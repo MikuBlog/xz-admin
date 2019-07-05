@@ -11,7 +11,7 @@ const successMsg = (msg) => {
 const warnMsg = (msg) => {
     Message({
         message: msg,
-        type: 'warn'
+        type: 'warning'
     })
 }
 

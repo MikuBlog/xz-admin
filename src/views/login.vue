@@ -201,9 +201,12 @@ export default {
             this.fileEle.type = "file"
             this.fileEle.accept = "image/jpeg, image/png"
             this.fileEle.addEventListener('change', () => {
-                pattern.test(this.fileEle.files[0].type)
-                ? reader.readAsDataURL(this.fileEle.files[0])
-                : this.$warnMsg("请正确选择文件!")
+                const files = this.fileEle.files[0]
+                files.size / (1024 ** 2) > 2
+                ? this.$warnMsg("选择的图片不能超过2MB")
+                : (pattern.test(files.type)
+                ? reader.readAsDataURL(files)
+                : this.$warnMsg("请选择图片"))
             })
             reader.addEventListener('load', () => {
                 this.url = reader.result
