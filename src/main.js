@@ -2,10 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// 引入浏览器数据库
+import Database from './plugins/database/database'
 //引入二次封装的axios
-import http from '../src/plugins/http'
+import Http from './plugins/http/http'
 // 引入全局提示
-import message from '../src/plugins/message'
+import Message from './plugins/message/message'
 // 引入element-ui框架
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -15,38 +17,53 @@ import 'iview/dist/styles/iview.css';
 // 引入全局样式
 import './global/style.css'
 import './global/icon_font/iconfont.css'
-import './plugins/iconfont'
+import './plugins/iconfont/iconfont'
 // 引入时间格式化函数
-import date from '../src/plugins/form_date'
+import Date from './plugins/other/form_date'
 // 引入设置样式函数
-import SetStyle from '../src/plugins/set_style'
+import SetStyle from './plugins/dom/set_style'
+// 引入全屏函数
+import FullScreen from './plugins/other/full_screen'
+// 引入设置元素类模块
+import SetClass from './plugins/dom/set_class'
+/**
+ * 浏览器数据库操作：增
+ * @param {Object} data {id: 1, url: xxx} 
+ * 浏览器数据库操作：改
+ * @param {Object} data {id: 1, url: xxx} 
+ * 浏览器数据库操作：查
+ * @param {Number} id 
+ */
+Vue.prototype.$insert = Database.insert
+Vue.prototype.$update = Database.update
+Vue.prototype.$find = Database.find
 /**
  * 添加axios实例
  * 1. 键值对数据请求
  * 2. json数据请求
  * 3. 文件数据请求
  */
-Vue.prototype.$http_normal = http.http_normal
-Vue.prototype.$http_json = http.http_json
-Vue.prototype.$http_file = http.http_file
+Vue.prototype.$http_normal = Http.http_normal
+Vue.prototype.$http_json = Http.http_json
+Vue.prototype.$http_file = Http.http_file
 /**
  * 引入全局提示
  * @param {String} msg 成功提示
  */
-Vue.prototype.$successMsg = message.successMsg
-Vue.prototype.$warnMsg = message.warnMsg
-Vue.prototype.$errorMsg = message.errorMsg
+Vue.prototype.$successMsg = Message.successMsg
+Vue.prototype.$warnMsg = Message.warnMsg
+Vue.prototype.$errorMsg = Message.errorMsg
 /**
  * 引入时间格式化函数
  * @param {String | Date} date 日期格式化
  */
-Vue.prototype.$formDate = date.formDate
+Vue.prototype.$formDate = Date.formDate
 /**
  * 日期差(date_2 - date_1)
  * @param {String | Date} date_1
  * @param {String | Date} date_2
  */
-Vue.prototype.$dateDiff = date.dateDiff
+Vue.prototype.$dateDiff = Date.dateDiff
 /**
  * 给元素设置样式
  * @param {DOM Object} ele DOM元素
@@ -54,7 +71,24 @@ Vue.prototype.$dateDiff = date.dateDiff
  * @param {String} value CSS值
  */
 Vue.prototype.$setStyle = SetStyle.setStyle
-
+/**
+ * 设置全屏函数与取消全屏函数
+ * @param {DOM Object} element DOM元素
+ */
+Vue.prototype.$setFullScreen = FullScreen.requestFullScreen
+Vue.prototype.$cancelFullScreen = FullScreen.cancelFullScreen
+/**
+ * 添加与删除类
+ * @param {DOM Object} element DOM元素
+ * @param {String} className DOM元素
+ */
+Vue.prototype.$addClass = SetClass.addClass
+Vue.prototype.$removeClass = SetClass.removeClass
+/**
+ * 获取类名
+ * @param {DOM Object} element DOM元素
+ */
+Vue.prototype.$getClassName = SetClass.getClassName
 // 加入element-ui组件
 Vue.use(ElementUI);
 // 引入iview抽屉

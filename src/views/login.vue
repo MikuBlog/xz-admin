@@ -45,7 +45,7 @@
                 </svg>
             </div>
         </div>
-        <Drawer title="设置" :closable="false" v-model="isShowDrawer" width="350px">
+        <Drawer title="设置" :closable="false" v-model="isShowDrawer" width="350px" style="overflow-x: hidden">
               <el-tabs v-model="activeName" type="card" @tab-click="getTag">
                 <el-tab-pane label="背景图" name="0"></el-tab-pane>
                 <el-tab-pane label="登录框" name="1"></el-tab-pane>
@@ -91,6 +91,14 @@
                 </div>
             </div>
             <div class="login-box-setting" v-show="tab[1]">
+                <div class="block" style="text-align:right">
+                    <span class="label">登录框颜色:</span>
+                    <el-color-picker v-model="boxColor" show-alpha></el-color-picker>
+                </div>
+                <div class="block" style="text-align:right">
+                    <span class="label">字体颜色:</span>
+                    <el-color-picker v-model="fontColor" ></el-color-picker>
+                </div>
                 <div class="block">
                     <span class="demonstration">高度：</span>
                     <el-slider 
@@ -104,13 +112,7 @@
                     ></el-slider>
                 </div>
                 <div class="block">
-                    <span class="demonstration">透明度：</span>
-                    <el-slider 
-                    v-model="loginOpacity" 
-                    ></el-slider>
-                </div>
-                <div class="block">
-                    <span class="demonstration">字体大小：</span>
+                    <span class="demonstration">标题大小：</span>
                     <el-slider 
                     v-model="fontSize" 
                     ></el-slider>
@@ -138,7 +140,7 @@ export default {
     data() {
         return {
             labelPosition: 'left',
-            isShowDrawer: false,
+            isShowDrawer: true,
             activeName: '0',
             tab: [1, 0],
             fileEle: "",
@@ -148,7 +150,6 @@ export default {
             blur: +localStorage.getItem('blur') || 0,
             height: +localStorage.getItem('height') || 62,
             width: +localStorage.getItem('width') || 50,
-            loginOpacity: +localStorage.getItem('loginOpacity') || 35,
             fontSize: +localStorage.getItem('fontSize') || 30,
             iconSize: +localStorage.getItem('iconSize') || 30,
             ruleForm: {
@@ -157,6 +158,8 @@ export default {
                 checked: false,
             },
             size: localStorage.getItem('size') || "cover",
+            boxColor: localStorage.getItem('boxColor') || "rgba(0, 0, 0, .35)",
+            fontColor: localStorage.getItem('fontColor') || "#fefefe",
             rules: {
                 account: [
                     { required: true, message: "账号不能为空", trigger: 'blur' },
@@ -176,6 +179,7 @@ export default {
     mounted() {
         // DOM元素加载后进行样式的修改
         this.useStyle()
+        this.initialStyle()
     },
     methods: {
         // 检测属性值的变化
@@ -191,6 +195,10 @@ export default {
         // 值格式化
         formatTooltip(val) {
             return val / 100
+        },
+        initialStyle() {
+            const ele = document.querySelector('.ivu-drawer-body')
+            this.$setStyle(ele, 'overflow-x', 'hidden')
         },
         // 创建元素
         getFileEle() {
@@ -223,15 +231,19 @@ export default {
                 ele = this.$refs.background,
                 loginBox = this.$refs.loginBox,
                 header = this.$refs.header,
-                svg = document.querySelectorAll('svg')         
+                svg = document.querySelectorAll('svg'),
+                checkBox = document.querySelector('.el-checkbox'),
+                tip = document.querySelector('.tip')
             this.url
-            ? (this.$setStyle(ele, 'background-image', `url(${this.url})`), this.$setStyle(ele, 'opacity', `${this.opacity / 100}`),
+            && (this.$setStyle(ele, 'background-image', `url(${this.url})`), this.$setStyle(ele, 'opacity', `${this.opacity / 100}`),
             this.$setStyle(ele, 'filter', `blur(${this.blur}px)`), this.$setStyle(ele, 'background-size', `${this.size == "fill" ? "100% 100%" : this.size}`))
-            : this.$warnMsg("请选择图片")
             this.$setStyle(loginBox, 'height', `${this.height / 2}rem`)
             this.$setStyle(loginBox, 'width', `${this.width / 2}rem`)
-            this.$setStyle(loginBox, 'background', `rgba(0, 0, 0, ${this.loginOpacity / 100})`)
+            this.$setStyle(loginBox, 'background', `${this.boxColor}`)
             this.$setStyle(header, 'font-size', `${this.fontSize / 20}rem`)
+            this.$setStyle(header, 'color', `${this.fontColor}`)
+            this.$setStyle(checkBox, 'color', `${this.fontColor}`)
+            this.$setStyle(tip, 'color', `${this.fontColor}`)
             svg.forEach(value => {
                 this.$setStyle(value, 'width', `${this.iconSize / 10}rem`)
                 this.$setStyle(value, 'height', `${this.iconSize / 10}rem`)
@@ -241,10 +253,11 @@ export default {
             localStorage.setItem('blur', this.blur)
             localStorage.setItem('height', this.height)
             localStorage.setItem('width', this.width)
-            localStorage.setItem('loginOpacity', this.loginOpacity)
             localStorage.setItem('fontSize', this.fontSize)
             localStorage.setItem('iconSize', this.iconSize)
             localStorage.setItem('size', this.size)
+            localStorage.setItem('boxColor', this.boxColor)
+            localStorage.setItem('fontColor', this.fontColor)
         },
         // 显示对应的tab页
         getTag(tab, event) {
@@ -388,5 +401,14 @@ export default {
     .button {
         position: relative;
         margin: .5rem 0;
+    }
+    .block {
+        position: relative;
+    }
+    .label {
+        position: absolute;
+        left: 0;
+        top: 40%;
+        transform: translateY(-50%);
     }
 </style>
