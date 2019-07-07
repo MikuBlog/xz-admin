@@ -13,6 +13,7 @@ import { element } from 'protractor';
                 active-text-color="#429ee2"
                 text-color="#becad8"
                 width="200px"
+                :unique-opened="true"
                 @select="getMenu">
                         <el-menu-item 
                         v-if="!items.children"
@@ -32,7 +33,7 @@ import { element } from 'protractor';
                             </template>
                             <el-menu-item-group>
                                 <el-menu-item 
-                                index="2-1" 
+                                :index="child.index" 
                                 @click="clickMenuItem(child.path, child.title, child.index)"
                                  v-for="child in items.children">
                                     <i :class="child.icon"></i>
@@ -55,6 +56,7 @@ import { element } from 'protractor';
                     active-text-color="#429ee2"
                     text-color="#becad8"
                     width="200px"
+                    :unique-opened="true"
                     @select="getMenu">
                             <el-menu-item 
                             v-if="!items.children"
@@ -74,7 +76,7 @@ import { element } from 'protractor';
                                 </template>
                                 <el-menu-item-group>
                                     <el-menu-item 
-                                    index="2-1" 
+                                    :index="child.index"
                                     @click="clickMenuItem(child.path, child.title, child.index)"
                                     v-for="child in items.children">
                                         <i :class="child.icon"></i>
@@ -93,7 +95,7 @@ import { element } from 'protractor';
                             class="el-icon-s-unfold" @click="showMenu"></i>
                         </div>
                         <div class="icon-box">
-                            <span class="iconfont iconicon-" @click="fullScreen"
+                            <span class="iconfont iconfull_screen" @click="fullScreen"
                             ref="icon"
                             ></span>
                         </div>
@@ -105,7 +107,7 @@ import { element } from 'protractor';
                                 <i class="el-icon-caret-bottom el-icon--right"></i>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item>首页</el-dropdown-item>
-                                    <el-dropdown-item>个人中心</el-dropdown-item>
+                                    <el-dropdown-item @click.native="clickMenuItem('/home/person', '个人中心', '2')"><span>个人中心</span></el-dropdown-item>
                                     <el-dropdown-item>项目地址</el-dropdown-item>
                                     <div class="line"></div>
                                     <el-dropdown-item>退出登录</el-dropdown-item>
@@ -129,7 +131,7 @@ import { element } from 'protractor';
                     </div>
                 </el-header>
                 <el-main>
-                    <transition name="el-zoom-in-top el-fade-in-linear">
+                    <transition name="el-fade-in-linear">
                         <router-view/>
                     </transition>
                 </el-main>
@@ -152,10 +154,10 @@ export default {
                 index: "1",
                 icon: "el-icon-menu"
             }, {
-                title: "项目地址",
-                path: "",
+                title: "个人中心",
+                path: "/home/person",
                 index: "2",
-                icon: "el-icon-menu"
+                icon: "el-icon-user-solid"
             }, {
                 title: "文章管理",
                 index: "3",
@@ -188,6 +190,7 @@ export default {
         this.$nextTick(() => {
             this.changeTagStyle(this.nowIndex)
         })
+        this.activeIndex = this.tagsList[this.nowIndex].index
     },
     methods: {
         // 初始化标签页
@@ -215,6 +218,7 @@ export default {
         tabsClick(path, index, menuInd) {
             this.nowIndex = index
             this.activeIndex = menuInd
+            this.$setMemory('menuInd', this.activeIndex)
             this.changeTagStyle(index)
             this.navigateTo(path)
         },
@@ -249,6 +253,8 @@ export default {
         },
         // 跳转路由
         navigateTo(path) {
+            if(this.$route.path == path) return
+            this.$Loading.finish()
             this.$router.push({path})
         },
         // 判断当前点击的菜单在哪个标签
@@ -276,12 +282,13 @@ export default {
         fullScreen() {
             const ele = this.$refs.icon
             this.isFullScreen 
-            ? (this.$cancelFullScreen(), this.$removeClass(ele, 'iconquxiaoquanping'),
-            this.$addClass(ele, 'iconicon-'))
-            : (this.$setFullScreen(), this.$addClass(ele, 'iconquxiaoquanping'),
-            this.$removeClass(ele, 'iconicon-'))
+            ? (this.$cancelFullScreen(), this.$removeClass(ele, 'iconfullscreenexit'),
+            this.$addClass(ele, 'iconfull_screen'))
+            : (this.$setFullScreen(), this.$addClass(ele, 'iconfullscreenexit'),
+            this.$removeClass(ele, 'iconfull_screen'))
             this.isFullScreen = !this.isFullScreen
         },
+        // 初始化样式
         initialStyle() {
             const 
                 eles = document.querySelectorAll('.el-scrollbar__wrap'),
@@ -309,6 +316,7 @@ export default {
             : this.isSmall = false
             this.initialStyle()
         },
+        // 事件监听
         eventListener() {
             window.addEventListener('resize', () => {
                 this.getWindowWidth()
@@ -398,46 +406,6 @@ export default {
     .iconfont {
         font-size: 1.6rem;
     }
-    .el-menu--collapse {
-        transition: .5s;
-    }
-    // .transitionRouter-enter-active {
-    //     animation: fold-in .3s ease-in .5s;
-    //     opacity: 0;
-    // }
-    // .transitionRouter-leave-active {
-    //     animation: fold-out .3s ease-in;
-    //     opacity: 0;
-    // }
-    // .ivu-drawer-body {
-    //     padding: 0!important;
-    // }
-    // @keyframes fold-in {
-    //     0% {
-    //         transform: translate3d(0, 100%, 0);
-    //         opacity: 0;
-    //     }
-    //     50% {
-    //         transform: translate3d(0, 50%, 0);
-    //     }
-    //     100% {
-    //         transform: translate3d(0, 0, 0);
-    //         opacity: 1;
-    //     }
-    // }
-    // @keyframes fold-out {
-    //     0% {
-    //         transform: translate3d(0, 0, 0);
-    //         opacity: 1;
-    //     }
-    //     50% {
-    //         transform: translate3d(0, 50%, 0);
-    //     }
-    //     100% {
-    //         transform: translate3d(0, 100%, 0);
-    //         opacity: 0;
-    //     }
-    // }
     .el-header:last-of-type {
         height: 41px!important;
     }

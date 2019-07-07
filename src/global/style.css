@@ -33,3 +33,7 @@ body {
 .el-menu {
     border-right: none;
 }
+.border {
+    position: relative;
+    border-top: 1px solid #dbdee5;
+}

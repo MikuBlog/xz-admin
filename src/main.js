@@ -12,7 +12,7 @@ import Message from './plugins/message/message'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // 按需引入iview样式
-import { Drawer, Tag } from 'iview';
+import iview from 'iview';
 import 'iview/dist/styles/iview.css';
 // 引入全局样式
 import './global/style.css'
@@ -112,9 +112,8 @@ Vue.prototype.$setMemory = Memory.setMemory
 Vue.prototype.$getMemory = Memory.getMemory
 // 加入element-ui组件
 Vue.use(ElementUI);
-// 引入iview抽屉
-Vue.component('Drawer', Drawer);
-Vue.component('Tag', Tag)
+// 引入iview组件
+Vue.use(iview)
 
 Vue.config.productionTip = false
 

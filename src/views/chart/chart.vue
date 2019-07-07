@@ -6,7 +6,7 @@
                     <el-row>
                         <el-col :span="12">
                             <div class="iconfont-box">
-                                <span class="iconfont iconpeoples"></span>
+                                <span class="iconfont iconmanmany"></span>
                             </div>
                         </el-col>
                         <el-col :span="12">
@@ -27,7 +27,7 @@
                     <el-row>
                         <el-col :span="12">
                             <div class="iconfont-box">
-                                <span class="iconfont iconmessage"></span>
+                                <span class="iconfont iconarticle"></span>
                             </div>
                         </el-col>
                         <el-col :span="12">
@@ -48,7 +48,7 @@
                     <el-row>
                         <el-col :span="12">
                             <div class="iconfont-box">
-                                <span class="iconfont iconmoney"></span>
+                                <span class="iconfont iconyuan"></span>
                             </div>
                         </el-col>
                         <el-col :span="12">
@@ -200,30 +200,30 @@ export default {
         transition: .5s;
         border-radius: 1rem;
     }
-    .iconpeoples:hover {
+    .iconmanmany:hover {
         color: #fefefe;
         background: #3fc8c5;
     }
-    .iconmessage {
+    .iconarticle {
         color: #38a3f5;
     }
-    .iconmessage:hover {
+    .iconarticle:hover {
         color: #fefefe;
         background: #38a3f5;
     }
-    .iconmoney {
+    .iconyuan {
         color: #f3516b;
     }
-    .iconmoney:hover {
+    .iconyuan:hover {
         color: #fefefe;
         background: #f3516b;
     }
     .iconcart {
-        color: #32bea3;
+        color: #ffd900;
     }
     .iconcart:hover {
         color: #fefefe;
-        background: #32bea3;
+        background: #ffd900;
     }
     .content-box {
         position: relative;
