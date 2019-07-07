@@ -1,9 +1,10 @@
 <template>
-    <div class="add-article">
+    <div class="edit-article">
         <el-card class="box-card">
             <el-row class="button-box">
                 <el-col :span="24">
-                    <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                    <el-button @click="navigateBack">返回</el-button>
                 </el-col>
             </el-row>
             <el-row>
@@ -102,6 +103,17 @@ export default {
         };
     },
     methods: {
+        // 返回
+        navigateBack() {
+            this.$showMsgBox(
+                '是否放弃添加文章',
+                '提示',
+            ).then(result => {
+                this.$router.go(-1)
+            }).catch(e => {
+                return
+            })
+        },
         // 获取富文本内容
         getValue(val) {
             this.msg = ""

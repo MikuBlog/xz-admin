@@ -5,177 +5,83 @@ import { element } from 'protractor';
             <el-scrollbar 
             style="height:100%" 
             v-show="!isSmall">
-                <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :collapse="isCollapse"
+                <el-menu 
+                :default-active="activeIndex" 
+                class="el-menu-vertical-demo menu-list" 
+                :collapse="isCollapse"
                 background-color="#2f4055"
                 active-text-color="#429ee2"
-                text-color="#becad8">
-                    <el-submenu index="1">
+                text-color="#becad8"
+                width="200px"
+                @select="getMenu">
+                        <el-menu-item 
+                        v-if="!items.children"
+                        :index="items.index" 
+                        @click="clickMenuItem(items.path, items.title, items.index)" 
+                        v-for="items in menuList">
+                            <i :class="items.icon"></i>
+                            <span slot="title">{{items.title}}</span>
+                        </el-menu-item>
+                        <el-submenu 
+                        :index="items.index" 
+                        v-if="items.children"
+                        v-for="items in menuList">
                             <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span slot="title">导航一</span>
+                                <i :class="items.icon"></i>
+                                <span>{{items.title}}</span>
                             </template>
                             <el-menu-item-group>
-                                <span slot="title">分组一</span>
-                                <el-menu-item index="1-1">选项1</el-menu-item>
-                                <el-menu-item index="1-2">选项2</el-menu-item>
-                                </el-menu-item-group>
-                                <el-menu-item-group title="分组2">
-                                <el-menu-item index="1-3">选项3</el-menu-item>
+                                <el-menu-item 
+                                index="2-1" 
+                                @click="clickMenuItem(child.path, child.title, child.index)"
+                                 v-for="child in items.children">
+                                    <i :class="child.icon"></i>
+                                    <span slot="title">{{child.title}}</span>
+                                </el-menu-item>
                             </el-menu-item-group>
-                            <el-submenu index="1-4">
-                                <span slot="title">选项4</span>
-                                <el-menu-item index="1-4-1">选项1</el-menu-item>
-                            </el-submenu>
                         </el-submenu>
-                        <el-menu-item index="2">
-                            <i class="el-icon-menu"></i>
-                            <span slot="title">导航二</span>
-                        </el-menu-item>
-                        <el-menu-item index="3" disabled>
-                            <i class="el-icon-document"></i>
-                            <span slot="title">导航三</span>
-                        </el-menu-item>
-                        <el-menu-item index="4">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="5">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="6">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="7">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="8">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="9">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="10">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="11">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="12">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="13">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="14">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="15">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                        <el-menu-item index="16">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
                 </el-menu>
             </el-scrollbar>
             <Drawer 
             v-show="isSmall" 
             v-model="isMenuCollapse"
+            height="auto"
             placement="left">
                 <el-scrollbar style="height:100%">
-                    <el-menu default-active="1-4-1" class="el-menu-vertical-demo"
+                    <el-menu 
+                    :default-active="activeIndex" 
+                    class="el-menu-vertical-demo menu-list" 
                     background-color="#2f4055"
                     active-text-color="#429ee2"
-                    text-color="#becad8">
-                        <el-submenu index="1">
+                    text-color="#becad8"
+                    width="200px"
+                    @select="getMenu">
+                            <el-menu-item 
+                            v-if="!items.children"
+                            :index="items.index" 
+                            @click="clickMenuItem(items.path, items.title, items.index)" 
+                            v-for="items in menuList">
+                                <i :class="items.icon"></i>
+                                <span slot="title">{{items.title}}</span>
+                            </el-menu-item>
+                            <el-submenu 
+                            :index="items.index" 
+                            v-if="items.children"
+                            v-for="items in menuList">
                                 <template slot="title">
-                                <i class="el-icon-location"></i>
-                                <span slot="title">导航一</span>
+                                    <i :class="items.icon"></i>
+                                    <span>{{items.title}}</span>
                                 </template>
                                 <el-menu-item-group>
-                                    <span slot="title">分组一</span>
-                                    <el-menu-item index="1-1">选项1</el-menu-item>
-                                    <el-menu-item index="1-2">选项2</el-menu-item>
-                                    </el-menu-item-group>
-                                    <el-menu-item-group title="分组2">
-                                    <el-menu-item index="1-3">选项3</el-menu-item>
+                                    <el-menu-item 
+                                    index="2-1" 
+                                    @click="clickMenuItem(child.path, child.title, child.index)"
+                                    v-for="child in items.children">
+                                        <i :class="child.icon"></i>
+                                        <span slot="title">{{child.title}}</span>
+                                    </el-menu-item>
                                 </el-menu-item-group>
-                                <el-submenu index="1-4">
-                                    <span slot="title">选项4</span>
-                                    <el-menu-item index="1-4-1">选项1</el-menu-item>
-                                </el-submenu>
                             </el-submenu>
-                            <el-menu-item index="2">
-                                <i class="el-icon-menu"></i>
-                                <span slot="title">导航二</span>
-                            </el-menu-item>
-                            <el-menu-item index="3" disabled>
-                                <i class="el-icon-document"></i>
-                                <span slot="title">导航三</span>
-                            </el-menu-item>
-                            <el-menu-item index="4">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="5">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="6">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="7">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="8">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="9">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="10">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="11">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="12">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="13">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="14">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="15">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
-                            <el-menu-item index="16">
-                                <i class="el-icon-setting"></i>
-                                <span slot="title">导航四</span>
-                            </el-menu-item>
                     </el-menu>
                 </el-scrollbar>
             </Drawer>
@@ -210,20 +116,20 @@ import { element } from 'protractor';
                 </el-header>
                 <el-header>
                     <div class="tabs">
-                        <el-tabs v-model="editableTabsValue" type="card"
-                        :closable="true">
-                            <el-tab-pane
-                            :key="item.name"
-                            v-for="(item, index) in editableTabs"
-                            :label="item.title"
-                            :name="item.name"
-                        >
-                        </el-tab-pane>
-                        </el-tabs>
+                        <Tag 
+                        color="primary"
+                        type="dot"
+                        closable
+                        checkable
+                        v-for="(items, index) in tagsList" 
+                        :name="items.title"
+                        @on-close="tabsRemove"
+                        @on-change="tabsClick(items.path, index, items.index)"
+                        >{{items.title}}</Tag>
                     </div>
                 </el-header>
                 <el-main>
-                    <transition name="transitionRouter">
+                    <transition name="el-zoom-in-top el-fade-in-linear">
                         <router-view/>
                     </transition>
                 </el-main>
@@ -240,29 +146,132 @@ export default {
             isFullScreen: false,
             isSmall: false,
             isMenuCollapse: false,
-            editableTabsValue: "1",
-            editableTabs: [{
-                title: '首页',
-                name: '1',
-                content: 'Tab 1 content'
-            },
-            {
-                title: 'Tab 1',
-                name: '2',
-                content: 'Tab 1 content'
-            }]
+            menuList: [{
+                title: "首页",
+                path: "/home/chart",
+                index: "1",
+                icon: "el-icon-menu"
+            }, {
+                title: "项目地址",
+                path: "",
+                index: "2",
+                icon: "el-icon-menu"
+            }, {
+                title: "文章管理",
+                index: "3",
+                icon: "el-icon-edit",
+                children: [{
+                    title: "添加文章",
+                    path: "/home/add_article",
+                    index: "3-1",
+                    icon: "el-icon-tickets"
+                }]
+            }],
+            tagsList: [{
+                title: "首页",
+                path: "/home/chart",
+                index: "1"
+            }],
+            nowIndex: this.$getMemory('nowIndex') || 0,
+            activeIndex: "1"
         }
-    },
-    created() {
-
     },
     mounted() {
         // 样式初始化
         this.initialStyle()
-        this.eventListen()
+        // 监听器初始化
+        this.eventListener()
+        // 获取视窗大小
         this.getWindowWidth()
+        this.initialTags()
+        this.navigateTo(this.tagsList[this.nowIndex].path)
+        this.$nextTick(() => {
+            this.changeTagStyle(this.nowIndex)
+        })
     },
     methods: {
+        // 初始化标签页
+        initialTags() {
+            let tagsList = this.$getMemory('tagsList', true)
+            tagsList
+            && (this.tagsList.splice(0, this.tagsList.length),
+            tagsList.forEach(value => {
+                this.tagsList.push(value)
+            }))
+        },
+        // 改变标签样式
+        changeTagStyle(index) {
+            let dots = document.querySelectorAll('.ivu-tag-dot-inner')
+            dots.forEach((value, ind) => {
+                if(index == ind) {
+                    this.$setStyle(value, 'display', 'inline-block')
+                }else {
+                    this.$setStyle(value, 'display', 'none')
+                }
+            })
+            this.nowIndex = index
+        },
+        // 点击标签
+        tabsClick(path, index, menuInd) {
+            this.nowIndex = index
+            this.activeIndex = menuInd
+            this.changeTagStyle(index)
+            this.navigateTo(path)
+        },
+        // 移除标签
+        tabsRemove(event, title) {
+            for(let i = 0, len = this.tagsList.length; i < len; i ++) {
+                if(title == this.tagsList[i].title) {
+                    this.tagsList.splice(i, 1)
+                    this.changeTagStyle(this.nowIndex)
+                    i == this.nowIndex
+                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.nowIndex - 1))
+                    this.$setMemory('tagsList', this.tagsList)
+                    this.$setMemory('nowIndex', this.nowIndex)
+                    return
+                }    
+            }
+        },
+        // 添加标签
+        addTag(path, title, index) {
+            let tabs = this.tagsList
+            for(let i = 0, len = tabs.length; i < len; i ++) {
+                if(tabs[i].title == title) return
+            }
+            this.tagsList.push({
+                title: title,
+                path: path,
+                index: index
+            })
+            this.nowIndex = this.tagsList.length - 1
+            this.$setMemory('tagsList', this.tagsList)
+            this.$setMemory('nowIndex', this.nowIndex)
+        },
+        // 跳转路由
+        navigateTo(path) {
+            this.$router.push({path})
+        },
+        // 判断当前点击的菜单在哪个标签
+        findIndex(title) {
+            let tags = this.tagsList
+            for(let i = 0, len = tags.length; i < len; i ++) {
+                if(tags[i].title == title) {
+                    this.nowIndex = i
+                }
+            }
+        },
+        // 路由跳转
+        clickMenuItem(path, title, index) {
+            this.addTag(path, title, index)
+            this.navigateTo(path)
+            this.findIndex(title)
+            this.changeTagStyle(this.nowIndex)
+            this.isMenuCollapse = false
+        },
+        // 菜单激活回调
+        getMenu(index, indexPath) {
+            this.activeIndex = '1-1'
+        },
         // 设置全屏与取消全屏
         fullScreen() {
             const ele = this.$refs.icon
@@ -277,22 +286,22 @@ export default {
             const 
                 eles = document.querySelectorAll('.el-scrollbar__wrap'),
                 drawer = document.querySelector('.ivu-drawer-body'),
-                close = document.querySelector('.el-tabs__new-tab'),
-                tabsCard = document.querySelector('.el-tabs--card .el-tabs__header'),
-                tabsBorder = document.querySelectorAll('.el-tabs__item')
+                tag = document.querySelector('.ivu-tag'),
+                menuList = document.querySelector('.el-menu-vertical-demo'),
+                drawerContent = document.querySelector('.ivu-drawer-content')
+            this.$setStyle(drawer, 'padding', 0)
+            this.$setStyle(tag.lastElementChild, 'display', 'none')
+            this.$setStyle(drawerContent, 'background', '#2e3f54')
             eles.forEach(value => {
                 this.$setStyle(value, 'overflow-x', 'hidden')
             })
-            this.$setStyle(drawer, 'padding', 0)
             this.isMenuCollapse = false
         },
         // 显示菜单
         showMenu() {
-            if(this.isSmall) {
-                this.isMenuCollapse = !this.isMenuCollapse
-            }else {
-                this.isCollapse = !this.isCollapse
-            }
+            this.isSmall
+            ? this.isMenuCollapse = !this.isMenuCollapse
+            : this.isCollapse = !this.isCollapse
         },
         getWindowWidth() {
             window.innerWidth < 900
@@ -300,7 +309,7 @@ export default {
             : this.isSmall = false
             this.initialStyle()
         },
-        eventListen() {
+        eventListener() {
             window.addEventListener('resize', () => {
                 this.getWindowWidth()
             })
@@ -341,6 +350,10 @@ export default {
     }
     .menu-button:active {
         color: rgb(19, 180, 255);
+    }
+    .el-menu-item {
+        position: relative;
+        padding-right: 5rem;
     }
     .avatar-box {
         position: absolute;
@@ -385,43 +398,46 @@ export default {
     .iconfont {
         font-size: 1.6rem;
     }
-    .transitionRouter-enter-active {
-        animation: fold-in .3s ease-in .5s;
-        opacity: 0;
+    .el-menu--collapse {
+        transition: .5s;
     }
-    .transitionRouter-leave-active {
-        animation: fold-out .3s ease-in;
-        opacity: 0;
-    }
-    .ivu-drawer-body {
-        padding: 0!important;
-    }
-    @keyframes fold-in {
-        0% {
-            transform: translate3d(0, 100%, 0);
-            opacity: 0;
-        }
-        50% {
-            transform: translate3d(0, 50%, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
-    }
-    @keyframes fold-out {
-        0% {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
-        50% {
-            transform: translate3d(0, 50%, 0);
-        }
-        100% {
-            transform: translate3d(0, 100%, 0);
-            opacity: 0;
-        }
-    }
+    // .transitionRouter-enter-active {
+    //     animation: fold-in .3s ease-in .5s;
+    //     opacity: 0;
+    // }
+    // .transitionRouter-leave-active {
+    //     animation: fold-out .3s ease-in;
+    //     opacity: 0;
+    // }
+    // .ivu-drawer-body {
+    //     padding: 0!important;
+    // }
+    // @keyframes fold-in {
+    //     0% {
+    //         transform: translate3d(0, 100%, 0);
+    //         opacity: 0;
+    //     }
+    //     50% {
+    //         transform: translate3d(0, 50%, 0);
+    //     }
+    //     100% {
+    //         transform: translate3d(0, 0, 0);
+    //         opacity: 1;
+    //     }
+    // }
+    // @keyframes fold-out {
+    //     0% {
+    //         transform: translate3d(0, 0, 0);
+    //         opacity: 1;
+    //     }
+    //     50% {
+    //         transform: translate3d(0, 50%, 0);
+    //     }
+    //     100% {
+    //         transform: translate3d(0, 100%, 0);
+    //         opacity: 0;
+    //     }
+    // }
     .el-header:last-of-type {
         height: 41px!important;
     }

@@ -140,26 +140,26 @@ export default {
     data() {
         return {
             labelPosition: 'left',
-            isShowDrawer: true,
+            isShowDrawer: false,
             activeName: '0',
             tab: [1, 0],
             fileEle: "",
-            url: localStorage.getItem("backgroundUrl") || "",
+            url: this.$getMemory("backgroundUrl") || "",
             event: "",
-            opacity: +localStorage.getItem('opacity') || 100,
-            blur: +localStorage.getItem('blur') || 0,
-            height: +localStorage.getItem('height') || 62,
-            width: +localStorage.getItem('width') || 50,
-            fontSize: +localStorage.getItem('fontSize') || 30,
-            iconSize: +localStorage.getItem('iconSize') || 30,
+            opacity: +this.$getMemory('opacity') || 100,
+            blur: +this.$getMemory('blur') || 0,
+            height: +this.$getMemory('height') || 62,
+            width: +this.$getMemory('width') || 50,
+            fontSize: +this.$getMemory('fontSize') || 30,
+            iconSize: +this.$getMemory('iconSize') || 30,
             ruleForm: {
                 account: "",
                 password: "",
                 checked: false,
             },
-            size: localStorage.getItem('size') || "cover",
-            boxColor: localStorage.getItem('boxColor') || "rgba(0, 0, 0, .35)",
-            fontColor: localStorage.getItem('fontColor') || "#fefefe",
+            size: this.$getMemory('size') || "cover",
+            boxColor: this.$getMemory('boxColor') || "rgba(0, 0, 0, .35)",
+            fontColor: this.$getMemory('fontColor') || "#fefefe",
             rules: {
                 account: [
                     { required: true, message: "账号不能为空", trigger: 'blur' },
@@ -248,16 +248,16 @@ export default {
                 this.$setStyle(value, 'width', `${this.iconSize / 10}rem`)
                 this.$setStyle(value, 'height', `${this.iconSize / 10}rem`)
             })
-            localStorage.setItem('backgroundUrl', this.url),
-            localStorage.setItem('opacity', this.opacity),
-            localStorage.setItem('blur', this.blur)
-            localStorage.setItem('height', this.height)
-            localStorage.setItem('width', this.width)
-            localStorage.setItem('fontSize', this.fontSize)
-            localStorage.setItem('iconSize', this.iconSize)
-            localStorage.setItem('size', this.size)
-            localStorage.setItem('boxColor', this.boxColor)
-            localStorage.setItem('fontColor', this.fontColor)
+            this.$setMemory('backgroundUrl', this.url)
+            this.$setMemory('opacity', this.opacity)
+            this.$setMemory('blur', this.blur)
+            this.$setMemory('height', this.height)
+            this.$setMemory('width', this.width)
+            this.$setMemory('fontSize', this.fontSize)
+            this.$setMemory('iconSize', this.iconSize)
+            this.$setMemory('size', this.size)
+            this.$setMemory('boxColor', this.boxColor)
+            this.$setMemory('fontColor', this.fontColor)
         },
         // 显示对应的tab页
         getTag(tab, event) {
@@ -276,6 +276,9 @@ export default {
             this.$refs[formName].validate(valid => {
                 if(valid) {
                     this.$successMsg('登录成功')
+                    setTimeout(() => {
+                        this.$router.push({path: '/home/chart'})
+                    }, 1000);
                 }else {
                     return false
                 }
@@ -345,7 +348,7 @@ export default {
     }
     .login-box:hover {
         transform: translateY(-1.5%);
-        box-shadow: 0 5px 5px 1px rgb(160, 160, 160);
+        box-shadow: 0 5px 2px 1px rgb(78, 78, 78);
     }
     .header {
         position: relative;

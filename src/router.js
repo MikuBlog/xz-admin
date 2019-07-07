@@ -10,6 +10,8 @@ import Home from './views/home.vue'
  */
 import Welcome from './views/welcome/welcome.vue'
 import AddArticle from './views/article/add_article.vue'
+import EditArticle from './views/article/edit_article.vue'
+import Chart from './views/chart/chart.vue'
 
 Vue.use(Router)
 
@@ -34,6 +36,14 @@ export default new Router({
         path: 'add_article',
         name: 'add_article',
         component: AddArticle
+      },{
+        path: 'edit_article',
+        name: 'edit_article',
+        component: EditArticle
+      },{
+        path: 'chart',
+        name: 'chart',
+        component: Chart
       }]
     },
   ]

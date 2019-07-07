@@ -34,17 +34,20 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
-            'fullscreen', 'source', '|', 'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+            'fullscreen', 'source', '|',
+            'undo', 'redo', '|',
+            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'spechars', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
+            'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+            'link', 'unlink', 'anchor',
+            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 
+            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 
             'directionalityltr', 'directionalityrtl', 'indent', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-            'link', 'anchor', '|',
-             'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-            'horizontal', 'date', 'time', 'spechars', 'snapscreen', '|',
-            'inserttable', '|',
-            'print', 'preview', 'searchreplace', 'drafts', 'help'
+            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+            'touppercase', 'tolowercase', '|',
+            , 'insertimage', 'emotion', 'map', 'insertvideo', 'attachment', 'insertcode','scrawl', 'pagebreak', 'template', 'background', '|',
+            'horizontal', 'date', 'time', 'snapscreen', '|',
+            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
+            'print', 'preview', 'searchreplace', 'drafts'
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{

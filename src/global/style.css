@@ -3,10 +3,33 @@ body {
     margin: 0;
     height: 100%;
 }
-
 .icon {
     width: 1em; height: 1em;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
  }
+.el-form--label-top .el-form-item__label {
+    padding: 0!important;
+}
+.el-select {
+    position: relative;
+    width: 100%;
+}
+.title {
+    font-size: 14px;
+    line-height: 40px;
+    color: #606266;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.line {
+    position: relative;
+    text-align: center;
+}
+.el-container {
+    flex-basis: 0;
+}
+.el-menu {
+    border-right: none;
+}
