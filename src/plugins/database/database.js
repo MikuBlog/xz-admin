@@ -1,70 +1,78 @@
-let 
-    request = window.indexedDB.open('xuanzai'),
-    db
+// 保存数据库实例
+let db
 
-function createTable() {
-    if (!db.objectStoreNames.contains('picture')) {
-        let objectStore = db.createObjectStore('picture', { keyPath: 'id' });
-        objectStore.createIndex('url', 'url', { unique: true });
+function createTable(tableName, options) {
+    if (!db.objectStoreNames.contains(tableName)) {
+        let objectStore = db.createObjectStore(tableName, { keyPath: options.primaryKey});
+        for(let keys in options.keys) objectStore.createIndex(keys, keys, { unique: true });
     }
 }
 
-function insert(data, success, error) {
-    let req = db.transaction(['picture'], 'readwrite')
-    .objectStore('picture')
-    .add(data)
-    req.addEventListener('success', (event) => {
-        success()
-    })
-    req.addEventListener('error', (event) => {
-        error()
-    })
-}
-
-function find(id, success, error) {
-    let req = db.transaction(['picture'])
-    .objectStore('picture')
-    .get(id)
-    req.addEventListener('success', (event) => {
-        req.result 
-        ? success(req.result)
-        : success(undefined)
-    })
-    req.addEventListener('error', (event) => {
-        error()
+function insert(tableName, data) {
+    return new Promise((resolve, reject) => {
+        let req = db.transaction([tableName], 'readwrite')
+        .objectStore(tableName)
+        .add(data)
+        req.addEventListener('success', (event) => {
+            resolve(event)
+        })
+        req.addEventListener('error', (event) => {
+            reject(event)
+        })
     })
 }
 
-function update(data, success, error) {
-    let req = db
-    .transaction(['person'], 'readwrite')
-    .objectStore('person')
-    .put({ id: data.id, url: data.url});
-
-    req.addEventListener('success', (event) => {
-        success()
-    })
-    req.addEventListener('error', (event) => {
-        error()
+function find(tableName, id) {
+    return new Promise((resolve, reject) => {
+        let req = db.transaction([tableName])
+        .objectStore(tableName)
+        .get(id)
+        req.addEventListener('success', (event) => {
+            req.result 
+            ? resolve(req.result)
+            : resolve(event)
+        })
+        req.addEventListener('error', (event) => {
+            reject(event)
+        })
     })
 }
 
-request.addEventListener('success', (event) => {
-    db = request.result
-    console.log('浏览器数据库打开成功');
-})
+function update(tableName, id, data) {
+    return new Promise((resolve, reject) => {
+        let req = db
+        .transaction([tableName], 'readwrite')
+        .objectStore(tableName)
+        .put({ id: id, url: data.url});
+        req.addEventListener('success', (event) => {
+            resolve()
+        })
+        req.addEventListener('error', (event) => {
+            reject()
+        })
+    })
+}
 
-request.addEventListener('error', (event) => {
-    console.log('浏览器数据库打开报错');
-})
-
-request.addEventListener('upgradeneeded', (event) => {
-    db = event.target.result;
-    createTable()
-    console.log('浏览器数据库打开报错');
-})
+function connectDatabase(databaseName) {
+    return new Promise((resolve, reject) => {
+        let request = window.indexedDB.open(databaseName)
+        request.addEventListener('success', (event) => {
+            db = request.result
+            resolve('浏览器数据库打开成功');
+        })
+        request.addEventListener('error', (event) => {
+            reject('浏览器数据库打开报错');
+        })
+        request.addEventListener('upgradeneeded', (event) => {
+            db = event.target.result;
+            resolve(event)
+        })
+    })
+}
 
 export default {
+    connectDatabase,
+    createTable,
     insert,
     find,
     update

@@ -15,7 +15,7 @@
                                     流量
                                 </div>
                                 <div class="number">
-                                    1024.13
+                                    {{peopleNum}}
                                 </div>
                             </div>
                         </el-col>
@@ -36,7 +36,7 @@
                                     留言
                                 </div>
                                 <div class="number">
-                                    1024.13
+                                    {{messageNum}}
                                 </div>
                             </div>
                         </el-col>
@@ -57,7 +57,7 @@
                                 销售额
                                 </div>
                                 <div class="number">
-                                    1024.13
+                                    {{money}}
                                 </div>
                             </div>
                         </el-col>
@@ -78,7 +78,7 @@
                                 销售量
                                 </div>
                                 <div class="number">
-                                    1024.13
+                                    {{sellNum}}
                                 </div>
                             </div>
                         </el-col>
@@ -89,7 +89,7 @@
         <el-row style="margin-top: 1rem">
             <el-col :span="24">
                 <el-card class="box-card">
-                    <ve-line :data="lineData"></ve-line>
+                    <ve-line :data="lineData" :settings="lineSettings"></ve-line>
                 </el-card>
             </el-col>
         </el-row>
@@ -123,6 +123,10 @@ import VeFunnel from 'v-charts/lib/funnel.common'
 export default {
     components: { VeLine, VePie, VeRing, VeHistogram, VeFunnel },
     data() {
+        this.lineSettings = {
+            stack: { '用户': ['访问用户', '下单用户'] },
+            area: true
+        }
         this.ringSettings = {
             roseType: 'radius'
         }
@@ -143,7 +147,8 @@ export default {
                     { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
                     { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
                     { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
-                    { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
+                    { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 },
+                    { '日期': '1/7', '访问用户': 5634, '下单用户': 6837, '下单率': 0.78 },
                 ]
             },
             ringData: {
@@ -169,15 +174,65 @@ export default {
                 ]
             },
             funnelData: {
-                columns: ['状态', '状态', '数值'],
+                columns: ['状态', '数值'],
                 rows: [
                     { '状态': '展示', '状态': '展示', '数值': 900 },
                     { '状态': '访问', '状态': '访问', '数值': 600 },
                     { '状态': '点击', '状态': '点击', '数值': 300 },
                     { '状态': '订单', '状态': '订单', '数值': 100 }
                 ]
-            }
+            },
+            peopleNum: 0,
+            money: 0,
+            sellNum: 0,
+            messageNum: 0
         }
+    },
+    mounted() {
+        // 初始化数字滚动
+        this.numberScroll('peopleNum', 1023)
+        this.numberScroll('money', 6783.5)
+        this.numberScroll('sellNum', 573)
+        this.numberScroll('messageNum', 79)
+    },
+    methods: {
+        // 数字滚动
+        numberScroll(key, number) {
+            let 
+                num = 0,
+                dotNumber = number.toString().split(/\./)[1] 
+                ? number.toString().split(/\./)[1].length
+                : 0
+            let clock = setInterval(() => {
+                if(num < number - 50000) {
+                    num += 300
+                }
+                if(num < number - 10000) {
+                    num += 200
+                }
+                if(num < number - 1000) {
+                    num += 100
+                }
+                if(num < number - 500) {
+                    num += 40
+                }
+                if(num < number - 100) {
+                    num += 7
+                }
+                if(num < number - 10) {
+                    num += .3
+                }
+                if(num < number) {
+                    num += .1
+                }
+                if(num >= number) {
+                    this[key] = number
+                    clearInterval(clock)
+                    return
+                }
+                this[key] = num.toFixed(dotNumber)
+            })
+        },
     }
 }
 </script>
@@ -234,7 +289,8 @@ export default {
         padding-right: .5rem;
     }
     .number {
-        font-weight: bold;
+        font-weight: bolder;
         color: #656565;
+        font-size: 1.2rem;
     }
 </style>

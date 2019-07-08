@@ -19,6 +19,9 @@
                         <el-form-item label="文章标题" prop="title">
                             <el-input v-model="ruleForm.title" placeholder="请输入文章标题"></el-input>
                         </el-form-item>
+                        <el-form-item label="文章作者" prop="author">
+                            <el-input v-model="ruleForm.author" placeholder="请输入文章作者"></el-input>
+                        </el-form-item>
                         <el-form-item label="文章分类" prop="type">
                             <el-select v-model="ruleForm.type" placeholder="请选择文章分类">
                             <el-option label="分类1" value="分类1"></el-option>
@@ -59,6 +62,7 @@
                     </el-upload>
                 </el-col>
             </el-row>    
+            <el-divider></el-divider>
             <el-row>
                 <el-col :span="24">
                     <div class="editor">
@@ -82,6 +86,7 @@ export default {
             msg: "",
             ruleForm: {
                 title: "",
+                author: "",
                 type: "",
                 date: "",
                 time: ""
@@ -89,6 +94,9 @@ export default {
             rules: {
                 title: [
                     { required: true, message: '请输入文章标题', trigger: 'blur' }
+                ],
+                author: [
+                    { required: true, message: '请输入文章作者', trigger: 'blur' }
                 ],
                 type: [
                     { required: true, message: '请选择文章分类', trigger: 'change' }
@@ -182,7 +190,7 @@ export default {
     }
     .editor {
         position: relative;
-        margin-top: 3rem;
+        margin-top: 1rem;
         width: 100%;
         height: 600px;
     }

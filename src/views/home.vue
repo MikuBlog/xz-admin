@@ -7,14 +7,17 @@ import { element } from 'protractor';
             v-show="!isSmall">
                 <el-menu 
                 :default-active="activeIndex" 
-                class="el-menu-vertical-demo menu-list" 
                 :collapse="isCollapse"
+                class="el-menu-vertical-demo menu-list" 
                 background-color="#2f4055"
                 active-text-color="#429ee2"
                 text-color="#becad8"
                 width="200px"
                 :unique-opened="true"
-                @select="getMenu">
+                >
+                    <div class="logo" v-show="isShowLogo" v-if="!isCollapse">
+                        <img src="../assets/logo/menu_logo.png" alt="logo.png">
+                    </div>
                         <el-menu-item 
                         v-if="!items.children"
                         :index="items.index" 
@@ -46,7 +49,6 @@ import { element } from 'protractor';
             <Drawer 
             v-show="isSmall" 
             v-model="isMenuCollapse"
-            height="auto"
             placement="left">
                 <el-scrollbar style="height:100%">
                     <el-menu 
@@ -57,7 +59,7 @@ import { element } from 'protractor';
                     text-color="#becad8"
                     width="200px"
                     :unique-opened="true"
-                    @select="getMenu">
+                    >
                             <el-menu-item 
                             v-if="!items.children"
                             :index="items.index" 
@@ -91,26 +93,65 @@ import { element } from 'protractor';
                 <el-header>
                     <div class="navbar">
                         <div class="menu-button">
-                            <i 
-                            class="el-icon-s-unfold" @click="showMenu"></i>
+                            <el-tooltip 
+                            class="item" 
+                            effect="dark" 
+                            content="展开菜单" 
+                            placement="bottom">
+                                <i 
+                                class="el-icon-s-unfold" 
+                                @click="showMenu"></i>
+                            </el-tooltip>
+                            <el-tooltip 
+                            class="item" 
+                            effect="dark" 
+                            content="删除所有标签页" 
+                            placement="bottom">
+                                <i 
+                                class="el-icon-circle-close" 
+                                @click="removeAllTags"
+                                title="删除所有标签页"></i>
+                            </el-tooltip>
                         </div>
                         <div class="icon-box">
-                            <span class="iconfont iconfull_screen" @click="fullScreen"
-                            ref="icon"
-                            ></span>
+                            <el-tooltip 
+                            class="item" 
+                            effect="dark" 
+                            content="样式设置" 
+                            placement="bottom">
+                                <i 
+                                class="el-icon-s-tools"
+                                @click="showSetting"></i>
+                            </el-tooltip>
+                            <el-tooltip 
+                            class="item" 
+                            effect="dark" 
+                            content="全屏" 
+                            placement="bottom">
+                                <span class="iconfont iconfull_screen" @click="fullScreen"
+                                ref="icon"
+                                ></span>
+                            </el-tooltip>
                         </div>
                         <div class="avatar-box">
                             <el-dropdown trigger="click">
-                                <img 
-                                class="image"
-                                src="http://myinterface.xuanzai.top/getPicture?type=头像&id=1" alt="avatar.png">
+                                <div class="block">
+                                    <el-avatar 
+                                    shape="square" 
+                                    :size="45" 
+                                    :src="squareUrl">
+                                        <img src="http://myinterface.xuanzai.top/getPicture?type=error"/>
+                                    </el-avatar>
+                                </div>
                                 <i class="el-icon-caret-bottom el-icon--right"></i>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item>首页</el-dropdown-item>
+                                    <el-dropdown-item
+                                    @click.native="clickMenuItem('/home/chart', '首页', '1')">首页</el-dropdown-item>
                                     <el-dropdown-item @click.native="clickMenuItem('/home/person', '个人中心', '2')"><span>个人中心</span></el-dropdown-item>
                                     <el-dropdown-item>项目地址</el-dropdown-item>
                                     <div class="line"></div>
-                                    <el-dropdown-item>退出登录</el-dropdown-item>
+                                    <el-dropdown-item
+                                    @click.native="logout">退出登录</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </div>
@@ -118,16 +159,20 @@ import { element } from 'protractor';
                 </el-header>
                 <el-header>
                     <div class="tabs">
-                        <Tag 
-                        color="primary"
-                        type="dot"
-                        closable
-                        checkable
-                        v-for="(items, index) in tagsList" 
-                        :name="items.title"
-                        @on-close="tabsRemove"
-                        @on-change="tabsClick(items.path, index, items.index)"
-                        >{{items.title}}</Tag>
+                        <el-scrollbar
+                        style="height: 50px;" 
+                        >
+                            <Tag 
+                            color="primary"
+                            type="dot"
+                            closable
+                            checkable
+                            v-for="(items, index) in tagsList" 
+                            :name="items.title"
+                            @on-close="tabsRemove"
+                            @on-change="tabsClick(items.path, index, items.index)"
+                            >{{items.title}}</Tag>
+                        </el-scrollbar>
                     </div>
                 </el-header>
                 <el-main>
@@ -137,6 +182,38 @@ import { element } from 'protractor';
                 </el-main>
             </el-container>
         </el-container>
+        <Drawer 
+        v-model="isSetting"
+        width="350px">
+            <h2 style="margin-top: 1rem">系统布局设置</h2>
+            <el-divider></el-divider>
+            <div class="switch-box">
+                <div class="box">
+                    <span class="tips">显示菜单Logo</span>
+                    <el-switch v-model="isShowLogo" @change="showLogo">
+                    </el-switch>
+                </div>
+            </div>
+            <el-image
+            style="width: 100%; height: 159px"
+            :src="logoUrl"
+            fit="cover"
+            ref="image"></el-image>
+            <div class="button">
+                <el-button 
+                type="primary" 
+                style="width: 100%"
+                @click="selectPic"
+                >选择图片</el-button>
+            </div>
+            <div class="button">
+                <el-button 
+                type="success" 
+                style="width: 100%"
+                @click="uploadLogo"
+                >上传Logo</el-button>
+            </div>
+        </Drawer>
     </div>
 </template>
 
@@ -148,34 +225,18 @@ export default {
             isFullScreen: false,
             isSmall: false,
             isMenuCollapse: false,
-            menuList: [{
-                title: "首页",
-                path: "/home/chart",
-                index: "1",
-                icon: "el-icon-menu"
-            }, {
-                title: "个人中心",
-                path: "/home/person",
-                index: "2",
-                icon: "el-icon-user-solid"
-            }, {
-                title: "文章管理",
-                index: "3",
-                icon: "el-icon-edit",
-                children: [{
-                    title: "添加文章",
-                    path: "/home/add_article",
-                    index: "3-1",
-                    icon: "el-icon-tickets"
-                }]
-            }],
+            isSetting: false,
+            isShowLogo: true,
+            menuList: [],
+            logoUrl: "",
             tagsList: [{
                 title: "首页",
                 path: "/home/chart",
                 index: "1"
             }],
-            nowIndex: this.$getMemory('nowIndex') || 0,
-            activeIndex: "1"
+            nowIndex: this.$getMemorySes('nowIndex') || 0,
+            activeIndex: "1",
+            squareUrl: "http://myinterface.xuanzai.top/getPicture?type=头像&id=8",
         }
     },
     mounted() {
@@ -190,12 +251,49 @@ export default {
         this.$nextTick(() => {
             this.changeTagStyle(this.nowIndex)
         })
+        // 是否显示Logo
+        this.isShowLogo = this.$getMemoryPmt('isShowLogo')
+        // 获取菜单
+        this.menuList = this.$store.state.menuList
+        // 获取当前活动的标签页
         this.activeIndex = this.tagsList[this.nowIndex].index
     },
     methods: {
+        // 退出登录
+        logout() {
+            this.$router.push({path: '/login'})
+        },
+        // 选择图片
+        selectPic() {
+            this
+                .$getImgFile()
+                .then(result => {
+                    this.logoUrl = result
+                })
+                .catch(e => {
+                    this.$warnMsg(e)
+                })
+        },
+        // 上床logo
+        uploadLogo() {
+
+        },
+        // 全局设置显示菜单Logo
+        showLogo(val) {
+            this.$setMemoryPmt('isShowLogo', val)
+        },
+        // 打开设置抽屉
+        showSetting() {
+            this.isSetting = true
+        },
+        // 保存当前标签页与索引
+        saveTagsAndInd() {
+            this.$setMemorySes('tagsList', this.tagsList)
+            this.$setMemorySes('nowIndex', this.nowIndex)
+        },
         // 初始化标签页
         initialTags() {
-            let tagsList = this.$getMemory('tagsList', true)
+            let tagsList = this.$getMemorySes('tagsList')
             tagsList
             && (this.tagsList.splice(0, this.tagsList.length),
             tagsList.forEach(value => {
@@ -206,11 +304,9 @@ export default {
         changeTagStyle(index) {
             let dots = document.querySelectorAll('.ivu-tag-dot-inner')
             dots.forEach((value, ind) => {
-                if(index == ind) {
-                    this.$setStyle(value, 'display', 'inline-block')
-                }else {
-                    this.$setStyle(value, 'display', 'none')
-                }
+                index == ind
+                ? this.$setStyle(value, 'display', 'inline-block')
+                : this.$setStyle(value, 'display', 'none')
             })
             this.nowIndex = index
         },
@@ -218,9 +314,17 @@ export default {
         tabsClick(path, index, menuInd) {
             this.nowIndex = index
             this.activeIndex = menuInd
-            this.$setMemory('menuInd', this.activeIndex)
+            this.$setMemorySes('menuInd', this.activeIndex)
             this.changeTagStyle(index)
             this.navigateTo(path)
+        },
+        // 移除所有标签
+        removeAllTags() {
+            this.tagsList.splice(1, this.nowIndex - 1)
+            this.nowIndex == 0
+            ? (this.tagsList.splice(1), this.changeTagStyle(0))
+            : (this.tagsList.splice(2), this.changeTagStyle(1))
+            this.saveTagsAndInd()
         },
         // 移除标签
         tabsRemove(event, title) {
@@ -230,8 +334,7 @@ export default {
                     this.changeTagStyle(this.nowIndex)
                     i == this.nowIndex
                     && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.nowIndex - 1))
-                    this.$setMemory('tagsList', this.tagsList)
-                    this.$setMemory('nowIndex', this.nowIndex)
+                    this.saveTagsAndInd()
                     return
                 }    
             }
@@ -248,14 +351,13 @@ export default {
                 index: index
             })
             this.nowIndex = this.tagsList.length - 1
-            this.$setMemory('tagsList', this.tagsList)
-            this.$setMemory('nowIndex', this.nowIndex)
+            this.saveTagsAndInd()
         },
         // 跳转路由
         navigateTo(path) {
             if(this.$route.path == path) return
             this.$Loading.finish()
-            this.$router.push({path})
+            this.$router.push({ path })
         },
         // 判断当前点击的菜单在哪个标签
         findIndex(title) {
@@ -266,17 +368,13 @@ export default {
                 }
             }
         },
-        // 路由跳转
+        // 点击菜单项
         clickMenuItem(path, title, index) {
             this.addTag(path, title, index)
             this.navigateTo(path)
             this.findIndex(title)
             this.changeTagStyle(this.nowIndex)
             this.isMenuCollapse = false
-        },
-        // 菜单激活回调
-        getMenu(index, indexPath) {
-            this.activeIndex = '1-1'
         },
         // 设置全屏与取消全屏
         fullScreen() {
@@ -299,7 +397,7 @@ export default {
             this.$setStyle(drawer, 'padding', 0)
             this.$setStyle(tag.lastElementChild, 'display', 'none')
             this.$setStyle(drawerContent, 'background', '#2e3f54')
-            eles.forEach(value => {
+            eles.forEach((value, index) => {
                 this.$setStyle(value, 'overflow-x', 'hidden')
             })
             this.isMenuCollapse = false
@@ -350,18 +448,30 @@ export default {
     .menu-button {
         position: relative;
         display: inline-block;
-        margin-left: 1rem;
+        padding: 0 1rem;
         font-size: 1.5rem;
         color: #686868;
+        transition: .3s;
         cursor: pointer;
+    }
+    .menu-button:hover {
+        background: #f8f8f8;
+    }
+    .el-icon-s-unfold, .el-icon-circle-close {
         transition: .3s;
     }
-    .menu-button:active {
+    .el-icon-s-unfold:active {
         color: rgb(19, 180, 255);
     }
     .el-menu-item {
         position: relative;
-        padding-right: 5rem;
+    }
+    .el-icon-circle-close {
+        position: relative;
+        margin-left: .8rem;
+    }
+    .el-icon-circle-close:active {
+        color: rgb(19, 180, 255);
     }
     .avatar-box {
         position: absolute;
@@ -375,6 +485,9 @@ export default {
         width: 60px;
         height: 50px;
     }
+    .el-menu-item, .el-submenu__title {
+        width: 200px;
+    }
     .image {
         height: 100%;
         border-radius: 1rem;
@@ -386,25 +499,43 @@ export default {
     }
     .el-icon-caret-bottom {
         position: absolute;
-        right: 0;
-        bottom: 10px;
+        right: -2px;
+        bottom: 5px;
     }
     .icon-box {
         position: absolute;
         top:0;
-        right: 70px;
-        width: 50px;
+        right: 75px;
+        padding: 0 1rem;
         height: 50px;
         line-height: 50px;
         color: #676767;
         text-align: center;
         transition: .3s;
     }
+    .el-icon-s-tools {
+        position: relative;
+        top: 1px;
+        margin-right: .8rem;
+        font-size: 25px;
+    }
+    .iconfull_screen, .el-icon-s-tools, .iconfullscreenexit {
+        transition: .3s;
+    }
+    .iconfull_screen:active {
+        color: rgb(19, 180, 255);
+    }
+    .el-icon-s-tools:active {
+        color: rgb(19, 180, 255);
+    }
+    .iconfullscreenexit:active {
+        color: rgb(19, 180, 255);
+    }
     .icon-box:hover {
         background: #f8f8f8;
     }
     .iconfont {
-        font-size: 1.6rem;
+        font-size: 22px;
     }
     .el-header:last-of-type {
         height: 41px!important;
@@ -412,5 +543,40 @@ export default {
     .tabs {
         position: relative;
         margin-left: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .el-scrollbar__view {
+        overflow: hidden!important;
+    }
+    .logo {
+        position: relative;
+        margin: 1.5rem 0 .5rem 0;
+        width: 13rem;
+        text-align: center;
+    }
+    .logo > img {
+        position: relative;
+        left: -5px;
+        width: 80%;
+    }
+    .switch-box {
+        position: relative;
+        margin: 1rem 0;
+        text-align: right;
+    }
+    .box {
+        position: relative;
+        margin: .5rem;
+    }
+    .tips {
+        position: absolute;
+        top: -3px;
+        left: 0;
+        font-size: 1rem;
+    }
+    .button {
+        position: relative;
+        margin: .5rem 0;
     }
 </style>

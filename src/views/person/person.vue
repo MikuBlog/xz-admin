@@ -8,7 +8,11 @@
                     </div>
                     <div class="avatar-box">
                         <div class="avatar">
-                            <img src="http://myinterface.xuanzai.top/getPicture?type=头像&id=1" alt="avatar.png" class="image">
+                            <el-avatar 
+                            :size="120" 
+                            :src="squareUrl">
+                                <img src="http://myinterface.xuanzai.top/getPicture?type=error"/>
+                            </el-avatar>
                         </div>
                         <div class="avatar-detail">
                             <div class="role">
@@ -127,7 +131,8 @@ export default {
                 'http://myinterface.xuanzai.top/getPicture?type=2233&id=3',
                 'http://myinterface.xuanzai.top/getPicture?type=2233&id=4',
                 'http://myinterface.xuanzai.top/getPicture?type=2233&id=5'
-            ]
+            ],
+            squareUrl: "http://myinterface.xuanzai.top/getPicture?type=头像&id=8"
         }
     },
     methods: {

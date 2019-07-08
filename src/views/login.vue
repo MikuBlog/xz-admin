@@ -45,7 +45,12 @@
                 </svg>
             </div>
         </div>
-        <Drawer title="设置" :closable="false" v-model="isShowDrawer" width="350px" style="overflow-x: hidden">
+        <Drawer 
+        title="设置" 
+        :closable="false" 
+        v-model="isShowDrawer" 
+        width="350px" 
+        style="overflow-x: hidden">
               <el-tabs v-model="activeName" type="card" @tab-click="getTag">
                 <el-tab-pane label="背景图" name="0"></el-tab-pane>
                 <el-tab-pane label="登录框" name="1"></el-tab-pane>
@@ -53,7 +58,7 @@
             <div class="background-setting" v-show="tab[0]">
                 <el-image
                 style="width: 100%; height: 159px"
-                :src="url"
+                :src="backgroundUrl"
                 :fit="size"
                 ref="image"></el-image>
                 <div class="radio-box">
@@ -144,22 +149,22 @@ export default {
             activeName: '0',
             tab: [1, 0],
             fileEle: "",
-            url: this.$getMemory("backgroundUrl") || "",
+            backgroundUrl: this.$getMemoryPmt("backgroundUrl") || "",
             event: "",
-            opacity: +this.$getMemory('opacity') || 100,
-            blur: +this.$getMemory('blur') || 0,
-            height: +this.$getMemory('height') || 62,
-            width: +this.$getMemory('width') || 50,
-            fontSize: +this.$getMemory('fontSize') || 30,
-            iconSize: +this.$getMemory('iconSize') || 30,
+            opacity: +this.$getMemoryPmt('opacity') || 100,
+            blur: +this.$getMemoryPmt('blur') || 0,
+            height: +this.$getMemoryPmt('height') || 62,
+            width: +this.$getMemoryPmt('width') || 50,
+            fontSize: +this.$getMemoryPmt('fontSize') || 30,
+            iconSize: +this.$getMemoryPmt('iconSize') || 30,
+            size: this.$getMemoryPmt('size') || "cover",
+            boxColor: this.$getMemoryPmt('boxColor') || "rgba(0, 0, 0, .35)",
+            fontColor: this.$getMemoryPmt('fontColor') || "#fefefe",
             ruleForm: {
                 account: "",
                 password: "",
                 checked: false,
             },
-            size: this.$getMemory('size') || "cover",
-            boxColor: this.$getMemory('boxColor') || "rgba(0, 0, 0, .35)",
-            fontColor: this.$getMemory('fontColor') || "#fefefe",
             rules: {
                 account: [
                     { required: true, message: "账号不能为空", trigger: 'blur' },
@@ -171,10 +176,6 @@ export default {
                 ]
             }
         }
-    },
-    created() {
-        // 初始化操作
-        this.getFileEle()
     },
     mounted() {
         // DOM元素加载后进行样式的修改
@@ -188,7 +189,7 @@ export default {
                 child = document.querySelector('.el-image__inner'),
                 loginBox = this.$refs.loginBox,
                 header = this.$refs.header
-            this.url
+            this.backgroundUrl
             ? (this.$setStyle(child, 'opacity', `${this.opacity / 100}`),this.$setStyle(child, 'filter', `blur(${this.blur}px)`))
             : this.$warnMsg("请选择图片")
         },
@@ -200,30 +201,16 @@ export default {
             const ele = document.querySelector('.ivu-drawer-body')
             this.$setStyle(ele, 'overflow-x', 'hidden')
         },
-        // 创建元素
-        getFileEle() {
-            let
-                reader = new FileReader(),
-                pattern = new RegExp(/^image/)
-            this.fileEle = document.createElement('input')
-            this.fileEle.type = "file"
-            this.fileEle.accept = "image/jpeg, image/png"
-            this.fileEle.addEventListener('change', () => {
-                const files = this.fileEle.files[0]
-                files.size / (1024 ** 2) > 2
-                ? this.$warnMsg("选择的图片不能超过2MB")
-                : (pattern.test(files.type)
-                ? reader.readAsDataURL(files)
-                : this.$warnMsg("请选择图片"))
-            })
-            reader.addEventListener('load', () => {
-                this.url = reader.result
-            })
-        },
         // 选择背景图
         selectPic() {
-            const event = new MouseEvent('click') 
-            this.fileEle.dispatchEvent(event)
+            this
+                .$getImgFile()
+                .then(result => {
+                    this.backgroundUrl = result
+                })
+                .catch(e => {
+                    this.$warnMsg(e)
+                })
         },
         // 应用图片
         useStyle() {
@@ -234,8 +221,8 @@ export default {
                 svg = document.querySelectorAll('svg'),
                 checkBox = document.querySelector('.el-checkbox'),
                 tip = document.querySelector('.tip')
-            this.url
-            && (this.$setStyle(ele, 'background-image', `url(${this.url})`), this.$setStyle(ele, 'opacity', `${this.opacity / 100}`),
+            this.backgroundUrl
+            && (this.$setStyle(ele, 'background-image', `url(${this.backgroundUrl})`), this.$setStyle(ele, 'opacity', `${this.opacity / 100}`),
             this.$setStyle(ele, 'filter', `blur(${this.blur}px)`), this.$setStyle(ele, 'background-size', `${this.size == "fill" ? "100% 100%" : this.size}`))
             this.$setStyle(loginBox, 'height', `${this.height / 2}rem`)
             this.$setStyle(loginBox, 'width', `${this.width / 2}rem`)
@@ -248,16 +235,16 @@ export default {
                 this.$setStyle(value, 'width', `${this.iconSize / 10}rem`)
                 this.$setStyle(value, 'height', `${this.iconSize / 10}rem`)
             })
-            this.$setMemory('backgroundUrl', this.url)
-            this.$setMemory('opacity', this.opacity)
-            this.$setMemory('blur', this.blur)
-            this.$setMemory('height', this.height)
-            this.$setMemory('width', this.width)
-            this.$setMemory('fontSize', this.fontSize)
-            this.$setMemory('iconSize', this.iconSize)
-            this.$setMemory('size', this.size)
-            this.$setMemory('boxColor', this.boxColor)
-            this.$setMemory('fontColor', this.fontColor)
+            this.$setMemoryPmt('backgroundUrl', this.backgroundUrl)
+            this.$setMemoryPmt('opacity', this.opacity)
+            this.$setMemoryPmt('blur', this.blur)
+            this.$setMemoryPmt('height', this.height)
+            this.$setMemoryPmt('width', this.width)
+            this.$setMemoryPmt('fontSize', this.fontSize)
+            this.$setMemoryPmt('iconSize', this.iconSize)
+            this.$setMemoryPmt('size', this.size)
+            this.$setMemoryPmt('boxColor', this.boxColor)
+            this.$setMemoryPmt('fontColor', this.fontColor)
         },
         // 显示对应的tab页
         getTag(tab, event) {

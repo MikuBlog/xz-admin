@@ -37,3 +37,7 @@ body {
     position: relative;
     border-top: 1px solid #dbdee5;
 }
+.button-box {
+    position: relative;
+    margin: 1rem 0 2rem 0;
+}

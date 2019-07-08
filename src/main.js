@@ -2,22 +2,22 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// 引入浏览器数据库
-// import Database from './plugins/database/database'
-//引入二次封装的axios
+// 引入浏览器数据库模块
+import Database from './plugins/database/database'
+// 引入二次封装的axios模块
 import Http from './plugins/http/http'
-// 引入全局提示
+// 引入全局提示魔窟家
 import Message from './plugins/message/message'
 // 引入element-ui框架
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-// 按需引入iview样式
+// 引入iview框架
 import iview from 'iview';
-import 'iview/dist/styles/iview.css';
 // 引入全局样式
 import './global/style.css'
 import './global/icon_font/iconfont.css'
 import './plugins/iconfont/iconfont'
+import 'element-ui/lib/theme-chalk/index.css';
+import 'iview/dist/styles/iview.css';
 // 引入时间格式化函数
 import Date from './plugins/other/form_date'
 // 引入设置样式函数
@@ -28,17 +28,36 @@ import FullScreen from './plugins/other/full_screen'
 import SetClass from './plugins/dom/set_class'
 // 引入存储模块
 import Memory from './plugins/storage/storage'
+// 引入图片读取模块
+import ReadImg from './plugins/dom/get_file_image'
 /**
- * 浏览器数据库操作：增
- * @param {Object} data {id: 1, url: xxx} 
- * 浏览器数据库操作：改
- * @param {Object} data {id: 1, url: xxx} 
- * 浏览器数据库操作：查
- * @param {Number} id 
+ * 连接数据库
+ * @param {String} databaseName 数据库名称
+ * @return {Promise}
  */
-// Vue.prototype.$insert = Database.insert
-// Vue.prototype.$update = Database.update
-// Vue.prototype.$find = Database.find
+Vue.prototype.$connectDatabase = Database.connectDatabase
+/**
+ * 添加数据
+ * @param {String} tableName 表名
+ * @param {Object} data 插入的数据
+ * @return {Promise}
+ */
+Vue.prototype.$insert = Database.insert
+/**
+ * 查找数据
+ * @param {String} tableName 表名
+ * @param {Number} id 数据id
+ * @return {Promise}
+ */
+Vue.prototype.$update = Database.find
+/**
+ * 修改数据
+ * @param {String} tableName 表名
+ * @param {Number} id 数据id
+ * @param {Number} data 修改数据
+ * @return {Promise}
+ */
+Vue.prototype.$find = Database.update
 /**
  * 添加axios实例
  * 1. 键值对数据请求
@@ -99,17 +118,20 @@ Vue.prototype.$getClassName = SetClass.getClassName
  * 设置存储值
  * @param {String} key 存储键
  * @param {String | Object | Number | Boolean} value 存储值
- * @param {Boolean} isPermanent 是否永久存储，默认为false
  */
-Vue.prototype.$setMemory = Memory.setMemory
+Vue.prototype.$setMemorySes = Memory.setMemorySes
+Vue.prototype.$setMemoryPmt = Memory.setMemoryPmt
 /**
  * 获取存储值
  * @param {String} key 存储值
- * @param {Boolean} isObject 是否为对象
- * @param {Boolean} isPermanent 是否获取永久存储值，默认为false
  * @return {String | Object | Number | Boolean} 返回值
  */
-Vue.prototype.$getMemory = Memory.getMemory
+Vue.prototype.$getMemorySes = Memory.getMemorySes
+Vue.prototype.$getMemoryPmt = Memory.getMemoryPmt
+/**
+ * @return {Promise}
+ */
+Vue.prototype.$getImgFile = ReadImg.getImgFile
 // 加入element-ui组件
 Vue.use(ElementUI);
 // 引入iview组件
