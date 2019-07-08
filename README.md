@@ -20,7 +20,7 @@
 
 <br/>
 
-# 页面布局
+# 页面布局 :earth_asia:
 
 + 弹性布局
 + 响应式布局
@@ -30,13 +30,13 @@
 <br/>
 
 
-# 技术栈
+# 技术栈 :sparkling_heart:
 
 使用了`vue`、`element-ui`、`iview`作为主要技术栈
 
 <br/>
 
-# 插件
+# 插件 :electric_plug:
 
 + 富文本编辑器：二次封装的`UEditor`
 + 表格：`VCharts`
