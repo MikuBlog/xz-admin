@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@riophae/vue-treeselect": "^0.0.38",
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "echarts": "^4.2.1",
