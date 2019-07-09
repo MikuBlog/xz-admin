@@ -189,124 +189,22 @@
                 </el-card>
             </el-col>
         </el-row>
-        <el-dialog 
-        title="添加字典" 
-        :visible.sync="isShowAddBox"
-        width="450px">
-            <el-form 
-            :model="addForm"
-            ref="addForm"
-            :rules="addFormRules">
-                <el-form-item 
-                label="字典名称"
-                prop="name">
-                    <el-input 
-                    placeholder="请输入字典名称"
-                    v-model="addForm.name" 
-                    autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item 
-                label="描述"
-                prop="description">
-                    <el-input 
-                    placeholder="请输入字典描述"
-                    v-model="addForm.description" 
-                    autocomplete="off"></el-input>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button 
-                @click="isShowAddBox = false" 
-                size="small">取 消</el-button>
-                <el-button 
-                type="primary" 
-                @click="submitForm('addForm')"
-                size="small">确 定</el-button>
-            </div>
-        </el-dialog>
-        <el-dialog 
-        title="添加字典详情" 
-        :visible.sync="isShowDetailBox"
-        width="450px">
-            <el-form 
-            :model="detailForm"
-            ref="detailForm"
-            :rules="detailFormRules">
-                <el-form-item 
-                label="字典标签"
-                prop="tag">
-                    <el-input 
-                    placeholder="请输入字典标签"
-                    v-model="detailForm.tag" 
-                    autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item 
-                label="字典值"
-                prop="val">
-                    <el-input 
-                    placeholder="请输入字典值"
-                    v-model="detailForm.val"
-                    autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item 
-                label="排序"
-                prop="sort">
-                    <el-input 
-                    placeholder="请输入序号"
-                    v-model="detailForm.sort" 
-                    type="number"
-                    autocomplete="off"></el-input>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button
-                @click="isShowDetailBox = false"
-                size="small">取 消</el-button>
-                <el-button 
-                type="primary" 
-                size="small"
-                @click="submitForm('detailForm')">确 定</el-button>
-            </div>
-        </el-dialog>
+        <Form-Add ref="formAdd"></Form-Add>
+        <Form-Edit ref="formEdit"></Form-Edit>
     </div>
 </template>
 
 <script>
+import FormAdd from './add'
+import FormEdit from './edit'
 export default {
+    components: { FormAdd, FormEdit },
     data() {
         return {
             isShowAddBox: false,
             isShowDetailBox: false,
             searchVal: "",
             selectVal: "",
-            addForm: {
-                name: "",
-                description: ""
-            },
-            detailForm: {
-                name: "",
-                val: "",
-                sort: "",
-            },
-            addFormRules: {
-                name: [
-                    { required: true, message: '请输入字典名称', trigger: 'blur' }
-                ],
-                description: [
-                    { required: true, message: '请输入字典描述', trigger: 'blur' }
-                ],
-            },
-            detailFormRules: {
-                tag: [
-                    { required: true, message: '请输入字典标签', trigger: 'blur' }
-                ],
-                val: [
-                    { required: true, message: '请输入字典值', trigger: 'blur' }
-                ],
-                sort: [
-                    { required: true, message: '请输入序号', trigger: 'blur' }
-                ],
-            },
             dictionaryList: [{
                 name: "xz_test",
                 description: "旋仔牛B"
@@ -328,21 +226,10 @@ export default {
     },
     methods: {
         addDictionary() {
-            this.isShowAddBox = true
+            this.$refs.formAdd.isShowAddBox = true
         },
         addDetail() {
-            this.isShowDetailBox = true
-        },
-        // 添加字典
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
+            this.$refs.formEdit.isShowDetailBox = true
         },
         handleEdit() {
 

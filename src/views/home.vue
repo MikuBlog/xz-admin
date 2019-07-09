@@ -328,6 +328,7 @@ export default {
             this.activeIndex = menuInd
             this.$setMemorySes('menuInd', this.activeIndex)
             this.changeTagStyle(index)
+            this.saveTagsAndInd()
             this.navigateTo(path)
         },
         // 移除所有标签
@@ -386,6 +387,7 @@ export default {
             this.navigateTo(path)
             this.findIndex(title)
             this.changeTagStyle(this.nowIndex)
+            this.saveTagsAndInd()
             this.isMenuCollapse = false
         },
         // 设置全屏与取消全屏

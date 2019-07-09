@@ -1,43 +1,43 @@
 import Vue from 'vue'
-import Http from './plugins/http/http'
-import store from './store'
+import Http from '@/plugins/http/http'
+import store from '@/store'
 import Router from 'vue-router'
 // 登录页面
-import Login from './views/login.vue'
+import Login from '@/views/login.vue'
 // 后台管理页面首页
-import Home from './views/home.vue'
+import Home from '@/views/home.vue'
 
 /**
  * 子页面
  */
-import Welcome from './views/welcome/welcome.vue'
-import Chart from './views/chart/chart.vue'
-import Person from './views/person/person.vue'
+import Welcome from '@/views/welcome/welcome.vue'
+import Chart from '@/views/chart/chart.vue'
+import Person from '@/views/person/person.vue'
 
 /**
  * 文章模块
  */
-import AddArticle from './views/article/add_article.vue'
-import EditArticle from './views/article/edit_article.vue'
-import ArticleList from './views/article/article_list.vue'
-import ArticleRecycle from './views/article/article_recycle.vue'
+import AddArticle from '@/views/article/add_article.vue'
+import EditArticle from '@/views/article/edit_article.vue'
+import ArticleList from '@/views/article/article_list.vue'
+import ArticleRecycle from '@/views/article/article_recycle.vue'
 
 /**
  * 订单模块
  */
-import AddOrder from './views/order/add_order.vue'
-import EditOrder from './views/order/edit_order.vue'
-import OrderList from './views/order/order_list.vue'
-import OrderRecycle from './views/order/order_recycle.vue'
+import AddOrder from '@/views/order/add_order.vue'
+import EditOrder from '@/views/order/edit_order.vue'
+import OrderList from '@/views/order/order_list.vue'
+import OrderRecycle from '@/views/order/order_recycle.vue'
 
 /**
  * 系统模块
  */
-import AuthorityManage from './views/system/authority_manage.vue'
-import UserManage from './views/system/user_manage.vue'
-import RoleManage from './views/system/role_manage.vue'
-import MenuManage from './views/system/menu_manage.vue'
-import DictionaryManage from './views/system/dictionary_manage.vue'
+import AuthorityManage from '@/views/system/authority/index.vue'
+import UserManage from '@/views/system/user/index.vue'
+import RoleManage from '@/views/system/role/index.vue'
+import MenuManage from '@/views/system/menu/index.vue'
+import DictionaryManage from '@/views/system/dictionary/index.vue'
 
 Vue.use(Router)
 
@@ -136,6 +136,9 @@ const menuList = [{
       }]
   
 const routes = [{
+          path: "*",
+          redirect: "/login"
+        }, {
         path: '/home',
         name: 'home',
         component: Home,

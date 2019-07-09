@@ -70,9 +70,7 @@
             <el-row>
                 <el-col :span="24">
                     <div class="editor">
-                        <div class="float">
-                            <editor @getValue="getValue"></editor>
-                        </div>
+                        <editor @getValue="getValue"></editor>
                     </div>
                 </el-col>
             </el-row>

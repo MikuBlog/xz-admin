@@ -20,6 +20,9 @@ import './global/icon_font/iconfont.css'
 import './plugins/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'iview/dist/styles/iview.css';
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+// 引入树状选择器
+import Treeselect from '@riophae/vue-treeselect'
 // 引入时间格式化函数
 import Date from './plugins/other/form_date'
 // 引入设置样式函数
@@ -146,6 +149,8 @@ Vue.prototype.$getImgFile = ReadImg.getImgFile
 Vue.use(ElementUI);
 // 引入iview组件
 Vue.use(iview)
+// 引入树状选择器组件
+Vue.component('treeselect', Treeselect)
 
 Vue.config.productionTip = false
 
