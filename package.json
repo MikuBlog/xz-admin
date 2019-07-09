@@ -13,8 +13,10 @@
     "echarts": "^4.2.1",
     "element-ui": "^2.10.1",
     "iview": "^3.4.2",
+    "jquery": "^3.4.1",
     "v-charts": "^1.19.0",
     "vue": "^2.6.10",
+    "vue-number-scroll": "^2.0.1",
     "vue-router": "^3.0.3",
     "vue-ueditor-wrap": "^2.4.1",
     "vuex": "^3.0.1"
