@@ -6,12 +6,33 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>demo</title>
+    <style>
+      .loading-image {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+      }
+      .loading-image > img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 20rem;
+        height: 15rem;
+      }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but demo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <div class="loading-image">
+          <img src="http://localhost:8080/tv.gif" alt="loading.gif">
+      </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
