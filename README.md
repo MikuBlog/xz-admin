@@ -43,3 +43,4 @@
 + 富文本编辑器：二次封装的`UEditor`
 + 表格：`VCharts`
 + 数字滚动：`vue-number-scroll`
++ 树状选择器：`vue-treeselect`
