@@ -170,7 +170,7 @@ import { element } from 'protractor';
                             v-for="(items, index) in tagsList" 
                             :name="items.title"
                             @on-close="tabsRemove"
-                            @on-change="tabsClick(items.path, index, items.index)"
+                            @on-change="tabsClick(items.path, index, items.index, items.title)"
                             >{{items.title}}</Tag>
                         </el-scrollbar>
                     </div>
@@ -261,6 +261,8 @@ export default {
         })
         // 是否显示Logo
         this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
+        // 获取浏览器标签页标题
+        document.title = this.$getMemorySes('tagTitle')
         // 获取菜单
         this.menuList = this.$store.state.menuList
         // 获取当前活动的标签页
@@ -298,10 +300,11 @@ export default {
         showSetting() {
             this.isSetting = true
         },
-        // 保存当前标签页与索引
+        // 保存当前标签页、索引、标题
         saveTagsAndInd() {
             this.$setMemorySes('tagsList', this.tagsList)
             this.$setMemorySes('nowIndex', this.nowIndex)
+            this.$setMemorySes('tagTitle', document.title)
         },
         // 初始化标签页
         initialTags() {
@@ -323,7 +326,8 @@ export default {
             this.nowIndex = index
         },
         // 点击标签
-        tabsClick(path, index, menuInd) {
+        tabsClick(path, index, menuInd, title) {
+            document.title = title
             this.nowIndex = index
             this.activeIndex = menuInd
             this.$setMemorySes('menuInd', this.activeIndex)
@@ -383,6 +387,7 @@ export default {
         },
         // 点击菜单项
         clickMenuItem(path, title, index) {
+            document.title = title
             this.addTag(path, title, index)
             this.navigateTo(path)
             this.findIndex(title)

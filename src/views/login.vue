@@ -177,6 +177,9 @@ export default {
             }
         }
     },
+    created() {
+        document.title = "登录"
+    },
     mounted() {
         // DOM元素加载后进行样式的修改
         this.useStyle()
@@ -332,6 +335,7 @@ export default {
         height: 30rem;
         background: rgba(0, 0, 0, .35);
         transition: .5s;
+        border-radius: 10px;
     }
     .login-box:hover {
         transform: translateY(-1.5%);
