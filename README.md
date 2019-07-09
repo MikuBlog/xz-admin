@@ -1,3 +1,9 @@
+# 页面浏览 :smirk:
+
+https://xzadmin.xuanzai.top
+
+<br/>
+
 # 页面开发进度 :ok_hand:
 
 - 登录
@@ -24,8 +30,6 @@
 - 系统监控
   - 操作日志
   - 异常日志
-  - 系统缓存
-  - SQL监控
 
 <br/>
 
