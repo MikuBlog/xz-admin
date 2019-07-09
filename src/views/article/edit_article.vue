@@ -188,18 +188,14 @@ export default {
     .el-col-11 {
         padding-left: 0!important;
     }
-    .editor {
-        position: relative;
-        margin-top: 1rem;
-        width: 100%;
-        height: 600px;
-    }
     .button-box {
         position: relative;
         margin: 1rem 0 2rem 0;
     }
-    .float {
+    .editor {
         position: relative;
-        float: left;
+        margin: 1rem 0 2rem;
+        width: 100%;
+        height: 600px;
     }
 </style>

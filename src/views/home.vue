@@ -1,6 +1,6 @@
 import { element } from 'protractor';
 <template>
-    <div class="home" ref="home">
+    <div class="home" ref="home" id="home">
         <el-container>
             <el-scrollbar 
             style="height:100%" 
@@ -16,7 +16,7 @@ import { element } from 'protractor';
                 :unique-opened="true"
                 >
                     <div class="logo" v-show="isShowLogo" v-if="!isCollapse">
-                        <img src="../assets/logo/menu_logo.png" alt="logo.png">
+                        <img src="../assets/logo/catjoker.png" alt="logo.png">
                     </div>
                         <el-menu-item 
                         v-if="!items.children"
@@ -175,10 +175,19 @@ import { element } from 'protractor';
                         </el-scrollbar>
                     </div>
                 </el-header>
-                <el-main>
+                <el-main class="top">
                     <transition name="el-fade-in-linear">
                         <router-view/>
                     </transition>
+                    <div class="back-top">
+                        <el-button 
+                        type="primary" 
+                        icon="el-icon-top" 
+                        circle
+                        class="to-top"
+                        @click="backTop"
+                        v-show="isShowBackTop"></el-button>
+                    </div>
                 </el-main>
             </el-container>
         </el-container>
@@ -227,6 +236,7 @@ export default {
             isMenuCollapse: false,
             isSetting: false,
             isShowLogo: true,
+            isShowBackTop: false,
             menuList: [],
             logoUrl: "",
             tagsList: [{
@@ -240,10 +250,8 @@ export default {
         }
     },
     mounted() {
-        // 样式初始化
         this.initialStyle()
-        // 监听器初始化
-        this.eventListener()
+        this.initialListener()
         // 获取视窗大小
         this.getWindowWidth()
         this.initialTags()
@@ -259,6 +267,10 @@ export default {
         this.activeIndex = this.tagsList[this.nowIndex].index
     },
     methods: {
+        // 返回顶部
+        backTop() {
+            this.$$('.top').animate({scrollTop: 0}, 500)
+        },
         // 退出登录
         logout() {
             this.$router.push({path: '/login'})
@@ -267,14 +279,14 @@ export default {
         selectPic() {
             this
                 .$getImgFile()
-                .then(result => {
-                    this.logoUrl = result
+                .then(({raw, url}) => {
+                    this.logoUrl = url
                 })
                 .catch(e => {
                     this.$warnMsg(e)
                 })
         },
-        // 上床logo
+        // 上传logo
         uploadLogo() {
 
         },
@@ -409,15 +421,26 @@ export default {
             : this.isCollapse = !this.isCollapse
         },
         getWindowWidth() {
+            window.innerWidth < 1200
+            && (this.isCollapse = true)
             window.innerWidth < 900
             ? this.isSmall = true
             : this.isSmall = false
             this.initialStyle()
         },
+        getScrollTop(obj) {
+            obj.scrollTop >= 100
+            ? this.isShowBackTop = true
+            : this.isShowBackTop = false
+        },
         // 事件监听
-        eventListener() {
+        initialListener() {
+            const _this = this
             window.addEventListener('resize', () => {
                 this.getWindowWidth()
+            })
+            document.querySelector('.top').addEventListener('scroll', function() {
+                _this.getScrollTop(this)
             })
         }
     }
@@ -551,7 +574,7 @@ export default {
     }
     .logo {
         position: relative;
-        margin: 1.5rem 0 .5rem 0;
+        margin: 2rem 0 1rem 0;
         width: 13rem;
         text-align: center;
     }
@@ -578,5 +601,11 @@ export default {
     .button {
         position: relative;
         margin: .5rem 0;
+    }
+    .back-top {
+        position: fixed;
+        z-index: 9999;
+        right: 40px;
+        bottom: 40px;
     }
 </style>

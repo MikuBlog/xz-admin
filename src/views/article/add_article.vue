@@ -183,12 +183,8 @@ export default {
     }
     .editor {
         position: relative;
-        margin-top: 1rem;
+        margin: 1rem 0 2rem;
         width: 100%;
         height: 600px;
-    }
-    .float {
-        position: relative;
-        float: left;
     }
 </style>

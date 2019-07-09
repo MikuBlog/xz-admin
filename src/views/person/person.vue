@@ -61,7 +61,7 @@
                 </el-card>
             </el-col>
             <el-col :sm="24" :md="18">
-                <el-card class="box-card">
+                <el-card class="box-card card-gutter">
                     <div class="tabs">
                         <el-tabs v-model="activeName" @tab-click="handleClick">
                             <el-tab-pane label="Timeline" name="first">
@@ -195,10 +195,5 @@ export default {
     }
     .timeline-content {
         font-size: .8rem;
-    }
-    @media screen and (min-width: 0) and (max-width: 992px) {
-        .box-card:last-of-type {
-            margin-top: 1rem;
-        }
     }
 </style>

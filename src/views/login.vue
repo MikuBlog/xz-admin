@@ -205,8 +205,8 @@ export default {
         selectPic() {
             this
                 .$getImgFile()
-                .then(result => {
-                    this.backgroundUrl = result
+                .then(({raw, url}) => {
+                    this.backgroundUrl = url
                 })
                 .catch(e => {
                     this.$warnMsg(e)

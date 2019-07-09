@@ -9,9 +9,11 @@ import Http from './plugins/http/http'
 // 引入全局提示魔窟家
 import Message from './plugins/message/message'
 // 引入element-ui框架
-import ElementUI from 'element-ui';
+import ElementUI from 'element-ui'
 // 引入iview框架
-import iview from 'iview';
+import iview from 'iview'
+// 引入jquery
+import Jquery from 'jquery'
 // 引入全局样式
 import './global/style.css'
 import './global/icon_font/iconfont.css'
@@ -30,24 +32,32 @@ import SetClass from './plugins/dom/set_class'
 import Memory from './plugins/storage/storage'
 // 引入图片读取模块
 import ReadImg from './plugins/dom/get_file_image'
+
+Vue.prototype.$$ = Jquery 
 /**
  * 连接数据库
  * @param {String} databaseName 数据库名称
- * @return {Promise}
+ * @returns {Promise}
  */
 Vue.prototype.$connectDatabase = Database.connectDatabase
+/**
+ * 创建表格
+ * @param {String} tableName 表名
+ * @param {Object} options 参数
+ */
+Vue.prototype.$createTable = Database.createTable
 /**
  * 添加数据
  * @param {String} tableName 表名
  * @param {Object} data 插入的数据
- * @return {Promise}
+ * @returns {Promise}
  */
 Vue.prototype.$insert = Database.insert
 /**
  * 查找数据
  * @param {String} tableName 表名
  * @param {Number} id 数据id
- * @return {Promise}
+ * @returns {Promise}
  */
 Vue.prototype.$update = Database.find
 /**
@@ -55,7 +65,7 @@ Vue.prototype.$update = Database.find
  * @param {String} tableName 表名
  * @param {Number} id 数据id
  * @param {Number} data 修改数据
- * @return {Promise}
+ * @returns {Promise}
  */
 Vue.prototype.$find = Database.update
 /**
@@ -129,7 +139,7 @@ Vue.prototype.$setMemoryPmt = Memory.setMemoryPmt
 Vue.prototype.$getMemorySes = Memory.getMemorySes
 Vue.prototype.$getMemoryPmt = Memory.getMemoryPmt
 /**
- * @return {Promise}
+ * @returns {Promise}
  */
 Vue.prototype.$getImgFile = ReadImg.getImgFile
 // 加入element-ui组件

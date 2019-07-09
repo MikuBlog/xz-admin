@@ -40,6 +40,7 @@ function find(tableName, id) {
 
 function update(tableName, id, data) {
     return new Promise((resolve, reject) => {
+        data.id = id
         let req = db
         .transaction([tableName], 'readwrite')
         .objectStore(tableName)

@@ -15,7 +15,7 @@ function requestFullScreen() {
     }   
 }
 
-function cancelFullScreen(element) {
+function cancelFullScreen() {
     if (document.cancelFullScreen) {
         document.cancelFullScreen();
     } else if (document.mozCancelFullScreen) {

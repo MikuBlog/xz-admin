@@ -15,7 +15,7 @@
                                     流量
                                 </div>
                                 <div class="number">
-                                    {{peopleNum}}
+                                    <vns :start="0" :end="peopleNum" :times="times" :speed="speed"/>
                                 </div>
                             </div>
                         </el-col>
@@ -36,7 +36,7 @@
                                     留言
                                 </div>
                                 <div class="number">
-                                    {{messageNum}}
+                                    <vns :start="0" :end="messageNum" :times="times" :speed="speed"/>
                                 </div>
                             </div>
                         </el-col>
@@ -57,7 +57,7 @@
                                 销售额
                                 </div>
                                 <div class="number">
-                                    {{money}}
+                                    <vns :start="0" :end="money" :times="times" :speed="speed"/>
                                 </div>
                             </div>
                         </el-col>
@@ -78,7 +78,7 @@
                                 销售量
                                 </div>
                                 <div class="number">
-                                    {{sellNum}}
+                                    <vns :start="0" :end="sellNum" :times="times" :speed="speed"/>
                                 </div>
                             </div>
                         </el-col>
@@ -115,13 +115,14 @@
 
 <script>
 // 引入v-chart
+import vns from 'vue-number-scroll'
 import VeLine from 'v-charts/lib/line.common'
 import VePie from 'v-charts/lib/pie.common'
 import VeRing from 'v-charts/lib/ring.common'
 import VeHistogram from 'v-charts/lib/histogram.common'
 import VeFunnel from 'v-charts/lib/funnel.common'
 export default {
-    components: { VeLine, VePie, VeRing, VeHistogram, VeFunnel },
+    components: { VeLine, VePie, VeRing, VeHistogram, VeFunnel, vns },
     data() {
         this.lineSettings = {
             stack: { '用户': ['访问用户', '下单用户'] },
@@ -139,6 +140,12 @@ export default {
             metrics: '数值'
         }
         return {
+            peopleNum: 1023,
+            money: 6783.5,
+            sellNum: 573,
+            messageNum: 79,
+            speed: 40,
+            times: 30,
             lineData: {
                 columns: ['日期', '访问用户', '下单用户', '下单率'],
                 rows: [
@@ -182,57 +189,12 @@ export default {
                     { '状态': '订单', '状态': '订单', '数值': 100 }
                 ]
             },
-            peopleNum: 0,
-            money: 0,
-            sellNum: 0,
-            messageNum: 0
         }
     },
     mounted() {
-        // 初始化数字滚动
-        this.numberScroll('peopleNum', 1023)
-        this.numberScroll('money', 6783.5)
-        this.numberScroll('sellNum', 573)
-        this.numberScroll('messageNum', 79)
     },
     methods: {
-        // 数字滚动
-        numberScroll(key, number) {
-            let 
-                num = 0,
-                dotNumber = number.toString().split(/\./)[1] 
-                ? number.toString().split(/\./)[1].length
-                : 0
-            let clock = setInterval(() => {
-                if(num < number - 50000) {
-                    num += 300
-                }
-                if(num < number - 10000) {
-                    num += 200
-                }
-                if(num < number - 1000) {
-                    num += 100
-                }
-                if(num < number - 500) {
-                    num += 40
-                }
-                if(num < number - 100) {
-                    num += 7
-                }
-                if(num < number - 10) {
-                    num += .3
-                }
-                if(num < number) {
-                    num += .1
-                }
-                if(num >= number) {
-                    this[key] = number
-                    clearInterval(clock)
-                    return
-                }
-                this[key] = num.toFixed(dotNumber)
-            })
-        },
+
     }
 }
 </script>
