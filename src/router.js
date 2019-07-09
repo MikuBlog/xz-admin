@@ -39,6 +39,12 @@ import RoleManage from '@/views/system/role/index.vue'
 import MenuManage from '@/views/system/menu/index.vue'
 import DictionaryManage from '@/views/system/dictionary/index.vue'
 
+/**
+ * 日志模块
+ */
+import ExceptionLog from '@/views/monitor/exception_log.vue'
+import OpertionLog from '@/views/monitor/operation_log.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -133,6 +139,21 @@ const menuList = [{
           index: "5-5",
           icon: "el-icon-delete-solid"
         }]
+      }, {
+        title: "系统监控",
+        index: "6",
+        icon: "el-icon-edit",
+        children: [{
+            title: "操作日志",
+            path: "/home/operation_log",
+            index: "6-1",
+            icon: "el-icon-document-copy"
+        }, {
+            title: "异常日志",
+            path: "/home/exception_log",
+            index: "6-2",
+            icon: "el-icon-tickets"
+        }]
       }]
   
 const routes = [{
@@ -198,6 +219,14 @@ const routes = [{
           path: 'dictionary_manage',
           name: 'dictionary_manage',
           component: DictionaryManage
+        }, {
+          path: 'exception_log',
+          name: 'exception_log',
+          component: ExceptionLog
+        }, {
+          path: 'operation_log',
+          name: 'operation_log',
+          component: OpertionLog
         }, {
           path: 'chart',
           name: 'chart',

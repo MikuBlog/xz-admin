@@ -6,7 +6,7 @@
 	*	通过状态码返回对应的提示
 	*	@param {Integer} result 状态码
 	*/
-	function justifyStatus(result) {
+	function justifyStatus(result, additional) {
 		switch(result) {
 			case 404: Message({
 				showClose: true,
@@ -21,6 +21,11 @@
 			case 0: Message({
 				showClose: true,
 				message: "请登录",
+				type: 'error'
+			});break;
+			case 'none': Message({
+				showClose: true,
+				message: `${additional}`,
 				type: 'error'
 			});break;
 			case 500: 
@@ -52,7 +57,9 @@
 				loading.close()
 				return response;
 			}, err => {
-				justifyStatus(err.response.status)
+				err.response 
+				? justifyStatus(err.response.status)
+				: justifyStatus('none', err)
 				loading.close()
 				return Promise.reject(err)
 			})
@@ -61,10 +68,10 @@
 	let loading
 	
 	// 给所有的实例配置请求根路径
-	axios.defaults.baseURL = 'http://myinterface.xuanzai.top/'
+	axios.defaults.baseURL = 'https://myinterface.xuanzai.top/'
 	
     // 配置请求时限
-	axios.defaults.timeout = 3000 
+	axios.defaults.timeout = 5000 
 
 	// 给所有的实例配置同一的返回数据格式
 	axios.defaults.transformResponse = [(data) => {

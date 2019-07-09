@@ -260,7 +260,7 @@ export default {
             this.changeTagStyle(this.nowIndex)
         })
         // 是否显示Logo
-        this.isShowLogo = this.$getMemoryPmt('isShowLogo')
+        this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
         // 获取菜单
         this.menuList = this.$store.state.menuList
         // 获取当前活动的标签页
