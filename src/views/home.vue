@@ -22,7 +22,8 @@ import { element } from 'protractor';
                         v-if="!items.children"
                         :index="items.index" 
                         @click="clickMenuItem(items.path, items.title, items.index)" 
-                        v-for="items in menuList">
+                        v-for="items in menuList"
+                        class="parent-item">
                             <i :class="items.icon"></i>
                             <span slot="title">{{items.title}}</span>
                         </el-menu-item>
