@@ -1,5 +1,5 @@
 <template>
-    <div class="article-list">
+    <div class="station-manage">
         <el-row>
             <el-col :span="24">
                 <el-card class="box-card">
@@ -8,50 +8,71 @@
                         v-model="searchVal" 
                         placeholder="搜索内容"
                         class="search-input"></el-input>
+                        <el-select 
+                        v-model="selectType" 
+                        placeholder="类型"
+                        class="select-input">
+                            <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
                         <el-button 
                         icon="el-icon-search" 
                         circle></el-button>
+                        <el-button 
+                        type="primary"
+                        icon="el-icon-plus" 
+                        circle></el-button>
                     </div>
                     <el-table
-                        :data="articleList"
+                        :data="managementList"
                         style="width: 100%">
+                        <el-table-column
+                        label="名称"
+                        >
+                            <template slot-scope="scope">
+                                <span style="margin-left: 10px">{{ scope.row.name }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                        label="所属部门"
+                        >
+                        <template slot-scope="scope">
+                            <div slot="reference" class="name-wrapper">
+                                {{ scope.row.department }}
+                            </div>
+                        </template>
+                        </el-table-column>
+                        <el-table-column
+                        label="排序"
+                        >
+                        <template slot-scope="scope">
+                            <div slot="reference" class="name-wrapper">
+                                {{ scope.row.sort }}
+                            </div>
+                        </template>
+                        </el-table-column>
+                        <el-table-column
+                        label="状态"
+                        >
+                        <template slot-scope="scope">
+                            <div slot="reference" class="name-wrapper">
+                                <el-tag>
+                                    {{ scope.row.status }}
+                                </el-tag>
+                            </div>
+                        </template>
+                        </el-table-column>
                         <el-table-column
                         label="创建日期"
                         width="180"
                         >
                         <template slot-scope="scope">
-                            <i class="el-icon-time"></i>
-                            <span style="margin-left: 10px">{{ scope.row.date }}</span>
-                        </template>
-                        </el-table-column>
-                        <el-table-column
-                        label="文章标题"
-                        >
-                        <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                {{ scope.row.title }}
-                            </div>
-                        </template>
-                        </el-table-column>
-                        <el-table-column
-                        label="文章作者"
-                        >
-                        <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
-                                {{ scope.row.author }}
-                            </div>
-                        </template>
-                        </el-table-column>
-                        <el-table-column
-                        label="文章分类"
-                        >
-                        <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
-                                <el-tag 
-                                size="medium"
-                                type="info"> 
-                                    {{ scope.row.type }}
-                                </el-tag>
+                                {{ scope.row.createTime }}        
                             </div>
                         </template>
                         </el-table-column>
@@ -74,7 +95,7 @@
                         </template>
                         </el-table-column>
                     </el-table>
-                     <div class="pagination">
+                    <div class="pagination">
                         <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
@@ -96,78 +117,29 @@ export default {
     data() {
         return {
             searchVal: "",
-            articleList: [{
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }, {
-                date: "2019-07-08 12:00",
-                title: "旋仔牛B",
-                author: "匿名",
-                type: "旋仔牛B系列",
-            }]
-        }
-    },
-    methods: {
-        // 查找当前菜单目录
-        findIndex() {
-
-        },
-        handleEdit() {
-
-        },
-        handleDelete() {
-
+            selectType: "",
+            managementList: [{
+                name: "xuanzai",
+                department: "网维",
+                sort: "1",
+                status: "正常",
+                createTime: "2019-07-10 12:00"
+            }],
+            options: [{
+                value: '选项1',
+                label: '黄金糕'
+            },{
+                value: '选项2',
+                label: '黄金糕'
+            },{
+                value: '选项3',
+                label: '黄金糕'
+            }],
         }
     }
 }
 </script>
 
-<style lang="scss" scoped>
-    .el-pagination{
-        position: relative;
-        text-align: right;
-        margin: 2rem 0 1rem 0;
-    }
+<style>
+
 </style>

@@ -127,10 +127,10 @@ export default {
         return {
             activeName: "first",
             imageList: [
-                'http://myinterface.xuanzai.top/getPicture?type=2233&id=2',
-                'http://myinterface.xuanzai.top/getPicture?type=2233&id=3',
-                'http://myinterface.xuanzai.top/getPicture?type=2233&id=4',
-                'http://myinterface.xuanzai.top/getPicture?type=2233&id=5'
+                'https://myinterface.xuanzai.top/getPicture?type=2233&id=2',
+                'https://myinterface.xuanzai.top/getPicture?type=2233&id=3',
+                'https://myinterface.xuanzai.top/getPicture?type=2233&id=4',
+                'https://myinterface.xuanzai.top/getPicture?type=2233&id=5'
             ],
             squareUrl: "http://myinterface.xuanzai.top/getPicture?type=头像&id=8"
         }

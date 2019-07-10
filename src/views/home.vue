@@ -262,7 +262,7 @@ export default {
         // 是否显示Logo
         this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
         // 获取浏览器标签页标题
-        document.title = this.$getMemorySes('tagTitle')
+        document.title = this.$getMemorySes('tagTitle') || "欢迎"
         // 获取菜单
         this.menuList = this.$store.state.menuList
         // 获取当前活动的标签页
@@ -412,10 +412,12 @@ export default {
                 drawer = document.querySelector('.ivu-drawer-body'),
                 tag = document.querySelector('.ivu-tag'),
                 menuList = document.querySelector('.el-menu-vertical-demo'),
-                drawerContent = document.querySelector('.ivu-drawer-content')
+                drawerContent = document.querySelector('.ivu-drawer-content'),
+                scrollContainer = document.querySelector('.el-scrollbar')
             this.$setStyle(drawer, 'padding', 0)
             this.$setStyle(tag.lastElementChild, 'display', 'none')
             this.$setStyle(drawerContent, 'background', '#2e3f54')
+            this.$setStyle(scrollContainer, 'background', '#2d3e53')
             eles.forEach((value, index) => {
                 this.$setStyle(value, 'overflow-x', 'hidden')
             })
@@ -612,7 +614,7 @@ export default {
     .back-top {
         position: fixed;
         z-index: 9999;
-        right: 40px;
-        bottom: 40px;
+        right: 50px;
+        bottom: 100px;
     }
 </style>

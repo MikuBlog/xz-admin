@@ -4,13 +4,24 @@
             <el-col :span="24">
                 <el-card class="box-card">
                     <el-row class="button-box">
-                        <el-col :span="24">
+                        <el-col :span="12">
                             <el-button 
                             type="danger" 
                             size="small"
                             icon="el-icon-delete">
                                 清空
                             </el-button>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="search" style="text-align:right">
+                                <el-input 
+                                v-model="searchVal" 
+                                placeholder="搜索内容"
+                                class="search-input"></el-input>
+                                <el-button 
+                                icon="el-icon-search" 
+                                circle></el-button>
+                            </div>
                         </el-col>
                     </el-row>
                     <el-table
@@ -75,13 +86,17 @@
                         </template>
                         </el-table-column>
                     </el-table>
-                    <el-col :span="24" style="pagination">
+                     <div class="pagination">
                         <el-pagination
-                        background
-                        layout="prev, pager, next"
-                        :total="1000">
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        :pager-count="5"
+                        layout="total, prev, pager, next, jumper"
+                        :total="400">
                         </el-pagination>
-                    </el-col>
+                    </div>
                 </el-card>
             </el-col>
         </el-row>

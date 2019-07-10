@@ -20,8 +20,10 @@
                             <el-col :span="12">
                                 <el-input v-model="searchVal" placeholder="搜索内容"></el-input>
                             </el-col>
-                            <el-col :span="6">
-                                <el-select v-model="selectVal" placeholder="类型">
+                                <el-select 
+                                v-model="selectVal" 
+                                placeholder="类型"
+                                class="select-input">
                                     <el-option
                                     v-for="item in options"
                                     :key="item.value"
@@ -29,17 +31,14 @@
                                     :value="item.value">
                                     </el-option>
                                 </el-select>
-                            </el-col>
-                            <el-col :span="3">
                                 <el-button 
                                 icon="el-icon-search" 
                                 circle></el-button>
-                            </el-col>
                         </el-row>
                     </div>
                     <el-table
                         :data="dictionaryList"
-                        style="width: 100%">
+                        style="width: 100%;">
                         <el-table-column
                         label="名称"
                         >
@@ -58,7 +57,8 @@
                         </el-table-column>
                         <el-table-column 
                         label="操作"
-                        width="150">
+                        width="150"
+                        fixed="right">
                         <template slot-scope="scope">
                             <el-button 
                             type="primary" 
@@ -103,21 +103,12 @@
                     </div>
                     <div class="search">
                         <el-row :gutter="10">
-                            <el-col :span="6">
-                                <el-select v-model="selectVal" placeholder="字典标签">
-                                    <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                    </el-option>
-                                </el-select>
+                            <el-col :span="12">
+                                <el-input v-model="searchVal" placeholder="按字典标签内容搜索"></el-input>
                             </el-col>
-                            <el-col :span="3">
-                                <el-button 
+                            <el-button 
                                 icon="el-icon-search" 
                                 circle></el-button>
-                            </el-col>
                         </el-row>
                     </div>
                     <el-table
@@ -159,7 +150,9 @@
                         </el-table-column>
                         <el-table-column 
                         label="操作"
-                        width="150">
+                        width="150"
+                        fixed="right"
+                        >
                         <template slot-scope="scope">
                             <el-button 
                             type="primary" 

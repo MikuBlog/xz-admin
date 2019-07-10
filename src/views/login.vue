@@ -41,7 +41,7 @@
                     <use xlink:href="#iconweibo"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#iconwechat"></use>
+                    <use xlink:href="#iconweixin"></use>
                 </svg>
             </div>
         </div>
@@ -331,15 +331,15 @@ export default {
         top: 0;
         bottom: 0;
         margin: auto;
-        width: 20rem;
-        height: 30rem;
+        width: 25rem;
+        height: 31rem;
         background: rgba(0, 0, 0, .35);
         transition: .5s;
-        border-radius: 10px;
+        border-radius: 5px;
     }
     .login-box:hover {
-        transform: translateY(-1.5%);
-        box-shadow: 0 5px 2px 1px rgb(78, 78, 78);
+        transform: translateY(-.5%);
+        box-shadow: 0 0 5px 1px rgb(78, 78, 78);
     }
     .header {
         position: relative;
@@ -374,8 +374,8 @@ export default {
         text-align: center;
     }
     svg {
-        width: 2rem;
-        height: 2rem;
+        width: 3rem;
+        height: 3rem;
         transition: .5s;
     }
     svg:first-of-type {

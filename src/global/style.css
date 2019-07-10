@@ -16,6 +16,49 @@ body {
     position: relative;
     width: 100%;
 }
+.el-container {
+    flex-basis: 0;
+}
+.el-menu {
+    border-right: none;
+}
+.el-table {
+    margin: 1rem 0;
+}
+.interval-top {
+    margin-top: 1rem;
+}
+.interval-left {
+    margin-left: 1rem;
+}
+.interval-right {
+    margin-right: 1rem;
+}
+.interval-bottom {
+    margin-bottom: 1rem;
+}
+.select-input{
+    width: 7rem;
+    margin: 0 .5rem;
+}
+.search-input {
+    width: 15rem;
+}
+.is-circle {
+    margin-left: .3rem;
+}
+.border {
+    position: relative;
+    border-top: 1px solid #dbdee5;
+}
+.button-box {
+    position: relative;
+    margin: 1rem 0 2rem 0;
+}
+.tree-box {
+    position: relative;
+    margin: 1rem 0;
+}
 .title {
     font-size: 14px;
     line-height: 40px;
@@ -27,19 +70,9 @@ body {
     position: relative;
     text-align: center;
 }
-.el-container {
-    flex-basis: 0;
-}
-.el-menu {
-    border-right: none;
-}
-.border {
+.pagination {
     position: relative;
-    border-top: 1px solid #dbdee5;
-}
-.button-box {
-    position: relative;
-    margin: 1rem 0 2rem 0;
+    text-align: right;
 }
 @media screen and (min-width: 0) and (max-width: 992px) {
     .card-gutter {

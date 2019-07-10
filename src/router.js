@@ -38,6 +38,8 @@ import UserManage from '@/views/system/user/index.vue'
 import RoleManage from '@/views/system/role/index.vue'
 import MenuManage from '@/views/system/menu/index.vue'
 import DictionaryManage from '@/views/system/dictionary/index.vue'
+import StationManage from '@/views/system/station/index.vue'
+import DepartmentManage from '@/views/system/department/index.vue'
 
 /**
  * 日志模块
@@ -138,6 +140,16 @@ const menuList = [{
           path: "/home/dictionary_manage",
           index: "5-5",
           icon: "el-icon-delete-solid"
+        }, {
+          title: "部门管理",
+          path: "/home/department_manage",
+          index: "5-6",
+          icon: "el-icon-delete-solid"
+        }, {
+          title: "岗位管理",
+          path: "/home/station_manage",
+          index: "5-7",
+          icon: "el-icon-delete-solid"
         }]
       }, {
         title: "系统监控",
@@ -220,6 +232,14 @@ const routes = [{
           name: 'dictionary_manage',
           component: DictionaryManage
         }, {
+          path: 'station_manage',
+          name: 'station_manage',
+          component: StationManage
+        },{
+          path: 'department_manage',
+          name: 'department_manage',
+          component: DepartmentManage
+        },{
           path: 'exception_log',
           name: 'exception_log',
           component: ExceptionLog
