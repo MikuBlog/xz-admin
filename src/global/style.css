@@ -25,6 +25,18 @@ body {
 .el-table {
     margin: 1rem 0;
 }
+.el-submenu__title {
+    padding: 0 10px!important;
+}
+.el-menu--collapse {
+    width: 45px;
+}
+.el-tooltip {
+    padding: 0 10px!important;
+}
+.el-menu-item {
+    padding: 0 10px!important;
+}
 .interval-top {
     margin-top: 1rem;
 }

@@ -11,7 +11,7 @@
                             <el-avatar 
                             :size="120" 
                             :src="squareUrl">
-                                <img src="http://myinterface.xuanzai.top/getPicture?type=error"/>
+                                <img src="https://myinterface.xuanzai.top/getPicture?type=error"/>
                             </el-avatar>
                         </div>
                         <div class="avatar-detail">
@@ -132,7 +132,7 @@ export default {
                 'https://myinterface.xuanzai.top/getPicture?type=2233&id=4',
                 'https://myinterface.xuanzai.top/getPicture?type=2233&id=5'
             ],
-            squareUrl: "http://myinterface.xuanzai.top/getPicture?type=头像&id=8"
+            squareUrl: "https://myinterface.xuanzai.top/getPicture?type=头像&id=8"
         }
     },
     methods: {

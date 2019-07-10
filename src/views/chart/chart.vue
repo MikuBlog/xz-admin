@@ -94,17 +94,17 @@
             </el-col>
         </el-row>
         <el-row style="margin-top: 1rem" :gutter="20">
-            <el-col :xs="24" :sm="24" :md="8">
+            <el-col :xs="24" :sm="24" :md="24" :lg="8">
                 <el-card class="box-card">
                     <ve-ring :data="ringData" :settings="ringSettings"></ve-ring>
                 </el-card>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="8">
+            <el-col :xs="24" :sm="24" :md="24" :lg="8">
                 <el-card class="box-card">
                     <ve-funnel :data="funnelData" :settings="funnelSettings"></ve-funnel>
                 </el-card>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="8">
+            <el-col :xs="24" :sm="24" :md="24" :lg="8">
                 <el-card class="box-card">
                     <ve-histogram :data="histogramData" :settings="histogramSettings"></ve-histogram>
                 </el-card>

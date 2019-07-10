@@ -140,7 +140,7 @@ import { element } from 'protractor';
                                     shape="square" 
                                     :size="45" 
                                     :src="squareUrl">
-                                        <img src="http://myinterface.xuanzai.top/getPicture?type=error"/>
+                                        <img src="https://myinterface.xuanzai.top/getPicture?type=error"/>
                                     </el-avatar>
                                 </div>
                                 <i class="el-icon-caret-bottom el-icon--right"></i>
@@ -246,7 +246,7 @@ export default {
             }],
             nowIndex: this.$getMemorySes('nowIndex') || 0,
             activeIndex: "1",
-            squareUrl: "http://myinterface.xuanzai.top/getPicture?type=头像&id=8",
+            squareUrl: "https://myinterface.xuanzai.top/getPicture?type=头像&id=8",
         }
     },
     mounted() {
