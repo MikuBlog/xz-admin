@@ -181,8 +181,7 @@ export default {
     }
     .editor {
         position: relative;
-        margin: 1rem 0 2rem;
+        margin: 1rem 0;
         width: 100%;
-        height: 600px;
     }
 </style>
