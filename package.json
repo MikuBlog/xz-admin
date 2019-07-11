@@ -15,6 +15,7 @@
     "element-ui": "^2.10.1",
     "iview": "^3.4.2",
     "jquery": "^3.4.1",
+    "svg-sprite-loader": "^4.1.6",
     "v-charts": "^1.19.0",
     "vue": "^2.6.10",
     "vue-number-scroll": "^2.0.1",
@@ -31,6 +32,9 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
+    "svgo": "^1.1.0",
+    "svgo-loader": "^2.1.0",
+    "vue-cli-plugin-svg-sprite": "^1.0.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
