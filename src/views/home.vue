@@ -516,9 +516,6 @@ export default {
         width: 60px;
         height: 50px;
     }
-    .el-menu-item, .el-submenu__title {
-        width: 200px;
-    }
     .image {
         height: 100%;
         border-radius: 1rem;

@@ -46,6 +46,7 @@ import DepartmentManage from '@/views/system/department/index.vue'
  */
 import ExceptionLog from '@/views/monitor/exception_log.vue'
 import OpertionLog from '@/views/monitor/operation_log.vue'
+import AuthorityLog from '@/views/monitor/authority_log.vue'
 
 Vue.use(Router)
 
@@ -165,8 +166,13 @@ const menuList = [{
             path: "/home/exception_log",
             index: "6-2",
             icon: "el-icon-tickets"
-        }]
+        }, {
+          title: "权限日志",
+          path: "/home/authority_log",
+          index: "6-3",
+          icon: "el-icon-tickets"
       }]
+    }]
   
 const routes = [{
           path: "*",
@@ -248,6 +254,10 @@ const routes = [{
           name: 'operation_log',
           component: OpertionLog
         }, {
+          path: 'authority_log',
+          name: 'authority_log',
+          component: AuthorityLog
+        },  {
           path: 'chart',
           name: 'chart',
           component: Chart

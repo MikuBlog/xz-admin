@@ -28,6 +28,18 @@ body {
 .el-table {
     margin: 1rem 0;
 }
+.el-menu-item {
+    background: none!important;
+}
+.el-menu--popup {
+    background: #1e2c3c!important;
+}
+.el-menu-item:hover {
+    background: #253344!important;
+}
+.el-menu-item-group {
+    background: #1e2c3c;
+}
 .interval-top {
     margin-top: 1rem;
 }

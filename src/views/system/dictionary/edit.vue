@@ -9,7 +9,8 @@
             ref="detailForm"
             :rules="detailFormRules"
             label-position="right"
-            label-width="80px">
+            label-width="80px"
+            size="small">
                 <el-form-item 
                 label="字典标签"
                 prop="tag">

@@ -8,7 +8,8 @@
             ref="addForm"
             :rules="addFormRules"
             label-position="right"
-            label-width="80px">
+            label-width="80px"
+            size="small">
                 <el-form-item 
                 label="字典名称"
                 prop="name">
