@@ -16,6 +16,7 @@ https://xzadmin.xuanzai.top
 - 系统管理
   - 字典管理
   - 用户管理
+  - 菜单管理
   - 岗位管理
 - 系统监控
   - 操作日志
@@ -26,10 +27,8 @@ https://xzadmin.xuanzai.top
 # 仍待完成 :muscle:
 
 - 系统管理
-  - 菜单管理
   - 权限管理
   - 部门管理
-  - 岗位管理
 
 <br/>
 
