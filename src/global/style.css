@@ -16,6 +16,9 @@ body {
     position: relative;
     width: 100%;
 }
+.el-input-number {
+    width: 100%;
+}
 .el-container {
     flex-basis: 0;
 }

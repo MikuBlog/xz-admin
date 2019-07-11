@@ -42,12 +42,9 @@
 </template>
 
 <script>
-import { add, edit, getMenusTree } from '@/api/menu'
-import Treeselect from '@riophae/vue-treeselect'
-import IconSelect from '@/components/IconSelect'
-import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import IconSelect from '@/components/icon_select'
 export default {
-  components: { Treeselect, IconSelect },
+  components: { IconSelect },
   props: {
     isAdd: {
       type: Boolean,
@@ -87,46 +84,24 @@ export default {
       })
     },
     doAdd() {
-      add(this.form).then(res => {
-        this.resetForm()
-        this.$notify({
-          title: '添加成功',
-          type: 'success',
-          duration: 2500
-        })
-        this.$parent.init()
-      }).catch(err => {
-        console.log(err.response.data.message)
-      })
+
     },
     doEdit() {
-      edit(this.form).then(res => {
-        this.resetForm()
-        this.$notify({
-          title: '修改成功',
-          type: 'success',
-          duration: 2500
-        })
-        this.$parent.init()
-      }).catch(err => {
-        console.log(err.response.data.message)
-      })
+     
     },
     resetForm() {
-      this.dialog = false
-      this.$refs['form'].resetFields()
-      this.form = { name: '', sort: 999, path: '', component: '', iframe: 'false', roles: [], pid: 0, icon: '' }
+     
     },
     selected(name) {
       this.form.icon = name
     },
     getMenus() {
-      getMenusTree().then(res => {
-        this.menus = []
-        const menu = { id: 0, label: '顶级类目', children: [] }
-        menu.children = res
-        this.menus.push(menu)
-      })
+      // getMenusTree().then(res => {
+      //   this.menus = []
+      //   const menu = { id: 0, label: '顶级类目', children: [] }
+      //   menu.children = res
+      //   this.menus.push(menu)
+      // })
     }
   }
 }

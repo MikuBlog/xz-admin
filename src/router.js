@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Http from '@/plugins/http/http'
+import Http from '@/api/http/http'
 import store from '@/store'
 import Router from 'vue-router'
 // 登录页面

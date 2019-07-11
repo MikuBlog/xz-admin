@@ -6,7 +6,9 @@
             <el-form 
             :model="addForm"
             ref="addForm"
-            :rules="addFormRules">
+            :rules="addFormRules"
+            label-position="right"
+            label-width="80px">
                 <el-form-item 
                 label="字典名称"
                 prop="name">

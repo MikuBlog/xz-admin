@@ -6,7 +6,7 @@
                     <el-row>
                         <el-col :span="12">
                             <div class="iconfont-box">
-                                <span class="iconfont iconmanmany"></span>
+                                <span class="el-icon-user-solid"></span>
                             </div>
                         </el-col>
                         <el-col :span="12">
@@ -27,7 +27,7 @@
                     <el-row>
                         <el-col :span="12">
                             <div class="iconfont-box">
-                                <span class="iconfont iconarticle"></span>
+                                <span class="el-icon-document"></span>
                             </div>
                         </el-col>
                         <el-col :span="12">
@@ -48,7 +48,7 @@
                     <el-row>
                         <el-col :span="12">
                             <div class="iconfont-box">
-                                <span class="iconfont iconyuan"></span>
+                                <span class="el-icon-coin"></span>
                             </div>
                         </el-col>
                         <el-col :span="12">
@@ -69,7 +69,7 @@
                     <el-row>
                         <el-col :span="12">
                             <div class="iconfont-box">
-                                <span class="iconfont iconcart"></span>
+                                <span class="el-icon-shopping-cart-1"></span>
                             </div>
                         </el-col>
                         <el-col :span="12">
@@ -207,9 +207,8 @@ export default {
         position: relative;
         margin: .5rem 0;
     }
-    .iconfont {
+    .el-icon-user-solid, .el-icon-document, .el-icon-coin, .el-icon-shopping-cart-1 {
         position: relative;
-        width: 5rem;
         line-height: 5rem;
         font-size: 4rem;
         color: #3fc8c5;
@@ -217,34 +216,34 @@ export default {
         transition: .5s;
         border-radius: 1rem;
     }
-    .iconmanmany:hover {
+    .el-icon-user-solid:hover {
         color: #fefefe;
         background: #3fc8c5;
     }
-    .iconarticle {
+    .el-icon-document {
         color: #38a3f5;
     }
-    .iconarticle:hover {
+    .el-icon-document:hover {
         color: #fefefe;
         background: #38a3f5;
     }
-    .iconyuan {
+    .el-icon-coin {
         color: #f3516b;
     }
-    .iconyuan:hover {
+    .el-icon-coin:hover {
         color: #fefefe;
         background: #f3516b;
     }
-    .iconcart {
+    .el-icon-shopping-cart-1 {
         color: #ffd900;
     }
-    .iconcart:hover {
+    .el-icon-shopping-cart-1:hover {
         color: #fefefe;
         background: #ffd900;
     }
     .content-box {
         position: relative;
-        top: 1rem;
+        top: 1.8rem;
         font-size: 1.1rem;
         color: #8b8b8b;
         text-align: right;

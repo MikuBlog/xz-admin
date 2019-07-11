@@ -23,7 +23,7 @@ import { element } from 'protractor';
                         :index="items.index" 
                         @click="clickMenuItem(items.path, items.title, items.index)" 
                         v-for="items in menuList"
-                        class="parent-item">
+                        >
                             <i :class="items.icon"></i>
                             <span slot="title">{{items.title}}</span>
                         </el-menu-item>
@@ -129,7 +129,7 @@ import { element } from 'protractor';
                             effect="dark" 
                             content="全屏" 
                             placement="bottom">
-                                <span class="iconfont iconfull_screen" @click="fullScreen"
+                                <span class="el-icon-full-screen" @click="fullScreen"
                                 ref="icon"
                                 ></span>
                             </el-tooltip>
@@ -400,10 +400,8 @@ export default {
         fullScreen() {
             const ele = this.$refs.icon
             this.isFullScreen 
-            ? (this.$cancelFullScreen(), this.$removeClass(ele, 'iconfullscreenexit'),
-            this.$addClass(ele, 'iconfull_screen'))
-            : (this.$setFullScreen(), this.$addClass(ele, 'iconfullscreenexit'),
-            this.$removeClass(ele, 'iconfull_screen'))
+            ? this.$cancelFullScreen()
+            : this.$setFullScreen()
             this.isFullScreen = !this.isFullScreen
         },
         // 初始化样式
@@ -537,7 +535,7 @@ export default {
     }
     .icon-box {
         position: absolute;
-        top:0;
+        top:3px;
         right: 75px;
         padding: 0 1rem;
         height: 50px;
@@ -552,10 +550,10 @@ export default {
         margin-right: .8rem;
         font-size: 25px;
     }
-    .iconfull_screen, .el-icon-s-tools, .iconfullscreenexit {
+    .el-icon-full-screen, .el-icon-s-tools, .iconfullscreenexit {
         transition: .3s;
     }
-    .iconfull_screen:active {
+    .el-icon-full-screen:active {
         color: rgb(19, 180, 255);
     }
     .el-icon-s-tools:active {
@@ -567,7 +565,7 @@ export default {
     .icon-box:hover {
         background: #f8f8f8;
     }
-    .iconfont {
+    .el-icon-full-screen {
         font-size: 22px;
     }
     .el-header:last-of-type {

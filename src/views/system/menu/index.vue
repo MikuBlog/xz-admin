@@ -3,6 +3,33 @@
         <el-row :gutter="20">
             <el-col :span=24>
                 <el-card class="box-card">
+                    <div class="search">
+                        <el-row :gutter="10">
+                            <el-input 
+                            v-model="searchVal" 
+                            placeholder="搜索内容"
+                            class="search-input "></el-input>
+                                <el-select 
+                                v-model="selectVal" 
+                                placeholder="类型"
+                                class="select-input">
+                                    <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                    </el-option>
+                                </el-select>
+                                <el-button 
+                                icon="el-icon-search" 
+                                circle></el-button>
+                                <el-button 
+                                type="primary"
+                                icon="el-icon-plus" 
+                                circle
+                                @click="showBox('添加菜单')"></el-button>
+                        </el-row>
+                    </div>
                     <tree-table 
                     :data="data" 
                     :expand-all="expand" 
@@ -57,17 +84,29 @@
                 </el-card>
             </el-col>
         </el-row>
+        <eForm ref="form" :is-add="isAdd"/>
     </div>
 </template>
 
 <script>
-import treeTable from "../../../components/tree_table/tree_table";
+import treeTable from "@/components/tree_table/tree_table"
+import eForm from "./form.vue"
 export default {
-    components: { treeTable },
+    components: { treeTable, eForm },
     data() {
         return {
             expand: true,
             delLoading: false,
+            searchVal: "",
+            selectVal: "",
+            isAdd: true,
+            options: [{
+                value: '选项1',
+                label: '黄金糕'
+            },{
+                value: '选项2',
+                label: '黄金糕'
+            }],
             columns: [
                 {
                     text: '名称',
@@ -77,6 +116,11 @@ export default {
             data: [
                 
             ]
+        }
+    },
+    methods: {
+        showBox(name) {
+            this.$refs.form.dialog = true
         }
     }
 }

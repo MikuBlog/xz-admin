@@ -2,11 +2,14 @@
     <el-dialog 
         title="添加字典详情" 
         :visible.sync="isShowDetailBox"
-        width="450px">
+        width="450px"
+        >
             <el-form 
             :model="detailForm"
             ref="detailForm"
-            :rules="detailFormRules">
+            :rules="detailFormRules"
+            label-position="right"
+            label-width="80px">
                 <el-form-item 
                 label="字典标签"
                 prop="tag">
@@ -26,11 +29,12 @@
                 <el-form-item 
                 label="排序"
                 prop="sort">
-                    <el-input 
+                    <el-input-number
                     placeholder="请输入序号"
                     v-model="detailForm.sort" 
                     type="number"
-                    autocomplete="off"></el-input>
+                    autocomplete="off"
+                    controls-position="right"></el-input-number>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
