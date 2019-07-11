@@ -27,6 +27,7 @@ https://xzadmin.xuanzai.top
 # 仍待完成 :muscle:
 
 - 系统管理
+  - 角色管理
   - 权限管理
   - 部门管理
 
