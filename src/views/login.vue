@@ -50,6 +50,7 @@
         :closable="false" 
         v-model="isShowDrawer" 
         width="350px" 
+        @on-close="closeDrawer"
         style="overflow-x: hidden">
               <el-tabs v-model="activeName" type="card" @tab-click="getTag">
                 <el-tab-pane label="背景图" name="0"></el-tab-pane>
@@ -98,42 +99,51 @@
             <div class="login-box-setting" v-show="tab[1]">
                 <div class="block" style="text-align:right">
                     <span class="label">登录框颜色:</span>
-                    <el-color-picker v-model="boxColor" show-alpha></el-color-picker>
+                    <el-color-picker
+                     v-model="boxColor"
+                    @change="getBoxVal"
+                     show-alpha></el-color-picker>
                 </div>
                 <div class="block" style="text-align:right">
                     <span class="label">字体颜色:</span>
-                    <el-color-picker v-model="fontColor" ></el-color-picker>
+                    <el-color-picker 
+                    v-model="fontColor"
+                    @change="getBoxVal"></el-color-picker>
                 </div>
                 <div class="block">
                     <span class="demonstration">高度：</span>
                     <el-slider 
                     v-model="height" 
+                    @change="getBoxVal"
                     ></el-slider>
                 </div>
                 <div class="block">
                     <span class="demonstration">宽度：</span>
                     <el-slider 
                     v-model="width" 
+                    @change="getBoxVal"
                     ></el-slider>
                 </div>
                 <div class="block">
                     <span class="demonstration">标题大小：</span>
                     <el-slider 
                     v-model="fontSize" 
+                    @change="getBoxVal"
                     ></el-slider>
                 </div>
                 <div class="block">
                     <span class="demonstration">图标大小：</span>
                     <el-slider 
                     v-model="iconSize" 
+                    @change="getBoxVal"
                     ></el-slider>
                 </div>
                 <div class="button">
                     <el-button 
                     type="success" 
                     style="width: 100%"
-                    @click="useStyle"
-                    >应用样式</el-button>
+                    @click="saveBoxStyle"
+                    >保存样式</el-button>
                 </div>
             </div>
         </Drawer>
@@ -181,17 +191,55 @@ export default {
         document.title = "登录"
     },
     mounted() {
-        // DOM元素加载后进行样式的修改
+        // 初始化样式
+        this.getBoxVal()
         this.useStyle()
         this.initialStyle()
     },
     methods: {
-        // 检测属性值的变化
-        getVal() {
-            const 
-                child = document.querySelector('.el-image__inner'),
+        closeDrawer() {
+            const
                 loginBox = this.$refs.loginBox,
-                header = this.$refs.header
+                header = this.$refs.header,
+                svg = document.querySelectorAll('svg'),
+                checkBox = document.querySelector('.el-checkbox'),
+                tip = document.querySelector('.tip')
+            console.log(this.$getMemoryPmt('height'))
+            this.$setStyle(loginBox, 'height', `${(this.height = this.$getMemoryPmt('height') || 62) / 2}rem`)
+            this.$setStyle(loginBox, 'width', `${(this.width = this.$getMemoryPmt('width') || 50) / 2}rem`)
+            this.$setStyle(loginBox, 'background', `${(this.boxColor = this.$getMemoryPmt('boxColor') || 'rgba(0, 0, 0, .35)')}`)
+            this.$setStyle(header, 'font-size', `${(this.fontSize = this.$getMemoryPmt('fontSize') || 30) / 20}rem`)
+            this.$setStyle(header, 'color', `${(this.fontColor = this.$getMemoryPmt('fontColor') || '#fefefe')}`)
+            this.$setStyle(checkBox, 'color', `${(this.$getMemoryPmt('fontColor') || '#fefefe')}`)
+            this.$setStyle(tip, 'color', `${(this.$getMemoryPmt('fontColor') || '#fefefe')}`)
+            svg.forEach(value => {
+                this.$setStyle(value, 'width', `${(this.iconSize =  this.$getMemoryPmt('iconSize') || 30) / 10}rem`)
+                this.$setStyle(value, 'height', `${(this.$getMemoryPmt('iconSize') || 30) / 10}rem`)
+            })
+        },
+        // 登录框样式预览
+        getBoxVal() {
+            const
+                loginBox = this.$refs.loginBox,
+                header = this.$refs.header,
+                svg = document.querySelectorAll('svg'),
+                checkBox = document.querySelector('.el-checkbox'),
+                tip = document.querySelector('.tip')
+            this.$setStyle(loginBox, 'height', `${this.height / 2}rem`)
+            this.$setStyle(loginBox, 'width', `${this.width / 2}rem`)
+            this.$setStyle(loginBox, 'background', `${this.boxColor}`)
+            this.$setStyle(header, 'font-size', `${this.fontSize / 20}rem`)
+            this.$setStyle(header, 'color', `${this.fontColor}`)
+            this.$setStyle(checkBox, 'color', `${this.fontColor}`)
+            this.$setStyle(tip, 'color', `${this.fontColor}`)
+            svg.forEach(value => {
+                this.$setStyle(value, 'width', `${this.iconSize / 10}rem`)
+                this.$setStyle(value, 'height', `${this.iconSize / 10}rem`)
+            })
+        },
+        // 图片预览
+        getVal() {
+            const child = document.querySelector('.el-image__inner')
             this.backgroundUrl
             ? (this.$setStyle(child, 'opacity', `${this.opacity / 100}`),this.$setStyle(child, 'filter', `blur(${this.blur}px)`))
             : this.$warnMsg("请选择图片")
@@ -200,6 +248,7 @@ export default {
         formatTooltip(val) {
             return val / 100
         },
+        // 初始化样式
         initialStyle() {
             const ele = document.querySelector('.ivu-drawer-body')
             this.$setStyle(ele, 'overflow-x', 'hidden')
@@ -218,29 +267,20 @@ export default {
         // 应用图片
         useStyle() {
             const 
-                ele = this.$refs.background,
-                loginBox = this.$refs.loginBox,
-                header = this.$refs.header,
-                svg = document.querySelectorAll('svg'),
-                checkBox = document.querySelector('.el-checkbox'),
-                tip = document.querySelector('.tip')
+                ele = this.$refs.background
             this.backgroundUrl
             && (this.$setStyle(ele, 'background-image', `url(${this.backgroundUrl})`), this.$setStyle(ele, 'opacity', `${this.opacity / 100}`),
             this.$setStyle(ele, 'filter', `blur(${this.blur}px)`), this.$setStyle(ele, 'background-size', `${this.size == "fill" ? "100% 100%" : this.size}`))
-            this.$setStyle(loginBox, 'height', `${this.height / 2}rem`)
-            this.$setStyle(loginBox, 'width', `${this.width / 2}rem`)
-            this.$setStyle(loginBox, 'background', `${this.boxColor}`)
-            this.$setStyle(header, 'font-size', `${this.fontSize / 20}rem`)
-            this.$setStyle(header, 'color', `${this.fontColor}`)
-            this.$setStyle(checkBox, 'color', `${this.fontColor}`)
-            this.$setStyle(tip, 'color', `${this.fontColor}`)
-            svg.forEach(value => {
-                this.$setStyle(value, 'width', `${this.iconSize / 10}rem`)
-                this.$setStyle(value, 'height', `${this.iconSize / 10}rem`)
-            })
+            this.saveBgStyle()
+        },
+        // 保存背景样式
+        saveBgStyle() {
             this.$setMemoryPmt('backgroundUrl', this.backgroundUrl)
             this.$setMemoryPmt('opacity', this.opacity)
             this.$setMemoryPmt('blur', this.blur)
+        },
+        // 保存登录框样式
+        saveBoxStyle() {
             this.$setMemoryPmt('height', this.height)
             this.$setMemoryPmt('width', this.width)
             this.$setMemoryPmt('fontSize', this.fontSize)
@@ -248,6 +288,7 @@ export default {
             this.$setMemoryPmt('size', this.size)
             this.$setMemoryPmt('boxColor', this.boxColor)
             this.$setMemoryPmt('fontColor', this.fontColor)
+            this.$successMsg('保存成功')
         },
         // 显示对应的tab页
         getTag(tab, event) {
