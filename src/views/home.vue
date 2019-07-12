@@ -21,7 +21,7 @@ import { element } from 'protractor';
                         <el-menu-item 
                         v-if="!items.children"
                         :index="items.index" 
-                        @click="clickMenuItem(items.path, items.title, items.index)" 
+                        @click="clickMenuItem(items.path, items.title, items.index, items.parent)" 
                         v-for="items in menuList"
                         >
                             <i :class="items.icon"></i>
@@ -38,7 +38,7 @@ import { element } from 'protractor';
                             <el-menu-item-group>
                                 <el-menu-item 
                                 :index="child.index" 
-                                @click="clickMenuItem(child.path, child.title, child.index)"
+                                @click="clickMenuItem(child.path, child.title, child.index, child.parent)"
                                  v-for="child in items.children">
                                     <i :class="child.icon"></i>
                                     <span slot="title">{{child.title}}</span>
@@ -64,7 +64,7 @@ import { element } from 'protractor';
                             <el-menu-item 
                             v-if="!items.children"
                             :index="items.index" 
-                            @click="clickMenuItem(items.path, items.title, items.index)" 
+                            @click="clickMenuItem(items.path, items.title, items.index, items.parent)" 
                             v-for="items in menuList">
                                 <i :class="items.icon"></i>
                                 <span slot="title">{{items.title}}</span>
@@ -80,7 +80,7 @@ import { element } from 'protractor';
                                 <el-menu-item-group>
                                     <el-menu-item 
                                     :index="child.index"
-                                    @click="clickMenuItem(child.path, child.title, child.index)"
+                                    @click="clickMenuItem(child.path, child.title, child.index, child.parent)"
                                     v-for="child in items.children">
                                         <i :class="child.icon"></i>
                                         <span slot="title">{{child.title}}</span>
@@ -113,6 +113,16 @@ import { element } from 'protractor';
                                 @click="removeAllTags"
                                 title="删除所有标签页"></i>
                             </el-tooltip>
+                        </div>
+                        <div class="breadcrumb">
+                            <el-breadcrumb separator-class="el-icon-arrow-right">
+                                <el-breadcrumb-item 
+                                :to="{ path: '/home/chart' }"
+                                @click.native="addBreakcrumb()">首页</el-breadcrumb-item>
+                                <el-breadcrumb-item 
+                                v-for="items in breadcrumbList"
+                                >{{items}}</el-breadcrumb-item>
+                            </el-breadcrumb>
                         </div>
                         <div class="icon-box">
                             <el-tooltip 
@@ -171,7 +181,7 @@ import { element } from 'protractor';
                             v-for="(items, index) in tagsList" 
                             :name="items.title"
                             @on-close="tabsRemove"
-                            @on-change="tabsClick(items.path, index, items.index, items.title)"
+                            @on-change="tabsClick(items.path, index, items.index, items.title, items.parent)"
                             >{{items.title}}</Tag>
                         </el-scrollbar>
                     </div>
@@ -238,8 +248,9 @@ export default {
             isSetting: false,
             isShowLogo: true,
             isShowBackTop: false,
-            menuList: [],
             logoUrl: "",
+            menuList: [],
+            breadcrumbList: [],
             tagsList: [{
                 title: "首页",
                 path: "/home/chart",
@@ -256,6 +267,7 @@ export default {
         // 获取视窗大小
         this.getWindowWidth()
         this.initialTags()
+        this.initialBreakcrumb()
         this.navigateTo(this.tagsList[this.nowIndex].path)
         this.$nextTick(() => {
             this.changeTagStyle(this.nowIndex)
@@ -302,10 +314,11 @@ export default {
             this.isSetting = true
         },
         // 保存当前标签页、索引、标题
-        saveTagsAndInd() {
+        saveMsg() {
             this.$setMemorySes('tagsList', this.tagsList)
             this.$setMemorySes('nowIndex', this.nowIndex)
             this.$setMemorySes('tagTitle', document.title)
+            this.$setMemorySes('breadcrumbList', this.breadcrumbList)
         },
         // 初始化标签页
         initialTags() {
@@ -314,6 +327,15 @@ export default {
             && (this.tagsList.splice(0, this.tagsList.length),
             tagsList.forEach(value => {
                 this.tagsList.push(value)
+            }))
+        },
+        // 初始化面包屑
+        initialBreakcrumb() {
+            let breadcrumbList = this.$getMemorySes('breadcrumbList')
+            breadcrumbList
+            && (this.breadcrumbList.splice(0, this.breadcrumbList.length),
+            breadcrumbList.forEach(value => {
+                this.breadcrumbList.push(value)
             }))
         },
         // 改变标签样式
@@ -326,14 +348,23 @@ export default {
             })
             this.nowIndex = index
         },
+        // 添加面包屑
+        addBreakcrumb(title, parent) {
+            this.breadcrumbList.splice(0, this.breadcrumbList.length)
+            parent
+            && this.breadcrumbList.push(parent)
+            title && title != "首页"
+            && this.breadcrumbList.push(title)
+        },
         // 点击标签
-        tabsClick(path, index, menuInd, title) {
+        tabsClick(path, index, menuInd, title, parent) {
             document.title = title
             this.nowIndex = index
             this.activeIndex = menuInd
             this.$setMemorySes('menuInd', this.activeIndex)
             this.changeTagStyle(index)
-            this.saveTagsAndInd()
+            this.addBreakcrumb(title, parent)
+            this.saveMsg()
             this.navigateTo(path)
         },
         // 移除所有标签
@@ -342,7 +373,7 @@ export default {
             this.nowIndex == 0
             ? (this.tagsList.splice(1), this.changeTagStyle(0))
             : (this.tagsList.splice(2), this.changeTagStyle(1))
-            this.saveTagsAndInd()
+            this.saveMsg()
         },
         // 移除标签
         tabsRemove(event, title) {
@@ -358,7 +389,7 @@ export default {
             }
         },
         // 添加标签
-        addTag(path, title, index) {
+        addTag(path, title, index, parent) {
             let tabs = this.tagsList
             for(let i = 0, len = tabs.length; i < len; i ++) {
                 if(tabs[i].title == title) return
@@ -366,10 +397,11 @@ export default {
             this.tagsList.push({
                 title: title,
                 path: path,
-                index: index
+                index: index,
+                parent: parent
             })
             this.nowIndex = this.tagsList.length - 1
-            this.saveTagsAndInd()
+            this.saveMsg()
         },
         // 跳转路由
         navigateTo(path) {
@@ -387,14 +419,15 @@ export default {
             }
         },
         // 点击菜单项
-        clickMenuItem(path, title, index) {
+        clickMenuItem(path, title, index, parent) {
             document.title = title
             this.isMenuCollapse = false
-            this.addTag(path, title, index)
+            this.addTag(path, title, index, parent)
             this.navigateTo(path)
             this.findIndex(title)
             this.changeTagStyle(this.nowIndex)
-            this.saveTagsAndInd()
+            this.addBreakcrumb(title, parent)
+            this.saveMsg()
         },
         // 设置全屏与取消全屏
         fullScreen() {
@@ -480,6 +513,7 @@ export default {
         position: relative;
         display: inline-block;
         padding: 0 1rem;
+        top:3px;
         font-size: 1.5rem;
         color: #686868;
         transition: .3s;
