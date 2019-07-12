@@ -362,7 +362,7 @@ export default {
             title && title != "首页"
             && this.breadcrumbList.push(title)
             parent == undefined && title ==  undefined
-            && (this.changeTagStyle(0), this.activeIndex = 1)
+            && (this.changeTagStyle(0), this.activeIndex = 1) 
         },
         // 点击标签
         tabsClick(path, index, menuInd, title, parent) {
