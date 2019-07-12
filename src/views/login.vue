@@ -191,7 +191,7 @@ export default {
     mounted() {
         // 初始化样式
         this.getBoxVal()
-        this.useStyle()
+        this.useBg()
         this.initialStyle()
     },
     methods: {

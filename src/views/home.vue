@@ -159,7 +159,10 @@ import { element } from 'protractor';
                                     <el-dropdown-item
                                     @click.native="clickMenuItem('/home/chart', '首页', '1')">首页</el-dropdown-item>
                                     <el-dropdown-item @click.native="clickMenuItem('/home/person', '个人中心', '2')"><span>个人中心</span></el-dropdown-item>
-                                    <el-dropdown-item>项目地址</el-dropdown-item>
+                                    <el-dropdown-item
+                                    @click.native="openProject">
+                                        项目地址
+                                    </el-dropdown-item>
                                     <div class="line"></div>
                                     <el-dropdown-item
                                     @click.native="logout">退出登录</el-dropdown-item>
@@ -282,6 +285,9 @@ export default {
         this.activeIndex = this.tagsList[this.nowIndex].index
     },
     methods: {
+        openProject() {
+            window.open('https://github.com/MikuBlog/xz-admin')
+        },
         // 返回顶部
         backTop() {
             this.$$('.top').animate({scrollTop: 0}, 500)
@@ -355,6 +361,8 @@ export default {
             && this.breadcrumbList.push(parent)
             title && title != "首页"
             && this.breadcrumbList.push(title)
+            parent == undefined && title ==  undefined
+            && this.changeTagStyle(0)
         },
         // 点击标签
         tabsClick(path, index, menuInd, title, parent) {
