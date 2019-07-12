@@ -41,6 +41,7 @@ https://xzadmin.xuanzai.top
 + 标签管理
 + 动态路由
 + 动态菜单
++ 添加面包屑
 
 <br/>
 
