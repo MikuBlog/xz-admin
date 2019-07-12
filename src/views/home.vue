@@ -389,12 +389,12 @@ export default {
         // 点击菜单项
         clickMenuItem(path, title, index) {
             document.title = title
+            this.isMenuCollapse = false
             this.addTag(path, title, index)
             this.navigateTo(path)
             this.findIndex(title)
             this.changeTagStyle(this.nowIndex)
             this.saveTagsAndInd()
-            this.isMenuCollapse = false
         },
         // 设置全屏与取消全屏
         fullScreen() {

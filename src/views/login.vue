@@ -82,7 +82,7 @@
                     @change="getVal"></el-slider>
                 </div>
                 <div class="button">
-                    <el-button 
+          git          <el-button 
                     type="primary" 
                     style="width: 100%"
                     @click="selectPic"
@@ -92,7 +92,7 @@
                     <el-button 
                     type="success" 
                     style="width: 100%"
-                    @click="useStyle"
+                    @click="useBg"
                     >应用背景</el-button>
                 </div>
             </div>
@@ -158,9 +158,7 @@ export default {
             isShowDrawer: false,
             activeName: '0',
             tab: [1, 0],
-            fileEle: "",
             backgroundUrl: this.$getMemoryPmt("backgroundUrl") || "",
-            event: "",
             opacity: +this.$getMemoryPmt('opacity') || 100,
             blur: +this.$getMemoryPmt('blur') || 0,
             height: +this.$getMemoryPmt('height') || 62,
@@ -197,6 +195,7 @@ export default {
         this.initialStyle()
     },
     methods: {
+        // 关闭抽屉样式恢复
         closeDrawer() {
             const
                 loginBox = this.$refs.loginBox,
@@ -204,17 +203,43 @@ export default {
                 svg = document.querySelectorAll('svg'),
                 checkBox = document.querySelector('.el-checkbox'),
                 tip = document.querySelector('.tip')
-            console.log(this.$getMemoryPmt('height'))
-            this.$setStyle(loginBox, 'height', `${(this.height = this.$getMemoryPmt('height') || 62) / 2}rem`)
-            this.$setStyle(loginBox, 'width', `${(this.width = this.$getMemoryPmt('width') || 50) / 2}rem`)
-            this.$setStyle(loginBox, 'background', `${(this.boxColor = this.$getMemoryPmt('boxColor') || 'rgba(0, 0, 0, .35)')}`)
-            this.$setStyle(header, 'font-size', `${(this.fontSize = this.$getMemoryPmt('fontSize') || 30) / 20}rem`)
-            this.$setStyle(header, 'color', `${(this.fontColor = this.$getMemoryPmt('fontColor') || '#fefefe')}`)
-            this.$setStyle(checkBox, 'color', `${(this.$getMemoryPmt('fontColor') || '#fefefe')}`)
-            this.$setStyle(tip, 'color', `${(this.$getMemoryPmt('fontColor') || '#fefefe')}`)
+            this.$setStyle(
+                loginBox, 
+                'height', 
+                `${(this.height = this.$getMemoryPmt('height') || 62) / 2}rem`)
+            this.$setStyle(
+                loginBox, 
+                'width', 
+                `${(this.width = this.$getMemoryPmt('width') || 50) / 2}rem`)
+            this.$setStyle(
+                loginBox, 
+                'background', 
+                `${(this.boxColor = this.$getMemoryPmt('boxColor') || 'rgba(0, 0, 0, .35)')}`)
+            this.$setStyle(
+                header, 
+                'font-size', 
+                `${(this.fontSize = this.$getMemoryPmt('fontSize') || 30) / 20}rem`)
+            this.$setStyle(
+                header, 
+                'color', 
+                `${(this.fontColor = this.$getMemoryPmt('fontColor') || '#fefefe')}`)
+            this.$setStyle(
+                checkBox, 
+                'color', 
+                `${(this.$getMemoryPmt('fontColor') || '#fefefe')}`)
+            this.$setStyle(
+                tip, 
+                'color', 
+                `${(this.$getMemoryPmt('fontColor') || '#fefefe')}`)
             svg.forEach(value => {
-                this.$setStyle(value, 'width', `${(this.iconSize =  this.$getMemoryPmt('iconSize') || 30) / 10}rem`)
-                this.$setStyle(value, 'height', `${(this.$getMemoryPmt('iconSize') || 30) / 10}rem`)
+                this.$setStyle(
+                    value, 
+                    'width', 
+                    `${(this.iconSize =  this.$getMemoryPmt('iconSize') || 30) / 10}rem`)
+                this.$setStyle(
+                    value, 
+                    'height', 
+                    `${(this.$getMemoryPmt('iconSize') || 30) / 10}rem`)
             })
         },
         // 登录框样式预览
@@ -225,23 +250,57 @@ export default {
                 svg = document.querySelectorAll('svg'),
                 checkBox = document.querySelector('.el-checkbox'),
                 tip = document.querySelector('.tip')
-            this.$setStyle(loginBox, 'height', `${this.height / 2}rem`)
-            this.$setStyle(loginBox, 'width', `${this.width / 2}rem`)
-            this.$setStyle(loginBox, 'background', `${this.boxColor}`)
-            this.$setStyle(header, 'font-size', `${this.fontSize / 20}rem`)
-            this.$setStyle(header, 'color', `${this.fontColor}`)
-            this.$setStyle(checkBox, 'color', `${this.fontColor}`)
-            this.$setStyle(tip, 'color', `${this.fontColor}`)
+            this.$setStyle(
+                loginBox, 
+                'height', 
+                `${this.height / 2}rem`)
+            this.$setStyle(
+                loginBox, 
+                'width', 
+                `${this.width / 2}rem`)
+            this.$setStyle(
+                loginBox, 
+                'background', 
+                `${this.boxColor}`)
+            this.$setStyle(
+                header, 
+                'font-size', 
+                `${this.fontSize / 20}rem`)
+            this.$setStyle(
+                header, 
+                'color',
+                `${this.fontColor}`)
+            this.$setStyle(
+                checkBox, 
+                'color', 
+                `${this.fontColor}`)
+            this.$setStyle(
+                tip, 
+                'color', 
+                `${this.fontColor}`)
             svg.forEach(value => {
-                this.$setStyle(value, 'width', `${this.iconSize / 10}rem`)
-                this.$setStyle(value, 'height', `${this.iconSize / 10}rem`)
+                this.$setStyle(
+                    value, 
+                    'width', 
+                    `${this.iconSize / 10}rem`)
+                this.$setStyle(
+                    value, 
+                    'height', 
+                    `${this.iconSize / 10}rem`)
             })
         },
         // 图片预览
         getVal() {
             const child = document.querySelector('.el-image__inner')
             this.backgroundUrl
-            ? (this.$setStyle(child, 'opacity', `${this.opacity / 100}`),this.$setStyle(child, 'filter', `blur(${this.blur}px)`))
+            ? (this.$setStyle(
+                child, 
+                'opacity', 
+                `${this.opacity / 100}`),
+                this.$setStyle(
+                    child, 
+                    'filter', 
+                    `blur(${this.blur}px)`))
             : this.$warnMsg("请选择图片")
         },
         // 值格式化
@@ -251,7 +310,10 @@ export default {
         // 初始化样式
         initialStyle() {
             const ele = document.querySelector('.ivu-drawer-body')
-            this.$setStyle(ele, 'overflow-x', 'hidden')
+            this.$setStyle(
+                ele, 
+                'overflow-x', 
+                'hidden')
         },
         // 选择背景图
         selectPic() {
@@ -265,12 +327,25 @@ export default {
                 })
         },
         // 应用图片
-        useStyle() {
-            const 
-                ele = this.$refs.background
+        useBg() {
+            const ele = this.$refs.background
             this.backgroundUrl
-            && (this.$setStyle(ele, 'background-image', `url(${this.backgroundUrl})`), this.$setStyle(ele, 'opacity', `${this.opacity / 100}`),
-            this.$setStyle(ele, 'filter', `blur(${this.blur}px)`), this.$setStyle(ele, 'background-size', `${this.size == "fill" ? "100% 100%" : this.size}`))
+            && (this.$setStyle(
+                ele, 
+                'background-image', 
+                `url(${this.backgroundUrl})`), 
+                this.$setStyle(
+                    ele, 
+                    'opacity', 
+                    `${this.opacity / 100}`),
+            this.$setStyle(
+                ele, 
+                'filter', 
+                `blur(${this.blur}px)`), 
+                this.$setStyle(
+                    ele, 
+                    'background-size', 
+                    `${this.size == "fill" ? "100% 100%" : this.size}`))
             this.saveBgStyle()
         },
         // 保存背景样式
@@ -300,9 +375,11 @@ export default {
                 }
             })
         },
+        // 展开抽屉
         showSetting() {
             this.isShowDrawer = true
         },
+        // 登录
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
                 if(valid) {
@@ -314,9 +391,6 @@ export default {
                     return false
                 }
             })
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields()
         }
     },
 }
@@ -342,7 +416,6 @@ export default {
         background-repeat: no-repeat;
         z-index: -1;
         opacity: 0.5;
-        transform: blur
     }
     .setting {
         position: relative;
