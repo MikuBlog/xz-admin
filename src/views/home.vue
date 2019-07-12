@@ -190,8 +190,8 @@ import { element } from 'protractor';
                     </div>
                 </el-header>
                 <el-main class="top">
-                    <transition name="el-fade-in-linear">
-                        <router-view/>
+                    <transition name="xz-animation">
+                        <router-view class="router"/>
                     </transition>
                     <div class="back-top">
                         <el-button 
@@ -285,6 +285,7 @@ export default {
         this.activeIndex = this.tagsList[this.nowIndex].index
     },
     methods: {
+        // 跳转至项目地址
         openProject() {
             window.open('https://github.com/MikuBlog/xz-admin')
         },
@@ -659,5 +660,15 @@ export default {
         z-index: 9999;
         right: 50px;
         bottom: 100px;
+    }
+    .xz-animation-enter-active {
+        transition: all .5s .5s;
+    }
+    .xz-animation-leave-active {
+        transition: all .5s;
+    }
+    .xz-animation-enter, .xz-animation-leave-to {
+        transform: translateX(-50px);
+        opacity: 0;
     }
 </style>
