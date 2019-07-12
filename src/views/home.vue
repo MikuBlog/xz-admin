@@ -370,9 +370,10 @@ export default {
             this.nowIndex = index
             this.activeIndex = menuInd
             this.$setMemorySes('menuInd', this.activeIndex)
+            this.addBreakcrumb(title, parent)
             this.changeTagStyle(index)
-            this.saveMsg()
             this.navigateTo(path)
+            this.saveMsg()
         },
         // 移除所有标签
         removeAllTags() {
