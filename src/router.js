@@ -284,12 +284,14 @@ const routes = [{
         }]
     }]
 
+router.addRoutes(routes)
+store.commit('setMenuList', menuList)
 // 从数据库获取菜单与路由信息
-Http.http_normal({
-  url: "getData",
-  method: "get",
-})
-.then((result) => {
-  router.addRoutes(routes)
-  store.commit('setMenuList', menuList)
-})
+// Http.http_normal({
+//   url: "getData",
+//   method: "get",
+// })
+// .then((result) => {
+//   router.addRoutes(routes)
+//   store.commit('setMenuList', menuList)
+// })
