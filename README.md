@@ -2,6 +2,8 @@
 
 https://xzadmin.xuanzai.top
 
+账号密码随便填~
+
 <br/>
 
 # 页面开发进度 :ok_hand:
