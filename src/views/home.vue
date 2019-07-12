@@ -362,7 +362,7 @@ export default {
             title && title != "首页"
             && this.breadcrumbList.push(title)
             parent == undefined && title ==  undefined
-            && this.changeTagStyle(0)
+            && (this.changeTagStyle(0), this.activeIndex = 1)
         },
         // 点击标签
         tabsClick(path, index, menuInd, title, parent) {
@@ -371,7 +371,6 @@ export default {
             this.activeIndex = menuInd
             this.$setMemorySes('menuInd', this.activeIndex)
             this.changeTagStyle(index)
-            this.addBreakcrumb(title, parent)
             this.saveMsg()
             this.navigateTo(path)
         },
@@ -545,6 +544,11 @@ export default {
     }
     .el-icon-circle-close:active {
         color: rgb(19, 180, 255);
+    }
+    .el-breadcrumb {
+        position: absolute;
+        left: 100px;
+        top: 21px;
     }
     .avatar-box {
         position: absolute;

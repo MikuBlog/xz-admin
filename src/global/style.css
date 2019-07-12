@@ -43,11 +43,6 @@ body {
 .el-breadcrumb__inner {
     color: #8a8a95;
 }
-.el-breadcrumb {
-    position: absolute;
-    left: 100px;
-    top: 21px;
-}
 .interval-top {
     margin-top: 1rem;
 }
