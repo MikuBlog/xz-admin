@@ -6,7 +6,7 @@ import store from './store'
 import Database from '@/api/database/database'
 // 引入二次封装的axios模块
 import Http from '@/api/http/http'
-// 引入全局提示魔窟家
+// 引入全局提示模块
 import Message from '@/api/message/message'
 // 引入element-ui框架
 import ElementUI from 'element-ui'
