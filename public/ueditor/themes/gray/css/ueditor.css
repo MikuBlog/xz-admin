@@ -43,6 +43,10 @@
     padding-left: 1rem!important;
 }
 
+#edui2 {
+    padding: 7px!important;
+}
+
 .edui-dialog-foot {
     line-height: 40px;
 }
