@@ -291,8 +291,8 @@ export default {
             window.open('https://github.com/MikuBlog/xz-admin')
         },
         // 返回顶部
-        backTop() {
-            this.$$('.top').animate({scrollTop: 0}, 500)
+        backTop(delay = 500) {
+            this.$$('.top').animate({scrollTop: 0}, delay)
         },
         // 退出登录
         logout() {
@@ -350,7 +350,9 @@ export default {
         initialScrollTop(isIntial = false) {
             isIntial 
             ? document.querySelector('.top').scrollTop = this.$getMemorySes('scrollTop')
-            : document.querySelector('.top').scrollTop = 0
+            : setTimeout(() => {
+                document.querySelector('.top').scrollTop = 0
+            }, 700)
         },
         // 改变标签样式
         changeTagStyle(index) {
