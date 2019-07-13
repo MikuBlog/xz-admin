@@ -189,7 +189,7 @@ import { element } from 'protractor';
                         </el-scrollbar>
                     </div>
                 </el-header>
-                <el-main class="top">
+                <el-main class="top" id="top">
                     <transition name="xz-animation">
                         <router-view class="router"/>
                     </transition>
@@ -212,7 +212,7 @@ import { element } from 'protractor';
             <el-divider></el-divider>
             <div class="switch-box">
                 <div class="box">
-                    <span class="tips">显示菜单Logo</span>
+                    <span class="tips">显示Logo</span>
                     <el-switch v-model="isShowLogo" @change="showLogo">
                     </el-switch>
                 </div>
@@ -271,6 +271,7 @@ export default {
         this.getWindowWidth()
         this.initialTags()
         this.initialBreakcrumb()
+        this.initialScrollTop(true)
         this.navigateTo(this.tagsList[this.nowIndex].path)
         this.$nextTick(() => {
             this.changeTagStyle(this.nowIndex)
@@ -345,6 +346,12 @@ export default {
                 this.breadcrumbList.push(value)
             }))
         },
+        // 初始化当前滚动高度
+        initialScrollTop(isIntial = false) {
+            isIntial 
+            ? document.querySelector('.top').scrollTop = this.$getMemorySes('scrollTop')
+            : document.querySelector('.top').scrollTop = 0
+        },
         // 改变标签样式
         changeTagStyle(index) {
             let dots = document.querySelectorAll('.ivu-tag-dot-inner')
@@ -374,6 +381,7 @@ export default {
             this.addBreakcrumb(title, parent)
             this.changeTagStyle(index)
             this.navigateTo(path)
+            this.initialScrollTop()
             this.saveMsg()
         },
         // 移除所有标签
@@ -433,6 +441,7 @@ export default {
             this.isMenuCollapse = false
             this.addTag(path, title, index, parent)
             this.navigateTo(path)
+            this.initialScrollTop()
             this.findIndex(title)
             this.changeTagStyle(this.nowIndex)
             this.addBreakcrumb(title, parent)
@@ -482,6 +491,7 @@ export default {
             obj.scrollTop >= 100
             ? this.isShowBackTop = true
             : this.isShowBackTop = false
+            this.$setMemorySes('scrollTop', obj.scrollTop)
         },
         // 事件监听
         initialListener() {
@@ -662,10 +672,10 @@ export default {
         bottom: 100px;
     }
     .xz-animation-enter-active {
-        transition: all .5s .5s;
+        transition: all .6s .6s;
     }
     .xz-animation-leave-active {
-        transition: all .5s;
+        transition: all .6s;
     }
     .xz-animation-enter, .xz-animation-leave-to {
         transform: translateX(-50px);

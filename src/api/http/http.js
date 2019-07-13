@@ -2,38 +2,47 @@
 	import { Loading, Message } from 'element-ui'
 	import 'element-ui/lib/theme-chalk/index.css';
 
-	/*
-	*	通过状态码返回对应的提示
-	*	@param {Integer} result 状态码
-	*/
+	/**
+	 * @description 通过状态码返回对应的信息
+	 * @param {Integer} result 状态码
+	 */
 	function justifyStatus(result, additional) {
 		switch(result) {
-			case 404: Message({
-				showClose: true,
-				message: "找不到该接口，请联系程序员进行修复",
-				type: 'error'
-			});break;
-			case 401: Message({
-				showClose: true,
-				message: "权限不足",
-				type: 'error'
-			});break;
-			case 0: Message({
-				showClose: true,
-				message: "请登录",
-				type: 'error'
-			});break;
-			case 'none': Message({
-				showClose: true,
-				message: `${additional}`,
-				type: 'error'
-			});break;
+			case 404: 
+				Message({
+					showClose: true,
+					message: "找不到该接口，请联系程序员进行修复",
+					type: 'error'
+				})
+				break
+			case 401: 
+				Message({
+					showClose: true,
+					message: "权限不足",
+					type: 'error'
+				})
+				break
+			case 0: 
+				Message({
+					showClose: true,
+					message: "请登录",
+					type: 'error'
+				})
+				break
+			case 'none': 
+				Message({
+					showClose: true,
+					message: `${additional}`,
+					type: 'error'
+				})
+				break
 			case 500: 
-			default: Message({
-				showClose: true,
-				message: "服务器出错，请联系程序员进行修复",
-				type: 'error'
-			});
+			default: 
+				Message({
+					showClose: true,
+					message: "服务器出错，请联系程序员进行修复",
+					type: 'error'
+				})
 		}
 	}
 	
@@ -41,6 +50,10 @@
 	*	添加拦截器函数
 	*	@param {Object} obj axios实例对象
 	*/
+	/**
+	 * @description 添加拦截器函数
+	 * @param {Object} obj axios实例对象 
+	 */
 	function addInterceptors(obj) {
 		obj.interceptors.request
 			.use(config => {
