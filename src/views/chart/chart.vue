@@ -145,7 +145,7 @@ export default {
             sellNum: 573,
             messageNum: 79,
             speed: 40,
-            times: 30,
+            times: 60,
             lineData: {
                 columns: ['日期', '访问用户', '下单用户', '下单率'],
                 rows: [

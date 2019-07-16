@@ -40,7 +40,7 @@ import { MessageBox } from 'mint-ui';
                         label="IP"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
+                            <div slot="reference">
                                 {{ scope.row.requestIp }}
                             </div>
                         </template>
@@ -49,7 +49,7 @@ import { MessageBox } from 'mint-ui';
                         label="描述"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
+                            <div slot="reference">
                                 {{ scope.row.description }}
                             </div>
                         </template>
@@ -58,18 +58,32 @@ import { MessageBox } from 'mint-ui';
                         label="方法名称"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
-                                {{ scope.row.method }}
-                            </div>
+                            <el-tooltip 
+                            slot="reference" 
+                            class="item" 
+                            effect="dark" 
+                            :content="scope.row.method" 
+                            placement="top">
+                                <div class="name-wrapper">
+                                    {{ scope.row.method }}
+                                </div>
+                            </el-tooltip>
                         </template>
                         </el-table-column>
                         <el-table-column
                         label="参数"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
-                                {{ scope.row.params }}
-                            </div>
+                            <el-tooltip 
+                            slot="reference" 
+                            class="item" 
+                            effect="dark" 
+                            :content="scope.row.params" 
+                            placement="top">
+                                <div class="name-wrapper">
+                                    {{ scope.row.params }}
+                                </div>
+                            </el-tooltip>
                         </template>
                         </el-table-column>
                         <el-table-column

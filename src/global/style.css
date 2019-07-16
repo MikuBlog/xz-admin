@@ -92,6 +92,11 @@ body {
     position: relative;
     text-align: right;
 }
+.name-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 @media screen and (min-width: 0) and (max-width: 992px) {
     .card-gutter {
         margin-top: 1rem;

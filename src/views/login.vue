@@ -27,7 +27,7 @@
                     style="width: 100%;">登录</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-checkbox v-model="ruleForm.checked">自动登陆</el-checkbox>
+                    <el-checkbox v-model="ruleForm.checked">自动登录</el-checkbox>
                 </el-form-item>
             </el-form>
             <el-divider></el-divider>
@@ -188,6 +188,7 @@ export default {
     },
     created() {
         document.title = "登录"
+        this.isAutoLogin()
     },
     mounted() {
         // 初始化样式
@@ -196,6 +197,10 @@ export default {
         this.initialStyle()
     },
     methods: {
+        // 判断是否自动登录
+        isAutoLogin() {
+            localStorage.getItem('isAutoLogin') && localStorage.getItem('token') && this.$router.push({path: '/home/chart'})
+        },
         // 关闭抽屉样式恢复
         closeDrawer() {
             const
@@ -397,7 +402,7 @@ export default {
                             password: this.ruleForm.password
                         }
                     }).then(result => {
-                        console.log(result.data.token)
+                        localStorage.setItem('isAutoLogin', this.ruleForm.checked)
                         localStorage.setItem('token', result.data.token)
                         this.$router.push({path: '/home/chart'})
                     })

@@ -269,10 +269,10 @@ export default {
         this.initialListener()
         // 获取视窗大小
         this.getWindowWidth()
-        this.initialTags()
-        this.initialBreakcrumb()
-        this.initialScrollTop(true)
-        this.navigateTo(this.tagsList[this.nowIndex].path)
+        this.initialTags(),
+        this.initialBreakcrumb(),
+        this.initialScrollTop(true),
+        this.navigateTo(this.tagsList[this.nowIndex].path),
         this.$nextTick(() => {
             this.changeTagStyle(this.nowIndex)
         })
@@ -296,6 +296,8 @@ export default {
         },
         // 退出登录
         logout() {
+            // 退出前先清空用户访问记录
+            this.deleteMsg()
             this.$router.push({path: '/login'})
         },
         // 选择图片
@@ -321,7 +323,15 @@ export default {
         showSetting() {
             this.isSetting = true
         },
-        // 保存当前标签页、索引、标题
+        // 清空所有用户访问记录
+        deleteMsg() {
+            this.$setMemorySes('tagsList', '')
+            this.$setMemorySes('nowIndex', '')
+            this.$setMemorySes('tagTitle', '')
+            this.$setMemorySes('breadcrumbList', '')
+            localStorage.setItem('token', '')
+        },
+        // 保存当前用户访问记录
         saveMsg() {
             this.$setMemorySes('tagsList', this.tagsList)
             this.$setMemorySes('nowIndex', this.nowIndex)
@@ -371,7 +381,7 @@ export default {
             && this.breadcrumbList.push(parent)
             title && title != "首页"
             && this.breadcrumbList.push(title)
-            parent == undefined && title ==  undefined
+            !parent && !title
             && (this.changeTagStyle(0), this.activeIndex = 1) 
         },
         // 点击标签
@@ -379,7 +389,6 @@ export default {
             document.title = title
             this.nowIndex = index
             this.activeIndex = menuInd
-            this.$setMemorySes('menuInd', this.activeIndex)
             this.addBreakcrumb(title, parent)
             this.changeTagStyle(index)
             this.navigateTo(path)

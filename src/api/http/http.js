@@ -12,43 +12,10 @@
 			message: `${message}`,
 			type: 'error'
 		})
-		// switch(result) {
-		// 	case 404: 
-		// 		Message({
-		// 			showClose: true,
-		// 			message: `${additional}`,
-		// 			type: 'error'
-		// 		})
-		// 		break
-		// 	case 401: 
-		// 		Message({
-		// 			showClose: true,
-		// 			message: "权限不足",
-		// 			type: 'error'
-		// 		})
-		// 		break
-		// 	case 0: 
-		// 		Message({
-		// 			showClose: true,
-		// 			message: "请登录",
-		// 			type: 'error'
-		// 		})
-		// 		break
-		// 	case 'none': 
-		// 		Message({
-		// 			showClose: true,
-		// 			message: `${additional}`,
-		// 			type: 'error'
-		// 		})
-		// 		break
-		// 	case 500: 
-		// 	default: 
-		// 		Message({
-		// 			showClose: true,
-		// 			message: "服务器出错，请联系程序员进行修复",
-		// 			type: 'error'
-		// 		})
-		// }
+	}
+	function isLogin(status) {
+		status === 401
+		&& localStorage.setItem('token', '')
 	}
 	/**
 	 * @description 添加拦截器函数
@@ -86,9 +53,9 @@
 				return response;
 			}, err => {
 				typeof err.response === "object" 
-				? showTips(
+				? (showTips(
 					JSON.parse(err.response.request.response).message.replace(/{.*}/g, '')
-				)
+				), isLogin(err.response.status))
 				: showTips('服务器出错，请联系客服进行处理')
 				loading.close()
 				return Promise.reject(err)

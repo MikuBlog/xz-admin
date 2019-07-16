@@ -7,7 +7,8 @@
                         <el-input 
                         v-model="searchVal" 
                         placeholder="搜索内容"
-                        class="search-input"></el-input>
+                        class="search-input"
+                        @keyup.native="searchEnter($event)"></el-input>
                         <el-select 
                         v-model="selectType" 
                         placeholder="类型"
@@ -21,7 +22,8 @@
                         </el-select>
                         <el-button 
                         icon="el-icon-search" 
-                        circle></el-button>
+                        circle
+                        @click="search"></el-button>
                     </div>
                     <el-table
                         :data="operationLogList"
@@ -30,15 +32,15 @@
                         label="用户名"
                         >
                             <template slot-scope="scope">
-                                <span style="margin-left: 10px">{{ scope.row.userName }}</span>
+                                <span style="margin-left: 10px">{{ scope.row.username }}</span>
                             </template>
                         </el-table-column>
                         <el-table-column
                         label="IP"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
-                                {{ scope.row.ip }}
+                            <div slot="reference">
+                                {{ scope.row.requestIp }}
                             </div>
                         </template>
                         </el-table-column>
@@ -46,7 +48,7 @@
                         label="描述"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
+                            <div slot="reference">
                                 {{ scope.row.description }}
                             </div>
                         </template>
@@ -55,18 +57,32 @@
                         label="方法名称"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
-                                {{ scope.row.methodName }}
-                            </div>
+                            <el-tooltip 
+                            slot="reference" 
+                            class="item" 
+                            effect="dark" 
+                            :content="scope.row.method" 
+                            placement="top">
+                                <div class="name-wrapper">
+                                    {{ scope.row.method }}
+                                </div>
+                            </el-tooltip>
                         </template>
                         </el-table-column>
                         <el-table-column
                         label="参数"
                         >
                         <template slot-scope="scope">
-                            <div slot="reference" class="name-wrapper">
-                                {{ scope.row.param }}
-                            </div>
+                            <el-tooltip 
+                            slot="reference" 
+                            class="item" 
+                            effect="dark" 
+                            :content="scope.row.params" 
+                            placement="top">
+                                <div class="name-wrapper">
+                                    {{ scope.row.params }}
+                                </div>
+                            </el-tooltip>
                         </template>
                         </el-table-column>
                         <el-table-column
@@ -75,7 +91,7 @@
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
                                 <el-tag>
-                                    {{ scope.row.consumeTime }}ms      
+                                    {{ scope.row.time }}ms      
                                 </el-tag>
                             </div>
                         </template>
@@ -95,11 +111,11 @@
                         <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
+                        :page-sizes="[10, 25, 50, 100]"
+                        :page-size.sync="nowSize"
                         :pager-count="5"
-                        layout="total, prev, pager, next, jumper"
-                        :total="400">
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="totalElements">
                         </el-pagination>
                     </div>
                 </el-card>
@@ -114,28 +130,72 @@ export default {
         return {
             searchVal: "",
             selectType: "",
-            operationLogList: [{
-                userName: "xuanzai",
-                ip: "120.78.199.46",
-                description: "xuanzainiub",
-                methodName: "xuanzainiub",
-                param: "none",
-                consumeTime: "0",
-                createTime: "2019-07-10 12:00"
-            }],
+            operationLogList: [],
+            // 当前页数
+            nowPage: 1,
+            // 当前页条数
+            nowSize: 10,
+            // 总条数
+            totalElements: 1,
             options: [{
-                value: '选项1',
-                label: '黄金糕'
+                value: 'username',
+                label: '用户名'
             },{
-                value: '选项2',
-                label: '黄金糕'
-            },{
-                value: '选项3',
-                label: '黄金糕'
+                value: 'description',
+                label: '描述'
             }],
         }
     },
+    created() {
+        // 初始化页面数据
+        this.getOpertionLogList(this.nowPage)
+    },
     methods: {
+         // 点击搜索
+        search() {
+            this.selectType
+            ? this.getOpertionLogList()
+            : this.$warnMsg('请选择搜索类型')
+        },
+        // 回车搜索
+        searchEnter(e) {
+            e.keyCode === 13
+            && (this.selectType
+            ? this.getOpertionLogList()
+            : this.$warnMsg('请选择搜索类型'))
+        },
+        // 条数变化
+        handleSizeChange(size) {
+            this.nowSize = size
+            this.getOpertionLogList()
+        },
+        // 页数变化
+        handleCurrentChange(page) {
+            this.nowPage = page
+            this.getOpertionLogList()
+        },
+        // 分页处理
+        initialPage(totalElements) {
+            this.totalElements = totalElements
+        },
+        // 初始化操作日志列表
+        initialOpertionLogList(list) {
+            this.operationLogList.splice(0, this.operationLogList.length)
+            list.forEach(value => {
+                this.operationLogList.push(value)
+            })
+        },
+        // 获取操作日志信息
+        getOpertionLogList() {
+            this.$http_normal({
+                url: `/log/page?page=${this.nowPage - 1}&size=${this.nowSize}${this.selectType ? `&${this.selectType}=${this.searchVal}` : ""}`,
+                method: "get"
+            }).then(result => {
+                const data = result.data
+                this.initialPage(data.totalElements)
+                this.initialOpertionLogList(data.content)
+            })
+        }
     },
 }
 </script>

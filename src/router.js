@@ -286,12 +286,18 @@ const routes = [{
 
 router.addRoutes(routes)
 store.commit('setMenuList', menuList)
-// 从数据库获取菜单与路由信息
-// Http.http_normal({
-//   url: "getData",
-//   method: "get",
-// })
-// .then((result) => {
-//   router.addRoutes(routes)
-//   store.commit('setMenuList', menuList)
-// })
+/**
+ * 判断token是否存在，不存在或过期重新登录
+ * 每进入一次路由跳转之前都会先执行该函数
+ * 第一行为了防止死循环，如果目标是登录页面，那就跳转到登录页面
+ * 第二行判断token是否存在，如果不存在，中断当前跳转的路由，跳转到登录界面
+ * 当第二行与第一行调转，如果token不存在，那么每次都会进行中断跳转，然后跳转之前又判断是否token存在，又中断跳转，导致死循环
+ * 第三行如果不满足上述情况，直接进行路由的跳转
+ */
+router.beforeEach((to, from, next) => {
+  to.name === 'login'
+  && next()
+  !localStorage.getItem('token')
+  && next('/login')
+  next()
+})
