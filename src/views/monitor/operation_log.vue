@@ -22,8 +22,9 @@
                         </el-select>
                         <el-button 
                         icon="el-icon-search" 
+                        @click="search"
                         circle
-                        @click="search"></el-button>
+                        ></el-button>
                     </div>
                     <el-table
                         :data="operationLogList"
@@ -148,7 +149,7 @@ export default {
     },
     created() {
         // 初始化页面数据
-        this.getOpertionLogList(this.nowPage)
+        this.getOpertionLogList()
     },
     methods: {
          // 点击搜索

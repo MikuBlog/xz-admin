@@ -1,6 +1,6 @@
 <template>
     <el-dialog 
-        title="添加字典" 
+        :title="title" 
         :visible.sync="isShowAddBox"
         width="450px">
             <el-form 
@@ -20,10 +20,10 @@
                 </el-form-item>
                 <el-form-item 
                 label="描述"
-                prop="description">
+                prop="remark">
                     <el-input 
                     placeholder="请输入字典描述"
-                    v-model="addForm.description" 
+                    v-model="addForm.remark" 
                     autocomplete="off"></el-input>
                 </el-form-item>
             </el-form>
@@ -42,18 +42,29 @@
 <script>
 export default {
     name: "form-add",
+    props: {
+        isAdd: {
+            type: Boolean,
+            default: true
+        }
+    },
+    created() {
+        this.isAdd
+        && (this.title = "添加字典")
+    },
     data() {
         return {
+            title: "编辑字典",
             isShowAddBox: false,
             addForm: {
                 name: "",
-                description: ""
+                remark: ""
             },
             addFormRules: {
                 name: [
                     { required: true, message: '请输入字典名称', trigger: 'blur' }
                 ],
-                description: [
+                remark: [
                     { required: true, message: '请输入字典描述', trigger: 'blur' }
                 ],
             },
@@ -64,7 +75,17 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    
+                    this.isAdd
+                    && this.$http_json({
+                        url: "/api/dict/add",
+                        method: "post",
+                        data: this.addForm
+                    }).then(result => {
+                        result.status === 200
+                        && (this.$successMsg('添加成功'),
+                        this.isShowAddBox = false,
+                        this.$emit('updateList'))
+                    })
                 } else {
                     console.log('error submit!!');
                     return false;

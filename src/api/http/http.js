@@ -3,16 +3,20 @@
 	import 'element-ui/lib/theme-chalk/index.css';
 
 	/**
-	 * @description 通过状态码返回对应的信息
+	 * @description 返回错误信息
 	 * @param {String} message 错误信息
 	 */
 	function showTips(message) {
 		Message({
 			showClose: true,
-			message: `${message}`,
+			message: message,
 			type: 'error'
 		})
 	}
+	/**
+	 * @description 如果状态码为401，清除token
+	 * @param {Number} status 状态码 
+	 */
 	function isLogin(status) {
 		status === 401
 		&& localStorage.setItem('token', '')
@@ -30,10 +34,6 @@
 				 * 如果是登陆请求，不发送token
 				 * 否则都带token过去
 				 */
-				// if(config.method === 'post') {
-				// 	showTips('测试环境不允许操作')
-				// 	return
-				// }
 				config.url.indexOf('login') != -1
 				? config.headers.Authorization = ""
 				: config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
@@ -61,15 +61,12 @@
 				return Promise.reject(err)
 			})
 	}
-	
+
 	let loading
-	
 	// 给所有的实例配置请求根路径
-	axios.defaults.baseURL = 'http://47.106.187.102:8008'
-	
+	axios.defaults.baseURL = 'http://47.106.187.102:8008'	
     // 配置请求时限
 	axios.defaults.timeout = 5000 
-
 	// 给所有的实例配置同一的返回数据格式
 	axios.defaults.transformResponse = [(data) => {
 		try {
@@ -77,8 +74,7 @@
 		}catch(e) {
 			return data
 		}
-	}]
-	
+	}]	
 	// 发送数据格式为键值对
 	const http_normal = axios.create({
 		headers: {
@@ -92,7 +88,6 @@
 			return str.replace(/&$/, '')
 		}],
 	})
-	
 	// 发送数据格式为JSON格式
 	const http_json = axios.create({
 		headers: {
@@ -101,8 +96,7 @@
 		transformRequest: [(data) => {
 			return JSON.stringify(data)
 		}],
-	})
-	
+	})	
 	// 发送数据格式为文件类型
 	const http_file = axios.create({
 		headers: {
@@ -118,10 +112,8 @@
 	})
 	
 	// 添加拦截器
-	addInterceptors(http_normal)
-	
+	addInterceptors(http_normal)	
 	addInterceptors(http_json)
-	
 	addInterceptors(http_file)
 	
 	export default {

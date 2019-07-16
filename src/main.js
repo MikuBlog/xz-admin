@@ -93,6 +93,9 @@ Vue.prototype.$warnMsg = Message.warnMsg
 Vue.prototype.$errorMsg = Message.errorMsg
 /**
  * @description 引入全局弹框
+ * @param {String} title 标题
+ * @param {String} msg 内容
+ * @param {Boolean} isHTML 内容是否为html
  */
 Vue.prototype.$showMsgBox = Message.showMsgBox
 /**

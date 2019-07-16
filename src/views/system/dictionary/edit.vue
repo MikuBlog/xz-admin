@@ -1,6 +1,6 @@
 <template>
     <el-dialog 
-        title="添加字典详情" 
+        :title="title" 
         :visible.sync="isShowDetailBox"
         width="450px"
         >
@@ -52,9 +52,20 @@
 
 <script>
 export default {
+    props: {
+        isAdd: {
+            type: Boolean,
+            default: true
+        }
+    },
+    created() {
+        this.isAdd
+        && (this.title = "添加字典详情")
+    },
     data() {
         name: "form-edit"
         return {
+            title: "编辑字典详情",
             isShowDetailBox: false,
             detailForm: {
                 name: "",

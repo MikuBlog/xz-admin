@@ -157,7 +157,7 @@ export default {
     },
     created() {
         // 初始化页面数据
-        this.getExceptionLogList(this.nowPage)
+        this.getExceptionLogList()
     },
     methods: {
         // 点击搜索
