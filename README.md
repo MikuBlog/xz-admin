@@ -16,6 +16,8 @@ https://xzadmin.xuanzai.top
 # 已对接接口 :muscle:
 
 - 登录接口
+- 系统管理
+  - 字典管理数据的获取
 - 系统监控
   - 操作日志
   - 异常日志 
