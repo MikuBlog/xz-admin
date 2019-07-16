@@ -1,3 +1,4 @@
+import { MessageBox } from 'mint-ui';
 <template>
     <div class="exception-log">
         <el-row>
@@ -7,7 +8,8 @@
                         <el-input 
                         v-model="searchVal" 
                         placeholder="搜索内容"
-                        class="search-input"></el-input>
+                        class="search-input"
+                        @keyup.native="searchEnter($event)"></el-input>
                         <el-select 
                         v-model="selectType" 
                         placeholder="类型"
@@ -21,7 +23,8 @@
                         </el-select>
                         <el-button 
                         icon="el-icon-search" 
-                        circle></el-button>
+                        circle
+                        @click="search"></el-button>
                     </div>
                     <el-table
                         :data="exceptionLogList"
@@ -30,7 +33,7 @@
                         label="用户名"
                         >
                             <template slot-scope="scope">
-                                <span style="margin-left: 10px">{{ scope.row.userName }}</span>
+                                <span style="margin-left: 10px">{{ scope.row.username }}</span>
                             </template>
                         </el-table-column>
                         <el-table-column
@@ -38,7 +41,7 @@
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                {{ scope.row.ip }}
+                                {{ scope.row.requestIp }}
                             </div>
                         </template>
                         </el-table-column>
@@ -56,7 +59,7 @@
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                {{ scope.row.methodName }}
+                                {{ scope.row.method }}
                             </div>
                         </template>
                         </el-table-column>
@@ -65,7 +68,7 @@
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                {{ scope.row.param }}
+                                {{ scope.row.params }}
                             </div>
                         </template>
                         </el-table-column>
@@ -84,7 +87,7 @@
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                <el-button @click="showDetail(scope.row)" type="text" size="small">查看详情</el-button>
+                                <el-button @click="showDetail(scope.row.logId)" type="text" size="small">查看详情</el-button>
                             </div>
                         </template>
                         </el-table-column>
@@ -93,16 +96,24 @@
                         <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
+                        :page-sizes="[10, 25, 50, 100]"
+                        :page-size.sync="nowSize"
                         :pager-count="5"
-                        layout="total, prev, pager, next, jumper"
-                        :total="400">
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="totalElements">
                         </el-pagination>
                     </div>
                 </el-card>
             </el-col>
         </el-row>
+        <el-dialog
+        title="提示"
+        :visible.sync="dialogVisible"
+        :fullscreen="true"
+        width="30%"
+        >
+            <span>{{exceptionDetail}}</span>
+        </el-dialog>
     </div>
 </template>
 
@@ -112,37 +123,87 @@ export default {
         return {
             searchVal: "",
             selectType: "",
-            exceptionLogList: [{
-                userName: "xuanzai",
-                ip: "120.78.199.46",
-                description: "xuanzainiub",
-                methodName: "xuanzainiub",
-                param: "none",
-                consumeTime: "0",
-                createTime: "2019-07-10 12:00"
-            }],
+            exceptionLogList: [],
+            // 当前页数
+            nowPage: 1,
+            // 当前页条数
+            nowSize: 10,
+            // 总条数
+            totalElements: 1,
+            dialogVisible: false,
+            exceptionDetail: "",
             options: [{
-                value: '选项1',
-                label: '黄金糕'
+                value: 'username',
+                label: '用户名'
             },{
-                value: '选项2',
-                label: '黄金糕'
-            },{
-                value: '选项3',
-                label: '黄金糕'
-            }],
+                value: 'description',
+                label: '描述'
+            }]
         }
     },
+    created() {
+        // 初始化页面数据
+        this.getExceptionLogList(this.nowPage)
+    },
     methods: {
-        showDetail() {
-            
+        // 点击搜索
+        search() {
+            this.selectType
+            ? this.getExceptionLogList()
+            : this.$warnMsg('请选择搜索类型')
+        },
+        // 回车搜索
+        searchEnter(e) {
+            e.keyCode === 13
+            && (this.selectType
+            ? this.getExceptionLogList()
+            : this.$warnMsg('请选择搜索类型'))
+        },
+        // 显示具体错误信息
+        showDetail(logId) {
+            this.$http_normal({
+                url: `/log/page/error/${logId}`,
+                method: "get"
+            }).then(result => {
+                this.dialogVisible = true
+                this.exceptionDetail = result.data.exception
+            })
+        },
+        // 条数变化
+        handleSizeChange(size) {
+            this.nowSize = size
+            this.getExceptionLogList()
+        },
+        // 页数变化
+        handleCurrentChange(page) {
+            this.nowPage = page
+            this.getExceptionLogList()
+        },
+        // 分页处理
+        initialPage(totalElements) {
+            this.totalElements = totalElements
+        },
+        // 初始化错误日志列表
+        initialExceptionLogList(list) {
+            this.exceptionLogList.splice(0, this.exceptionLogList.length)
+            list.forEach(value => {
+                this.exceptionLogList.push(value)
+            })
+        },
+        // 获取错误日志信息
+        getExceptionLogList() {
+            this.$http_normal({
+                url: `/log/page/error?page=${this.nowPage - 1}&size=${this.nowSize}${this.selectType ? `&${this.selectType}=${this.searchVal}` : ""}`,
+                method: "get"
+            }).then(result => {
+                const data = result.data
+                this.initialPage(data.totalElements)
+                this.initialExceptionLogList(data.content)
+            })
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-    .el-table {
-        white-space: nowrap;
-    }
 </style>

@@ -22,7 +22,7 @@ const errorMsg = (msg) => {
     })
 }
 
-const showMsgBox = (msg, title) => {
+const showMsgBox = (title, msg, isHTML = false) => {
     return MessageBox.confirm(msg, title, {
         showClose: true,
         // 是否可通过点击遮罩关闭 MessageBox
@@ -31,6 +31,8 @@ const showMsgBox = (msg, title) => {
         closeOnPressEscape: true,
         // 是否在 hashchange 时关闭 MessageBox
         closeOnHashChange: true,
+        // 是否将msg作为html处理
+        dangerouslyUseHTMLString: isHTML
     })
 }
 

@@ -29,14 +29,16 @@ import Treeselect from '@riophae/vue-treeselect'
 import Date from '@/api/other/form_date'
 // 引入设置样式函数
 import SetStyle from '@/api/dom/set_style'
-// 引入全屏函数
-import FullScreen from '@/api/other/full_screen'
 // 引入设置元素类模块
 import SetClass from '@/api/dom/set_class'
-// 引入存储模块
-import Memory from '@/api/storage/storage'
+// 引入文件下载模块
+import Download from '@/api/dom/download'
 // 引入图片读取模块
 import ReadImg from '@/api/dom/get_file_image'
+// 引入全屏函数
+import FullScreen from '@/api/other/full_screen'
+// 引入存储模块
+import Memory from '@/api/storage/storage'
 
 Vue.prototype.$$ = Jquery 
 /**
@@ -148,6 +150,11 @@ Vue.prototype.$getMemoryPmt = Memory.getMemoryPmt
  * @returns {Promise}
  */
 Vue.prototype.$getImgFile = ReadImg.getImgFile
+/**
+ * @description 下载文件
+ * @param {String} url 地址
+ */
+Vue.prototype.$download = Download.download
 // 加入element-ui组件
 Vue.use(ElementUI);
 // 引入iview组件

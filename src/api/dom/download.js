@@ -11,5 +11,5 @@ function download(url) {
 }
 
 export default {
-    url
+    download
 }

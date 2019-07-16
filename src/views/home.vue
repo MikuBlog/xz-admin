@@ -402,7 +402,7 @@ export default {
                     this.changeTagStyle(this.nowIndex)
                     i == this.nowIndex
                     && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.nowIndex - 1))
-                    this.saveTagsAndInd()
+                    this.saveMsg()
                     return
                 }    
             }
@@ -669,7 +669,7 @@ export default {
     }
     .back-top {
         position: fixed;
-        z-index: 9999;
+        z-index: 1500;
         right: 50px;
         bottom: 100px;
     }

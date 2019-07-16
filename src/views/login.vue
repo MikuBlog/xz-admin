@@ -9,15 +9,16 @@
                 XZ-Admin
             </div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm"        label-position="right">
-                <el-form-item prop="account">
+                <el-form-item prop="username">
                     <el-input 
-                    v-model="ruleForm.account" prefix-icon="el-icon-user-solid"></el-input>
+                    v-model="ruleForm.username" prefix-icon="el-icon-user-solid"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
                     <el-input 
                     v-model="ruleForm.password"
                     prefix-icon="el-icon-lock"
-                    type="password"></el-input>
+                    type="password"
+                    @keyup.native="pressEnter($event)"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button 
@@ -82,7 +83,7 @@
                     @change="getVal"></el-slider>
                 </div>
                 <div class="button">
-          git          <el-button 
+                    <el-button 
                     type="primary" 
                     style="width: 100%"
                     @click="selectPic"
@@ -169,12 +170,12 @@ export default {
             boxColor: this.$getMemoryPmt('boxColor') || "rgba(0, 0, 0, .35)",
             fontColor: this.$getMemoryPmt('fontColor') || "#fefefe",
             ruleForm: {
-                account: "",
+                username: "",
                 password: "",
                 checked: false,
             },
             rules: {
-                account: [
+                username: [
                     { required: true, message: "账号不能为空", trigger: 'blur' },
                     { min: 3, max: 20, message: "账号长度在3到20个字符", trigger: 'blur' }
                 ],
@@ -379,14 +380,27 @@ export default {
         showSetting() {
             this.isShowDrawer = true
         },
+        // 回车登陆
+        pressEnter(e) {
+            e.keyCode === 13
+            && this.submitForm('ruleForm')
+        },
         // 登录
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
                 if(valid) {
-                    this.$successMsg('登录成功')
-                    setTimeout(() => {
+                    this.$http_json({
+                        url: "/auth/login",
+                        method: "post",
+                        data: {
+                            username: this.ruleForm.username,
+                            password: this.ruleForm.password
+                        }
+                    }).then(result => {
+                        console.log(result.data.token)
+                        localStorage.setItem('token', result.data.token)
                         this.$router.push({path: '/home/chart'})
-                    }, 1000);
+                    })
                 }else {
                     return false
                 }
