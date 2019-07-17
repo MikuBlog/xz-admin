@@ -329,7 +329,7 @@ export default {
             this.$setMemorySes('nowIndex', '')
             this.$setMemorySes('tagTitle', '')
             this.$setMemorySes('breadcrumbList', '')
-            localStorage.setItem('token', '')
+            this.$setMemoryPmt('token', '')
         },
         // 保存当前用户访问记录
         saveMsg() {

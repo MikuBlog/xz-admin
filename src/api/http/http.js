@@ -1,4 +1,5 @@
 	import axios from 'axios'
+	import storage from '../storage/storage'
 	import { Loading, Message } from 'element-ui'
 	import 'element-ui/lib/theme-chalk/index.css';
 
@@ -19,7 +20,7 @@
 	 */
 	function isLogin(status) {
 		status === 401
-		&& localStorage.setItem('token', '')
+		&& storage.setMemoryPmt('token', '')
 	}
 	/**
 	 * @description 添加拦截器函数
@@ -36,7 +37,7 @@
 				 */
 				config.url.indexOf('login') != -1
 				? config.headers.Authorization = ""
-				: config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+				: config.headers.Authorization = `Bearer ${storage.getMemoryPmt('token')}`
 				loading = Loading.service({ fullscreen: true })
 				return config
 			}, err => {
