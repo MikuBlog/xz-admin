@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import Http from '@/api/http/http'
 import store from '@/store'
 import Router from 'vue-router'
+import Http from '@/api/http/http'
+import Storage from '@/api/storage/storage'
 // 登录页面
 import Login from '@/views/login.vue'
 // 后台管理页面首页
@@ -297,7 +298,7 @@ store.commit('setMenuList', menuList)
 router.beforeEach((to, from, next) => {
   to.name === 'login'
   && next()
-  !localStorage.getItem('token')
+  !Storage.getMemoryPmt('token')
   && next('/login')
   next()
 })
