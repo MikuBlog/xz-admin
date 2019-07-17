@@ -22,8 +22,8 @@ const errorMsg = (msg) => {
     })
 }
 
-const showMsgBox = (title = "标题", msg = "", isHTML = false) => {
-    return MessageBox.confirm(msg, title, {
+const showMsgBox = ({ title, msg, isHTML }) => {
+    return MessageBox.confirm(msg || "", title || "", {
         showClose: true,
         // 是否可通过点击遮罩关闭 MessageBox
         closeOnClickModal: true,
@@ -32,7 +32,7 @@ const showMsgBox = (title = "标题", msg = "", isHTML = false) => {
         // 是否在 hashchange 时关闭 MessageBox
         closeOnHashChange: true,
         // 是否将msg作为html处理
-        dangerouslyUseHTMLString: isHTML
+        dangerouslyUseHTMLString: isHTML || false
     })
 }
 
