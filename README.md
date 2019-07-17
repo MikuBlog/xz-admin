@@ -1,6 +1,6 @@
 # 页面浏览 :smirk:
 
-https://xzadmin.xuanzai.top
+http://xzadmin.xuanzai.top
 
 账号：admin
 密码：123456
