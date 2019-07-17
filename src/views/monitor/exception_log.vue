@@ -207,7 +207,7 @@ export default {
         // 获取错误日志信息
         getExceptionLogList() {
             this.$http_normal({
-                url: `/log/page/error?page=${this.nowPage - 1}&size=${this.nowSize}&sort=id,desc${this.selectType ? `&${this.selectType}=${this.searchVal}` : ""}`,
+                url: `/log/page/error?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.selectType ? `&${this.selectType}=${this.searchVal}` : ""}`,
                 method: "get"
             }).then(result => {
                 const data = result.data

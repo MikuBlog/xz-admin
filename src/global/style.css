@@ -97,6 +97,18 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.button-left {
+    margin-left: .3rem;
+}
+.button-left-circle {
+    margin-left: .7rem;
+}
+.button-right {
+    margin-right: .3rem;
+}
+.button-right-circle {
+    margin-right: .7rem;
+}
 @media screen and (min-width: 0) and (max-width: 992px) {
     .card-gutter {
         margin-top: 1rem;

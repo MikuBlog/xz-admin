@@ -8,30 +8,22 @@
                             <el-input 
                             v-model="searchVal" 
                             placeholder="搜索内容"
-                            class="search-input "></el-input>
-                                <el-select 
-                                v-model="selectVal" 
-                                placeholder="类型"
-                                class="select-input">
-                                    <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                    </el-option>
-                                </el-select>
+                            class="search-input"
+                            @keyup.native="searchEnter($event)"></el-input>
                                 <el-button 
-                                icon="el-icon-search" 
+                                icon="el-icon-search"
+                                class="button-left-circle" 
+                                @click="search"
                                 circle></el-button>
                                 <el-button 
                                 type="primary"
                                 icon="el-icon-plus" 
                                 circle
-                                @click="showBox('添加菜单')"></el-button>
+                                ></el-button>
                         </el-row>
                     </div>
                     <tree-table 
-                    :data="data" 
+                    :data="menuList" 
                     :expand-all="expand" 
                     :columns="columns" 
                     size="small">
@@ -68,7 +60,8 @@
                              type="primary" 
                              icon="el-icon-edit" 
                              @click="edit(scope.row)"
-                             size="small" />
+                             size="small" 
+                             class="button-right"/>
                             <el-popover
                                 :ref="scope.row.id"
                                 placement="top"
@@ -80,7 +73,8 @@
                                 <el-button type="primary" size="small" 
                                 >确定</el-button>
                                 </div>
-                                <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"/>
+                                <el-button slot="reference" type="danger" icon="el-icon-delete" size="small"
+                                class="button-left"/>
                             </el-popover>
                             </template>
                         </el-table-column>
@@ -102,29 +96,45 @@ export default {
             expand: true,
             delLoading: false,
             searchVal: "",
-            selectVal: "",
             isAdd: true,
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
-            },{
-                value: '选项2',
-                label: '黄金糕'
-            }],
+            menuList: [],
             columns: [
                 {
                     text: '名称',
                     value: 'name'
                 }
             ],
-            data: [
-                
-            ]
         }
     },
+    created() {
+        // 初始化获取菜单列表
+        this.getMenuList()
+    },
     methods: {
-        showBox(name) {
-            this.$refs.form.dialog = true
+        // 点击搜索
+        search() {
+            this.getMenuList()
+        },
+        // 回车搜索
+        searchEnter(e) {
+            e.keyCode === 13
+            && this.getMenuList()
+        },
+        // 初始化菜单列表
+        initialMenuList(list) {
+            this.menuList.splice(0, this.menuList.length)
+            list.forEach(value => {
+                this.menuList.push(value)
+            })
+        },
+        // 获取菜单列表
+        getMenuList() {
+            this.$http_json({
+                url: `/api/menu/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
+                method: "get"
+            }).then(result => {
+                this.initialMenuList(result.data.content)
+            })
         }
     }
 }

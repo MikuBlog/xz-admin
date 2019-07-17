@@ -66,12 +66,17 @@
                             <el-button 
                             type="primary" 
                             icon="el-icon-edit"
-                            @click="handleEdit(scope.$index, scope.row)"
+                            @click="editDictionary(
+                                scope.row.dictId, 
+                                scope.row.name, 
+                                scope.row.remark)"
                             size="small"></el-button>
                             <el-button 
                             type="danger" 
                             icon="el-icon-delete"
-                            @click="handleDelete(scope.$index, scope.row)"
+                            @click="deleteDictionary(
+                                scope.row.name, 
+                                scope.row.dictId)"
                             size="small"
                             ></el-button>
                         </template>
@@ -164,12 +169,18 @@
                             <el-button 
                             type="primary" 
                             icon="el-icon-edit"
-                            @click="handleEdit(scope.$index, scope.row)"
+                            @click="editDetail(
+                                scope.row.dictDetailId, 
+                                scope.row.label, 
+                                scope.row.value, 
+                                scope.row.sort)"
                             size="small"></el-button>
                             <el-button 
                             type="danger" 
                             icon="el-icon-delete"
-                            @click="handleDelete(scope.$index, scope.row)"
+                            @click="deleteDetail(
+                                scope.row.label, 
+                                scope.row.dictDetailId)"
                             size="small"
                             ></el-button>
                         </template>
@@ -192,12 +203,12 @@
         <Form-Add 
         ref="formAdd" 
         :isAdd="isAdd_1" 
-        @updateDictionaryList="updateDictionaryList">
+        @updateDictionaryList="getDictionaryList">
         </Form-Add>
         <Form-Edit 
         ref="formEdit" 
         :isAdd="isAdd_2"
-        @updateDetailList="updateDetailList">
+        @updateDetailList="getDetailList">
         </Form-Edit>
     </div>
 </template>
@@ -230,12 +241,7 @@ export default {
             isShowAddBox: false,
             isShowDetailBox: false,
             dictionaryList: [],
-            detailList: [{
-                belong: "xz_test",
-                tag: "正常",
-                val: "true",
-                sort: 1
-            }],
+            detailList: [],
             options: [{
                 value: 'name',
                 label: '名称'
@@ -246,32 +252,78 @@ export default {
         }
     },
     created() {
-        // 初始化页面数据
+        // 初始化字典列表
         this.getDictionaryList()
         this.getDetailList()
     },
     methods: {
-        // 更新字典列表
-        updateDictionaryList() {
-            this.getDictionaryList()
-        },
-        // 更新字典详情列表
-        updateDetailList() {
-            this.getDetailList()
-        },
+        // 添加字典
         addDictionary() {
             this.isAdd_1 = true
-            this.$refs.formAdd.isShowAddBox = true
+            this.$refs.formAdd.addForm.name = ""
+            this.$refs.formAdd.addForm.remark = ""
+            this.showAddBox()
         },
+        // 添加详情
         addDetail() {
             this.isAdd_2 = true
-            this.$refs.formEdit.isShowDetailBox = true
+            this.$refs.formEdit.detailForm.label = ""
+            this.$refs.formEdit.detailForm.value = ""
+            this.$refs.formEdit.detailForm.sort = 0
+            this.showDetailBox()
         },
-        // 点击搜索
-        search_1() {
-            this.selectType_1
-            ? this.getDictionaryList()
-            : this.$warnMsg('请选择搜索类型')
+        // 编辑字典
+        editDictionary(id, name, remark) {
+            this.isAdd_1 = false
+            this.$refs.formAdd.dictId = id
+            this.$refs.formAdd.addForm.name = name
+            this.$refs.formAdd.addForm.remark = remark
+            this.showAddBox()
+        },
+        // 编辑字典详情
+        editDetail(id, label, value, sort) {
+            this.isAdd_2 = false
+            this.$refs.formEdit.dictDetailId = id
+            this.$refs.formEdit.detailForm.label = label
+            this.$refs.formEdit.detailForm.value = value
+            this.$refs.formEdit.detailForm.sort = sort
+            this.showDetailBox()
+        },
+        // 删除字典
+        deleteDictionary(name, id) {
+            this
+                .$showMsgBox("", `是否删除字典${name}?`)
+                .then(() => {
+                    this.$http_json({
+                        url: `/api/dict/del/${id}`,
+                        method: "post"
+                    }).then(result => {
+                        this.$successMsg('删除成功')
+                        this.getDictionaryList()
+                    })  
+                })
+        },
+        // 删除字典详情
+        deleteDetail(label, id) {
+            this
+                .$showMsgBox("", `是否删除字典详情${label}?`)
+                .then(() => {
+                    this.$http_json({
+                        url: `/api/dictDetail/del/${id}`,
+                        method: "post"
+                    }).then(result => {
+                        this.$successMsg('删除成功')
+                        this.getDictionaryList()
+                    })  
+                })
+        },
+        // 显示添加字典弹框
+        showAddBox() {
+            this.$refs.formAdd.isShowAddBox = true
+        },
+        // 显示添加字典详情弹框
+        showDetailBox() {
+            this.$refs.formEdit.isShowDetailBox = true
         },
         // 回车搜索
         searchEnter_1(e) {
@@ -280,31 +332,34 @@ export default {
             ? this.getDictionaryList()
             : this.$warnMsg('请选择搜索类型'))
         },
-        // 点击搜索
-        search_2() {
-            this.getDetailList()
-        },
-        // 回车搜索
         searchEnter_2(e) {
             e.keyCode === 13
             && this.getDetailList()
         },
+        // 点击搜索
+        search_1() {
+            this.selectType_1
+            ? this.getDictionaryList()
+            : this.$warnMsg('请选择搜索类型')
+        },
+        search_2() {
+            this.getDetailList()
+        },
+        // 回车搜索
         // 条数变化
         handleSizeChange_1(size) {
             this.nowSize_1 = size
             this.getDictionaryList()
+        },
+        handleSizeChange_2(size) {
+            this.nowSize_2 = size
+            this.getDetailList()
         },
         // 页数变化
         handleCurrentChange_1(page) {
             this.nowPage_1 = page
             this.getDictionaryList()
         },
-        // 条数变化
-        handleSizeChange_2(size) {
-            this.nowSize_2 = size
-            this.getDetailList()
-        },
-        // 页数变化
         handleCurrentChange_2(page) {
             this.nowPage_2 = page
             this.getDetailList()
@@ -349,9 +404,12 @@ export default {
                 this.initialDetailList(data.content)
             })
         },
-        // 获取字典列表当行的信息
+        // 获取字典列表当行的信息，并为添加编辑字典详情作准备
         getDictName(row) {
             this.dictName = row.name
+            this.$refs.formEdit.detailForm.dict = {
+                dictId: row.dictId
+            }
             this.getDetailList()
         } 
     }
@@ -362,8 +420,5 @@ export default {
     .title {
         position: relative;
         font-size: 1rem;
-    }
-    .pagination {
-        margin-top: 1rem;
     }
 </style>

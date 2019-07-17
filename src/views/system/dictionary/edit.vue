@@ -1,6 +1,6 @@
 <template>
     <el-dialog 
-        :title="title" 
+        :title="isAdd ? '添加字典详情' : '编辑字典详情'" 
         :visible.sync="isShowDetailBox"
         width="450px"
         >
@@ -13,18 +13,18 @@
             size="small">
                 <el-form-item 
                 label="字典标签"
-                prop="tag">
+                prop="label">
                     <el-input 
                     placeholder="请输入字典标签"
-                    v-model="detailForm.tag" 
+                    v-model="detailForm.label" 
                     autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item 
                 label="字典值"
-                prop="val">
+                prop="value">
                     <el-input 
                     placeholder="请输入字典值"
-                    v-model="detailForm.val"
+                    v-model="detailForm.value"
                     autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item 
@@ -52,31 +52,28 @@
 
 <script>
 export default {
+    name: "form-edit",
     props: {
         isAdd: {
             type: Boolean,
             default: true
         }
     },
-    created() {
-        this.isAdd
-        && (this.title = "添加字典详情")
-    },
     data() {
-        name: "form-edit"
         return {
+            dictDetailId: "",
             title: "编辑字典详情",
             isShowDetailBox: false,
             detailForm: {
-                name: "",
-                val: "",
+                label: "",
+                value: "",
                 sort: "",
             },
             detailFormRules: {
-                tag: [
+                label: [
                     { required: true, message: '请输入字典标签', trigger: 'blur' }
                 ],
-                val: [
+                value: [
                     { required: true, message: '请输入字典值', trigger: 'blur' }
                 ],
                 sort: [
@@ -86,13 +83,45 @@ export default {
         }
     },
     methods: {
-        // 添加字典
+        // 更新父组件数据
+        updateList() {
+            this.$emit('updateDetailList')
+        },
+        // 隐藏弹出框
+        hideDetailBox() {
+            this.isShowDetailBox = false
+        },
+        // 添加字典详情
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    
+                    if(!this.detailForm.dict) {
+                        this.$warnMsg('请选择字典再进行操作')
+                        return false
+                    }
+                    this.isAdd
+                    ? this.$http_json({
+                        url: "/api/dictDetail/add",
+                        method: "post",
+                        data: this.detailForm
+                    }).then(result => {
+                        result.status === 200
+                        && (this.$successMsg('添加成功'),
+                        this.hideDetailBox(),
+                        this.updateList())
+                    })
+                    : (this.detailForm.dictDetailId = this.dictDetailId, 
+                    this.$http_json({
+                        url: "/api/dictDetail/edit",
+                        method: "post",
+                        data: this.detailForm
+                    }).then(result => {
+                        result.status === 200
+                        && (this.$successMsg('编辑成功'),
+                        this.hideDetailBox(),
+                        this.updateList())
+                    }))
                 } else {
-                    console.log('error submit!!');
                     return false;
                 }
             });

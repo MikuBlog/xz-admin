@@ -21,6 +21,7 @@
                         <el-tree 
                         :data="departmentList" 
                         :props="defaultProps" 
+                        default-expand-all
                         @node-click="handleNodeClick"></el-tree>
                     </div>
                 </el-card>
@@ -39,7 +40,7 @@
                                 placeholder="类型"
                                 class="select-input">
                                     <el-option
-                                    v-for="item in options"
+                                    v-for="item in options_1"
                                     :key="item.value"
                                     :label="item.label"
                                     :value="item.value">
@@ -50,7 +51,7 @@
                              placeholder="类型"
                              class="select-input">
                                     <el-option
-                                    v-for="item in options"
+                                    v-for="item in options_2"
                                     :key="item.value"
                                     :label="item.label"
                                     :value="item.value">
@@ -59,6 +60,11 @@
                             <el-button 
                                 icon="el-icon-search" 
                                 circle></el-button>
+                            <el-button 
+                                type="primary"
+                                icon="el-icon-plus" 
+                                circle
+                                ></el-button>
                         </el-row>
                     </div>
                     <el-table
@@ -144,11 +150,11 @@
                         <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
+                        :page-sizes="[10, 25, 50, 100]"
+                        :page-size.sync="nowSize"
                         :pager-count="5"
-                        layout="total, prev, pager, next, jumper"
-                        :total="400">
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="totalElements">
                         </el-pagination>
                     </div>
                 </el-card>
@@ -164,12 +170,20 @@ export default {
             searchVal: "",
             selectType: "",
             selectStatus: "",
+            // 当前页数
+            nowPage: 1,
+            // 当前页条数
+            nowSize: 10,
+            // 总条数
+            totalElements: 1,
+            // 部门编号
+            deptId: 1,
             departmentList: [{
                 label: '一级 1',
                 children: [{
-                    label: '二级 1-1',
+                        label: '二级 1-1',
                     children: [{
-                    label: '三级 1-1-1'
+                        label: '三级 1-1-1'
                     }]
                 }]
                 }, {
@@ -203,15 +217,19 @@ export default {
                 children: 'children',
                 label: 'label'
             },
-            options: [{
+            options_1: [{
                 value: '选项1',
-                label: '黄金糕'
+                label: '用户名'
             },{
                 value: '选项2',
-                label: '黄金糕'
+                label: '邮箱'
+            }],
+            options_2: [{
+                value: '选项1',
+                label: '激活'
             },{
-                value: '选项3',
-                label: '黄金糕'
+                value: '选项2',
+                label: '锁定'
             }],
             userList: [{
                 userName: "xuanzai",
@@ -223,9 +241,63 @@ export default {
             }]
         }
     },
+    created() {
+        // 初始化获取部门列表
+        this.getDepartmentList()
+    },
     methods: {
         handleNodeClick(val) {
-            console.log(val)
+            this.deptId = val.deptId
+            this.getUserList()
+        },
+        // 条数变化
+        handleSizeChange(size) {
+            this.nowSize = size
+            this.getExceptionLogList()
+        },
+        // 分页处理
+        initialPage(totalElements) {
+            this.totalElements = totalElements
+        },
+        // 页数变化
+        handleCurrentChange(page) {
+            this.nowPage = page
+            this.getExceptionLogList()
+        },
+        // 获取用户列表
+        // 初始化错误日志列表
+        initialUserList(list) {
+            this.userList.splice(0, this.userList.length)
+            list.forEach(value => {
+                this.userList.push(value)
+            })
+        },
+        // 获取错误日志信息
+        getUserList() {
+            this.$http_normal({
+                url: `/api/user/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc&deptId=${this.deptId}`,
+                method: "get"
+            }).then(result => {
+                const data = result.data
+                this.initialPage(data.totalElements)
+                this.initialExceptionLogList(data.content)
+            })
+        },
+        // 初始化错误日志列表
+        initialDepartmentList(list) {
+            this.departmentList.splice(0, this.departmentList.length)
+            list.forEach(value => {
+                this.departmentList.push(value)
+            })
+        },
+        // 获取错误日志信息
+        getDepartmentList() {
+            this.$http_json({
+                url: `/api/dept/get`,
+                method: "get"
+            }).then(result => {
+                this.initialDepartmentList(result.data.content)
+            })
         }
     }
 }

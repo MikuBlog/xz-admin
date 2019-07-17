@@ -8,9 +8,11 @@
                             <el-input 
                             v-model="searchVal" 
                             placeholder="搜索内容"
-                            class="search-input "></el-input>
+                            class="search-input"
+                            @keyup.native="searchEnter($event)"></el-input>
                                 <el-select 
-                                v-model="selectVal" 
+                                v-model="selectType" 
+                                @change="search"
                                 placeholder="类型"
                                 class="select-input">
                                     <el-option
@@ -22,52 +24,51 @@
                                 </el-select>
                                 <el-button 
                                 icon="el-icon-search" 
+                                @click="search"
                                 circle></el-button>
                                 <el-button 
                                 circle
                                 type="primary"
                                 icon="el-icon-plus" 
-                                @click="showBox('添加菜单')"></el-button>
+                                ></el-button>
                         </el-row>
                     </div>
                     <tree-table 
-                    :data="data" 
                     :expand-all="expand" 
+                    :data="departmentList" 
                     :columns="columns" 
                     size="small">
-                        <el-table-column prop="icon" label="状态" align="center">
+                        <el-table-column label="状态" align="center">
                             <template slot-scope="scope">
-                                <el-tag>{{ scope.row.sort }}</el-tag>
+                                <el-tag :type="scope.row.enabled ? '' : 'info'">{{ scope.row.enabled ? "正常" : "停用" }}</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="createTime" label="创建日期" width="150">
+                        <el-table-column prop="createTime" label="创建日期">
                             <template slot-scope="scope">
                             <span>{{ scope.row.createTime }}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column 
-                        label="操作" 
-                        width="150" 
-                        align="center"
-                        fixed="right">
+                        <el-table-column label="操作" width="130px" align="center">
                             <template slot-scope="scope">
                             <el-button 
-                             type="primary" 
-                             icon="el-icon-edit" 
-                             @click="edit(scope.row)"
-                             size="small" />
+                            size="small"
+                            type="primary" 
+                            icon="el-icon-edit" 
+                            class="button-right"
+                            @click="edit(scope.row)"/>
                             <el-popover
                                 :ref="scope.row.id"
                                 placement="top"
-                                width="200">
-                                <p>确定删除吗,如果存在下级节点则一并删除，此操作不能撤销！</p>
+                                width="180">
+                                <p>确定删除本条数据吗？</p>
                                 <div style="text-align: right; margin: 0">
-                                <el-button size="mini" type="text" 
-                                >取消</el-button>
-                                <el-button type="primary" size="small" 
-                                >确定</el-button>
+                                <el-button size="mini" type="text" >取消</el-button>
+                                <el-button :loading="delLoading" type="primary" size="mini" >确定</el-button>
                                 </div>
-                                <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"/>
+                                <el-button slot="reference" :disabled="scope.row.id === 1" type="danger" 
+                                icon="el-icon-delete" 
+                                class="button-left"
+                                size="small"/>
                             </el-popover>
                             </template>
                         </el-table-column>
@@ -75,28 +76,29 @@
                 </el-card>
             </el-col>
         </el-row>
-        <eForm ref="form" :is-add="isAdd"/>
+        <!-- <eForm ref="form" :is-add="isAdd"/> -->
     </div>
 </template>
 
 <script>
 import treeTable from "@/components/tree_table/tree_table"
-import eForm from "./form.vue"
+// import eForm from "./form.vue"
 export default {
-    components: { treeTable, eForm },
+    components: { treeTable },
     data() {
         return {
             expand: true,
             delLoading: false,
             searchVal: "",
-            selectVal: "",
+            selectType: "",
             isAdd: true,
+            departmentList: [],
             options: [{
-                value: '选项1',
-                label: '黄金糕'
+                value: true,
+                label: '正常'
             },{
-                value: '选项2',
-                label: '黄金糕'
+                value: false,
+                label: '禁用'
             }],
             columns: [
                 {
@@ -104,14 +106,40 @@ export default {
                     value: 'name'
                 }
             ],
-            data: [
-                
-            ]
         }
+    },
+    created() {
+        // 初始化获取部门列表
+        this.getDepartmentList()
     },
     methods: {
         showBox(name) {
             this.$refs.form.dialog = true
+        },
+        // 点击搜索
+        search(val) {
+            this.getDepartmentList()
+        },
+        // 回车搜索
+        searchEnter(e) {
+            e.keyCode === 13
+            && this.getDepartmentList()
+        },
+        // 初始化部门列表
+        initialDepartmentList(list) {
+            this.departmentList.splice(0, this.departmentList.length)
+            list.forEach(value => {
+                this.departmentList.push(value)
+            })
+        },
+        // 获取部门列表
+        getDepartmentList() {
+            this.$http_json({
+                url: `/api/dept/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.selectType ? `&enabled=${this.selectType}` : ""}`,
+                method: "get"
+            }).then(result => {
+                this.initialDepartmentList(result.data.content)
+            })
         }
     }
 }

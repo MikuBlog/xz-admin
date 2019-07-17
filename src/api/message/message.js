@@ -22,7 +22,7 @@ const errorMsg = (msg) => {
     })
 }
 
-const showMsgBox = (title, msg, isHTML = false) => {
+const showMsgBox = (title = "标题", msg = "", isHTML = false) => {
     return MessageBox.confirm(msg, title, {
         showClose: true,
         // 是否可通过点击遮罩关闭 MessageBox

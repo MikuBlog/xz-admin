@@ -1,6 +1,6 @@
 <template>
     <el-dialog 
-        :title="title" 
+        :title="isAdd ? '添加字典' : '编辑字典'" 
         :visible.sync="isShowAddBox"
         width="450px">
             <el-form 
@@ -48,12 +48,9 @@ export default {
             default: true
         }
     },
-    created() {
-        this.isAdd
-        && (this.title = "添加字典")
-    },
     data() {
         return {
+            dictId: "",
             title: "编辑字典",
             isShowAddBox: false,
             addForm: {
@@ -71,23 +68,42 @@ export default {
         }
     },
     methods: {
+        // 更新父组件数据
+        updateList() {
+            this.$emit('updateDictionaryList')
+        },
+        // 隐藏弹出框
+        hideAddBox() {
+            this.isShowAddBox = false
+        },
         // 添加字典
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     this.isAdd
-                    && this.$http_json({
+                    ? (delete this.addForm.dictId,
+                    this.$http_json({
                         url: "/api/dict/add",
                         method: "post",
                         data: this.addForm
                     }).then(result => {
                         result.status === 200
                         && (this.$successMsg('添加成功'),
-                        this.isShowAddBox = false,
-                        this.$emit('updateList'))
-                    })
+                        this.hideAddBox(),
+                        this.updateList())
+                    }))
+                    : (this.addForm.dictId = this.dictId, 
+                    this.$http_json({
+                        url: "/api/dict/edit",
+                        method: "post",
+                        data: this.addForm
+                    }).then(result => {
+                        result.status === 200
+                        && (this.$successMsg('编辑成功'),
+                        this.hideAddBox(),
+                        this.updateList())
+                    }))
                 } else {
-                    console.log('error submit!!');
                     return false;
                 }
             });
