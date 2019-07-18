@@ -149,6 +149,11 @@ Vue.prototype.$setMemoryPmt = Memory.setMemoryPmt
 Vue.prototype.$getMemorySes = Memory.getMemorySes
 Vue.prototype.$getMemoryPmt = Memory.getMemoryPmt
 /**
+ * @description 清空浏览器存储的数据
+ */
+Vue.prototype.$clearMemorySes = Memory.clearMemorySes
+Vue.prototype.$clearMemoryPmt = Memory.clearMemoryPmt
+/**
  * @description 获取图片文件地址与文件信息
  * @returns {Promise}
  */

@@ -325,11 +325,7 @@ export default {
         },
         // 清空所有用户访问记录
         deleteMsg() {
-            this.$setMemorySes('tagsList', '')
-            this.$setMemorySes('nowIndex', '')
-            this.$setMemorySes('tagTitle', '')
-            this.$setMemorySes('breadcrumbList', '')
-            this.$setMemoryPmt('token', '')
+            this.$clearMemorySes()
         },
         // 保存当前用户访问记录
         saveMsg() {

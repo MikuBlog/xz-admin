@@ -14,9 +14,19 @@ function getMemoryPmt(key) {
     return JSON.parse(localStorage.getItem(key))
 }
 
+function clearMemorySes() {
+    sessionStorage.clear()
+}
+
+function clearMemoryPmt() {
+    localStorage.clear()
+}
+
 export default {
     setMemorySes,
     getMemorySes,
     setMemoryPmt,
-    getMemoryPmt
+    getMemoryPmt,
+    clearMemorySes,
+    clearMemoryPmt
 }
