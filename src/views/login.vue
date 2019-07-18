@@ -161,20 +161,20 @@ export default {
             isShowDrawer: false,
             activeName: '0',
             tab: [1, 0],
-            backgroundUrl: this.$getMemoryPmt("backgroundUrl") || "",
-            opacity: +this.$getMemoryPmt('opacity') || 100,
-            blur: +this.$getMemoryPmt('blur') || 0,
-            height: +this.$getMemoryPmt('height') || 62,
-            width: +this.$getMemoryPmt('width') || 50,
-            fontSize: +this.$getMemoryPmt('fontSize') || 30,
-            iconSize: +this.$getMemoryPmt('iconSize') || 30,
-            size: this.$getMemoryPmt('size') || "cover",
-            boxColor: this.$getMemoryPmt('boxColor') || "rgba(0, 0, 0, .35)",
-            fontColor: this.$getMemoryPmt('fontColor') || "#fefefe",
+            backgroundUrl: "",
+            opacity: 100,
+            blur: 0,
+            height: 62,
+            width: 50,
+            fontSize: 30,
+            iconSize: 30,
+            size: "cover",
+            boxColor: "rgba(0, 0, 0, .35)",
+            fontColor: "#fefefe",
             ruleForm: {
                 username: "",
                 password: "",
-                checked: this.$getMemoryPmt('isAutoLogin') || false,
+                checked: false,
             },
             rules: {
                 username: [
@@ -201,7 +201,6 @@ export default {
     methods: {
         // 判断是否自动登录
         isAutoLogin() {
-            console.log(this.$getMemoryPmt('token'))
             this.$getMemoryPmt('isAutoLogin') && this.$getMemoryPmt('token') 
             && this.$router.push({path: '/home/chart'})
         },
@@ -327,6 +326,17 @@ export default {
                 ele, 
                 'overflow-x', 
                 'hidden')
+            this.backgroundUrl = this.$getMemoryPmt("backgroundUrl") || "",
+            this.opacity =  +this.$getMemoryPmt('opacity') || 100,
+            this.blur = +this.$getMemoryPmt('blur') || 0,
+            this.height = +this.$getMemoryPmt('height') || 62,
+            this.width = +this.$getMemoryPmt('width') || 50,
+            this.fontSize = +this.$getMemoryPmt('fontSize') || 30,
+            this.iconSize = +this.$getMemoryPmt('iconSize') || 30,
+            this.size = this.$getMemoryPmt('size') || "cover",
+            this.boxColor = this.$getMemoryPmt('boxColor') || "rgba(0, 0, 0, .35)",
+            this.fontColor = this.$getMemoryPmt('fontColor') || "#fefefe"
+            this.ruleForm.checked = this.$getMemoryPmt('isAutoLogin') || false
         },
         // 选择背景图
         selectPic() {
