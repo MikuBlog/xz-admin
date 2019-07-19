@@ -25,11 +25,19 @@
                     </div>
                     <div class="title">
                         <i class="el-icon-reading"></i>
-                        <span class="word">GDOU Univercity</span>
+                        <span class="word">School</span>
                         <div class="border"></div>
                     </div>
                     <div style="font-size: .8rem;">
-                        My favorite action is study.
+                        I come from GDOU Univercity School.
+                    </div>
+                    <div class="title">
+                        <i class="el-icon-headset"></i>
+                        <span class="word">Favority sport</span>
+                        <div class="border"></div>
+                    </div>
+                    <div style="font-size: .8rem;">
+                        My favorite action is playing badminton.
                     </div>
                     <div class="title">
                         <i class="el-icon-magic-stick"></i>
@@ -39,22 +47,24 @@
                     <div class="skill-box">
                         <span>HTML</span>
                         <el-progress status="success" :percentage="100"></el-progress>
-                        <span>CSS</span>
-                        <el-progress :percentage="70"></el-progress>
                         <span>JavaScript</span>
                         <el-progress :percentage="80"></el-progress>
+                        <span>Vue</span>
+                        <el-progress :percentage="80"></el-progress>
+                        <span>Small procedures</span>
+                        <el-progress :percentage="80"></el-progress>
+                        <span>CSS</span>
+                        <el-progress :percentage="70"></el-progress>
                         <span>jquery</span>
                         <el-progress status="warning" :percentage="50"></el-progress>
                         <span>Node.js</span>
                         <el-progress status="warning" :percentage="50"></el-progress>
-                        <span>Vue</span>
-                        <el-progress :percentage="80"></el-progress>
-                        <span>React</span>
-                        <el-progress status="exception" :percentage="30"></el-progress>
                         <span>Angular</span>
                         <el-progress status="warning" :percentage="50"></el-progress>
-                        <span>Small procedures</span>
-                        <el-progress :percentage="80"></el-progress>
+                        <span>MongoDB</span>
+                        <el-progress status="warning" :percentage="40"></el-progress>
+                        <span>React</span>
+                        <el-progress status="exception" :percentage="30"></el-progress>      
                         <span>Flutter</span>
                         <el-progress status="exception" :percentage="30"></el-progress>
                     </div>
