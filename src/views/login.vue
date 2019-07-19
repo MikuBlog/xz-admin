@@ -1,6 +1,8 @@
 <template>
     <div class="login">
-        <div class="background" ref="background"></div>
+        <div class="background" ref="background">
+            <div class="mask" ref="mask"></div>
+        </div>
         <div class="setting" @click="showSetting">
             <i class="el-icon-setting"></i>
         </div>
@@ -8,7 +10,11 @@
             <div class="header" ref="header">
                 XZ-Admin
             </div>
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm"        label-position="right">
+            <el-form 
+            :model="ruleForm" 
+            :rules="rules" 
+            ref="ruleForm"        
+            >
                 <el-form-item prop="username">
                     <el-input 
                     v-model="ruleForm.username" prefix-icon="el-icon-user-solid"></el-input>
@@ -18,7 +24,7 @@
                     v-model="ruleForm.password"
                     prefix-icon="el-icon-lock"
                     type="password"
-                    @keyup.native="pressEnter($event)"></el-input>
+                    @keyup.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button 
@@ -81,6 +87,13 @@
                     <span class="demonstration">模糊度：</span>
                     <el-slider 
                     v-model="blur" 
+                    :format-tooltip="formatTooltip"
+                    @change="getVal"></el-slider>
+                </div>
+                <div class="block">
+                    <span class="demonstration">遮罩浓度：</span>
+                    <el-slider 
+                    v-model="mask" 
                     :format-tooltip="formatTooltip"
                     @change="getVal"></el-slider>
                 </div>
@@ -161,8 +174,9 @@ export default {
             isShowDrawer: false,
             activeName: '0',
             tab: [1, 0],
-            backgroundUrl: "",
+            backgroundUrl: this.$getMemoryPmt("backgroundUrl") || "",
             opacity: 100,
+            mask: 0,
             blur: 0,
             height: 62,
             width: 50,
@@ -197,8 +211,21 @@ export default {
         this.initialStyle()
         this.getBoxVal()
         this.useBg()
+        setTimeout(() => {
+            // 插入元素
+            this.insertEle()
+        })
     },
     methods: {
+        // 插入元素
+        insertEle() {
+            const 
+                image = document.querySelector('.el-image__inner'),
+                mask = document.createElement('div')
+            mask.className = "small-mask"
+            this.$insertAfter(mask, image)
+            this.getVal()
+        },
         // 判断是否自动登录
         isAutoLogin() {
             this.$getMemoryPmt('isAutoLogin') && this.$getMemoryPmt('token') 
@@ -303,7 +330,9 @@ export default {
         },
         // 图片预览
         getVal() {
-            const child = document.querySelector('.el-image__inner')
+            const 
+                child = document.querySelector('.el-image__inner'),
+                mask = document.querySelector('.small-mask')
             this.backgroundUrl
             ? (this.$setStyle(
                 child, 
@@ -314,6 +343,14 @@ export default {
                     'filter', 
                     `blur(${this.blur}px)`))
             : this.$warnMsg("请选择图片")
+            mask.style.cssText = `
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, ${this.mask / 100});
+            `
         },
         // 值格式化
         formatTooltip(val) {
@@ -326,9 +363,9 @@ export default {
                 ele, 
                 'overflow-x', 
                 'hidden')
-            this.backgroundUrl = this.$getMemoryPmt("backgroundUrl") || "",
             this.opacity =  +this.$getMemoryPmt('opacity') || 100,
             this.blur = +this.$getMemoryPmt('blur') || 0,
+            this.mask = +this.$getMemoryPmt('mask') || 0,
             this.height = +this.$getMemoryPmt('height') || 62,
             this.width = +this.$getMemoryPmt('width') || 50,
             this.fontSize = +this.$getMemoryPmt('fontSize') || 30,
@@ -341,7 +378,7 @@ export default {
         // 选择背景图
         selectPic() {
             this
-                .$getImgFile()
+                .$getImgFile(3)
                 .then(({raw, url}) => {
                     this.backgroundUrl = url
                 })
@@ -351,24 +388,30 @@ export default {
         },
         // 应用图片
         useBg() {
-            const ele = this.$refs.background
+            const 
+                ele = this.$refs.background,
+                mask = this.$refs.mask
             this.backgroundUrl
             && (this.$setStyle(
                 ele, 
                 'background-image', 
-                `url(${this.backgroundUrl})`), 
+                `url(${this.backgroundUrl})`),
                 this.$setStyle(
                     ele, 
                     'opacity', 
                     `${this.opacity / 100}`),
-            this.$setStyle(
-                ele, 
-                'filter', 
-                `blur(${this.blur}px)`), 
+                this.$setStyle(
+                    ele, 
+                    'filter', 
+                    `blur(${this.blur}px)`), 
                 this.$setStyle(
                     ele, 
                     'background-size', 
-                    `${this.size == "fill" ? "100% 100%" : this.size}`))
+                    `${this.size == "fill" ? "100% 100%" : this.size}`),
+                this.$setStyle(
+                    mask, 
+                    'background', 
+                    `rgba(0, 0, 0, ${this.mask / 100})`))
             this.saveBgStyle()
         },
         // 保存背景样式
@@ -376,6 +419,7 @@ export default {
             this.$setMemoryPmt('backgroundUrl', this.backgroundUrl)
             this.$setMemoryPmt('opacity', this.opacity)
             this.$setMemoryPmt('blur', this.blur)
+            this.$setMemoryPmt('mask', this.mask)
         },
         // 保存登录框样式
         saveBoxStyle() {
@@ -461,6 +505,14 @@ export default {
         background-repeat: no-repeat;
         z-index: -1;
         opacity: 0.5;
+    }
+    .mask {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0);
     }
     .setting {
         position: relative;

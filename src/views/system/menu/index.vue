@@ -9,7 +9,7 @@
                             v-model="searchVal" 
                             placeholder="搜索内容"
                             class="search-input"
-                            @keyup.native="searchEnter($event)"></el-input>
+                            @keyup.native="searchEnter"></el-input>
                                 <el-button 
                                 icon="el-icon-search"
                                 class="button-left-circle" 

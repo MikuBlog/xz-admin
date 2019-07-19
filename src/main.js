@@ -31,6 +31,8 @@ import Date from '@/api/other/form_date'
 import SetStyle from '@/api/dom/set_style'
 // 引入设置元素类模块
 import SetClass from '@/api/dom/set_class'
+// 引入插入元素模块
+import InsertAfter from '@/api/dom/insert_after'
 // 引入文件下载模块
 import Download from '@/api/dom/download'
 // 引入图片读取模块
@@ -163,6 +165,12 @@ Vue.prototype.$getImgFile = ReadImg.getImgFile
  * @param {String} url 地址
  */
 Vue.prototype.$download = Download.download
+/**
+ * @description 插入元素
+ * @param {DOM Object} newEle 新元素
+ * @param {DOM Object} nowEle 旧元素
+ */
+Vue.prototype.$insertAfter = InsertAfter.insertAfter
 // 加入element-ui组件
 Vue.use(ElementUI);
 // 引入iview组件

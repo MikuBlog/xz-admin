@@ -14,7 +14,7 @@ function getImgFile(limit = 2) {
             const files = fileEle.files[0]
             data.raw = files
             files.size / (1024 ** 2) > limit
-            ? reject(`图片大小超过${limit}MB!`)
+            ? reject(`图片大小不能超过${limit}MB!`)
             : (pattern.test(files.type)
             ? reader.readAsDataURL(files)
             : reject('请选择图片!'))

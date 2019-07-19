@@ -19,7 +19,7 @@
                         <el-row :gutter="10">
                             <el-col :span="12">
                                 <el-input v-model="searchVal_1" placeholder="搜索内容"
-                                @keyup.native="searchEnter_1($event)"></el-input>
+                                @keyup.native="searchEnter_1"></el-input>
                             </el-col>
                                 <el-select 
                                 v-model="selectType_1" 
@@ -115,7 +115,7 @@
                                 <el-input
                                 v-model="searchVal_2" 
                                 placeholder="按字典标签内容搜索"
-                                @keyup.native="searchEnter_2($event)"></el-input>
+                                @keyup.native="searchEnter_2"></el-input>
                             </el-col>
                             <el-button 
                                 icon="el-icon-search" 
