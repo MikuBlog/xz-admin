@@ -220,7 +220,7 @@ export default {
         // 插入元素
         insertEle() {
             const 
-                image = document.querySelector('.el-image__inner'),
+                image = document.querySelector('.el-image__inner') || document.querySelector('.el-image__error'),
                 mask = document.createElement('div')
             mask.className = "small-mask"
             this.$insertAfter(mask, image)
@@ -334,7 +334,7 @@ export default {
                 child = document.querySelector('.el-image__inner'),
                 mask = document.querySelector('.small-mask')
             this.backgroundUrl
-            ? (this.$setStyle(
+            && (this.$setStyle(
                 child, 
                 'opacity', 
                 `${this.opacity / 100}`),
@@ -342,7 +342,6 @@ export default {
                     child, 
                     'filter', 
                     `blur(${this.blur}px)`))
-            : this.$warnMsg("请选择图片")
             mask.style.cssText = `
                 position: absolute;
                 top: 0;
@@ -363,7 +362,7 @@ export default {
                 ele, 
                 'overflow-x', 
                 'hidden')
-            this.opacity =  +this.$getMemoryPmt('opacity') || 100,
+            this.opacity = +this.$getMemoryPmt('opacity') || 100,
             this.blur = +this.$getMemoryPmt('blur') || 0,
             this.mask = +this.$getMemoryPmt('mask') || 0,
             this.height = +this.$getMemoryPmt('height') || 62,

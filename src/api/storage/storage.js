@@ -9,7 +9,6 @@ function getMemorySes(key) {
 function setMemoryPmt(key, data) {
     localStorage.setItem(key, JSON.stringify(data))
 }
-
 function getMemoryPmt(key) {
     return JSON.parse(localStorage.getItem(key))
 }
