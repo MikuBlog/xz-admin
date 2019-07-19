@@ -1,4 +1,4 @@
-# 页面浏览 :smirk:
+# :smirk: 页面浏览 
 
 http://xzadmin.xuanzai.top
 
@@ -7,13 +7,13 @@ http://xzadmin.xuanzai.top
 
 <br/>
 
-# 页面开发进度 :ok_hand:
+# :ok_hand: 页面开发进度
 
 已完成所有，日后再添加
 
 <br/>
 
-# 已对接接口 :muscle:
+# :muscle: 已对接接口
 
 - 登录接口
 - 系统管理
@@ -27,7 +27,7 @@ http://xzadmin.xuanzai.top
 
 <br/>
 
-# 已有功能 :bulb:
+# :bulb: 已有功能
 
 + 个性化登录界面
 + 个性化后台管理界面
@@ -41,7 +41,7 @@ http://xzadmin.xuanzai.top
 
 <br/>
 
-# 页面布局 :earth_asia:
+# :earth_asia: 页面布局
 
 + 弹性布局
 + 响应式布局
@@ -51,13 +51,12 @@ http://xzadmin.xuanzai.top
 <br/>
 
 
-# 技术栈 :sparkling_heart:
-
+# :sparkling_heart: 技术栈
 使用了`vue`、`element-ui`、`iview`作为主要技术栈
 
 <br/>
 
-# 插件 :electric_plug:
+# :electric_plug: 插件
 
 + 富文本编辑器：`UEditor`
 + 表格：`VCharts`
