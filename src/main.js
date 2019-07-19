@@ -35,12 +35,12 @@ import SetClass from '@/api/dom/set_class'
 import InsertAfter from '@/api/dom/insert_after'
 // 引入文件下载模块
 import Download from '@/api/dom/download'
-// 引入图片读取模块
-import ReadImg from '@/api/dom/get_file_image'
 // 引入全屏函数
 import FullScreen from '@/api/other/full_screen'
 // 引入存储模块
 import Memory from '@/api/storage/storage'
+// 引入图片读取模块
+import ReadImg from '@/api/image/get_file_image'
 
 Vue.prototype.$$ = Jquery 
 /**
