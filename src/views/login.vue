@@ -420,6 +420,7 @@ export default {
             this.$setMemoryPmt('opacity', this.opacity)
             this.$setMemoryPmt('blur', this.blur)
             this.$setMemoryPmt('mask', this.mask)
+            this.$setMemoryPmt('size', this.size)
         },
         // 保存登录框样式
         saveBoxStyle() {
@@ -427,7 +428,6 @@ export default {
             this.$setMemoryPmt('width', this.width)
             this.$setMemoryPmt('fontSize', this.fontSize)
             this.$setMemoryPmt('iconSize', this.iconSize)
-            this.$setMemoryPmt('size', this.size)
             this.$setMemoryPmt('boxColor', this.boxColor)
             this.$setMemoryPmt('fontColor', this.fontColor)
             this.$successMsg('保存成功')
