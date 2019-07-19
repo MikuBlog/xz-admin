@@ -194,9 +194,9 @@ export default {
     },
     mounted() {
         // 初始化样式
+        this.initialStyle()
         this.getBoxVal()
         this.useBg()
-        this.initialStyle()
     },
     methods: {
         // 判断是否自动登录
