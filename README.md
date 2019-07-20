@@ -69,6 +69,6 @@ http://xzadmin.xuanzai.top
 
 > 有些图标不能正常显示
 
-原因：因为在`vue.config.js`中加了`svg`处理器，用于处理添加菜单时的`svg`图片显示问题，所以导致了有些`svg`图标被处理了两次，导致不能显示。
+原因：因为在`vue.config.js`中加了`svg`处理器，用于处理添加菜单时`svg`图片的显示，所以导致了有些`svg`图标被处理了两次，不能正常显示。
 
-解决方法：node_modules --> iview --> dist --> styles --> iview.css --> 删除`svg`处理代码（ctrl + F 查删）
+解决方案：node_modules --> iview --> dist --> styles --> iview.css --> 删除`svg`处理代码（ctrl + F 查删）
