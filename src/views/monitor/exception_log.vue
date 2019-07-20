@@ -23,6 +23,7 @@ import { MessageBox } from 'mint-ui';
                         </el-select>
                         <el-button 
                         icon="el-icon-search" 
+                        class="button-left-circle"
                         circle
                         @click="search"></el-button>
                     </div>
@@ -101,7 +102,7 @@ import { MessageBox } from 'mint-ui';
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                <el-button @click="showDetail(scope.row.logId)" type="text" size="small">查看详情</el-button>
+                                <el-button @click="showDetail(scope.row.id)" type="text" size="small">查看详情</el-button>
                             </div>
                         </template>
                         </el-table-column>
@@ -174,9 +175,9 @@ export default {
             : this.$warnMsg('请选择搜索类型'))
         },
         // 显示具体错误信息
-        showDetail(logId) {
+        showDetail(id) {
             this.$http_normal({
-                url: `/log/page/error/${logId}`,
+                url: `/log/page/error/${id}`,
                 method: "get"
             }).then(result => {
                 this.dialogVisible = true

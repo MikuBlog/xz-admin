@@ -43,6 +43,9 @@ body {
 .el-breadcrumb__inner {
     color: #8a8a95;
 }
+.el-col-8 {
+    padding: 0!important;
+}
 .interval-top {
     margin-top: 1rem;
 }
@@ -57,7 +60,7 @@ body {
 }
 .select-input{
     width: 7rem;
-    margin: 0 .5rem;
+    margin-left: .5rem;
 }
 .search-input {
     width: 15rem;

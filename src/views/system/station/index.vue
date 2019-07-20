@@ -7,9 +7,11 @@
                         <el-input 
                         v-model="searchVal" 
                         placeholder="搜索内容"
-                        class="search-input"></el-input>
+                        class="search-input"
+                        @keyup.native="searchEnter"></el-input>
                         <el-select 
                         v-model="selectType" 
+                        @change="search"
                         placeholder="类型"
                         class="select-input">
                             <el-option
@@ -21,14 +23,17 @@
                         </el-select>
                         <el-button 
                         icon="el-icon-search" 
+                        class="button-left-circle"
+                        @click="search"
                         circle></el-button>
                         <el-button 
                         type="primary"
                         icon="el-icon-plus" 
+                        @click="showAddStation"
                         circle></el-button>
                     </div>
                     <el-table
-                        :data="managementList"
+                        :data="stationList"
                         style="width: 100%">
                         <el-table-column
                         label="名称"
@@ -42,7 +47,7 @@
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                {{ scope.row.department }}
+                                {{ scope.row.dept.name }}
                             </div>
                         </template>
                         </el-table-column>
@@ -60,8 +65,8 @@
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                <el-tag>
-                                    {{ scope.row.status }}
+                                <el-tag :type="scope.row.enabled ? '' : 'info'">
+                                    {{ scope.row.enabled ? "正常" : "禁用"}}
                                 </el-tag>
                             </div>
                         </template>
@@ -84,12 +89,12 @@
                             <el-button 
                             type="primary" 
                             icon="el-icon-edit"
-                            @click="handleEdit(scope.$index, scope.row)"
+                            @click="editStation(scope.$index, scope.row)"
                             size="small"></el-button>
                             <el-button 
                             type="danger" 
                             icon="el-icon-delete"
-                            @click="handleDelete(scope.$index, scope.row)"
+                            @click="deleteStation(scope.row)"
                             size="small"
                             ></el-button>
                         </template>
@@ -99,43 +104,140 @@
                         <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
+                        :page-sizes="[10, 25, 50, 100]"
+                        :page-size.sync="nowSize"
                         :pager-count="5"
-                        layout="total, prev, pager, next, jumper"
-                        :total="400">
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="totalElements">
                         </el-pagination>
                     </div>
                 </el-card>
             </el-col>
         </el-row>
+        <stationForm 
+        ref="form" 
+        :is-add="isAdd" 
+        :dicts="dicts"
+        @updateStationList="getStationList"></stationForm>
     </div>
 </template>
 
 <script>
+import stationForm from './form'
 export default {
+    components: { stationForm },
     data() {
         return {
             searchVal: "",
             selectType: "",
-            managementList: [{
-                name: "xuanzai",
-                department: "网维",
-                sort: "1",
-                status: "正常",
-                createTime: "2019-07-10 12:00"
-            }],
+            stationList: [],
+            dicts: [],
+            isAdd: true,
+            // 当前页数
+            nowPage: 1,
+            // 当前页条数
+            nowSize: 10,
+            // 总条数
+            totalElements: 1,
             options: [{
-                value: '选项1',
-                label: '黄金糕'
+                value: 'true',
+                label: '正常'
             },{
-                value: '选项2',
-                label: '黄金糕'
-            },{
-                value: '选项3',
-                label: '黄金糕'
+                value: 'false',
+                label: '禁用'
             }],
         }
+    },
+    created() {
+        // 初始化页面数据
+        this.getStationList()
+        // 获取岗位字典
+        this.getDictsList('job_status')
+    },
+    methods: {
+        // 删除岗位
+        deleteStation(item) {
+            this
+                .$showMsgBox({ msg: `是否删除岗位${item.name}?` })
+                .then(() => {
+                    this.$http_json({
+                        url: `/api/job/del/${item.id}`,
+                        method: "post"
+                    }).then(() => {
+                        this.$successMsg('删除成功')
+                        this.getStationList()
+                    })
+                })
+        },
+        // 显示添加菜单窗口
+        showAddStation() {
+            this.isAdd = true
+            this.$refs.form.dialog = true
+            this.$refs.form.resetForm()
+        },
+        // 显示编辑菜单窗口
+        showEditStation() {
+            this.isAdd = false
+            this.$refs.form.dialog = true
+        },
+        // 编辑菜单项
+        editStationItem(item) {
+            const stationForm = this.$refs.form.stationForm
+            this.$refs.form.deptId = item.id
+            stationForm.name = item.name
+            stationForm.sort = item.sort
+            stationForm.enabled = item.enabled.toString()
+            this.showEditStation()
+        },
+        // 点击搜索
+        search(val) {
+            this.getStationList()
+        },
+        // 回车搜索
+        searchEnter(e) {
+            e.keyCode === 13
+            && this.getStationList()
+        },
+        // 条数变化
+        handleSizeChange(size) {
+            this.nowSize = size
+            this.getStationList()
+        },
+        // 页数变化
+        handleCurrentChange(page) {
+            this.nowPage = page
+            this.getStationList()
+        },
+        // 分页处理
+        initialPage(totalElements) {
+            this.totalElements = totalElements
+        },
+        // 初始化错误日志列表
+        initialStationList(list) {
+            this.stationList.splice(0, this.stationList.length)
+            list.forEach(value => {
+                this.stationList.push(value)
+            })
+        },
+        // 获取错误日志信息
+        getStationList() {
+            this.$http_normal({
+                url: `/api/job/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""}`,
+                method: "get"
+            }).then(result => {
+                const data = result.data
+                this.initialPage(data.totalElements)
+                this.initialStationList(data.content)
+            })
+        },
+        // 获取岗位字典
+        getDictsList(dictName) {
+            this.$http_json({
+                url: `/api/dictDetail/page?page=0&size=9999&sort=sort,asc&dictName=${dictName}`
+            }).then(result => {
+                this.dicts = result.data.content
+            })
+        },
     }
 }
 </script>

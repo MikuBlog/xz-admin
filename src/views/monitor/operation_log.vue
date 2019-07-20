@@ -22,6 +22,7 @@
                         </el-select>
                         <el-button 
                         icon="el-icon-search" 
+                        class="button-left-circle"
                         @click="search"
                         circle
                         ></el-button>

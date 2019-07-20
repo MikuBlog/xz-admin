@@ -60,8 +60,13 @@ export default {
         }
     },
     data() {
+        const numberValidate = (rule, value, callback) => {
+            value < 0 || value > 999
+            ? callback(new Error('排序范围在0~999之间'))
+            : callback()
+        }
         return {
-            dictDetailId: "",
+            id: "",
             title: "编辑字典详情",
             isShowDetailBox: false,
             detailForm: {
@@ -77,7 +82,7 @@ export default {
                     { required: true, message: '请输入字典值', trigger: 'blur' }
                 ],
                 sort: [
-                    { required: true, message: '请输入序号', trigger: 'blur' }
+                    { validator: numberValidate, trigger: 'blur' },
                 ],
             },
         }
@@ -92,35 +97,39 @@ export default {
             this.isShowDetailBox = false
         },
         // 添加字典详情
+        addDictDetail() {
+            delete this.detailForm.id
+            this.$http_json({
+                url: "/api/dictDetail/add",
+                method: "post",
+                data: this.detailForm
+            }).then(result => {
+                result.status === 200
+                && (this.$successMsg('添加成功'),
+                this.hideDetailBox(),
+                this.updateList())
+            })
+        },
+        editDictDetail() {
+            this.detailForm.id = this.id
+            this.$http_json({
+                url: "/api/dictDetail/edit",
+                method: "post",
+                data: this.detailForm
+            }).then(result => {
+                result.status === 200
+                && (this.$successMsg('编辑成功'),
+                this.hideDetailBox(),
+                this.updateList())
+            })
+        },
+        // 提交数据
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    if(!this.detailForm.dict) {
-                        this.$warnMsg('请选择字典再进行操作')
-                        return false
-                    }
                     this.isAdd
-                    ? this.$http_json({
-                        url: "/api/dictDetail/add",
-                        method: "post",
-                        data: this.detailForm
-                    }).then(result => {
-                        result.status === 200
-                        && (this.$successMsg('添加成功'),
-                        this.hideDetailBox(),
-                        this.updateList())
-                    })
-                    : (this.detailForm.dictDetailId = this.dictDetailId, 
-                    this.$http_json({
-                        url: "/api/dictDetail/edit",
-                        method: "post",
-                        data: this.detailForm
-                    }).then(result => {
-                        result.status === 200
-                        && (this.$successMsg('编辑成功'),
-                        this.hideDetailBox(),
-                        this.updateList())
-                    }))
+                    ? this.addDictDetail()
+                    : this.editDictDetail()
                 } else {
                     return false;
                 }

@@ -18,6 +18,7 @@
                                 <el-button 
                                 type="primary"
                                 icon="el-icon-plus" 
+                                @click="showAddMenu()"
                                 circle
                                 ></el-button>
                         </el-row>
@@ -56,33 +57,25 @@
                         fixed="right"
                         align="center">
                             <template slot-scope="scope">
-                            <el-button 
-                             type="primary" 
-                             icon="el-icon-edit" 
-                             @click="edit(scope.row)"
-                             size="small" 
-                             class="button-right"/>
-                            <el-popover
-                                :ref="scope.row.id"
-                                placement="top"
-                                width="200">
-                                <p>确定删除吗,如果存在下级节点则一并删除，此操作不能撤销！</p>
-                                <div style="text-align: right; margin: 0">
-                                <el-button size="small" type="text" 
-                                >取消</el-button>
-                                <el-button type="primary" size="small" 
-                                >确定</el-button>
-                                </div>
-                                <el-button slot="reference" type="danger" icon="el-icon-delete" size="small"
-                                class="button-left"/>
-                            </el-popover>
+                                <el-button 
+                                type="primary" 
+                                icon="el-icon-edit" 
+                                @click="editMenuItem(scope.row)"
+                                size="small" 
+                                />
+                                <el-button 
+                                slot="reference" 
+                                type="danger" 
+                                @click="deleteMenuItem(scope.row)"
+                                icon="el-icon-delete" size="small"
+                                />
                             </template>
                         </el-table-column>
                         </tree-table>
                 </el-card>
             </el-col>
         </el-row>
-        <eForm ref="form" :is-add="isAdd"/>
+        <eForm ref="form" :is-add="isAdd" @updateMenu="getMenuList"/>
     </div>
 </template>
 
@@ -111,6 +104,45 @@ export default {
         this.getMenuList()
     },
     methods: {
+        // 删除菜单
+        deleteMenuItem(item) {
+            this
+                .$showMsgBox({ msg: `<p>是否删除菜单${item.name}?</p><p>如果菜单包含子菜单，则会一并删除！</p>`, isHTML: true })
+                .then(() => {
+                    this.$http_json({
+                        url: `/api/menu/del/${item.id}`,
+                        method: "post"
+                    }).then(() => {
+                        this.$successMsg('删除成功')
+                        this.getMenuList()
+                    })
+                })
+        },
+        // 显示添加菜单窗口
+        showAddMenu() {
+            this.isAdd = true
+            this.$refs.form.dialog = true
+            this.$refs.form.resetForm()
+        },
+        // 显示编辑菜单窗口
+        showEditMenu() {
+            this.isAdd = false
+            this.$refs.form.dialog = true
+        },
+        // 编辑菜单项
+        editMenuItem(item) {
+            const menuItem = this.$refs.form.menuForm
+            this.$refs.form.id = item.id
+            menuItem.name = item.name
+            menuItem.sort = item.sort
+            menuItem.path = item.path
+            menuItem.component = item.component
+            menuItem.iframe = item.iframe.toString()
+            menuItem.roles = item.roles
+            menuItem.parentId = item.parentId
+            menuItem.icon = item.icon
+            this.showEditMenu()
+        },
         // 点击搜索
         search() {
             this.getMenuList()
@@ -135,7 +167,7 @@ export default {
             }).then(result => {
                 this.initialMenuList(result.data.content)
             })
-        }
+        },
     }
 }
 </script>

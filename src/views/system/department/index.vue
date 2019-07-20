@@ -24,6 +24,7 @@
                                 </el-select>
                                 <el-button 
                                 icon="el-icon-search" 
+                                class="button-left-circle"
                                 @click="search"
                                 circle></el-button>
                                 <el-button 
@@ -50,26 +51,17 @@
                         </el-table-column>
                         <el-table-column label="操作" width="130px" align="center">
                             <template slot-scope="scope">
-                            <el-button 
-                            size="small"
-                            type="primary" 
-                            icon="el-icon-edit" 
-                            class="button-right"
-                            @click="edit(scope.row)"/>
-                            <el-popover
-                                :ref="scope.row.id"
-                                placement="top"
-                                width="180">
-                                <p>确定删除本条数据吗？</p>
-                                <div style="text-align: right; margin: 0">
-                                <el-button size="mini" type="text" >取消</el-button>
-                                <el-button :loading="delLoading" type="primary" size="mini" >确定</el-button>
-                                </div>
-                                <el-button slot="reference" :disabled="scope.row.id === 1" type="danger" 
-                                icon="el-icon-delete" 
-                                class="button-left"
-                                size="small"/>
-                            </el-popover>
+                                <el-button 
+                                type="primary" 
+                                icon="el-icon-edit" 
+                                @click="editMenuItem(scope.row)"
+                                size="small" 
+                                />
+                                <el-button 
+                                slot="reference" 
+                                type="danger" 
+                                icon="el-icon-delete" size="small"
+                                />
                             </template>
                         </el-table-column>
                         </tree-table>
@@ -94,10 +86,10 @@ export default {
             isAdd: true,
             departmentList: [],
             options: [{
-                value: true,
+                value: "true",
                 label: '正常'
             },{
-                value: false,
+                value: "false",
                 label: '禁用'
             }],
             columns: [

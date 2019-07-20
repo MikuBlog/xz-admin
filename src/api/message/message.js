@@ -24,7 +24,8 @@ const errorMsg = (msg) => {
 
 const showMsgBox = ({ title, msg, isHTML }) => {
     return MessageBox.confirm(msg || "", title || "", {
-        showClose: true,
+        // 不允许显示取消icon
+        showClose: false,
         // 是否可通过点击遮罩关闭 MessageBox
         closeOnClickModal: true,
         // 是否可通过按下 ESC 键关闭 MessageBox

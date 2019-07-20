@@ -1,3 +1,4 @@
+import { edit } from '@/api/user';
 <template>
     <el-dialog 
         :title="isAdd ? '添加字典' : '编辑字典'" 
@@ -50,7 +51,7 @@ export default {
     },
     data() {
         return {
-            dictId: "",
+            id: "",
             title: "编辑字典",
             isShowAddBox: false,
             addForm: {
@@ -73,36 +74,44 @@ export default {
             this.$emit('updateDictionaryList')
         },
         // 隐藏弹出框
-        hideAddBox() {
+        hideBox() {
             this.isShowAddBox = false
         },
         // 添加字典
+        addDictionary() {
+            delete this.addForm.id
+            this.$http_json({
+                url: "/api/dict/add",
+                method: "post",
+                data: this.addForm
+            }).then(result => {
+                result.status === 200
+                && (this.$successMsg('添加成功'),
+                this.hideBox(),
+                this.updateList())
+            })
+        },
+        // 编辑字典
+        editDictionary() {
+            this.addForm.id = this.id
+            this.$http_json({
+                url: "/api/dict/edit",
+                method: "post",
+                data: this.addForm
+            }).then(result => {
+                result.status === 200
+                && (this.$successMsg('编辑成功'),
+                this.hideBox(),
+                this.updateList())
+            })
+        },
+        // 提交数据
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     this.isAdd
-                    ? (delete this.addForm.dictId,
-                    this.$http_json({
-                        url: "/api/dict/add",
-                        method: "post",
-                        data: this.addForm
-                    }).then(result => {
-                        result.status === 200
-                        && (this.$successMsg('添加成功'),
-                        this.hideAddBox(),
-                        this.updateList())
-                    }))
-                    : (this.addForm.dictId = this.dictId, 
-                    this.$http_json({
-                        url: "/api/dict/edit",
-                        method: "post",
-                        data: this.addForm
-                    }).then(result => {
-                        result.status === 200
-                        && (this.$successMsg('编辑成功'),
-                        this.hideAddBox(),
-                        this.updateList())
-                    }))
+                    ? this.addDictionary()
+                    : this.editDictionary()
                 } else {
                     return false;
                 }

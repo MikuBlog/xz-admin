@@ -11,6 +11,7 @@
                             class="search-input"></el-input>
                             <el-button 
                                 icon="el-icon-search" 
+                                class="button-left-circle"
                                 circle></el-button>
                         </el-row>
                     </div>
@@ -97,7 +98,7 @@
                 <el-card class="box-card">
                     <div class="search">
                         <el-row>
-                            <el-col :span="20">
+                            <el-col :span="19">
                                 <el-input 
                                 v-model="searchVal" 
                                 placeholder="搜索内容"></el-input>
@@ -105,6 +106,7 @@
                             <el-col :span="3">
                                 <el-button 
                                 icon="el-icon-search" 
+                                class="button-left-circle"
                                 circle></el-button>
                             </el-col>
                         </el-row>

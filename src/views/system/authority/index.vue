@@ -9,33 +9,23 @@
                             v-model="searchVal" 
                             placeholder="搜索内容"
                             class="search-input "></el-input>
-                                <el-select 
-                                v-model="selectVal" 
-                                placeholder="类型"
-                                class="select-input">
-                                    <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                    </el-option>
-                                </el-select>
                                 <el-button 
                                 icon="el-icon-search" 
+                                class="button-left-circle"
                                 circle></el-button>
                                 <el-button 
                                 circle
                                 type="primary"
                                 icon="el-icon-plus" 
-                                @click="showBox('添加菜单')"></el-button>
+                                @click="showAddAuthority()"></el-button>
                         </el-row>
                     </div>
                     <tree-table 
-                    :data="data" 
+                    :data="authorityList" 
                     :expand-all="expand" 
                     :columns="columns" 
                     size="small">
-                        <el-table-column prop="icon" label="别名" align="center">
+                        <el-table-column prop="icon" label="别名">
                             <template slot-scope="scope">
                             <svg-icon :icon-class="scope.row.icon" />
                             </template>
@@ -51,24 +41,18 @@
                         align="center"
                         fixed="right">
                             <template slot-scope="scope">
-                            <el-button 
-                             type="primary" 
-                             icon="el-icon-edit" 
-                             @click="edit(scope.row)"
-                             size="small" />
-                            <el-popover
-                                :ref="scope.row.id"
-                                placement="top"
-                                width="200">
-                                <p>确定删除吗,如果存在下级节点则一并删除，此操作不能撤销！</p>
-                                <div style="text-align: right; margin: 0">
-                                <el-button size="mini" type="text" 
-                                >取消</el-button>
-                                <el-button type="primary" size="small" 
-                                >确定</el-button>
-                                </div>
-                                <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"/>
-                            </el-popover>
+                                <el-button 
+                                type="primary" 
+                                icon="el-icon-edit" 
+                                @click="editAuthorityItem(scope.row)"
+                                size="small" 
+                                />
+                                <el-button 
+                                slot="reference" 
+                                type="danger" 
+                                @click="deleteAuthorityItem(scope.row)"
+                                icon="el-icon-delete" size="small"
+                                />
                             </template>
                         </el-table-column>
                         </tree-table>
@@ -91,28 +75,37 @@ export default {
             searchVal: "",
             selectVal: "",
             isAdd: true,
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
-            },{
-                value: '选项2',
-                label: '黄金糕'
-            }],
             columns: [
                 {
                     text: '名称',
                     value: 'name'
                 }
             ],
-            data: [
-                
-            ]
+            authorityList: []
         }
     },
+    created() {
+        this.getAuthorityList()
+    },
     methods: {
-        showBox(name) {
-            this.$refs.form.dialog = true
-        }
+        // 获取权限列表
+        // 初始化菜单列表
+        initialAuthorityList(list) {
+            this.authorityList.splice(0, this.authorityList.length)
+            list.forEach(value => {
+                this.authorityList.push(value)
+            })
+        },
+        // 获取菜单列表
+        getAuthorityList() {
+            this.$http_json({
+                url: `/api/permission/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
+                method: "get"
+            }).then(result => {
+                // console.log(result.data)
+                this.initialAuthorityList(result.data.content)
+            })
+        },
     }
 }
 </script>

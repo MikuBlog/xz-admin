@@ -488,9 +488,9 @@ export default {
             : this.isCollapse = !this.isCollapse
         },
         getWindowWidth() {
-            window.innerWidth < 1200
+            window.innerWidth < 1000
             && (this.isCollapse = true)
-            window.innerWidth < 900
+            window.innerWidth < 800
             ? this.isSmall = true
             : this.isSmall = false
             this.initialStyle()
@@ -520,7 +520,6 @@ export default {
         position: relative;
         height: 100%;
         background: #eef0f3;
-        overflow-y: auto;
     }
     .el-container {
         position: relative;
@@ -545,9 +544,6 @@ export default {
         color: #686868;
         transition: .3s;
         cursor: pointer;
-    }
-    .menu-button:hover {
-        background: #f8f8f8;
     }
     .el-icon-s-unfold, .el-icon-circle-close {
         transition: .3s;
@@ -624,9 +620,6 @@ export default {
     }
     .iconfullscreenexit:active {
         color: rgb(19, 180, 255);
-    }
-    .icon-box:hover {
-        background: #f8f8f8;
     }
     .el-icon-full-screen {
         font-size: 22px;
