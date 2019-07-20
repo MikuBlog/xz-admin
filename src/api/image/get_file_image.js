@@ -53,10 +53,10 @@ function getBase64Image(image) {
 function openPictureBase64(base64) {
     const 
         image = new Image(),
-        newWin = window.open('', '_blank')
+        newTag = window.open('', '_blank')
     image.src = base64
-    newWin.document.body.style['textAlign'] = "center"
-    newWin.document.body.appendChild(image)
+    newTag.document.body.style['textAlign'] = "center"
+    newTag.document.body.appendChild(image)
 }
 
 export default {

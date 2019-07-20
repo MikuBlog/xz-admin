@@ -121,7 +121,7 @@ import { MessageBox } from 'mint-ui';
             </el-col>
         </el-row>
         <el-dialog
-        title="提示"
+        title="详情信息"
         :visible.sync="dialogVisible"
         :fullscreen="true"
         width="30%"
