@@ -287,7 +287,7 @@ export default {
         // 删除字典
         deleteDictionary(item) {
             this
-                .$showMsgBox({ msg: `是否删除字典${item.name}?` })
+                .$showMsgBox({ msg: `是否删除${item.name}字典?` })
                 .then(() => {
                     this.$http_json({
                         url: `/api/dict/del/${item.id}`,
@@ -301,7 +301,7 @@ export default {
         // 删除字典详情
         deleteDetail(item) {
             this
-                .$showMsgBox({ msg: `是否删除字典详情${item.label}?` })
+                .$showMsgBox({ msg: `是否删除${item.label}字典详情?` })
                 .then(() => {
                     this.$http_json({
                         url: `/api/dictDetail/del/${item.id}`,

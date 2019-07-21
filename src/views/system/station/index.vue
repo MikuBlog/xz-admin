@@ -89,7 +89,7 @@
                             <el-button 
                             type="primary" 
                             icon="el-icon-edit"
-                            @click="editStation(scope.$index, scope.row)"
+                            @click="editStationItem(scope.row)"
                             size="small"></el-button>
                             <el-button 
                             type="danger" 
@@ -158,7 +158,7 @@ export default {
         // 删除岗位
         deleteStation(item) {
             this
-                .$showMsgBox({ msg: `是否删除岗位${item.name}?` })
+                .$showMsgBox({ msg: `是否删除${item.name}岗位?` })
                 .then(() => {
                     this.$http_json({
                         url: `/api/job/del/${item.id}`,
@@ -169,24 +169,25 @@ export default {
                     })
                 })
         },
-        // 显示添加菜单窗口
+        // 显示添加岗位窗口
         showAddStation() {
             this.isAdd = true
             this.$refs.form.dialog = true
             this.$refs.form.resetForm()
         },
-        // 显示编辑菜单窗口
+        // 显示编辑岗位窗口
         showEditStation() {
             this.isAdd = false
             this.$refs.form.dialog = true
         },
-        // 编辑菜单项
+        // 编辑岗位
         editStationItem(item) {
             const stationForm = this.$refs.form.stationForm
-            this.$refs.form.deptId = item.id
+            stationForm.id = item.id
             stationForm.name = item.name
             stationForm.sort = item.sort
             stationForm.enabled = item.enabled.toString()
+            this.$refs.form.deptId = item.dept.id
             this.showEditStation()
         },
         // 点击搜索

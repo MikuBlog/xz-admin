@@ -59,31 +59,62 @@ export default {
       this.getDepartmentList()
   },
   methods: {
+    // 更新列表
+    updateStationList() {
+      this.$emit('updateStationList')
+    },
     // 隐藏窗口
     hideBox() {
         this.dialog = false
     },
+    // 提价信息
     doSubmit() {
       this.stationForm.dept.id = this.deptId
       this.$refs['stationForm'].validate((valid) => {
         if (valid) {
-          
+          if(!this.deptId) {
+            this.$warnMsg('请选择所属部门')
+            return
+          }
+          this.isAdd
+          ? this.addStation()
+          : this.editStation()
         }else {
             return false
         }
       })
     },
+    // 添加岗位
     addStation() {
-      
+      this.$http_json({
+        url: "/api/job/add",
+        method: "post",
+        data: this.stationForm
+      }).then(result => {
+        this.$successMsg('添加成功')
+        this.hideBox()
+        this.updateStationList()
+      }) 
     },
+    // 编辑岗位
     editStation() {
-      
+      this.$http_json({
+        url: "/api/job/edit",
+        method: "post",
+        data: this.stationForm
+      }).then(result => {
+        this.$successMsg('编辑成功')
+        this.hideBox()
+        this.updateStationList()
+      }) 
     },
+    // 重置表单
     resetForm() {
       try {
         this.$refs.stationForm.resetFields()
       }catch(e) {}
     },
+    // 获取部门列表
     getDepartmentList() {
         this.$http_json({
             url: "/api/dept/get?enabled=true",
