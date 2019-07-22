@@ -8,10 +8,12 @@
                             <el-input 
                             v-model="searchVal" 
                             placeholder="搜索内容"
-                            class="search-input "></el-input>
+                            class="search-input"
+                            @keyup.native="searchEnter"></el-input>
                                 <el-button 
                                 icon="el-icon-search" 
                                 class="button-left-circle"
+                                @click="search" 
                                 circle></el-button>
                                 <el-button 
                                 circle
@@ -25,9 +27,9 @@
                     :expand-all="expand" 
                     :columns="columns" 
                     size="small">
-                        <el-table-column prop="icon" label="别名">
+                        <el-table-column prop="alias" label="别名">
                             <template slot-scope="scope">
-                            <svg-icon :icon-class="scope.row.icon" />
+                                <span>{{scope.row.alias}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="createTime" label="创建日期" width="150">
@@ -59,7 +61,10 @@
                 </el-card>
             </el-col>
         </el-row>
-        <eForm ref="form" :is-add="isAdd"/>
+        <eForm 
+        ref="form" 
+        :is-add="isAdd" 
+        @updateAuthorityList="getAuthorityList"/>
     </div>
 </template>
 
@@ -88,7 +93,49 @@ export default {
         this.getAuthorityList()
     },
     methods: {
-        // 获取权限列表
+        // 删除权限
+        deleteAuthorityItem(item) {
+            this
+                .$showMsgBox({ msg: `<p>是否删除${item.name}权限?</p><p>如果权限中包含子权限，则会一并删除！</p>`, isHTML: true })
+                .then(() => {
+                    this.$http_json({
+                        url: `/api/permission/del/${item.id}`,
+                        method: "post"
+                    }).then(() => {
+                        this.$successMsg('删除成功')
+                        this.getAuthorityList()
+                    })
+                })
+        },
+        // 显示添加权限窗口
+        showAddAuthority() {
+            this.isAdd = true
+            this.$refs.form.dialog = true
+            this.$refs.form.resetForm()
+        },
+        // 显示编辑权限窗口
+        showEditAuthority() {
+            this.isAdd = false
+            this.$refs.form.dialog = true
+        },
+        // 编辑权限项
+        editAuthorityItem(item) {
+            const authorityItem = this.$refs.form.authorityForm
+            this.$refs.form.authorityId = item.id
+            authorityItem.name = item.name
+            authorityItem.alias = item.alias
+            authorityItem.parentId = item.parentId
+            this.showEditAuthority()
+        },
+        // 点击搜索
+        search() {
+            this.getAuthorityList()
+        },
+        // 回车搜索
+        searchEnter(e) {
+            e.keyCode === 13
+            && this.getAuthorityList()
+        },
         // 初始化菜单列表
         initialAuthorityList(list) {
             this.authorityList.splice(0, this.authorityList.length)
@@ -102,7 +149,6 @@ export default {
                 url: `/api/permission/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
                 method: "get"
             }).then(result => {
-                // console.log(result.data)
                 this.initialAuthorityList(result.data.content)
             })
         },

@@ -24,8 +24,8 @@ import { MessageBox } from 'mint-ui';
                         <el-button 
                         icon="el-icon-search" 
                         class="button-left-circle"
-                        circle
-                        @click="search"></el-button>
+                        @click="search"
+                        circle></el-button>
                     </div>
                     <el-table
                         :data="exceptionLogList"

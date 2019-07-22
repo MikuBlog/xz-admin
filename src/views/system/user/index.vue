@@ -38,6 +38,7 @@
                             </el-col>
                             <el-select 
                                 v-model="selectType" 
+                                clearable
                                 placeholder="类型"
                                 class="select-input">
                                     <el-option
@@ -49,6 +50,7 @@
                             </el-select>
                              <el-select 
                              v-model="selectStatus" 
+                             clearable
                              placeholder="类型"
                              class="select-input">
                                     <el-option
@@ -180,41 +182,7 @@ export default {
             totalElements: 1,
             // 部门编号
             deptId: 1,
-            departmentList: [{
-                label: '一级 1',
-                children: [{
-                        label: '二级 1-1',
-                    children: [{
-                        label: '三级 1-1-1'
-                    }]
-                }]
-                }, {
-                label: '一级 2',
-                children: [{
-                    label: '二级 2-1',
-                    children: [{
-                    label: '三级 2-1-1'
-                    }]
-                }, {
-                    label: '二级 2-2',
-                    children: [{
-                    label: '三级 2-2-1'
-                    }]
-                }]
-                }, {
-                label: '一级 3',
-                children: [{
-                    label: '二级 3-1',
-                    children: [{
-                    label: '三级 3-1-1'
-                    }]
-                }, {
-                    label: '二级 3-2',
-                    children: [{
-                    label: '三级 3-2-1'
-                    }]
-                }]
-            }],
+            departmentList: [],
             defaultProps: {
                 children: 'children',
                 label: 'label'
@@ -249,7 +217,7 @@ export default {
     },
     methods: {
         handleNodeClick(val) {
-            this.deptId = val.deptId
+            this.deptId = val.id
             this.getUserList()
         },
         // 条数变化

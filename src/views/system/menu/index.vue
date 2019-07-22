@@ -107,7 +107,7 @@ export default {
         // 删除菜单
         deleteMenuItem(item) {
             this
-                .$showMsgBox({ msg: `<p>是否删除菜单${item.name}?</p><p>如果菜单包含子菜单，则会一并删除！</p>`, isHTML: true })
+                .$showMsgBox({ msg: `<p>是否删除${item.name}菜单?</p><p>如果菜单包含子菜单，则会一并删除！</p>`, isHTML: true })
                 .then(() => {
                     this.$http_json({
                         url: `/api/menu/del/${item.id}`,
@@ -132,7 +132,7 @@ export default {
         // 编辑菜单项
         editMenuItem(item) {
             const menuItem = this.$refs.form.menuForm
-            this.$refs.form.id = item.id
+            this.$refs.form.menuId = item.id
             menuItem.name = item.name
             menuItem.sort = item.sort
             menuItem.path = item.path

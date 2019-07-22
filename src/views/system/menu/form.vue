@@ -30,7 +30,7 @@
       <el-form-item v-if="menuForm.iframe === 'false'" label="组件路径" prop="component">
         <el-input v-model="menuForm.component" placeholder="菜单路径" style="width: 460px;"/>
       </el-form-item>
-      <el-form-item label="上级类目" prop="parentId">
+      <el-form-item label="上级类目">
         <treeselect v-model="menuForm.parentId" :options="menus" style="width: 460px;" placeholder="选择上级类目" />
       </el-form-item>
     </el-form>
@@ -58,7 +58,7 @@ export default {
       : callback()
     }
     return {
-      id: "",
+      menuId: "",
       dialog: false, menus: [],
       menuForm: { name: '', sort: 0, path: '', component: '', iframe: 'false', roles: [], parentId: 0, icon: '' },
       rules: {
@@ -70,9 +70,6 @@ export default {
         ],
         iframe: [
           { required: true, message: '请选择菜单类型', trigger: 'blur' }
-        ],
-        parentId: [
-          { required: true, message: '请选择菜单层级', trigger: 'blur' }
         ],
         path: [
           { required: false, message: '请输入菜单路径', trigger: 'blur' }
@@ -91,6 +88,7 @@ export default {
     // 重置表单
     resetForm() {
       try {
+        this.menuForm = { name: '', sort: 0, path: '', component: '', iframe: 'false', roles: [], parentId: 0, icon: '' }
         this.$refs.menuForm.resetFields()
       }catch(e) {}
     },
@@ -106,6 +104,10 @@ export default {
     doSubmit() {
       this.$refs['menuForm'].validate((valid) => {
         if (valid) {
+          if(this.menuForm.parentId == undefined) {
+            this.$warnMsg("请选择上级类目")
+            return
+          }
           this.isAdd
           ? this.addMenu()
           : this.editMenu()
@@ -122,29 +124,35 @@ export default {
         method: "post",
         data: this.menuForm
       }).then(result => {
-        result.status === 200
-        && (this.$successMsg('添加成功'),
-        this.hideBox(),
-        this.updateList())
+        this.$successMsg('添加成功')
+        this.hideBox()
+        this.getMenus()
+        this.updateList()
       })
     },
     // 编辑菜单
     editMenu() {
-      this.menuForm.id = this.id
+      this.menuForm.id = this.menuId
       this.$http_json({
         url: "/api/menu/edit",
         method: "post",
         data: this.menuForm
       }).then(result => {
-        result.status === 200
-        && (this.$successMsg('编辑成功'),
-        this.hideBox(),
-        this.updateList())
+        this.$successMsg('编辑成功')
+        this.hideBox()
+        this.getMenus()
+        this.updateList()
       })
     },
     // 选择icon
     selected(name) {
       this.menuForm.icon = name
+    },
+    initialMenus(list) {
+      const menu = { id: 0, label: '顶级类目', children: [] }
+      this.menus.splice(0, this.menus.length)
+      menu.children = list
+      this.menus.push(menu)
     },
     // 获取菜单列表
     getMenus() {
@@ -152,10 +160,7 @@ export default {
         url: "/api/menu/tree",
         method: "get"
       }).then(result => {
-        this.menus = []
-        const menu = { id: 0, label: '顶级类目', children: [] }
-        menu.children = result.data
-        this.menus.push(menu)
+        this.initialMenus(result.data)
       })
     }
   }

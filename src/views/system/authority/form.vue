@@ -1,18 +1,18 @@
 <template>
   <el-dialog :visible.sync="dialog" :title="isAdd ? '新增权限' : '编辑权限'" append-to-body width="500px">
-    <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
+    <el-form ref="authorityForm" :model="authorityForm" :rules="rules" size="small" label-width="80px">
       <el-form-item label="名称" prop="name">
-        <el-input v-model="form.name" style="width: 360px;"/>
+        <el-input v-model="authorityForm.name" style="width: 360px;"/>
       </el-form-item>
       <el-form-item label="别名" prop="alias">
-        <el-input v-model="form.alias" style="width: 360px;"/>
+        <el-input v-model="authorityForm.alias" style="width: 360px;"/>
       </el-form-item>
       <el-form-item style="margin-bottom: 0px;" label="上级类目">
-        <treeselect v-model="form.pid" style="width: 360px;" placeholder="选择上级类目" />
+        <treeselect v-model="authorityForm.parentId" :options="permissions" style="width: 360px;" placeholder="选择上级类目" />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button type="text" @click="cancel" size="small">取消</el-button>
+      <el-button type="text" @click="hideBox" size="small">取消</el-button>
       <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
     </div>
   </el-dialog>
@@ -28,8 +28,8 @@ export default {
   },
   data() {
     return {
-      loading: false, dialog: false, permissions: [],
-      form: { name: '', alias: '', pid: 0 },
+      dialog: false, permissions: [], authorityId: "",
+      authorityForm: { name: '', alias: '', parentId: 0 },
       rules: {
         name: [
           { required: true, message: '请输入名称', trigger: 'blur' }
@@ -40,64 +40,85 @@ export default {
       }
     }
   },
+  created() {
+    // 获取权限树状列表
+    this.getPermissions()
+  },
   methods: {
-    cancel() {
-      this.resetForm()
+    // 更新列表
+    updateList() {
+      this.$emit("updateAuthorityList")
     },
+    // 隐藏窗口
+    hideBox() {
+      this.dialog = false
+    },
+    // 提交数据
     doSubmit() {
-      this.$refs['form'].validate((valid) => {
+      this.$refs['authorityForm'].validate((valid) => {
         if (valid) {
-          this.loading = true
-          if (this.isAdd) {
-            this.doAdd()
-          } else this.doEdit()
+          if(this.authorityForm.parentId == undefined) {
+            this.$warnMsg("请选择上级类目")
+            return
+          }
+          this.isAdd
+          ? this.addAuthority()
+          : this.editAuthority()
         } else {
           return false
         }
       })
     },
-    doAdd() {
-    //   add(this.form).then(res => {
-    //     this.resetForm()
-    //     this.$notify({
-    //       title: '添加成功',
-    //       type: 'success',
-    //       duration: 2500
-    //     })
-    //     this.loading = false
-    //     this.$parent.init()
-    //   }).catch(err => {
-    //     this.loading = false
-    //     console.log(err.response.data.message)
-    //   })
+    // 添加权限
+    addAuthority() {
+      delete this.authorityForm.id
+      this.$http_json({
+        url: "/api/permission/add",
+        method: "post",
+        data: this.authorityForm
+      }).then(result => {
+        this.$successMsg('添加成功')
+        this.hideBox()
+        this.getPermissions()
+        this.updateList()
+      })
     },
-    doEdit() {
-    //   edit(this.form).then(res => {
-    //     this.resetForm()
-    //     this.$notify({
-    //       title: '修改成功',
-    //       type: 'success',
-    //       duration: 2500
-    //     })
-    //     this.loading = false
-    //     this.$parent.init()
-    //   }).catch(err => {
-    //     this.loading = false
-    //     console.log(err.response.data.message)
-    //   })
+    // 编辑权限
+    editAuthority() {
+      this.authorityForm.id = this.authorityId
+      this.$http_json({
+        url: "/api/permission/edit",
+        method: "post",
+        data: this.authorityForm
+      }).then(result => {
+        this.$successMsg('编辑成功')
+        this.hideBox()
+        this.getPermissions()
+        this.updateList()
+      })
     },
+    // 重置表单
     resetForm() {
-      this.dialog = false
-      this.$refs['form'].resetFields()
-      this.form = { name: '', alias: '', pid: 0 }
+      try {
+        this.authorityForm = { name: '', alias: '', parentId: 0 }
+        this.$refs.authorityForm.resetFields()
+      }catch(e) {}
     },
+    // 初始化权限列表
+    initialPermissions(list) {
+      const permission = { id: 0, label: '顶级类目', children: [] }
+      this.permissions.splice(0, this.permissions.length)
+      permission.children = list
+      this.permissions.push(permission)
+    },
+    // 获取权限列表
     getPermissions() {
-    //   getPermissionTree().then(res => {
-    //     this.permissions = []
-    //     const permission = { id: 0, label: '顶级类目', children: [] }
-    //     permission.children = res
-    //     this.permissions.push(permission)
-    //   })
+      this.$http_json({
+        url: "/api/permission/tree",
+        method: "get"
+      }).then(result => {
+        this.initialPermissions(result.data)
+      })
     }
   }
 }

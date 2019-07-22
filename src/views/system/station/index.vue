@@ -13,6 +13,7 @@
                         v-model="selectType" 
                         @change="search"
                         placeholder="类型"
+                        clearable
                         class="select-input">
                             <el-option
                             v-for="item in options"
@@ -183,7 +184,7 @@ export default {
         // 编辑岗位
         editStationItem(item) {
             const stationForm = this.$refs.form.stationForm
-            stationForm.id = item.id
+            this.$refs.form.stationId = item.id
             stationForm.name = item.name
             stationForm.sort = item.sort
             stationForm.enabled = item.enabled.toString()

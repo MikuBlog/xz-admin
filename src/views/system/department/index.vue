@@ -14,6 +14,7 @@
                                 v-model="selectType" 
                                 @change="search"
                                 placeholder="类型"
+                                clearable
                                 class="select-input">
                                     <el-option
                                     v-for="item in options"

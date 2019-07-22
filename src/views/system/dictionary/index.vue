@@ -23,6 +23,7 @@
                             </el-col>
                                 <el-select 
                                 v-model="selectType_1" 
+                                clearable
                                 placeholder="类型"
                                 class="select-input">
                                     <el-option

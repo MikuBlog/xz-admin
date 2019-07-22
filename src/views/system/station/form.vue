@@ -11,7 +11,7 @@
         <el-radio v-for="item in dicts" :key="item.id" v-model="stationForm.enabled" :label="item.value">{{ item.label }}</el-radio>
       </el-form-item>
       <el-form-item label="所属部门">
-        <treeselect v-model="deptId" :options="depts" style="width: 370px" placeholder="选择部门" />
+        <treeselect v-model="stationForm.dept.id" :options="depts" style="width: 370px" placeholder="选择部门"/>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -35,14 +35,14 @@ export default {
   },
   data() {
     return {
-        dialog: false, depts: [], deptId: null,
+        dialog: false, depts: [],
+        stationId: "",
         stationForm: {
-            id: '',
             name: '',
             sort: 0,
             enabled: 'true',
             createTime: '',
-            dept: { id: '' }
+            dept: { id: 1 }
         },
         rules: {
             name: [
@@ -69,11 +69,10 @@ export default {
     },
     // 提价信息
     doSubmit() {
-      this.stationForm.dept.id = this.deptId
       this.$refs['stationForm'].validate((valid) => {
         if (valid) {
-          if(!this.deptId) {
-            this.$warnMsg('请选择所属部门')
+          if(this.stationForm.dept.id == undefined) {
+            this.$warnMsg("请选择所属部门")
             return
           }
           this.isAdd
@@ -86,6 +85,7 @@ export default {
     },
     // 添加岗位
     addStation() {
+      delete this.stationForm.id
       this.$http_json({
         url: "/api/job/add",
         method: "post",
@@ -93,11 +93,13 @@ export default {
       }).then(result => {
         this.$successMsg('添加成功')
         this.hideBox()
+        this.getDepartmentList()
         this.updateStationList()
       }) 
     },
     // 编辑岗位
     editStation() {
+      this.stationForm.id = this.stationId
       this.$http_json({
         url: "/api/job/edit",
         method: "post",
@@ -105,22 +107,37 @@ export default {
       }).then(result => {
         this.$successMsg('编辑成功')
         this.hideBox()
+        this.getDepartmentList()
         this.updateStationList()
       }) 
     },
     // 重置表单
     resetForm() {
       try {
+        this.deptId = 1
+        this.stationForm = {
+            id: '',
+            name: '',
+            sort: 0,
+            enabled: 'true',
+            createTime: '',
+            dept: { id: 1 }
+        }
         this.$refs.stationForm.resetFields()
       }catch(e) {}
+    },
+    // 初始化部门列表
+    initialDepartmentlist(list) {
+      this.depts.splice(0, this.depts.length)
+      this.depts = list
     },
     // 获取部门列表
     getDepartmentList() {
         this.$http_json({
-            url: "/api/dept/get?enabled=true",
-            method: "get"
+          url: "/api/dept/get?enabled=true",
+          method: "get"
         }).then(result => {
-            this.depts = result.data.content
+          this.initialDepartmentlist(result.data.content)
         })
     }
   }
