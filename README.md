@@ -26,6 +26,7 @@ http://xzadmin.xuanzai.top
 - 系统监控
   - 操作日志
   - 异常日志 
+  - 权限日志
 
 <br/>
 
