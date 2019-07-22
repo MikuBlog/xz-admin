@@ -41,6 +41,8 @@ import FullScreen from '@/api/other/full_screen'
 import Memory from '@/api/storage/storage'
 // 引入图片读取模块
 import ReadImg from '@/api/image/get_file_image'
+// 引入json美化模块
+import JsonPretty from '@/api/json/json_pretty'
 
 Vue.prototype.$$ = Jquery 
 /**
@@ -171,6 +173,12 @@ Vue.prototype.$download = Download.download
  * @param {DOM Object} nowEle 旧元素
  */
 Vue.prototype.$insertAfter = InsertAfter.insertAfter
+/**
+ * @description json美化(配合pre标签使用)
+ * @param {JSON | Object} json json字符串或对象
+ * @returns {JSON} 返回美化好的JSON 
+ */
+Vue.prototype.$jsonPretty = JsonPretty.jsonPretty
 // 加入element-ui组件
 Vue.use(ElementUI);
 // 引入iview组件

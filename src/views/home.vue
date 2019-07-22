@@ -50,6 +50,7 @@ import { element } from 'protractor';
             <Drawer 
             v-show="isSmall" 
             v-model="isMenuCollapse"
+            width="212"
             placement="left">
                 <el-scrollbar style="height:100%">
                     <el-menu 
@@ -61,6 +62,11 @@ import { element } from 'protractor';
                     width="200px"
                     :unique-opened="true"
                     >
+                    <div class="logo" 
+                    v-show="isShowLogo" 
+                    >
+                        <img src="../assets/logo/catjoker.png" alt="logo.png">
+                    </div>
                             <el-menu-item 
                             v-if="!items.children"
                             :index="items.index" 

@@ -224,7 +224,7 @@ export default {
         // 获取错误日志信息
         getStationList() {
             this.$http_normal({
-                url: `/api/job/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""}`,
+                url: `/api/job/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=sort,asc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""}`,
                 method: "get"
             }).then(result => {
                 const data = result.data
