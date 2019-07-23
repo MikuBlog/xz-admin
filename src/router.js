@@ -49,6 +49,11 @@ import ExceptionLog from '@/views/monitor/exception_log.vue'
 import OpertionLog from '@/views/monitor/operation_log.vue'
 import AuthorityLog from '@/views/monitor/authority_log.vue'
 
+/**
+ * 项目模块
+ */
+import ProjectChart from '@/views/project/chart/chart.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -189,6 +194,17 @@ const menuList = [{
           parent: "系统监控",
           icon: "el-icon-tickets"
       }]
+    },{
+      title: "项目管理",
+      index: "7",
+      icon: "el-icon-edit",
+      children: [{
+          title: "流程图表",
+          path: "/home/project_chart",
+          index: "7-1",
+          parent: "项目管理",
+          icon: "el-icon-document-copy"
+      }]
     }]
   
 const routes = [{
@@ -274,7 +290,11 @@ const routes = [{
           path: 'authority_log',
           name: 'authority_log',
           component: AuthorityLog
-        },  {
+        }, {
+          path: 'project_chart',
+          name: 'project_chart',
+          component: ProjectChart
+        }, {
           path: 'chart',
           name: 'chart',
           component: Chart
