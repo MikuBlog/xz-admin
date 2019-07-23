@@ -71,6 +71,7 @@
                             <el-button 
                                 type="primary"
                                 icon="el-icon-plus" 
+                                @click="showAddUser"
                                 circle
                                 ></el-button>
                         </el-row>
@@ -143,12 +144,12 @@
                             <el-button 
                             type="primary" 
                             icon="el-icon-edit"
-                            @click="handleEdit(scope.$index, scope.row)"
+                            @click="editUserItem(scope.row)"
                             size="small"></el-button>
                             <el-button 
                             type="danger" 
                             icon="el-icon-delete"
-                            @click="handleDelete(scope.$index, scope.row)"
+                            @click="deleteUserItem(scope.row)"
                             size="small"
                             ></el-button>
                         </template>
@@ -168,17 +169,26 @@
                 </el-card>
             </el-col>
         </el-row>
+        <eForm 
+        ref="form" 
+        :is-add="isAdd" 
+        :dicts="dicts"
+        @updateUserList="getUserList"/>
     </div>
 </template>
 
 <script>
+import eForm from './form'
 export default {
+    components: { eForm },
     data() {
         return {
             searchVal_1: "",
             searchVal_2: "",
             selectType: "",
             selectStatus: "",
+            isAdd: true,
+            dicts: [],
             // 当前页数
             nowPage: 1,
             // 当前页条数
@@ -212,8 +222,53 @@ export default {
     created() {
         // 初始化获取部门列表
         this.getDepartmentList()
+        // 获取岗位字典
+        this.getDictsList('user_status')
+        // 获取用户列表
+        this.getUserList()
     },
     methods: {
+        // 删除用户
+        deleteUserItem(item) {
+            this
+                .$showMsgBox({ msg: `<p>是否删除${item.username}用户?</p>`, isHTML: true })
+                .then(() => {
+                    this.$http_json({
+                        url: `/api/user/del/${item.id}`,
+                        method: "post"
+                    }).then(() => {
+                        this.$successMsg('删除成功')
+                        this.getUserList()
+                    })
+                })
+        },
+        // 显示添加菜单窗口
+        showAddUser() {
+            this.isAdd = true
+            this.$refs.form.dialog = true
+            this.$refs.form.resetForm()
+        },
+        // 显示编辑菜单窗口
+        showEditUser() {
+            this.isAdd = false
+            this.$refs.form.dialog = true
+        },
+        // 编辑菜单项
+        editUserItem(item) {
+            const 
+                userItem = this.$refs.form.userForm,
+                component = this.$refs.form
+            userItem.username = item.username
+            userItem.enabled = item.enabled.toString()
+            userItem.phone = item.phone
+            userItem.email = item.email
+            userItem.roles = item.roles
+            component.userId = item.id
+            component.jobId = item.job.id
+            component.deptId = item.job.dept.id
+            component.roleIds = item.roles.map(val => val.id)
+            this.showEditUser()
+        },
         // 点击搜索
         search_1() {
             this.getDepartmentList()
@@ -291,7 +346,15 @@ export default {
             }).then(result => {
                 this.initialDepartmentList(result.data.content)
             })
-        }
+        },
+        // 获取岗位字典
+        getDictsList(dictName) {
+            this.$http_json({
+                url: `/api/dictDetail/page?page=0&size=9999&sort=sort,asc&dictName=${dictName}`
+            }).then(result => {
+                this.dicts = result.data.content
+            })
+        },
     }
 }
 </script>

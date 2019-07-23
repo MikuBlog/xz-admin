@@ -194,13 +194,11 @@
         <Form-Add 
         ref="formAdd" 
         :isAdd="isAdd_1" 
-        @updateDictionaryList="getDictionaryList">
-        </Form-Add>
+        @updateDictionaryList="getDictionaryList"/>
         <Form-Edit 
         ref="formEdit" 
         :isAdd="isAdd_2"
-        @updateDetailList="getDetailList">
-        </Form-Edit>
+        @updateDetailList="getDetailList"/>
     </div>
 </template>
 

@@ -119,7 +119,7 @@
         ref="form" 
         :is-add="isAdd" 
         :dicts="dicts"
-        @updateStationList="getStationList"></stationForm>
+        @updateStationList="getStationList"/>
     </div>
 </template>
 

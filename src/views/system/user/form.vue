@@ -1,23 +1,23 @@
 <template>
   <el-dialog :visible.sync="dialog" :title="isAdd ? '新增用户' : '编辑用户'" append-to-body width="570px">
-    <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="66px">
+    <el-form ref="userForm" :inline="true" :model="userForm" :rules="rules" size="small" label-width="66px">
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="form.username"/>
+        <el-input v-model="userForm.username"/>
       </el-form-item>
       <el-form-item label="状态" prop="enabled">
-        <el-radio v-for="item in dicts" :key="item.id" v-model="form.enabled" :label="item.value">{{ item.label }}</el-radio>
+        <el-radio v-for="item in dicts" :key="item.id" v-model="userForm.enabled" :label="item.value">{{ item.label }}</el-radio>
       </el-form-item>
       <el-form-item label="电话" prop="phone">
-        <el-input v-model.number="form.phone" />
+        <el-input v-model.number="userForm.phone" />
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="form.email" />
+        <el-input v-model="userForm.email" />
       </el-form-item>
       <el-form-item label="部门">
-        <treeselect v-model="deptId" :options="depts" :style="style" placeholder="选择部门" @select="selectFun" />
+        <treeselect v-model="deptId" :options="depts" :style="style" placeholder="选择部门" @select="selectFun" @input="jobSelect"/>
       </el-form-item>
       <el-form-item label="岗位">
-        <el-select v-model="jobId" :style="style" placeholder="请先选择部门">
+        <el-select v-model="jobId" class="select-station" :style="style" placeholder="请先选择部门">
           <el-option
             v-for="(item, index) in jobs"
             :key="item.name + index"
@@ -37,8 +37,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button type="text" @click="cancel">取消</el-button>
-      <el-button :loading="loading" type="primary" @click="doSubmit">确认</el-button>
+      <el-button type="text" @click="hideBox">取消</el-button>
+      <el-button type="primary" @click="doSubmit">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -67,7 +67,10 @@ export default {
       }
     }
     return {
-      dialog: false, form: { username: '', email: '', enabled: 'false', roles: [], job: { id: '' }, dept: { id: '' }, phone: null },
+      dialog: false, 
+      userId: "",
+      level: "",
+      userForm: { username: '', email: '', enabled: 'false', roles: [], job: { id: '' }, dept: { id: '' }, phone: null },
       roleIds: [], roles: [], depts: [], deptId: null, jobId: null, jobs: [], style: 'width: 184px', level: 3,
       rules: {
         username: [
@@ -95,14 +98,31 @@ export default {
       this.style = 'width: 172px'
     }
   },
+  created() {
+    // 初始化列表
+    this.getRoles()
+    this.getDepts()
+    this.getRoleLevel()
+  },
   methods: {
-    cancel() {
-      this.resetForm()
+    // 更新列表
+    updateList() {
+      this.$emit("updateUserList")
     },
+    // 判断电话是否有效
+    isvalidPhone(str) {
+      const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
+      return reg.test(str)
+    },
+    // 隐藏窗口
+    hideBox() {
+      this.dialog = false
+    },
+    // 提交数据
     doSubmit() {
-        this.form.dept.id = this.deptId
-        this.form.job.id = this.jobId
-        this.$refs['form'].validate((valid) => {
+        this.userForm.dept.id = this.deptId
+        this.userForm.job.id = this.jobId
+        this.$refs.userForm.validate((valid) => {
             if (valid) {
                 if (this.deptId === null || this.deptId === undefined) {
                     this.$warnMsg("部门不能为空")
@@ -116,11 +136,11 @@ export default {
                     this.$warnMsg("角色不能不为空")
                     return
                 }
-                this.form.roles = []
+                this.userForm.roles = []
                 const _this = this
                 this.roleIds.forEach(function(data, index) {
                     const role = { id: data }
-                    _this.form.roles.push(role)
+                    _this.userForm.roles.push(role)
                 })
                 this.isAdd
                 ? this.addUser()
@@ -130,65 +150,93 @@ export default {
             }
         })
     },
+    // 添加用户
     addUser() {
-      
+      delete this.userForm.id
+      this.$http_json({
+        url: "/api/user/add",
+        method: "post",
+        data: this.userForm
+      }).then(result => {
+        this.$successMsg('添加成功')
+        this.hideBox()
+        this.updateList()
+      })
     },
+    // 编辑用户
     editUser() {
-
+      this.userForm.id = this.userId
+      this.$http_json({
+        url: "/api/user/edit",
+        method: "post",
+        data: this.userForm
+      }).then(result => {
+        this.$successMsg('编辑成功')
+        this.hideBox()
+        this.updateList()
+      })
     },
+    // 重置表单
     resetForm() {
-      this.dialog = false
-      this.$refs['form'].resetFields()
-      this.deptId = null
-      this.jobId = null
-      this.roleIds = []
-      this.form = { username: '', email: '', enabled: 'false', roles: [], job: { id: '' }, dept: { id: '' }, phone: null }
+      try {
+        this.deptId = null
+        this.jobId = null
+        this.roleIds = []
+        this.userForm = { username: '', email: '', enabled: 'false', roles: [], job: { id: '' }, dept: { id: '' }, phone: null }
+        this.$refs.userForm.resetFields()
+      }catch(e) {}
     },
+    // 获取角色
     getRoles() {
         this.$http_json({
-            url: ""
+          url: "/api/role/all",
+          method: "get"
+        }).then(result => {
+          this.roles = result.data
         })
-    //   getAll().then(res => {
-    //     this.roles = res
-    //   }).catch(err => {
-    //     console.log(err.response.data.message)
-    //   })
     },
-    getJobs(id) {
-    //   getAllJob(id).then(res => {
-    //     this.jobs = res.content
-    //   }).catch(err => {
-    //     console.log(err.response.data.message)
-    //   })
+    // 清空岗位
+    jobSelect() {
+      this.jobId = null
     },
-    getDepts() {
-    //   getDepts({ enabled: true }).then(res => {
-    //     this.depts = res.content
-    //   })
-    },
-    isvalidPhone(str) {
-      const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
-      return reg.test(str)
-    },
+    // 选择工作
     selectFun(node, instanceId) {
-    //   this.getJobs(node.id)
+      this.getJobs(node.id)
     },
+    // 获取工作岗位
+    getJobs(id) {
+      this.$http_json({
+        url: `/api/job/page?page=0&size=9999&deptId=${id}`,
+        method: "get"
+      }).then(result => {
+        this.jobs = result.data.content
+        this.jobSelect()
+      })
+    },
+    // 获取部门列表
+    getDepts() {
+      this.$http_json({
+        url: "/api/dept/get",
+        method: "get"
+      }).then(result => {
+        this.depts = result.data.content
+      })
+    },
+    // 获取角色权值
     getRoleLevel() {
         this.$http_json({
             url: "/api/role/level",
             method: "get"
         }).then(result => {
-            console.log()
+            this.level = result.data.content
         })
-    //   getLevel().then(res => {
-    //     this.level = res.level
-    //   }).catch(err => {
-    //     console.log(err.response.data.message)
-    //   })
     }
   }
 }
 </script>
 
 <style scoped>
+  .vue-treeselect, .select-station {
+    width: 188px!important;
+  }
 </style>

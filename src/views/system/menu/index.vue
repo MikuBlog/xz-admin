@@ -75,7 +75,10 @@
                 </el-card>
             </el-col>
         </el-row>
-        <eForm ref="form" :is-add="isAdd" @updateMenu="getMenuList"/>
+        <eForm 
+        ref="form" 
+        :is-add="isAdd" 
+        @updateMenu="getMenuList"/>
     </div>
 </template>
 
