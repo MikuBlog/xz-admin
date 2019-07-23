@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     // 更新列表
-    updateStationList() {
+    updateList() {
       this.$emit('updateStationList')
     },
     // 隐藏窗口
@@ -94,7 +94,7 @@ export default {
         this.$successMsg('添加成功')
         this.hideBox()
         this.getDepartmentList()
-        this.updateStationList()
+        this.updateList()
       }) 
     },
     // 编辑岗位
@@ -108,7 +108,7 @@ export default {
         this.$successMsg('编辑成功')
         this.hideBox()
         this.getDepartmentList()
-        this.updateStationList()
+        this.updateList()
       }) 
     },
     // 重置表单

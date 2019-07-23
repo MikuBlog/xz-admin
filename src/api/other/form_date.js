@@ -1,9 +1,6 @@
-const formDate = (dateTime, isAccurate) => {
-    (Object(dateTime) instanceof Boolean && dateTime == true) ? (dateTime = "", isAccurate = true) : dateTime = ""
-    let nowDate = new Date()
-    let time = "", date =  dateTime 
-    ? new Date(dateTime) 
-    : new Date(nowDate.getTime() - (nowDate.getTimezoneOffset() * 60000))
+const formDate = (dateTime, isAccurate = false) => {
+    let nowDate = new Date(dateTime)
+    let date =  new Date(nowDate.getTime() - (nowDate.getTimezoneOffset() * 60000))
     let newDate = date.toISOString().split("T")[0]
     isAccurate 
     && (newDate = `${date.toISOString().split("T")[0]} ${date.toISOString().split("T")[1].split('.')[0]}`)

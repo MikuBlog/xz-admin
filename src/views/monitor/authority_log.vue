@@ -10,16 +10,38 @@
                         class="search-input"
                         @keyup.native="searchEnter"></el-input>
                         <el-select 
-                        v-model="selectType" 
+                        v-model="selectType_1" 
                         placeholder="类型"
                         class="select-input">
                             <el-option
-                            v-for="item in options"
+                            v-for="item in options_1"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value">
                             </el-option>
                         </el-select>
+                        <el-select 
+                        clearable
+                        v-model="selectType_2" 
+                        @change="getOperationType"
+                        placeholder="操作类型"
+                        class="select-input">
+                            <el-option
+                            v-for="item in options_2"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                        <el-date-picker
+                        v-model="date"
+                        class="select-input"
+                        type="datetimerange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                        @change="getDate">
+                        </el-date-picker>
                         <el-button 
                         icon="el-icon-search" 
                         class="button-left-circle"
@@ -132,14 +154,13 @@
         title="详情信息"
         :visible.sync="dialogVisible"
         :fullscreen="true"
-        width="30%"
         >
-            <el-row :gutter="20">
-                <el-col :span="12">
+            <el-row :gutter=20>
+                <el-col :sm="24" :md="12">
                     <h3>操作前的值</h3>
                     <pre>{{authorityOldDetail}}</pre>
                 </el-col>
-                <el-col :span="12">
+                <el-col :sm="24" :md="12">
                     <h3>操作后的值</h3>
                     <pre>{{authorityNewDetail}}</pre>
                 </el-col>
@@ -153,8 +174,11 @@ export default {
     data() {
         return {
             searchVal: "",
-            selectType: "",
+            selectType_1: "",
+            selectType_2: "",
             title: "",
+            date: "",
+            dateArray: [],
             authorityOldDetail: "",
             authorityNewDetail: "",
             dialogVisible: false,
@@ -165,16 +189,32 @@ export default {
             nowSize: 10,
             // 总条数
             totalElements: 1,
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
+            options_1: [{
+                value: 'creatorName',
+                label: '操作者'
             },{
-                value: '选项2',
-                label: '黄金糕'
-            },{
-                value: '选项3',
-                label: '黄金糕'
+                value: 'name',
+                label: '描述'
             }],
+            options_2: [{
+                value: '1',
+                label: '用户'
+            },{
+                value: '2',
+                label: '角色'
+            },{
+                value: '3',
+                label: '权限'
+            },{
+                value: '4',
+                label: '部门'
+            },{
+                value: '5',
+                label: '岗位'
+            },{
+                value: '6',
+                label: '菜单'
+            },],
         }
     },
     created() {
@@ -213,19 +253,19 @@ export default {
         // 展示当前值
         showDetail (item) {
             this.dialogVisible = true
-            this.authorityOldDetail = this.$jsonPretty(item.oldValue)
-            this.authorityNewDetail = this.$jsonPretty(item.newValue)
+            this.authorityOldDetail = this.$jsonPretty(item.oldValue, 1)
+            this.authorityNewDetail = this.$jsonPretty(item.newValue, 1)
         },
         // 点击搜索
         search() {
-            this.selectType
+            this.selectType_1
             ? this.getAuthorityLogList()
             : this.$warnMsg('请选择搜索类型')
         },
         // 回车搜索
         searchEnter(e) {
             e.keyCode === 13
-            && (this.selectType
+            && (this.selectType_1
             ? this.getAuthorityLogList()
             : this.$warnMsg('请选择搜索类型'))
         },
@@ -238,6 +278,14 @@ export default {
         handleCurrentChange(page) {
             this.nowPage = page
             this.getAuthorityLogList()
+        },
+        // 日期格式化
+        initialDate() {
+            this.dateArray.splice(0, this.dateArray.length)
+            this.date
+            && this.dateArray.push(
+            this.$formDate(this.date[0], true),
+            this.$formDate(this.date[1], true))
         },
         // 分页处理
         initialPage(totalElements) {
@@ -268,10 +316,19 @@ export default {
                 this.authorityLogList.push(value)
             })
         },
+        // 获取日期
+        getDate() {
+            this.initialDate()
+            this.getAuthorityLogList()
+        },
+        // 获取操作类型
+        getOperationType() {
+            this.getAuthorityLogList()
+        },
         // 获取权限日志信息
         getAuthorityLogList() {
             this.$http_normal({
-                url: `/api/authLog/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.selectType ? `&${this.selectType}=${this.searchVal}` : ""}`,
+                url: `/api/authLog/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.selectType_1 ? `&${this.selectType_1}=${this.searchVal}` : ""}${this.date ? `&greatTime=${this.dateArray[0]}&lessTime=${this.dateArray[1]}` : ""}${this.selectType_2 ? `&type=${this.selectType_2}` : ""}`,
                 method: "get"
             }).then(result => {
                 const data = result.data

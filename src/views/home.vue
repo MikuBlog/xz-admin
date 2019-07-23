@@ -493,14 +493,14 @@ export default {
             ? this.isMenuCollapse = !this.isMenuCollapse
             : this.isCollapse = !this.isCollapse
         },
+        // 获取屏幕宽度
         getWindowWidth() {
-            window.innerWidth < 1000
-            && (this.isCollapse = true)
-            window.innerWidth < 800
-            ? this.isSmall = true
+            window.innerWidth < 1100
+            ? (this.isSmall = true, this.isCollapse = true)
             : this.isSmall = false
             this.initialStyle()
         },
+        // 获取滚动高度
         getScrollTop(obj) {
             obj.scrollTop >= 100
             ? this.isShowBackTop = true
