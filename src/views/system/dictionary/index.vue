@@ -221,13 +221,13 @@ export default {
             // 当前页条数
             nowSize_1: 10,
             // 总条数
-            totalElements_1: 1,
+            totalElements_1: 0,
             // 当前页数
             nowPage_2: 1,
             // 当前页条数
             nowSize_2: 10,
             // 总条数
-            totalElements_2: 1,
+            totalElements_2: 0,
             isShowAddBox: false,
             isShowDetailBox: false,
             dictionaryList: [],

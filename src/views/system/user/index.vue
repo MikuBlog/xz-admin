@@ -194,7 +194,7 @@ export default {
             // 当前页条数
             nowSize: 10,
             // 总条数
-            totalElements: 1,
+            totalElements: 0,
             // 部门编号
             deptId: 1,
             departmentList: [],

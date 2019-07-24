@@ -165,11 +165,10 @@ router.addRoutes(routes)
  * 当第二行与第一行调转，如果token不存在，那么每次都会进行中断跳转，然后跳转之前又判断是否token存在，又中断跳转，导致死循环
  * 第三行如果不满足上述情况，直接进行路由的跳转
  */
-
-router.beforeEach((to, from, next) => {
-  to.name === 'login'
-  && next()
-  !Storage.getMemoryPmt('token')
-  && next('/login')
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   to.name === 'login'
+//   && next()
+//   !Storage.getMemoryPmt('token')
+//   && next('/login')
+//   next()
+// })
