@@ -53,11 +53,14 @@
 				loading.close()
 				return response;
 			}, err => {
+				const regexp = new RegExp(/timeout/g)
 				typeof err.response === "object" 
 				? (showTips(
 					JSON.parse(err.response.request.response).message.replace(/{.*}/g, '')
 				), isLogin(err.response.status))
-				: showTips('服务器出错，请联系客服进行处理')
+				: (regexp.test(err)
+				? showTips('请求超时，请联系客服进行处理')
+				: showTips('服务器出错，请联系客服进行处理'))
 				loading.close()
 				return Promise.reject(err)
 			})

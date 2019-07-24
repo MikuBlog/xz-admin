@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import store from '@/store'
 import Router from 'vue-router'
 import Http from '@/api/http/http'
 import Storage from '@/api/storage/storage'
@@ -67,145 +66,6 @@ const router = new Router({
 })
 
 export default router 
-
-const menuList = [{
-        title: "首页",
-        path: "/home/chart",
-        index: "1",
-        icon: "el-icon-menu"
-      }, {
-        title: "个人中心",
-        path: "/home/person",
-        index: "2",
-        icon: "el-icon-user-solid"
-      }, {
-        title: "文章管理",
-        index: "3",
-        icon: "el-icon-edit",
-        children: [{
-            title: "文章列表",
-            path: "/home/article_list",
-            index: "3-1",
-            parent: "文章管理",
-            icon: "el-icon-document-copy"
-        }, {
-            title: "添加文章",
-            path: "/home/add_article",
-            index: "3-2",
-            parent: "文章管理",
-            icon: "el-icon-tickets"
-        }, {
-            title: "文章回收站",
-            path: "/home/article_recycle",
-            index: "3-3",
-            parent: "文章管理",
-            icon: "el-icon-delete-solid"
-        }]
-      }, {
-        title: "订单管理",
-        index: "4",
-        icon: "el-icon-edit",
-        children: [{
-            title: "订单列表",
-            path: "/home/order_list",
-            index: "4-1",
-            parent: "订单管理",
-            icon: "el-icon-document-copy"
-        }, {
-            title: "添加订单",
-            path: "/home/add_order",
-            index: "4-2",
-            parent: "订单管理",
-            icon: "el-icon-tickets"
-        }, {
-            title: "订单回收站",
-            path: "/home/order_recycle",
-            index: "4-3",
-            parent: "订单管理",
-            icon: "el-icon-delete-solid"
-        }]
-      }, {
-        title: "系统管理",
-        index: "5",
-        icon: "el-icon-edit",
-        children: [{
-            title: "用户管理",
-            path: "/home/user_manage",
-            index: "5-1",
-            parent: "系统管理",
-            icon: "el-icon-document-copy"
-        }, {
-            title: "角色管理",
-            path: "/home/role_manage",
-            index: "5-2",
-            parent: "系统管理",
-            icon: "el-icon-tickets"
-        }, {
-          title: "权限管理",
-          path: "/home/authority_manage",
-          index: "5-3",
-          parent: "系统管理",
-          icon: "el-icon-delete-solid"
-        }, {
-            title: "菜单管理",
-            path: "/home/menu_manage",
-            index: "5-4",
-            parent: "系统管理",
-            icon: "el-icon-delete-solid"
-        }, {
-          title: "字典管理",
-          path: "/home/dictionary_manage",
-          index: "5-5",
-          parent: "系统管理",
-          icon: "el-icon-delete-solid"
-        }, {
-          title: "部门管理",
-          path: "/home/department_manage",
-          index: "5-6",
-          parent: "系统管理",
-          icon: "el-icon-delete-solid"
-        }, {
-          title: "岗位管理",
-          path: "/home/station_manage",
-          index: "5-7",
-          parent: "系统管理",
-          icon: "el-icon-delete-solid"
-        }]
-      }, {
-        title: "系统监控",
-        index: "6",
-        icon: "el-icon-edit",
-        children: [{
-            title: "操作日志",
-            path: "/home/operation_log",
-            index: "6-1",
-            parent: "系统监控",
-            icon: "el-icon-document-copy"
-        }, {
-            title: "异常日志",
-            path: "/home/exception_log",
-            index: "6-2",
-            parent: "系统监控",
-            icon: "el-icon-tickets"
-        }, {
-          title: "权限日志",
-          path: "/home/authority_log",
-          index: "6-3",
-          parent: "系统监控",
-          icon: "el-icon-tickets"
-      }]
-    },{
-      title: "项目管理",
-      index: "7",
-      icon: "el-icon-edit",
-      children: [{
-          title: "流程图表",
-          path: "/home/project_chart",
-          index: "7-1",
-          parent: "项目管理",
-          icon: "el-icon-document-copy"
-      }]
-    }]
   
 const routes = [{
           path: "*",
@@ -306,7 +166,6 @@ const routes = [{
     }]
 
 router.addRoutes(routes)
-store.commit('setMenuList', menuList)
 /**
  * 判断token是否存在，不存在或过期重新登录
  * 每进入一次路由跳转之前都会先执行该函数
@@ -315,6 +174,7 @@ store.commit('setMenuList', menuList)
  * 当第二行与第一行调转，如果token不存在，那么每次都会进行中断跳转，然后跳转之前又判断是否token存在，又中断跳转，导致死循环
  * 第三行如果不满足上述情况，直接进行路由的跳转
  */
+
 router.beforeEach((to, from, next) => {
   to.name === 'login'
   && next()
