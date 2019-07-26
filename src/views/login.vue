@@ -463,7 +463,8 @@ export default {
                         }
                     }).then(result => {
                         this.$setMemoryPmt('token', result.data.token)
-                        this.$router.push({path: '/home/chart'})
+                        this.$clearMemorySes()
+                        this.$router.push({path: '/home/welcome'})
                     })
                 }else {
                     return false

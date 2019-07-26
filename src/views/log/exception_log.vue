@@ -176,12 +176,12 @@ export default {
         },
         // 显示具体错误信息
         showDetail(id) {
-            this.$http_normal({
+            this.$http_json({
                 url: `/log/page/error/${id}`,
                 method: "get"
             }).then(result => {
                 this.dialogVisible = true
-                this.exceptionDetail = result.data.exception
+                this.exceptionDetail = result.data
             })
         },
         // 条数变化

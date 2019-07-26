@@ -14,6 +14,8 @@ import ElementUI from 'element-ui'
 import iview from 'iview'
 // 引入jquery
 import Jquery from 'jquery'
+// 引入导航栏折叠
+import Fragment from 'vue-fragment'
 // 引入icon组件
 import './icons'
 // 引入全局样式
@@ -185,6 +187,8 @@ Vue.use(ElementUI);
 Vue.use(iview)
 // 引入树状选择器组件
 Vue.component('treeselect', Treeselect)
+// 引入导航栏折叠
+Vue.use(Fragment.Plugin)
 
 Vue.config.productionTip = false
 

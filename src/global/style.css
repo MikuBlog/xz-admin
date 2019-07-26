@@ -112,6 +112,14 @@ body {
 .button-right-circle {
     margin-right: .7rem;
 }
+.menu-icon {
+    position: relative;
+    margin: 0 4px;
+    top: 2px;
+}
+.el-submenu__title {
+    overflow: hidden!important;
+}
 @media screen and (min-width: 0) and (max-width: 992px) {
     .card-gutter {
         margin-top: 1rem;

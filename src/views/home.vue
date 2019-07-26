@@ -8,43 +8,18 @@ import { element } from 'protractor';
                 <el-menu 
                 :default-active="activeIndex" 
                 :collapse="isCollapse"
-                class="el-menu-vertical-demo menu-list" 
+                class="el-menu-vertical-demo" 
                 background-color="#2f4055"
                 active-text-color="#429ee2"
                 text-color="#becad8"
-                width="200px"
                 :unique-opened="true"
                 >
                     <div class="logo" v-show="isShowLogo" v-if="!isCollapse">
                         <img src="../assets/logo/catjoker.png" alt="logo.png">
                     </div>
-                        <el-menu-item 
-                        v-if="!items.children"
-                        :index="items.index" 
-                        @click="clickMenuItem(items.path, items.title, items.index, items.parent)" 
-                        v-for="items in menuList"
-                        >
-                            <i :class="items.icon"></i>
-                            <span slot="title">{{items.title}}</span>
-                        </el-menu-item>
-                        <el-submenu 
-                        :index="items.index" 
-                        v-if="items.children"
-                        v-for="items in menuList">
-                            <template slot="title">
-                                <i :class="items.icon"></i>
-                                <span>{{items.title}}</span>
-                            </template>
-                            <el-menu-item-group>
-                                <el-menu-item 
-                                :index="child.index" 
-                                @click="clickMenuItem(child.path, child.title, child.index, child.parent)"
-                                 v-for="child in items.children">
-                                    <i :class="child.icon"></i>
-                                    <span slot="title">{{child.title}}</span>
-                                </el-menu-item>
-                            </el-menu-item-group>
-                        </el-submenu>
+                    <NavMenu 
+                    :navMenus="menuList"
+                    @getMenuItem="clickMenuItem"></NavMenu>
                 </el-menu>
             </el-scrollbar>
             <Drawer 
@@ -62,37 +37,14 @@ import { element } from 'protractor';
                     width="200px"
                     :unique-opened="true"
                     >
-                    <div class="logo" 
-                    v-show="isShowLogo" 
-                    >
-                        <img src="../assets/logo/catjoker.png" alt="logo.png">
-                    </div>
-                            <el-menu-item 
-                            v-if="!items.children"
-                            :index="items.index" 
-                            @click="clickMenuItem(items.path, items.title, items.index, items.parent)" 
-                            v-for="items in menuList">
-                                <i :class="items.icon"></i>
-                                <span slot="title">{{items.title}}</span>
-                            </el-menu-item>
-                            <el-submenu 
-                            :index="items.index" 
-                            v-if="items.children"
-                            v-for="items in menuList">
-                                <template slot="title">
-                                    <i :class="items.icon"></i>
-                                    <span>{{items.title}}</span>
-                                </template>
-                                <el-menu-item-group>
-                                    <el-menu-item 
-                                    :index="child.index"
-                                    @click="clickMenuItem(child.path, child.title, child.index, child.parent)"
-                                    v-for="child in items.children">
-                                        <i :class="child.icon"></i>
-                                        <span slot="title">{{child.title}}</span>
-                                    </el-menu-item>
-                                </el-menu-item-group>
-                            </el-submenu>
+                        <div class="logo" 
+                        v-show="isShowLogo" 
+                        >
+                            <img src="../assets/logo/catjoker.png" alt="logo.png">
+                        </div>
+                        <NavMenu 
+                        :navMenus="menuList"
+                        @getMenuItem="clickMenuItem"></NavMenu>
                     </el-menu>
                 </el-scrollbar>
             </Drawer>
@@ -122,12 +74,17 @@ import { element } from 'protractor';
                         </div>
                         <div class="breadcrumb">
                             <el-breadcrumb separator-class="el-icon-arrow-right">
-                                <el-breadcrumb-item 
-                                :to="{ path: '/home/chart' }"
-                                @click.native="addBreakcrumb()">首页</el-breadcrumb-item>
-                                <el-breadcrumb-item 
-                                v-for="items in breadcrumbList"
-                                >{{items}}</el-breadcrumb-item>
+                                    <el-breadcrumb-item 
+                                    :to="{ path: '/home/welcome' }"
+                                    @click.native="clickMenuItem({
+                                        name: '首页',
+                                        path: '/home/welcome',
+                                        index: '首页',
+                                        parentId: null,
+                                    })">首页</el-breadcrumb-item>
+                                    <el-breadcrumb-item 
+                                    v-for="items in breadcrumbList"
+                                    >{{items}}</el-breadcrumb-item>
                             </el-breadcrumb>
                         </div>
                         <div class="icon-box">
@@ -163,8 +120,18 @@ import { element } from 'protractor';
                                 <i class="el-icon-caret-bottom el-icon--right"></i>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item
-                                    @click.native="clickMenuItem('/home/chart', '首页', '1')">首页</el-dropdown-item>
-                                    <el-dropdown-item @click.native="clickMenuItem('/home/person', '个人中心', '2')"><span>个人中心</span></el-dropdown-item>
+                                    @click.native="clickMenuItem({
+                                        name: '首页',
+                                        path: '/home/welcome',
+                                        index: '首页',
+                                        parentId: null,
+                                    })">首页</el-dropdown-item>
+                                    <el-dropdown-item @click.native="clickMenuItem({
+                                        name: '个人中心',
+                                        path: '/home/person',
+                                        index: '个人中心',
+                                        parentId: null,
+                                    })"><span>个人中心</span></el-dropdown-item>
                                     <el-dropdown-item
                                     @click.native="openProject">
                                         项目地址
@@ -188,16 +155,19 @@ import { element } from 'protractor';
                             closable
                             checkable
                             v-for="(items, index) in tagsList" 
-                            :name="items.title"
-                            @on-close="tabsRemove"
-                            @on-change="tabsClick(items.path, index, items.index, items.title, items.parent)"
-                            >{{items.title}}</Tag>
+                            :name="items.name"
+                            @on-close="tabsRemove(items)"
+                            @on-change="tabsClick(items)"
+                            >{{items.name}}</Tag>
                         </el-scrollbar>
                     </div>
                 </el-header>
                 <el-main class="top" id="top">
                     <transition name="xz-animation">
-                        <router-view class="router"/>
+                        <router-view 
+                        @clickMenuItem="clickMenuItem"
+                        @updateMenuList="getMenuList"
+                        class="router"/>
                     </transition>
                     <div class="back-top">
                         <el-button 
@@ -247,7 +217,9 @@ import { element } from 'protractor';
 </template>
 
 <script>
+import NavMenu from '@/components/tree_menu/SidebarItem'
 export default {
+    components: { NavMenu },
     data() {
         return {
             isCollapse: false,
@@ -261,12 +233,14 @@ export default {
             menuList: [],
             breadcrumbList: [],
             tagsList: [{
-                title: "首页",
-                path: "/home/chart",
-                index: "1"
+                name: "首页",
+                path: "/home/welcome",
+                index: "首页",
+                parentId: null,
+                key: 1
             }],
-            nowIndex: this.$getMemorySes('nowIndex') || 0,
-            activeIndex: "1",
+            nowIndex: this.$getMemorySes('nowIndex') || "首页",
+            activeIndex: "首页",
             squareUrl: "https://myinterface.xuanzai.top/getPicture?type=头像&id=8",
         }
     },
@@ -280,7 +254,7 @@ export default {
         // 获取菜单
         this.getMenuList()
         this.initialScrollTop(true)
-        this.navigateTo(this.tagsList[this.nowIndex].path)
+        this.initialRouter()
         this.$nextTick(() => {
             this.changeTagStyle(this.nowIndex)
         })
@@ -288,156 +262,16 @@ export default {
         this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
         // 获取浏览器标签页标题
         document.title = this.$getMemorySes('tagTitle') || "欢迎"
-        // 获取当前活动的标签页
-        this.activeIndex = this.tagsList[this.nowIndex].index
     },
     methods: {
         // 获取菜单列表
         getMenuList() {
-            this.menuList = [{
-                title: "首页",
-                path: "/home/chart",
-                index: "1",
-                icon: "el-icon-menu"
-            }, {
-                title: "个人中心",
-                path: "/home/person",
-                index: "2",
-                icon: "el-icon-user-solid"
-            }, {
-                title: "文章管理",
-                index: "3",
-                icon: "el-icon-edit",
-                children: [{
-                    title: "文章列表",
-                    path: "/home/article_list",
-                    index: "3-1",
-                    parent: "文章管理",
-                    icon: "el-icon-document-copy"
-                }, {
-                    title: "添加文章",
-                    path: "/home/add_article",
-                    index: "3-2",
-                    parent: "文章管理",
-                    icon: "el-icon-tickets"
-                }, {
-                    title: "文章回收站",
-                    path: "/home/article_recycle",
-                    index: "3-3",
-                    parent: "文章管理",
-                    icon: "el-icon-delete-solid"
-                }]
-            }, {
-                title: "订单管理",
-                index: "4",
-                icon: "el-icon-edit",
-                children: [{
-                    title: "订单列表",
-                    path: "/home/order_list",
-                    index: "4-1",
-                    parent: "订单管理",
-                    icon: "el-icon-document-copy"
-                }, {
-                    title: "添加订单",
-                    path: "/home/add_order",
-                    index: "4-2",
-                    parent: "订单管理",
-                    icon: "el-icon-tickets"
-                }, {
-                    title: "订单回收站",
-                    path: "/home/order_recycle",
-                    index: "4-3",
-                    parent: "订单管理",
-                    icon: "el-icon-delete-solid"
-                }]
-            }, {
-                title: "系统管理",
-                index: "5",
-                icon: "el-icon-edit",
-                children: [{
-                    title: "用户管理",
-                    path: "/home/user_manage",
-                    index: "5-1",
-                    parent: "系统管理",
-                    icon: "el-icon-document-copy"
-                }, {
-                    title: "角色管理",
-                    path: "/home/role_manage",
-                    index: "5-2",
-                    parent: "系统管理",
-                    icon: "el-icon-tickets"
-                }, {
-                title: "权限管理",
-                path: "/home/authority_manage",
-                index: "5-3",
-                parent: "系统管理",
-                icon: "el-icon-delete-solid"
-                }, {
-                    title: "菜单管理",
-                    path: "/home/menu_manage",
-                    index: "5-4",
-                    parent: "系统管理",
-                    icon: "el-icon-delete-solid"
-                }, {
-                title: "字典管理",
-                path: "/home/dictionary_manage",
-                index: "5-5",
-                parent: "系统管理",
-                icon: "el-icon-delete-solid"
-                }, {
-                title: "部门管理",
-                path: "/home/department_manage",
-                index: "5-6",
-                parent: "系统管理",
-                icon: "el-icon-delete-solid"
-                }, {
-                title: "岗位管理",
-                path: "/home/station_manage",
-                index: "5-7",
-                parent: "系统管理",
-                icon: "el-icon-delete-solid"
-                }]
-            }, {
-                title: "系统监控",
-                index: "6",
-                icon: "el-icon-edit",
-                children: [{
-                    title: "操作日志",
-                    path: "/home/operation_log",
-                    index: "6-1",
-                    parent: "系统监控",
-                    icon: "el-icon-document-copy"
-                }, {
-                    title: "异常日志",
-                    path: "/home/exception_log",
-                    index: "6-2",
-                    parent: "系统监控",
-                    icon: "el-icon-tickets"
-                }, {
-                title: "权限日志",
-                path: "/home/authority_log",
-                index: "6-3",
-                parent: "系统监控",
-                icon: "el-icon-tickets"
-            }]
-            },{
-            title: "项目管理",
-            index: "7",
-            icon: "el-icon-edit",
-            children: [{
-                title: "流程图表",
-                path: "/home/project_chart",
-                index: "7-1",
-                parent: "项目管理",
-                icon: "el-icon-document-copy"
-            }]
-            }]
-            // this.$http_json({
-            //     url: "/api/menu/tree",
-            //     method: "get"
-            // }).then(result => {
-            //     console.log(result.data)
-            // })
+            this.$http_json({
+                url: "/api/menu/build",
+                method: "get"
+            }).then(result => {
+                this.menuList = result.data
+            })
         },
         // 跳转至项目地址
         openProject() {
@@ -479,7 +313,6 @@ export default {
         // 清空所有用户访问记录
         deleteMsg() {
             this.$setMemoryPmt('token', '')
-            this.$clearMemorySes()
         },
         // 保存当前用户访问记录
         saveMsg() {
@@ -487,6 +320,24 @@ export default {
             this.$setMemorySes('nowIndex', this.nowIndex)
             this.$setMemorySes('tagTitle', document.title)
             this.$setMemorySes('breadcrumbList', this.breadcrumbList)
+        },
+        // 查找tag的位置
+        findTagsLocation() {
+            for(let i = 0, len = this.tagsList.length; i < len; i ++) {
+                if(this.tagsList[i].index === this.nowIndex) {
+                    return i
+                    break
+                }
+            }
+        },
+        // 查找当前tag的index
+        findTagsIndex() {
+            return this.tagsList[this.findTagsLocation()].index
+        },
+        // 初始当前路由
+        initialRouter() {
+            this.activeIndex = this.tagsList[this.findTagsLocation()].index
+            this.$router.push({ path: this.tagsList[this.findTagsLocation()].path })
         },
         // 初始化标签页
         initialTags() {
@@ -517,68 +368,90 @@ export default {
         // 改变标签样式
         changeTagStyle(index) {
             let dots = document.querySelectorAll('.ivu-tag-dot-inner')
-            dots.forEach((value, ind) => {
-                index == ind
-                ? this.$setStyle(value, 'display', 'inline-block')
-                : this.$setStyle(value, 'display', 'none')
+            this.tagsList.forEach((value, ind) => {
+                index == value.name
+                ? this.$setStyle(dots[ind], 'display', 'inline-block')
+                : this.$setStyle(dots[ind], 'display', 'none')
             })
             this.nowIndex = index
         },
+        // 查找父类菜单
+        findParentMenu(list, id) {
+            for(let i = 0, len = list.length; i < len; i ++) {
+                if(list[i].id == id) {
+                    return { name: list[i].name, parentId: list[i].parentId }
+                }
+            }
+            for(let i = 0, len = list.length; i < len; i ++) {
+                if(list[i].children != null) {
+                    if(this.findParentMenu(list[i].children, id)) {
+                        return this.findParentMenu(list[i].children, id)
+                    }
+                }
+            }
+            return false
+        },
         // 添加面包屑
-        addBreakcrumb(title, parent) {
+        addBreakcrumb(item) {
+            let 
+                id = item.parentId,
+                name = ""
             this.breadcrumbList.splice(0, this.breadcrumbList.length)
-            parent
-            && this.breadcrumbList.push(parent)
-            title && title != "首页"
-            && this.breadcrumbList.push(title)
-            !parent && !title
-            && (this.changeTagStyle(0), this.activeIndex = 1) 
+            while(id) { 
+                name = this.findParentMenu(this.menuList, id).name
+                id = this.findParentMenu(this.menuList, id).parentId
+                this.breadcrumbList.unshift(name)
+            }
+            item.name && item.name != "首页"
+            && this.breadcrumbList.push(item.name)
+            !item.parentId && !item.name
+            && (this.changeTagStyle(0), this.activeIndex = "1") 
         },
         // 点击标签
-        tabsClick(path, index, menuInd, title, parent) {
-            document.title = title
-            this.nowIndex = index
-            this.activeIndex = menuInd
-            this.addBreakcrumb(title, parent)
-            this.changeTagStyle(index)
-            this.navigateTo(path)
+        tabsClick(item) {
+            document.title = item.name
+            this.nowIndex = item.index
+            this.activeIndex = item.name
+            this.addBreakcrumb(item)
+            this.changeTagStyle(item.index)
+            this.navigateTo(item.path)
             this.initialScrollTop()
             this.saveMsg()
         },
         // 移除所有标签
         removeAllTags() {
-            this.tagsList.splice(1, this.nowIndex - 1)
-            this.nowIndex == 0
-            ? (this.tagsList.splice(1), this.changeTagStyle(0))
-            : (this.tagsList.splice(2), this.changeTagStyle(1))
+            this.tagsList.splice(1)
+            this.changeTagStyle(this.tagsList[0].index)
+            this.navigateTo('/home/welcome')
             this.saveMsg()
         },
         // 移除标签
-        tabsRemove(event, title) {
+        tabsRemove(item) {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
-                if(title == this.tagsList[i].title) {
+                if(item.name == this.tagsList[i].name) {
+                    i == this.findTagsLocation()
+                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.tagsList[this.findTagsLocation() - 1].index),
+                    this.addBreakcrumb(this.tagsList[this.findTagsLocation()]))
                     this.tagsList.splice(i, 1)
                     this.changeTagStyle(this.nowIndex)
-                    i == this.nowIndex
-                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.nowIndex - 1))
                     this.saveMsg()
                     return
                 }    
             }
         },
         // 添加标签
-        addTag(path, title, index, parent) {
+        addTag(item) {
             let tabs = this.tagsList
             for(let i = 0, len = tabs.length; i < len; i ++) {
-                if(tabs[i].title == title) return
+                if(tabs[i].name == item.name) return
             }
             this.tagsList.push({
-                title: title,
-                path: path,
-                index: index,
-                parent: parent
+                name: item.name,
+                path: item.path,
+                index: item.name,
+                parentId: item.parentId
             })
-            this.nowIndex = this.tagsList.length - 1
+            this.nowIndex = item.name
             this.saveMsg()
         },
         // 跳转路由
@@ -597,15 +470,18 @@ export default {
             }
         },
         // 点击菜单项
-        clickMenuItem(path, title, index, parent) {
-            document.title = title
+        clickMenuItem(item) {
+            document.title = item.name
             this.isMenuCollapse = false
-            this.addTag(path, title, index, parent)
-            this.navigateTo(path)
+            this.nowIndex = item.name
+            this.addTag(item)
+            this.navigateTo(item.path)
             this.initialScrollTop()
-            this.findIndex(title)
-            this.changeTagStyle(this.nowIndex)
-            this.addBreakcrumb(title, parent)
+            this.findIndex(item.name)
+            this.$nextTick(() => {
+                this.changeTagStyle(item.name)
+            })
+            this.addBreakcrumb(item)
             this.saveMsg()
         },
         // 设置全屏与取消全屏
@@ -638,14 +514,13 @@ export default {
         showMenu() {
             this.isSmall
             ? this.isMenuCollapse = !this.isMenuCollapse
-            : this.isCollapse = !this.isCollapse
+            : (this.isCollapse = !this.isCollapse)
         },
         // 获取屏幕宽度
         getWindowWidth() {
             window.innerWidth < 1100
             ? (this.isSmall = true, this.isCollapse = true)
             : this.isSmall = false
-            this.initialStyle()
         },
         // 获取滚动高度
         getScrollTop(obj) {
