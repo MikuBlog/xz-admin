@@ -65,6 +65,7 @@ http://xzadmin.xuanzai.top
 + 表格：`VCharts`
 + 数字滚动：`vue-number-scroll`
 + 树状选择器：`vue-treeselect`
++ 动态菜单折叠插件：`vue-fragment`
 
 <br/>
 
