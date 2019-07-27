@@ -5,16 +5,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    // 保存分页设置项
-    pageSetting: {
-      pageSize: 10,
-      pagerCount: 5
+    // 保存用户信息
+    user: {
+      avatar: "",
+      createTime: "",
+      dept: "",
+      email: "",
+      job: "",
+      phone: ""
     }
   },
   mutations: {
-    // 设置分页设置项
-    setPage(state, obj) {
-      state.pageSetting = obj
+    setUserInfo(state, obj) {
+      for(let key in obj)
+        state.user[key] = obj[key]
     }
   },
   actions: {

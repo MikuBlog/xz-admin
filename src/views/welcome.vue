@@ -3,7 +3,7 @@
         <el-row>
             <el-col :span="24">
                 <el-card class="box-card">
-                    
+                    待开发
                 </el-card>
             </el-col>
         </el-row>
@@ -12,6 +12,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            detail: ""
+        }
+    },
     methods: {
         goto() {
             this.$router.push({path: "/home/add_article"})
@@ -21,8 +26,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .home {
-        position: relative;
-        height: 1000px;
-    }
+    
 </style>

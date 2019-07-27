@@ -133,7 +133,7 @@ import { element } from 'protractor';
                                         parentId: null,
                                     })"><span>个人中心</span></el-dropdown-item>
                                     <el-dropdown-item
-                                    @click.native="openProject">
+                                    @click.native="navigateTo('https://github.com/MikuBlog/xz-admin')">
                                         项目地址
                                     </el-dropdown-item>
                                     <div class="line"></div>
@@ -167,6 +167,7 @@ import { element } from 'protractor';
                         <router-view 
                         @clickMenuItem="clickMenuItem"
                         @updateMenuList="getMenuList"
+                        @updateUserInfo="getUserInfo"
                         class="router"/>
                     </transition>
                     <div class="back-top">
@@ -218,6 +219,7 @@ import { element } from 'protractor';
 
 <script>
 import NavMenu from '@/components/tree_menu/SidebarItem'
+import { mapGetters } from 'vuex';
 export default {
     components: { NavMenu },
     data() {
@@ -239,10 +241,15 @@ export default {
                 parentId: null,
                 key: 1
             }],
+            user: {},
             nowIndex: this.$getMemorySes('nowIndex') || "首页",
             activeIndex: "首页",
-            squareUrl: "https://myinterface.xuanzai.top/getPicture?type=头像&id=8",
+            squareUrl: "",
         }
+    },
+    created() {
+        // 获取用户信息
+        this.getUserInfo()
     },
     mounted() {
         this.initialStyle()
@@ -264,6 +271,17 @@ export default {
         document.title = this.$getMemorySes('tagTitle') || "欢迎"
     },
     methods: {
+        // 获取用户信息
+        getUserInfo() {
+            this.$http_json({
+                url: "/auth/info",
+                method: "get"
+            }).then(result => {
+                this.$store.commit("setUserInfo", result.data)
+                this.user = this.$store.state.user
+                this.squareUrl = this.user.avatar
+            })
+        },
         // 获取菜单列表
         getMenuList() {
             this.$http_json({
@@ -456,6 +474,11 @@ export default {
         },
         // 跳转路由
         navigateTo(path) {
+            const pathRegexp = new RegExp(/^http/g)
+            if(pathRegexp.test(path)) {
+                window.open(path)
+                return
+            }
             if(this.$route.path == path) return
             this.$Loading.finish()
             this.$router.push({ path })

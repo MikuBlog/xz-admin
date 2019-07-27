@@ -24,7 +24,7 @@
 export default {
     data() {
         return {
-            imagesUploadApi: "http://47.106.187.102:8008/api/picture/upload",
+            imagesUploadApi: "https://aboot.missiono.cn/api/picture/upload",
             fileList: [],
             pictures: [],
             dialogImageUrl: "",

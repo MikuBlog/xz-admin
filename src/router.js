@@ -17,18 +17,27 @@ const home = {
 /**
  * 首页
  */
-import Welcome from '@/views/welcome/welcome.vue'
+import Welcome from '@/views/welcome.vue'
 
 home.children.push({
   path: 'welcome',
   name: 'welcome',
   component: Welcome
 })
+
+/**
+ * 介绍页
+ */
+import Introduction from '@/views/introduction.vue'
+home.children.push({
+  path: 'introduction',
+  name: 'introduction',
+  component: Introduction
+})
 /**
  * 404页面
  */
 import Error from '@/views/error/404.vue'
-
 /**
  * 子页面
  */
@@ -193,6 +202,9 @@ const router = new Router({
     path: '/404',
     name: '404',
     component: Error
+  }, {
+    path: "*",
+    redirect: "/404"
   }]
 })
 

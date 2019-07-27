@@ -4,159 +4,226 @@
             <el-col :sm="24" :md="6">
                 <el-card class="box-card">
                     <div slot="header" class="header">
-                        <span>About me</span>
+                        <span>关于我</span>
                     </div>
                     <div class="avatar-box">
                         <div class="avatar">
                             <el-avatar 
                             :size="120" 
-                            :src="squareUrl">
+                            :src="user.avatar"
+                            @click.native="uploadAvatar">
                                 <img src="https://myinterface.xuanzai.top/getPicture?type=error"/>
                             </el-avatar>
                         </div>
                         <div class="avatar-detail">
                             <div class="role">
-                                Super Admin
+                                {{user.username}}
                             </div>
                             <div class="name">
-                                XuanZai
+                                {{user.email}}
                             </div>
                         </div>
                     </div>
                     <div class="title">
                         <i class="el-icon-reading"></i>
-                        <span class="word">School</span>
+                        <span class="word">个人信息</span>
                         <div class="border"></div>
+                    </div>
+                    <div style="margin: .5rem 0; font-size: .8rem;">
+                        <i class="el-icon-s-custom"></i>部门：{{user.dept}}
+                    </div>
+                    <div style="margin: .5rem 0; font-size: .8rem;">
+                        <i class="el-icon-s-check"></i>岗位：{{user.job}}
+                    </div>
+                    <div style="margin: .5rem 0; font-size: .8rem;">
+                        <i class="el-icon-phone"></i>电话：{{user.phone}}
                     </div>
                     <div style="font-size: .8rem;">
-                        I come from GDOU Univercity School.
-                    </div>
-                    <div class="title">
-                        <i class="el-icon-headset"></i>
-                        <span class="word">Favority sport</span>
-                        <div class="border"></div>
-                    </div>
-                    <div style="font-size: .8rem;">
-                        My favorite action is playing badminton.
-                    </div>
-                    <div class="title">
-                        <i class="el-icon-magic-stick"></i>
-                        <span class="word">skill</span>
-                        <div class="border"></div>
-                    </div>
-                    <div class="skill-box">
-                        <span>HTML</span>
-                        <el-progress status="success" :percentage="100"></el-progress>
-                        <span>JavaScript</span>
-                        <el-progress :percentage="80"></el-progress>
-                        <span>Vue</span>
-                        <el-progress :percentage="80"></el-progress>
-                        <span>Small procedures</span>
-                        <el-progress :percentage="80"></el-progress>
-                        <span>CSS</span>
-                        <el-progress :percentage="70"></el-progress>
-                        <span>jquery</span>
-                        <el-progress status="warning" :percentage="50"></el-progress>
-                        <span>Node.js</span>
-                        <el-progress status="warning" :percentage="50"></el-progress>
-                        <span>Angular</span>
-                        <el-progress status="warning" :percentage="50"></el-progress>
-                        <span>MongoDB</span>
-                        <el-progress status="warning" :percentage="40"></el-progress>
-                        <span>React</span>
-                        <el-progress status="exception" :percentage="30"></el-progress>      
-                        <span>Flutter</span>
-                        <el-progress status="exception" :percentage="30"></el-progress>
+                        <i class="el-icon-lock"></i>设置：<el-button type="text" @click="showEditPassword">修改密码</el-button>
+                        <el-button type="text" @click="showEditEmail">修改邮箱</el-button>
                     </div>
                 </el-card>
             </el-col>
             <el-col :sm="24" :md="18">
                 <el-card class="box-card card-gutter">
-                    <div class="tabs">
-                        <el-tabs v-model="activeName" @tab-click="handleClick">
-                            <el-tab-pane label="Timeline" name="first">
-                                <el-timeline>
-                                    <el-timeline-item timestamp="2018/4/17" placement="top">
-                                    <el-card>
-                                        <h4 class="timeline-title">更新 Github 模板</h4>
-                                        <p class="timeline-content">旋仔 提交于 2018/4/17 20:46</p>
-                                    </el-card>
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="2018/4/16" placement="top">
-                                    <el-card>
-                                        <h4 class="timeline-title">更新 Github 模板</h4>
-                                        <p class="timeline-content">旋仔 提交于 2018/4/16 20:46</p>
-                                    </el-card>
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="2018/4/15" placement="top">
-                                    <el-card>
-                                        <h4 class="timeline-title">更新 Github 模板</h4>
-                                        <p class="timeline-content">旋仔 提交于 2018/4/15 20:46</p>
-                                    </el-card>
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="2018/4/12" placement="top">
-                                    <el-card>
-                                        <h4 class="timeline-title">更新 Github 模板</h4>
-                                        <p class="timeline-content">旋仔 提交于 2018/4/12 20:46</p>
-                                    </el-card>
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="2018/4/3" placement="top">
-                                    <el-card>
-                                        <h4 class="timeline-title">更新 Github 模板</h4>
-                                        <p class="timeline-content">旋仔 提交于 2018/4/3 20:46</p>
-                                    </el-card>
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="2018/4/2" placement="top">
-                                    <el-card>
-                                        <h4 class="timeline-title">更新 Github 模板</h4>
-                                        <p class="timeline-content">旋仔 提交于 2018/4/2 20:46</p>
-                                    </el-card>
-                                    </el-timeline-item>
-                                </el-timeline>
-                            </el-tab-pane>
-                            <el-tab-pane label="Activity" name="second">
-                                <el-carousel :interval="4000" type="card" height="200px">
-                                    <el-carousel-item v-for="item in imageList" :key="item">
-                                        <div class="image-box">
-                                            <img :src="item" class="image">
-                                        </div>
-                                    </el-carousel-item>
-                                </el-carousel>
-                            </el-tab-pane>
-                        </el-tabs>
+                    <div slot="header" class="clearfix">
+                        <span class="header">操作日志</span>
+                    </div>
+                    <div class="search">
+                        <el-input 
+                        v-model="searchVal" 
+                        placeholder="搜索内容"
+                        class="search-input"
+                        @keyup.native="searchEnter"></el-input>
+                        <el-button 
+                        icon="el-icon-search" 
+                        class="button-left-circle"
+                        @click="search"
+                        circle
+                        ></el-button>
+                    </div>
+                    <el-table
+                        :data="operationLogList"
+                        style="width: 100%">
+                        <el-table-column
+                        label="行为"
+                        >
+                            <template slot-scope="scope">
+                                <span style="margin-left: 10px">{{ scope.row.description }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                        label="IP"
+                        >
+                        <template slot-scope="scope">
+                            <div slot="reference">
+                                {{ scope.row.requestIp }}
+                            </div>
+                        </template>
+                        </el-table-column>
+                        <el-table-column
+                        label="请求耗时"
+                        >
+                        <template slot-scope="scope">
+                            <div slot="reference" class="name-wrapper">
+                                <el-tag>
+                                    {{ scope.row.time }}ms      
+                                </el-tag>
+                            </div>
+                        </template>
+                        </el-table-column>
+                        <el-table-column
+                        label="创建日期"
+                        width="180"
+                        >
+                        <template slot-scope="scope">
+                            <div slot="reference" class="name-wrapper">
+                                {{ scope.row.createTime }}        
+                            </div>
+                        </template>
+                        </el-table-column>
+                    </el-table>
+                    <div class="pagination">
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :page-sizes="[10, 25, 50, 100]"
+                        :page-size.sync="nowSize"
+                        :pager-count="5"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="totalElements">
+                        </el-pagination>
                     </div>
                 </el-card>
             </el-col>
         </el-row>
+        <editPassword ref="pswForm" />
+        <editEmail ref="emailForm" />
     </div>
 </template>
 
 <script>
+import editPassword from './edit_password'
+import editEmail from './edit_email'
 export default {
+    components: { editPassword, editEmail },
     data() {
         return {
+            user: this.$store.state.user,
             activeName: "first",
-            imageList: [
-                'https://myinterface.xuanzai.top/getPicture?type=2233&id=2',
-                'https://myinterface.xuanzai.top/getPicture?type=2233&id=3',
-                'https://myinterface.xuanzai.top/getPicture?type=2233&id=4',
-                'https://myinterface.xuanzai.top/getPicture?type=2233&id=5'
-            ],
-            squareUrl: "https://myinterface.xuanzai.top/getPicture?type=头像&id=8"
+            searchVal: "",
+            // 当前页数
+            nowPage: 1,
+            // 当前页条数
+            nowSize: 10,
+            // 总条数
+            totalElements: 0,
+            operationLogList: []
         }
     },
+    created() {
+        // 初始化页面数据
+        this.getOpertionLogList()
+    },
     methods: {
-        handleClick(tab, event) {
-            
+         // 点击搜索
+        search() {
+            this.getOpertionLogList()
+        },
+        // 回车搜索
+        searchEnter(e) {
+            e.keyCode === 13
+            && this.getOpertionLogList()
+        },
+        // 修改密码
+        showEditPassword() {
+            this.$refs.pswForm.dialog = true
+            this.$refs.pswForm.resetForm()
+        },
+        // 修改邮箱
+        showEditEmail() {
+            this.$refs.emailForm.dialog = true
+            this.$refs.emailForm.resetForm()
+        },
+        // 上传头像
+        uploadAvatar() {
+            this
+                .$getImgFile(2)
+                .then(result => {
+                    this.$http_file({
+                        url: "/api/user/updateAvatar",
+                        method: "post",
+                        data: {
+                            file: result.raw
+                        }
+                    }).then(result => {
+                        this.$emit("updateUserInfo")
+                    })
+                })
+        },
+        handleClick() {
+
+        },
+        // 条数变化
+        handleSizeChange(size) {
+            this.nowSize = size
+            this.getOpertionLogList()
+        },
+        // 页数变化
+        handleCurrentChange(page) {
+            this.nowPage = page
+            this.getOpertionLogList()
+        },
+        // 分页处理
+        initialPage(totalElements) {
+            this.totalElements = totalElements
+        },
+        // 初始化操作日志列表
+        initialOpertionLogList(list) {
+            this.operationLogList.splice(0, this.operationLogList.length)
+            list.forEach(value => {
+                this.operationLogList.push(value)
+            })
+        },
+        // 获取操作日志信息
+        getOpertionLogList() {
+            this.$http_normal({
+                url: `/log/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.searchVal ? `&description=${this.searchVal}` : ""}`,
+                method: "get"
+            }).then(result => {
+                const data = result.data
+                this.initialPage(data.totalElements)
+                this.initialOpertionLogList(data.content)
+            })
         }
-    }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
     .header {
         position: relative;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: #2f3032;
     }
     .avatar-box {
@@ -205,5 +272,9 @@ export default {
     }
     .timeline-content {
         font-size: .8rem;
+    }
+    .el-button--text {
+        font-size: .8rem;
+        padding: 0;
     }
 </style>
