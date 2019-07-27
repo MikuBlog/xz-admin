@@ -77,7 +77,7 @@ https://xzadmin.xuanzai.top
 # :electric_plug: 插件
 
 + 富文本编辑器：`UEditor`
-+ 表格：`VCharts`
++ 图表：`VCharts`
 + 数字滚动：`vue-number-scroll`
 + 树状选择器：`vue-treeselect`
 + 动态菜单折叠插件：`vue-fragment`
