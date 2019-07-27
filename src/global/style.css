@@ -46,6 +46,9 @@ body {
 .el-col-8 {
     padding: 0!important;
 }
+.el-menu-item-group__title {
+    padding: 0;
+}
 .interval-top {
     margin-top: 1rem;
 }

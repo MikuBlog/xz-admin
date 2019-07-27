@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" :title="isAdd ? '新增用户' : '编辑用户'" append-to-body width="570px">
+  <el-dialog :visible.sync="dialog" :title="isAdd ? '新增用户' : '编辑用户'" width="570px">
     <el-form ref="userForm" :inline="true" :model="userForm" :rules="rules" size="small" label-width="66px">
       <el-form-item label="用户名" prop="username">
         <el-input v-model="userForm.username"/>
@@ -37,8 +37,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button type="text" @click="hideBox">取消</el-button>
-      <el-button type="primary" @click="doSubmit">确认</el-button>
+      <el-button type="text" size="small" @click="hideBox">取消</el-button>
+      <el-button type="primary" size="small" @click="doSubmit">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -203,14 +203,21 @@ export default {
     selectFun(node, instanceId) {
       this.getJobs(node.id)
     },
+    // 初始化工作岗位
+    initialJobs(list, id) {
+      this.jobs.splice(0, this.jobs.length)
+      list.forEach(value => {
+        this.jobs.push(value)
+      })
+      this.jobId = id
+    },
     // 获取工作岗位
-    getJobs(id) {
+    getJobs(id, jobId) {
       this.$http_json({
         url: `/api/job/page?page=0&size=9999&deptId=${id}`,
         method: "get"
       }).then(result => {
-        this.jobs = result.data.content
-        this.jobSelect()
+        this.initialJobs(result.data.content, jobId)
       })
     },
     // 获取部门列表

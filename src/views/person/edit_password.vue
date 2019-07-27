@@ -69,7 +69,9 @@ export default {
                         data: this.userForm
                     }).then(() => {
                         this.hideBox()
-                        this.$successMsg("修改成功")
+                        this.$successMsg("修改成功，请重新登录")
+                        this.$setMemoryPmt("token", '')
+                        this.$router.push({ path: "/login" })
                     })
                 } else {
                     return false

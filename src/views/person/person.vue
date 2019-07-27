@@ -118,7 +118,10 @@
             </el-col>
         </el-row>
         <editPassword ref="pswForm" />
-        <editEmail ref="emailForm" />
+        <editEmail 
+        ref="emailForm" 
+        @updateUserInfo="updateUserInfo"
+        />
     </div>
 </template>
 
@@ -146,6 +149,10 @@ export default {
         this.getOpertionLogList()
     },
     methods: {
+        // 更新用户数据
+        updateUserInfo() {
+            this.$emit("updateUserInfo")
+        },
          // 点击搜索
         search() {
             this.getOpertionLogList()
@@ -177,7 +184,8 @@ export default {
                             file: result.raw
                         }
                     }).then(result => {
-                        this.$emit("updateUserInfo")
+                        this.updateUserInfo()
+                        this.$successMsg("更换头像成功，正在缓慢加载中~")
                     })
                 })
         },

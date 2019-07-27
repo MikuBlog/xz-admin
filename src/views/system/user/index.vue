@@ -107,11 +107,20 @@
                         </template>
                         </el-table-column>
                         <el-table-column
-                        label="部门/岗位"
+                        label="部门"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
                                 {{ scope.row.dept.name }}
+                            </div>
+                        </template>
+                        </el-table-column>
+                        <el-table-column
+                        label="岗位"
+                        >
+                        <template slot-scope="scope">
+                            <div slot="reference" class="name-wrapper">
+                                {{scope.row.job.name}}
                             </div>
                         </template>
                         </el-table-column>
@@ -262,11 +271,11 @@ export default {
             userItem.enabled = item.enabled.toString()
             userItem.phone = item.phone
             userItem.email = item.email
-            userItem.roles = item.roles
             component.userId = item.id
             component.jobId = item.job.id
-            component.deptId = item.job.dept.id
             component.roleIds = item.roles.map(val => val.id)
+            component.deptId = item.dept.id
+            component.getJobs(item.dept.id, item.job.id)
             this.showEditUser()
         },
         // 点击搜索

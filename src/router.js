@@ -41,14 +41,9 @@ import Error from '@/views/error/404.vue'
 /**
  * 子页面
  */
-import Chart from '@/views/chart/chart.vue'
 import Person from '@/views/person/person.vue'
 
 home.children.push({
-  path: 'chart',
-  name: 'chart',
-  component: Chart
-}, {
   path: 'person',
   name: 'person',
   component: Person

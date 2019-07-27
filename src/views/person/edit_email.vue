@@ -54,6 +54,7 @@ export default {
                     }).then(() => {
                         this.hideBox()
                         this.$successMsg("修改成功")
+                        this.$emit("updateUserInfo")
                     })
                 } else {
                     return false
