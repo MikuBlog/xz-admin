@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Http from '@/api/http/http'
 import Storage from '@/api/storage/storage'
+// 引入进度条插件
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 // 登录页面
 import Login from '@/views/login.vue'
 // 后台管理页面首页
@@ -215,9 +218,15 @@ router.addRoutes([home])
  * 第三行如果不满足上述情况，直接进行路由的跳转
  */
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   to.name === 'login'
   && next()
   !Storage.getMemoryPmt('token')
   && next('/login')
   next()
+})
+
+// 跳转路由后触发
+router.afterEach((to, from) => {
+  NProgress.done()
 })

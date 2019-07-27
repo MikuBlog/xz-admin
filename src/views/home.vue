@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 <template>
     <div class="home" ref="home" id="home">
         <el-container>
@@ -219,7 +218,6 @@ import { element } from 'protractor';
 
 <script>
 import NavMenu from '@/components/tree_menu/SidebarItem'
-import { mapGetters } from 'vuex';
 export default {
     components: { NavMenu },
     data() {
@@ -480,7 +478,6 @@ export default {
                 return
             }
             if(this.$route.path == path) return
-            this.$Loading.finish()
             this.$router.push({ path })
         },
         // 判断当前点击的菜单在哪个标签
