@@ -81,6 +81,7 @@ https://xzadmin.xuanzai.top
 + 数字滚动：`vue-number-scroll`
 + 树状选择器：`vue-treeselect`
 + 动态菜单折叠插件：`vue-fragment`
++ 进度条：`nprogress`
 
 <br/>
 
