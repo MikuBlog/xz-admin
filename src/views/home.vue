@@ -132,7 +132,10 @@
                                         parentId: null,
                                     })"><span>个人中心</span></el-dropdown-item>
                                     <el-dropdown-item
-                                    @click.native="navigateTo('https://github.com/MikuBlog/xz-admin')">
+                                    @click.native="navigateTo({
+                                        path: 'https://github.com/MikuBlog/xz-admin',
+                                        iframe: true
+                                    })">
                                         项目地址
                                     </el-dropdown-item>
                                     <div class="line"></div>
@@ -430,7 +433,7 @@ export default {
             this.activeIndex = item.name
             this.addBreakcrumb(item)
             this.changeTagStyle(item.index)
-            this.navigateTo(item.path)
+            this.navigateTo(item)
             this.initialScrollTop()
             this.saveMsg()
         },
@@ -438,7 +441,11 @@ export default {
         removeAllTags() {
             this.tagsList.splice(1)
             this.changeTagStyle(this.tagsList[0].index)
-            this.navigateTo('/home/welcome')
+            this.activeIndex = this.tagsList[0].index
+            this.navigateTo({
+                path: '/home/welcome',
+                iframe: false
+            })
             this.saveMsg()
         },
         // 移除标签
@@ -450,6 +457,7 @@ export default {
                     this.addBreakcrumb(this.tagsList[this.findTagsLocation()]))
                     this.tagsList.splice(i, 1)
                     this.changeTagStyle(this.nowIndex)
+                    this.activeIndex = this.nowIndex
                     this.saveMsg()
                     return
                 }    
@@ -465,20 +473,20 @@ export default {
                 name: item.name,
                 path: item.path,
                 index: item.name,
+                iframe: item.iframe,
                 parentId: item.parentId
             })
             this.nowIndex = item.name
             this.saveMsg()
         },
         // 跳转路由
-        navigateTo(path) {
-            const pathRegexp = new RegExp(/^http/g)
-            if(pathRegexp.test(path)) {
-                window.open(path)
+        navigateTo(item) {
+            if(item.iframe) {
+                window.open(item.path)
                 return
             }
-            if(this.$route.path == path) return
-            this.$router.push({ path })
+            if(this.$route.path == item.path) return
+            this.$router.push({ path: item.path })
         },
         // 判断当前点击的菜单在哪个标签
         findIndex(title) {
@@ -494,8 +502,9 @@ export default {
             document.title = item.name
             this.isMenuCollapse = false
             this.nowIndex = item.name
+            this.activeIndex = item.name
             this.addTag(item)
-            this.navigateTo(item.path)
+            this.navigateTo(item)
             this.initialScrollTop()
             this.findIndex(item.name)
             this.$nextTick(() => {
