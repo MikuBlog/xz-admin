@@ -1,17 +1,17 @@
 <template>
     <div class="user-manage">
         <el-row :gutter="20">
-            <el-col :xs="8" :sm="8" :md="6">
+            <el-col :xs="24" :sm="8" :md="6">
                 <el-card class="box-card">
                     <div class="search">
                         <el-row>
-                            <el-col :span="19">
+                            <el-col :xs="14" :sm="19">
                                 <el-input 
                                 v-model="searchVal_1" 
                                 placeholder="搜索内容"
                                 @keyup.native="searchEnter_1"></el-input>
                             </el-col>
-                            <el-col :span="3">
+                            <el-col :xs="3" :sm="3">
                                 <el-button 
                                 icon="el-icon-search" 
                                 class="button-left-circle"
@@ -29,8 +29,8 @@
                     </div>
                 </el-card>
             </el-col>
-            <el-col :xs="16" :sm="16" :md="18">
-                <el-card class="box-card">
+            <el-col :xs="24" :sm="16" :md="18">
+                <el-card class="box-card card-gutter-xs">
                     <div class="search">
                         <el-row :gutter="10">
                             <el-col :span="8">
@@ -130,7 +130,7 @@
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
                                 <el-tag :type="scope.row.enabled ? '' : 'info'">
-                                    {{ scope.row.enabled ? "正常" : "禁用"}}
+                                    {{ scope.row.enabled ? "激活" : "锁定"}}
                                 </el-tag>
                             </div>
                         </template>

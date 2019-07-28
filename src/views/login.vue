@@ -229,7 +229,7 @@ export default {
         // 判断是否自动登录
         isAutoLogin() {
             this.$getMemoryPmt('isAutoLogin') && this.$getMemoryPmt('token') 
-            && this.$router.push({path: '/home/chart'})
+            && this.$router.push({path: '/home/welcome'})
         },
         autoLogin(val) {
             this.$setMemoryPmt('isAutoLogin', val)

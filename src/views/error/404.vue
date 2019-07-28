@@ -55,9 +55,9 @@ export default {
     },
     mounted() {
       const _this = this
-      _this.$$(function(){
+      	_this.$$(function(){
         var time=setTimeout(function(){
-          _this("#duobei").css({
+          _this.$$("#duobei").css({
             "-webkit-transform": "rotate(-30deg) scale(0.5)",
           });
         },2000);

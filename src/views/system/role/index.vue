@@ -121,7 +121,7 @@
                 </el-card>
             </el-col>
             <el-col :sm="24" :md="8">
-                <el-card class="box-card card-gutter" v-show="selectType == '菜单分配'">
+                <el-card class="box-card card-gutter-sm" v-show="selectType == '菜单分配'">
                     <div slot="header" class="clearfix">
                         <span class="header">{{roleName}}菜单分配</span>
                         <el-button 
@@ -360,7 +360,8 @@ export default {
                 method: "get"
             }).then(result => {
                 this.getRoleItem(result.data)
-                this.$emit('updateMenuList')
+                this.$emit("updateMenuList")
+                this.getRoleList()
             })
         },
         // 点击表格项
@@ -390,7 +391,7 @@ export default {
                 this.permissions = result.data
             })
         },
-        // 获取错误日志信息
+        // 获取权限日志信息
         getRoleList() {
             this.$http_normal({
                 url: `/api/role/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
