@@ -117,7 +117,6 @@ export default {
   table td {
     line-height: 26px;
   }
-
   .tree-ctrl{
     position: relative;
     cursor: pointer;

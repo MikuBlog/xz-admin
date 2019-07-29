@@ -21,6 +21,11 @@
                                 @click="showAddMenu()"
                                 circle
                                 ></el-button>
+                                <el-button 
+                                type="warning" icon="el-icon-star-off" 
+                                title="全部展开或收起"
+                                @click="isExpandAll"
+                                circle></el-button>
                         </el-row>
                     </div>
                     <tree-table 
@@ -90,7 +95,6 @@ export default {
     data() {
         return {
             expand: true,
-            delLoading: false,
             searchVal: "",
             isAdd: true,
             menuList: [],
@@ -107,6 +111,11 @@ export default {
         this.getMenuList()
     },
     methods: {
+        // 是否展开全部
+        isExpandAll() {
+            this.expand = !this.expand
+            this.getMenuList()
+        },
         // 删除菜单
         deleteMenuItem(item) {
             this

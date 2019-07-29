@@ -32,9 +32,6 @@
   export default {
     name: 'NavMenu',
     props: ['navMenus'],
-    data() {
-      return {}
-    },
     methods: {
       // 点击菜单项
       clickMenuItem(item) {

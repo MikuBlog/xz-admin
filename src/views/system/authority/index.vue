@@ -20,6 +20,11 @@
                                 type="primary"
                                 icon="el-icon-plus" 
                                 @click="showAddAuthority()"></el-button>
+                                <el-button 
+                                type="warning" icon="el-icon-star-off" 
+                                title="全部展开或收起"
+                                @click="isExpandAll"
+                                circle></el-button>
                         </el-row>
                     </div>
                     <tree-table 
@@ -93,6 +98,11 @@ export default {
         this.getAuthorityList()
     },
     methods: {
+        // 是否展开全部
+        isExpandAll() {
+            this.expand = !this.expand
+            this.getAuthorityList()
+        },
         // 删除权限
         deleteAuthorityItem(item) {
             this

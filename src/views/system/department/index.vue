@@ -34,6 +34,11 @@
                                 icon="el-icon-plus" 
                                 @click="showAddDepartment"
                                 ></el-button>
+                                <el-button 
+                                type="warning" icon="el-icon-star-off" 
+                                title="全部展开或收起"
+                                @click="isExpandAll"
+                                circle></el-button>
                         </el-row>
                     </div>
                     <tree-table 
@@ -115,6 +120,11 @@ export default {
         this.getDictsList('dept_status')
     },
     methods: {
+        // 是否展开全部
+        isExpandAll() {
+            this.expand = !this.expand
+            this.getDepartmentList()
+        },
         // 删除岗位
         deleteDepartment(item) {
             this
