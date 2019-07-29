@@ -137,7 +137,8 @@ export default {
         selectItem(picArray) {
             this.idList = picArray.map(val => val.id)
             this.idList.length != 0
-            && (this.isShowButton = true)
+            ? this.isShowButton = true
+            : this.isShowButton = false
         },
         // 点击搜索
         search() {
