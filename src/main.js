@@ -20,7 +20,6 @@ import Fragment from 'vue-fragment'
 import './icons'
 // 引入全局样式
 import '@/global/style.css'
-import '@/global/icon_font/iconfont.css'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'iview/dist/styles/iview.css';
