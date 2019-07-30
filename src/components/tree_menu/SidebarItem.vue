@@ -1,7 +1,9 @@
 <template>
   <fragment>
     <template v-for="navMenu in navMenus">
-      <el-menu-item v-if="navMenu.children==null"
+      <el-menu-item 
+                    v-show="navMenu.enabled"
+                    v-if="navMenu.children==null"
                     :key="navMenu.name" 
                     :index="navMenu.name" 
                     @click="clickMenuItem(navMenu)"
@@ -10,7 +12,9 @@
         <span slot="title" class="menu-title">{{navMenu.name}}</span>
       </el-menu-item>
 
-      <el-submenu v-if="navMenu.children"
+      <el-submenu 
+                  v-show="navMenu.enabled"
+                  v-if="navMenu.children"
                   :key="navMenu.name" 
                   :index="navMenu.name"
                   >
