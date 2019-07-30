@@ -315,7 +315,7 @@ export default {
         initialPage(totalElements) {
             this.totalElements = totalElements
         },
-        // 初始化错误日志列表
+        // 初始化角色列表
         initialRoleList(list) {
             this.roleList.splice(0, this.roleList.length)
             list.forEach(value => {
@@ -325,7 +325,7 @@ export default {
         // 初始化权限选中
         initialRoleCheck(item) {
             item.permissions.forEach(val => {
-                this.permissionIds.push(item.id)
+                this.permissionIds.push(val.id)
             })
         },
         // 初始化菜单选中
