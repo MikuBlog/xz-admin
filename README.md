@@ -2,7 +2,7 @@
 
 https://xzadmin.xuanzai.top
 
-账号：admin
+账号：xuanzai
 密码：123456
 
 <br/>
