@@ -45,7 +45,7 @@
                 </el-card>
             </el-col>
             <el-col :sm="24" :md="18">
-                <el-card class="box-card card-gutter">
+                <el-card class="box-card card-gutter-sm">
                     <div slot="header" class="clearfix">
                         <span class="header">操作日志</span>
                     </div>

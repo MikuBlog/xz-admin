@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import router from '@/router/index'
+import store from '@/store/store'
 // 引入浏览器数据库模块
 import Database from '@/api/database/database'
 // 引入二次封装的axios模块

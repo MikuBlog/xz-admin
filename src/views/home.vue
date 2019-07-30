@@ -85,6 +85,7 @@
                                     v-for="items in breadcrumbList"
                                     >{{items}}</el-breadcrumb-item>
                             </el-breadcrumb>
+                            <!-- <Breadcrumb /> -->
                         </div>
                         <div class="icon-box">
                             <el-tooltip 
@@ -221,8 +222,9 @@
 
 <script>
 import NavMenu from '@/components/tree_menu/SidebarItem'
+import Breadcrumb from '@/components/breadcrumb'
 export default {
-    components: { NavMenu },
+    components: { NavMenu, Breadcrumb },
     data() {
         return {
             isCollapse: false,
@@ -233,7 +235,17 @@ export default {
             isShowLogo: true,
             isShowBackTop: false,
             logoUrl: "",
-            menuList: [],
+            menuList: [{
+                name: "首页",
+                index: "首页",
+                component: "/welcome",
+                path: "/home/welcome",
+                iframe: false, 
+                meta: {
+                    title: "首页",
+                    icon: "图表",
+                }
+            }],
             breadcrumbList: [],
             tagsList: [{
                 name: "首页",
@@ -257,19 +269,15 @@ export default {
         this.initialListener()
         // 获取视窗大小
         this.getWindowWidth()
-        this.initialTags()
         this.initialBreakcrumb()
         // 获取菜单
         this.getMenuList()
         this.initialScrollTop(true)
-        this.initialRouter()
         this.$nextTick(() => {
             this.changeTagStyle(this.nowIndex)
         })
         // 是否显示Logo
         this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
-        // 获取浏览器标签页标题
-        document.title = this.$getMemorySes('tagTitle') || "欢迎"
     },
     methods: {
         // 获取用户信息
@@ -285,12 +293,12 @@ export default {
         },
         // 获取菜单列表
         getMenuList() {
-            this.$http_json({
-                url: "/api/menu/build",
-                method: "get"
-            }).then(result => {
-                this.menuList = result.data
+            this.menuList.splice(1, this.menuList.length)
+            this.$store.state.menuList.forEach(value => {
+                this.menuList.push(value)
             })
+            // 初始化标签页
+            this.initialTags()
         },
         // 跳转至项目地址
         openProject() {
@@ -335,9 +343,7 @@ export default {
         },
         // 保存当前用户访问记录
         saveMsg() {
-            this.$setMemorySes('tagsList', this.tagsList)
             this.$setMemorySes('nowIndex', this.nowIndex)
-            this.$setMemorySes('tagTitle', document.title)
             this.$setMemorySes('breadcrumbList', this.breadcrumbList)
         },
         // 查找tag的位置
@@ -353,19 +359,22 @@ export default {
         findTagsIndex() {
             return this.tagsList[this.findTagsLocation()].index
         },
-        // 初始当前路由
-        initialRouter() {
-            this.activeIndex = this.tagsList[this.findTagsLocation()].index
-            this.$router.push({ path: this.tagsList[this.findTagsLocation()].path })
-        },
         // 初始化标签页
         initialTags() {
-            let tagsList = this.$getMemorySes('tagsList')
-            tagsList
-            && (this.tagsList.splice(0, this.tagsList.length),
-            tagsList.forEach(value => {
-                this.tagsList.push(value)
-            }))
+            const  route = this.$route.matched[this.$route.matched.length - 1]
+            if(route.name == "首页") {
+                return
+            }else {
+                const item = {
+                    name: route.name,
+                    path: route.path,
+                    index: route.name,
+                    iframe: route.meta.iframe,
+                    parentId: route.meta.parentId
+                }
+                this.tagsList.push(item)
+                this.clickMenuItem(item)
+            }
         },
         // 初始化面包屑
         initialBreakcrumb() {
@@ -428,7 +437,6 @@ export default {
         },
         // 点击标签
         tabsClick(item) {
-            document.title = item.name
             this.nowIndex = item.index
             this.activeIndex = item.name
             this.addBreakcrumb(item)
@@ -499,7 +507,6 @@ export default {
         },
         // 点击菜单项
         clickMenuItem(item) {
-            document.title = item.name
             this.isMenuCollapse = false
             this.nowIndex = item.name
             this.activeIndex = item.name
