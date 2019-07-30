@@ -240,6 +240,7 @@ export default {
                 component: "/welcome",
                 path: "/home/welcome",
                 iframe: false, 
+                enabled: "true",
                 meta: {
                     title: "首页",
                     icon: "图表",
