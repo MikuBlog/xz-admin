@@ -35,7 +35,13 @@ function generateRouter(list) {
                 path: value.path,
                 name: value.name,
                 meta: value.meta,
-                component: () => import(`@/views${value.component}`)
+                component: () => {
+                    if(value.component === "Layout") {
+                        router.push({ path: "/404" })
+                    }else {
+                        return import(`@/views${value.component}`)
+                    }
+                }
             })
         }
     })

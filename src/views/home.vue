@@ -222,9 +222,8 @@
 
 <script>
 import NavMenu from '@/components/tree_menu/SidebarItem'
-import Breadcrumb from '@/components/breadcrumb'
 export default {
-    components: { NavMenu, Breadcrumb },
+    components: { NavMenu },
     data() {
         return {
             isCollapse: false,
