@@ -143,7 +143,7 @@
                         node-key="id"/>
                     </div>
                 </el-card>
-                <el-card class="box-card card-gutter" v-show="selectType == '权限分配'">
+                <el-card class="box-card card-gutter-sm" v-show="selectType == '权限分配'">
                     <div slot="header" class="clearfix">
                         <span class="header">{{roleName}}权限分配</span>
                         <el-button 
@@ -215,9 +215,6 @@ export default {
         this.getAuthorityTree()
     },
     methods: {
-        handleCheckChange(val) {
-            console.log(val)
-        },
         // 删除角色
         deleteRole(item) {
             this
@@ -360,7 +357,6 @@ export default {
                 method: "get"
             }).then(result => {
                 this.getRoleItem(result.data)
-                this.$emit("updateMenuList")
                 this.getRoleList()
             })
         },

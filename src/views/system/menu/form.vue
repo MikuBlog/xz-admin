@@ -33,6 +33,10 @@
       <el-form-item label="上级类目">
         <treeselect v-model="menuForm.parentId" :options="menus" style="width: 460px;" placeholder="选择上级类目" />
       </el-form-item>
+      <el-form-item label="是否显示" prop="enabled">
+        <el-radio v-model="menuForm.enabled" label="true">是</el-radio>
+        <el-radio v-model="menuForm.enabled" label="false" >否</el-radio>
+      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
@@ -60,7 +64,7 @@ export default {
     return {
       menuId: "",
       dialog: false, menus: [],
-      menuForm: { name: '', sort: 0, path: '', component: '', iframe: 'false', roles: [], parentId: 0, icon: '' },
+      menuForm: { name: '', sort: 0, path: '', component: '', iframe: 'false', roles: [], parentId: 0, icon: '', enabled: true },
       rules: {
         name: [
           { required: true, message: '请输入菜单名称', trigger: 'blur' }
@@ -70,6 +74,9 @@ export default {
         ],
         iframe: [
           { required: true, message: '请选择菜单类型', trigger: 'blur' }
+        ],
+        enabled: [
+          { required: true, message: '请选择显示状态', trigger: 'blur' }
         ],
         path: [
           { required: false, message: '请输入菜单路径', trigger: 'blur' }
@@ -88,7 +95,7 @@ export default {
     // 重置表单
     resetForm() {
       try {
-        this.menuForm = { name: '', sort: 0, path: '', component: '', iframe: 'false', roles: [], parentId: 0, icon: '' }
+        this.menuForm = { name: '', sort: 0, path: '', component: '', iframe: 'false', roles: [], parentId: 0, icon: '', enabled: 'true' }
         this.$refs.menuForm.resetFields()
       }catch(e) {}
     },

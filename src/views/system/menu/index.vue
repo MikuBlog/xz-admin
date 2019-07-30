@@ -51,6 +51,12 @@
                                 <span v-else>否</span>
                             </template>
                         </el-table-column>
+                        <el-table-column prop="enabled" label="是否显示">
+                            <template slot-scope="scope">
+                                <span v-if="scope.row.enabled">是</span>
+                                <span v-else>否</span>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="createTime" label="创建日期" width="150">
                             <template slot-scope="scope">
                             <span>{{ scope.row.createTime }}</span>
@@ -151,6 +157,7 @@ export default {
             menuItem.component = item.component
             menuItem.iframe = item.iframe.toString()
             menuItem.roles = item.roles
+            menuItem.enabled = item.enabled.toString()
             menuItem.parentId = item.parentId
             menuItem.icon = item.icon
             this.showEditMenu()
