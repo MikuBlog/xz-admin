@@ -86,6 +86,7 @@ function generateRouter(list, pre, now) {
     }
 }
 
+// 获取菜单与路由
 function getRouter() {
     if(store.state.menuList.length == 0) {
         Http.http_json({
@@ -103,6 +104,26 @@ function getRouter() {
         })
     }
 }
+
+// 添加标签页
+function addTags(tag) {
+    const tagsList = store.state.tagsList
+    // 先将所有标签的活跃状态置为false
+    for(let i = 0, len = tagsList.length; i < len; i ++) {
+        tagsList[i].meta.active = false
+    }
+    // 如果已存在标签，将该标签改为活跃状态
+    for(let i = 0, len = tagsList.length; i < len; i ++) {
+        if(tagsList[i].meta.title === tag.meta.title || !tag.name) {
+            tagsList[i].meta.active = true
+            return
+        }
+    }
+    // 将新加入到标签的状态改为活跃状态
+    tag.meta.active = true
+    store.commit('addTags', tag)
+}
+// 去除标签页
 
 // 动态生成路由并做拦截
 router.beforeEach((to, from, next) => {
@@ -125,6 +146,9 @@ router.beforeEach((to, from, next) => {
             if(store.state.menuList.length == 0) {
                 getRouter()
             }
+            // 改变菜单索引
+            store.commit('setMenuIndex', to.name)
+            addTags(to)
             next()
         }
     }else {

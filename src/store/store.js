@@ -15,7 +15,17 @@ export default new Vuex.Store({
       phone: ""
     },
     // 保存菜单项
-    menuList: []
+    menuList: [],
+    // 保存菜单索引
+    menuIndex: "首页",
+    // 保存标签页列表
+    tagsList: [{
+      meta: {
+        title: "首页",
+        active: true
+      },
+      path: '/home/welcome',
+    }]
   },
   mutations: {
     setUserInfo(state, obj) {
@@ -24,6 +34,12 @@ export default new Vuex.Store({
     },
     setMenuList(state, obj) {
       state.menuList = obj
+    },
+    setMenuIndex(state, index) {
+      state.menuIndex = index
+    },
+    addTags(state, tags) {
+      state.tagsList.push(tags)
     }
   },
   actions: {

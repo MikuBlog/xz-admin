@@ -5,7 +5,7 @@
             style="height:100%" 
             v-show="!isSmall">
                 <el-menu 
-                :default-active="activeIndex" 
+                :default-active="$store.state.menuIndex" 
                 :collapse="isCollapse"
                 class="el-menu-vertical-demo" 
                 background-color="#2f4055"
@@ -18,7 +18,7 @@
                     </div>
                     <NavMenu 
                     :navMenus="menuList"
-                    @getMenuItem="clickMenuItem"></NavMenu>
+                    ></NavMenu>
                 </el-menu>
             </el-scrollbar>
             <Drawer 
@@ -28,13 +28,14 @@
             placement="left">
                 <el-scrollbar style="height:100%">
                     <el-menu 
-                    :default-active="activeIndex" 
+                    :default-active="$store.state.menuIndex" 
                     class="el-menu-vertical-demo menu-list" 
                     background-color="#2f4055"
                     active-text-color="#429ee2"
                     text-color="#becad8"
                     width="200px"
                     :unique-opened="true"
+                    @select="clickMenuItem"
                     >
                         <div class="logo" 
                         v-show="isShowLogo" 
@@ -43,7 +44,7 @@
                         </div>
                         <NavMenu 
                         :navMenus="menuList"
-                        @getMenuItem="clickMenuItem"></NavMenu>
+                        ></NavMenu>
                     </el-menu>
                 </el-scrollbar>
             </Drawer>
@@ -72,7 +73,7 @@
                             </el-tooltip>
                         </div>
                         <div class="breadcrumb">
-                            <Breadcrumb @clickMenuItem="clickMenuItem"></Breadcrumb>
+                            <Breadcrumb></Breadcrumb>
                         </div>
                         <div class="icon-box">
                             <el-tooltip 
@@ -107,23 +108,9 @@
                                 <i class="el-icon-caret-bottom el-icon--right"></i>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item
-                                    @click.native="clickMenuItem({
-                                        meta: {
-                                            title: '首页'
-                                        },
-                                        path: '/home/welcome'
-                                    })">首页</el-dropdown-item>
-                                    <el-dropdown-item @click.native="clickMenuItem({
-                                        meta: {
-                                            title: '个人中心'
-                                        },
-                                        path: '/home/person'
-                                    })"><span>个人中心</span></el-dropdown-item>
-                                    <el-dropdown-item
-                                    @click.native="navigateTo({
-                                        path: 'https://github.com/MikuBlog/xz-admin',
-                                        iframe: true
-                                    })">
+                                    >首页</el-dropdown-item>
+                                    <el-dropdown-item><span>个人中心</span></el-dropdown-item>
+                                    <el-dropdown-item>
                                         项目地址
                                     </el-dropdown-item>
                                     <div class="line"></div>
@@ -140,7 +127,7 @@
                         style="height: 50px;" 
                         >
                             <Tag 
-                            color="primary"
+                            :color="items.meta.active ? 'primary' : ''"
                             type="dot"
                             closable
                             checkable
@@ -155,7 +142,6 @@
                 <el-main class="top" id="top">
                     <transition name="xz-animation">
                         <router-view 
-                        @clickMenuItem="clickMenuItem"
                         @updateMenuList="getMenuList"
                         @updateUserInfo="getUserInfo"
                         class="router"/>
@@ -235,27 +221,14 @@ export default {
                 },
                 enabled: true,
             }],
-            tagsList: [{
-                name: "首页",
-                path: "/home/welcome",
-                index: "首页",
-                meta: {
-                    title: "首页",
-                    icon: "图表",
-                },
-                parentId: null,
-                key: 1
-            }],
+            tagsList: this.$store.state.tagsList,
             user: {},
-            nowIndex: this.$getMemorySes('nowIndex') || "首页",
-            activeIndex: "首页",
             squareUrl: "",
         }
     },
     created() {
         // 获取用户信息
         this.getUserInfo()
-        sessionStorage.clear()
     },
     mounted() {
         this.initialStyle()
@@ -265,9 +238,6 @@ export default {
         // 获取菜单
         this.getMenuList()
         this.initialScrollTop(true)
-        this.$nextTick(() => {
-            this.changeTagStyle(this.nowIndex)
-        })
         // 是否显示Logo
         this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
     },
@@ -289,12 +259,6 @@ export default {
             this.$store.state.menuList.forEach(value => {
                 this.menuList.push(value)
             })
-            // 初始化标签页
-            this.initialTags()
-        },
-        // 跳转至项目地址
-        openProject() {
-            window.open('https://github.com/MikuBlog/xz-admin')
         },
         // 返回顶部
         backTop(delay = 500) {
@@ -333,29 +297,6 @@ export default {
         deleteMsg() {
             this.$setMemoryPmt('token', '')
         },
-        // 保存当前用户访问记录
-        saveMsg() {
-            this.$setMemorySes('nowIndex', this.nowIndex)
-        },
-        // 查找tag的位置
-        findTagsLocation() {
-            for(let i = 0, len = this.tagsList.length; i < len; i ++) {
-                if(this.tagsList[i].meta.title === this.nowIndex) {
-                    return i
-                    break
-                }
-            }
-        },
-        // 初始化标签页
-        initialTags() {
-            const  route = this.$route.matched[this.$route.matched.length - 1]
-            if(route.name == "首页") {
-                return
-            }else {
-                this.tagsList.push(route)
-                this.clickMenuItem(route)
-            }
-        },
         // 初始化当前滚动高度
         initialScrollTop(isIntial = false) {
             isIntial 
@@ -364,90 +305,34 @@ export default {
                 document.querySelector('.top').scrollTop = 0
             }, 700)
         },
-        // 改变标签样式
-        changeTagStyle(index) {
-            let dots = document.querySelectorAll('.ivu-tag-dot-inner')
-            this.tagsList.forEach((value, ind) => {
-                index == value.meta.title
-                ? this.$setStyle(dots[ind], 'display', 'inline-block')
-                : this.$setStyle(dots[ind], 'display', 'none')
-            })
-            this.nowIndex = index
-        },
         // 点击标签
         tabsClick(item) {
-            this.nowIndex = item.meta.title
-            this.activeIndex = item.meta.title
-            this.changeTagStyle(item.meta.title)
-            this.navigateTo(item)
+            this.navigateTo(item.path)
             this.initialScrollTop()
-            this.saveMsg()
         },
         // 移除所有标签
         removeAllTags() {
             this.tagsList.splice(1)
-            this.changeTagStyle(this.tagsList[0].index)
-            this.activeIndex = this.tagsList[0].index
-            this.navigateTo({
-                path: '/home/welcome',
-                iframe: false
-            })
-            this.saveMsg()
+            this.navigateTo('/home/welcome')
         },
         // 移除标签
         tabsRemove(item) {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
                 if(item.meta.title == this.tagsList[i].meta.title) {
-                    i == this.findTagsLocation()
-                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.tagsList[this.findTagsLocation() - 1].meta.title))
+                    if(i == len - 1 && this.tagsList[i].meta.active == true) {
+                        this.navigateTo(this.tagsList[i - 1].path)
+                    }
                     this.tagsList.splice(i, 1)
-                    this.activeIndex = this.nowIndex
-                    this.saveMsg()
-                    return
                 }    
             }
         },
-        // 添加标签
-        addTag(item) {
-            let tabs = this.tagsList
-            for(let i = 0, len = tabs.length; i < len; i ++) {
-                if(tabs[i].meta.title == item.meta.title) return
-            }
-            this.tagsList.push(item)
-            this.nowIndex = item.name
-            this.saveMsg()
+        // 点击菜单
+        clickMenuItem() {
+            this.isMenuCollapse = false
         },
         // 跳转路由
-        navigateTo(item) {
-            if(item.iframe) {
-                window.open(item.path)
-                return
-            }
-            if(this.$route.path == item.path) return
-            this.$router.push({ path: item.path })
-        },
-        // 判断当前点击的菜单在哪个标签
-        findIndex(title) {
-            let tags = this.tagsList
-            for(let i = 0, len = tags.length; i < len; i ++) {
-                if(tags[i].meta.title == title) {
-                    this.nowIndex = i
-                }
-            }
-        },
-        // 点击菜单项
-        clickMenuItem(item) {
-            this.isMenuCollapse = false
-            this.nowIndex = item.meta.title
-            this.activeIndex = item.meta.title
-            this.addTag(item)
-            this.navigateTo(item)
-            this.initialScrollTop()
-            this.findIndex(item.meta.title)
-            this.$nextTick(() => {
-                this.changeTagStyle(item.meta.title)
-            })
-            this.saveMsg()
+        navigateTo(path) {
+            this.$router.push({ path })
         },
         // 设置全屏与取消全屏
         fullScreen() {

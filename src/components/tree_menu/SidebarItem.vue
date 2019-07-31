@@ -6,7 +6,7 @@
                     v-if="navMenu.children==null"
                     :key="navMenu.name" 
                     :index="navMenu.meta.title" 
-                    @click="clickMenuItem(navMenu)"
+                    @click="navigateTo(navMenu)"
                     >
         <svg-icon :icon-class="navMenu.meta.icon" class="el-icon-location menu-icon" />
         <span slot="title" class="menu-title">{{navMenu.name}}</span>
@@ -26,7 +26,7 @@
         <el-menu-item-group>
           <NavMenu 
           :navMenus="navMenu.children"
-          @getMenuItem="clickMenuItem"></NavMenu>
+          ></NavMenu>
         </el-menu-item-group>
       </el-submenu>
     </template>
@@ -39,8 +39,12 @@
     props: ['navMenus'],
     methods: {
       // 点击菜单项
-      clickMenuItem(item) {
-        this.$emit("getMenuItem", item)
+      navigateTo(item) {
+        if(item.iframe) {
+          window.open(item.path)
+        }else {
+          this.$router.push({ path: item.path })
+        }
       },
     },
     mounted() {
