@@ -131,6 +131,7 @@ router.beforeEach((to, from, next) => {
     && (document.title = to.meta.title)
     NProgress.start()
     if(to.name === "login") {
+        store.commit("setMenuList", [])
         next()
         return
     }
