@@ -56,7 +56,8 @@
 				const regexp = new RegExp(/timeout/g)
 				typeof err.response === "object" 
 				? (showTips(
-					JSON.parse(err.response.request.response).message ? JSON.parse(err.response.request.response).message.replace(/{.*}/g, '')
+					JSON.parse(err.response.request.response).message 
+					? JSON.parse(err.response.request.response).message.replace(/{.*}/g, '')
 					: JSON.parse(err.response.request.response)
 				), isLogin(err.response.status))
 				: (regexp.test(err)

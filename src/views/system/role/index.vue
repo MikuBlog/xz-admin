@@ -39,6 +39,7 @@
                         @row-click="getRoleItem">
                         <el-table-column
                         label="名称"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <span style="margin-left: 10px">{{ scope.row.name }}</span>
@@ -46,6 +47,7 @@
                         </el-table-column>
                         <el-table-column
                         label="数据权限"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -55,6 +57,7 @@
                         </el-table-column>
                         <el-table-column
                         label="角色级别"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -64,18 +67,13 @@
                         </el-table-column>
                         <el-table-column
                         label="描述"
+                        :show-overflow-tooltip="true"
                         >
-                        <template slot-scope="scope">
-                            <el-tooltip 
-                            slot="reference" 
-                            class="item" 
-                            effect="dark" 
-                            :content="scope.row.remark" 
-                            placement="top">
-                                <div class="name-wrapper">
-                                    {{ scope.row.remark }}
-                                </div>
-                            </el-tooltip>
+                        <template 
+                        slot-scope="scope">
+                            <div  slot="reference"  class="name-wrapper">
+                                {{ scope.row.remark }}
+                            </div>
                         </template>
                         </el-table-column>
                         <el-table-column

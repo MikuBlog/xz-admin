@@ -81,6 +81,7 @@
                         style="width: 100%;">
                         <el-table-column
                         label="用户名"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <span style="margin-left: 10px">{{ scope.row.username }}</span>
@@ -108,6 +109,7 @@
                         </el-table-column>
                         <el-table-column
                         label="部门"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -117,6 +119,7 @@
                         </el-table-column>
                         <el-table-column
                         label="岗位"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -126,6 +129,7 @@
                         </el-table-column>
                         <el-table-column
                         label="状态"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">

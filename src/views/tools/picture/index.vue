@@ -33,14 +33,23 @@
                     style="width: 100%;"
                     @selection-change="selectItem">
                         <el-table-column type="selection" width="55"/>
-                        <el-table-column prop="filename" label="文件名"/>
-                        <el-table-column prop="username" label="上传者"/>
+                        <el-table-column 
+                        prop="filename" 
+                        label="文件名"
+                        :show-overflow-tooltip="true"/>
+                        <el-table-column 
+                        prop="username" 
+                        label="上传者"
+                        :show-overflow-tooltip="true"/>
                         <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="缩略图">
                             <template slot-scope="scope">
                             <a :href="scope.row.url" style="color: #42b983" target="_blank"><img :src="scope.row.url" alt="点击打开" class="el-avatar"></a>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="size" label="文件大小"/>
+                        <el-table-column 
+                        prop="size" 
+                        label="文件大小"
+                        :show-overflow-tooltip="true"/>
                         <el-table-column 
                         label="操作"
                         width="150"

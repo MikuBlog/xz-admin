@@ -69,6 +69,7 @@
                         </el-table-column>
                         <el-table-column
                         label="描述"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -91,6 +92,7 @@
                         </el-table-column>
                         <el-table-column
                         label="操作类型"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">

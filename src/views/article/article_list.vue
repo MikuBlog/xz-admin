@@ -27,6 +27,7 @@
                         </el-table-column>
                         <el-table-column
                         label="文章标题"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -36,6 +37,7 @@
                         </el-table-column>
                         <el-table-column
                         label="文章作者"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -45,6 +47,7 @@
                         </el-table-column>
                         <el-table-column
                         label="文章分类"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">

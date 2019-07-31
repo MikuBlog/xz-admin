@@ -25,6 +25,7 @@ import { MessageBox } from 'mint-ui';
                         :data="redisList"
                         style="width: 100%">
                         <el-table-column
+                        :show-overflow-tooltip="true"
                         label="KEY"
                         >
                         <template slot-scope="scope">

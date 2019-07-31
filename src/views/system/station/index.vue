@@ -38,6 +38,7 @@
                         style="width: 100%">
                         <el-table-column
                         label="名称"
+                        :show-overflow-tooltip="true"
                         >
                             <template slot-scope="scope">
                                 <span style="margin-left: 10px">{{ scope.row.name }}</span>
@@ -45,6 +46,7 @@
                         </el-table-column>
                         <el-table-column
                         label="所属部门"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -54,6 +56,7 @@
                         </el-table-column>
                         <el-table-column
                         label="排序"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -63,6 +66,7 @@
                         </el-table-column>
                         <el-table-column
                         label="状态"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">

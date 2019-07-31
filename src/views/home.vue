@@ -108,16 +108,16 @@
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item
                                     @click.native="clickMenuItem({
-                                        name: '首页',
-                                        path: '/home/welcome',
-                                        index: '首页',
-                                        parentId: null,
+                                        meta: {
+                                            title: '首页'
+                                        },
+                                        path: '/home/welcome'
                                     })">首页</el-dropdown-item>
                                     <el-dropdown-item @click.native="clickMenuItem({
-                                        name: '个人中心',
-                                        path: '/home/person',
-                                        index: '个人中心',
-                                        parentId: null,
+                                        meta: {
+                                            title: '个人中心'
+                                        },
+                                        path: '/home/person'
                                     })"><span>个人中心</span></el-dropdown-item>
                                     <el-dropdown-item
                                     @click.native="navigateTo({
@@ -346,10 +346,6 @@ export default {
                 }
             }
         },
-        // 查找当前tag的index
-        findTagsIndex() {
-            return this.tagsList[this.findTagsLocation()].index
-        },
         // 初始化标签页
         initialTags() {
             const  route = this.$route.matched[this.$route.matched.length - 1]
@@ -372,27 +368,11 @@ export default {
         changeTagStyle(index) {
             let dots = document.querySelectorAll('.ivu-tag-dot-inner')
             this.tagsList.forEach((value, ind) => {
-                index == value.name
+                index == value.meta.title
                 ? this.$setStyle(dots[ind], 'display', 'inline-block')
                 : this.$setStyle(dots[ind], 'display', 'none')
             })
             this.nowIndex = index
-        },
-        // 查找父类菜单
-        findParentMenu(list, id) {
-            for(let i = 0, len = list.length; i < len; i ++) {
-                if(list[i].id == id) {
-                    return { name: list[i].name, parentId: list[i].parentId }
-                }
-            }
-            for(let i = 0, len = list.length; i < len; i ++) {
-                if(list[i].children != null) {
-                    if(this.findParentMenu(list[i].children, id)) {
-                        return this.findParentMenu(list[i].children, id)
-                    }
-                }
-            }
-            return false
         },
         // 点击标签
         tabsClick(item) {

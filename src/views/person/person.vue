@@ -67,6 +67,7 @@
                         style="width: 100%">
                         <el-table-column
                         label="行为"
+                        :show-overflow-tooltip="true"
                         >
                             <template slot-scope="scope">
                                 <span style="margin-left: 10px">{{ scope.row.description }}</span>
@@ -74,6 +75,7 @@
                         </el-table-column>
                         <el-table-column
                         label="IP"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference">
@@ -83,6 +85,7 @@
                         </el-table-column>
                         <el-table-column
                         label="请求耗时"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">

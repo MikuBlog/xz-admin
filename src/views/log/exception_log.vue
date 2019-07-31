@@ -57,34 +57,22 @@ import { MessageBox } from 'mint-ui';
                         </el-table-column>
                         <el-table-column
                         label="方法名称"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
-                            <el-tooltip 
-                            slot="reference" 
-                            class="item" 
-                            effect="dark" 
-                            :content="scope.row.method" 
-                            placement="top">
-                                <div class="name-wrapper">
-                                    {{ scope.row.method }}
-                                </div>
-                            </el-tooltip>
+                            <div  slot="reference" class="name-wrapper">
+                                {{ scope.row.method }}
+                            </div>
                         </template>
                         </el-table-column>
                         <el-table-column
                         label="参数"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
-                            <el-tooltip 
-                            slot="reference" 
-                            class="item" 
-                            effect="dark" 
-                            :content="scope.row.params" 
-                            placement="top">
-                                <div class="name-wrapper">
-                                    {{ scope.row.params }}
-                                </div>
-                            </el-tooltip>
+                            <div class="name-wrapper" slot="reference" >
+                                {{ scope.row.params }}
+                            </div>
                         </template>
                         </el-table-column>
                         <el-table-column

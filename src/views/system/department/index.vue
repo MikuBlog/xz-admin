@@ -51,7 +51,10 @@
                                 <el-tag :type="scope.row.enabled ? '' : 'info'">{{ scope.row.enabled ? "正常" : "停用" }}</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="createTime" label="创建日期">
+                        <el-table-column 
+                        :show-overflow-tooltip="true"
+                        prop="createTime" 
+                        label="创建日期">
                             <template slot-scope="scope">
                             <span>{{ scope.row.createTime }}</span>
                             </template>

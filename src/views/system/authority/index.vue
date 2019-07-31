@@ -32,7 +32,10 @@
                     :expand-all="expand" 
                     :columns="columns" 
                     size="small">
-                        <el-table-column prop="alias" label="别名">
+                        <el-table-column 
+                        prop="alias" 
+                        label="别名"
+                        :show-overflow-tooltip="true">
                             <template slot-scope="scope">
                                 <span>{{scope.row.alias}}</span>
                             </template>

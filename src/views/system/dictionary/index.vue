@@ -46,6 +46,7 @@
                         @row-click="getDictName">
                         <el-table-column
                         label="名称"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <span style="margin-left: 10px">{{ scope.row.name }}</span>
@@ -53,6 +54,7 @@
                         </el-table-column>
                         <el-table-column
                         label="描述"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -125,6 +127,7 @@
                         style="width: 100%">
                         <el-table-column
                         label="所属字典"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <span style="margin-left: 10px">{{ beloneDictName }}</span>
@@ -132,6 +135,7 @@
                         </el-table-column>
                         <el-table-column
                         label="字典标签"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -141,6 +145,7 @@
                         </el-table-column>
                         <el-table-column
                         label="字典值"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -150,6 +155,7 @@
                         </el-table-column>
                         <el-table-column
                         label="排序"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
