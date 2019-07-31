@@ -342,16 +342,20 @@ export default {
                 const data = result.data
                 this.initialPage(data.totalElements)
                 this.initialUserList(data.content)
+            }).catch(e => {
+                this.$setMemoryPmt('token', '')
+                this.$warnMsg("修改了当前账户，请重新登录")
+                this.$router.push({ path: "/login" })
             })
         },
-        // 初始化错误日志列表
+        // 初始化部门列表
         initialDepartmentList(list) {
             this.departmentList.splice(0, this.departmentList.length)
             list.forEach(value => {
                 this.departmentList.push(value)
             })
         },
-        // 获取错误日志信息
+        // 获取部门信息
         getDepartmentList() {
             this.$http_json({
                 url: `/api/dept/get${this.searchVal_1 ? `?name=${this.searchVal_1}` : ""}`,
