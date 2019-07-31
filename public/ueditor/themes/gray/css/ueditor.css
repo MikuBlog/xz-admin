@@ -43,10 +43,6 @@
     padding-left: 1rem!important;
 }
 
-#edui2 {
-    padding: 5px!important;
-}
-
 .edui-dialog-foot {
     line-height: 40px;
 }
@@ -73,6 +69,10 @@
     transform: translateY(-50%);
 }
 
+#edui2 {
+    padding: 5px !important;
+}
+
 .edui-listitem-label {
     padding: 3px 5px!important;
     transition: .3s;
@@ -82,7 +82,6 @@
 .edui-listitem-label:hover {
     background:rgb(238, 238, 238);
 }
-
 
 
 /*基础UI构建

@@ -9,5 +9,8 @@ module.exports = {
         symbolId: "icon-[name]",
         include: ["./src/icons"]
       });
+  },
+  configureWebpack: {
+    devtool: 'source-map'
   }
 };

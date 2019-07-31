@@ -20,6 +20,7 @@
     "jquery": "^3.4.1",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",
+    "path-to-regexp": "^3.0.0",
     "svg-sprite-loader": "^4.1.6",
     "v-charts": "^1.19.0",
     "vue": "^2.6.10",
