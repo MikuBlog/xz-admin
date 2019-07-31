@@ -114,7 +114,7 @@
                                     <el-dropdown-item @click.native="navigateTo('/home/person')">
                                         个人中心
                                     </el-dropdown-item>
-                                    <el-dropdown-item @click.native="window.open('https://github.com/MikuBlog/xz-admin')">
+                                    <el-dropdown-item @click.native="openNewPage()">
                                         项目地址
                                     </el-dropdown-item>
                                     <div class="line"></div>
@@ -267,6 +267,10 @@ export default {
         // 返回顶部
         backTop(delay = 500) {
             this.$$('.top').animate({scrollTop: 0}, delay)
+        },
+        // 前往项目地址
+        openNewPage() {
+            window.open('https://github.com/MikuBlog/xz-admin')
         },
         // 退出登录
         logout() {
