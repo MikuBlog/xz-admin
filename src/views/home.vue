@@ -108,9 +108,13 @@
                                 <i class="el-icon-caret-bottom el-icon--right"></i>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item
-                                    >首页</el-dropdown-item>
-                                    <el-dropdown-item><span>个人中心</span></el-dropdown-item>
-                                    <el-dropdown-item>
+                                    @click.native="navigateTo('/home/welcome')"
+                                    >首页
+                                    </el-dropdown-item>
+                                    <el-dropdown-item @click.native="navigateTo('/home/person')">
+                                        个人中心
+                                    </el-dropdown-item>
+                                    <el-dropdown-item @click.native="window.open('https://github.com/MikuBlog/xz-admin')">
                                         项目地址
                                     </el-dropdown-item>
                                     <div class="line"></div>
