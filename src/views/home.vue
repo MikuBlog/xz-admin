@@ -72,20 +72,7 @@
                             </el-tooltip>
                         </div>
                         <div class="breadcrumb">
-                            <el-breadcrumb separator-class="el-icon-arrow-right">
-                                    <el-breadcrumb-item 
-                                    :to="{ path: '/home/welcome' }"
-                                    @click.native="clickMenuItem({
-                                        name: '首页',
-                                        path: '/home/welcome',
-                                        index: '首页',
-                                        parentId: null,
-                                    })">首页</el-breadcrumb-item>
-                                    <el-breadcrumb-item 
-                                    v-for="items in breadcrumbList"
-                                    >{{items}}</el-breadcrumb-item>
-                            </el-breadcrumb>
-                            <!-- <Breadcrumb /> -->
+                            <Breadcrumb @clickMenuItem="clickMenuItem"></Breadcrumb>
                         </div>
                         <div class="icon-box">
                             <el-tooltip 
@@ -158,10 +145,10 @@
                             closable
                             checkable
                             v-for="(items, index) in tagsList" 
-                            :name="items.name"
+                            :name="items.meta.title"
                             @on-close="tabsRemove(items)"
                             @on-change="tabsClick(items)"
-                            >{{items.name}}</Tag>
+                            >{{items.meta.title}}</Tag>
                         </el-scrollbar>
                     </div>
                 </el-header>
@@ -222,8 +209,9 @@
 
 <script>
 import NavMenu from '@/components/tree_menu/SidebarItem'
+import Breadcrumb from '@/components/breadcrumb';
 export default {
-    components: { NavMenu },
+    components: { NavMenu, Breadcrumb },
     data() {
         return {
             isCollapse: false,
@@ -244,13 +232,17 @@ export default {
                 meta: {
                     title: "首页",
                     icon: "图表",
-                }
+                },
+                enabled: true,
             }],
-            breadcrumbList: [],
             tagsList: [{
                 name: "首页",
                 path: "/home/welcome",
                 index: "首页",
+                meta: {
+                    title: "首页",
+                    icon: "图表",
+                },
                 parentId: null,
                 key: 1
             }],
@@ -269,7 +261,6 @@ export default {
         this.initialListener()
         // 获取视窗大小
         this.getWindowWidth()
-        this.initialBreakcrumb()
         // 获取菜单
         this.getMenuList()
         this.initialScrollTop(true)
@@ -344,7 +335,6 @@ export default {
         // 保存当前用户访问记录
         saveMsg() {
             this.$setMemorySes('nowIndex', this.nowIndex)
-            this.$setMemorySes('breadcrumbList', this.breadcrumbList)
         },
         // 查找tag的位置
         findTagsLocation() {
@@ -365,25 +355,9 @@ export default {
             if(route.name == "首页") {
                 return
             }else {
-                const item = {
-                    name: route.name,
-                    path: route.path,
-                    index: route.name,
-                    iframe: route.meta.iframe,
-                    parentId: route.meta.parentId
-                }
-                this.tagsList.push(item)
-                this.clickMenuItem(item)
+                this.tagsList.push(route)
+                this.clickMenuItem(route)
             }
-        },
-        // 初始化面包屑
-        initialBreakcrumb() {
-            let breadcrumbList = this.$getMemorySes('breadcrumbList')
-            breadcrumbList
-            && (this.breadcrumbList.splice(0, this.breadcrumbList.length),
-            breadcrumbList.forEach(value => {
-                this.breadcrumbList.push(value)
-            }))
         },
         // 初始化当前滚动高度
         initialScrollTop(isIntial = false) {
@@ -419,27 +393,10 @@ export default {
             }
             return false
         },
-        // 添加面包屑
-        addBreakcrumb(item) {
-            let 
-                id = item.parentId,
-                name = ""
-            this.breadcrumbList.splice(0, this.breadcrumbList.length)
-            while(id) { 
-                name = this.findParentMenu(this.menuList, id).name
-                id = this.findParentMenu(this.menuList, id).parentId
-                this.breadcrumbList.unshift(name)
-            }
-            item.name && item.name != "首页"
-            && this.breadcrumbList.push(item.name)
-            !item.parentId && !item.name
-            && (this.changeTagStyle(0), this.activeIndex = "1") 
-        },
         // 点击标签
         tabsClick(item) {
             this.nowIndex = item.index
             this.activeIndex = item.name
-            this.addBreakcrumb(item)
             this.changeTagStyle(item.index)
             this.navigateTo(item)
             this.initialScrollTop()
@@ -461,8 +418,7 @@ export default {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
                 if(item.name == this.tagsList[i].name) {
                     i == this.findTagsLocation()
-                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.tagsList[this.findTagsLocation() - 1].index),
-                    this.addBreakcrumb(this.tagsList[this.findTagsLocation()]))
+                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.tagsList[this.findTagsLocation() - 1].index))
                     this.tagsList.splice(i, 1)
                     this.changeTagStyle(this.nowIndex)
                     this.activeIndex = this.nowIndex
@@ -475,15 +431,9 @@ export default {
         addTag(item) {
             let tabs = this.tagsList
             for(let i = 0, len = tabs.length; i < len; i ++) {
-                if(tabs[i].name == item.name) return
+                if(tabs[i].meta.title == item.meta.title) return
             }
-            this.tagsList.push({
-                name: item.name,
-                path: item.path,
-                index: item.name,
-                iframe: item.iframe,
-                parentId: item.parentId
-            })
+            this.tagsList.push(item)
             this.nowIndex = item.name
             this.saveMsg()
         },
@@ -500,7 +450,7 @@ export default {
         findIndex(title) {
             let tags = this.tagsList
             for(let i = 0, len = tags.length; i < len; i ++) {
-                if(tags[i].title == title) {
+                if(tags[i].meta.title == title) {
                     this.nowIndex = i
                 }
             }
@@ -508,16 +458,15 @@ export default {
         // 点击菜单项
         clickMenuItem(item) {
             this.isMenuCollapse = false
-            this.nowIndex = item.name
-            this.activeIndex = item.name
+            this.nowIndex = item.meta.title
+            this.activeIndex = item.meta.title
             this.addTag(item)
             this.navigateTo(item)
             this.initialScrollTop()
-            this.findIndex(item.name)
+            this.findIndex(item.meta.title)
             this.$nextTick(() => {
-                this.changeTagStyle(item.name)
+                this.changeTagStyle(item.meta.title)
             })
-            this.addBreakcrumb(item)
             this.saveMsg()
         },
         // 设置全屏与取消全屏

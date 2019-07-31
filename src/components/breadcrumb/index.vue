@@ -1,11 +1,11 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
-    <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item,index) in levelList" v-if="item.meta.title" :key="item.path">
+  <el-breadcrumb 
+  class="app-breadcrumb" 
+  separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item v-for="(item,index) in levelList" v-if="item.meta.title" :key="item.title">
         <span v-if="item.redirect==='noredirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
-    </transition-group>
   </el-breadcrumb>
 </template>
 
@@ -32,7 +32,7 @@ export default {
           return true
         }
       })
-      const first = matched[0]
+      const first = matched[1]
       if (first && first.name !== '首页') {
         matched = [{ path: '/home/welcome', meta: { title: '首页' }}].concat(matched)
       }
@@ -50,6 +50,7 @@ export default {
         this.$router.push(redirect)
         return
       }
+      this.$emit("clickMenuItem", item)
       this.$router.push(this.pathCompile(path))
     }
   }
@@ -66,5 +67,10 @@ export default {
       color: #97a8be;
       cursor: text;
     }
+  }
+  .el-breadcrumb__item {
+    position: relative;
+    top: -19px;
+    left: -15px;
   }
 </style>
