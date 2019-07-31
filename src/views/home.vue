@@ -255,6 +255,7 @@ export default {
     created() {
         // 获取用户信息
         this.getUserInfo()
+        sessionStorage.clear()
     },
     mounted() {
         this.initialStyle()
@@ -339,7 +340,7 @@ export default {
         // 查找tag的位置
         findTagsLocation() {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
-                if(this.tagsList[i].index === this.nowIndex) {
+                if(this.tagsList[i].meta.title === this.nowIndex) {
                     return i
                     break
                 }
@@ -416,7 +417,7 @@ export default {
         // 移除标签
         tabsRemove(item) {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
-                if(item.name == this.tagsList[i].name) {
+                if(item.meta.title == this.tagsList[i].meta.title) {
                     i == this.findTagsLocation()
                     && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.tagsList[this.findTagsLocation() - 1].index))
                     this.tagsList.splice(i, 1)
