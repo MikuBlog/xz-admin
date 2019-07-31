@@ -131,7 +131,9 @@ router.beforeEach((to, from, next) => {
     && (document.title = to.meta.title)
     NProgress.start()
     if(to.name === "login") {
+        // 重新登录清空缓存
         store.commit("setMenuList", [])
+        store.commit("removeTag")
         next()
         return
     }

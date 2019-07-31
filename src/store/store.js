@@ -40,6 +40,9 @@ export default new Vuex.Store({
     },
     addTags(state, tags) {
       state.tagsList.push(tags)
+    },
+    removeTag(state) {
+      state.tagsList.splice(1)
     }
   },
   actions: {
