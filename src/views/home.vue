@@ -17,7 +17,7 @@
                         <img src="../assets/logo/catjoker.png" alt="logo.png">
                     </div>
                     <NavMenu 
-                    :navMenus="menuList"
+                    :navMenus="$store.state.menuList"
                     ></NavMenu>
                 </el-menu>
             </el-scrollbar>
@@ -43,7 +43,7 @@
                             <img src="../assets/logo/catjoker.png" alt="logo.png">
                         </div>
                         <NavMenu 
-                        :navMenus="menuList"
+                        :navMenus="$store.state.menuList"
                         ></NavMenu>
                     </el-menu>
                 </el-scrollbar>
@@ -212,19 +212,6 @@ export default {
             isShowLogo: true,
             isShowBackTop: false,
             logoUrl: "",
-            menuList: [{
-                name: "首页",
-                index: "首页",
-                component: "/welcome",
-                path: "/home/welcome",
-                iframe: false, 
-                enabled: "true",
-                meta: {
-                    title: "首页",
-                    icon: "图表",
-                },
-                enabled: true,
-            }],
             tagsList: this.$store.state.tagsList,
             user: {},
             squareUrl: "",
@@ -239,8 +226,6 @@ export default {
         this.initialListener()
         // 获取视窗大小
         this.getWindowWidth()
-        // 获取菜单
-        this.getMenuList()
         this.initialScrollTop(true)
         // 是否显示Logo
         this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
@@ -255,13 +240,6 @@ export default {
                 this.$store.commit("setUserInfo", result.data)
                 this.user = this.$store.state.user
                 this.squareUrl = this.user.avatar
-            })
-        },
-        // 获取菜单列表
-        getMenuList() {
-            this.menuList.splice(1, this.menuList.length)
-            this.$store.state.menuList.forEach(value => {
-                this.menuList.push(value)
             })
         },
         // 返回顶部
