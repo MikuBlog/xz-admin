@@ -396,9 +396,9 @@ export default {
         },
         // 点击标签
         tabsClick(item) {
-            this.nowIndex = item.index
-            this.activeIndex = item.name
-            this.changeTagStyle(item.index)
+            this.nowIndex = item.meta.title
+            this.activeIndex = item.meta.title
+            this.changeTagStyle(item.meta.title)
             this.navigateTo(item)
             this.initialScrollTop()
             this.saveMsg()
@@ -419,9 +419,8 @@ export default {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
                 if(item.meta.title == this.tagsList[i].meta.title) {
                     i == this.findTagsLocation()
-                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.tagsList[this.findTagsLocation() - 1].index))
+                    && (this.$router.push({path: `${this.tagsList[i-1].path}`}), this.changeTagStyle(this.tagsList[this.findTagsLocation() - 1].meta.title))
                     this.tagsList.splice(i, 1)
-                    this.changeTagStyle(this.nowIndex)
                     this.activeIndex = this.nowIndex
                     this.saveMsg()
                     return

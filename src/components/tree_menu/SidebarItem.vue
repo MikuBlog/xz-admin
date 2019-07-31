@@ -5,7 +5,7 @@
                     v-show="navMenu.enabled"
                     v-if="navMenu.children==null"
                     :key="navMenu.name" 
-                    :index="navMenu.name" 
+                    :index="navMenu.meta.title" 
                     @click="clickMenuItem(navMenu)"
                     >
         <svg-icon :icon-class="navMenu.meta.icon" class="el-icon-location menu-icon" />
