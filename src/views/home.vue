@@ -409,8 +409,8 @@ export default {
     }
     .el-icon-caret-bottom {
         position: absolute;
-        right: 10px;
-        bottom: 6px;
+        right: 0;
+        bottom: 3px;
     }
     .icon-box {
         position: absolute;

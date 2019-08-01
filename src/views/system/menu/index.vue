@@ -23,7 +23,8 @@
                                 circle
                                 ></el-button>
                                 <el-button 
-                                type="warning" icon="el-icon-star-off" 
+                                type="warning" 
+                                icon="el-icon-more" 
                                 title="全部展开或收起"
                                 class="margin-box"
                                 @click="isExpandAll"

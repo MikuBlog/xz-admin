@@ -36,7 +36,8 @@
                                 @click="showAddDepartment"
                                 ></el-button>
                                 <el-button 
-                                type="warning" icon="el-icon-star-off" 
+                                type="warning" 
+                                icon="el-icon-more" 
                                 class="margin-box"
                                 title="全部展开或收起"
                                 @click="isExpandAll"

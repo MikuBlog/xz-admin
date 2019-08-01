@@ -23,7 +23,8 @@
                                 @click="showAddAuthority()"></el-button>
                                 <el-button 
                                 class="margin-box" 
-                                type="warning" icon="el-icon-star-off" 
+                                type="warning" 
+                                icon="el-icon-more" 
                                 title="全部展开或收起"
                                 @click="isExpandAll"
                                 circle></el-button>
