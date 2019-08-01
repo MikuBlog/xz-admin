@@ -9,21 +9,13 @@ import 'nprogress/nprogress.css';
 import Layout from '@/views/home.vue'
 // 默认路由页，用来存放子路由的纯路由页面
 import DefaultPage from '@/Layout/index.vue'
-import Welcome from '@/views/welcome.vue'
 
 // 默认后台管理模板
 const layout = {
     path: '/home',
     name: 'home',
     component: Layout,
-    children: [{
-        path: "welcome",
-        name: "首页",
-        meta: {
-            title: "首页"
-        },
-        component: Welcome
-    }]
+    children: []
 }
 
 // 动态生成路由
@@ -108,6 +100,10 @@ function getRouter() {
 // 添加标签页
 function addTags(tag) {
     const tagsList = store.state.tagsList
+    // 如果是404页面，不添加标签页
+    if(tag.meta.title === "404") {
+        return
+    }
     // 先将所有标签的活跃状态置为false
     for(let i = 0, len = tagsList.length; i < len; i ++) {
         tagsList[i].meta.active = false
@@ -123,7 +119,12 @@ function addTags(tag) {
     tag.meta.active = true
     store.commit('addTags', tag)
 }
-// 去除标签页
+
+// 清除缓存
+function removeRedis() {
+    store.commit("setMenuList", [])
+    store.commit("removeTag")
+}
 
 // 动态生成路由并做拦截
 router.beforeEach((to, from, next) => {
@@ -132,8 +133,7 @@ router.beforeEach((to, from, next) => {
     NProgress.start()
     if(to.name === "login") {
         // 重新登录清空缓存
-        store.commit("setMenuList", [])
-        store.commit("removeTag")
+        removeRedis()
         next()
         return
     }

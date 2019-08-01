@@ -28,19 +28,24 @@ export default new Vuex.Store({
     }]
   },
   mutations: {
+    // 保存用户信息
     setUserInfo(state, obj) {
       for(let key in obj)
         state.user[key] = obj[key]
     },
+    // 设置菜单
     setMenuList(state, obj) {
       state.menuList = obj
     },
+    // 设置菜单索引
     setMenuIndex(state, index) {
       state.menuIndex = index
     },
+    // 添加标签页
     addTags(state, tags) {
       state.tagsList.push(tags)
     },
+    // 移除所有标签页
     removeTag(state) {
       state.tagsList.splice(1)
     }

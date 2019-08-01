@@ -146,7 +146,6 @@
                 <el-main class="top" id="top">
                     <transition name="xz-animation">
                         <router-view 
-                        @updateMenuList="getMenuList"
                         @updateUserInfo="getUserInfo"
                         class="router"/>
                     </transition>
@@ -253,8 +252,8 @@ export default {
         // 退出登录
         logout() {
             // 退出前先清空用户访问记录
-            this.deleteMsg()
-            this.$router.push({path: '/login'})
+            this.$setMemoryPmt('token', '')
+            this.$router.push({ path: '/login' })
         },
         // 选择图片
         selectPic() {
@@ -279,10 +278,6 @@ export default {
         showSetting() {
             this.isSetting = true
         },
-        // 清空所有用户访问记录
-        deleteMsg() {
-            this.$setMemoryPmt('token', '')
-        },
         // 初始化当前滚动高度
         initialScrollTop(isIntial = false) {
             isIntial 
@@ -305,14 +300,14 @@ export default {
         tabsRemove(item) {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
                 if(item.meta.title == this.tagsList[i].meta.title) {
-                    if(i == len - 1 && this.tagsList[i].meta.active == true) {
+                    if(this.tagsList[i].meta.active) {
                         this.navigateTo(this.tagsList[i - 1].path)
                     }
                     this.tagsList.splice(i, 1)
                 }    
             }
         },
-        // 点击菜单
+        // 点击隐藏左侧抽屉菜单
         clickMenuItem() {
             this.isMenuCollapse = false
         },
