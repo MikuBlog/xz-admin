@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss" scoped>
     .xz-animation-enter-active {
-        transition: all .6s .6s;
+        transition: all .6s .7s;
     }
     .xz-animation-leave-active {
         transition: all .6s;

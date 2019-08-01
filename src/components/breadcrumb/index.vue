@@ -22,6 +22,11 @@ export default {
   created() {
     this.getBreadcrumb()
   },
+  watch: {
+    $route() {
+      this.getBreadcrumb()
+    }
+  },
   methods: {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => {

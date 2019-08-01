@@ -483,7 +483,7 @@ export default {
         bottom: 100px;
     }
     .xz-animation-enter-active {
-        transition: all .6s .6s;
+        transition: all .6s .7s;
     }
     .xz-animation-leave-active {
         transition: all .6s;

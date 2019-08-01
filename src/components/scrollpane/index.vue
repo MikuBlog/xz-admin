@@ -16,6 +16,7 @@ export default {
     }
   },
   watch: {
+      // 修复滚动条不显示问题
       $route() {
           const 
             $scrollWrapper = this.$refs.scrollContainer.$refs.wrap,
