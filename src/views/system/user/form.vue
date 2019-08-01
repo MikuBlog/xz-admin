@@ -98,12 +98,6 @@ export default {
       this.style = 'width: 172px'
     }
   },
-  created() {
-    // 初始化列表
-    this.getRoles()
-    this.getDepts()
-    this.getRoleLevel()
-  },
   methods: {
     // 更新列表
     updateList() {

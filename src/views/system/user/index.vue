@@ -255,14 +255,22 @@ export default {
         },
         // 显示添加菜单窗口
         showAddUser() {
+            const form = this.$refs.form
             this.isAdd = true
-            this.$refs.form.dialog = true
-            this.$refs.form.resetForm()
+            form.dialog = true
+            form.getRoles()
+            form.getDepts()
+            form.getRoleLevel()
+            form.resetForm()
         },
         // 显示编辑菜单窗口
         showEditUser() {
+            const form = this.$refs.form
             this.isAdd = false
-            this.$refs.form.dialog = true
+            form.dialog = true
+            form.getRoles()
+            form.getDepts()
+            form.getRoleLevel()
         },
         // 编辑菜单项
         editUserItem(item) {
