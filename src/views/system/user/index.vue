@@ -5,19 +5,16 @@
                 <el-card class="box-card">
                     <div class="search">
                         <el-row>
-                            <el-col :xs="14" :sm="19">
-                                <el-input 
+                            <el-input 
                                 v-model="searchVal_1" 
                                 placeholder="搜索内容"
+                                class="search-input margin-box"
                                 @keyup.native="searchEnter_1"></el-input>
-                            </el-col>
-                            <el-col :xs="3" :sm="3">
-                                <el-button 
+                            <el-button 
                                 icon="el-icon-search" 
-                                class="button-left-circle"
+                                class="margin-box"
                                 @click="search_1"
                                 circle></el-button>
-                            </el-col>
                         </el-row>
                     </div>
                     <div class="tree-box">
@@ -33,12 +30,11 @@
                 <el-card class="box-card card-gutter-xs">
                     <div class="search">
                         <el-row :gutter="10">
-                            <el-col :span="8">
-                                <el-input
-                                v-model="searchVal_2" 
-                                placeholder="搜索内容"
-                                @keyup.native="searchEnter_2"></el-input>
-                            </el-col>
+                            <el-input
+                            v-model="searchVal_2" 
+                            placeholder="搜索内容"
+                            class="search-input margin-box"
+                            @keyup.native="searchEnter_2"/>
                             <el-select 
                                 v-model="selectType" 
                                 clearable
@@ -56,7 +52,7 @@
                              clearable
                              placeholder="类型"
                              @change="getStatus"
-                             class="select-input">
+                             class="select-input margin-box">
                                     <el-option
                                     v-for="item in options_2"
                                     :key="item.value"
@@ -66,11 +62,12 @@
                             </el-select>
                             <el-button 
                                 icon="el-icon-search" 
-                                class="button-left-circle"
+                                class="margin-box"
                                 circle></el-button>
                             <el-button 
                                 type="primary"
                                 icon="el-icon-plus" 
+                                class="margin-box"
                                 @click="showAddUser"
                                 circle
                                 ></el-button>

@@ -18,16 +18,17 @@
                             <el-input
                             v-model="searchVal" 
                             placeholder="搜索内容"
-                            class="search-input"
+                            class="search-input margin-box"
                             @keyup.native="searchEnter"></el-input>
                             <el-button 
                                 icon="el-icon-search" 
-                                class="button-left-circle"
+                                class="margin-box"
                                 @click="search"
                                 circle></el-button>
                             <el-button 
                                 type="primary"
                                 icon="el-icon-plus" 
+                                class="margin-box"
                                 @click="showAddRole()"
                                 circle
                                 ></el-button>

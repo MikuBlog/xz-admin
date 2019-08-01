@@ -7,10 +7,10 @@
                         <el-input 
                         v-model="searchVal" 
                         placeholder="搜索内容"
-                        class="search-input"></el-input>
+                        class="search-input margin-box"></el-input>
                         <el-button 
                         icon="el-icon-search" 
-                        class="button-left-circle"
+                        class="margin-box"
                         circle></el-button>
                     </div>
                     <el-table

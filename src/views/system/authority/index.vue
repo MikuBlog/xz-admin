@@ -8,19 +8,21 @@
                             <el-input 
                             v-model="searchVal" 
                             placeholder="搜索内容"
-                            class="search-input"
+                            class="search-input margin-box"
                             @keyup.native="searchEnter"></el-input>
                                 <el-button 
                                 icon="el-icon-search" 
-                                class="button-left-circle"
+                                class="margin-box"
                                 @click="search" 
                                 circle></el-button>
                                 <el-button 
                                 circle
                                 type="primary"
-                                icon="el-icon-plus" 
+                                icon="el-icon-plus"
+                                class="margin-box" 
                                 @click="showAddAuthority()"></el-button>
                                 <el-button 
+                                class="margin-box" 
                                 type="warning" icon="el-icon-star-off" 
                                 title="全部展开或收起"
                                 @click="isExpandAll"

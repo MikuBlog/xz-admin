@@ -62,14 +62,26 @@ body {
     margin-bottom: 1rem;
 }
 .select-input{
-    width: 7rem;
-    margin-left: .5rem;
+    width: 6rem;
 }
 .search-input {
-    width: 15rem;
+    width: 12rem;
+}
+.margin-box {
+    margin: .3rem!important;
 }
 .is-circle {
-    margin-left: .3rem;
+    margin: 0;
+    padding: 0;
+}
+.el-button+.el-button {
+    margin: 0;
+}
+.el-range-separator {
+    width: 2rem!important;
+}
+.el-date-editor--datetimerange {
+    width: 20rem!important;
 }
 .border {
     position: relative;
@@ -102,12 +114,6 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-}
-.button-left {
-    margin-left: .3rem;
-}
-.button-left-circle {
-    margin-left: .7rem;
 }
 .button-right {
     margin-right: .3rem;

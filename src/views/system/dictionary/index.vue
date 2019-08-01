@@ -17,15 +17,15 @@
                     </div>
                     <div class="search">
                         <el-row :gutter="10">
-                            <el-col :span="12" class="gutter">
-                                <el-input v-model="searchVal_1" placeholder="搜索内容"
+                                <el-input v-model="searchVal_1" 
+                                class="search-input margin-box"
+                                placeholder="搜索内容"
                                 @keyup.native="searchEnter_1"></el-input>
-                            </el-col>
                                 <el-select 
                                 v-model="selectType_1" 
                                 clearable
                                 placeholder="类型"
-                                class="select-input">
+                                class="select-input margin-box">
                                     <el-option
                                     v-for="item in options"
                                     :key="item.value"
@@ -35,7 +35,7 @@
                                 </el-select>
                                 <el-button 
                                 icon="el-icon-search" 
-                                class="button-left-circle"
+                                class="margin-box"
                                 @click="search_1"
                                 circle></el-button>
                         </el-row>

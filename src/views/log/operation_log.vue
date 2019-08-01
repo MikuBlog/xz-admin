@@ -7,12 +7,12 @@
                         <el-input 
                         v-model="searchVal" 
                         placeholder="搜索内容"
-                        class="search-input"
+                        class="search-input margin-box"
                         @keyup.native="searchEnter"></el-input>
                         <el-select 
                         v-model="selectType" 
                         placeholder="类型"
-                        class="select-input">
+                        class="select-input margin-box">
                             <el-option
                             v-for="item in options"
                             :key="item.value"
@@ -22,7 +22,7 @@
                         </el-select>
                         <el-button 
                         icon="el-icon-search" 
-                        class="button-left-circle"
+                        class="margin-box"
                         @click="search"
                         circle
                         ></el-button>
