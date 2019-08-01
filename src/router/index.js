@@ -104,10 +104,6 @@ function addTags(tag) {
     if(tag.meta.title === "404") {
         return
     }
-    // 先将所有标签的活跃状态置为false
-    for(let i = 0, len = tagsList.length; i < len; i ++) {
-        tagsList[i].meta.active = false
-    }
     // 如果已存在标签，将该标签改为活跃状态
     for(let i = 0, len = tagsList.length; i < len; i ++) {
         if(tagsList[i].meta.title === tag.meta.title || !tag.name) {
@@ -115,8 +111,6 @@ function addTags(tag) {
             return
         }
     }
-    // 将新加入到标签的状态改为活跃状态
-    tag.meta.active = true
     store.commit('addTags', tag)
 }
 

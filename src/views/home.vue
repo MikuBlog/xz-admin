@@ -100,7 +100,7 @@
                                 <div class="block">
                                     <el-avatar 
                                     shape="square" 
-                                    :size="45" 
+                                    :size="35" 
                                     :src="squareUrl">
                                         <img src="https://myinterface.xuanzai.top/getPicture?type=error"/>
                                     </el-avatar>
@@ -125,24 +125,9 @@
                         </div>
                     </div>
                 </el-header>
-                <el-header>
-                    <div class="tabs">
-                        <el-scrollbar
-                        style="height: 50px;" 
-                        >
-                            <Tag 
-                            :color="items.meta.active ? 'primary' : ''"
-                            type="dot"
-                            closable
-                            checkable
-                            v-for="(items, index) in tagsList" 
-                            :name="items.meta.title"
-                            @on-close="tabsRemove(items)"
-                            @on-change="tabsClick(items)"
-                            >{{items.meta.title}}</Tag>
-                        </el-scrollbar>
-                    </div>
-                </el-header>
+                <div class="tabs">
+                    <Tag :tagsList="$store.state.tagsList" />
+                </div>
                 <el-main class="top" id="top">
                     <transition name="xz-animation">
                         <router-view 
@@ -189,7 +174,6 @@
                 <el-button 
                 type="success" 
                 style="width: 100%"
-                @click="uploadLogo"
                 >上传Logo</el-button>
             </div>
         </Drawer>
@@ -199,8 +183,9 @@
 <script>
 import NavMenu from '@/components/tree_menu/SidebarItem'
 import Breadcrumb from '@/components/breadcrumb';
+import Tag from '@/components/tag';
 export default {
-    components: { NavMenu, Breadcrumb },
+    components: { NavMenu, Breadcrumb, Tag },
     data() {
         return {
             isCollapse: false,
@@ -225,7 +210,6 @@ export default {
         this.initialListener()
         // 获取视窗大小
         this.getWindowWidth()
-        this.initialScrollTop(true)
         // 是否显示Logo
         this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
     },
@@ -266,10 +250,6 @@ export default {
                     this.$warnMsg(e)
                 })
         },
-        // 上传logo
-        uploadLogo() {
-
-        },
         // 全局设置显示菜单Logo
         showLogo(val) {
             this.$setMemoryPmt('isShowLogo', val)
@@ -278,34 +258,10 @@ export default {
         showSetting() {
             this.isSetting = true
         },
-        // 初始化当前滚动高度
-        initialScrollTop(isIntial = false) {
-            isIntial 
-            ? document.querySelector('.top').scrollTop = this.$getMemorySes('scrollTop')
-            : setTimeout(() => {
-                document.querySelector('.top').scrollTop = 0
-            }, 700)
-        },
-        // 点击标签
-        tabsClick(item) {
-            this.navigateTo(item.path)
-            this.initialScrollTop()
-        },
         // 移除所有标签
         removeAllTags() {
             this.tagsList.splice(1)
             this.navigateTo('/home/welcome')
-        },
-        // 移除标签
-        tabsRemove(item) {
-            for(let i = 0, len = this.tagsList.length; i < len; i ++) {
-                if(item.meta.title == this.tagsList[i].meta.title) {
-                    if(this.tagsList[i].meta.active) {
-                        this.navigateTo(this.tagsList[i - 1].path)
-                    }
-                    this.tagsList.splice(i, 1)
-                }    
-            }
         },
         // 点击隐藏左侧抽屉菜单
         clickMenuItem() {
@@ -328,12 +284,11 @@ export default {
             const 
                 eles = document.querySelectorAll('.el-scrollbar__wrap'),
                 drawer = document.querySelector('.ivu-drawer-body'),
-                tag = document.querySelector('.ivu-tag'),
                 menuList = document.querySelector('.el-menu-vertical-demo'),
                 drawerContent = document.querySelector('.ivu-drawer-content'),
-                scrollContainer = document.querySelector('.el-scrollbar')
+                scrollContainer = document.querySelector('.el-scrollbar'),
+                scrollBar = document.querySelectorAll('.el-scrollbar__thumb')[1]
             this.$setStyle(drawer, 'padding', 0)
-            this.$setStyle(tag.lastElementChild, 'display', 'none')
             this.$setStyle(drawerContent, 'background', '#2e3f54')
             this.$setStyle(scrollContainer, 'background', '#2d3e53')
             eles.forEach((value, index) => {
@@ -397,8 +352,9 @@ export default {
     .menu-button {
         position: relative;
         display: inline-block;
-        padding: 0 1rem;
-        top:3px;
+        margin-left: 1rem;
+        height: 40px;
+        line-height: 40px;
         font-size: 1.5rem;
         color: #686868;
         transition: .3s;
@@ -428,7 +384,7 @@ export default {
     .avatar-box {
         position: absolute;
         top: 0;
-        right: 10px;
+        right: 3px;
         width: 60px;
         height: 50px;
     }
@@ -446,18 +402,22 @@ export default {
         height: 0;
         border: 1px solid #eee;
     }
+    .tabs {
+        position: relative;
+        background: #ffffff;
+    }
     .el-icon-caret-bottom {
         position: absolute;
-        right: -2px;
-        bottom: 5px;
+        right: 10px;
+        bottom: 12px;
     }
     .icon-box {
         position: absolute;
         top:3px;
-        right: 75px;
+        right: 60px;
         padding: 0 1rem;
-        height: 50px;
-        line-height: 50px;
+        height: 40px;
+        line-height: 40px;
         color: #676767;
         text-align: center;
         transition: .3s;
@@ -485,15 +445,6 @@ export default {
     }
     .el-header:last-of-type {
         height: 41px!important;
-    }
-    .tabs {
-        position: relative;
-        margin-left: 10px;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-    .el-scrollbar__view {
-        overflow: hidden!important;
     }
     .logo {
         position: relative;

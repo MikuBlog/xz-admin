@@ -2,10 +2,12 @@
   <el-breadcrumb 
   class="app-breadcrumb" 
   separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item v-for="(item,index) in levelList" v-if="item.meta.title" :key="item.title">
+    <transition-group name="breadcrumb">
+      <el-breadcrumb-item v-for="(item,index) in levelList" v-if="item.meta.title" :key="item.path">
         <span v-if="item.redirect==='noredirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
+    </transition-group>
   </el-breadcrumb>
 </template>
 
@@ -15,11 +17,6 @@ export default {
   data() {
     return {
       levelList: null
-    }
-  },
-  watch: {
-    $route() {
-      this.getBreadcrumb()
     }
   },
   created() {
@@ -39,7 +36,6 @@ export default {
       this.levelList = matched
     },
     pathCompile(path) {
-      // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
       const { params } = this.$route
       var toPath = pathToRegexp.compile(path)
       return toPath(params)
@@ -70,7 +66,7 @@ export default {
   }
   .el-breadcrumb__item {
     position: relative;
-    top: -19px;
+    top: -25px;
     left: -15px;
   }
 </style>

@@ -7,5 +7,6 @@
   #app {
     position: relative;
     height: 100%;
+    overflow-y: auto;
   }
 </style>

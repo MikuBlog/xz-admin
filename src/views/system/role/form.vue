@@ -24,8 +24,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button type="text" @click="hideBox">取消</el-button>
-      <el-button type="primary" @click="doSubmit">确认</el-button>
+      <el-button type="text" size="small" @click="hideBox">取消</el-button>
+      <el-button type="primary" size="small" @click="doSubmit">确认</el-button>
     </div>
   </el-dialog>
 </template>
