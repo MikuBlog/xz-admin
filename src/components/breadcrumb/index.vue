@@ -2,7 +2,7 @@
   <el-breadcrumb 
   class="app-breadcrumb" 
   separator-class="el-icon-arrow-right">
-    <transition-group name="breadcrumb">
+    <transition-group name="bread-list">
       <el-breadcrumb-item v-for="(item,index) in levelList" v-if="item.meta.title" :key="item.path">
         <span v-if="item.redirect==='noredirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
@@ -74,4 +74,14 @@ export default {
     top: -25px;
     left: -15px;
   }
+  .bread-list-enter-active {
+    transition: all 1s 1s;
+  }
+  .bread-list-enter-active {
+    transition: all 1s;
+  }
+  .bread-list-enter, .bread-list-elave-to {
+        transform: translateX(-25px);
+        opacity: 0;
+    }
 </style>
