@@ -49,7 +49,7 @@ https://xzadmin.xuanzai.top
 
 + 个性化登录界面
 + 个性化后台管理界面
-+ 路由、菜单、面包屑三向关联（vue-router）
++ 路由与标签页、菜单、面包屑关联（vue-router）
 
 <br/>
 
@@ -81,8 +81,18 @@ https://xzadmin.xuanzai.top
 
 # :page_with_curl: 已知问题
 
+<br/>
+
 > 有些图标不能正常显示
 
 原因：因为在`vue.config.js`中加了`svg`处理器，用于处理添加菜单时`svg`图片的显示，所以导致了有些`svg`图标被处理了两次，不能正常显示。
 
 解决方案：node_modules --> iview --> dist --> styles --> iview.css --> 删除`svg`处理代码（ctrl + F 查删）
+
+<br/>
+
+> `el-scrollbar`滚动条组件不能正常显示横向滚动条
+
+解决方案：观察发现，浏览器视窗大小发生变化后才能正常显示横向滚动条。所以，我采用了瞬间调整`home`布局组件的高度来强行显示横向滚动条。
+
+
