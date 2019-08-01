@@ -49,7 +49,7 @@
                 </el-scrollbar>
             </Drawer>
             <el-container>
-                <el-header>
+                <el-header style="height: 50px;">
                     <div class="navbar">
                         <div class="menu-button">
                             <el-tooltip 
@@ -100,7 +100,7 @@
                                 <div class="block">
                                     <el-avatar 
                                     shape="square" 
-                                    :size="35" 
+                                    :size="45" 
                                     :src="squareUrl">
                                         <img src="https://myinterface.xuanzai.top/getPicture?type=error"/>
                                     </el-avatar>
@@ -124,6 +124,7 @@
                             </el-dropdown>
                         </div>
                     </div>
+                    <div class="border" style="border-color: #f0f0f0"></div>
                 </el-header>
                 <div class="tabs">
                     <Tag :tagsList="$store.state.tagsList" />
@@ -353,8 +354,8 @@ export default {
         position: relative;
         display: inline-block;
         margin-left: 1rem;
-        height: 40px;
-        line-height: 40px;
+        height: 50px;
+        line-height: 50px;
         font-size: 1.5rem;
         color: #686868;
         transition: .3s;
@@ -409,15 +410,15 @@ export default {
     .el-icon-caret-bottom {
         position: absolute;
         right: 10px;
-        bottom: 12px;
+        bottom: 6px;
     }
     .icon-box {
         position: absolute;
         top:3px;
         right: 60px;
         padding: 0 1rem;
-        height: 40px;
-        line-height: 40px;
+        height: 50px;
+        line-height: 50px;
         color: #676767;
         text-align: center;
         transition: .3s;
@@ -442,9 +443,6 @@ export default {
     }
     .el-icon-full-screen {
         font-size: 22px;
-    }
-    .el-header:last-of-type {
-        height: 41px!important;
     }
     .logo {
         position: relative;

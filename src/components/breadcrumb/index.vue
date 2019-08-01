@@ -71,7 +71,7 @@ export default {
   }
   .el-breadcrumb__item {
     position: relative;
-    top: -25px;
+    top: -21px;
     left: -15px;
   }
   .bread-list-enter-active {

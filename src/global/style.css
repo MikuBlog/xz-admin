@@ -74,9 +74,6 @@ body {
     margin: 0;
     padding: 0;
 }
-.el-button+.el-button {
-    margin: 0;
-}
 .el-range-separator {
     width: 2rem!important;
 }
