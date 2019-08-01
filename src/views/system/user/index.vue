@@ -7,7 +7,7 @@
                         <el-row>
                             <el-input 
                                 v-model="searchVal_1" 
-                                placeholder="搜索内容"
+                                placeholder="搜索部门名称"
                                 class="search-input margin-box"
                                 @keyup.native="searchEnter_1"></el-input>
                             <el-button 
@@ -32,7 +32,7 @@
                         <el-row :gutter="10">
                             <el-input
                             v-model="searchVal_2" 
-                            placeholder="搜索内容"
+                            placeholder="请选择类型进行搜索"
                             class="search-input margin-box"
                             @keyup.native="searchEnter_2"/>
                             <el-select 
@@ -50,9 +50,10 @@
                              <el-select 
                              v-model="selectStatus" 
                              clearable
-                             placeholder="类型"
+                             placeholder="状态"
                              @change="getStatus"
-                             class="select-input margin-box">
+                             class="select-input margin-box"
+                             >
                                     <el-option
                                     v-for="item in options_2"
                                     :key="item.value"

@@ -52,7 +52,7 @@
                     <div class="search">
                         <el-input 
                         v-model="searchVal" 
-                        placeholder="搜索内容"
+                        placeholder="搜索行为名称"
                         class="search-input margin-box"
                         @keyup.native="searchEnter"></el-input>
                         <el-button 

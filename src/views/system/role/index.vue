@@ -17,7 +17,7 @@
                         <el-row :gutter="10">
                             <el-input
                             v-model="searchVal" 
-                            placeholder="搜索内容"
+                            placeholder="搜索角色名称"
                             class="search-input margin-box"
                             @keyup.native="searchEnter"></el-input>
                             <el-button 

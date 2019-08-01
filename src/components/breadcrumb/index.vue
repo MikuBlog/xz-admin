@@ -75,12 +75,12 @@ export default {
     left: -15px;
   }
   .bread-list-enter-active {
-    transition: all 1s 1s;
+    transition: all .6s .7s;
   }
-  .bread-list-enter-active {
-    transition: all 1s;
+  .bread-list-leave-active {
+    transition: all .6s;
   }
-  .bread-list-enter, .bread-list-elave-to {
+  .bread-list-enter, .bread-list-leave-to {
         transform: translateX(-25px);
         opacity: 0;
     }

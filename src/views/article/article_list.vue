@@ -6,7 +6,7 @@
                     <div class="search">
                         <el-input 
                         v-model="searchVal" 
-                        placeholder="搜索内容"
+                        placeholder="搜索文章名称"
                         class="search-input margin-box"></el-input>
                         <el-button 
                         icon="el-icon-search" 

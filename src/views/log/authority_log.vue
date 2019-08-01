@@ -6,7 +6,7 @@
                     <div class="search">
                         <el-input 
                         v-model="searchVal" 
-                        placeholder="搜索内容"
+                        placeholder="请选择类型进行搜索"
                         class="search-input margin-box"
                         @keyup.native="searchEnter"></el-input>
                         <el-select 
@@ -24,9 +24,9 @@
                         clearable
                         v-model="selectType_2" 
                         @change="getOperationType"
-                        placeholder="操作类型"
+                        placeholder="操作"
                         class="select-input margin-box"
-                        style="width: 7rem">
+                        >
                             <el-option
                             v-for="item in options_2"
                             :key="item.value"

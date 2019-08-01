@@ -7,7 +7,7 @@
                         <el-row :gutter="10">
                             <el-input 
                             v-model="searchVal" 
-                            placeholder="搜索内容"
+                            placeholder="请选择类型进行搜索"
                             class="search-input margin-box"
                             @keyup.native="searchEnter"></el-input>
                                 <el-select 
