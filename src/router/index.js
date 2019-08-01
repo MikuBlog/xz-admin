@@ -107,7 +107,6 @@ function addTags(tag) {
     // 如果已存在标签，将该标签改为活跃状态
     for(let i = 0, len = tagsList.length; i < len; i ++) {
         if(tagsList[i].meta.title === tag.meta.title || !tag.name) {
-            tagsList[i].meta.active = true
             return
         }
     }

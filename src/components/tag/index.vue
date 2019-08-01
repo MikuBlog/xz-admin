@@ -40,10 +40,6 @@ export default {
                 for (const tag of tags) {
                     if (tag.to.path === this.$route.path) {
                         this.$refs.scrollPane.moveToTarget(tag)
-                        // // when query is different then update
-                        // if (tag.to.fullPath !== this.$route.fullPath) {
-                        //     this.$store.dispatch('updateVisitedView', this.$route)
-                        // }
                         break
                     }
                 }
@@ -60,20 +56,15 @@ export default {
             this.navigateTo(item.path)
             this.initialScrollTop()
         },
-        // 移除所有标签
-        removeAllTags() {
-            this.tagsList.splice(1)
-            this.navigateTo('/home/welcome')
-        },
         // 移除标签
         tabsRemove(item) {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
-                if(item.meta.title == this.tagsList[i].meta.title) {
-                    if(this.tagsList[i].meta.active) {
-                        this.navigateTo(this.tagsList[i - 1].path)
-                    }
-                    this.tagsList.splice(i, 1)
-                }    
+              if(item.meta.title === this.tagsList[i].meta.title) {
+                if(item.path == this.$route.path) {
+                  this.$router.push({ path: this.tagsList[i - 1].path })
+                }  
+                this.tagsList.splice(i, 1)
+              }  
             }
         },
         // 初始化当前滚动高度
