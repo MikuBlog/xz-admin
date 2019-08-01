@@ -11,7 +11,7 @@ import Message from '@/api/message/message'
 // 引入element-ui框架
 import ElementUI from 'element-ui'
 // 引入iview框架
-import { Drawer, Tag } from 'iview'
+import { Drawer } from 'iview'
 // 引入jquery
 import Jquery from 'jquery'
 // 引入导航栏折叠
@@ -182,9 +182,8 @@ Vue.prototype.$insertAfter = InsertAfter.insertAfter
 Vue.prototype.$jsonPretty = JsonPretty.jsonPretty
 // 加入element-ui组件
 Vue.use(ElementUI);
-// 引入iview组件
+// 引入iview抽屉组件
 Vue.component('Drawer', Drawer);
-Vue.component('Tag', Tag);
 // 引入树状选择器组件
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠
