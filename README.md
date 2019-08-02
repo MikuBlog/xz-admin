@@ -13,7 +13,7 @@ https://xzadmin.xuanzai.top
 
 运行：在项目目录下`npm run serve`
 
-如有问题，请看已知问题列表
+如有问题，请看 * [已知问题列表](#question)
 
 <br/>
 
@@ -76,16 +76,22 @@ https://xzadmin.xuanzai.top
 + 树状选择器：`vue-treeselect`
 + 动态菜单折叠插件：`vue-fragment`
 + 进度条：`nprogress`
++ markdown编辑器：`mavonEditor`
 
 <br/>
 
-# :page_with_curl: 已知问题
 
+<h1 id="question">:page_with_curl: 已知问题</h1>
 
 <br/>
 
-> `el-scrollbar`滚动条组件不能正常显示横向滚动条
+> Module build failed (from ./node_modules/_svg-sprite-loader@4.1.6@svg-sprite-loader/lib/loader.js)
 
-解决方案：观察发现，浏览器视窗大小发生变化后才能正常显示横向滚动条。所以，我采用了瞬间调整`home`布局组件的高度来强行显示横向滚动条。
+原因：引入了`svg-loader`，对已经处理过的`svg`再次进行处理导致报错
+
+解决方案：类似这种问题，看看引入的全局`CSS`或自己写的`CSS`文件里有没有类似这样的语句：`url(xxxxx) format("truetype")) format("svg")`，如果有，则直接删除即可。
+
++ `mavonEditor`中的`index.css`中含有该组件，如果要继续使用`mavonEditor`markdown编辑器，请在`node_modules --> mavon-editor --> dist --> index.css`删除如上代码。
+
 
 
