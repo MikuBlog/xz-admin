@@ -17,7 +17,7 @@
                             effect="dark" 
                             :content="items.tag" 
                             placement="top">
-                                <div>
+                                <div class="tip-box">
                                     <svg-icon :icon-class="items.name" />
                                     <div class="icon-name">
                                         {{items.name}}
@@ -68,18 +68,24 @@ export default {
         position: relative;
         display: inline-block;
         width: 100px;
-        height: 60px;
-        margin: 2rem 1rem;
+        height: 100px;
+        margin: 1rem 1rem;
         text-align: center;
+        border-radius: 1rem;
+        cursor: pointer;
+        transition: .3s;
+    }
+    .box:hover {
+        background: rgb(245, 245, 245);
     }
     .svg-icon {
         position: relative;
+        margin-top: 15px;
         width: 40px;
         height: 40px;
     }
     .icon-name {
         margin: .5rem 0;
         font-size: 1rem;
-        white-space: nowrap;
     }
 </style>
