@@ -95,8 +95,8 @@
                                 ></span>
                             </el-tooltip>
                         </div>
-                        <div class="avatar-box">
-                            <el-dropdown trigger="click">
+                        <el-dropdown trigger="click">
+                            <div class="avatar-box">
                                 <div class="block">
                                     <el-avatar 
                                     shape="square" 
@@ -121,8 +121,8 @@
                                     <el-dropdown-item
                                     @click.native="logout">退出登录</el-dropdown-item>
                                 </el-dropdown-menu>
-                            </el-dropdown>
-                        </div>
+                            </div>
+                        </el-dropdown>
                     </div>
                     <div class="border" style="border-color: #f0f0f0"></div>
                 </el-header>
@@ -382,15 +382,10 @@ export default {
         left: 100px;
         top: 21px;
     }
-    .avatar-box {
+    .el-dropdown {
         position: absolute;
         top: 0;
-        right: 3px;
-        width: 60px;
-        height: 50px;
-    }
-    .el-dropdown {
-        position: relative;
+        right: 0;
         width: 60px;
         height: 50px;
     }

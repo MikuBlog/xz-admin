@@ -1,3 +1,9 @@
+/**
+ * @author xuanzai
+ * @description 日期格式化
+ * @param {Date} dateTime 日期
+ * @param {Boolean} isAccurate 是否精确到时分秒 
+ */
 const formDate = (dateTime, isAccurate = false) => {
     let nowDate = new Date(dateTime)
     let date =  new Date(nowDate.getTime() - (nowDate.getTimezoneOffset() * 60000))
@@ -7,6 +13,12 @@ const formDate = (dateTime, isAccurate = false) => {
     return newDate
 }
 
+/**
+ * @author xuanzai
+ * @description 日期差
+ * @param {Date} sDate1 时间戳
+ * @param {Date} sDate2 时间戳
+ */
 const dateDiff = (sDate1,  sDate2) => {   
     const iDays = sDate1 < sDate2 
     ? (new Date(sDate2) - new Date(sDate1)) 

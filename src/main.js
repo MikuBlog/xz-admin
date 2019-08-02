@@ -12,6 +12,8 @@ import Message from '@/api/message/message'
 import ElementUI from 'element-ui'
 // 引入iview框架
 import { Drawer } from 'iview'
+// 引入markdown编辑器
+import mavonEditor from 'mavon-editor'
 // 引入jquery
 import Jquery from 'jquery'
 // 引入导航栏折叠
@@ -24,6 +26,7 @@ import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'iview/dist/styles/iview.css';
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import 'mavon-editor/dist/css/index.css'
 // 引入树状选择器
 import Treeselect from '@riophae/vue-treeselect'
 // 引入时间格式化函数
@@ -36,6 +39,8 @@ import SetClass from '@/api/dom/set_class'
 import InsertAfter from '@/api/dom/insert_after'
 // 引入文件下载模块
 import Download from '@/api/dom/download'
+// 引入文本复制模块
+import Copy from '@/api/dom/copy'
 // 引入全屏函数
 import FullScreen from '@/api/other/full_screen'
 // 引入存储模块
@@ -46,7 +51,7 @@ import ReadImg from '@/api/file/get_file_image'
 import PreviewFile from '@/api/file/preview_file'
 // 引入json美化模块
 import JsonPretty from '@/api/json/json_pretty'
-
+// 引入jquery模块
 Vue.prototype.$$ = Jquery 
 /**
  * @author xuanzai
@@ -188,7 +193,6 @@ Vue.prototype.$getImgFile = ReadImg.getImgFile
  * @author xuanzai
  * @description 获取图片文件地址与文件信息
  * @param {String} url 文件地址
- * @returns {DOM | iframe}
  */
 Vue.prototype.$previewFile = PreviewFile.previewFile
 /**
@@ -197,6 +201,13 @@ Vue.prototype.$previewFile = PreviewFile.previewFile
  * @param {String} url 地址
  */
 Vue.prototype.$download = Download.download
+/**
+ * @author xuanzai
+ * @description 文本复制
+ * @param {DOM | String} obj 要复制的内容或DOM文本节点
+ * @returns {Promise}
+ */
+Vue.prototype.$copyText = Copy.copyText
 /**
  * @author xuanzai
  * @description 插入元素
@@ -212,9 +223,11 @@ Vue.prototype.$insertAfter = InsertAfter.insertAfter
  */
 Vue.prototype.$jsonPretty = JsonPretty.jsonPretty
 // 加入element-ui组件
-Vue.use(ElementUI);
+Vue.use(ElementUI)
+// 引入markdown编辑器组件
+Vue.use(mavonEditor)
 // 引入iview抽屉组件
-Vue.component('Drawer', Drawer);
+Vue.component('Drawer', Drawer)
 // 引入树状选择器组件
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠

@@ -1,6 +1,11 @@
 import { Message, MessageBox  } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 
+/**
+ * @author xuanzai
+ * @description 提示
+ * @param {String} msg 
+ */
 const successMsg = (msg) => {
     Message({
         message: msg,

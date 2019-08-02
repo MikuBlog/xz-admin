@@ -1,3 +1,9 @@
+/**
+ * @author xuanzai
+ * @description 添加类
+ * @param {DOM} element 
+ * @param {String} name 
+ */
 function addClass(element, name) {
     element.classList.add(name)
 }

@@ -96,9 +96,9 @@
                     </div>
                 </el-card>
             </el-col>
-            <el-col  :sm="24" :md="12" class="card-gutter">
+            <el-col  :sm="24" :md="12">
                 <el-card 
-                class="box-card">
+                class="box-card card-gutter-sm">
                     <div slot="header" class="clearfix">
                         <span class="title">字典详情</span>
                         <el-button 

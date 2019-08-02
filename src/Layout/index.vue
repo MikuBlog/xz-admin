@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <transition name="xz-animation">
-            <router-view></router-view>
-        </transition>
-    </div>
+    <transition name="xz-animation">
+        <router-view></router-view>
+    </transition>
 </template>
 
 <script>

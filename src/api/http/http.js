@@ -4,6 +4,7 @@
 	import 'element-ui/lib/theme-chalk/index.css';
 
 	/**
+	 * @author xuanzai
 	 * @description 返回错误信息
 	 * @param {String} message 错误信息
 	 */
@@ -15,6 +16,7 @@
 		})
 	}
 	/**
+	 * @author xuanzai
 	 * @description 如果状态码为401，清除token
 	 * @param {Number} status 状态码 
 	 */
@@ -23,6 +25,7 @@
 		&& storage.setMemoryPmt('token', '')
 	}
 	/**
+	 * @author xuanzai
 	 * @description 添加拦截器函数
 	 * @param {Object} obj axios实例对象 
 	 */
@@ -81,7 +84,10 @@
 			return data
 		}
 	}]	
-	// 发送数据格式为键值对
+	/**
+	 * @author xuanzai
+	 * @description 键值形式发送
+	 */
 	const http_normal = axios.create({
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
@@ -94,7 +100,10 @@
 			return str.replace(/&$/, '')
 		}],
 	})
-	// 发送数据格式为JSON格式
+	/**
+	 * @author xuanzai
+	 * @description json形式发送
+	 */
 	const http_json = axios.create({
 		headers: {
 			'Content-Type': 'application/json'
@@ -103,7 +112,10 @@
 			return JSON.stringify(data)
 		}],
 	})	
-	// 发送数据格式为文件类型
+	/**
+	 * @author xuanzai
+	 * @description 文件类型发送
+	 */
 	const http_file = axios.create({
 		headers: {
 			'Content-Type': 'multipart/form-data'

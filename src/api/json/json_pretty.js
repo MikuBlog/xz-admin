@@ -1,6 +1,6 @@
 /**
- * @description json美化(配合pre标签使用)
  * @author xuanzai
+ * @description json美化(配合pre标签使用)
  * @param {JSON | Object} json json字符串或对象
  * @param {Number} tab 空格的个数
  * @returns {JSON} 返回美化好的JSON 

@@ -223,8 +223,10 @@ export default {
                 image = document.querySelector('.el-image__inner') || document.querySelector('.el-image__error'),
                 mask = document.createElement('div')
             mask.className = "small-mask"
-            this.$insertAfter(mask, image)
-            this.getVal()
+            try {
+                this.$insertAfter(mask, image)
+                this.getVal()
+            }catch(e) {}
         },
         // 判断是否自动登录
         isAutoLogin() {

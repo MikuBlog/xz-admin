@@ -17,9 +17,10 @@ function previewFile(url) {
             height: 100%;
         `
     if(type == 'doc'|| type == 'docx'|| type == 'xls' || type == 'xlsx' || type == 'ppt' || type == 'pptx') {
-        let newPage = window.open('', type)
+        const newPage = window.open('', type)
         iframe.src = `https://view.officeapps.live.com/op/view.aspx?src=${url}`
-		newPage.document.body.appendChild(iframe)
+        newPage.document.body.appendChild(iframe)
+        newPage.document.body.style.margin = "0"
     }else {
         window.open(url)
     }	
