@@ -12,8 +12,8 @@ import DefaultPage from '@/Layout/index.vue'
 
 // 默认后台管理模板
 const layout = {
-    path: '/home',
     name: 'home',
+    path: '/home',
     component: Layout,
     children: []
 }

@@ -1,0 +1,37 @@
+<template>
+    <div class="editor">
+        <el-row>
+            <el-col :span="24">
+                <el-card class="box-card">
+                    <div slot="header">
+                        <span style="font-size: 1rem">富文本编辑器</span>
+                    </div>
+                    <Editor 
+                    ref="editor"
+                    @getValue="getValue" />
+                </el-card>
+            </el-col>
+        </el-row>
+    </div>
+</template>
+
+<script>
+import Editor from '@/components/editor/editor'
+export default {
+    components: { Editor },
+    data() {
+        return {
+            msg: ""
+        }
+    },
+    methods: {
+        getValue(val) {
+            this.msg = val
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>
