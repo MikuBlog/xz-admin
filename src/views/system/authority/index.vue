@@ -22,10 +22,10 @@
                                 class="margin-box" 
                                 @click="showAddAuthority()"></el-button>
                                 <el-button 
-                                class="margin-box" 
                                 type="warning" 
-                                icon="el-icon-more" 
+                                :icon="expand ? 'el-icon-open' : 'el-icon-turn-off'" 
                                 title="全部展开或收起"
+                                class="margin-box"
                                 @click="isExpandAll"
                                 circle></el-button>
                         </el-row>

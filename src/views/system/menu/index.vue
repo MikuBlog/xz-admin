@@ -24,7 +24,7 @@
                                 ></el-button>
                                 <el-button 
                                 type="warning" 
-                                icon="el-icon-more" 
+                                :icon="expand ? 'el-icon-open' : 'el-icon-turn-off'" 
                                 title="全部展开或收起"
                                 class="margin-box"
                                 @click="isExpandAll"
