@@ -1,29 +1,9 @@
 	import axios from 'axios'
+	import router from '@/router/index'
+	import { Loading  } from 'element-ui'
 	import storage from '../storage/storage'
-	import { Loading, Message } from 'element-ui'
-	import 'element-ui/lib/theme-chalk/index.css';
+	import Message from '../message/message'
 
-	/**
-	 * @author xuanzai
-	 * @description 返回错误信息
-	 * @param {String} message 错误信息
-	 */
-	function showTips(message) {
-		Message({
-			showClose: true,
-			message: message,
-			type: 'error'
-		})
-	}
-	/**
-	 * @author xuanzai
-	 * @description 如果状态码为401，清除token
-	 * @param {Number} status 状态码 
-	 */
-	function isLogin(status) {
-		status === 401
-		&& storage.setMemoryPmt('token', '')
-	}
 	/**
 	 * @author xuanzai
 	 * @description 添加拦截器函数
@@ -44,7 +24,7 @@
 				loading = Loading.service({ fullscreen: true })
 				return config
 			}, err => {
-				showTips('服务器出错，请联系客服进行处理')
+				Message.errorMsg('服务器出错，请联系客服进行处理')
 				loading.close()
 				return Promise.reject(err)
 			})
@@ -58,14 +38,21 @@
 			}, err => {
 				const regexp = new RegExp(/timeout/g)
 				typeof err.response === "object" 
-				? (showTips(
-					JSON.parse(err.response.request.response).message 
-					? JSON.parse(err.response.request.response).message.replace(/{.*}/g, '')
-					: JSON.parse(err.response.request.response)
-				), isLogin(err.response.status))
+				? (err.response.status === 401
+					? Message
+						.showMsgBox({ title: "系统提示", msg: "登录信息已过期，是否重新登录？", type: "warning" })
+						.then(() => {
+							router.push({ path: "/login" })
+						})
+					: Message
+						.errorMsg(
+							JSON.parse(err.response.request.response).message 
+							? JSON.parse(err.response.request.response).message.replace(/{.*}/g, '')
+							: JSON.parse(err.response.request.response)
+				))
 				: (regexp.test(err)
-				? showTips('请求超时，请联系客服进行处理')
-				: showTips('服务器出错，请联系客服进行处理'))
+				? Message.errorMsg('请求超时，请联系客服进行处理')
+				: Message.errorMsg('服务器出错，请联系客服进行处理'))
 				loading.close()
 				return Promise.reject(err)
 			})

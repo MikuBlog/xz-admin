@@ -27,7 +27,7 @@ const errorMsg = (msg) => {
     })
 }
 
-const showMsgBox = ({ title, msg, isHTML }) => {
+const showMsgBox = ({ title, msg, isHTML, type }) => {
     return MessageBox.confirm(msg || "", title || "", {
         // 不允许显示取消icon
         showClose: false,
@@ -38,7 +38,9 @@ const showMsgBox = ({ title, msg, isHTML }) => {
         // 是否在 hashchange 时关闭 MessageBox
         closeOnHashChange: true,
         // 是否将msg作为html处理
-        dangerouslyUseHTMLString: isHTML || false
+        dangerouslyUseHTMLString: isHTML || false,
+        // 图标类型
+        type: type || "info"
     })
 }
 
