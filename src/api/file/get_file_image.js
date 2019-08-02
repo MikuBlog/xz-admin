@@ -1,4 +1,5 @@
 /**
+ * @author xuanzai
  * @description 选择文件获取图片url
  * @param {Number} limit 图片大小限制，默认为2MB
  * @returns {Promise}
