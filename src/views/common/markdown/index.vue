@@ -9,7 +9,7 @@
                     <mavon-editor 
                     v-model="leftMsg" 
                     :toolbars="toolbars" 
-                    style="height: 550px"
+                    style="height: 550px; z-index: 1"
                     @change="getVal"/>
                 </el-card>
             </el-col>

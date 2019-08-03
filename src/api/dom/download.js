@@ -11,6 +11,4 @@ function download(url) {
 	ele.dispatchEvent(event)
 }
 
-export default {
-    download
-}
+export default download

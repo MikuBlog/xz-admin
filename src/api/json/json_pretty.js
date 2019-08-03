@@ -13,6 +13,4 @@ function jsonPretty(json, tab = 4) {
     }
 }
 
-export default {
-    jsonPretty
-}
+export default jsonPretty

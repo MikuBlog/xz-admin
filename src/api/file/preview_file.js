@@ -26,6 +26,4 @@ function previewFile(url) {
     }	
 }
 
-export default {
-    previewFile
-}
+export default previewFile

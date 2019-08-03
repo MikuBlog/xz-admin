@@ -8,6 +8,4 @@ function insertAfter(newEle, nowEle) {
 	nowEle.parentNode.insertBefore(newEle, nowEle.nextSibling)
 }
 
-export default {
-    insertAfter
-}
+export default insertAfter

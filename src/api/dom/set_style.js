@@ -9,7 +9,5 @@ function setStyle(el, ruleName, value) {
 	el.style[ruleName] = value
 }
 
-export default {
-    setStyle
-}
+export default setStyle
     

@@ -41,6 +41,4 @@ function copyText(obj) {
     })
 }
 
-export default {
-    copyText
-}
+export default copyText
