@@ -42,6 +42,7 @@
 					? Message
 						.showMsgBox({ title: "系统提示", msg: "登录信息已过期，是否重新登录？", type: "warning" })
 						.then(() => {
+							storage.setMemoryPmt('token', '')
 							router.push({ path: "/login" })
 						})
 					: Message
