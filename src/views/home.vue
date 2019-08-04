@@ -183,8 +183,9 @@
 
 <script>
 import NavMenu from '@/components/tree_menu/SidebarItem'
-import Breadcrumb from '@/components/breadcrumb';
-import Tag from '@/components/tag';
+import Breadcrumb from '@/components/breadcrumb'
+import Tag from '@/components/tag'
+import store from '@/store/store'
 export default {
     components: { NavMenu, Breadcrumb, Tag },
     data() {
@@ -224,7 +225,7 @@ export default {
     },
     methods: {
         // 获取用户信息
-        getUserInfo() {
+        getUserInfo() {       
             this.$http_json({
                 url: "/auth/info",
                 method: "get"
