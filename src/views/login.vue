@@ -66,6 +66,13 @@
                 <el-tab-pane label="登录框" name="1"></el-tab-pane>
             </el-tabs>
             <div class="background-setting" v-show="tab[0]">
+                <div class="block" style="text-align: right; margin: .5rem 0;">
+                    背景是否重复：<el-switch
+                            v-model="repeat"
+                            active-color="#13ce66"
+                            inactive-color="#dcdfe6">
+                            </el-switch>
+                </div>
                 <el-image
                 style="width: 100%; height: 159px"
                 :src="backgroundUrl"
@@ -183,8 +190,10 @@ export default {
             fontSize: 30,
             iconSize: 30,
             size: "cover",
+            repeat: false,
             boxColor: "rgba(0, 0, 0, .35)",
             fontColor: "#fefefe",
+            unLock: false,
             ruleForm: {
                 username: "",
                 password: "",
@@ -207,7 +216,6 @@ export default {
         this.isAutoLogin()
     },
     mounted() {
-        // 初始化样式
         this.initialStyle()
         this.getBoxVal()
         this.useBg()
@@ -231,7 +239,7 @@ export default {
         // 判断是否自动登录
         isAutoLogin() {
             this.$getMemoryPmt('isAutoLogin') && this.$getMemoryPmt('token') 
-            && this.$router.push({path: '/home/welcome'})
+            && this.$router.push({path: '/home/redirect'})
         },
         autoLogin(val) {
             this.$setMemoryPmt('isAutoLogin', val)
@@ -241,6 +249,7 @@ export default {
             const
                 loginBox = this.$refs.loginBox,
                 header = this.$refs.header,
+                background = this.$refs.background,
                 svg = document.querySelectorAll('svg'),
                 checkBox = document.querySelector('.el-checkbox'),
                 tip = document.querySelector('.tip')
@@ -364,15 +373,16 @@ export default {
                 ele, 
                 'overflow-x', 
                 'hidden')
-            this.opacity = +this.$getMemoryPmt('opacity') || 100,
-            this.blur = +this.$getMemoryPmt('blur') || 0,
-            this.mask = +this.$getMemoryPmt('mask') || 0,
-            this.height = +this.$getMemoryPmt('height') || 62,
-            this.width = +this.$getMemoryPmt('width') || 50,
-            this.fontSize = +this.$getMemoryPmt('fontSize') || 30,
-            this.iconSize = +this.$getMemoryPmt('iconSize') || 30,
-            this.size = this.$getMemoryPmt('size') || "cover",
-            this.boxColor = this.$getMemoryPmt('boxColor') || "rgba(0, 0, 0, .35)",
+            this.opacity = +this.$getMemoryPmt('opacity') || 100
+            this.blur = +this.$getMemoryPmt('blur') || 0
+            this.mask = +this.$getMemoryPmt('mask') || 0
+            this.height = +this.$getMemoryPmt('height') || 62
+            this.width = +this.$getMemoryPmt('width') || 50
+            this.fontSize = +this.$getMemoryPmt('fontSize') || 30
+            this.iconSize = +this.$getMemoryPmt('iconSize') || 30
+            this.size = this.$getMemoryPmt('size') || "cover"
+            this.repeat = this.$getMemoryPmt('repeat') || false
+            this.boxColor = this.$getMemoryPmt('boxColor') || "rgba(0, 0, 0, .35)"
             this.fontColor = this.$getMemoryPmt('fontColor') || "#fefefe"
             this.ruleForm.checked = this.$getMemoryPmt('isAutoLogin') || false
         },
@@ -413,6 +423,9 @@ export default {
                     mask, 
                     'background', 
                     `rgba(0, 0, 0, ${this.mask / 100})`))
+                this.repeat
+                ? this.$setStyle(ele, 'background-repeat', 'no-repeat')
+                : this.$setStyle(ele, 'background-repeat', 'repeat')
             this.saveBgStyle()
         },
         // 保存背景样式
@@ -422,6 +435,11 @@ export default {
             this.$setMemoryPmt('blur', this.blur)
             this.$setMemoryPmt('mask', this.mask)
             this.$setMemoryPmt('size', this.size)
+            this.$setMemoryPmt('repeat', this.repeat)
+            if(this.unLock) {
+                this.$successMsg('应用背景成功')
+            }
+            this.unLock = true
         },
         // 保存登录框样式
         saveBoxStyle() {
@@ -466,7 +484,7 @@ export default {
                     }).then(result => {
                         this.$setMemoryPmt('token', result.data.token)
                         this.$clearMemorySes()
-                        this.$router.push({path: '/home/welcome'})
+                        this.$router.push({path: '/home/redirect'})
                     })
                 }else {
                     return false
@@ -502,9 +520,7 @@ export default {
         left: 0;
         bottom: 0;
         background-image: url(../assets/login/background.png);
-        background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
         z-index: -1;
         opacity: 0.5;
     }

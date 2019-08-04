@@ -29,15 +29,13 @@ export default {
   },
   methods: {
     getBreadcrumb() {
+      let firstTag = this.$store.state.tagsList[0]
       let matched = this.$route.matched.filter(item => {
-        if (item.name) {
+        if (item.name && item.name != firstTag.name) {
           return true
         }
       })
-      const first = matched[1]
-      if (first && first.name !== '首页') {
-        matched = [{ path: '/home/welcome', meta: { title: '首页' }}].concat(matched)
-      }
+      matched = [firstTag].concat(matched)
       this.levelList = matched
     },
     pathCompile(path) {

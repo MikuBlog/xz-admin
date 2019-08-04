@@ -19,13 +19,7 @@ export default new Vuex.Store({
     // 保存菜单索引
     menuIndex: "首页",
     // 保存标签页列表
-    tagsList: [{
-      meta: {
-        title: "首页",
-        active: true
-      },
-      path: '/home/welcome',
-    }]
+    tagsList: []
   },
   mutations: {
     // 保存用户信息

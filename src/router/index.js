@@ -9,13 +9,19 @@ import 'nprogress/nprogress.css';
 import Layout from '@/views/home.vue'
 // 默认路由页，用来存放子路由的纯路由页面
 import DefaultPage from '@/Layout/index.vue'
+// 重定向页面
+import Redirect from '@/views/redirect'
 
 // 默认后台管理模板
 const layout = {
     name: 'home',
     path: '/home',
     component: Layout,
-    children: []
+    children: [{
+        name: 'redirect',
+        path: 'redirect',
+        component: Redirect
+    }]
 }
 
 // 动态生成路由
@@ -87,6 +93,7 @@ function getRouter() {
         }).then(result => {
             const list = result.data
             store.commit("setMenuList", list)
+            initialTags(list)
             generateRouter(list, layout)
             router.addRoutes([ layout ])
             router.addRoutes([{
@@ -97,6 +104,13 @@ function getRouter() {
     }
 }
 
+// 初始化标签页
+function initialTags(list) {
+    const tagsList = store.state.tagsList
+    tagsList.splice(0)
+    tagsList.push(list[0])
+}
+
 // 添加标签页
 function addTags(tag) {
     const tagsList = store.state.tagsList
@@ -104,9 +118,9 @@ function addTags(tag) {
     if(tag.meta.title === "404") {
         return
     }
-    // 如果已存在标签，将该标签改为活跃状态
+    // 已存在标签或标签名不存在或标签名为重定向，不添加标签
     for(let i = 0, len = tagsList.length; i < len; i ++) {
-        if(tagsList[i].meta.title === tag.meta.title || !tag.name) {
+        if(tagsList[i].meta.title === tag.meta.title || !tag.name || tag.name === 'redirect') {
             return
         }
     }

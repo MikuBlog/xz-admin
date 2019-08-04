@@ -12,7 +12,7 @@
         @click.middle.native="tabsClick(tag)"
         @contextmenu.prevent.native="openMenu(tag,$event)">
         {{ tag.meta.title }}
-        <span v-if="tag.meta.title != '首页'" class="el-icon-close" @click.prevent.stop="tabsRemove(tag)" />
+        <span v-if="tag.meta.title != $store.state.tagsList[0].meta.title" class="el-icon-close" @click.prevent.stop="tabsRemove(tag)" />
       </router-link>
     </scroll-pane>
   </div>
