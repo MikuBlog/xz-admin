@@ -42,6 +42,12 @@ export default new Vuex.Store({
     // 移除所有标签页
     removeTag(state) {
       state.tagsList.splice(1)
+    },
+    // 移除用户信息
+    removeUserInfo(state) {
+      for(let key in state.user) {
+        state.user[key] = ""
+      }
     }
   },
   actions: {

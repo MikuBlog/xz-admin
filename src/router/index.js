@@ -127,7 +127,7 @@ function addTags(tag) {
     store.commit('addTags', tag)
 }
 
-// 清除缓存
+// 清除用户信息
 function removeRedis() {
     store.commit("setMenuList", [])
     store.commit("removeTag")
@@ -148,12 +148,8 @@ router.beforeEach((to, from, next) => {
         if(to.path === "/") {
             next({ path: '/login' })
         }else {
-            // 如果用户信息存在，拉取动态路由与菜单
-            if(store.state.user.phone) {
-                getRouter()
-            }
-            // 如果菜单信息不存在（直接访问），重新拉取动态路由与菜单
-            if(store.state.menuList.length == 0) {
+            // 如果菜单信息不存在（直接访问）或当前子路由只剩一个，重新拉取动态路由与菜单
+            if(store.state.menuList.length == 0 && layout.children.length == 1) {
                 getRouter()
             }
             // 改变菜单索引
