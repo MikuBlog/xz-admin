@@ -200,6 +200,14 @@ export default {
             tagsList: this.$store.state.tagsList,
             user: {},
             squareUrl: "",
+            menuList:[{
+                meta: {
+                    title: "首页"
+                },
+                iframe: false,
+                icon: "主页",
+                path: "/home/welcome"
+            }]
         }
     },
     created() {

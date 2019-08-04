@@ -21,8 +21,7 @@ export default new Vuex.Store({
     // 保存标签页列表
     tagsList: [{
       meta: {
-        title: "首页",
-        active: true
+        title: "首页"
       },
       path: '/home/welcome',
     }]

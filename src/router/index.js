@@ -9,13 +9,22 @@ import 'nprogress/nprogress.css';
 import Layout from '@/views/home.vue'
 // 默认路由页，用来存放子路由的纯路由页面
 import DefaultPage from '@/Layout/index.vue'
+// 默认首页加载
+import Welcome from '@/views/welcome'
 
 // 默认后台管理模板
 const layout = {
     name: 'home',
     path: '/home',
     component: Layout,
-    children: []
+    children: [{
+        name: "首页",
+        path: "welcome",
+        meta: {
+            title: "首页"
+        },
+        component: Welcome
+    }]
 }
 
 // 动态生成路由
