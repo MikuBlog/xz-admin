@@ -3,7 +3,6 @@
         <el-row>
             <el-col :span="24">
                 <div class="background-box" ref="background"></div>
-                <!-- <img class="image" src="@/assets/welcome/welcome.png" alt="welcome.png"> -->
             </el-col>
         </el-row>
     </div>
@@ -34,7 +33,7 @@ export default {
 <style lang="scss" scoped>
     .background-box {
         position: relative;
-        background-image: url(../assets/welcome/welcome.png);
+        background-image: url(../assets/welcome/welcome.gif);
         background-size: cover;
         background-position: center;
         box-shadow: 0 0 3px 3px silver;
