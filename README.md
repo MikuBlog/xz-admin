@@ -72,7 +72,7 @@ https://xzadmin.xuanzai.top
 
 + 富文本编辑器：`UEditor`
 + 图表：`VCharts`
-+ 数字滚动：`vue-number-scroll`
++ 数字滚动：`vue-count-to`
 + 树状选择器：`vue-treeselect`
 + 动态菜单折叠插件：`vue-fragment`
 + 进度条：`nprogress`
