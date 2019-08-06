@@ -37,5 +37,5 @@ export default {
         background-size: cover;
         background-position: center;
         box-shadow: 0 0 3px 3px silver;
-    }
+    } 
 </style>
