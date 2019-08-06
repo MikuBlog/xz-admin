@@ -29,6 +29,7 @@ import { MessageBox } from 'mint-ui';
                     </div>
                     <el-table
                         :data="exceptionLogList"
+                        :highlight-current-row="true"
                         style="width: 100%">
                         <el-table-column
                         label="用户名"

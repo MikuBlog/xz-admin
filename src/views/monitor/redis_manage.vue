@@ -24,6 +24,7 @@ import { MessageBox } from 'mint-ui';
                     </div>
                     <el-table
                         :data="redisList"
+                        :highlight-current-row="true"
                         style="width: 100%">
                         <el-table-column
                         :show-overflow-tooltip="true"

@@ -51,6 +51,7 @@
                     </div>
                     <el-table
                         :data="authorityLogList"
+                        :highlight-current-row="true"
                         style="width: 100%">
                         <el-table-column
                         label="操作者"

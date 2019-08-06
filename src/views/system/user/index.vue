@@ -76,6 +76,7 @@
                     </div>
                     <el-table
                         :data="userList"
+                        :highlight-current-row="true"
                         style="width: 100%;">
                         <el-table-column
                         label="用户名"

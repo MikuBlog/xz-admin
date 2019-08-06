@@ -43,6 +43,7 @@
                     <el-table
                         :data="dictionaryList"
                         style="width: 100%;"
+                        :highlight-current-row="true"
                         @row-click="getDictName">
                         <el-table-column
                         label="名称"
@@ -126,6 +127,7 @@
                     </div>
                     <el-table
                         :data="detailList"
+                        :highlight-current-row="true"
                         style="width: 100%">
                         <el-table-column
                         label="所属字典"

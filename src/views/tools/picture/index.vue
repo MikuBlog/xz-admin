@@ -31,6 +31,7 @@
                     <el-table 
                     ref="table" 
                     :data="pictureList" 
+                    :highlight-current-row="true"
                     size="small" 
                     style="width: 100%;"
                     @selection-change="selectItem">

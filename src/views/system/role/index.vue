@@ -37,6 +37,7 @@
                     <el-table
                         :data="roleList"
                         style="width: 100%;"
+                        :highlight-current-row="true"
                         @row-click="getRoleItem">
                         <el-table-column
                         label="名称"
