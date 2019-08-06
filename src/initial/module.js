@@ -48,6 +48,8 @@ import ReadImg from '@/api/file/get_file_image'
 import PreviewFile from '@/api/file/preview_file'
 // 引入json美化模块
 import JsonPretty from '@/api/json/json_pretty'
+// 引入图片加载动画模块
+import ImageLoad from '@/api/other/image_load'
 // 引入jquery模块
 Vue.prototype.$$ = Jquery 
 /**
@@ -219,6 +221,12 @@ Vue.prototype.$insertAfter = InsertAfter
  * @returns {JSON} 返回美化好的JSON 
  */
 Vue.prototype.$jsonPretty = JsonPretty
+/**
+ * @author xuanzai
+ * @description 图片加载模块
+ * @param {String} url
+ */
+Vue.prototype.$imageLoad = ImageLoad
 // 加入element-ui组件
 Vue.use(ElementUI)
 // 引入markdown编辑器组件

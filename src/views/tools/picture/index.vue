@@ -46,7 +46,7 @@
                         :show-overflow-tooltip="true"/>
                         <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="缩略图">
                             <template slot-scope="scope">
-                            <a :href="scope.row.url" style="color: #42b983" target="_blank"><img :src="scope.row.url" alt="点击打开" class="el-avatar"></a>
+                            <a :href="scope.row.url" style="color: #42b983" target="_blank"><img :src="scope.row.url" alt="点击打开" class="el-avatar xz-image"></a>
                             </template>
                         </el-table-column>
                         <el-table-column 

@@ -15,7 +15,7 @@
                                     流量
                                 </div>
                                 <div class="number">
-                                    <vns :start="0" :end="peopleNum" :times="times" :speed="speed"/>
+                                    <countTo :startVal="0" :endVal="peopleNum" :duration="5000"/>
                                 </div>
                             </div>
                         </el-col>
@@ -36,7 +36,7 @@
                                     留言
                                 </div>
                                 <div class="number">
-                                    <vns :start="0" :end="messageNum" :times="times" :speed="speed"/>
+                                  <countTo :startVal="0" :endVal="messageNum" :duration="8000"/>
                                 </div>
                             </div>
                         </el-col>
@@ -57,7 +57,7 @@
                                 销售额
                                 </div>
                                 <div class="number">
-                                    <vns :start="0" :end="money" :times="times" :speed="speed"/>
+                                  <countTo :startVal="0" :endVal="money" :duration="6000"/>
                                 </div>
                             </div>
                         </el-col>
@@ -78,7 +78,7 @@
                                 销售量
                                 </div>
                                 <div class="number">
-                                    <vns :start="0" :end="sellNum" :times="times" :speed="speed"/>
+                                  <countTo :startVal="0" :endVal="sellNum" :duration="6000"/>
                                 </div>
                             </div>
                         </el-col>
@@ -115,14 +115,14 @@
 
 <script>
 // 引入v-chart
-import vns from 'vue-number-scroll'
+import countTo from 'vue-count-to'
 import VeLine from 'v-charts/lib/line.common'
 import VePie from 'v-charts/lib/pie.common'
 import VeRing from 'v-charts/lib/ring.common'
 import VeHistogram from 'v-charts/lib/histogram.common'
 import VeFunnel from 'v-charts/lib/funnel.common'
 export default {
-    components: { VeLine, VePie, VeRing, VeHistogram, VeFunnel, vns },
+    components: { VeLine, VePie, VeRing, VeHistogram, VeFunnel, countTo },
     data() {
         this.lineSettings = {
             stack: { '用户': ['访问用户', '下单用户'] },
@@ -145,7 +145,6 @@ export default {
             sellNum: 573,
             messageNum: 79,
             speed: 40,
-            times: 60,
             lineData: {
                 columns: ['日期', '访问用户', '下单用户', '下单率'],
                 rows: [
