@@ -66,7 +66,7 @@ export default {
                 if(item.path == this.$route.path && i != len - 1) {
                   this.$router.push({ path: this.tagsList[i + 1].path })
                 }
-                this.tagsList.splice(i, 1)
+                this.tagsList.splice(i, 1) 
               }  
             }
         },
