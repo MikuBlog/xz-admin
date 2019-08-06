@@ -19,7 +19,8 @@ export default {
             const 
                 ele = document.querySelector('#top'),
                 background = this.$refs.background
-            this.$setStyle(background, 'height', `${ele.clientHeight - 40}px`)
+            this.$setStyle(background, 'height', `${ele.clientHeight + 5}px`)
+            this.$setStyle(background, 'width', `${ele.clientWidth + 5}px`)
         },
         initialListener() {
             window.addEventListener('resize', () => {
@@ -32,7 +33,9 @@ export default {
 
 <style lang="scss" scoped>
     .background-box {
-        position: relative;
+        position: absolute;
+        top: -15px;
+        left: -15px;
         background-image: url(../assets/welcome/welcome.gif);
         background-size: cover;
         background-position: center;
