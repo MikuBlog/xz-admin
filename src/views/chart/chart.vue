@@ -15,7 +15,7 @@
                                     流量
                                 </div>
                                 <div class="number">
-                                    <countTo :startVal="0" :endVal="peopleNum" :duration="5000"/>
+                                    <countTo :startVal="0" :endVal="peopleNum" :duration="3000"/>
                                 </div>
                             </div>
                         </el-col>
@@ -36,7 +36,7 @@
                                     留言
                                 </div>
                                 <div class="number">
-                                  <countTo :startVal="0" :endVal="messageNum" :duration="8000"/>
+                                  <countTo :startVal="0" :endVal="messageNum" :duration="3000"/>
                                 </div>
                             </div>
                         </el-col>
@@ -57,7 +57,7 @@
                                 销售额
                                 </div>
                                 <div class="number">
-                                  <countTo :startVal="0" :endVal="money" :duration="6000"/>
+                                  <countTo :startVal="0" :endVal="money" :duration="5000"/>
                                 </div>
                             </div>
                         </el-col>
@@ -78,7 +78,7 @@
                                 销售量
                                 </div>
                                 <div class="number">
-                                  <countTo :startVal="0" :endVal="sellNum" :duration="6000"/>
+                                  <countTo :startVal="0" :endVal="sellNum" :duration="3000"/>
                                 </div>
                             </div>
                         </el-col>

@@ -60,9 +60,12 @@ export default {
         tabsRemove(item) {
             for(let i = 0, len = this.tagsList.length; i < len; i ++) {
               if(item.meta.title === this.tagsList[i].meta.title) {
-                if(item.path == this.$route.path) {
+                if(item.path == this.$route.path && i == len - 1) {
                   this.$router.push({ path: this.tagsList[i - 1].path })
-                }  
+                }
+                if(item.path == this.$route.path && i != len - 1) {
+                  this.$router.push({ path: this.tagsList[i + 1].path })
+                }
                 this.tagsList.splice(i, 1)
               }  
             }
