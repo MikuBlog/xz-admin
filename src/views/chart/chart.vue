@@ -4,12 +4,12 @@
             <el-col :xs="12" :sm="12" :md="6" :xl="6">
                 <el-card class="box-card">
                     <el-row>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12" style="text-align: center">
                             <div class="iconfont-box">
                                 <span class="el-icon-user-solid"></span>
                             </div>
                         </el-col>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12">
                             <div class="content-box">
                                 <div class="header">
                                     流量
@@ -25,12 +25,12 @@
             <el-col :xs="12" :sm="12" :md="6" :xl="6">
                 <el-card class="box-card">
                     <el-row>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12" style="text-align: center">
                             <div class="iconfont-box">
                                 <span class="el-icon-document"></span>
                             </div>
                         </el-col>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12">
                             <div class="content-box">
                                 <div class="header">
                                     留言
@@ -46,12 +46,12 @@
             <el-col :xs="12" :sm="12" :md="6" :xl="6">
                 <el-card class="box-card">
                     <el-row>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12" style="text-align: center">
                             <div class="iconfont-box">
                                 <span class="el-icon-coin"></span>
                             </div>
                         </el-col>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12">
                             <div class="content-box">
                                 <div class="header">
                                 销售额
@@ -67,12 +67,12 @@
             <el-col :xs="12" :sm="12" :md="6" :xl="6">
                 <el-card class="box-card">
                     <el-row>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12" style="text-align: center">
                             <div class="iconfont-box">
                                 <span class="el-icon-shopping-cart-1"></span>
                             </div>
                         </el-col>
-                        <el-col :span="12">
+                        <el-col :xs="24" :sm="12">
                             <div class="content-box">
                                 <div class="header">
                                 销售量
@@ -254,4 +254,11 @@ export default {
         color: #656565;
         font-size: 1.2rem;
     }
+    @media screen and (max-width: 768px) {
+          .content-box {
+            text-align: center;
+            top: 0;
+            padding-right: 0;
+          }
+      } 
 </style>
