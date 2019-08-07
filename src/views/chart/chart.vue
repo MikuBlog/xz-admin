@@ -15,7 +15,7 @@
                                     流量
                                 </div>
                                 <div class="number">
-                                    <countTo :startVal="0" :endVal="peopleNum" :duration="3000"/>
+                                    <countTo :startVal="0" :endVal="peopleNum" :duration="duration"/>
                                 </div>
                             </div>
                         </el-col>
@@ -36,7 +36,7 @@
                                     留言
                                 </div>
                                 <div class="number">
-                                  <countTo :startVal="0" :endVal="messageNum" :duration="3000"/>
+                                  <countTo :startVal="0" :endVal="messageNum" :duration="duration"/>
                                 </div>
                             </div>
                         </el-col>
@@ -57,7 +57,7 @@
                                 销售额
                                 </div>
                                 <div class="number">
-                                  <countTo :startVal="0" :endVal="money" :duration="5000"/>
+                                  <countTo :startVal="0" :endVal="money" :duration="duration"/>
                                 </div>
                             </div>
                         </el-col>
@@ -78,7 +78,7 @@
                                 销售量
                                 </div>
                                 <div class="number">
-                                  <countTo :startVal="0" :endVal="sellNum" :duration="3000"/>
+                                  <countTo :startVal="0" :endVal="sellNum" :duration="duration"/>
                                 </div>
                             </div>
                         </el-col>
@@ -145,6 +145,7 @@ export default {
             sellNum: 573,
             messageNum: 79,
             speed: 40,
+            duration: 4000,
             lineData: {
                 columns: ['日期', '访问用户', '下单用户', '下单率'],
                 rows: [
