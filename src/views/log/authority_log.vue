@@ -162,11 +162,11 @@
             <el-row :gutter=20>
                 <el-col :sm="24" :md="12">
                     <h3>操作前的值</h3>
-                    <pre>{{authorityOldDetail}}</pre>
+                    <pre class="pre">{{authorityOldDetail}}</pre>
                 </el-col>
                 <el-col :sm="24" :md="12">
                     <h3>操作后的值</h3>
-                    <pre>{{authorityNewDetail}}</pre>
+                    <pre class="pre">{{authorityNewDetail}}</pre>
                 </el-col>
             </el-row>
         </el-dialog>
@@ -350,5 +350,8 @@ export default {
     }
     h3 {
         line-height: 3rem;
+    }
+    .pre {
+      white-space: pre-wrap;
     }
 </style>
