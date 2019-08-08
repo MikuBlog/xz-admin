@@ -28,7 +28,7 @@ export default {
           const 
             image = new Image(),
             background = this.$refs.background
-          image.src = "/img/welcome.3dc9d18c.gif"
+          image.src = "/img/homepage.f40b3207.gif"
           image.onload = () => {
             this.$setStyle(background, 'display', "block")
             this.$setStyle(background, 'background-image', `url(${image.src})`)
@@ -52,7 +52,7 @@ export default {
         position: relative;
         display: none;
         height: 100%;
-        background-image: url(../assets/welcome/welcome.png);
+        background-image: url(../assets/welcome/homepage.gif);
         background-size: cover;
         background-position: center;
         box-shadow: 0 0 3px 3px silver;

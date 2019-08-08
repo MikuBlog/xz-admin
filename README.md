@@ -17,65 +17,24 @@ https://xzadmin.xuanzai.top
 
 <br/>
 
-# :ok_hand: 页面开发进度
+# 文档
 
-已完成所有，日后再添加
-
-<br/>
-
-# :muscle: 已对接接口
-
-- 登录
-- 系统管理
-  - 字典管理
-  - 菜单管理
-  - 岗位管理
-  - 权限管理
-  - 用户管理
-  - 部门管理
-  - 权限管理
-- 日志管理
-  - 操作日志
-  - 异常日志 
-  - 权限日志
-- 系统监控
-  - 系统缓存
-- 系统工具
-  - 图片管理
-
-<br/>
-
-# :bulb: 已有功能
-
-+ 个性化登录界面
-+ 个性化后台管理界面
-+ 路由与标签页、菜单、面包屑关联（vue-router）
-
-<br/>
-
-# :earth_asia: 页面布局
-
-+ 弹性布局
-+ 响应式布局
-+ 响应式菜单
-+ 可滚动标签页
-
-<br/>
+前端开发文档仍在编写中
 
 
 # :sparkling_heart: 技术栈
-使用了`vue`、`element-ui`、`iview`作为主要技术栈
+使用了`vue`、`element-ui`作为主要技术栈
 
 <br/>
 
 # :electric_plug: 插件
 
-+ 富文本编辑器：`UEditor`
 + 图表：`VCharts`
 + 数字滚动：`vue-count-to`
 + 树状选择器：`vue-treeselect`
 + 动态菜单折叠插件：`vue-fragment`
 + 进度条：`nprogress`
++ 富文本编辑器：`UEditor`
 + markdown编辑器：`mavonEditor`
 
 <br/>
