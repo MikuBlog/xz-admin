@@ -383,7 +383,7 @@ export default {
       width: 200px;
     }
     .el-menu--collapse {
-      width: 60px;
+      width: 63px;
     }
     .el-menu-item {
         position: relative;
