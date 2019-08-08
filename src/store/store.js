@@ -5,6 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // 页面元素样式设置
+    setting: {
+      showLogo: true,
+      showTags: true,
+      showBreadcrumb: true,
+    },
     // 保存用户信息
     user: {
       avatar: "",

@@ -13,7 +13,7 @@
                 text-color="#becad8"
                 :unique-opened="true"
                 >
-                    <div class="logo" v-show="isShowLogo" v-if="!isCollapse">
+                    <div class="logo" v-show="$store.state.setting.showLogo" v-if="!isCollapse">
                         <img src="../assets/logo/catjoker.png" alt="logo.png">
                     </div>
                     <NavMenu 
@@ -24,7 +24,7 @@
             <Drawer 
             v-show="isSmall" 
             v-model="isMenuCollapse"
-            width="212"
+            width="200"
             placement="left">
                 <el-scrollbar style="height:100%">
                     <el-menu 
@@ -38,7 +38,7 @@
                     @select="clickMenuItem"
                     >
                         <div class="logo" 
-                        v-show="isShowLogo" 
+                        v-show="$store.state.setting.showLogo" 
                         >
                             <img src="../assets/logo/catjoker.png" alt="logo.png">
                         </div>
@@ -72,7 +72,7 @@
                                 title="删除所有标签页"></i>
                             </el-tooltip>
                         </div>
-                        <div class="breadcrumb">
+                        <div class="breadcrumb" v-show="$store.state.setting.showBreadcrumb">
                             <Breadcrumb></Breadcrumb>
                         </div>
                         <div class="icon-box">
@@ -126,7 +126,7 @@
                     </div>
                     <div class="border" style="border-color: #f0f0f0"></div>
                 </el-header>
-                <div class="tabs">
+                <div class="tabs" v-show="$store.state.setting.showTags">
                     <Tag :tagsList="$store.state.tagsList" />
                 </div>
                 <el-main class="top" id="top">
@@ -155,7 +155,17 @@
             <div class="switch-box">
                 <div class="box">
                     <span class="tips">显示Logo</span>
-                    <el-switch v-model="isShowLogo" @change="showLogo">
+                    <el-switch v-model="$store.state.setting.showLogo">
+                    </el-switch>
+                </div>
+                <div class="box">
+                    <span class="tips">显示标签页</span>
+                    <el-switch v-model="$store.state.setting.showTags">
+                    </el-switch>
+                </div>
+                <div class="box">
+                    <span class="tips">显示面包屑</span>
+                    <el-switch v-model="$store.state.setting.showBreadcrumb">
                     </el-switch>
                 </div>
             </div>
@@ -195,7 +205,6 @@ export default {
             isSmall: false,
             isMenuCollapse: false,
             isSetting: false,
-            isShowLogo: true,
             isShowBackTop: false,
             logoUrl: "",
             tagsList: this.$store.state.tagsList,
@@ -220,8 +229,6 @@ export default {
         this.initialListener()
         // 获取视窗大小
         this.getWindowWidth()
-        // 是否显示Logo
-        this.isShowLogo = this.$getMemoryPmt('isShowLogo') || true
     },
     methods: {
         // 获取用户信息
@@ -259,10 +266,6 @@ export default {
                 .catch(e => {
                     this.$warnMsg(e)
                 })
-        },
-        // 全局设置显示菜单Logo
-        showLogo(val) {
-            this.$setMemoryPmt('isShowLogo', val)
         },
         // 打开设置抽屉
         showSetting() {
@@ -375,6 +378,12 @@ export default {
     }
     .el-icon-s-unfold:active {
         color: rgb(19, 180, 255);
+    }
+    .el-menu {
+      width: 200px;
+    }
+    .el-menu--collapse {
+      width: 60px;
     }
     .el-menu-item {
         position: relative;

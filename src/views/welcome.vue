@@ -52,7 +52,7 @@ export default {
         position: relative;
         display: none;
         height: 100%;
-        background-image: url(../assets/welcome/welcome.gif);
+        background-image: url(../assets/welcome/welcome.png);
         background-size: cover;
         background-position: center;
         box-shadow: 0 0 3px 3px silver;
