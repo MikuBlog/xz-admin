@@ -13,7 +13,7 @@ https://xzadmin.xuanzai.top
 
 运行：在项目目录下`npm run serve`
 
-查询文档，[快速上手](http://xzadmin-docs.xuanzai.top)
+查阅文档，[快速上手](http://xzadmin-docs.xuanzai.top)
 
 如有问题，请看[已知问题列表](#question)
 
