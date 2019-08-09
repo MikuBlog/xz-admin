@@ -11,7 +11,7 @@
 
 ## 添加icon
 
-通过强大的阿里妈妈iconfont平台下载自己喜欢的icon：`https://www.iconfont.cn/`。
+通过强大的阿里妈妈[iconfont](https://www.iconfont.cn/)平台下载自己喜欢的`icon`。
 
 将下载好的`SVG`文件放到`src/icons/svg`目录下，即可自动生成`icon`。
 
@@ -19,6 +19,12 @@
 
 ```
 <svg-icon icon-class="icon的名字"/>
+```
+
+同样可以使用[font-awesome](http://fontawesome.dashgame.com/)提供的图标，项目中已经引入
+
+```
+<i class="fa fa-address-book"></i>
 ```
 
 <br/>
