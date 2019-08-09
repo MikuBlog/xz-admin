@@ -15,11 +15,9 @@ https://xzadmin.xuanzai.top
 
 如有问题，请看[已知问题列表](#question)
 
+[快速上手](http://xzadmin-docs.xuanzai.top)
+
 <br/>
-
-# 文档
-
-前端开发文档仍在编写中
 
 
 # :sparkling_heart: 技术栈
