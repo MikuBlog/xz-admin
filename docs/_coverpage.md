@@ -6,6 +6,7 @@
 * 采用RBAC模式设计的数据库模型
 
 [GitHub](https://github.com/MikuBlog/xz-admin)
-[Get Started](#介绍)
+[preview](https://xzadmin.xuanzai.top)
+[Get Started](/page/introduction)
 
 ![](background/background_1.PNG)
