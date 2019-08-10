@@ -176,7 +176,7 @@ export default {
         },
         // 初始化部门列表
         initialDepartmentList(list) {
-            this.departmentList.splice(0, this.departmentList.length)
+            this.departmentList.splice(0)
             list.forEach(value => {
                 this.departmentList.push(value)
             })

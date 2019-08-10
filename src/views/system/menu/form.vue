@@ -157,7 +157,7 @@ export default {
     },
     initialMenus(list) {
       const menu = { id: 0, label: '顶级类目', children: [] }
-      this.menus.splice(0, this.menus.length)
+      this.menus.splice(0)
       menu.children = list
       this.menus.push(menu)
     },

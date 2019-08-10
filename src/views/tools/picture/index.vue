@@ -177,7 +177,7 @@ export default {
         },
         // 初始化错误日志列表
         initialPictureList(list) {
-            this.pictureList.splice(0, this.pictureList.length)
+            this.pictureList.splice(0)
             list.forEach(value => {
                 this.pictureList.push(value)
             })

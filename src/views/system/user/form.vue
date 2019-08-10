@@ -199,7 +199,7 @@ export default {
     },
     // 初始化工作岗位
     initialJobs(list, id) {
-      this.jobs.splice(0, this.jobs.length)
+      this.jobs.splice(0)
       list.forEach(value => {
         this.jobs.push(value)
       })

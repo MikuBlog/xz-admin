@@ -189,7 +189,7 @@ export default {
         },
         // 初始化错误日志列表
         initialExceptionLogList(list) {
-            this.exceptionLogList.splice(0, this.exceptionLogList.length)
+            this.exceptionLogList.splice(0)
             list.forEach(value => {
                 this.exceptionLogList.push(value)
             })

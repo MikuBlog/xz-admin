@@ -114,18 +114,13 @@ export default {
         this.$refs.departmentForm.resetFields()
       }catch(e) {}
     },
-    // 初始化部门列表
-    initialDepartmentlist(list) {
-      this.depts.splice(0, this.depts.length)
-      this.depts = list
-    },
     // 获取部门列表
     getDepartmentList() {
         this.$http_json({
           url: "/api/dept/get?enabled=true",
           method: "get"
         }).then(result => {
-          this.initialDepartmentlist(result.data.content)
+          this.depts = result.data.content
         })
     }
   }

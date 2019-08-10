@@ -314,7 +314,7 @@ export default {
         },
         // 初始化权限日志列表
         initialAuthorityLogList(list) {
-            this.authorityLogList.splice(0, this.authorityLogList.length)
+            this.authorityLogList.splice(0)
             list.forEach(value => {
                 value.type = this.initialOperationType(value.type)
                 this.authorityLogList.push(value)

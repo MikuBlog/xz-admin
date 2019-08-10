@@ -317,7 +317,7 @@ export default {
         },
         // 初始化角色列表
         initialRoleList(list) {
-            this.roleList.splice(0, this.roleList.length)
+            this.roleList.splice(0)
             list.forEach(value => {
                 this.roleList.push(value)
             })

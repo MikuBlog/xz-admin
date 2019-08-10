@@ -176,7 +176,7 @@ export default {
         },
         // 初始化菜单列表
         initialMenuList(list) {
-            this.menuList.splice(0, this.menuList.length)
+            this.menuList.splice(0)
             list.forEach(value => {
                 this.menuList.push(value)
             })

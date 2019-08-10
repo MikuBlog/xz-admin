@@ -154,7 +154,7 @@ export default {
         },
         // 初始化菜单列表
         initialAuthorityList(list) {
-            this.authorityList.splice(0, this.authorityList.length)
+            this.authorityList.splice(0)
             list.forEach(value => {
                 this.authorityList.push(value)
             })

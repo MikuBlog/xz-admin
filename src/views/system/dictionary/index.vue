@@ -373,7 +373,7 @@ export default {
         },
         // 初始化字典列表
         initialDictionaryList(list) {
-            this.dictionaryList.splice(0, this.dictionaryList.length)
+            this.dictionaryList.splice(0)
             list.forEach(value => {
                 this.dictionaryList.push(value)
             })
@@ -391,7 +391,7 @@ export default {
         },
         // 初始化字典详情列表
         initialDetailList(list) {
-            this.detailList.splice(0, this.detailList.length)
+            this.detailList.splice(0)
             list.forEach(value => {
                 this.detailList.push(value)
             })

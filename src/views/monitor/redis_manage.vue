@@ -165,7 +165,7 @@ export default {
         },
         // 初始化错误日志列表
         initialRedisList(list) {
-            this.redisList.splice(0, this.redisList.length)
+            this.redisList.splice(0)
             list.forEach(value => {
                 this.redisList.push(value)
             })

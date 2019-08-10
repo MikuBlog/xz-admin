@@ -107,7 +107,7 @@ export default {
     // 初始化权限列表
     initialPermissions(list) {
       const permission = { id: 0, label: '顶级类目', children: [] }
-      this.permissions.splice(0, this.permissions.length)
+      this.permissions.splice(0)
       permission.children = list
       this.permissions.push(permission)
     },

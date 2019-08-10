@@ -128,7 +128,7 @@ export default {
     },
     // 初始化部门列表
     initialDepartmentlist(list) {
-      this.depts.splice(0, this.depts.length)
+      this.depts.splice(0)
       this.depts = list
     },
     // 获取部门列表

@@ -224,7 +224,7 @@ export default {
         },
         // 初始化错误日志列表
         initialStationList(list) {
-            this.stationList.splice(0, this.stationList.length)
+            this.stationList.splice(0)
             list.forEach(value => {
                 this.stationList.push(value)
             })

@@ -212,7 +212,7 @@ export default {
         },
         // 初始化操作日志列表
         initialOpertionLogList(list) {
-            this.operationLogList.splice(0, this.operationLogList.length)
+            this.operationLogList.splice(0)
             list.forEach(value => {
                 this.operationLogList.push(value)
             })
