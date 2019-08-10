@@ -254,7 +254,7 @@ export default {
                     })
                 })
         },
-        // 显示添加菜单窗口
+        // 显示添加用户窗口
         showAddUser() {
             const form = this.$refs.form
             this.isAdd = true
@@ -264,7 +264,7 @@ export default {
             form.getRoleLevel()
             form.resetForm()
         },
-        // 显示编辑菜单窗口
+        // 显示编辑用户窗口
         showEditUser() {
             const form = this.$refs.form
             this.isAdd = false

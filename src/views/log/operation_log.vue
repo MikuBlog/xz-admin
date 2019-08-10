@@ -33,6 +33,7 @@
                         style="width: 100%">
                         <el-table-column
                         label="用户名"
+                        :show-overflow-tooltip="true"
                         >
                             <template slot-scope="scope">
                                 <span style="margin-left: 10px">{{ scope.row.username }}</span>
@@ -40,6 +41,7 @@
                         </el-table-column>
                         <el-table-column
                         label="IP"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference">
@@ -49,6 +51,7 @@
                         </el-table-column>
                         <el-table-column
                         label="描述"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference">
@@ -58,6 +61,7 @@
                         </el-table-column>
                         <el-table-column
                         label="方法名称"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <el-tooltip 
@@ -74,6 +78,7 @@
                         </el-table-column>
                         <el-table-column
                         label="参数"
+                        :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <el-tooltip 
