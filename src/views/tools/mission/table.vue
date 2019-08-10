@@ -160,7 +160,7 @@ export default {
         }&sort=createTime,desc${
           this.searchVal ? `&jobName=${this.searchVal}` : ""
         }${
-          this.selectType.toString() != "" ? `&successful=${this.selectType}` : ""
+          this.selectType !== "" ? `&successful=${this.selectType}` : ""
         }`,
         method: "get"
       }).then(result => {
