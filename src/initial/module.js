@@ -163,7 +163,7 @@ Vue.prototype.$getClassName = SetClass.getClassName
  * @author xuanzai
  * @description 设置存储值
  * @param {String} key 存储键
- * @param {String | Object | Number | Boolean} value 存储值
+ * @param {Any} value 存储值
  */
 Vue.prototype.$setMemorySes = Memory.setMemorySes
 Vue.prototype.$setMemoryPmt = Memory.setMemoryPmt
@@ -171,7 +171,7 @@ Vue.prototype.$setMemoryPmt = Memory.setMemoryPmt
  * @author xuanzai
  * @description 获取存储值
  * @param {String} key 存储值
- * @return {String | Object | Number | Boolean} 返回值
+ * @return {Any} 返回值
  */
 Vue.prototype.$getMemorySes = Memory.getMemorySes
 Vue.prototype.$getMemoryPmt = Memory.getMemoryPmt
