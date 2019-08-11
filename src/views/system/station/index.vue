@@ -196,7 +196,7 @@ export default {
             stationForm.name = item.name
             stationForm.sort = item.sort
             stationForm.enabled = item.enabled.toString()
-            this.$refs.form.deptId = item.dept.id
+            stationForm.dept.id = item.dept.id
             this.showEditStation()
         },
         // 点击搜索
