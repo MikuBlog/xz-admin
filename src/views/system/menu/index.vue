@@ -48,16 +48,24 @@
                         </el-table-column>
                         <el-table-column :show-overflow-tooltip="true" prop="path" label="链接地址"/>
                         <el-table-column :show-overflow-tooltip="true" prop="component" label="组件路径"/>
-                        <el-table-column prop="iframe" label="内部菜单">
+                        <el-table-column prop="iframe" label="内部菜单" align="center">
                             <template slot-scope="scope">
-                                <span v-if="!scope.row.iframe">是</span>
-                                <span v-else>否</span>
+                              <el-tag 
+                              size="small"
+                              effect="dark"
+                              :type="!scope.row.iframe ? 'success' : 'info'">
+                                {{!scope.row.iframe ? '是' : '否'}}
+                              </el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="enabled" label="是否显示">
+                        <el-table-column prop="enabled" label="是否显示" align="center">
                             <template slot-scope="scope">
-                                <span v-if="scope.row.enabled">是</span>
-                                <span v-else>否</span>
+                              <el-tag 
+                              size="small"
+                              effect="dark"
+                              :type="scope.row.enabled ? 'success' : 'info'">
+                                {{scope.row.enabled ? '是' : '否'}}
+                              </el-tag>
                             </template>
                         </el-table-column>
                         <el-table-column prop="createTime" label="创建日期" width="150">

@@ -57,7 +57,7 @@
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">
                 <div slot="reference">
-                  <el-tag :type="scope.row.paused ? 'info' : 'success'">
+                  <el-tag :type="scope.row.paused ? 'info' : 'success'" size="small">
                     {{ scope.row.paused
                     ? '已暂停'
                     : '运行中' }}
@@ -75,7 +75,7 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="200" fixed="right">
+            <el-table-column label="操作" width="200" fixed="right" align="center">
               <template slot-scope="scope">
                 <el-button type="text" @click="editItem(scope.row)" size="small">编辑</el-button>
                 <el-button type="text" @click="executeItem(scope.row)" size="small">执行</el-button>

@@ -95,6 +95,7 @@
                         </el-table-column>
                         <el-table-column
                         label="请求耗时"
+                        align="center"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">

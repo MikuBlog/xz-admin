@@ -39,6 +39,7 @@ import { MessageBox } from 'mint-ui';
                         <el-table-column
                         label="VALUE"
                         width="100"
+                        align="center"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -50,6 +51,7 @@ import { MessageBox } from 'mint-ui';
                         label="操作"
                         width="100"
                         fixed="right"
+                        align="center"
                         >
                         <template slot-scope="scope">
                             <el-button 

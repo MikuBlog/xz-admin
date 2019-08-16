@@ -91,7 +91,8 @@
                         <el-table-column 
                         label="操作"
                         fixed="right"
-                        width="150">
+                        width="150"
+                        align="center">
                         <template slot-scope="scope">
                             <el-button 
                             type="primary" 

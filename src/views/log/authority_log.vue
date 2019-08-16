@@ -82,6 +82,7 @@
                         </el-table-column>
                         <el-table-column
                         label="是否恢复"
+                        align="center"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -95,6 +96,7 @@
                         </el-table-column>
                         <el-table-column
                         label="操作类型"
+                        align="center"
                         :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
@@ -115,6 +117,7 @@
                         </el-table-column>
                         <el-table-column
                         label="操作值"
+                        align="center"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
@@ -125,7 +128,8 @@
                         <el-table-column 
                         label="操作"
                         fixed="right"
-                        width="150">
+                        width="150"
+                        align="center">
                         <template slot-scope="scope">
                             <el-button 
                             type="success" 

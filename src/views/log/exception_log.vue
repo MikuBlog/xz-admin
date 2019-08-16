@@ -91,6 +91,7 @@ import { MessageBox } from 'mint-ui';
                         </el-table-column>
                         <el-table-column
                         label="异常详情"
+                        align="center"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
