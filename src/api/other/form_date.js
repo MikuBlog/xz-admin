@@ -18,11 +18,15 @@ const formDate = (dateTime, isAccurate = false) => {
  * @description 日期差
  * @param {Date} sDate1 时间戳
  * @param {Date} sDate2 时间戳
+ * @param {Boolean} isNegative true，返回结果可以为负值，否则都为正值
  */
-const dateDiff = (sDate1,  sDate2) => {   
-    const iDays = sDate1 < sDate2 
-    ? (new Date(sDate2) - new Date(sDate1)) 
-    : (new Date(sDate1) - new Date(sDate2))
+const dateDiff = (sDate1,  sDate2, isNegative = false) => {   
+  let iDays = ""
+  isNegative
+  ? iDays = new Date(sDate1) - new Date(sDate2)
+  : iDays = sDate1 < sDate2
+  ? (new Date(sDate2) - new Date(sDate1))
+  : (new Date(sDate1) - new Date(sDate2))
     return iDays / 1000 / 60 / 60 / 24 
 }
 

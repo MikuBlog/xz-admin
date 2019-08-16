@@ -65,8 +65,8 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="描述">
-              <template slot-scope="scope" :show-overflow-tooltip="true">
+            <el-table-column label="描述" :show-overflow-tooltip="true">
+              <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.remark }}</div>
               </template>
             </el-table-column>
