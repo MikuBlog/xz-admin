@@ -59,6 +59,7 @@
                         </el-table-column>
                         <el-table-column
                         label="角色级别"
+                        align="center"
                         :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">

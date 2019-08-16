@@ -68,11 +68,12 @@
                         </el-table-column>
                         <el-table-column
                         label="状态"
+                        align="center"
                         :show-overflow-tooltip="true"
                         >
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                <el-tag :type="scope.row.enabled ? '' : 'info'">
+                                <el-tag :type="scope.row.enabled ? '' : 'info'" size="small">
                                     {{ scope.row.enabled ? "正常" : "禁用"}}
                                 </el-tag>
                             </div>
