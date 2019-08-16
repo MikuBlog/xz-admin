@@ -65,7 +65,8 @@
                             class="item" 
                             effect="dark" 
                             content="删除所有标签页" 
-                            placement="bottom">
+                            placement="bottom"
+                            v-show="$store.state.setting.showTags">
                                 <i 
                                 class="el-icon-circle-close" 
                                 @click="removeAllTags"
@@ -73,7 +74,7 @@
                             </el-tooltip>
                         </div>
                         <div class="breadcrumb" v-show="$store.state.setting.showBreadcrumb">
-                            <Breadcrumb></Breadcrumb>
+                            <Breadcrumb :style="!$store.state.setting.showTags ? 'margin-left: -28px' : '' "></Breadcrumb>
                         </div>
                         <div class="icon-box">
                             <el-tooltip 
