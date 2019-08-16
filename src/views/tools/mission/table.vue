@@ -54,8 +54,8 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.exceptionDetail }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="耗时">
-              <template slot-scope="scope" :show-overflow-tooltip="true" align="center">
+            <el-table-column label="耗时" align="center">
+              <template slot-scope="scope" :show-overflow-tooltip="true">
                 <el-tag type="primary" size="small">
                   {{ scope.row.time }}ms
                 </el-tag>
