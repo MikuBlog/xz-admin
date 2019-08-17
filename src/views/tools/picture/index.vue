@@ -59,6 +59,12 @@
                         align="center">
                         <template slot-scope="scope">
                             <el-button 
+                            type="success" 
+                            icon="el-icon-share"
+                            @click="copy(scope.row)"
+                            size="small"
+                            ></el-button>
+                            <el-button 
                             type="danger" 
                             icon="el-icon-delete"
                             @click="deletePicture(scope.row)"
@@ -111,6 +117,14 @@ export default {
         this.getPictureList()
     },
     methods: {
+        // 复制图片地址
+        copy(item) {
+          this
+            .$copyText(item.url)
+            .then(() => {
+              this.$successMsg("复制成功")
+            })
+        },
         // 删除选中的图片
         deleteSelect() {
             this
