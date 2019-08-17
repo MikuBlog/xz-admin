@@ -35,20 +35,5 @@ https://xzadmin.xuanzai.top
 + 富文本编辑器：`UEditor`
 + markdown编辑器：`mavonEditor`
 
-<br/>
-
-
-<h1 id="question">:page_with_curl: 已知问题</h1>
-
-<br/>
-
-> Module build failed (from ./node_modules/_svg-sprite-loader@4.1.6@svg-sprite-loader/lib/loader.js)
-
-原因：引入了`svg-loader`，对已经处理过的`svg`再次进行处理导致报错
-
-解决方案：类似这种问题，看看引入的全局`CSS`或自己写的`CSS`文件里有没有类似这样的语句：`url(xxxxx) format("truetype")) format("svg")`，如果有，则直接删除即可。
-
-+ `mavonEditor`中的`index.css`中含有该组件，如果要继续使用`mavonEditor`markdown编辑器，请在`node_modules --> mavon-editor --> dist --> index.css`删除如上代码。
-
 
 
