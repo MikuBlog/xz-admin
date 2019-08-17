@@ -5,7 +5,6 @@ function resolve(dir) {
 
 module.exports = {
   chainWebpack: config => {
-     // set svg-sprite-loader
     config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))
