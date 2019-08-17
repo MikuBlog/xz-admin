@@ -147,8 +147,6 @@ router.beforeEach((to, from, next) => {
             if(store.state.menuList.length == 0) {
                 getRouter()
             }
-            // 改变菜单索引
-            store.commit('setMenuIndex', to.name)
             addTags(to)
             next()
         }

@@ -5,7 +5,7 @@
             style="height:100%" 
             v-show="!isSmall">
                 <el-menu 
-                :default-active="$store.state.menuIndex" 
+                :default-active="$route.path" 
                 :collapse="isCollapse"
                 class="el-menu-vertical-demo" 
                 background-color="#2f4055"
@@ -28,7 +28,7 @@
             placement="left">
                 <el-scrollbar style="height:100%">
                     <el-menu 
-                    :default-active="$store.state.menuIndex" 
+                    :default-active="$route.path" 
                     class="el-menu-vertical-demo menu-list" 
                     background-color="#2f4055"
                     active-text-color="#429ee2"

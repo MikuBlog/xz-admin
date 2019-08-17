@@ -22,8 +22,6 @@ export default new Vuex.Store({
     },
     // 保存菜单项
     menuList: [],
-    // 保存菜单索引
-    menuIndex: "首页",
     // 保存标签页列表
     tagsList: [{
       meta: {
@@ -41,10 +39,6 @@ export default new Vuex.Store({
     // 设置菜单
     setMenuList(state, obj) {
       state.menuList = obj
-    },
-    // 设置菜单索引
-    setMenuIndex(state, index) {
-      state.menuIndex = index
     },
     // 添加标签页
     addTags(state, tags) {
