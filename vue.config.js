@@ -7,7 +7,8 @@ module.exports = {
       .loader("svg-sprite-loader")
       .options({
         symbolId: "icon-[name]",
-        include: ["./src/icons"]
+        include: ["./src/icons"],
+        exclude: ["./src/icons"],
       });
   },
   configureWebpack: {
