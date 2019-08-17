@@ -3,10 +3,10 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-// 登录页面
-import Login from '@/views/login.vue'
-// 404页面
-import Error from '@/views/error/404.vue'
+const 
+  Login = () => import('@/views/login.vue'),
+  Error = () => import('@/views/error/404.vue'),
+  Permission = () => import('@/views/error/401.vue')
 
 const router = new Router({
   mode: 'history',
@@ -22,6 +22,13 @@ const router = new Router({
       title: "404"
     },
     component: Error
+  }, {
+    path: '/401',
+    name: '401',
+    meta: {
+      title: "401"
+    },
+    component: Permission
   }] 
 })
 
