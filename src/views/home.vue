@@ -245,7 +245,7 @@ export default {
         },
         // 返回顶部
         backTop(delay = 500) {
-            this.$$('.top').animate({scrollTop: 0}, delay)
+            $('.top').animate({scrollTop: 0}, delay)
         },
         // 前往项目地址
         openNewPage() {

@@ -11,17 +11,15 @@ import ElementUI from 'element-ui'
 import { Drawer } from 'iview'
 // 引入markdown编辑器
 import mavonEditor from 'mavon-editor'
-// 引入jquery
-import Jquery from 'jquery'
 // 引入导航栏折叠
 import Fragment from 'vue-fragment'
 // 引入icon组件
 import '@/icons'
 // 引入全局样式
-import '@/global/style.css'
+import '@/global/css/style.css'
 import '@/api/iconfont/iconfont'
-import 'element-ui/lib/theme-chalk/index.css';
-import 'iview/dist/styles/iview.css';
+import 'element-ui/lib/theme-chalk/index.css'
+import 'iview/dist/styles/iview.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import 'mavon-editor/dist/css/index.css'
 // 引入树状选择器
@@ -50,8 +48,6 @@ import PreviewFile from '@/api/file/preview_file'
 import JsonPretty from '@/api/json/json_pretty'
 // 引入图片加载动画模块
 import ImageLoad from '@/api/other/image_load'
-// 引入jquery模块
-Vue.prototype.$$ = Jquery 
 /**
  * @author xuanzai
  * @description 连接数据库

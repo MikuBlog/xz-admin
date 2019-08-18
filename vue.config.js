@@ -5,6 +5,10 @@ function resolve(dir) {
 
 module.exports = {
   chainWebpack: config => {
+    // 检测webpack打包后的大小
+    // config
+    //   .plugin('webpack-bundle-analyzer')
+    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
     // 避免svg处理冲突
     config.module
       .rule('svg')

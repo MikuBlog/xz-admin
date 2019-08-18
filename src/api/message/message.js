@@ -1,5 +1,4 @@
 import { Message, MessageBox  } from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
 
 /**
  * @author xuanzai
