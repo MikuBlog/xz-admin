@@ -6,7 +6,7 @@
                     <div class="search">
                         <el-input 
                         v-model="searchVal" 
-                        placeholder="请选择类型进行搜索"
+                        placeholder="搜索岗位名称"
                         class="search-input margin-box"
                         @keyup.native="searchEnter"></el-input>
                         <el-select 
