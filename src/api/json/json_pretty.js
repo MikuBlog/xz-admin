@@ -6,11 +6,15 @@
  * @returns {JSON} 返回美化好的JSON 
  */
 function jsonPretty(json, tab = 4) {
+  try {
     if(typeof json == "object") {
-        return JSON.stringify(json, null, tab)
+      return JSON.stringify(json, null, tab)
     }else {
-        return JSON.stringify(JSON.parse(json), null, tab)
+      return JSON.stringify(JSON.parse(json), null, tab)
     }
+  }catch(e) {
+    return json
+  }
 }
 
 export default jsonPretty
