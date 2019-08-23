@@ -57,8 +57,8 @@
 
 ## 修改请求地址
 
-请求地址在`src/api/http/http.js` 文件内，只需修改这串代码即可。
+请求地址在`public/js/baseUrl.js` 文件内，只需修改这串代码即可。
 
 ```
-axios.defaults.baseURL = 'http://openlan.missiono.cn'	
+baseURL = 'http://openlan.missiono.cn'	
 ```
