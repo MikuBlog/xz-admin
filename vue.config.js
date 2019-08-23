@@ -8,7 +8,14 @@ module.exports = {
     // 检测webpack打包后的大小
     // config
     //   .plugin('webpack-bundle-analyzer')
-    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin) 
+    // 解决IE打开空白页面问题
+    config.module
+      .rule('iview')
+      .test(/iview.src.*?js$/)
+      .use('babel')
+      .loader('babel-loader')
+      .end()
     // 避免svg处理冲突
     config.module
       .rule('svg')
