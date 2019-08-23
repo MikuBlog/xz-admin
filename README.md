@@ -1,6 +1,7 @@
 <h1 align="center">XZ-ADMIN</h1>
 
-<hr>
+<br/>
+<br/>
 
 # :smirk: 页面浏览 
 
