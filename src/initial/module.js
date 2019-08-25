@@ -26,6 +26,8 @@ import 'mavon-editor/dist/css/index.css'
 import Treeselect from '@riophae/vue-treeselect'
 // 引入时间格式化函数
 import Date from '@/api/other/form_date'
+// 引入获取URL参数函数
+import UrlQuery from '@/api/other/url_query'
 // 引入设置样式函数
 import SetStyle from '@/api/dom/set_style'
 // 引入设置元素类模块
@@ -119,6 +121,12 @@ Vue.prototype.$showMsgBox = Message.showMsgBox
  * @param {String | Date} date 日期格式化
  */
 Vue.prototype.$formDate = Date.formDate
+/**
+  * @author xuanzai
+  * @description 获取url后的参数
+  * @returns {Object}
+  */
+Vue.prototype.$urlQuery = UrlQuery
 /**
  * @author xuanzai
  * @description 日期差(date_2 - date_1)

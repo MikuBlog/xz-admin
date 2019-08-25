@@ -48,8 +48,5 @@ export default new Vuex.Store({
     removeTag(state) {
       state.tagsList.splice(1)
     }
-  },
-  actions: {
-
   }
 })
