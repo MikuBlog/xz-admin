@@ -81,6 +81,16 @@ this.$copyText("xuanzai")
 this.$copyText(this.$refs.contentBox)
 ```
 
+## urlQuery
+
+描述：获取url后的参数
+
+示例
+```js
+this.$urlQuery() // url: http://myinterface.xuanzai.top/getPicture?type=头像&id=1   { type: '头像', id: 1 }
+
+```
+
 ## storage
 
 通过`sessionStorage`与`localStorage`进行简单的封装。
