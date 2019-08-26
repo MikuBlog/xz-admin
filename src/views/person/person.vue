@@ -130,9 +130,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import editPassword from './edit_password'
 import editEmail from './edit_email'
-import { mapState } from 'vuex'
 export default {
     components: { editPassword, editEmail },
     data() {

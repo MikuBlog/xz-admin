@@ -22,6 +22,20 @@ Object
     Vue.filter(key, filters[key])
   })
 
+/**
+ * @author xuanzai
+ * @description 全局指令初始化。在如下路径文件下全局注册指令即可。
+ */
+import directives from '@/initial/directives'
+// 全局注册指令
+Object
+  .keys(directives)
+  .forEach(key => {
+    Vue.directive(key, {
+      inserted: directives[key]
+    })
+  })
+
 new Vue({
   router,
   store,

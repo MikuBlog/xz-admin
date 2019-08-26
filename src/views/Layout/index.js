@@ -1,7 +1,7 @@
+import { mapState, mapMutations } from 'vuex'
 import NavMenu from '@/components/tree_menu/SidebarItem'
 import Breadcrumb from '@/components/breadcrumb'
 import Tag from '@/components/tag'
-import { mapState, mapMutations } from 'vuex'
 export default {
   components: { NavMenu, Breadcrumb, Tag },
   data() {
@@ -91,10 +91,6 @@ export default {
     removeAllTags() {
       this.tagsList.splice(1)
       this.navigateTo('/home/welcome')
-    },
-    // 点击隐藏左侧抽屉菜单
-    clickMenuItem() {
-      this.isMenuCollapse = false
     },
     // 跳转路由
     navigateTo(path) {

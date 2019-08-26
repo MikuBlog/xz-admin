@@ -18,7 +18,8 @@ export default new Vuex.Store({
       dept: "",
       email: "",
       job: "",
-      phone: ""
+      phone: "",
+      roles: []
     },
     // 保存菜单项
     menuList: [],
