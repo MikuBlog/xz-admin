@@ -15,14 +15,6 @@ export default {
       logoUrl: "",
       user: {},
       squareUrl: "",
-      menuList: [{
-        meta: {
-          title: "首页"
-        },
-        iframe: false,
-        icon: "主页",
-        path: "/home/welcome"
-      }]
     }
   },
   computed: {
@@ -30,7 +22,8 @@ export default {
       showLogo: state => state.setting.showLogo,
       showBreadcrumb: state => state.setting.showBreadcrumb,
       showTags: state => state.setting.showTags,
-      tagsList: state => state.tagsList
+      tagsList: state => state.tags.tagsList,
+      menuList: state => state.menu.menuList
     })
   },
   created() {

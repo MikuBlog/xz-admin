@@ -108,7 +108,7 @@ function getRouter() {
 
 // 添加标签页
 function addTags(tag) {
-    const tagsList = store.state.tagsList
+    const tagsList = store.state.tags.tagsList
     // 如果是404页面，不添加标签页
     if(tag.meta.title === "404" || tag.meta.title === "401") {
         return

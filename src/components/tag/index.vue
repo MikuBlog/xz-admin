@@ -25,7 +25,7 @@ export default {
     props: {
         tagsList: {
             type: Array,
-            default: []
+            default: () => []
         }
     },
     watch: {

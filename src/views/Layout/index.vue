@@ -17,7 +17,7 @@
                         <img src="@/assets/logo/catjoker.png" alt="logo.png">
                     </div>
                     <NavMenu 
-                    :navMenus="$store.state.menuList"
+                    :navMenus="menuList"
                     ></NavMenu>
                 </el-menu>
             </el-scrollbar>
@@ -43,7 +43,7 @@
                             <img src="@/assets/logo/catjoker.png" alt="logo.png">
                         </div>
                         <NavMenu 
-                        :navMenus="$store.state.menuList"
+                        :navMenus="menuList"
                         ></NavMenu>
                     </el-menu>
                 </el-scrollbar>
@@ -128,7 +128,7 @@
                     <div class="border" style="border-color: #f0f0f0"></div>
                 </el-header>
                 <div class="tabs" v-show="showTags">
-                    <Tag :tagsList="$store.state.tagsList" />
+                    <Tag :tagsList="tagsList" />
                 </div>
                 <el-main class="top" id="top">
                     <transition name="xz-animation">
