@@ -1,7 +1,7 @@
 import NavMenu from '@/components/tree_menu/SidebarItem'
 import Breadcrumb from '@/components/breadcrumb'
 import Tag from '@/components/tag'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   components: { NavMenu, Breadcrumb, Tag },
   data() {
@@ -13,7 +13,6 @@ export default {
       isSetting: false,
       isShowBackTop: false,
       logoUrl: "",
-      tagsList: this.$store.state.tagsList,
       user: {},
       squareUrl: "",
       menuList: [{
@@ -30,7 +29,8 @@ export default {
     ...mapState({
       showLogo: state => state.setting.showLogo,
       showBreadcrumb: state => state.setting.showBreadcrumb,
-      showTags: state => state.setting.showTags
+      showTags: state => state.setting.showTags,
+      tagsList: state => state.tagsList
     })
   },
   created() {
@@ -44,13 +44,16 @@ export default {
     this.getWindowWidth()
   },
   methods: {
+    ...mapMutations([
+      "setUserInfo"
+    ]),
     // 获取用户信息
     getUserInfo() {
       this.$http_json({
         url: "/auth/info",
         method: "get"
       }).then(result => {
-        this.$store.commit("setUserInfo", result.data)
+        this.setUserInfo(result.data)
         this.user = this.$store.state.user
         this.squareUrl = this.user.avatar
       })
@@ -99,7 +102,6 @@ export default {
     },
     // 设置全屏与取消全屏
     fullScreen() {
-      const ele = this.$refs.icon
       this.isFullScreen
         ? this.$cancelFullScreen()
         : this.$setFullScreen()
@@ -110,10 +112,8 @@ export default {
       const
         eles = document.querySelectorAll('.el-scrollbar__wrap'),
         drawer = document.querySelector('.ivu-drawer-body'),
-        menuList = document.querySelector('.el-menu-vertical-demo'),
         drawerContent = document.querySelector('.ivu-drawer-content'),
-        scrollContainer = document.querySelector('.el-scrollbar'),
-        scrollBar = document.querySelectorAll('.el-scrollbar__thumb')[1]
+        scrollContainer = document.querySelector('.el-scrollbar')
       this.$setStyle(drawer, 'padding', 0)
       this.$setStyle(drawerContent, 'background', '#2e3f54')
       this.$setStyle(scrollContainer, 'background', '#2d3e53')

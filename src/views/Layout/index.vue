@@ -36,7 +36,7 @@ import Main from '../../../../vue-test/demo/src/components/test/test.vue';
                     text-color="#becad8"
                     width="200px"
                     :unique-opened="true"
-                    @select="clickMenuItem"
+                    @select="this.isMenuCollapse = false"
                     >
                         <div class="logo" 
                         v-show="showLogo" 
