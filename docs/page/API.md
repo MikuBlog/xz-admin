@@ -87,7 +87,7 @@ this.$copyText(this.$refs.contentBox)
 
 示例
 ```js
-this.$urlQuery() // url: http://myinterface.xuanzai.top/getPicture?type=头像&id=1   { type: '头像', id: 1 }
+this.$urlQuery() // url: http://myinterface.xuanzai.top/getPicture?type=头像&id=1  result: { type: '头像', id: 1 }
 
 ```
 
