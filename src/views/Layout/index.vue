@@ -14,7 +14,7 @@ import Main from '../../../../vue-test/demo/src/components/test/test.vue';
                 text-color="#becad8"
                 :unique-opened="true"
                 >
-                    <div class="logo" v-show="$store.state.setting.showLogo" v-if="!isCollapse">
+                    <div class="logo" v-show="showLogo" v-if="!isCollapse">
                         <img src="@/assets/logo/catjoker.png" alt="logo.png">
                     </div>
                     <NavMenu 
@@ -39,7 +39,7 @@ import Main from '../../../../vue-test/demo/src/components/test/test.vue';
                     @select="clickMenuItem"
                     >
                         <div class="logo" 
-                        v-show="$store.state.setting.showLogo" 
+                        v-show="showLogo" 
                         >
                             <img src="@/assets/logo/catjoker.png" alt="logo.png">
                         </div>
@@ -74,8 +74,8 @@ import Main from '../../../../vue-test/demo/src/components/test/test.vue';
                                 title="删除所有标签页"></i>
                             </el-tooltip>
                         </div>
-                        <div class="breadcrumb" v-show="$store.state.setting.showBreadcrumb">
-                            <Breadcrumb :style="!$store.state.setting.showTags ? 'margin-left: -28px' : '' "></Breadcrumb>
+                        <div class="breadcrumb" v-show="showBreadcrumb">
+                            <Breadcrumb :style="!showTags ? 'margin-left: -28px' : '' "></Breadcrumb>
                         </div>
                         <div class="icon-box">
                             <el-tooltip 
@@ -128,7 +128,7 @@ import Main from '../../../../vue-test/demo/src/components/test/test.vue';
                     </div>
                     <div class="border" style="border-color: #f0f0f0"></div>
                 </el-header>
-                <div class="tabs" v-show="$store.state.setting.showTags">
+                <div class="tabs" v-show="showTags">
                     <Tag :tagsList="$store.state.tagsList" />
                 </div>
                 <el-main class="top" id="top">

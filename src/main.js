@@ -2,8 +2,6 @@ import Vue from 'vue'
 import App from '@/App.vue'
 import router from '@/router/index'
 import store from '@/store/store'
-
-console.log(router)
 // 处理IE报错
 import 'babel-polyfill'
 /**
