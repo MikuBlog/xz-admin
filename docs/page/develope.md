@@ -53,11 +53,39 @@
 
 过滤器统一存放在`src/initial/filter.js`文件里，只需按照该文件里面代码格式在该文件里进行编写即可。
 
+示例：
+```js
+// 在原有基础上添加，变量名即为过滤器名称
+const demo = (val) => {
+	// todo
+}
+
+export default {
+	demo,
+	...
+}
+```
+
 <br/>
 
-## 指令注册
+## 注册指令
 
 过滤器统一存放在`src/initial/directives.js`文件里，只需按照该文件里面代码格式在该文件里进行编写即可。
+
+默认所有指令都以`inserted`方式全局注册，如要使用其他方式，请自行实现。
+
+示例：
+```js
+// 在原有基础上添加，变量名即为指令名称
+const demo = (el, binding) => {
+	// todo
+}
+
+export default {
+	demo,
+	...
+}
+```
 
 <br/>
 

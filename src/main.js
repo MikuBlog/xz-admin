@@ -27,6 +27,7 @@ Object
  * @description 全局指令初始化。在如下路径文件下全局注册指令即可。
  */
 import directives from '@/initial/directives'
+
 // 全局注册指令
 Object
   .keys(directives)

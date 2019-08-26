@@ -1,4 +1,3 @@
-import Main from '../../../../vue-test/demo/src/components/test/test.vue';
 <template>
     <div class="home" ref="home" id="home">
         <el-container>
