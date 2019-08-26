@@ -27,8 +27,6 @@ const layout = {
     }]
 }
 
-router.addRoutes([ layout ])
-
 // 动态生成路由
 function generateRouter(list, pre, now) {
     // 如果含有重定向（含有子菜单），则继续遍历添加
@@ -135,27 +133,26 @@ router.beforeEach((to, from, next) => {
     to.meta.title
     && (document.title = to.meta.title)
     NProgress.start()
-    next()
-    // if(to.name === "login") {
-    //     // 重新登录清空缓存
-    //     removeRedis()
-    //     next()
-    //     return
-    // }
-    // if(Storage.getMemoryPmt('token')) {
-    //     if(to.path === "/") {
-    //         next({ path: '/login' })
-    //     }else {
-    //         // 如果菜单信息不存在（直接访问），重新拉取动态路由与菜单
-    //         if(store.state.menuList.length == 0) {
-    //             getRouter()
-    //         }
-    //         addTags(to)
-    //         next()
-    //     }
-    // }else {
-    //     next({ path: "/login" })
-    // }
+    if(to.name === "login") {
+        // 重新登录清空缓存
+        removeRedis()
+        next()
+        return
+    }
+    if(Storage.getMemoryPmt('token')) {
+        if(to.path === "/") {
+            next({ path: '/login' })
+        }else {
+            // 如果菜单信息不存在（直接访问），重新拉取动态路由与菜单
+            if(store.state.menuList.length == 0) {
+                getRouter()
+            }
+            addTags(to)
+            next()
+        }
+    }else {
+        next({ path: "/login" })
+    }
 })
   
 // 跳转路由后触发

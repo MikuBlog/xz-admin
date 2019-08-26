@@ -132,11 +132,11 @@
 <script>
 import editPassword from './edit_password'
 import editEmail from './edit_email'
+import { mapState } from 'vuex'
 export default {
     components: { editPassword, editEmail },
     data() {
         return {
-            user: this.$store.state.user,
             activeName: "first",
             searchVal: "",
             // 当前页数
@@ -147,6 +147,11 @@ export default {
             totalElements: 0,
             operationLogList: []
         }
+    },
+    computed: {
+      ...mapState({
+        user: state => state.user
+      })
     },
     created() {
         // 初始化页面数据
