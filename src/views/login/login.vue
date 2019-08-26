@@ -519,7 +519,7 @@ export default {
         right: 0;
         left: 0;
         bottom: 0;
-        background-image: url(../assets/login/background.png);
+        background-image: url(../../assets/login/background.png);
         background-position: center;
         z-index: -1;
         opacity: 0.5;

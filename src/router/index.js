@@ -6,11 +6,11 @@ import Storage from '@/api/storage/storage'
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 // 后台管理页面模板
-import Layout from '@/views/home.vue'
+import Layout from '@/views/Layout/index.vue'
 // 默认路由页，用来存放子路由的纯路由页面
 import DefaultPage from '@/Layout/index.vue'
 // 默认首页加载
-import Welcome from '@/views/welcome'
+import Welcome from '@/views/welcome/welcome.vue'
 
 // 默认后台管理模板
 const layout = {
