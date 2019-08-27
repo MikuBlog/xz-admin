@@ -1,5 +1,6 @@
 const
   state = {
+    username: "",
     avatar: "",
     createTime: "",
     dept: "",
