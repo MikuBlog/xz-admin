@@ -15,7 +15,7 @@ const
       for(let key in obj)
         state.user[key] = obj[key]
     },
-  }
+  } 
 
 export default {
   state,
