@@ -21,7 +21,7 @@
 				config.url.indexOf('login') != -1
 				? config.headers.Authorization = ""
 				: config.headers.Authorization = `Bearer ${storage.getMemoryPmt('token')}`
-				loading = Loading.service({ fullscreen: true })
+				loading = Loading.service({ fullscreen: true, background: "rgba(0, 0, 0, .2)" })
 				return config
 			}, err => {
 				Message.errorMsg('服务器出错，请联系客服进行处理')
