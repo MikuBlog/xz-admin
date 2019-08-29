@@ -16,6 +16,14 @@ module.exports = {
       .use('babel')
       .loader('babel-loader')
       .end()
+    config.module
+      .rule("src")
+      .test(/\.js/)
+      .include.add(resolve("src"))
+      .end()
+      .use('babel')
+      .loader('babel-loader')
+      .end()
     // 避免svg处理冲突
     config.module
       .rule('svg')

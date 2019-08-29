@@ -2,8 +2,6 @@ import Vue from 'vue'
 import App from '@/App.vue'
 import router from '@/router/index'
 import store from '@/store/store'
-// 处理IE报错
-import 'babel-polyfill'
 /**
  * @author xuanzai
  * @description api模块初始化。在如下路径文件下引入模块即可。
