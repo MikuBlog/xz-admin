@@ -33,7 +33,8 @@ Object
   .keys(directives)
   .forEach(key => {
     Vue.directive(key, {
-      inserted: directives[key]
+      inserted: directives[key],
+      componentUpdated: directives[key]
     })
   })
 
