@@ -89,7 +89,7 @@ function generateRouter(list, pre, now) {
 
 // 获取菜单与路由
 function getRouter() {
-    if(store.state.menuList.length == 0) {
+    if(store.state.menu.menuList.length == 0) {
         Http.http_json({
             url: "/api/menu/build",
             method: "get"
@@ -144,7 +144,7 @@ router.beforeEach((to, from, next) => {
             next({ path: '/login' })
         }else {
             // 如果菜单信息不存在（直接访问），重新拉取动态路由与菜单
-            if(store.state.menuList.length == 0) {
+            if(store.state.menu.menuList.length == 0) {
                 getRouter()
             }
             addTags(to)

@@ -1,5 +1,6 @@
 const
   state = {
+    id: "",
     username: "",
     avatar: "",
     createTime: "",
@@ -13,7 +14,7 @@ const
     // 保存用户信息
     setUserInfo(state, obj) {
       for(let key in obj)
-        state.user[key] = obj[key]
+        state[key] = obj[key]
     },
   } 
 
