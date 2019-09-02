@@ -35,7 +35,7 @@
                     text-color="#becad8"
                     width="200px"
                     :unique-opened="true"
-                    @select="this.isMenuCollapse = false"
+                    @select="isMenuCollapse = false"
                     >
                         <div class="logo" 
                         v-show="showLogo" 

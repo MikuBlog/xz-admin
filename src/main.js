@@ -6,7 +6,7 @@ import store from '@/store/store'
  * @author xuanzai
  * @description api模块初始化。在如下路径文件下引入模块即可。
  */
-import '@/initial/module'
+import '@/initial/modules'
 /**
  * @author xuanzai
  * @description 全局过滤器初始化。在如下路径文件下全局注册过滤器即可。
