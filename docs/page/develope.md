@@ -91,7 +91,7 @@ export default {
 
 如下为默认自动全局注册自定义指令代码。
 
-```JS
+```js
 /**
  * @author xuanzai
  * @description 全局指令初始化。在如下路径文件下全局注册指令即可。

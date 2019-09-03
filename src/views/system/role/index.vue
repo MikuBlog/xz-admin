@@ -392,7 +392,7 @@ export default {
         // 获取权限日志信息
         getRoleList() {
             this.$http_normal({
-                url: `/api/role/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
+                url: encodeURI(`/api/role/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`),
                 method: "get"
             }).then(result => {
                 const data = result.data

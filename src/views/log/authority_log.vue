@@ -337,7 +337,7 @@ export default {
         // 获取权限日志信息
         getAuthorityLogList() {
             this.$http_normal({
-                url: `/api/authLog/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.selectType_1 ? `&${this.selectType_1}=${this.searchVal}` : ""}${this.date ? `&greatTime=${this.dateArray[0]}&lessTime=${this.dateArray[1]}` : ""}${this.selectType_2 ? `&type=${this.selectType_2}` : ""}`,
+                url: encodeURI(`/api/authLog/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${this.selectType_1 ? `&${this.selectType_1}=${this.searchVal}` : ""}${this.date ? `&greatTime=${this.dateArray[0]}&lessTime=${this.dateArray[1]}` : ""}${this.selectType_2 ? `&type=${this.selectType_2}` : ""}`),
                 method: "get"
             }).then(result => {
                 const data = result.data

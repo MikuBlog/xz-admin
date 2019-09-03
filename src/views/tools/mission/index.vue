@@ -245,13 +245,13 @@ export default {
     // 获取定时任务信息
     getMissionList() {
       this.$http_normal({
-        url: `/api/quartz/page?page=${this.nowPage - 1}&size=${
+        url: encodeURI(`/api/quartz/page?page=${this.nowPage - 1}&size=${
           this.nowSize
         }&sort=createTime,desc${
           this.searchVal ? `&jobName=${this.searchVal}` : ""
         }${
           this.selectType !== "" ? `&paused=${this.selectType}` : ""
-        }`,
+        }`),
         method: "get"
       }).then(result => {
         const data = result.data;
