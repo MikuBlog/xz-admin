@@ -175,7 +175,7 @@ export default {
         // 获取图片列表
         getRedisList() {
             this.$http_normal({
-                url: `/api/redis/page?page=${this.nowPage - 1}&size=${this.nowSize}&key=${this.searchVal || "*"}`,
+                url: encodeURI(`/api/redis/page?page=${this.nowPage - 1}&size=${this.nowSize}&key=${this.searchVal || "*"}`),
                 method: "get"
             }).then(result => {
                 const data = result.data

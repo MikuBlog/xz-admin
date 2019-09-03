@@ -383,7 +383,7 @@ export default {
         // 获取字典信息
         getDictionaryList() {
             this.$http_normal({
-                url: `/api/dict/page?page=${this.nowPage_1 - 1}&size=${this.nowSize_1}&sort=createTime,desc${this.selectType_1 ? `&${this.selectType_1}=${this.searchVal_1}` : ""}`,
+                url: encodeURI(`/api/dict/page?page=${this.nowPage_1 - 1}&size=${this.nowSize_1}&sort=createTime,desc${this.selectType_1 ? `&${this.selectType_1}=${this.searchVal_1}` : ""}`),
                 method: "get"
             }).then(result => {
                 const data = result.data
@@ -401,7 +401,7 @@ export default {
         // 获取字典详情信息
         getDetailList() {
             this.$http_normal({
-                url: `/api/dictDetail/page?page=${this.nowPage_2 - 1}&size=${this.nowSize_2}&sort=sort,asc&dictName=${this.dictName}${this.searchVal_2 ? `&label=${this.searchVal_2}` : ""}`,
+                url: encodeURI(`/api/dictDetail/page?page=${this.nowPage_2 - 1}&size=${this.nowSize_2}&sort=sort,asc&dictName=${this.dictName}${this.searchVal_2 ? `&label=${this.searchVal_2}` : ""}`),
                 method: "get"
             }).then(result => {
                 const data = result.data
