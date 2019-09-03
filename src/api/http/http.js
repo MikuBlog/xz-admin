@@ -18,6 +18,7 @@
 				 * 如果是登陆请求，不发送token
 				 * 否则都带token过去
 				 */
+        config.url = encodeURI(config.url)
 				config.url.indexOf('login') != -1
 				? config.headers.Authorization = ""
 				: config.headers.Authorization = `Bearer ${storage.getMemoryPmt('token')}`
