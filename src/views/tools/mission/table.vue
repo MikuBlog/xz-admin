@@ -125,10 +125,12 @@ export default {
   methods: {
     // 点击搜索
     search() {
+      this.nowPage = 1
       this.getMissionLogList();
     },
     // 回车搜索
     searchEnter(e) {
+      this.nowPage = 1
       e.keyCode === 13 && this.getMissionLogList();
     },
     // 条数变化

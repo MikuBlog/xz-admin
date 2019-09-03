@@ -184,7 +184,7 @@ export default {
         // 获取部门列表
         getDepartmentList() {
             this.$http_json({
-                url: encodeURI(`/api/dept/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.selectType ? `&enabled=${this.selectType}` : ""}`),
+                url: `/api/dept/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.selectType ? `&enabled=${this.selectType}` : ""}`,
                 method: "get"
             }).then(result => {
                 this.initialDepartmentList(result.data.content)
@@ -193,7 +193,7 @@ export default {
         // 获取岗位字典
         getDictsList(dictName) {
             this.$http_json({
-                url: encodeURI(`/api/dictDetail/page?page=0&size=9999&sort=sort,asc&dictName=${dictName}`)
+                url: `/api/dictDetail/page?page=0&size=9999&sort=sort,asc&dictName=${dictName}`
             }).then(result => {
                 this.dicts = result.data.content
             })

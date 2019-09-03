@@ -215,10 +215,12 @@ export default {
     },
     // 点击搜索
     search() {
+      this.nowPage = 1
       this.getMissionList();
     },
     // 回车搜索
     searchEnter(e) {
+      this.nowPage = 1
       e.keyCode === 13 && this.getMissionList();
     },
     // 条数变化

@@ -162,7 +162,7 @@ export default {
         // 获取菜单列表
         getAuthorityList() {
             this.$http_json({
-                url: encodeURI(`/api/permission/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`),
+                url: `/api/permission/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
                 method: "get"
             }).then(result => {
                 this.initialAuthorityList(result.data.content)

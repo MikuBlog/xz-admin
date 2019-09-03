@@ -192,7 +192,7 @@ export default {
         // 获取菜单列表
         getMenuList() {
             this.$http_json({
-                url: encodeURI(`/api/menu/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`),
+                url: `/api/menu/get?sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
                 method: "get"
             }).then(result => {
                 this.initialMenuList(result.data.content)
