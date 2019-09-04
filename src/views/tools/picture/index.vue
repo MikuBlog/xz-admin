@@ -188,11 +188,10 @@ export default {
     // 获取图片列表
     getPictureList() {
       this.$http_normal({
-        url: encodeURI(
-          `/api/picture/page?page=${this.nowPage - 1}&size=${this.nowSize}${
+        url: `/api/picture/page?page=${this.nowPage - 1}&size=${this.nowSize}${
             this.searchVal ? `&filename=${this.searchVal}` : ""
           }`
-        ),
+        ,
         method: "get"
       }).then(result => {
         const data = result.data;

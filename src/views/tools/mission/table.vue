@@ -157,13 +157,13 @@ export default {
     // 获取定时任务信息
     getMissionLogList() {
       this.$http_normal({
-        url: encodeURI(`/api/quartz/jobLogs?page=${this.nowPage - 1}&size=${
+        url: `/api/quartz/jobLogs?page=${this.nowPage - 1}&size=${
           this.nowSize
         }&sort=createTime,desc${
           this.searchVal ? `&jobName=${this.searchVal}` : ""
         }${
           this.selectType !== "" ? `&successful=${this.selectType}` : ""
-        }`),
+        }`,
         method: "get"
       }).then(result => {
         const data = result.data;
