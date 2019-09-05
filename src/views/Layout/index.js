@@ -102,12 +102,14 @@ export default {
         eles = document.querySelectorAll('.el-scrollbar__wrap'),
         drawer = document.querySelector('.ivu-drawer-body'),
         drawerContent = document.querySelector('.ivu-drawer-content'),
-        scrollContainer = document.querySelector('.el-scrollbar')
+        scrollContainer = document.querySelector('.el-scrollbar'),
+        regexp = new RegExp(/select/g)
       this.$setStyle(drawer, 'padding', 0)
       this.$setStyle(drawerContent, 'background', '#2e3f54')
       this.$setStyle(scrollContainer, 'background', '#2d3e53')
       eles.forEach((value, index) => {
-        this.$setStyle(value, 'overflow-x', 'hidden')
+        if (!regexp.test(value.className))
+          this.$setStyle(value, 'overflow-x', 'hidden')
       })
       this.isMenuCollapse = false
     },
