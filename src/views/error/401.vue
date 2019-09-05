@@ -55,17 +55,17 @@ export default {
     },
     mounted() {
       const _this = this
-      	_this.$$(function(){
+      	$(function(){
         var time=setTimeout(function(){
-          _this.$$("#duobei").css({
+          $("#duobei").css({
             "-webkit-transform": "rotate(-30deg) scale(0.5)",
           });
         },2000);
 
-        _this.$$("#title").hide();
+        $("#title").hide();
         var title=setTimeout(function(){
-          _this.$$("#title").addClass("title_move");
-          _this.$$("#title").show();
+          $("#title").addClass("title_move");
+          $("#title").show();
         },3400);
 
         var duobeiWrap=setTimeout(function(){
