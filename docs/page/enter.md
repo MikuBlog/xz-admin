@@ -41,7 +41,7 @@ npm run serve
 │  ├─login
 │  ├─logo
 │  └─welcome
-├─components // 第三方组件与自行封装的组件
+├─components // 第三方与自行封装的组件
 │  ├─breadcrumb
 │  ├─editor
 │  ├─icon_select
@@ -50,12 +50,46 @@ npm run serve
 │  ├─tag
 │  ├─tree_menu
 │  └─tree_table
-├─global
+├─global // 全局模块
+│  ├─css
+│  └─js
 ├─icons // 存放SVG图标
 │  └─svg
-├─initial // 第三方插件与过滤器初始文件
+├─initial // 第三方插件、过滤器、自定义指令初始化
 ├─Layout // 布局组件
 ├─router // 路由核心文件
 ├─store // vuex
-└─views // 页面布局文件
+│  └─modules
+├─utils // 工具类函数
+└─views // 页面组件
+    ├─article
+    ├─chart
+    ├─common
+    │  ├─editor
+    │  ├─file
+    │  ├─icon
+    │  └─markdown
+    ├─error
+    ├─introduction
+    ├─Layout
+    ├─log
+    ├─login
+    ├─menu_1
+    ├─menu_2
+    ├─menu_3
+    ├─monitor
+    ├─order
+    ├─person
+    ├─system
+    │  ├─authority
+    │  ├─department
+    │  ├─dictionary
+    │  ├─menu
+    │  ├─role
+    │  ├─station
+    │  └─user
+    ├─tools
+    │  ├─mission
+    │  └─picture
+    └─welcome
 ```
