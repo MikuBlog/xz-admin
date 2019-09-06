@@ -348,7 +348,7 @@ export default {
         this.menus = result.data;
       });
     },
-    // 获取权限列表
+    // 获取角色列表
     getAuthorityTree() {
       this.$http_json({
         url: "/api/permission/tree",
@@ -357,7 +357,7 @@ export default {
         this.permissions = result.data;
       });
     },
-    // 获取权限日志信息
+    // 获取角色信息
     getRoleList() {
       this.$http_normal({
         url: `/api/role/page?page=${this.nowPage - 1}&size=${

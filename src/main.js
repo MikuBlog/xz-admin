@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from '@/App.vue'
-import router from '@/router/index'
-import store from '@/store/store'
+import router from '@/router'
+import store from '@/store'
 /**
  * @author xuanzai
  * @description api模块初始化。在如下路径文件下引入模块即可。

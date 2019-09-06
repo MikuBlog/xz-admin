@@ -1,4 +1,4 @@
-import store from '@/store/store'
+import store from '@/store'
 export default function(value) {
   if (value && value instanceof Array && value.length > 0) {
     const roles = store.state.user && store.state.user.roles

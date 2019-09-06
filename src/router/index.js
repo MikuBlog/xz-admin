@@ -1,6 +1,6 @@
 import router from './router'
 import Http from '@/api/http/http'
-import store from '@/store/store'
+import store from '@/store'
 import Storage from '@/api/storage/storage'
 // 引入进度条插件
 import NProgress from 'nprogress';

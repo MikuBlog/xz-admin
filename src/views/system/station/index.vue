@@ -194,14 +194,14 @@ export default {
     initialPage(totalElements) {
       this.totalElements = totalElements;
     },
-    // 初始化错误日志列表
+    // 初始化岗位列表
     initialStationList(list) {
       this.stationList.splice(0);
       list.forEach(value => {
         this.stationList.push(value);
       });
     },
-    // 获取错误日志信息
+    // 获取岗位信息
     getStationList() {
       this.$http_normal({
         url: `/api/job/page?page=${this.nowPage - 1}&size=${

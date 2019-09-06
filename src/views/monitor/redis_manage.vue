@@ -139,14 +139,14 @@ export default {
     initialPage(totalElements) {
       this.totalElements = totalElements;
     },
-    // 初始化错误日志列表
+    // 初始化缓存列表
     initialRedisList(list) {
       this.redisList.splice(0);
       list.forEach(value => {
         this.redisList.push(value);
       });
     },
-    // 获取图片列表
+    // 获取缓存信息
     getRedisList() {
       this.$http_normal({
         url: `/api/redis/page?page=${this.nowPage - 1}&size=${

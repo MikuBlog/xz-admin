@@ -131,7 +131,7 @@ export default {
             this.expand = !this.expand
             this.getDepartmentList()
         },
-        // 删除岗位
+        // 删除部门
         deleteDepartment(item) {
             this
                 .$showMsgBox({ msg: `是否删除${item.name}部门?` })
