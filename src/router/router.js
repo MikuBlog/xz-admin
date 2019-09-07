@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const 
-  Login = () => import('@/views/login/login.vue'),
+  Login = () => import('@/views/login/index.vue'),
   Error = () => import('@/views/error/404.vue'),
   Permission = () => import('@/views/error/401.vue')
 

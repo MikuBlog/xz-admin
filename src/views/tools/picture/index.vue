@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import eForm from "./form";
+import eForm from "./components/form";
 export default {
   components: { eForm },
   data() {

@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import stationForm from "./form";
+import stationForm from "./components/form";
 export default {
   components: { stationForm },
   data() {

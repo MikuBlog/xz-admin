@@ -167,8 +167,8 @@
 </template>
 
 <script>
-import FormAdd from "./add";
-import FormEdit from "./edit";
+import FormAdd from "./components/add";
+import FormEdit from "./components/edit";
 export default {
   components: { FormAdd, FormEdit },
   data() {

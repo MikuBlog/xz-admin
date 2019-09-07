@@ -100,8 +100,8 @@
 
 <script>
 import { mapState } from "vuex";
-import editPassword from "./edit_password";
-import editEmail from "./edit_email";
+import editPassword from "./components/edit_password";
+import editEmail from "./components/edit_email";
 export default {
   components: { editPassword, editEmail },
   data() {

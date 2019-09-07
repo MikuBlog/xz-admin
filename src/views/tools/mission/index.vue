@@ -108,8 +108,8 @@
 </template>
 
 <script>
-import Form from './form'
-import Table from './table'
+import Form from './components/form'
+import Table from './components/table'
 export default {
   components: { Form, Table },
   data() {

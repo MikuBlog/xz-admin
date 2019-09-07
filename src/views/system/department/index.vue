@@ -92,7 +92,7 @@
 
 <script>
 import treeTable from "@/components/tree_table/tree_table"
-import eForm from "./form.vue"
+import eForm from "./components/form"
 export default {
     components: { eForm, treeTable },
     data() {
