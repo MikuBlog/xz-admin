@@ -93,7 +93,7 @@ export default {
 	-webkit-traisition: all 1s ease-out;
 	-moz-traisition: all 1s ease-out;
 	-o-traisition: all 1s ease-out;
-	traisition: all 1s ease-out;
+	transition: all 1s ease-out;
 }
 #duobei{
 	width: 600px;
@@ -308,7 +308,7 @@ export default {
 }
 
 /*webkit*/
-@-webkit-keyframes 'blues'{
+@-webkit-keyframes blues{
 	0%{
 		opacity: 0;
 	}
@@ -316,7 +316,7 @@ export default {
 		opacity: 1;
 	}
 }
-@-webkit-keyframes 'whites'{
+@-webkit-keyframes whites{
 	0%{
 		opacity: 0;
 	}
@@ -328,7 +328,7 @@ export default {
 	}
 }
 
-@-webkit-keyframes 'yellows'{
+@-webkit-keyframes yellows{
 	0%{
 		opacity: 0;
 	}
@@ -342,7 +342,7 @@ export default {
 
 
 /*moz*/
-@-moz-keyframes 'blues'{
+@-moz-keyframes blues{
 	0%{
 		opacity: 0;
 	}
@@ -350,7 +350,7 @@ export default {
 		opacity: 1;
 	}
 }
-@-moz-keyframes 'whites'{
+@-moz-keyframes whites{
 	0%{
 		opacity: 0;
 	}
@@ -362,7 +362,7 @@ export default {
 	}
 }
 
-@-moz-keyframes 'yellows'{
+@-moz-keyframes yellows{
 	0%{
 		opacity: 0;
 	}
@@ -413,7 +413,10 @@ export default {
 	transform-origin: 50%;
 }
 
-.fl {float:left;display:inline;}
+.fl {
+  float:left;
+  display:inline;
+}
 .fr {float:right;display:inline;}
 .cf {display:block;zoom:1;}
 * html .cf {height:1%;}
@@ -472,7 +475,7 @@ i:nth-child(n+3){
 
 
 
-@-webkit-keyframes 'zoom-d' {
+@-webkit-keyframes zoom-d {
     0% {
         -webkit-transform: scale(0.6);
         transform: scale(0.6);
@@ -499,7 +502,7 @@ i:nth-child(n+3){
     }
 }
 
-@-webkit-keyframes 'zoom-b' {
+@-webkit-keyframes zoom-b {
     0% {
         -webkit-transform: scale(0.6);
         transform: scale(0.6);
@@ -521,7 +524,7 @@ i:nth-child(n+3){
     }
 }
 
-@-webkit-keyframes 'zoom-g' {
+@-webkit-keyframes zoom-g {
     0% {
         -webkit-transform: scale(0.6);
         transform: scale(0.6);
@@ -543,7 +546,7 @@ i:nth-child(n+3){
     }
 }
 
-@-webkit-keyframes 'zoom-k' {
+@-webkit-keyframes zoom-k {
     0% {
         -webkit-transform: scale(0.6);
         transform: scale(0.6);
@@ -565,7 +568,7 @@ i:nth-child(n+3){
     }
 }
 
-@-webkit-keyframes 'zoom-c' {
+@-webkit-keyframes zoom-c {
     0% {
         -webkit-transform: scale(0.6);
         transform: scale(0.6);
@@ -707,7 +710,7 @@ i:nth-child(n+3){
 	transform: rotate(6deg) skew(0,0) translate(-60%,-5px);*/
 }
 
-@-webkit-keyframes 'not'{
+@-webkit-keyframes not{
 	0%{
 		
 	}
