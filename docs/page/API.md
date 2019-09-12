@@ -85,9 +85,13 @@ this.$copyText(this.$refs.contentBox)
 
 描述：获取url后的参数
 
+参数：
+
++ `url`: 键 [`String`]（如果参数为空，默认获取当前页面`url`的参数，否则解析传入的`url`参数）
+
 示例
 ```js
-this.$urlQuery() // url: http://myinterface.xuanzai.top/getPicture?type=头像&id=1  result: { type: '头像', id: 1 }
+this.$urlQuery([url]) // url: http://myinterface.xuanzai.top/getPicture?type=头像&id=1  result: { type: '头像', id: 1 }
 
 ```
 

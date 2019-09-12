@@ -116,5 +116,5 @@ Object
 请求地址在`public/js/baseUrl.js` 文件内，只需修改这串代码即可。
 
 ```
-baseURL = 'http://openlan.missiono.cn'	
+baseUrl = 'http://openlan.missiono.cn'	
 ```
