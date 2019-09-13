@@ -38,7 +38,7 @@ Object
 
 /**
  * @author xuanzai
- * @description 全局注册组件。在如下路径文件下全局注册指令即可。
+ * @description 全局注册组件。
  */
 const req = require.context('@/components', true, /\.vue$/)
 
