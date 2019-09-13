@@ -1,7 +1,7 @@
 	/**
 	 * @author xuanzai
 	 * @description 获取url后的参数
-	 * @parmas { url } 传入的url，默认为空
+	 * @param { url } 传入的url，默认为空
 	 * @returns { Object }
 	 */
 	function urlQuery(url = "") {
