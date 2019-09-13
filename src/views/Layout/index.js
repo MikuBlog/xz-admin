@@ -1,9 +1,5 @@
 import { mapState, mapMutations } from 'vuex'
-import NavMenu from '@/components/tree_menu/SidebarItem'
-import Breadcrumb from '@/components/breadcrumb'
-import Tag from '@/components/tag'
 export default {
-  components: { NavMenu, Breadcrumb, Tag },
   data() {
     return {
       isCollapse: false,

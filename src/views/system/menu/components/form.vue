@@ -46,9 +46,7 @@
 </template>
 
 <script>
-import IconSelect from '@/components/icon_select'
 export default {
-  components: { IconSelect },
   props: {
     isAdd: {
       type: Boolean,

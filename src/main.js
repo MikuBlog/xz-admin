@@ -35,6 +35,18 @@ Object
       componentUpdated: directives[key]
     })
   })
+  
+/**
+ * @author xuanzai
+ * @description 全局注册组件。在如下路径文件下全局注册指令即可。
+ */
+const req = require.context('@/components', true, /\.vue$/)
+
+// 全局注册组件
+req.keys().forEach(val => {
+  const component = req(val).default
+  Vue.component(component.name, component)
+})
 
 new Vue({
   router,

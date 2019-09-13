@@ -80,10 +80,9 @@
 </template>
 
 <script>
-import treeTable from "@/components/tree_table/tree_table"
 import eForm from "./components/form"
 export default {
-    components: { treeTable, eForm },
+    components: { eForm },
     data() {
         return {
             expand: true,
