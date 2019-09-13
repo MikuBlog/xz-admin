@@ -111,6 +111,28 @@ Object
 
 <br/>
 
+## 注册组件
+
+组件统一存放在`src/components`文件里。
+
+如下为默认自动全局注册自定义组件代码。
+
+```js
+/**
+ * @author xuanzai
+ * @description 全局注册组件。在如下路径文件下全局注册指令即可。
+ */
+const req = require.context('@/components', true, /\.vue$/)
+
+// 全局注册组件
+req.keys().forEach(val => {
+  const component = req(val).default
+  Vue.component(component.name, component)
+})
+```
+
+<br/>
+
 ## 修改请求地址
 
 请求地址在`public/js/baseUrl.js` 文件内，只需修改这串代码即可。
