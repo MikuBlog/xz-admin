@@ -49,7 +49,7 @@
 
 <br/>
 
-## 数据过滤器
+## 注册过滤器
 
 过滤器统一存放在`src/initial/filter.js`文件里，只需按照该文件里面代码格式在该文件里进行编写即可。
 
@@ -120,7 +120,7 @@ Object
 ```js
 /**
  * @author xuanzai
- * @description 全局注册组件。在如下路径文件下全局注册指令即可。
+ * @description 全局注册组件。
  */
 const req = require.context('@/components', true, /\.vue$/)
 
