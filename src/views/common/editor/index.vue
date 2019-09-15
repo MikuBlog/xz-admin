@@ -16,9 +16,7 @@
 </template>
 
 <script>
-import Editor from '@/components/editor/editor'
 export default {
-    components: { Editor },
     data() {
         return {
             msg: ""

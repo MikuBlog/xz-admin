@@ -79,9 +79,7 @@
 </template>
 
 <script>
-import editor from '../../components/editor/editor'
 export default {
-    components: { editor },
     data() {
         return {
             imageUrl: '',

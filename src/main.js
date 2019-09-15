@@ -40,13 +40,15 @@ Object
  * @author xuanzai
  * @description 全局注册组件。
  */
-const req = require.context('@/components', true, /\.vue$/)
+const req = require.context('@/components', true, /index\.vue$/)
 
 // 全局注册组件
-req.keys().forEach(val => {
-  const component = req(val).default
-  Vue.component(component.name, component)
-})
+req
+  .keys()
+  .forEach(val => {
+    const component = req(val).default
+    Vue.component(component.name, component)
+  })
 
 new Vue({
   router,

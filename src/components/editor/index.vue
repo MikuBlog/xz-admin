@@ -6,7 +6,7 @@
 <script>
 import VueUeditorWrap from 'vue-ueditor-wrap'
 export default {
-    name: "editor",
+    name: "Editor",
     components: { VueUeditorWrap },
     data() {
         return {
