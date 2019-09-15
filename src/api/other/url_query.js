@@ -12,6 +12,8 @@
 		list = url.split("?")[1]
 	  }else if (window.location.search) {
 	    list = window.location.search.replace("?", "")
+	  }else {
+		  return
 	  }
 	  list.split("&").forEach(val => {
 	    const
