@@ -117,18 +117,22 @@ Object
 
 如下为默认自动全局注册自定义组件代码。
 
+最终读取`src/components`下的所有`index.vue`文件进行组件注册。
+
 ```js
 /**
  * @author xuanzai
  * @description 全局注册组件。
  */
-const req = require.context('@/components', true, /\.vue$/)
+const req = require.context('@/components', true, /index\.vue$/)
 
 // 全局注册组件
-req.keys().forEach(val => {
-  const component = req(val).default
-  Vue.component(component.name, component)
-})
+req
+  .keys()
+  .forEach(val => {
+    const component = req(val).default
+    Vue.component(component.name, component)
+  })
 ```
 
 <br/>
