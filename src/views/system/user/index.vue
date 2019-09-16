@@ -19,6 +19,7 @@
               :data="departmentList"
               :props="defaultProps"
               default-expand-all
+              :expand-on-click-node="false"
               @node-click="handleNodeClick"
             ></el-tree>
           </div>
