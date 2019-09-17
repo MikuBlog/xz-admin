@@ -34,7 +34,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      "setUserInfo"
+      "setUserInfo",
+      "removeTag"
     ]),
     // 获取用户信息
     getUserInfo() {
@@ -78,7 +79,7 @@ export default {
     },
     // 移除所有标签
     removeAllTags() {
-      this.tagsList.splice(1)
+      this.removeTag()
       this.navigateTo('/home/welcome')
     },
     // 跳转路由

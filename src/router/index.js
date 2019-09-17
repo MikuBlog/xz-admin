@@ -119,7 +119,11 @@ function addTags(tag) {
             return
         }
     }
-    store.commit('addTags', tag) 
+    store.commit('addTags', {
+      name: tag.name,
+      meta: tag.meta,
+      path: tag.path
+    }) 
 }
 
 // 清除缓存
