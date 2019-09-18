@@ -16,8 +16,14 @@ const
       // 缓存tags
       storage.setMemorySes('tags', state.tagsList)
     },
+    // 删除指定标签
+    removeTags(state, index) {
+      state.tagsList.splice(index, 1)
+      // 缓存tags
+      storage.setMemorySes('tags', state.tagsList)
+    },
     // 移除所有标签页
-    removeTag(state) {
+    removeAllTags(state) {
       state.tagsList.splice(1)
       // 清除tags缓存
       storage.setMemorySes('tags', "")

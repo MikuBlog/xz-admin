@@ -129,7 +129,7 @@ function addTags(tag) {
 // 清除缓存
 function removeRedis() {
     store.commit("setMenuList", [])
-    store.commit("removeTag")
+    store.commit("removeAllTags")
 }
 
 // 动态生成路由并做拦截

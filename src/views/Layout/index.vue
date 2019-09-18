@@ -69,7 +69,7 @@
                             v-show="$store.state.setting.showTags">
                                 <i 
                                 class="el-icon-circle-close" 
-                                @click="removeAllTags"
+                                @click="removeTags"
                                 title="删除所有标签页"></i>
                             </el-tooltip>
                         </div>

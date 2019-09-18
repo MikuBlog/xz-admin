@@ -25,6 +25,7 @@
 
 <script>
 import ScrollPane from "@/components/scrollpane";
+import { mapMutations } from 'vuex'
 export default {
   name: "Tag",
   components: { ScrollPane },
@@ -40,6 +41,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      "removeTags"
+    ]),
     moveToCurrentTag() {
       const tags = this.$refs.tag;
       this.$nextTick(() => {
@@ -72,7 +76,7 @@ export default {
           if (item.path == this.$route.path && i != len - 1) {
             this.$router.push({ path: this.tagsList[i + 1].path });
           }
-          this.tagsList.splice(i, 1);
+          this.removeTags(i)
         }
       }
     },
