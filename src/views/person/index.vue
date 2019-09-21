@@ -190,7 +190,7 @@ export default {
     // 获取操作日志信息
     getOpertionLogList() {
       this.$http_normal({
-        url: `/log/page?page=${this.nowPage - 1}&size=${
+        url: `/log/page/user?page=${this.nowPage - 1}&size=${
           this.nowSize
         }&sort=createTime,desc${
           this.searchVal ? `&description=${this.searchVal}` : ""
