@@ -10,9 +10,6 @@ https://xzadmin.xuanzai.top
 账号：xuanzai
 密码：123456
 
-	new
-affaf
-
 <br/>
 
 # :star: 安装步骤
