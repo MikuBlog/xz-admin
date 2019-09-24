@@ -10,6 +10,8 @@ https://xzadmin.xuanzai.top
 账号：xuanzai
 密码：123456
 
+xuanzai吃shi
+
 <br/>
 
 # :star: 安装步骤
