@@ -107,6 +107,7 @@ export default {
     showGeneratorCodeBox(item) {
       const generatorBox = this.$refs.form
       generatorBox.dialog = true
+      generatorBox.getFormMsg()
       generatorBox.getTableList(item.tableName)
     },
     // 点击搜索

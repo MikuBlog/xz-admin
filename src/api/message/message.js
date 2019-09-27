@@ -1,4 +1,4 @@
-import { Message, MessageBox  } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 
 /**
  * @author xuanzai

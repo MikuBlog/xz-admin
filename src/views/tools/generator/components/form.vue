@@ -42,7 +42,6 @@
                 <el-switch
                   v-model="tableList[scope.$index].columnShow"
                   active-color="#13ce66"
-                  inactive-color="#ff4949"
                   active-value="true"
                   inactive-value="false"/>
               </el-tooltip>
@@ -110,17 +109,6 @@ export default {
     }
   },
   methods: {
-    toGen() {
-      this.dialog = true
-      this.time = 130
-      this.$nextTick(() => {
-        this.init()
-        get().then(data => {
-          this.form = data
-          this.form.cover = this.form.cover.toString()
-        })
-      })
-    },
     cancel() {
       this.dialog = false
       this.genLoading = false
@@ -152,6 +140,7 @@ export default {
             .all([this.uploadForm(), this.uploadTableList()])
             .then(result => {
               this.$successMsg("代码生成成功")
+              this.dialog = false
               this.$parent.getGenerateCodeList()
             })
         } else {
@@ -159,11 +148,26 @@ export default {
         }
       })
     },
+    // 初始化表单数据
+    initialFormMsg(data) {
+      for(let key in data) {
+        this.form[key] = data[key]
+      }
+    },
     // 初始化表格数据
     initialTableList(list) {
       this.tableList.splice(0)
       list.forEach(val => {
         this.tableList.push(val)
+      })
+    },
+    // 获取表单数据
+    getFormMsg() {
+      this.$http_json({
+        url: "/api/genConfig/list",
+        method: "get"
+      }).then(result => {
+        this.initialFormMsg(result.data)
       })
     },
     // 获取表格数据

@@ -50,6 +50,8 @@ import PreviewFile from '@/api/file/preview_file'
 import JsonPretty from '@/api/json/json_pretty'
 // 引入图片加载动画模块
 import ImageLoad from '@/api/other/image_load'
+// 引入图片加载动画模块
+import DefaultConfig from '@/global/js/config'
 /**
  * @author xuanzai
  * @description 连接数据库
@@ -231,6 +233,11 @@ Vue.prototype.$jsonPretty = JsonPretty
  * @param {String} url
  */
 Vue.prototype.$imageLoad = ImageLoad
+/**
+ * @author xuanzai
+ * @description 全局通用配置
+ */
+Vue.prototype.defaultConfig = DefaultConfig
 // 加入element-ui组件
 Vue.use(ElementUI)
 // 引入markdown编辑器组件
