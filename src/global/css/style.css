@@ -127,6 +127,10 @@ body {
     overflow: hidden!important;
 }
 
+.top-floor {
+  z-index: 9999!important;
+}
+
 @media screen and (min-width: 1920px){
     .card-gutter-xl {
         margin-top: 1rem;

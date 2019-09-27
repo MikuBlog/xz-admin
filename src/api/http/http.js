@@ -48,7 +48,7 @@
 							router.push({ path: "/login" })
 						})
           : err.response.status === 403
-          ? router.push({ path: "/401" })
+          ? router.push({ path: "/403" })
           : Message
 						.errorMsg(
 							JSON.parse(err.response.request.response).message 
