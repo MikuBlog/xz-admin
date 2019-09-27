@@ -100,7 +100,7 @@
         <eForm 
         ref="form" 
         :is-add="isAdd" 
-        @updateMenu="getMenuList"/>
+        />
     </div>
 </template>
 

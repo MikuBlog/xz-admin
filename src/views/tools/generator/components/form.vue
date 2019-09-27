@@ -1,6 +1,5 @@
 <template>
   <div>
-    <el-button type="primary" size="mini" @click="toGen">生成代码</el-button>
     <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="代码生成配置" append-to-body width="870px">
       <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="78px">
         <el-form-item label="模块名称" prop="moduleName">
@@ -51,7 +50,7 @@
           </el-table-column>
         </el-table>
         <el-form-item label="作者名称" prop="author">
-          <el-input v-model="form.author"/>
+          <el-input placeholder="请填写作者名称" v-model="form.author"/>
         </el-form-item>
         <el-form-item label="去表前缀" prop="prefix">
           <el-input v-model="form.prefix" placeholder="默认不去除表前缀"/>
@@ -86,8 +85,10 @@ export default {
   // },
   data() {
     return {
+      id: "",
+      tableName: "",
       dialog: false, columnQuery: '',
-      form: { author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '' },
+      form: {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '' },
       tableList: [],
       rules: {
         author: [
@@ -124,19 +125,35 @@ export default {
       this.dialog = false
       this.genLoading = false
       this.$refs['form'].resetFields()
-      this.form = { author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '' }
+      this.form = {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '' }
     },
+    // 上传表格数据
+    uploadTableList() {
+      return this.$http_json({
+        url: "/api/genConfig/edit",
+        method: "post",
+        data: this.form
+      })
+    },
+    // 上传表单数据
+    uploadForm() {
+      return this.$http_json({
+        url: `/api/generator/create?tableName=${this.tableName}`,
+        method: "post",
+        data: this.tableList
+      })
+    },
+    // 提交数据
     doSubmit() {
       this.genLoading = true
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          this.$http_json({
-            url: "/api/generator/create",
-            data: tableList
-          }).then(result => {
-            this.$successMsg("生成代码成功")
-            this.dialog = false
-          })
+          Promise
+            .all([this.uploadForm(), this.uploadTableList()])
+            .then(result => {
+              this.$successMsg("代码生成成功")
+              this.$parent.getGenerateCodeList()
+            })
         } else {
           return false
         }
@@ -151,8 +168,9 @@ export default {
     },
     // 获取表格数据
     getTableList(tableName) {
+      this.tableName = tableName
       this.$http_json({
-        url: `/api/generator/columns?tableName=${tableName}`,
+        url: `/api/generator/columns?tableName=${this.tableName}`,
         method: "get"
       }).then(result => {
         this.initialTableList(result.data.content)

@@ -142,7 +142,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <eForm ref="form" :is-add="isAdd" @updateRoleList="getRoleList" />
+    <eForm ref="form" :is-add="isAdd"/>
   </div>
 </template>
 

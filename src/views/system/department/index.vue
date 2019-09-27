@@ -86,7 +86,7 @@
         ref="form" 
         :is-add="isAdd"
         :dicts="dicts"
-        @updateDepartmentList="getDepartmentList"/>
+       />
     </div>
 </template>
 

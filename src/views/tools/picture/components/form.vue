@@ -42,7 +42,7 @@ export default {
             this.dialogVisible = false
             this.dialogImageUrl = ''
             this.dialog = false
-            this.$emit("updatePictureList")
+            this.$parent.getPictureList()
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url

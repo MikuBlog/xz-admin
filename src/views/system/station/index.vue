@@ -97,7 +97,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <stationForm ref="form" :is-add="isAdd" :dicts="dicts" @updateStationList="getStationList" />
+    <stationForm ref="form" :is-add="isAdd" :dicts="dicts"/>
   </div>
 </template>
 

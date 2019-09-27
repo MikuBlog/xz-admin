@@ -63,10 +63,6 @@ export default {
     }
   },
   methods: {
-    // 更新列表
-    updateList() {
-      this.$emit("updateMissionList")
-    },
     hideBox() {
       this.dialog = false
     },
@@ -102,7 +98,7 @@ export default {
       }).then(result => {
         this.$successMsg('添加成功')
         this.hideBox()
-        this.updateList()
+        this.$parent.getMissionList()
       })
     },
     doSubmit() {

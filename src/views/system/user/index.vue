@@ -138,7 +138,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <eForm ref="form" :is-add="isAdd" :dicts="dicts" @updateUserList="getUserList" />
+    <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>
 

@@ -75,7 +75,7 @@
         <eForm 
         ref="form" 
         :is-add="isAdd" 
-        @updateAuthorityList="getAuthorityList"/>
+        />
     </div>
 </template>
 
