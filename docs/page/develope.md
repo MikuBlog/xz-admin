@@ -137,6 +137,25 @@ req
 
 <br/>
 
+## 全局配置
+
+在`src/global/js/config.js`文件下，有全局统一配置信息。操作这些信息方便改后打包使用。
+
+这些属性时暂时的，往后会推出更多可配置项~
+
+```js
+export default {
+  // 登录标题
+  loginHeader: "XZ-Admin",
+  // 是否显示自定义登录界面按钮
+  loginSetting: true,
+  // 是否显示合作网站账号登录框
+  otherLoginMethods: true
+}
+```
+
+<br/>
+
 ## 修改请求地址
 
 请求地址在`public/js/baseUrl.js` 文件内，只需修改这串代码即可。
