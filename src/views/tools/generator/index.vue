@@ -30,7 +30,7 @@
             </el-table-column>
             <el-table-column label="备注" :show-overflow-tooltip="true">
               <template slot-scope="scope">
-                <div slot="reference">{{ scope.row.remark ? scope.row.remark : "无" }}</div>
+                <div slot="reference">{{ scope.row.remark ? scope.row.remark : "生成模板信息" }}</div>
               </template>
             </el-table-column>
             <el-table-column label="创建日期" width="180">

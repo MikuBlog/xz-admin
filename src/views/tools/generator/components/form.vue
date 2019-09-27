@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="代码生成配置" append-to-body width="870px">
-      <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="78px">
+    <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="代码生成配置" append-to-body width="920px">
+      <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="90px">
         <el-form-item label="模块名称" prop="moduleName">
           <el-input placeholder="请输入模块名称" v-model="form.moduleName"/>
         </el-form-item>
@@ -54,6 +54,9 @@
         <el-form-item label="去表前缀" prop="prefix">
           <el-input v-model="form.prefix" placeholder="默认不去除表前缀"/>
         </el-form-item>
+        <el-form-item label="实体注备名" prop="prefix">
+          <el-input v-model="form.tableComment" placeholder="请输入注备名"/>
+        </el-form-item>
         <!--    可自定义显示配置    -->
         <!--        <el-form-item label="Api路径">-->
         <!--          <el-input v-model="form.apiPath"/>-->
@@ -87,7 +90,7 @@ export default {
       id: "",
       tableName: "",
       dialog: false, columnQuery: '',
-      form: {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '' },
+      form: {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '', tableComment: '' },
       tableList: [],
       rules: {
         author: [
@@ -113,10 +116,10 @@ export default {
       this.dialog = false
       this.genLoading = false
       this.$refs['form'].resetFields()
-      this.form = {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '' }
+      this.form = {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '', tableComment: '' }
     },
     // 上传表格数据
-    uploadTableList() {
+    uploadForm() {
       return this.$http_json({
         url: "/api/genConfig/edit",
         method: "post",
@@ -124,7 +127,7 @@ export default {
       })
     },
     // 上传表单数据
-    uploadForm() {
+    uploadTableList() {
       return this.$http_json({
         url: `/api/generator/create?tableName=${this.tableName}`,
         method: "post",
