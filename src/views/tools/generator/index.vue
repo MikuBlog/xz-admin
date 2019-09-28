@@ -30,7 +30,7 @@
             </el-table-column>
             <el-table-column label="备注" :show-overflow-tooltip="true">
               <template slot-scope="scope">
-                <div slot="reference">{{ scope.row.remark ? scope.row.remark : "生成模板信息" }}</div>
+                <div slot="reference">{{ scope.row.remark ? scope.row.remark : "无" }}</div>
               </template>
             </el-table-column>
             <el-table-column label="创建日期" width="180">
@@ -67,8 +67,8 @@
           </div>
         </el-card>
       </el-col>
-      <GeneratorBox ref="form" />
     </el-row>
+    <GeneratorBox ref="form" />
   </div>
 </template>
 
@@ -107,6 +107,7 @@ export default {
     showGeneratorCodeBox(item) {
       const generatorBox = this.$refs.form
       generatorBox.dialog = true
+      generatorBox.form.remark = item.remark
       generatorBox.getFormMsg()
       generatorBox.getTableList(item.tableName)
     },

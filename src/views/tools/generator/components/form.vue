@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="代码生成配置" append-to-body width="920px">
-      <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="90px">
+    <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="代码生成配置" append-to-body width="960px">
+      <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="95px">
         <el-form-item label="模块名称" prop="moduleName">
           <el-input placeholder="请输入模块名称" v-model="form.moduleName"/>
         </el-form-item>
@@ -51,11 +51,11 @@
         <el-form-item label="作者名称" prop="author">
           <el-input placeholder="请填写作者名称" v-model="form.author"/>
         </el-form-item>
+        <el-form-item label="实体注备名" prop="remark">
+          <el-input v-model="form.remark" placeholder="请输入注备名"/>
+        </el-form-item>
         <el-form-item label="去表前缀" prop="prefix">
           <el-input v-model="form.prefix" placeholder="默认不去除表前缀"/>
-        </el-form-item>
-        <el-form-item label="实体注备名" prop="prefix">
-          <el-input v-model="form.tableComment" placeholder="请输入注备名"/>
         </el-form-item>
         <!--    可自定义显示配置    -->
         <!--        <el-form-item label="Api路径">-->
@@ -66,6 +66,26 @@
             <el-radio-button label="true">是</el-radio-button>
             <el-radio-button label="false">否</el-radio-button>
           </el-radio-group>
+        </el-form-item>
+        <el-form-item style="padding: 0 15px;">
+          <div style="padding: 5px 0">
+            <div>后端模板：</div>
+            <el-checkbox 
+            v-for="items in templateList" 
+            :key="items.name"
+            v-if="items.type === 0"
+            v-model="items.enabled" 
+            >{{ items.name }}</el-checkbox>
+          </div>
+          <div style="padding: 5px 0">
+            <div>前端模板：</div>
+            <el-checkbox 
+              v-for="items in templateList" 
+              :key="items.name"
+              v-if="items.type === 1"
+              v-model="items.enabled" 
+              >{{ items.name }}</el-checkbox>
+          </div>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -88,13 +108,18 @@ export default {
   data() {
     return {
       id: "",
-      tableName: "",
+      remark: "",
       dialog: false, columnQuery: '',
-      form: {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '', tableComment: '' },
+      form: {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '', remark: ""},
+      tableComment: "文章",
       tableList: [],
+      templateList: [],
       rules: {
         author: [
           { required: true, message: '作者不能为空', trigger: 'blur' }
+        ],
+        remark: [
+          { required: true, message: '注备不能为空', trigger: 'blur' }
         ],
         pack: [
           { required: true, message: '模块路径不能为空', trigger: 'blur' }
@@ -116,10 +141,12 @@ export default {
       this.dialog = false
       this.genLoading = false
       this.$refs['form'].resetFields()
-      this.form = {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '', tableComment: '' }
+      this.form = {id: 1, author: '', pack: '', path: '', moduleName: '', cover: 'false', apiPath: '', prefix: '', remark: ""}
     },
     // 上传表格数据
     uploadForm() {
+      this.form.genTemplates = this.templateList
+      delete this.form.remark
       return this.$http_json({
         url: "/api/genConfig/edit",
         method: "post",
@@ -129,21 +156,26 @@ export default {
     // 上传表单数据
     uploadTableList() {
       return this.$http_json({
-        url: `/api/generator/create?tableName=${this.tableName}`,
+        url: `/api/generator/create`,
         method: "post",
-        data: this.tableList
+        data: {
+          columnInfos: this.tableList,
+          remark: this.remark,
+          tableName: this.tableName
+        }
       })
     },
     // 提交数据
     doSubmit() {
       this.genLoading = true
       this.$refs['form'].validate((valid) => {
+        this.remark = this.form.remark
         if (valid) {
           Promise
             .all([this.uploadForm(), this.uploadTableList()])
             .then(result => {
-              this.$successMsg("代码生成成功")
               this.dialog = false
+              this.$successMsg("代码生成成功")
               this.$parent.getGenerateCodeList()
             })
         } else {
@@ -153,16 +185,20 @@ export default {
     },
     // 初始化表单数据
     initialFormMsg(data) {
+      this.templateList.splice(0)
       for(let key in data) {
         this.form[key] = data[key]
       }
+      data.genTemplates.forEach(val => {
+        this.templateList.push(val)
+      })
     },
     // 初始化表格数据
     initialTableList(list) {
       this.tableList.splice(0)
       list.forEach(val => {
         this.tableList.push(val)
-      })
+      }) 
     },
     // 获取表单数据
     getFormMsg() {
@@ -182,7 +218,7 @@ export default {
       }).then(result => {
         this.initialTableList(result.data.content)
       })
-    }
+    },
   }
 }
 </script>
