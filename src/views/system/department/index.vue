@@ -34,6 +34,7 @@
                                 icon="el-icon-plus" 
                                 class="margin-box"
                                 @click="showAddDepartment"
+                                title="添加部门"
                                 ></el-button>
                                 <el-button 
                                 type="warning" 

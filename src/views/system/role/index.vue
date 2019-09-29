@@ -24,6 +24,7 @@
                 icon="el-icon-plus"
                 class="margin-box"
                 @click="showAddRole()"
+                title="添加角色"
                 circle
               ></el-button>
             </el-row>

@@ -30,6 +30,7 @@
               class="margin-box"
               icon="el-icon-plus"
               @click="showAddStation"
+              title="添加岗位"
               circle
             ></el-button>
           </div>

@@ -301,19 +301,19 @@ export default {
     initialStyle() {
       const ele = document.querySelector(".ivu-drawer-body");
       this.$setStyle(ele, "overflow-x", "hidden");
-      this.opacity = +this.$getMemoryPmt("opacity") || 100;
-      this.blur = +this.$getMemoryPmt("blur") || 0;
-      this.mask = +this.$getMemoryPmt("mask") || 0;
-      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 62 : 41);
-      this.width = +this.$getMemoryPmt("width") || 50;
-      this.fontSize = +this.$getMemoryPmt("fontSize") || 30;
-      this.isItalic = this.$getMemoryPmt("isItalic") ? true : false;
-      this.iconSize = +this.$getMemoryPmt("iconSize") || 30;
-      this.size = this.$getMemoryPmt("size") || "cover";
-      this.repeat = this.$getMemoryPmt("repeat") || false;
-      this.boxColor = this.$getMemoryPmt("boxColor") || "rgba(0, 0, 0, .35)";
-      this.fontColor = this.$getMemoryPmt("fontColor") || "#fefefe";
-      this.ruleForm.checked = this.$getMemoryPmt("isAutoLogin") || false;
+      this.opacity = +this.$getMemoryPmt("opacity") || this.opacity;
+      this.blur = +this.$getMemoryPmt("blur") || this.blur;
+      this.mask = +this.$getMemoryPmt("mask") || this.mask;
+      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 62 : this.height);
+      this.width = +this.$getMemoryPmt("width") || this.width;
+      this.fontSize = +this.$getMemoryPmt("fontSize") || this.fontSize;
+      this.isItalic = this.$getMemoryPmt("isItalic") !== "" ? Boolean(this.$getMemoryPmt("isItalic")) : this.isItalic;
+      this.iconSize = +this.$getMemoryPmt("iconSize") || this.iconSize;
+      this.size = this.$getMemoryPmt("size") || this.size;
+      this.repeat = this.$getMemoryPmt("repeat") || this.repeat;
+      this.boxColor = this.$getMemoryPmt("boxColor") || this.boxColor;
+      this.fontColor = this.$getMemoryPmt("fontColor") || this.fontColor;
+      this.ruleForm.checked = this.$getMemoryPmt("isAutoLogin") || this.ruleForm.checked;
     },
     // 选择背景图
     selectPic() {
