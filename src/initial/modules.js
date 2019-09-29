@@ -203,7 +203,9 @@ Vue.prototype.$previewFile = PreviewFile
 /**
  * @author xuanzai
  * @description 下载文件
- * @param {String} url 地址
+ * @param {String} url 下载路径
+ * @param {String} fileName 文件名称
+ * @param {Boolean} isBlob 是否为二进制文件
  */
 Vue.prototype.$download = Download
 /**
