@@ -63,6 +63,15 @@
                 icon="el-icon-plus"
                 class="margin-box"
                 @click="showAddUser"
+                title="添加新用户"
+                circle
+              ></el-button>
+              <el-button
+                type="warning"
+                icon="el-icon-download"
+                class="margin-box"
+                @click="downloadUserList"
+                title="导出用户列表"
                 circle
               ></el-button>
             </el-row>
@@ -138,7 +147,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <eForm ref="form" :is-add="isAdd" :dicts="dicts" @updateUserList="getUserList" />
+    <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>
 
@@ -199,6 +208,16 @@ export default {
     this.getUserList();
   },
   methods: {
+    // 导出用户列表
+    downloadUserList() {
+      this.$http_json({
+        url: "/api/user/download",
+        responseType: 'blob',
+        method: "get"
+      }).then(result => {
+        this.$download(result.data, `用户列表-${this.$formDate(new Date(), true)}.xls`, true)
+      })
+    },
     // 删除用户
     deleteUserItem(item) {
       this.$showMsgBox({

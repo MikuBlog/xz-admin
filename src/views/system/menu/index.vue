@@ -20,6 +20,7 @@
                                 icon="el-icon-plus" 
                                 class="margin-box"
                                 @click="showAddMenu()"
+                                title="添加菜单"
                                 circle
                                 ></el-button>
                                 <el-button 
@@ -100,7 +101,7 @@
         <eForm 
         ref="form" 
         :is-add="isAdd" 
-        @updateMenu="getMenuList"/>
+        />
     </div>
 </template>
 

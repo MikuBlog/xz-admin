@@ -48,7 +48,7 @@
 							router.push({ path: "/login" })
 						})
           : err.response.status === 403
-          ? router.push({ path: "/401" })
+          ? router.push({ path: "/403" })
           : Message
 						.errorMsg(
 							JSON.parse(err.response.request.response).message 
@@ -67,7 +67,7 @@
 	// 给所有的实例配置请求根路径
 	axios.defaults.baseURL = baseUrl
     // 配置请求时限
-	axios.defaults.timeout = 5000 
+	axios.defaults.timeout = 10000 
 	// 给所有的实例配置同一的返回数据格式
 	axios.defaults.transformResponse = [(data) => {
 		try {

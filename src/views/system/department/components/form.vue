@@ -51,10 +51,6 @@ export default {
     this.getDepartmentList()
   },
   methods: {
-    // 更新部门列表
-    updateList() {
-      this.$emit("updateDepartmentList")
-    },
     // 隐藏弹窗
     hideBox() {
       this.dialog = false
@@ -86,7 +82,7 @@ export default {
         this.$successMsg('添加成功')
         this.hideBox()
         this.getDepartmentList()
-        this.updateList()
+        this.$parent.getDepartmentList()
       }) 
     },
     // 删除部门

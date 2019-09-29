@@ -1,4 +1,4 @@
-import { Message, MessageBox  } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 
 /**
  * @author xuanzai
@@ -8,21 +8,24 @@ import { Message, MessageBox  } from 'element-ui'
 const successMsg = (msg) => {
     Message({
         message: msg,
-        type: 'success'
+        type: 'success',
+        customClass: "top-floor"
     })
 }
 
 const warnMsg = (msg) => {
     Message({
         message: msg,
-        type: 'warning'
+        type: 'warning',
+        customClass: "top-floor"
     })
 }
 
 const errorMsg = (msg) => {
     Message({
         message: msg,
-        type: 'error'
+        type: 'error',
+        customClass: "top-floor"
     })
 }
 

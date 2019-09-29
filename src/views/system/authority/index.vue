@@ -20,7 +20,8 @@
                                 type="primary"
                                 icon="el-icon-plus"
                                 class="margin-box" 
-                                @click="showAddAuthority()"></el-button>
+                                @click="showAddAuthority()"
+                                title="添加权限"></el-button>
                                 <el-button 
                                 type="warning" 
                                 :icon="expand ? 'el-icon-open' : 'el-icon-turn-off'" 
@@ -75,7 +76,7 @@
         <eForm 
         ref="form" 
         :is-add="isAdd" 
-        @updateAuthorityList="getAuthorityList"/>
+        />
     </div>
 </template>
 

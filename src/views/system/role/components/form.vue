@@ -52,10 +52,6 @@ export default {
     }
   },
   methods: {
-    // 更新数据
-    updateList() {
-        this.$emit("updateRoleList")
-    },
     // 隐藏弹窗
     hideBox() {
         this.dialog = false
@@ -94,7 +90,7 @@ export default {
         }).then(() => {
             this.$successMsg('添加成功')
             this.hideBox()
-            this.updateList()
+            this.$parent.getRoleList()
         })
     },
     // 编辑角色
@@ -107,7 +103,7 @@ export default {
         }).then(() => {
             this.$successMsg('编辑成功')
             this.hideBox()
-            this.updateList()
+            this.$parent.getRoleList()
         })
     },
     // 重置表单

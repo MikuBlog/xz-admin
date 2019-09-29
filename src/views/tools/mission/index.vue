@@ -101,7 +101,7 @@
     <Form 
     ref="form" 
     :is-add="isAdd"
-    @updateMissionList="getMissionList" />
+    />
     <Table 
     ref="table"/>
   </div>

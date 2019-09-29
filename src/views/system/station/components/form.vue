@@ -59,10 +59,6 @@ export default {
       this.getDepartmentList()
   },
   methods: {
-    // 更新列表
-    updateList() {
-      this.$emit('updateStationList')
-    },
     // 隐藏窗口
     hideBox() {
         this.dialog = false
@@ -94,7 +90,7 @@ export default {
         this.$successMsg('添加成功')
         this.hideBox()
         this.getDepartmentList()
-        this.updateList()
+        this.$parent.getStationList()
       }) 
     },
     // 编辑岗位
@@ -108,7 +104,7 @@ export default {
         this.$successMsg('编辑成功')
         this.hideBox()
         this.getDepartmentList()
-        this.updateList()
+        this.$parent.getStationList()
       }) 
     },
     // 重置表单

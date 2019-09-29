@@ -69,10 +69,6 @@ export default {
         }
     },
     methods: {
-        // 更新父组件数据
-        updateList() {
-            this.$emit('updateDictionaryList')
-        },
         // 隐藏弹出框
         hideBox() {
             this.isShowAddBox = false
@@ -88,7 +84,7 @@ export default {
                 result.status === 200
                 && (this.$successMsg('添加成功'),
                 this.hideBox(),
-                this.updateList())
+                this.$parent.getDictionaryList())
             })
         },
         // 编辑字典
@@ -102,7 +98,7 @@ export default {
                 result.status === 200
                 && (this.$successMsg('编辑成功'),
                 this.hideBox(),
-                this.updateList())
+                this.$parent.getDictionaryList())
             })
         },
         // 提交数据

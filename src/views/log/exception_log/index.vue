@@ -32,6 +32,11 @@ import { MessageBox } from 'mint-ui';
                 <div slot="reference">{{ scope.row.requestIp }}</div>
               </template>
             </el-table-column>
+            <el-table-column label="IP来源" :show-overflow-tooltip="true">
+              <template slot-scope="scope">
+                <div slot="reference">{{ scope.row.address }}</div>
+              </template>
+            </el-table-column>
             <el-table-column label="描述" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.description }}</div>

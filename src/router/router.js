@@ -6,7 +6,7 @@ Vue.use(Router)
 const 
   Login = () => import('@/views/login/index.vue'),
   Error = () => import('@/views/error/404.vue'),
-  Permission = () => import('@/views/error/401.vue')
+  Permission = () => import('@/views/error/403.vue')
 
 const router = new Router({
   mode: 'history',
@@ -23,10 +23,10 @@ const router = new Router({
     },
     component: Error
   }, {
-    path: '/401',
-    name: '401',
+    path: '/403',
+    name: '403',
     meta: {
-      title: "401"
+      title: "403"
     },
     component: Permission
   }] 

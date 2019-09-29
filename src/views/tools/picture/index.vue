@@ -83,7 +83,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <eForm ref="form" @updatePictureList="getPictureList"></eForm>
+    <eForm ref="form" />
   </div>
 </template>
 

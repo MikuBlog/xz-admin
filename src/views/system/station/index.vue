@@ -30,6 +30,7 @@
               class="margin-box"
               icon="el-icon-plus"
               @click="showAddStation"
+              title="添加岗位"
               circle
             ></el-button>
           </div>
@@ -97,7 +98,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <stationForm ref="form" :is-add="isAdd" :dicts="dicts" @updateStationList="getStationList" />
+    <stationForm ref="form" :is-add="isAdd" :dicts="dicts"/>
   </div>
 </template>
 

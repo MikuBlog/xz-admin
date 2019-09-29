@@ -35,7 +35,7 @@
         <div class="not_found_404 cf">
           <span>4</span>
           <span>0</span>
-          <span>1</span>
+          <span>3</span>
         </div>
         <p class="not_found_tip">:( 很抱歉，您没有权限访问该接口!</p>
         <a @click="turnBack" class="button button-rounded">返回首页</a>

@@ -45,10 +45,6 @@ export default {
     this.getPermissions()
   },
   methods: {
-    // 更新列表
-    updateList() {
-      this.$emit("updateAuthorityList")
-    },
     // 隐藏窗口
     hideBox() {
       this.dialog = false
@@ -80,7 +76,7 @@ export default {
         this.$successMsg('添加成功')
         this.hideBox()
         this.getPermissions()
-        this.updateList()
+        this.$parent.getAuthorityList()
       })
     },
     // 编辑权限
