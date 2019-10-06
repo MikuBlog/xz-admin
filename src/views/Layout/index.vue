@@ -24,7 +24,7 @@
       </el-scrollbar>
       <Drawer
         class="drawer-menu"
-        v-show="isSmall || isVerticleMenu"
+        v-show="isSmall"
         v-model="isMenuCollapse"
         width="200"
         placement="left"
@@ -86,10 +86,14 @@
             </el-dropdown>
             <div class="icon-box">
               <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom">
-                <i class="el-icon-s-tools" @click="showSetting"></i>
+                <i class="el-icon-s-tools" 
+                @click="showSetting"></i>
               </el-tooltip>
               <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
-                <span class="el-icon-full-screen" @click="fullScreen" ref="icon"></span>
+                <svg-icon 
+                icon-class="全屏" 
+                style="width: 24px; height: 24px; top: 1px"
+                @click.native="fullScreen"/>
               </el-tooltip>
             </div>
             <div class="menu-button">

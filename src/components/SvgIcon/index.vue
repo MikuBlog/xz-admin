@@ -34,6 +34,7 @@ export default {
 
 <style scoped>
 .svg-icon {
+  position: relative;
   width: 1em;
   height: 1em;
   vertical-align: -0.15em;

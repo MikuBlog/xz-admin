@@ -85,7 +85,7 @@ export default {
       }).then(result => {
         this.$successMsg('编辑成功')
         this.hideBox()
-        this.updateList()
+        this.$parent.getMissionList()
       })
     },
     // 新增定时任务

@@ -85,7 +85,7 @@ export default {
         this.$parent.getDepartmentList()
       }) 
     },
-    // 删除部门
+    // 编辑部门
     editDepartment() {
       this.departmentForm.id = this.departmentId
       this.$http_json({
@@ -96,7 +96,7 @@ export default {
         this.$successMsg('编辑成功')
         this.hideBox()
         this.getDepartmentList()
-        this.updateList()
+        this.$parent.getDepartmentList()
       }) 
     },
     resetForm() {
