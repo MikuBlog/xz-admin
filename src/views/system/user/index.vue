@@ -216,6 +216,8 @@ export default {
         method: "get"
       }).then(result => {
         this.$download(result.data, `用户列表-${this.$formDate(new Date(), true)}.xls`, true)
+      }).catch(e => {
+        console.log(e)
       })
     },
     // 删除用户

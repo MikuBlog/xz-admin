@@ -5,8 +5,8 @@
  * @param {String} fileName 文件名称
  * @param {Boolean} isBlob 是否为二进制文件
  */
-function download(url, name, isBlob) {
-    const 
+function download(url, fileName, isBlob) {
+  const 
 		ele = document.createElement('a'),
     event = new MouseEvent('click')
   ele.href = isBlob ? window.URL.createObjectURL(new Blob([url])) : url

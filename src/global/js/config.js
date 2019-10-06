@@ -4,5 +4,7 @@ export default {
   // 是否显示自定义登录界面按钮
   loginSetting: true,
   // 是否显示合作网站账号登录框
-  otherLoginMethods: true
+  otherLoginMethods: true,
+  // 菜单布局类型
+  isVerticleMenu: false,
 }
