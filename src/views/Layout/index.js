@@ -8,7 +8,7 @@ export default {
       isMenuCollapse: false,
       isSetting: false,
       isShowBackTop: false,
-      logoUrl: "https://xzadmin.xuanzai.top/img/catjoker.5930ea02.png",
+      logo: "https://xzadmin.xuanzai.top/img/catjoker.5930ea02.png",
       user: {},
       squareUrl: "",
     }
@@ -19,10 +19,27 @@ export default {
       isVerticleMenu: state => state.setting.isVerticleMenu,
       showBreadcrumb: state => state.setting.showBreadcrumb,
       showTags: state => state.setting.showTags,
+      menuStyle: state => state.setting.menuStyle,
       tagsList: state => state.tags.tagsList,
       menuList: state => state.menu.menuList,
       settings: state => state.setting
-    })
+    }),
+    menuBackgroundColor() {
+      return this.menuStyle === 'dark' 
+      ? this.defaultConfig.menuStyle.dark.backgroundColor
+      : this.defaultConfig.menuStyle.light.backgroundColor
+    },
+    menuTextColor() {
+      return this.menuStyle === 'dark' 
+      ? this.defaultConfig.menuStyle.dark.textColor 
+      : this.defaultConfig.menuStyle.light.textColor 
+    },
+    activeTextColor() {
+      return this.defaultConfig.menuStyle.activeTextColor
+    },
+    logoUrl() {
+      return this.defaultConfig.logoUrl
+    }
   },
   created() {
     // 获取用户信息
@@ -104,10 +121,48 @@ export default {
     initialStyle() {
       const
         eles = document.querySelectorAll('.el-scrollbar__wrap'),
+        menuScrollBar = document.querySelector('.menu-scrollbar'),
+        menuProp = document.querySelectorAll('.el-menu--popup'),
+        menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
+        drawerContent = document.querySelector('.ivu-drawer-content'),
         regexp = new RegExp(/select/g)
-      eles.forEach((value, index) => {
-        if (!regexp.test(value.className))
-          this.$setStyle(value, 'overflow-x', 'hidden')
+      this.$setStyle(
+        menuScrollBar,
+        'background',
+        this.menuStyle === 'dark'
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor)
+      this.$setStyle(
+        drawerContent,
+        'background',
+        this.menuStyle === 'dark'
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor)
+      eles.forEach((val, ind) => {
+        if (!regexp.test(val.className))
+          this.$setStyle(val, 'overflow-x', 'hidden')
+      })
+      menuProp.forEach(val => {
+        this.menuStyle === 'dark'
+          ? this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
+          : this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
+      })
+      menuItemGroup.forEach(val => {
+        this.menuStyle === 'dark'
+          ? this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
+          : this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
       this.isMenuCollapse = false
     },
@@ -115,7 +170,11 @@ export default {
     showMenu() {
       this.isSmall
         ? this.isMenuCollapse = !this.isMenuCollapse
-        : (this.isCollapse = !this.isCollapse)
+        : this.isCollapse = !this.isCollaps
+      // 重渲染展开菜单项
+      setTimeout(() => {
+        this.initialStyle()
+      }, 400)
     },
     // 获取屏幕宽度
     getWindowWidth() {

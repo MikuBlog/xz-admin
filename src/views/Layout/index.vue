@@ -1,23 +1,18 @@
 <template>
   <div class="home" ref="home" id="home">
     <el-container>
-      <el-scrollbar
-        style="height:100%"
-        class="menu-scrollbar"
-        v-show="!isSmall"
-        v-if="isVerticleMenu"
-      >
+      <el-scrollbar style="height:100%" class="menu-scrollbar" v-show="!isSmall && isVerticleMenu">
         <el-menu
           :default-active="$route.path"
           :collapse="isCollapse"
           class="el-menu-vertical-demo"
-          background-color="#2f4055"
-          active-text-color="#429ee2"
-          text-color="#becad8"
+          :background-color="menuBackgroundColor"
+          :active-text-color="activeTextColor"
+          :text-color="menuTextColor"
           :unique-opened="true"
         >
           <div class="logo-verticle" v-show="showLogo" v-if="!isCollapse">
-            <img src="@/assets/logo/catjoker.png" alt="logo.png" />
+            <img :src="logoUrl" alt="logo.png" />
           </div>
           <NavMenu :navMenus="menuList"></NavMenu>
         </el-menu>
@@ -33,15 +28,15 @@
           <el-menu
             :default-active="$route.path"
             class="el-menu-vertical-demo menu-list"
-            background-color="#2f4055"
-            active-text-color="#429ee2"
-            text-color="#becad8"
+            :background-color="menuBackgroundColor"
+            :active-text-color="activeTextColor"
+            :text-color="menuTextColor"
             width="200px"
             :unique-opened="true"
             @select="isMenuCollapse = false"
           >
             <div class="logo-verticle" v-show="showLogo">
-              <img src="@/assets/logo/catjoker.png" alt="logo.png" />
+              <img :src="logoUrl" alt="logo.png" />
             </div>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
@@ -53,14 +48,14 @@
             <el-menu
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
-              background-color="#2f4055"
-              active-text-color="#429ee2"
-              text-color="#becad8"
+              :background-color="menuBackgroundColor"
+              :active-text-color="activeTextColor"
+              :text-color="menuTextColor"
               mode="horizontal"
               style="width: 100%"
             >
               <div class="logo-horizontal" v-show="showLogo">
-                <img src="@/assets/logo/catjoker.png" alt="logo.png" />
+                <img :src="logoUrl" alt="logo.png" />
               </div>
               <NavMenu class="menu-horizontal-item" :navMenus="menuList"></NavMenu>
             </el-menu>
@@ -86,14 +81,14 @@
             </el-dropdown>
             <div class="icon-box">
               <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom">
-                <i class="el-icon-s-tools" 
-                @click="showSetting"></i>
+                <i class="el-icon-s-tools" @click="showSetting"></i>
               </el-tooltip>
               <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
-                <svg-icon 
-                icon-class="全屏" 
-                style="width: 24px; height: 24px; top: 1px"
-                @click.native="fullScreen"/>
+                <svg-icon
+                  icon-class="全屏"
+                  style="width: 24px; height: 24px; top: 1px"
+                  @click.native="fullScreen"
+                />
               </el-tooltip>
             </div>
             <div class="menu-button">
@@ -143,8 +138,14 @@
       </el-container>
     </el-container>
     <Drawer v-model="isSetting" width="350px">
-      <h2 style="margin-top: 1rem">系统布局设置</h2>
-      <el-divider></el-divider>
+      <h2 style="margin: 2rem 0">菜单颜色风格</h2>
+      <div class="radio-box" @change="$nextTick(() => { initialStyle() })">
+        <el-radio-group v-model="$store.state.setting.menuStyle">
+          <el-radio label="dark">暗色</el-radio>
+          <el-radio label="light">亮色</el-radio>
+        </el-radio-group>
+      </div>
+      <h2 style="margin: 2rem 0">系统布局设置</h2>
       <div class="switch-box">
         <div class="box">
           <span class="tips">显示Logo</span>
@@ -166,7 +167,7 @@
           ></el-switch>
         </div>
       </div>
-      <el-image style="width: 100%; height: 159px" :src="logoUrl" fit="cover" ref="image"></el-image>
+      <el-image style="width: 100%; height: 159px" :src="logo" fit="cover" ref="image"></el-image>
       <div class="button">
         <el-button type="primary" style="width: 100%" @click="selectPic">选择Logo</el-button>
       </div>

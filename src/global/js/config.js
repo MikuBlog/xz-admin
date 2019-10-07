@@ -5,6 +5,20 @@ export default {
   loginSetting: true,
   // 是否显示合作网站账号登录框
   otherLoginMethods: true,
-  // 菜单布局类型
-  isVerticleMenu: false,
+  // 菜单颜色
+  menuStyle: {
+    light: {
+      textColor: '#444',
+      backgroundColor: '#fff',
+      subMenuItemBackgroundColor: '#f7f7f7'
+    },
+    dark: {
+      textColor: '#becad8',
+      backgroundColor: '#2f4055',
+      subMenuItemBackgroundColor: '#1e2c3c'
+    },
+    activeTextColor: '#429ee2'
+  },
+  // logo地址
+  logoUrl: "/img/logo_2.ccc22c0a.png"
 }
