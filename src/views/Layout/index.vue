@@ -82,6 +82,9 @@
               </div>
             </el-dropdown>
             <div class="icon-box">
+              <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom">
+                <i class="el-icon-question" @click="toHelp"></i>
+              </el-tooltip>
               <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom">
                 <i class="el-icon-s-tools" @click="showSetting"></i>
               </el-tooltip>

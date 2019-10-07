@@ -98,6 +98,7 @@
 .avatar-box {
   position: relative;
   float: right;
+  margin-right: 15px;
 }
 
 .avatar-box-horizontal {
@@ -116,14 +117,14 @@
   transition: .3s;
 }
 
-.el-icon-s-tools {
+.el-icon-s-tools, .el-icon-question {
   position: relative;
   top: 1px;
   margin-right: .8rem;
   font-size: 25px;
 }
 
-.el-icon-full-screen, .el-icon-s-tools, .iconfullscreenexit {
+.el-icon-full-screen, .el-icon-s-tools, .iconfullscreenexit, .el-icon-question {
   transition: .3s;
 }
 
@@ -132,6 +133,10 @@
 }
 
 .el-icon-s-tools:active {
+  color: #13b4ff;
+}
+
+.el-icon-question:active {
   color: #13b4ff;
 }
 
@@ -173,7 +178,7 @@
 
 .el-divider {
   position: relative;
-  box-shadow: 0 0 1px 1px #e0e0e0;
+  box-shadow: 0 0 1px 1px #dbdbdb;
 }
 
 .menu-horizontal-item {

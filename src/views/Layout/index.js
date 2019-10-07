@@ -80,11 +80,21 @@ export default {
     openNewPage() {
       window.open('https://github.com/MikuBlog/xz-admin')
     },
+    toHelp() {
+      window.open('http://xzadmin-docs.xuanzai.top')
+    },
     // 退出登录
     logout() {
-      // 退出前先清空用户访问记录
-      this.$setMemoryPmt('token', '')
-      this.$router.push({ path: '/login' })
+      this
+        .$showMsgBox({ 
+          msg: `是否注销当前账号?`, 
+          iconClass: 'el-icon-question' 
+        })
+        .then(result => {
+          // 退出前先清空用户访问记录
+          this.$setMemoryPmt('token', '')
+          this.$router.push({ path: '/login' })
+        })
     },
     // 选择图片
     selectPic() {
