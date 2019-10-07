@@ -90,7 +90,7 @@ export default {
         this.$successMsg('编辑成功')
         this.hideBox()
         this.getPermissions()
-        this.updateList()
+        this.$parent.getAuthorityList()
       })
     },
     // 重置表单

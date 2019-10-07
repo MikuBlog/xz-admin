@@ -8,7 +8,7 @@ export default {
       isMenuCollapse: false,
       isSetting: false,
       isShowBackTop: false,
-      logoUrl: "",
+      logoUrl: "https://xzadmin.xuanzai.top/img/catjoker.5930ea02.png",
       user: {},
       squareUrl: "",
     }
@@ -16,10 +16,12 @@ export default {
   computed: {
     ...mapState({
       showLogo: state => state.setting.showLogo,
+      isVerticleMenu: state => state.setting.isVerticleMenu,
       showBreadcrumb: state => state.setting.showBreadcrumb,
       showTags: state => state.setting.showTags,
       tagsList: state => state.tags.tagsList,
-      menuList: state => state.menu.menuList
+      menuList: state => state.menu.menuList,
+      settings: state => state.setting
     })
   },
   created() {
@@ -37,6 +39,11 @@ export default {
       "setUserInfo",
       "removeAllTags"
     ]),
+    // 保存设置
+    saveSetting() {
+      this.$setMemoryPmt("setting", this.settings)
+      this.$successMsg("保存设置成功")
+    },
     // 获取用户信息
     getUserInfo() {
       this.$http_json({
@@ -97,13 +104,7 @@ export default {
     initialStyle() {
       const
         eles = document.querySelectorAll('.el-scrollbar__wrap'),
-        drawer = document.querySelector('.ivu-drawer-body'),
-        drawerContent = document.querySelector('.ivu-drawer-content'),
-        scrollContainer = document.querySelector('.el-scrollbar'),
         regexp = new RegExp(/select/g)
-      this.$setStyle(drawer, 'padding', 0)
-      this.$setStyle(drawerContent, 'background', '#2e3f54')
-      this.$setStyle(scrollContainer, 'background', '#2d3e53')
       eles.forEach((value, index) => {
         if (!regexp.test(value.className))
           this.$setStyle(value, 'overflow-x', 'hidden')
