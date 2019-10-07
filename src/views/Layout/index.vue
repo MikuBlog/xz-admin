@@ -14,7 +14,7 @@
           <div class="logo-verticle" v-show="showLogo" v-if="!isCollapse">
             <img :src="logoUrl" alt="logo.png" />
           </div>
-          <el-divider v-if="menuStyle !== 'dark' && isCollapse === false"></el-divider>
+          <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
           <NavMenu :navMenus="menuList"></NavMenu>
         </el-menu>
       </el-scrollbar>
@@ -39,7 +39,7 @@
             <div class="logo-verticle" v-show="showLogo">
               <img :src="logoUrl" alt="logo.png" />
             </div>
-            <el-divider v-if="menuStyle !== 'dark'"></el-divider>
+            <el-divider v-if="menuStyle !== 'dark' && showLogo"></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
         </el-scrollbar>
