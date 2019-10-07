@@ -9,7 +9,7 @@ export default {
   menuStyle: {
     light: {
       textColor: '#444',
-      backgroundColor: '#fff',
+      backgroundColor: '#fefefe',
       subMenuItemBackgroundColor: '#f7f7f7'
     },
     dark: {

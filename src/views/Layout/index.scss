@@ -126,6 +126,9 @@ width: 63px;
     }
   }
 }
+.collapse-menu {
+  border-right: 1px solid rgb(231, 231, 231);
+}
 .menu-scrollbar {
   background: #2d3e53;
 }
@@ -135,9 +138,13 @@ width: 63px;
 }
 .logo-verticle {
   position: relative;
-  margin: 2rem 0 24px 0;
+  margin: 30px 0 24px 0;
   width: 12.5rem;
   text-align: center;
+}
+.el-divider {
+  position: relative;
+  box-shadow: 0 0 1px 1px rgb(224, 224, 224);
 }
 .menu-horizontal-item {
   flex: 1;

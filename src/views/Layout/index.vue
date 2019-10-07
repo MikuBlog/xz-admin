@@ -5,7 +5,7 @@
         <el-menu
           :default-active="$route.path"
           :collapse="isCollapse"
-          class="el-menu-vertical-demo"
+          class="el-menu-vertical-demo collapse-menu"
           :background-color="menuBackgroundColor"
           :active-text-color="activeTextColor"
           :text-color="menuTextColor"
