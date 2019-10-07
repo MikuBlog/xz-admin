@@ -164,13 +164,12 @@ export default {
             'background', 
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
-      this.isMenuCollapse = false
     },
     // 显示菜单
     showMenu() {
       this.isSmall
         ? this.isMenuCollapse = !this.isMenuCollapse
-        : this.isCollapse = !this.isCollaps
+        : this.isCollapse = !this.isCollapse
       // 重渲染展开菜单项
       setTimeout(() => {
         this.initialStyle()
@@ -179,7 +178,7 @@ export default {
     // 获取屏幕宽度
     getWindowWidth() {
       window.innerWidth < 1100
-        ? (this.isSmall = true, this.isCollapse = true)
+        ? (this.isSmall = true, this.isCollapse = true, this.isMenuCollapse = false)
         : this.isSmall = false
     },
     // 获取滚动高度
