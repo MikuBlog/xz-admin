@@ -47,17 +47,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      dialogVisible: true,
-      previews: {
-        img: {
-          height: "230px",
-          width: "230px"
-        }
-      },
+      dialogVisible: false,
+      previews: {},
       options: {
         img: "",
         size: 1,
@@ -68,14 +62,6 @@ export default {
         fixedBox: true
       }
     };
-  },
-  computed: {
-    ...mapState({
-      avatar: state => state.user.avatar
-    })
-  },
-  mounted() {
-    this.options.img = this.avatar
   },
   methods: {
     realTime(data) {

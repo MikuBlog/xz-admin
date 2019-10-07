@@ -8,7 +8,7 @@
           </div>
           <div class="avatar-box">
             <div class="avatar">
-              <el-avatar :size="120" :src="user.avatar" @click.native="uploadAvatar">
+              <el-avatar :size="120" :src="user.avatar" @click.native="$refs.avatarForm.dialogVisible = true">
                 <img src="https://myinterface.xuanzai.top/getPicture?type=error" />
               </el-avatar>
             </div>
@@ -157,21 +157,6 @@ export default {
     showEditEmail() {
       this.$refs.emailForm.dialog = true;
       this.$refs.emailForm.resetForm();
-    },
-    // 上传头像
-    uploadAvatar() {
-      this.$getImgFile(2).then(result => {
-        this.$http_file({
-          url: "/api/user/updateAvatar",
-          method: "post",
-          data: {
-            file: result.raw
-          }
-        }).then(result => {
-          this.updateUserInfo();
-          this.$successMsg("更换头像成功，正在缓慢加载中~");
-        });
-      });
     },
     // 条数变化
     handleSizeChange(size) {
