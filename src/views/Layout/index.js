@@ -8,7 +8,7 @@ export default {
       isMenuCollapse: false,
       isSetting: false,
       isShowBackTop: false,
-      logo: "https://xzadmin.xuanzai.top/img/catjoker.5930ea02.png",
+      logo: this.defaultConfig.logoUrl,
       user: {},
       squareUrl: "",
     }
@@ -91,7 +91,7 @@ export default {
       this
         .$getImgFile()
         .then(({ raw, url }) => {
-          this.logoUrl = url
+          this.logo = url
         })
         .catch(e => {
           this.$warnMsg(e)

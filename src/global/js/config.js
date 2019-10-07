@@ -20,5 +20,5 @@ export default {
     activeTextColor: '#429ee2'
   },
   // logo地址
-  logoUrl: "/img/logo_2.ccc22c0a.png"
+  logoUrl: "https://myinterface.xuanzai.top/getPicture?type=logo&id=1"
 }

@@ -168,7 +168,7 @@
             ></el-switch>
           </div>
         </div>
-        <el-image style="width: 100%; height: 159px" :src="logo" fit="cover" ref="image"></el-image>
+        <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
         <div class="button">
           <el-button type="primary" style="width: 100%" @click="selectPic">选择Logo</el-button>
         </div>
