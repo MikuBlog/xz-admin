@@ -100,6 +100,7 @@
     </el-row>
     <editPassword ref="pswForm" />
     <editEmail ref="emailForm" @updateUserInfo="updateUserInfo" />
+    <editAvatar ref="avatarForm"  @updateUserInfo="updateUserInfo" />
   </div>
 </template>
 
@@ -107,8 +108,9 @@
 import { mapState } from "vuex";
 import editPassword from "./components/edit_password";
 import editEmail from "./components/edit_email";
+import editAvatar from './components/edit_avatar'
 export default {
-  components: { editPassword, editEmail },
+  components: { editPassword, editEmail, editAvatar },
   data() {
     return {
       activeName: "first",

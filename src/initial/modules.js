@@ -13,6 +13,8 @@ import { Drawer } from 'iview'
 import mavonEditor from 'mavon-editor'
 // 引入导航栏折叠
 import Fragment from 'vue-fragment'
+// 引入图片剪裁组件
+import VueCropper from 'vue-cropper'
 // 引入icon组件
 import '@/icons'
 // 引入全局样式
@@ -250,5 +252,7 @@ Vue.component('Drawer', Drawer)
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠
 Vue.use(Fragment.Plugin)
+// 引入图片剪裁组件
+Vue.use(VueCropper)
 
 Vue.config.productionTip = false
