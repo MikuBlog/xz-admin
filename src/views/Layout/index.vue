@@ -138,45 +138,47 @@
       </el-container>
     </el-container>
     <Drawer v-model="isSetting" width="350px">
-      <h2 style="margin: 2rem 0">菜单颜色风格</h2>
-      <div class="radio-box" @change="$nextTick(() => { initialStyle() })">
-        <el-radio-group v-model="$store.state.setting.menuStyle">
-          <el-radio label="dark">暗色</el-radio>
-          <el-radio label="light">亮色</el-radio>
-        </el-radio-group>
-      </div>
-      <h2 style="margin: 2rem 0">系统布局设置</h2>
-      <div class="switch-box">
-        <div class="box">
-          <span class="tips">显示Logo</span>
-          <el-switch v-model="$store.state.setting.showLogo"></el-switch>
+      <el-scrollbar style="height:100%">
+        <h2 style="margin: 2rem 0">菜单颜色风格</h2>
+        <div class="radio-box" @change="$nextTick(() => { initialStyle() })">
+          <el-radio-group v-model="$store.state.setting.menuStyle">
+            <el-radio label="dark">暗色</el-radio>
+            <el-radio label="light">亮色</el-radio>
+          </el-radio-group>
         </div>
-        <div class="box">
-          <span class="tips">显示标签页</span>
-          <el-switch v-model="$store.state.setting.showTags"></el-switch>
+        <h2 style="margin: 2rem 0">系统布局设置</h2>
+        <div class="switch-box">
+          <div class="box">
+            <span class="tips">显示Logo</span>
+            <el-switch v-model="$store.state.setting.showLogo"></el-switch>
+          </div>
+          <div class="box">
+            <span class="tips">显示标签页</span>
+            <el-switch v-model="$store.state.setting.showTags"></el-switch>
+          </div>
+          <div class="box">
+            <span class="tips">显示面包屑</span>
+            <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
+          </div>
+          <div class="box">
+            <span class="tips">是否为垂直菜单</span>
+            <el-switch
+              v-model="$store.state.setting.isVerticleMenu"
+              @change="$nextTick(() => { initialStyle() })"
+            ></el-switch>
+          </div>
         </div>
-        <div class="box">
-          <span class="tips">显示面包屑</span>
-          <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
+        <el-image style="width: 100%; height: 159px" :src="logo" fit="cover" ref="image"></el-image>
+        <div class="button">
+          <el-button type="primary" style="width: 100%" @click="selectPic">选择Logo</el-button>
         </div>
-        <div class="box">
-          <span class="tips">是否为垂直菜单</span>
-          <el-switch
-            v-model="$store.state.setting.isVerticleMenu"
-            @change="$nextTick(() => { initialStyle() })"
-          ></el-switch>
+        <div class="button">
+          <el-button type="warning" style="width: 100%">上传Logo</el-button>
         </div>
-      </div>
-      <el-image style="width: 100%; height: 159px" :src="logo" fit="cover" ref="image"></el-image>
-      <div class="button">
-        <el-button type="primary" style="width: 100%" @click="selectPic">选择Logo</el-button>
-      </div>
-      <div class="button">
-        <el-button type="warning" style="width: 100%">上传Logo</el-button>
-      </div>
-      <div class="button button-bottom">
-        <el-button type="success" style="width: 100%" @click="saveSetting">保存设置</el-button>
-      </div>
+        <div class="button button-bottom">
+          <el-button type="success" style="width: 100%" @click="saveSetting">保存设置</el-button>
+        </div>
+      </el-scrollbar>
     </Drawer>
   </div>
 </template>

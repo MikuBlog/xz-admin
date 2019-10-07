@@ -226,10 +226,8 @@
 }
 
 .button-bottom {
-  position: absolute;
-  width: 90%;
-  right: 1rem;
-  bottom: 1rem;
+  position: relative;
+  margin-top: 5rem;
 }
 
 .radio-box {
