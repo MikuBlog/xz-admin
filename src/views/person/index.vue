@@ -35,7 +35,8 @@
             电话：{{user.phone}}
           </div>
           <div style="font-size: .8rem;">
-            <i class="el-icon-lock"></i>设置：
+            <i class="el-icon-lock"></i>
+            设置：
             <el-button type="text" @click="showEditPassword">修改密码</el-button>
             <el-button type="text" @click="showEditEmail">修改邮箱</el-button>
           </div>
