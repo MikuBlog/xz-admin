@@ -143,13 +143,18 @@ export default {
           ? this.defaultConfig.menuStyle.dark.backgroundColor
           : this.defaultConfig.menuStyle.light.backgroundColor)
       this.$setStyle(
+        menuScrollBar,
+        'border-right',
+        '1px solid #dcdfe6'
+      )
+      this.$setStyle(
         drawerContent,
         'background',
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
           : this.defaultConfig.menuStyle.light.backgroundColor)
       eles.forEach((val, ind) => {
-        if (!regexp.test(val.className))
+        if (!regexp.test(val.className)) 
           this.$setStyle(val, 'overflow-x', 'hidden')
       })
       menuProp.forEach(val => {

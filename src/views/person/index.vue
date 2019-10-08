@@ -8,9 +8,24 @@
           </div>
           <div class="avatar-box">
             <div class="avatar">
-              <el-avatar :size="120" :src="user.avatar" @click.native="$refs.avatarForm.dialogVisible = true">
+              <el-button 
+              icon="el-icon-upload" 
+              class="upload-button"
+              circle
+              @click="$refs.avatarForm.dialogVisible = true"></el-button>
+              <el-avatar
+                :size="120"
+                :src="user.avatar"
+              >
                 <img src="https://myinterface.xuanzai.top/getPicture?type=error" />
               </el-avatar>
+              <div 
+              class="hover-plus"
+              @click="$refs.avatarForm.dialogVisible = true">
+                <svg-icon 
+                icon-class="add" 
+                class="add-avatar"/>
+              </div>
             </div>
             <div class="avatar-detail">
               <div class="role">{{user.username}}</div>
@@ -101,7 +116,7 @@
     </el-row>
     <editPassword ref="pswForm" />
     <editEmail ref="emailForm" @updateUserInfo="updateUserInfo" />
-    <editAvatar ref="avatarForm"  @updateUserInfo="updateUserInfo" />
+    <editAvatar ref="avatarForm" @updateUserInfo="updateUserInfo" />
   </div>
 </template>
 
@@ -109,7 +124,7 @@
 import { mapState } from "vuex";
 import editPassword from "./components/edit_password";
 import editEmail from "./components/edit_email";
-import editAvatar from './components/edit_avatar'
+import editAvatar from "./components/edit_avatar";
 export default {
   components: { editPassword, editEmail, editAvatar },
   data() {
@@ -212,10 +227,38 @@ export default {
 .avatar {
   position: relative;
   margin: auto;
-  width: 8rem;
-  height: 8rem;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  overflow: hidden;
+}
+.avatar:hover .hover-plus {
+  opacity: 1;
+}
+.hover-plus {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  opacity: 0;
+  background: rgba(0, 0, 0, .5);
+  transition: .3s;
+}
+.add-avatar {
+  position: relative;
+  font-size: 2rem;
+  color: #d6d6d6;
+  top: 50%;
+  margin-top: -1rem;
+}
+.upload-button {
+  position: absolute; 
+  right: -5px; 
+  top: -10px; 
+  z-index: 100; 
+  opacity: .8
 }
 .image-box {
   position: relative;

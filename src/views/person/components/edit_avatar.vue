@@ -21,9 +21,18 @@
           @realTime="realTime"
         ></vueCropper>
         <div class="correct-button-box">
-          <el-button @click="$refs.cropper.changeScale(1)" size="medium" icon="el-icon-plus"></el-button>
-          <el-button @click="$refs.cropper.changeScale(-1)" size="medium" icon="el-icon-minus"></el-button>
-          <el-button @click="$refs.cropper.rotateLeft()" size="medium" icon="el-icon-refresh-left"></el-button>
+          <el-button 
+          @click="$refs.cropper.changeScale(1)" 
+          size="medium" 
+          icon="el-icon-plus"></el-button>
+          <el-button 
+          @click="$refs.cropper.changeScale(-1)" 
+          size="medium" 
+          icon="el-icon-minus"></el-button>
+          <el-button 
+          @click="$refs.cropper.rotateLeft()" 
+          size="medium" 
+          icon="el-icon-refresh-left"></el-button>
           <el-button
             @click="$refs.cropper.rotateRight()"
             size="medium"
@@ -32,9 +41,6 @@
         </div>
       </div>
       <div class="avatar-box">
-        <!-- <el-avatar :size="200" :style="previews.img" :src="previewUrl" @click.native="uploadAvatar">
-          <img src="https://myinterface.xuanzai.top/getPicture?type=error" />
-        </el-avatar>-->
         <div class="avatar-upload-preview">
           <img :src="previews.url" :style="previews.img" />
         </div>
@@ -93,14 +99,6 @@ export default {
         this.$warnMsg("请选择图片");
       }
     }
-    // imgMove(val) {
-    //   console.log(this.option.img)
-    //   this.$refs.cropper.stopCrop()
-    // },
-    // cropMove(val) {
-    //   console.log(this.option.img)
-    //   this.$refs.cropper.stopCrop()
-    // }
   }
 };
 </script>

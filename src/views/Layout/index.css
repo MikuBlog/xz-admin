@@ -156,10 +156,6 @@
   background: #2e3f54;
 }
 
-.collapse-menu {
-  border-right: 1px solid #e7e7e7;
-}
-
 .menu-scrollbar {
   background: #2d3e53;
 }
@@ -174,11 +170,6 @@
   margin: 30px 0 24px 0;
   width: 12.5rem;
   text-align: center;
-}
-
-.el-divider {
-  position: relative;
-  box-shadow: 0 0 1px 1px #dbdbdb;
 }
 
 .menu-horizontal-item {
