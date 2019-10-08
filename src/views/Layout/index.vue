@@ -147,8 +147,8 @@
         <h2 style="margin: 2rem 0">菜单颜色风格</h2>
         <div class="radio-box" @change="$nextTick(() => { initialStyle() })">
           <el-radio-group v-model="$store.state.setting.menuStyle">
-            <el-radio label="dark">暗色</el-radio>
-            <el-radio label="light">亮色</el-radio>
+            <el-radio label="light">白昼</el-radio>
+            <el-radio label="dark">夜晚</el-radio>
           </el-radio-group>
         </div>
         <h2 style="margin: 2rem 0">系统布局设置</h2>
