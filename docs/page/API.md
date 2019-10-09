@@ -25,10 +25,12 @@ this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
 参数：
 
 + `url`：地址 [`String`]
++ `fileName`: 文件名称 [`String`]
++ `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]
 
 示例：
 ```js
-this.$download(url)
+this.$download(url, fileName)
 ```
 
 ##  getImgFile
@@ -180,7 +182,7 @@ this.$successMsg("成功")
 
 示例：
 ```js
-this.$successMsg("警告")
+this.$warnMsg("警告")
 ```
 
 ### errorMsg
@@ -193,7 +195,7 @@ this.$successMsg("警告")
 
 示例：
 ```js
-this.$successMsg("错误")
+this.$errorMsg("错误")
 ```
 
 ### showMsgBox
@@ -212,6 +214,50 @@ this.$successMsg("错误")
 示例：
 ```js
 this.$showMsgBox({ [title: "标题"], msg: "内容", [isHTML: false], [type: info] })
+```
+
+## Notification
+
+### successTip
+
+描述：成功通知
+
+参数：
+
++ `msg`：通知内容 [`String`]
++ `title`：通知标题 [`String`]
+
+示例：
+```js
+this.$successTip({ msg: "成功通知", title: "成功" })
+```
+
+### warnTip
+
+描述：警告通知
+
+参数：
+
++ `msg`：通知内容 [`String`]
++ `title`：通知标题 [`String`]
+
+示例：
+```js
+this.$warnTip({ msg: "警告通知", title: "警告" })
+```
+
+### errorMsg
+
+描述：错误通知
+
+参数：
+
++ `msg`：通知内容 [`String`]
++ `title`：通知标题 [`String`]
+
+示例：
+```js
+this.$errorMsg({ msg: "错误通知", title: "错误" })
 ```
 
 ## http
