@@ -107,11 +107,17 @@ Vue.prototype.$http_file = Http.http_file
 /**
  * @author xuanzai
  * @description 引入全局提示
- * @param {String} msg 成功提示
+ * @param {String} msg 提示内容
  */
 Vue.prototype.$successMsg = Message.successMsg
 Vue.prototype.$warnMsg = Message.warnMsg
 Vue.prototype.$errorMsg = Message.errorMsg
+/**
+ * @author xuanzai
+ * @description 引入全局通知
+ * @param {String} msg 通知内容
+ * @param {String} title 标题
+ */
 Vue.prototype.$successTip = Notification.successTip
 Vue.prototype.$warnTip = Notification.warnTip
 Vue.prototype.$errorTip = Notification.errorTip

@@ -3,7 +3,8 @@ import { Notification } from 'element-ui'
 /**
  * @author xuanzai
  * @description 通知
- * @param {String} msg 
+ * @param {String} msg 通知内容
+ * @param {String} title 通知标题
  */
 const successTip = ({ title, msg }) => {
   Notification({
