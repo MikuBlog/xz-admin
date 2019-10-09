@@ -173,12 +173,27 @@
             ></el-switch>
           </div>
         </div>
-        <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
-        <div class="button">
-          <el-button type="primary" style="width: 100%" @click="selectPic">选择Logo</el-button>
+        <el-image 
+        style="width: 100%; height: 159px" 
+        :src="logo" 
+        fit="scale-down" 
+        ref="image"
+        v-permission="['ADMIN']"></el-image>
+        <div 
+        class="button"
+        v-permission="['ADMIN']">
+          <el-button 
+          type="primary" 
+          style="width: 100%" 
+          @click="selectLogo">选择Logo</el-button>
         </div>
-        <div class="button">
-          <el-button type="warning" style="width: 100%">上传Logo</el-button>
+        <div 
+        class="button"
+        v-permission="['ADMIN']">
+          <el-button 
+          type="warning" 
+          style="width: 100%"
+          >上传Logo</el-button>
         </div>
         <div class="button button-bottom">
           <el-button type="success" style="width: 100%" @click="saveSetting">保存设置</el-button>

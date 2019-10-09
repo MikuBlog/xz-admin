@@ -8,7 +8,8 @@ export default {
       isMenuCollapse: false,
       isSetting: false,
       isShowBackTop: false,
-      logo: this.defaultConfig.logoUrl,
+      logo: "",
+      logoBlob: "",
       user: {},
       squareUrl: "",
     }
@@ -44,6 +45,8 @@ export default {
   created() {
     // 获取用户信息
     this.getUserInfo()
+    // 获取Logo信息
+    // this.getLogo()
   },
   mounted() {
     this.initialStyle()
@@ -96,16 +99,42 @@ export default {
           this.$router.push({ path: '/login' })
         })
     },
-    // 选择图片
-    selectPic() {
+    // 获取Logo
+    // getLogo() {
+    //   this.$http_json({
+    //     url: "/api/file/page?filekey=logo",
+    //     method: "get"
+    //   }).then(result => {
+    //     console.log(result.data)
+    //   })
+    // },
+    // 选择Logo
+    selectLogo() {
       this
         .$getImgFile()
         .then(({ raw, url }) => {
           this.logo = url
+          this.logoBlob = raw
         })
         .catch(e => {
           this.$warnMsg(e)
         })
+    },
+    uploadLogo() {
+      if(!this.logo) {
+        this.$warnMsg("请选择Logo")
+      }else {
+        this.$http_file({
+          url: "/api/file/upload",
+          method: "post",
+          data: {
+            file: this.logoBlob,
+            filekey: "logo"
+          }
+        }).then(result => {
+          this.$successMsg("上传成功")
+        })
+      }
     },
     // 打开设置抽屉
     showSetting() {
