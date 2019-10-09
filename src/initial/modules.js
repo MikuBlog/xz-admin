@@ -5,6 +5,7 @@ import Database from '@/api/database/database'
 import Http from '@/api/http/http'
 // 引入全局提示模块
 import Message from '@/api/message/message'
+import Notification from '@/api/message/notification'
 // 引入element-ui框架
 import ElementUI from 'element-ui'
 // 引入iview框架
@@ -111,6 +112,9 @@ Vue.prototype.$http_file = Http.http_file
 Vue.prototype.$successMsg = Message.successMsg
 Vue.prototype.$warnMsg = Message.warnMsg
 Vue.prototype.$errorMsg = Message.errorMsg
+Vue.prototype.$successTip = Notification.successTip
+Vue.prototype.$warnTip = Notification.warnTip
+Vue.prototype.$errorTip = Notification.errorTip
 /**
  * @author xuanzai
  * @description 引入全局弹框
@@ -119,6 +123,14 @@ Vue.prototype.$errorMsg = Message.errorMsg
  * @param {Boolean} isHTML 内容是否为html
  */
 Vue.prototype.$showMsgBox = Message.showMsgBox
+/**
+ * @author xuanzai
+ * @description 引入全局弹框
+ * @param {String} title 标题
+ * @param {String} msg 内容
+ * @param {Boolean} isHTML 内容是否为html
+ */
+Vue.prototype.$showTipDiy = Notification.showTipDiy
 /**
  * @author xuanzai
  * @description 引入时间格式化函数
