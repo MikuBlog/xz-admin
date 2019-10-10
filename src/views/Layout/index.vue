@@ -166,6 +166,7 @@
           </div>
         </div>
         <div v-show="activeName === 'layout'">
+          <h2 style="margin: 2rem 0">系统布局设置</h2>
           <div class="switch-box">
             <div class="box">
               <span class="tips">显示Logo</span>
@@ -189,6 +190,7 @@
           </div>
         </div>
         <div v-show="activeName === 'logo'">
+          <h2 style="margin: 2rem 0">系统Logo设置</h2>
           <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
           <div class="button">
             <el-button type="primary" style="width: 100%" @click="selectLogo">选择Logo</el-button>
