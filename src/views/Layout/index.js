@@ -8,6 +8,7 @@ export default {
       isMenuCollapse: false,
       isSetting: false,
       isShowBackTop: false,
+      activeName: 'layout',
       logo: "",
       logoBlob: "",
       user: {},
@@ -59,6 +60,10 @@ export default {
       "setUserInfo",
       "removeAllTags"
     ]),
+    // 切换系统设置Tabs页
+    changeTabs(tab, event) {
+      console.log(this.activeName)
+    },
     // 保存设置
     saveSetting() {
       this.$setMemoryPmt("setting", this.settings)

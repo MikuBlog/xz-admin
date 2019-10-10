@@ -156,6 +156,10 @@
   background: #2e3f54;
 }
 
+.drawer-setting /deep/ .ivu-drawer-body {
+  overflow: hidden;
+}
+
 .menu-scrollbar {
   background: #2d3e53;
 }
@@ -231,7 +235,7 @@
 
 .button-bottom {
   position: relative;
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 .radio-box {
