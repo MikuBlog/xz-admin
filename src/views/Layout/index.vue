@@ -143,10 +143,17 @@
       </el-container>
     </el-container>
     <Drawer v-model="isSetting" width="350px" title="系统设置" class="drawer-setting">
-      <el-tabs v-model="activeName" type="card" @tab-click="changeTabs">
-        <el-tab-pane label="布局" name="layout"></el-tab-pane>
-        <el-tab-pane label="菜单" name="menu"></el-tab-pane>
-        <el-tab-pane label="Logo" name="logo"></el-tab-pane>
+      <el-tabs v-model="activeName" type="card">
+        <el-tab-pane 
+        label="布局" 
+        name="layout"></el-tab-pane>
+        <el-tab-pane 
+        label="菜单" 
+        name="menu"></el-tab-pane>
+        <el-tab-pane 
+        label="Logo" 
+        name="logo" 
+        ></el-tab-pane>
       </el-tabs>
       <el-scrollbar style="height: 80%">
         <div v-show="activeName === 'menu'">
@@ -181,7 +188,7 @@
             </div>
           </div>
         </div>
-        <div v-permission="['ADMIN']" v-if="activeName === 'logo'">
+        <div v-show="activeName === 'logo'">
           <h2 style="margin: 2rem 0">系统Logo设置</h2>
           <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
           <div class="button">
