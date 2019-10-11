@@ -166,18 +166,18 @@ export default {
       })
     },
     // 提交数据
-    doSubmit() {
+    async doSubmit() {
       this.genLoading = true
-      this.$refs['form'].validate((valid) => {
+      this.$refs['form'].validate(async (valid) => {
         this.remark = this.form.remark
         if (valid) {
-          Promise
-            .all([this.uploadForm(), this.uploadTableList()])
-            .then(result => {
-              this.dialog = false
-              this.$successMsg("代码生成成功")
-              this.$parent.getGenerateCodeList()
-            })
+          let result_1 = await this.uploadForm()
+          let result_2 = await this.uploadTableList()
+          if(result_1.status === 200 && result_2.status) {
+            this.dialog = false
+            this.$successMsg("代码生成成功")
+            this.$parent.getGenerateCodeList()
+          }
         } else {
           return false
         }

@@ -1,24 +1,20 @@
 <template>
   <div class="home" ref="home" id="home">
     <el-container>
-      <el-scrollbar
-        style="height:100%"
-        class="menu-scrollbar"
-        v-show="!isSmall"
-        v-if="isVerticleMenu"
-      >
+      <el-scrollbar style="height:100%" class="menu-scrollbar" v-show="!isSmall && isVerticleMenu">
         <el-menu
           :default-active="$route.path"
           :collapse="isCollapse"
-          class="el-menu-vertical-demo"
-          background-color="#2f4055"
-          active-text-color="#429ee2"
-          text-color="#becad8"
+          class="el-menu-vertical-demo collapse-menu"
+          :background-color="menuBackgroundColor"
+          :active-text-color="activeTextColor"
+          :text-color="menuTextColor"
           :unique-opened="true"
         >
           <div class="logo-verticle" v-show="showLogo" v-if="!isCollapse">
-            <img src="@/assets/logo/catjoker.png" alt="logo.png" />
+            <img :src="logoUrl" alt="logo.png" />
           </div>
+          <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
           <NavMenu :navMenus="menuList"></NavMenu>
         </el-menu>
       </el-scrollbar>
@@ -33,16 +29,17 @@
           <el-menu
             :default-active="$route.path"
             class="el-menu-vertical-demo menu-list"
-            background-color="#2f4055"
-            active-text-color="#429ee2"
-            text-color="#becad8"
+            :background-color="menuBackgroundColor"
+            :active-text-color="activeTextColor"
+            :text-color="menuTextColor"
             width="200px"
             :unique-opened="true"
             @select="isMenuCollapse = false"
           >
             <div class="logo-verticle" v-show="showLogo">
-              <img src="@/assets/logo/catjoker.png" alt="logo.png" />
+              <img :src="logoUrl" alt="logo.png" />
             </div>
+            <el-divider v-if="menuStyle !== 'dark' && showLogo"></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
         </el-scrollbar>
@@ -53,14 +50,14 @@
             <el-menu
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
-              background-color="#2f4055"
-              active-text-color="#429ee2"
-              text-color="#becad8"
+              :background-color="menuBackgroundColor"
+              :active-text-color="activeTextColor"
+              :text-color="menuTextColor"
               mode="horizontal"
               style="width: 100%"
             >
               <div class="logo-horizontal" v-show="showLogo">
-                <img src="@/assets/logo/catjoker.png" alt="logo.png" />
+                <img :src="logoUrl" alt="logo.png" />
               </div>
               <NavMenu class="menu-horizontal-item" :navMenus="menuList"></NavMenu>
             </el-menu>
@@ -85,15 +82,18 @@
               </div>
             </el-dropdown>
             <div class="icon-box">
+              <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom">
+                <i class="el-icon-question" @click="toHelp"></i>
+              </el-tooltip>
               <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom">
-                <i class="el-icon-s-tools" 
-                @click="showSetting"></i>
+                <i class="el-icon-s-tools" @click="showSetting"></i>
               </el-tooltip>
               <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
-                <svg-icon 
-                icon-class="全屏" 
-                style="width: 24px; height: 24px; top: 1px"
-                @click.native="fullScreen"/>
+                <svg-icon
+                  icon-class="全屏"
+                  style="width: 24px; height: 24px; top: 1px"
+                  @click.native="fullScreen"
+                />
               </el-tooltip>
             </div>
             <div class="menu-button">
@@ -142,40 +142,67 @@
         </el-main>
       </el-container>
     </el-container>
-    <Drawer v-model="isSetting" width="350px">
-      <h2 style="margin-top: 1rem">系统布局设置</h2>
-      <el-divider></el-divider>
-      <div class="switch-box">
-        <div class="box">
-          <span class="tips">显示Logo</span>
-          <el-switch v-model="$store.state.setting.showLogo"></el-switch>
+    <Drawer v-model="isSetting" width="350px" title="系统设置" class="drawer-setting">
+      <el-tabs v-model="activeName" type="card">
+        <el-tab-pane 
+        label="布局" 
+        name="layout"></el-tab-pane>
+        <el-tab-pane 
+        label="菜单" 
+        name="menu"></el-tab-pane>
+        <el-tab-pane 
+        label="Logo" 
+        name="logo" 
+        ></el-tab-pane>
+      </el-tabs>
+      <el-scrollbar style="height: 80%">
+        <div v-show="activeName === 'menu'">
+          <h2 style="margin: 2rem 0">菜单颜色风格</h2>
+          <div class="radio-box" @change="$nextTick(() => { initialStyle() })">
+            <el-radio-group v-model="$store.state.setting.menuStyle">
+              <el-radio label="light">白昼</el-radio>
+              <el-radio label="dark">夜晚</el-radio>
+            </el-radio-group>
+          </div>
         </div>
-        <div class="box">
-          <span class="tips">显示标签页</span>
-          <el-switch v-model="$store.state.setting.showTags"></el-switch>
+        <div v-show="activeName === 'layout'">
+          <h2 style="margin: 2rem 0">系统布局设置</h2>
+          <div class="switch-box">
+            <div class="box">
+              <span class="tips">显示Logo</span>
+              <el-switch v-model="$store.state.setting.showLogo"></el-switch>
+            </div>
+            <div class="box">
+              <span class="tips">显示标签页</span>
+              <el-switch v-model="$store.state.setting.showTags"></el-switch>
+            </div>
+            <div class="box">
+              <span class="tips">显示面包屑</span>
+              <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
+            </div>
+            <div class="box">
+              <span class="tips">是否为垂直菜单</span>
+              <el-switch
+                v-model="$store.state.setting.isVerticleMenu"
+                @change="$nextTick(() => { initialStyle() })"
+              ></el-switch>
+            </div>
+          </div>
         </div>
-        <div class="box">
-          <span class="tips">显示面包屑</span>
-          <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
+        <div v-show="activeName === 'logo'">
+          <h2 style="margin: 2rem 0">系统Logo设置</h2>
+          <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
+          <div class="button">
+            <el-button type="primary" style="width: 100%" @click="selectLogo">选择Logo</el-button>
+          </div>
+          <div class="button">
+            <el-button type="warning" style="width: 100%">上传Logo</el-button>
+          </div>
         </div>
-        <div class="box">
-          <span class="tips">是否为垂直菜单</span>
-          <el-switch
-            v-model="$store.state.setting.isVerticleMenu"
-            @change="$nextTick(() => { initialStyle() })"
-          ></el-switch>
+        <div class="button button-bottom">
+          <el-button type="success" style="width: 100%" @click="saveSetting">保存设置</el-button>
         </div>
-      </div>
-      <el-image style="width: 100%; height: 159px" :src="logoUrl" fit="cover" ref="image"></el-image>
-      <div class="button">
-        <el-button type="primary" style="width: 100%" @click="selectPic">选择Logo</el-button>
-      </div>
-      <div class="button">
-        <el-button type="warning" style="width: 100%">上传Logo</el-button>
-      </div>
-      <div class="button button-bottom">
-        <el-button type="success" style="width: 100%" @click="saveSetting">保存设置</el-button>
-      </div>
+      </el-scrollbar>
     </Drawer>
   </div>
 </template>

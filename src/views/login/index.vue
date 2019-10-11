@@ -44,8 +44,7 @@
       </div>
     </div>
     <Drawer
-      title="设置"
-      :closable="false"
+      title="界面设置"
       v-model="isShowDrawer"
       width="350px"
       @on-close="closeDrawer"
@@ -66,7 +65,7 @@
           <el-radio v-model="size" label="contain">适应</el-radio>
           <el-radio v-model="size" label="fill">填充</el-radio>
         </div>
-        <div class="block">
+        <div class="block" style="margin-top: 2rem">
           <span class="demonstration">透明度：</span>
           <el-slider v-model="opacity" :format-tooltip="formatTooltip" @change="getVal"></el-slider>
         </div>
@@ -78,7 +77,7 @@
           <span class="demonstration">遮罩浓度：</span>
           <el-slider v-model="mask" :format-tooltip="formatTooltip" @change="getVal"></el-slider>
         </div>
-        <div class="button">
+        <div class="button" style="margin-top: 2rem">
           <el-button type="primary" style="width: 100%" @click="selectPic">选择图片</el-button>
         </div>
         <div class="button">
@@ -114,7 +113,7 @@
           <span class="demonstration">图标大小：</span>
           <el-slider v-model="iconSize" @change="getBoxVal"></el-slider>
         </div>
-        <div class="button">
+        <div class="button" style="margin-top: 2rem">
           <el-button type="success" style="width: 100%" @click="saveBoxStyle">保存样式</el-button>
         </div>
       </div>

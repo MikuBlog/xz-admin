@@ -8,7 +8,9 @@ export default {
       isMenuCollapse: false,
       isSetting: false,
       isShowBackTop: false,
-      logoUrl: "https://xzadmin.xuanzai.top/img/catjoker.5930ea02.png",
+      activeName: 'layout',
+      logo: "",
+      logoBlob: "",
       user: {},
       squareUrl: "",
     }
@@ -19,14 +21,33 @@ export default {
       isVerticleMenu: state => state.setting.isVerticleMenu,
       showBreadcrumb: state => state.setting.showBreadcrumb,
       showTags: state => state.setting.showTags,
+      menuStyle: state => state.setting.menuStyle,
       tagsList: state => state.tags.tagsList,
       menuList: state => state.menu.menuList,
       settings: state => state.setting
-    })
+    }),
+    menuBackgroundColor() {
+      return this.menuStyle === 'dark' 
+      ? this.defaultConfig.menuStyle.dark.backgroundColor
+      : this.defaultConfig.menuStyle.light.backgroundColor
+    },
+    menuTextColor() {
+      return this.menuStyle === 'dark' 
+      ? this.defaultConfig.menuStyle.dark.textColor 
+      : this.defaultConfig.menuStyle.light.textColor 
+    },
+    activeTextColor() {
+      return this.defaultConfig.menuStyle.activeTextColor
+    },
+    logoUrl() {
+      return this.defaultConfig.logoUrl
+    }
   },
   created() {
     // 获取用户信息
     this.getUserInfo()
+    // 获取Logo信息
+    // this.getLogo()
   },
   mounted() {
     this.initialStyle()
@@ -63,22 +84,58 @@ export default {
     openNewPage() {
       window.open('https://github.com/MikuBlog/xz-admin')
     },
+    toHelp() {
+      window.open('http://xzadmin-docs.xuanzai.top')
+    },
     // 退出登录
     logout() {
-      // 退出前先清空用户访问记录
-      this.$setMemoryPmt('token', '')
-      this.$router.push({ path: '/login' })
+      this
+        .$showMsgBox({ 
+          msg: `是否注销当前账号?`, 
+          iconClass: 'el-icon-question' 
+        })
+        .then(result => {
+          // 退出前先清空用户访问记录
+          this.$setMemoryPmt('token', '')
+          this.$router.push({ path: '/login' })
+        })
     },
-    // 选择图片
-    selectPic() {
+    // 获取Logo
+    // getLogo() {
+    //   this.$http_json({
+    //     url: "/api/file/page?filekey=logo",
+    //     method: "get"
+    //   }).then(result => {
+    //     console.log(result.data)
+    //   })
+    // },
+    // 选择Logo
+    selectLogo() {
       this
         .$getImgFile()
         .then(({ raw, url }) => {
-          this.logoUrl = url
+          this.logo = url
+          this.logoBlob = raw
         })
         .catch(e => {
           this.$warnMsg(e)
         })
+    },
+    uploadLogo() {
+      if(!this.logo) {
+        this.$warnMsg("请选择Logo")
+      }else {
+        this.$http_file({
+          url: "/api/file/upload",
+          method: "post",
+          data: {
+            file: this.logoBlob,
+            filekey: "logo"
+          }
+        }).then(result => {
+          this.$successMsg("上传成功")
+        })
+      }
     },
     // 打开设置抽屉
     showSetting() {
@@ -104,23 +161,69 @@ export default {
     initialStyle() {
       const
         eles = document.querySelectorAll('.el-scrollbar__wrap'),
+        menuScrollBar = document.querySelector('.menu-scrollbar'),
+        menuProp = document.querySelectorAll('.el-menu--popup'),
+        menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
+        drawerContent = document.querySelector('.ivu-drawer-content'),
         regexp = new RegExp(/select/g)
-      eles.forEach((value, index) => {
-        if (!regexp.test(value.className))
-          this.$setStyle(value, 'overflow-x', 'hidden')
+      this.$setStyle(
+        menuScrollBar,
+        'background',
+        this.menuStyle === 'dark'
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor)
+      this.$setStyle(
+        menuScrollBar,
+        'border-right',
+        '1px solid #dcdfe6'
+      )
+      this.$setStyle(
+        drawerContent,
+        'background',
+        this.menuStyle === 'dark'
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor)
+      eles.forEach((val, ind) => {
+        if (!regexp.test(val.className)) 
+          this.$setStyle(val, 'overflow-x', 'hidden')
       })
-      this.isMenuCollapse = false
+      menuProp.forEach(val => {
+        this.menuStyle === 'dark'
+          ? this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
+          : this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
+      })
+      menuItemGroup.forEach(val => {
+        this.menuStyle === 'dark'
+          ? this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
+          : this.$setStyle(
+            val, 
+            'background', 
+            this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
+      })
     },
     // 显示菜单
     showMenu() {
       this.isSmall
         ? this.isMenuCollapse = !this.isMenuCollapse
-        : (this.isCollapse = !this.isCollapse)
+        : this.isCollapse = !this.isCollapse
+      // 重渲染展开菜单项
+      setTimeout(() => {
+        this.initialStyle()
+      }, 400)
     },
     // 获取屏幕宽度
     getWindowWidth() {
       window.innerWidth < 1100
-        ? (this.isSmall = true, this.isCollapse = true)
+        ? (this.isSmall = true, this.isCollapse = true, this.isMenuCollapse = false)
         : this.isSmall = false
     },
     // 获取滚动高度

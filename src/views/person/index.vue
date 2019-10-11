@@ -8,9 +8,24 @@
           </div>
           <div class="avatar-box">
             <div class="avatar">
-              <el-avatar :size="120" :src="user.avatar" @click.native="uploadAvatar">
+              <el-button 
+              icon="el-icon-upload" 
+              class="upload-button"
+              circle
+              @click="$refs.avatarForm.dialogVisible = true"></el-button>
+              <el-avatar
+                :size="120"
+                :src="user.avatar"
+              >
                 <img src="https://myinterface.xuanzai.top/getPicture?type=error" />
               </el-avatar>
+              <div 
+              class="hover-plus"
+              @click="$refs.avatarForm.dialogVisible = true">
+                <svg-icon 
+                icon-class="add" 
+                class="add-avatar"/>
+              </div>
             </div>
             <div class="avatar-detail">
               <div class="role">{{user.username}}</div>
@@ -35,7 +50,8 @@
             电话：{{user.phone}}
           </div>
           <div style="font-size: .8rem;">
-            <i class="el-icon-lock"></i>设置：
+            <i class="el-icon-lock"></i>
+            设置：
             <el-button type="text" @click="showEditPassword">修改密码</el-button>
             <el-button type="text" @click="showEditEmail">修改邮箱</el-button>
           </div>
@@ -100,6 +116,7 @@
     </el-row>
     <editPassword ref="pswForm" />
     <editEmail ref="emailForm" @updateUserInfo="updateUserInfo" />
+    <editAvatar ref="avatarForm" @updateUserInfo="updateUserInfo" />
   </div>
 </template>
 
@@ -107,8 +124,9 @@
 import { mapState } from "vuex";
 import editPassword from "./components/edit_password";
 import editEmail from "./components/edit_email";
+import editAvatar from "./components/edit_avatar";
 export default {
-  components: { editPassword, editEmail },
+  components: { editPassword, editEmail, editAvatar },
   data() {
     return {
       activeName: "first",
@@ -155,21 +173,6 @@ export default {
     showEditEmail() {
       this.$refs.emailForm.dialog = true;
       this.$refs.emailForm.resetForm();
-    },
-    // 上传头像
-    uploadAvatar() {
-      this.$getImgFile(2).then(result => {
-        this.$http_file({
-          url: "/api/user/updateAvatar",
-          method: "post",
-          data: {
-            file: result.raw
-          }
-        }).then(result => {
-          this.updateUserInfo();
-          this.$successMsg("更换头像成功，正在缓慢加载中~");
-        });
-      });
     },
     // 条数变化
     handleSizeChange(size) {
@@ -224,10 +227,38 @@ export default {
 .avatar {
   position: relative;
   margin: auto;
-  width: 8rem;
-  height: 8rem;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  overflow: hidden;
+}
+.avatar:hover .hover-plus {
+  opacity: 1;
+}
+.hover-plus {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  opacity: 0;
+  background: rgba(0, 0, 0, .5);
+  transition: .3s;
+}
+.add-avatar {
+  position: relative;
+  font-size: 2rem;
+  color: #d6d6d6;
+  top: 50%;
+  margin-top: -1rem;
+}
+.upload-button {
+  position: absolute; 
+  right: -5px; 
+  top: -10px; 
+  z-index: 100; 
+  opacity: .8
 }
 .image-box {
   position: relative;

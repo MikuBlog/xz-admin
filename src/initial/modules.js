@@ -5,6 +5,7 @@ import Database from '@/api/database/database'
 import Http from '@/api/http/http'
 // 引入全局提示模块
 import Message from '@/api/message/message'
+import Notification from '@/api/message/notification'
 // 引入element-ui框架
 import ElementUI from 'element-ui'
 // 引入iview框架
@@ -13,6 +14,8 @@ import { Drawer } from 'iview'
 import mavonEditor from 'mavon-editor'
 // 引入导航栏折叠
 import Fragment from 'vue-fragment'
+// 引入图片剪裁组件
+import VueCropper from 'vue-cropper'
 // 引入icon组件
 import '@/icons'
 // 引入全局样式
@@ -104,11 +107,20 @@ Vue.prototype.$http_file = Http.http_file
 /**
  * @author xuanzai
  * @description 引入全局提示
- * @param {String} msg 成功提示
+ * @param {String} msg 提示内容
  */
 Vue.prototype.$successMsg = Message.successMsg
 Vue.prototype.$warnMsg = Message.warnMsg
 Vue.prototype.$errorMsg = Message.errorMsg
+/**
+ * @author xuanzai
+ * @description 引入全局通知
+ * @param {String} msg 通知内容
+ * @param {String} title 标题
+ */
+Vue.prototype.$successTip = Notification.successTip
+Vue.prototype.$warnTip = Notification.warnTip
+Vue.prototype.$errorTip = Notification.errorTip
 /**
  * @author xuanzai
  * @description 引入全局弹框
@@ -117,6 +129,14 @@ Vue.prototype.$errorMsg = Message.errorMsg
  * @param {Boolean} isHTML 内容是否为html
  */
 Vue.prototype.$showMsgBox = Message.showMsgBox
+/**
+ * @author xuanzai
+ * @description 引入全局弹框
+ * @param {String} title 标题
+ * @param {String} msg 内容
+ * @param {Boolean} isHTML 内容是否为html
+ */
+Vue.prototype.$showTipDiy = Notification.showTipDiy
 /**
  * @author xuanzai
  * @description 引入时间格式化函数
@@ -250,5 +270,7 @@ Vue.component('Drawer', Drawer)
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠
 Vue.use(Fragment.Plugin)
+// 引入图片剪裁组件
+Vue.use(VueCropper)
 
 Vue.config.productionTip = false
