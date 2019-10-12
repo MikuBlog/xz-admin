@@ -1,5 +1,7 @@
 import { mapState, mapMutations } from 'vuex'
+import settingDrawer from './components/setting_drawer'
 export default {
+  components: { settingDrawer },
   data() {
     return {
       isCollapse: false,
@@ -9,7 +11,6 @@ export default {
       isSetting: false,
       isShowBackTop: false,
       activeName: 'layout',
-      logo: "",
       logoBlob: "",
       user: {},
       squareUrl: "",
@@ -24,7 +25,6 @@ export default {
       menuStyle: state => state.setting.menuStyle,
       tagsList: state => state.tags.tagsList,
       menuList: state => state.menu.menuList,
-      settings: state => state.setting
     }),
     menuBackgroundColor() {
       return this.menuStyle === 'dark' 
@@ -60,11 +60,6 @@ export default {
       "setUserInfo",
       "removeAllTags"
     ]),
-    // 保存设置
-    saveSetting() {
-      this.$setMemoryPmt("setting", this.settings)
-      this.$successMsg("保存设置成功")
-    },
     // 获取用户信息
     getUserInfo() {
       this.$http_json({
@@ -109,37 +104,9 @@ export default {
     //     console.log(result.data)
     //   })
     // },
-    // 选择Logo
-    selectLogo() {
-      this
-        .$getImgFile()
-        .then(({ raw, url }) => {
-          this.logo = url
-          this.logoBlob = raw
-        })
-        .catch(e => {
-          this.$warnMsg(e)
-        })
-    },
-    uploadLogo() {
-      if(!this.logo) {
-        this.$warnMsg("请选择Logo")
-      }else {
-        this.$http_file({
-          url: "/api/file/upload",
-          method: "post",
-          data: {
-            file: this.logoBlob,
-            filekey: "logo"
-          }
-        }).then(result => {
-          this.$successMsg("上传成功")
-        })
-      }
-    },
     // 打开设置抽屉
     showSetting() {
-      this.isSetting = true
+      this.$refs.setting.isSetting = true
     },
     // 移除所有标签
     removeTags() {

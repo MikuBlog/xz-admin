@@ -132,7 +132,7 @@ export default {
           class: "el-icon-remove-outline",
           style: {
             color: "#2196F3",
-            paddingRight: "5px"
+            paddingRight: "3px" 
           },
           on: {
             click: this.isExpandAll
