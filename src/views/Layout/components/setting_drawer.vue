@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     // 选择Logo
-    selectLogo() {
+    selectLogo() { 
       this.$getImgFile()
         .then(({ raw, url }) => {
           this.logo = url;
