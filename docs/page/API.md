@@ -8,9 +8,9 @@
 
 参数：
 
-+ `DOM`：`DOM`元素 [`DOM Object`]
-+ `ruleName`：CSS属性 [`String`]
-+ `style`：CSS属性值 [`String`]
++ `DOM`：`DOM`元素 [`DOM Object`]（必填）
++ `ruleName`：CSS属性 [`String`]（必填）
++ `style`：CSS属性值 [`String`]（必填）
 
 示例:
 ```js
@@ -24,9 +24,9 @@ this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
 
 参数：
 
-+ `url`：地址 [`String`]
-+ `fileName`: 文件名称 [`String`]
-+ `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]
++ `url`：地址 [`String`]（必填）
++ `fileName`: 文件名称 [`String`]（必填）
++ `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]（选填：默认为false）
 
 示例：
 ```js
@@ -39,7 +39,7 @@ this.$download(url, fileName)
 
 参数：
 
-+ `limit`：文件大小 [`Number`] 单位：兆
++ `limit`：文件大小 [`Number`] 单位：兆（选填：默认限制文件大小为2M）
 
 返回值：`Promise`
 
@@ -61,7 +61,7 @@ this
 
 参数：
 
-+ `url`：文件路径 [`String`]
++ `url`：文件路径 [`String`]（必填）
 
 示例：
 ```js
@@ -74,7 +74,7 @@ this.$previewFile(url)
 
 参数：
 
-+ `DOM Object | content`：要复制的`DOM`元素文本或纯文本 [`DOM Object`/`String`]
++ `DOM Object | content`：要复制的`DOM`元素文本或纯文本 [`DOM Object`/`String`]（必填）
 
 示例
 ```js
@@ -89,12 +89,27 @@ this.$copyText(this.$refs.contentBox)
 
 参数：
 
-+ `url`: 键 [`String`]（如果参数为空，默认获取当前页面`url`的参数，否则解析传入的`url`参数）
++ `url`: 需要解析的`url`字符串 [`String`]（选填：默认解析当前窗口地址）
 
 示例
 ```js
 this.$urlQuery([url]) // url: http://myinterface.xuanzai.top/getPicture?type=头像&id=1  result: { type: '头像', id: 1 }
 
+```
+
+## sortList
+
+描述：获取url后的参数
+
+参数：
+
++ `list`: 需要排序的数组 [`Array`]（必填）
++ `isDes`: 是否倒序（选填：默认为false）
++ `property`: 对象排序字段（选填：默认为空）
+
+示例
+```js
+this.$sortList(list, true, 'level') 
 ```
 
 ## storage
@@ -107,8 +122,8 @@ this.$urlQuery([url]) // url: http://myinterface.xuanzai.top/getPicture?type=头
 
 参数：
 
-+ `key`: 键 [`String`]
-+ `value`: 值 [`Any`]
++ `key`: 键 [`String`]（必填）
++ `value`: 值 [`Any`]（必填）
 
 示例：
 ```js
@@ -121,7 +136,7 @@ this.$setMemorySes("name", "xuanzai")
 
 参数：
 
-+ `key`: 键 [`String`]
++ `key`: 键 [`String`]（必填）
 
 示例：
 ```js
@@ -134,8 +149,8 @@ this.$getMemorySes("name")
 
 参数：
 
-+ `key`: 键 [`String`]
-+ `value`: 值 [`Any`]
++ `key`: 键 [`String`]（必填）
++ `value`: 值 [`Any`]（必填）
 + 
 示例：
 ```js
@@ -148,7 +163,7 @@ this.$setMemoryPmt("name", "xuanzai")
 
 参数：
 
-+ `key`: 键 [`String`]
++ `key`: 键 [`String`]（必填）
 
 示例：
 ```js
@@ -165,7 +180,7 @@ this.$getMemoryPmt("name")
 
 参数：
 
-+ `content`：提示语 [`String`]
++ `content`：提示语 [`String`]（必填）
 
 示例：
 ```js
@@ -178,7 +193,7 @@ this.$successMsg("成功")
 
 参数：
 
-+ `content`：提示语 [`String`]
++ `content`：提示语 [`String`]（必填）
 
 示例：
 ```js
@@ -191,7 +206,7 @@ this.$warnMsg("警告")
 
 参数：
 
-+ `content`：提示语 [`String`]
++ `content`：提示语 [`String`]（必填）
 
 示例：
 ```js
@@ -204,10 +219,10 @@ this.$errorMsg("错误")
 
 参数：
 
-+ `title`：标题 [`String`]
-+ `msg`：内容 [`String`/`HTML(isHTML为true时)`]
-+ `isHTML`：内容是否为`html`标签 [`true`/`false`]
-+ `type`: 类型 [`success`/`warn`/`info`/`error`]
++ `title`：标题 [`String`]（选填：默认为空）
++ `msg`：内容 [`String`/`HTML(isHTML为true时)`]（必填）
++ `isHTML`：内容是否为`html`标签 [`true`/`false`]（选填：默认为false）
++ `type`: 类型 [`success`/`warn`/`info`/`error`]（选填：默认为info）
 
 返回值：`Promise`
 
@@ -224,8 +239,8 @@ this.$showMsgBox({ [title: "标题"], msg: "内容", [isHTML: false], [type: inf
 
 参数：
 
-+ `msg`：通知内容 [`String`]
-+ `title`：通知标题 [`String`]
++ `msg`：通知内容 [`String`]（必填）
++ `title`：通知标题 [`String`]（选填：默认为空）
 
 示例：
 ```js
@@ -238,26 +253,26 @@ this.$successTip({ msg: "成功通知", title: "成功" })
 
 参数：
 
-+ `msg`：通知内容 [`String`]
-+ `title`：通知标题 [`String`]
++ `msg`：通知内容 [`String`]（必填）
++ `title`：通知标题 [`String`]（选填：默认为空）
 
 示例：
 ```js
 this.$warnTip({ msg: "警告通知", title: "警告" })
 ```
 
-### errorMsg
+### errorTip
 
 描述：错误通知
 
 参数：
 
-+ `msg`：通知内容 [`String`]
-+ `title`：通知标题 [`String`]
++ `msg`：通知内容 [`String`]（必填）
++ `title`：通知标题 [`String`]（选填：默认为空）
 
 示例：
 ```js
-this.$errorMsg({ msg: "错误通知", title: "错误" })
+this.$errorTip({ msg: "错误通知", title: "错误" })
 ```
 
 ## http
