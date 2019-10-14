@@ -53,6 +53,8 @@ import PreviewFile from '@/api/file/preview_file'
 import JsonPretty from '@/api/json/json_pretty'
 // 引入图片加载动画模块
 import ImageLoad from '@/api/other/image_load'
+// 引入排序函数
+import SortList from '@/api/other/sort'
 // 引入图片加载动画模块
 import DefaultConfig from '@/global/js/config'
 /**
@@ -255,6 +257,15 @@ Vue.prototype.$jsonPretty = JsonPretty
  * @param {String} url
  */
 Vue.prototype.$imageLoad = ImageLoad
+/**
+ * @author xuanzai
+ * @description 排序
+ * @param {Array} list 需要排序的数组
+ * @param {Boolean} isDes 是否倒序
+ * @param {String} property 如果排序元素为对象，可指定需要排序的字段
+ * @returns {Array} 返回新的数组
+ */
+Vue.prototype.$sortList = SortList
 /**
  * @author xuanzai
  * @description 全局通用配置
