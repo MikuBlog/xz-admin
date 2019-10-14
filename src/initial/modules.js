@@ -6,10 +6,6 @@ import Http from '@/api/http/http'
 // 引入全局提示模块
 import Message from '@/api/message/message'
 import Notification from '@/api/message/notification'
-// 引入element-ui框架
-import ElementUI from 'element-ui'
-// 引入iview框架
-import { Drawer } from 'iview'
 // 引入markdown编辑器
 import mavonEditor from 'mavon-editor'
 // 引入导航栏折叠
@@ -18,6 +14,9 @@ import Fragment from 'vue-fragment'
 import VueCropper from 'vue-cropper'
 // 引入icon组件
 import '@/icons'
+// 引入UI框架
+import './UI/elementUI'
+import './UI/iviewUI'
 // 引入全局样式
 import '@/global/css/style.css'
 import '@/api/iconfont/iconfont'
@@ -271,12 +270,8 @@ Vue.prototype.$sortList = SortList
  * @description 全局通用配置
  */
 Vue.prototype.defaultConfig = DefaultConfig
-// 加入element-ui组件
-Vue.use(ElementUI)
 // 引入markdown编辑器组件
 Vue.use(mavonEditor)
-// 引入iview抽屉组件
-Vue.component('Drawer', Drawer)
 // 引入树状选择器组件
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠
