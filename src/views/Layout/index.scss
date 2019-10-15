@@ -130,13 +130,6 @@ width: 63px;
     }
   }
 }
-.drawer-setting {
-  /deep/ {
-    .ivu-drawer-body {
-      overflow: hidden;
-    }
-  }
-}
 .menu-scrollbar {
   background: #2d3e53;
 }
@@ -173,34 +166,11 @@ width: 63px;
   width: 100%;
   vertical-align: middle;
 }
-.switch-box {
-  position: relative;
-  margin: 1rem 0;
-  text-align: right;
-}
-.box {
-  position: relative;
-  margin: 1rem .5rem;
-}
-.tips {
-  position: absolute;
-  top: -3px;
-  left: 0;
-  font-size: 1rem;
-}
-.button {
-  position: relative;
-  margin: .5rem 0;
-}
 .back-top {
   position: fixed;
   z-index: 1500;
   right: 50px;
   bottom: 100px;
-}
-.button-bottom {
-  position: relative;
-  margin-top: 3rem;
 }
 .radio-box {
   position: relative;

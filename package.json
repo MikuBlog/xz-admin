@@ -26,6 +26,7 @@
     "v-charts": "^1.19.0",
     "vue": "^2.6.10",
     "vue-count-to": "^1.0.13",
+    "vue-cropper": "^0.4.9",
     "vue-fragment": "^1.5.1",
     "vue-router": "^3.0.3",
     "vue-ueditor-wrap": "^2.4.1",

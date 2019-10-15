@@ -20,17 +20,14 @@
                 title="添加菜单"
                 circle
               ></el-button>
-              <el-button
-                type="warning"
-                :icon="expand ? 'el-icon-open' : 'el-icon-turn-off'"
-                title="全部展开或收起"
-                class="margin-box"
-                @click="isExpandAll"
-                circle
-              ></el-button>
             </el-row>
           </div>
-          <tree-table :data="menuList" :expand-all="expand" :columns="columns" size="small">
+          <tree-table 
+          :data="menuList" 
+          :expand-all="expand" 
+          :columns="columns" 
+          :renderHeader="renderHeader"
+          size="small">
             <el-table-column prop="icon" label="图标" align="center">
               <template slot-scope="scope">
                 <svg-icon :icon-class="scope.row.icon" />
@@ -115,9 +112,31 @@ export default {
   },
   methods: {
     // 是否展开全部
-    isExpandAll() {
+    isExpandAll(e) {
       this.expand = !this.expand;
+      this.expand
+      ? e.target.className = "el-icon-remove-outline"
+      : e.target.className = "el-icon-circle-plus-outline"
       this.getMenuList();
+    },
+    // 初始化表头
+    renderHeader(h, { column }) {
+      return h(
+        "div",
+        [
+          h("i", {
+            class: "el-icon-remove-outline",
+            style: {
+              color: "#2196F3",
+              paddingRight: "3px" 
+            },
+            on: {
+              click: this.isExpandAll
+            }
+          }),
+          h("span", column.label)
+        ]
+      )
     },
     // 删除菜单
     deleteMenuItem(item) {

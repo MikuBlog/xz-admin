@@ -18,7 +18,11 @@
     </el-table-column>
     <el-table-column 
     :show-overflow-tooltip="true"
-    v-for="(column, index) in columns" v-else :key="column.value" :label="column.text" :width="column.width">
+    v-for="(column, index) in columns" 
+    v-else :key="column.value" 
+    :label="column.text" 
+    :width="column.width"
+    :render-header="renderHeader">
       <template slot-scope="scope">
         <!-- Todo -->
         <!-- eslint-disable-next-line vue/no-confusing-v-for-v-if -->
@@ -57,6 +61,9 @@ export default {
     expandAll: {
       type: Boolean,
       default: false
+    },
+    renderHeader: {
+      type:Function,
     }
   },
   computed: {
