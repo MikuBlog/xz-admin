@@ -20,5 +20,11 @@ export default {
     activeTextColor: '#429ee2'
   },
   // logo地址
-  logoUrl: "https://myinterface.xuanzai.top/getPicture?type=logo&id=1"
+  logoUrl: "https://myinterface.xuanzai.top/getPicture?type=logo&id=1",
+  // 文档icon
+  helpPage: false,
+  // 系统设置icon
+  systemSetting: false,
+  // 全屏icon
+  fullScreen: false
 }

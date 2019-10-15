@@ -82,13 +82,13 @@
               </div>
             </el-dropdown>
             <div class="icon-box">
-              <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom">
+              <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom" v-show="defaultConfig.helpPage">
                 <i class="el-icon-question" @click="toHelp"></i>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="系统设置" placement="bottom">
+              <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom" v-show="defaultConfig.systemSetting">
                 <i class="el-icon-s-tools" @click="showSetting"></i>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
+              <el-tooltip class="item" effect="dark" content="全屏" placement="bottom" v-show="defaultConfig.fullScreen">
                 <svg-icon
                   icon-class="全屏"
                   style="width: 24px; height: 24px; top: 1px"
