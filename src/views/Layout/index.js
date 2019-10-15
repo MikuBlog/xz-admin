@@ -143,7 +143,7 @@ export default {
         '1px solid #dcdfe6'
       )
       this.$setStyle(
-        drawerContent,
+        drawerContent, 
         'background',
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
