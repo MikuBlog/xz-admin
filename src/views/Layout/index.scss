@@ -124,6 +124,13 @@ width: 63px;
   /deep/ {
     .ivu-drawer-body {
       padding: 0;
+      .el-scrollbar {
+        /deep/ {
+          .el-scrollbar__wrap {
+            overflow-x: hidden;
+          }
+        }
+      }
     }
     .ivu-drawer-content {
       background: #2e3f54;

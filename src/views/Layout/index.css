@@ -152,6 +152,10 @@
   padding: 0;
 }
 
+.drawer-menu /deep/ .ivu-drawer-body .el-scrollbar /deep/ .el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+
 .drawer-menu /deep/ .ivu-drawer-content {
   background: #2e3f54;
 }

@@ -113,6 +113,13 @@ export default {
   /deep/ {
     .ivu-drawer-body {
       overflow: hidden;
+      .el-scrollbar {
+        /deep/ {
+          .el-scrollbar__wrap {
+            overflow-x: hidden;
+          }
+        }
+      }
     }
   }
 }

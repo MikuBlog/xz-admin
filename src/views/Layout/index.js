@@ -127,12 +127,10 @@ export default {
     // 初始化样式
     initialStyle() {
       const
-        eles = document.querySelectorAll('.el-scrollbar__wrap'),
         menuScrollBar = document.querySelector('.menu-scrollbar'),
         menuProp = document.querySelectorAll('.el-menu--popup'),
         menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
-        drawerContent = document.querySelector('.ivu-drawer-content'),
-        regexp = new RegExp(/select/g)
+        drawerContent = document.querySelector('.ivu-drawer-content')
       this.$setStyle(
         menuScrollBar,
         'background',
@@ -150,10 +148,6 @@ export default {
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
           : this.defaultConfig.menuStyle.light.backgroundColor)
-      eles.forEach((val, ind) => {
-        if (!regexp.test(val.className)) 
-          this.$setStyle(val, 'overflow-x', 'hidden')
-      })
       menuProp.forEach(val => {
         this.menuStyle === 'dark'
           ? this.$setStyle(
