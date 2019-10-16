@@ -46,7 +46,7 @@
           <el-button type="primary" style="width: 100%" @click="selectLogo">选择Logo</el-button>
         </div>
         <div class="button">
-          <el-button type="warning" style="width: 100%">上传Logo</el-button>
+          <el-button type="warning" style="width: 100%" @click="uploadLogo">上传Logo</el-button>
         </div>
       </div>
       <div class="button button-bottom">
@@ -88,11 +88,10 @@ export default {
         this.$warnMsg("请选择Logo");
       } else {
         this.$http_file({
-          url: "/api/file/upload",
+          url: "/api/showConfig/uploadlogo",
           method: "post",
           data: {
-            file: this.logoBlob,
-            filekey: "logo"
+            file: this.logoBlob
           }
         }).then(result => {
           this.$successMsg("上传成功");

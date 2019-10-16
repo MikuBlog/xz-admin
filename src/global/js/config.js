@@ -22,9 +22,9 @@ export default {
   // logo地址
   logoUrl: "https://myinterface.xuanzai.top/getPicture?type=logo&id=1",
   // 文档icon
-  helpPage: false,
+  helpPage: true,
   // 系统设置icon
-  systemSetting: false,
+  systemSetting: true,
   // 全屏icon
-  fullScreen: false
+  fullScreen: true
 }

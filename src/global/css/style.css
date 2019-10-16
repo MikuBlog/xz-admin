@@ -65,7 +65,7 @@ body {
     width: 6rem;
 }
 .search-input {
-    width: 12rem;
+    width: 12rem!important;
 }
 .margin-box {
     margin: .3rem!important;
