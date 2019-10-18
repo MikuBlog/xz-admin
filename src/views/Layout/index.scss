@@ -137,8 +137,13 @@ width: 63px;
     }
   }
 }
-.menu-scrollbar {
+.menu-scrollbar, .menu-horizontal-scrollbar {
   background: #2d3e53;
+  /deep/ {
+    .el-scrollbar__wrap {
+      overflow-x: hidden;
+    }
+  }
 }
 .menu-horizontal {
   position: relative;

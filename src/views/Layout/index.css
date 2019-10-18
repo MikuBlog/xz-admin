@@ -160,8 +160,12 @@
   background: #2e3f54;
 }
 
-.menu-scrollbar {
+.menu-scrollbar, .menu-horizontal-scrollbar {
   background: #2d3e53;
+}
+
+.menu-scrollbar /deep/ .el-scrollbar__wrap, .menu-horizontal-scrollbar /deep/ .el-scrollbar__wrap {
+  overflow-x: hidden;
 }
 
 .menu-horizontal {

@@ -46,7 +46,7 @@
       </Drawer>
       <el-container>
         <div class="menu" v-show="!isVerticleMenu">
-          <el-scrollbar style="height:60px; width: 100%;">
+          <el-scrollbar style="height:60px; width: 100%;" class="menu-horizontal-scrollbar">
             <el-menu
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
