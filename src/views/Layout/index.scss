@@ -151,9 +151,21 @@ width: 63px;
 }
 .logo-verticle {
   position: relative;
-  margin: 30px 0 24px 0;
-  width: 12.5rem;
+  margin-top: 22px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
   text-align: center;
+  /deep/ {
+    .image-slot {
+      position: relative;
+      background: #f5f7fa;
+      .el-icon-picture-outline {
+        position: relative;
+        line-height: 5rem;
+      }
+    }
+  }
 }
 .menu-horizontal-item {
   flex: 1;
@@ -167,16 +179,18 @@ width: 63px;
   line-height: 3rem;
   min-width: 10rem;
   max-width: 10rem;
+  height: 50px;
   text-align: center;
-}
-.logo-verticle > img {
-  position: relative;
-  vertical-align: middle;
-  width: 80%;
-}
-.logo-horizontal > img {
-  width: 100%;
-  vertical-align: middle;
+  /deep/ {
+    .image-slot {
+      position: relative;
+      background: #f5f7fa;
+      .el-icon-picture-outline {
+        position: relative;
+        line-height: 50px;
+      }
+    }
+  }
 }
 .back-top {
   position: fixed;

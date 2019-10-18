@@ -1,5 +1,6 @@
 import { mapState, mapMutations } from 'vuex'
 import settingDrawer from './components/setting_drawer'
+import convertHttp from '@/utils/convertHttp'
 export default {
   components: { settingDrawer },
   data() {
@@ -14,6 +15,7 @@ export default {
       logoBlob: "",
       user: {},
       squareUrl: "",
+      logoUrl: ""
     }
   },
   computed: {
@@ -38,20 +40,20 @@ export default {
     },
     activeTextColor() {
       return this.defaultConfig.menuStyle.activeTextColor
-    },
-    logoUrl() {
-      return this.defaultConfig.logoUrl
     }
+    // logoUrl() {
+    //   return this.defaultConfig.logoUrl
+    // }
   },
   created() {
     // 获取用户信息
     this.getUserInfo()
     // 获取Logo信息
-    // this.getLogo()
+    this.getLogo()
   },
   mounted() {
     this.initialStyle()
-    this.initialListener()
+    this.initialListener() 
     // 获取视窗大小
     this.getWindowWidth()
   },
@@ -66,6 +68,7 @@ export default {
         url: "/auth/info",
         method: "get"
       }).then(result => {
+        result.data.avatar = convertHttp(result.data.avatar)
         this.setUserInfo(result.data)
         this.user = this.$store.state.user
         this.squareUrl = this.user.avatar
@@ -96,14 +99,15 @@ export default {
         })
     },
     // 获取Logo
-    // getLogo() {
-    //   this.$http_json({
-    //     url: "/api/file/page?filekey=logo",
-    //     method: "get"
-    //   }).then(result => {
-    //     console.log(result.data)
-    //   })
-    // },
+    getLogo() {
+      this.$http_json({
+        url: "/api/showConfig/getByName/logo",
+        method: "get"
+      }).then(result => {
+        this.logoUrl = result.data.value
+        this.$refs.setting.logo = result.data.value
+      })
+    },
     // 打开设置抽屉
     showSetting() {
       this.$refs.setting.isSetting = true

@@ -175,9 +175,21 @@
 
 .logo-verticle {
   position: relative;
-  margin: 30px 0 24px 0;
-  width: 12.5rem;
+  margin-top: 22px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
   text-align: center;
+}
+
+.logo-verticle /deep/ .image-slot {
+  position: relative;
+  background: #f5f7fa;
+}
+
+.logo-verticle /deep/ .image-slot .el-icon-picture-outline {
+  position: relative;
+  line-height: 5rem;
 }
 
 .menu-horizontal-item {
@@ -193,18 +205,18 @@
   line-height: 3rem;
   min-width: 10rem;
   max-width: 10rem;
+  height: 50px;
   text-align: center;
 }
 
-.logo-verticle > img {
+.logo-horizontal /deep/ .image-slot {
   position: relative;
-  vertical-align: middle;
-  width: 80%;
+  background: #f5f7fa;
 }
 
-.logo-horizontal > img {
-  width: 100%;
-  vertical-align: middle;
+.logo-horizontal /deep/ .image-slot .el-icon-picture-outline {
+  position: relative;
+  line-height: 50px;
 }
 
 .back-top {

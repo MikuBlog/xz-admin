@@ -89,6 +89,7 @@
 
 <script>
 import eForm from "./components/form";
+import convertHttp from '@/utils/convertHttp'
 export default {
   components: { eForm },
   data() {
@@ -182,6 +183,7 @@ export default {
     initialPictureList(list) {
       this.pictureList.splice(0);
       list.forEach(value => {
+        value.url = convertHttp(value.url)
         this.pictureList.push(value);
       });
     },

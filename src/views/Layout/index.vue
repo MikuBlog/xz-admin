@@ -11,9 +11,19 @@
           :text-color="menuTextColor"
           :unique-opened="true"
         >
-          <div class="logo-verticle" v-show="showLogo" v-if="!isCollapse">
+          <!-- <div class="logo-verticle" v-show="showLogo" v-if="!isCollapse">
             <img :src="logoUrl" alt="logo.png" />
-          </div>
+          </div> -->
+          <el-image 
+          :src="logoUrl" 
+          fit="cover"
+          class="logo-verticle" 
+          v-show="showLogo" 
+          v-if="!isCollapse">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
           <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
           <NavMenu :navMenus="menuList"></NavMenu>
         </el-menu>
@@ -36,9 +46,18 @@
             :unique-opened="true"
             @select="isMenuCollapse = false"
           >
-            <div class="logo-verticle" v-show="showLogo">
+            <el-image 
+            :src="logoUrl" 
+            fit="cover"
+            class="logo-verticle"
+            v-show="showLogo">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
+            <!-- <div class="logo-verticle" v-show="showLogo">
               <img :src="logoUrl" alt="logo.png" />
-            </div>
+            </div> -->
             <el-divider v-if="menuStyle !== 'dark' && showLogo"></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
@@ -56,9 +75,18 @@
               mode="horizontal"
               style="width: 100%"
             >
-              <div class="logo-horizontal" v-show="showLogo">
+              <!-- <div class="logo-horizontal" v-show="showLogo">
                 <img :src="logoUrl" alt="logo.png" />
-              </div>
+              </div> -->
+              <el-image 
+              :src="logoUrl" 
+              fit="contain"
+              class="logo-horizontal"
+              v-show="showLogo">
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline"></i>
+                </div>
+              </el-image>
               <NavMenu class="menu-horizontal-item" :navMenus="menuList"></NavMenu>
             </el-menu>
           </el-scrollbar>
