@@ -175,7 +175,7 @@
 
 .logo-verticle {
   position: relative;
-  margin-top: 22px;
+  margin: 23px 0;
   left: 50%;
   transform: translate(-50%);
   width: 90%;
@@ -190,6 +190,11 @@
 .logo-verticle /deep/ .image-slot .el-icon-picture-outline {
   position: relative;
   line-height: 5rem;
+}
+
+.el-divider {
+  position: relative;
+  margin-top: 0;
 }
 
 .menu-horizontal-item {

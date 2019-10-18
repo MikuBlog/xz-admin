@@ -11,9 +11,6 @@
           :text-color="menuTextColor"
           :unique-opened="true"
         >
-          <!-- <div class="logo-verticle" v-show="showLogo" v-if="!isCollapse">
-            <img :src="logoUrl" alt="logo.png" />
-          </div> -->
           <el-image 
           :src="logoUrl" 
           fit="cover"
@@ -24,7 +21,8 @@
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>
-          <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
+          <el-divider 
+          v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
           <NavMenu :navMenus="menuList"></NavMenu>
         </el-menu>
       </el-scrollbar>
@@ -55,9 +53,6 @@
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>
-            <!-- <div class="logo-verticle" v-show="showLogo">
-              <img :src="logoUrl" alt="logo.png" />
-            </div> -->
             <el-divider v-if="menuStyle !== 'dark' && showLogo"></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
@@ -75,9 +70,6 @@
               mode="horizontal"
               style="width: 100%"
             >
-              <!-- <div class="logo-horizontal" v-show="showLogo">
-                <img :src="logoUrl" alt="logo.png" />
-              </div> -->
               <el-image 
               :src="logoUrl" 
               fit="contain"

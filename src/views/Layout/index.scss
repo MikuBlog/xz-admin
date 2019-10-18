@@ -151,7 +151,7 @@ width: 63px;
 }
 .logo-verticle {
   position: relative;
-  margin-top: 22px;
+  margin: 23px 0;
   left: 50%;
   transform: translate(-50%);
   width: 90%;
@@ -166,6 +166,10 @@ width: 63px;
       }
     }
   }
+}
+.el-divider {
+  position: relative;
+  margin-top: 0;
 }
 .menu-horizontal-item {
   flex: 1;
