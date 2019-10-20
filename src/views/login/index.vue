@@ -480,8 +480,6 @@ export default {
   top: 0;
   bottom: 0;
   margin: auto;
-  width: 25rem;
-  height: 31rem;
   background: rgba(0, 0, 0, 0.35);
   transition: 0.5s;
   border-radius: 5px;

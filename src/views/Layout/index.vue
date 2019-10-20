@@ -11,10 +11,18 @@
           :text-color="menuTextColor"
           :unique-opened="true"
         >
-          <div class="logo-verticle" v-show="showLogo" v-if="!isCollapse">
-            <img :src="logoUrl" alt="logo.png" />
-          </div>
-          <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
+          <el-image 
+          :src="logoUrl" 
+          fit="cover"
+          class="logo-verticle" 
+          v-show="showLogo" 
+          v-if="!isCollapse">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
+          <el-divider 
+          v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
           <NavMenu :navMenus="menuList"></NavMenu>
         </el-menu>
       </el-scrollbar>
@@ -36,9 +44,15 @@
             :unique-opened="true"
             @select="isMenuCollapse = false"
           >
-            <div class="logo-verticle" v-show="showLogo">
-              <img :src="logoUrl" alt="logo.png" />
-            </div>
+            <el-image 
+            :src="logoUrl" 
+            fit="cover"
+            class="logo-verticle"
+            v-show="showLogo">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
             <el-divider v-if="menuStyle !== 'dark' && showLogo"></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
@@ -46,7 +60,7 @@
       </Drawer>
       <el-container>
         <div class="menu" v-show="!isVerticleMenu">
-          <el-scrollbar style="height:60px; width: 100%;">
+          <el-scrollbar style="height:60px; width: 100%;" class="menu-horizontal-scrollbar">
             <el-menu
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
@@ -56,9 +70,15 @@
               mode="horizontal"
               style="width: 100%"
             >
-              <div class="logo-horizontal" v-show="showLogo">
-                <img :src="logoUrl" alt="logo.png" />
-              </div>
+              <el-image 
+              :src="logoUrl" 
+              fit="contain"
+              class="logo-horizontal"
+              v-show="showLogo">
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline"></i>
+                </div>
+              </el-image>
               <NavMenu class="menu-horizontal-item" :navMenus="menuList"></NavMenu>
             </el-menu>
           </el-scrollbar>
@@ -82,13 +102,13 @@
               </div>
             </el-dropdown>
             <div class="icon-box">
-              <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom">
+              <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom" v-show="defaultConfig.helpPage">
                 <i class="el-icon-question" @click="toHelp"></i>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom">
+              <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom" v-show="defaultConfig.systemSetting">
                 <i class="el-icon-s-tools" @click="showSetting"></i>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
+              <el-tooltip class="item" effect="dark" content="全屏" placement="bottom" v-show="defaultConfig.fullScreen">
                 <svg-icon
                   icon-class="全屏"
                   style="width: 24px; height: 24px; top: 1px"

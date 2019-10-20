@@ -42,11 +42,11 @@
       <div v-show="activeName === 'logo'">
         <h2 style="margin: 2rem 0">系统Logo设置</h2>
         <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
-        <div class="button">
+        <div class="button" v-permission="['ADMIN']">
           <el-button type="primary" style="width: 100%" @click="selectLogo">选择Logo</el-button>
         </div>
-        <div class="button">
-          <el-button type="warning" style="width: 100%">上传Logo</el-button>
+        <div class="button" v-permission="['ADMIN']">
+          <el-button type="warning" style="width: 100%" @click="uploadLogo">上传Logo</el-button>
         </div>
       </div>
       <div class="button button-bottom">
@@ -58,6 +58,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import convertHttp from '@/utils/convertHttp'
 export default {
   data() {
     return {
@@ -84,17 +85,18 @@ export default {
         });
     },
     uploadLogo() {
-      if (!this.logo) {
+      const regexp = new RegExp(/^http/g)
+      if (!this.logo || regexp.test(this.logo)) {
         this.$warnMsg("请选择Logo");
       } else {
         this.$http_file({
-          url: "/api/file/upload",
+          url: "/api/showConfig/uploadlogo",
           method: "post",
           data: {
-            file: this.logoBlob,
-            filekey: "logo"
+            file: this.logoBlob
           }
         }).then(result => {
+          this.$parent.logoUrl = convertHttp(result.data.value)
           this.$successMsg("上传成功");
         });
       }
@@ -113,6 +115,13 @@ export default {
   /deep/ {
     .ivu-drawer-body {
       overflow: hidden;
+      .el-scrollbar {
+        /deep/ {
+          .el-scrollbar__wrap {
+            overflow-x: hidden;
+          }
+        }
+      }
     }
   }
 }
