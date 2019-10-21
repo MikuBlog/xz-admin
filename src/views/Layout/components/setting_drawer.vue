@@ -14,6 +14,13 @@
             <el-radio label="dark">夜晚</el-radio>
           </el-radio-group>
         </div>
+        <h2 style="margin: 2rem 0">菜单布局风格</h2>
+        <div class="radio-box">
+          <el-radio-group v-model="$store.state.setting.isVerticleMenu">
+            <el-radio :label="true">垂直</el-radio>
+            <el-radio :label="false">水平</el-radio>
+          </el-radio-group>
+        </div>
       </div>
       <div v-show="activeName === 'layout'">
         <h2 style="margin: 2rem 0">系统布局设置</h2>
@@ -30,13 +37,13 @@
             <span class="tips">显示面包屑</span>
             <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
           </div>
-          <div class="box">
+          <!-- <div class="box">
             <span class="tips">是否为垂直菜单</span>
             <el-switch
               v-model="$store.state.setting.isVerticleMenu"
               @change="$nextTick(() => { $parent.initialStyle() })"
             ></el-switch>
-          </div>
+          </div> -->
         </div>
       </div>
       <div v-show="activeName === 'logo'">
