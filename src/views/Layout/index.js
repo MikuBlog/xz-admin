@@ -177,7 +177,6 @@ export default {
             'background',
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
-      console.log(menuItemGroup)
       menuItemGroup.forEach(val => {
         this.menuStyle === 'dark'
           ? this.$setStyle(
