@@ -37,13 +37,6 @@
             <span class="tips">显示面包屑</span>
             <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
           </div>
-          <!-- <div class="box">
-            <span class="tips">是否为垂直菜单</span>
-            <el-switch
-              v-model="$store.state.setting.isVerticleMenu"
-              @change="$nextTick(() => { $parent.initialStyle() })"
-            ></el-switch>
-          </div> -->
         </div>
       </div>
       <div v-show="activeName === 'logo'">
