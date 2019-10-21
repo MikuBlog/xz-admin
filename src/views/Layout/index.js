@@ -15,7 +15,8 @@ export default {
       logoBlob: "",
       user: {},
       squareUrl: "",
-      logoUrl: ""
+      logoUrl: "",
+      interval: "",
     }
   },
   computed: {
@@ -41,9 +42,6 @@ export default {
     activeTextColor() {
       return this.defaultConfig.menuStyle.activeTextColor
     }
-    // logoUrl() {
-    //   return this.defaultConfig.logoUrl
-    // }
   },
   created() {
     // 获取用户信息
@@ -52,7 +50,16 @@ export default {
     this.getLogo()
   },
   mounted() {
-    this.initialStyle()
+    /**
+     * @description 初始化页面样式
+     * 由于菜单生成有滞后性，所以使用循环定时器进行页面初始化，如果菜单生成完毕，则初始化页面并停止循环定时器
+     */
+    this.interval = setInterval(() => {
+      if(document.querySelectorAll('.el-menu-item-group').length > 0) {
+        this.initialStyle()
+        clearInterval(this.interval)
+      }
+    }, 100)
     this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
@@ -170,6 +177,7 @@ export default {
             'background',
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
+      console.log(menuItemGroup)
       menuItemGroup.forEach(val => {
         this.menuStyle === 'dark'
           ? this.$setStyle(

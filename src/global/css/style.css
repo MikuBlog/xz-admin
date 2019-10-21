@@ -37,9 +37,6 @@ body {
 .el-menu-item:hover {
     background: rgba(0, 183, 255, 0.3)!important;
 }
-.el-menu-item-group {
-    background: #fdfdfd;
-}
 .el-breadcrumb__inner {
     color: #8a8a95;
 }

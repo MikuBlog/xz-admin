@@ -6,22 +6,6 @@
       <el-tab-pane label="Logo" name="logo"></el-tab-pane>
     </el-tabs>
     <el-scrollbar style="height: 80%">
-      <div v-show="activeName === 'menu'">
-        <h2 style="margin: 2rem 0">菜单颜色风格</h2>
-        <div class="radio-box" @change="$nextTick(() => { $parent.initialStyle() })">
-          <el-radio-group v-model="$store.state.setting.menuStyle">
-            <el-radio label="light">白昼</el-radio>
-            <el-radio label="dark">夜晚</el-radio>
-          </el-radio-group>
-        </div>
-        <h2 style="margin: 2rem 0">菜单布局风格</h2>
-        <div class="radio-box">
-          <el-radio-group v-model="$store.state.setting.isVerticleMenu">
-            <el-radio :label="true">垂直</el-radio>
-            <el-radio :label="false">水平</el-radio>
-          </el-radio-group>
-        </div>
-      </div>
       <div v-show="activeName === 'layout'">
         <h2 style="margin: 2rem 0">系统布局设置</h2>
         <div class="switch-box">
@@ -37,6 +21,22 @@
             <span class="tips">显示面包屑</span>
             <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
           </div>
+        </div>
+      </div>
+      <div v-show="activeName === 'menu'">
+        <h2 style="margin: 2rem 0">菜单颜色风格</h2>
+        <div class="radio-box" @change="$nextTick(() => { $parent.initialStyle() })">
+          <el-radio-group v-model="$store.state.setting.menuStyle">
+            <el-radio label="light">白昼</el-radio>
+            <el-radio label="dark">夜晚</el-radio>
+          </el-radio-group>
+        </div>
+        <h2 style="margin: 2rem 0">菜单布局风格</h2>
+        <div class="radio-box">
+          <el-radio-group v-model="$store.state.setting.isVerticleMenu">
+            <el-radio :label="true">垂直</el-radio>
+            <el-radio :label="false">水平</el-radio>
+          </el-radio-group>
         </div>
       </div>
       <div v-show="activeName === 'logo'">
