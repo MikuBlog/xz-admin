@@ -77,6 +77,12 @@ body {
 .el-date-editor--datetimerange {
     width: 20rem!important;
 }
+.left-border {
+  position: relative;
+  border-left: 4px solid #3366cc;
+  padding-left: 10px;
+  font-size: 1rem;
+}
 .border {
     position: relative;
     border-top: 1px solid #dbdee5;
