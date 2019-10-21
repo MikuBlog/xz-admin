@@ -1,6 +1,6 @@
 <template>
   <el-dialog :visible.sync="dialog" :title="isAdd ? '新增任务' : '编辑任务'" append-to-body width="600px">
-      <el-form ref="missionForm" :model="missionForm" :rules="rules" size="small" label-width="100px">
+      <el-form status-icon ref="missionForm" :model="missionForm" :rules="rules" size="small" label-width="100px">
         <el-form-item label="任务名称" prop="jobName">
           <el-input v-model="missionForm.jobName" style="width: 460px;"/>
         </el-form-item>

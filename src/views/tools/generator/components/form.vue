@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="代码生成配置" append-to-body width="960px">
-      <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="95px">
+      <el-form status-icon ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="95px">
         <el-form-item label="模块名称" prop="moduleName">
           <el-input placeholder="请输入模块名称" v-model="form.moduleName"/>
         </el-form-item>

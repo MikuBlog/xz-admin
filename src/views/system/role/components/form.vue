@@ -1,6 +1,6 @@
 <template>
   <el-dialog :visible.sync="dialog" :title="isAdd ? '新增角色' : '编辑角色'" append-to-body width="500px">
-    <el-form ref="roleForm" :model="roleForm" :rules="rules" size="small" label-width="80px">
+    <el-form status-icon ref="roleForm" :model="roleForm" :rules="rules" size="small" label-width="80px">
       <el-form-item label="角色名称" prop="name">
         <el-input v-model="roleForm.name" style="width: 370px;"/>
       </el-form-item>

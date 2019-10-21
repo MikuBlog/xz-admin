@@ -1,6 +1,6 @@
 <template>
     <el-dialog :visible.sync="dialog" title="修改密码" append-to-body width="500px">
-    <el-form ref="userForm" :model="userForm" :rules="rules" size="small" label-width="80px">
+    <el-form status-icon ref="userForm" :model="userForm" :rules="rules" size="small" label-width="80px">
       <el-form-item label="旧密码" prop="oldPass">
         <el-input v-model="userForm.oldPass" style="width: 360px;"/>
       </el-form-item>

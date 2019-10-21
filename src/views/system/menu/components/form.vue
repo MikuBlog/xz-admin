@@ -1,6 +1,6 @@
 <template>
   <el-dialog :visible.sync="dialog" :title="isAdd ? '新增菜单' : '编辑菜单'" append-to-body width="600px">
-    <el-form ref="menuForm" :model="menuForm" :rules="rules" size="small" label-width="80px">
+    <el-form status-icon ref="menuForm" :model="menuForm" :rules="rules" size="small" label-width="80px">
       <el-form-item label="菜单图标">
         <el-popover
           placement="bottom-start"

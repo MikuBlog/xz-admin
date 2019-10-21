@@ -5,6 +5,7 @@
         width="450px"
         >
             <el-form 
+            status-icon
             :model="detailForm"
             ref="detailForm"
             :rules="detailFormRules"

@@ -1,6 +1,6 @@
 <template>
     <el-dialog :visible.sync="dialog" title="修改邮箱" append-to-body width="500px">
-    <el-form ref="userForm" :model="userForm" :rules="rules" size="small" label-width="80px">
+    <el-form status-icon ref="userForm" :model="userForm" :rules="rules" size="small" label-width="80px">
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="userForm.email" style="width: 360px;"/>
       </el-form-item>
