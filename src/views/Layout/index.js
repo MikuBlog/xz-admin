@@ -29,14 +29,14 @@ export default {
       menuList: state => state.menu.menuList,
     }),
     menuBackgroundColor() {
-      return this.menuStyle === 'dark' 
-      ? this.defaultConfig.menuStyle.dark.backgroundColor
-      : this.defaultConfig.menuStyle.light.backgroundColor
+      return this.menuStyle === 'dark'
+        ? this.defaultConfig.menuStyle.dark.backgroundColor
+        : this.defaultConfig.menuStyle.light.backgroundColor
     },
     menuTextColor() {
-      return this.menuStyle === 'dark' 
-      ? this.defaultConfig.menuStyle.dark.textColor 
-      : this.defaultConfig.menuStyle.light.textColor 
+      return this.menuStyle === 'dark'
+        ? this.defaultConfig.menuStyle.dark.textColor
+        : this.defaultConfig.menuStyle.light.textColor
     },
     activeTextColor() {
       return this.defaultConfig.menuStyle.activeTextColor
@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     this.initialStyle()
-    this.initialListener() 
+    this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
   },
@@ -88,9 +88,9 @@ export default {
     // 退出登录
     logout() {
       this
-        .$showMsgBox({ 
-          msg: `是否注销当前账号?`, 
-          iconClass: 'el-icon-question' 
+        .$showMsgBox({
+          msg: `是否注销当前账号?`,
+          iconClass: 'el-icon-question'
         })
         .then(result => {
           // 退出前先清空用户访问记录
@@ -134,9 +134,16 @@ export default {
         menuScrollBar = document.querySelector('.menu-scrollbar'),
         menuProp = document.querySelectorAll('.el-menu--popup'),
         menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
-        drawerContent = document.querySelector('.ivu-drawer-content')
+        drawerContent = document.querySelector('.ivu-drawer-content'),
+        horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
       this.$setStyle(
         menuScrollBar,
+        'background',
+        this.menuStyle === 'dark'
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor)
+      this.$setStyle(
+        horizontalScrollbar,
         'background',
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
@@ -147,7 +154,7 @@ export default {
         '1px solid #dcdfe6'
       )
       this.$setStyle(
-        drawerContent, 
+        drawerContent,
         'background',
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
@@ -155,23 +162,23 @@ export default {
       menuProp.forEach(val => {
         this.menuStyle === 'dark'
           ? this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
           : this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
       menuItemGroup.forEach(val => {
         this.menuStyle === 'dark'
           ? this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
           : this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
     },
