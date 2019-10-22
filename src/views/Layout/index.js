@@ -59,7 +59,7 @@ export default {
         this.initialStyle()
         clearInterval(this.interval)
       }
-    }, 100)
+    })
     this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
