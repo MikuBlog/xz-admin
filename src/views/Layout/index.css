@@ -168,6 +168,13 @@
   overflow-x: hidden;
 }
 
+.search-menu-input {
+  position: relative;
+  display: inline-block;
+  top: -8px;
+  left: -19px;
+}
+
 .menu-horizontal {
   position: relative;
   display: flex;

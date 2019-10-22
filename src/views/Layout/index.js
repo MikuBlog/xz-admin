@@ -1,8 +1,9 @@
 import { mapState, mapMutations } from 'vuex'
 import settingDrawer from './components/setting_drawer'
+import search from './components/search'
 import convertHttp from '@/utils/convertHttp'
 export default {
-  components: { settingDrawer },
+  components: { settingDrawer, search },
   data() {
     return {
       isCollapse: false,
@@ -61,7 +62,7 @@ export default {
 	 */
 	this.interval = setInterval(() => {
 	  if(document.querySelectorAll('.el-menu-item-group').length > 0) {
-	    this.initialmenuItemGroupStyle()
+      this.initialmenuItemGroupStyle()
 	    clearInterval(this.interval)
 	  }
 	})

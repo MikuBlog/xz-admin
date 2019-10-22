@@ -102,6 +102,9 @@
               </div>
             </el-dropdown>
             <div class="icon-box">
+              <el-tooltip class="item" effect="dark" content="搜索菜单项" placement="bottom" v-show="defaultConfig.searchMenu">
+                <search class="search-menu-input"/>
+              </el-tooltip>
               <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom" v-show="defaultConfig.helpPage">
                 <i class="el-icon-question" @click="toHelp"></i>
               </el-tooltip>

@@ -31,9 +31,6 @@ body {
 .el-menu-item {
     background: none!important;
 }
-/* .el-menu--popup {
-    background: #1e2c3c!important;
-} */
 .el-menu-item:hover {
     background: rgba(0, 183, 255, 0.3)!important;
 }
@@ -45,6 +42,9 @@ body {
 }
 .el-menu-item-group__title {
     padding: 0;
+}
+label {
+  font-weight: bold;
 }
 .interval-top {
     margin-top: 1rem;
