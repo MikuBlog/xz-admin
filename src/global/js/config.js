@@ -6,7 +6,7 @@ export default {
   // 是否显示合作网站账号登录框
   otherLoginMethods: true,
   // 是否显示自动登录框
-  isAutoLogin: false,
+  isAutoLogin: true,
   // 菜单颜色
   menuStyle: {
     light: {

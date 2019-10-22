@@ -105,6 +105,7 @@ Vue.prototype.$find = Database.update
 Vue.prototype.$http_normal = Http.http_normal
 Vue.prototype.$http_json = Http.http_json
 Vue.prototype.$http_file = Http.http_file
+Vue.prototype.$http = Http.axios
 /**
  * @author xuanzai
  * @description 引入全局提示

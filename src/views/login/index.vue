@@ -133,7 +133,7 @@ export default {
       opacity: 100,
       mask: 0,
       blur: 0,
-      height: this.defaultConfig.otherLoginMethods ? 55 : 41,
+      height: this.defaultConfig.otherLoginMethods ? 62 : 41,
       width: 50,
       fontSize: 30,
       iconSize: 30,
@@ -206,7 +206,7 @@ export default {
       this.$setStyle(
         loginBox,
         "height",
-        `${(this.height = this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 55 : 41)) / 2}rem`
+        `${(this.height = this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 62 : 41)) / 2}rem`
       );
       this.$setStyle(
         loginBox,
@@ -303,7 +303,7 @@ export default {
       this.opacity = +this.$getMemoryPmt("opacity") || this.opacity;
       this.blur = +this.$getMemoryPmt("blur") || this.blur;
       this.mask = +this.$getMemoryPmt("mask") || this.mask;
-      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 55 : this.height);
+      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 62 : this.height);
       this.width = +this.$getMemoryPmt("width") || this.width;
       this.fontSize = +this.$getMemoryPmt("fontSize") || this.fontSize;
       this.isItalic = this.$getMemoryPmt("isItalic") !== "" ? Boolean(this.$getMemoryPmt("isItalic")) : this.isItalic;
