@@ -8,6 +8,7 @@ export default {
       isCollapse: false,
       isFullScreen: false,
       isSmall: false,
+      isMini: false,
       isMenuCollapse: false,
       isSetting: false,
       isShowBackTop: false,
@@ -221,6 +222,9 @@ export default {
       window.innerWidth < 1100
         ? (this.isSmall = true, this.isCollapse = true, this.isMenuCollapse = false)
         : this.isSmall = false
+      window.innerWidth < 768
+      ? this.isMini = true
+      : this.isMini = false
     },
     // 获取滚动高度
     getScrollTop(obj) {
