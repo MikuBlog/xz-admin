@@ -50,19 +50,21 @@ export default {
     this.getLogo()
   },
   mounted() {
-    /**
-     * @description 初始化页面样式
-     * 由于菜单生成有滞后性，所以使用循环定时器进行页面初始化，如果菜单生成完毕，则初始化页面并停止循环定时器
-     */
-    this.interval = setInterval(() => {
-      if(document.querySelectorAll('.el-menu-item-group').length > 0) {
-        this.initialStyle()
-        clearInterval(this.interval)
-      }
-    })
+	// 初始化样式
+	this.initialStyle()
     this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
+	/**
+	 * @description 初始化页面样式
+	 * 由于菜单生成有滞后性，所以使用循环定时器进行页面初始化，如果菜单生成完毕，则初始化页面并停止循环定时器
+	 */
+	this.interval = setInterval(() => {
+	  if(document.querySelectorAll('.el-menu-item-group').length > 0) {
+	    this.initialmenuItemGroupStyle()
+	    clearInterval(this.interval)
+	  }
+	})
   },
   methods: {
     ...mapMutations([
@@ -189,6 +191,21 @@ export default {
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
     },
+	// 初始化子菜单样式
+	initialmenuItemGroupStyle() {
+		const menuItemGroup = document.querySelectorAll('.el-menu-item-group')
+		menuItemGroup.forEach(val => {
+		  this.menuStyle === 'dark'
+		    ? this.$setStyle(
+		      val,
+		      'background',
+		      this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
+		    : this.$setStyle(
+		      val,
+		      'background',
+		      this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
+		})
+	},
     // 显示菜单
     showMenu() {
       this.isSmall
