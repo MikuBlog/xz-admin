@@ -1,9 +1,8 @@
 import { mapState, mapMutations } from 'vuex'
 import settingDrawer from './components/setting_drawer'
-import search from './components/search'
 import convertHttp from '@/utils/convertHttp'
 export default {
-  components: { settingDrawer, search },
+  components: { settingDrawer },
   data() {
     return {
       isCollapse: false,

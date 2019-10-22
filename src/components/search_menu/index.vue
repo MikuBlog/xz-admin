@@ -24,7 +24,7 @@ import Fuse from 'fuse.js'
 import path from 'path'
 
 export default {
-  name: 'HeaderSearch',
+  name: 'search',
   data() {
     return {
       search: '',
@@ -41,9 +41,11 @@ export default {
     }
   },
   watch: {
+    // 当路由发生变化的时候重新生成路由
     routes() {
       this.searchPool = this.generateRoutes(this.routes)
     },
+    // 当路由列表发生变化时，重新初始化fuse列表
     searchPool(list) {
       this.initFuse(list)
     },
@@ -59,6 +61,7 @@ export default {
     this.searchPool = this.generateRoutes(this.routes)
   },
   methods: {
+    // 弹出下拉选择框
     click(e) {
       this.show = !this.show
       if (this.show) {
@@ -66,12 +69,14 @@ export default {
         && this.$refs.headerSearchSelect.focus()
       }
     },
+    // 关闭下拉选择框
     close() {
       this.$refs.headerSearchSelect 
       && this.$refs.headerSearchSelect.blur()
       this.options = []
       this.show = false
     },
+    // 输入框值改变时调用
     change(val) {
       this.$router.push(val.path)
       this.search = ''
@@ -80,56 +85,46 @@ export default {
         this.show = false
       })
     },
+    // 初始化fuse规则
     initFuse(list) {
       this.fuse = new Fuse(list, {
-        shouldSort: true,
-        threshold: 0.4,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: [{
-          name: 'title',
-          weight: 0.7
-        }, {
-          name: 'path',
-          weight: 0.3
-        }]
+        keys: ['title', 'path']
       })
     },
-    // Filter out the routes that can be displayed in the sidebar
-    // And generate the internationalized title
+    // 生成一维扁平化路由数组，方便使用fuse进行筛选
     generateRoutes(routes, basePath = '/', prefixTitle = []) {
       let res = []
-      // console.log(routes)
+      /**
+       * 遍历所有路由，并进行扁平化处理
+       */
       for (const router of routes) {
-        // skip hidden router
-        if (router.hidden) { continue }
-        // console.log(router.path)
+        // 如果为隐藏的菜单项，跳过循环
+        if (!router.enabled) { continue }
+        // 为每个路由创建一个简单的对象
         const data = {
           path: path.resolve(basePath, router.path || "/"),
           title: [...prefixTitle]
         }
         if (router.meta && router.meta.title) {
-          data.title = [...data.title, router.meta.title]
-
-          if (router.redirect !== 'noRedirect') {
-            // only push the routes with title
-            // special case: need to exclude parent router without redirect
+          // 如果存在菜单标题，则添加菜单标题
+          data.title.push(router.meta.title)
+          if (router.redirect !== 'noredirect') {
+            // 如果不为父级菜单（重定向菜单），则添加菜单项
             res.push(data)
           }
         }
-
-        // recursive child routes
         if (router.children) {
+          // 如果含有子菜单，则继续递归遍历
           const tempRoutes = this.generateRoutes(router.children, data.path, data.title)
           if (tempRoutes.length >= 1) {
-            res = [...res, ...tempRoutes]
+            // 如果子菜单数量不为0，则添加所有子菜单项
+            res.push(...tempRoutes)
           }
         }
       }
       return res
     },
+    // 输入时调用
     querySearch(query) {
       if (query !== '') {
         this.options = this.fuse.search(query)
