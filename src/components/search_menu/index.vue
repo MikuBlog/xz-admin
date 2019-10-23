@@ -27,8 +27,7 @@ export default {
       options: [],
       searchPool: [],
       show: false,
-      fuse: undefined,
-      regexp: new RegExp(/search-icon$/g)
+      fuse: undefined
     }
   },
   computed: {
