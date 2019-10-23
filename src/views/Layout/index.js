@@ -11,7 +11,6 @@ export default {
       isMini: false,
       isMenuCollapse: false,
       isSetting: false,
-      isShowBackTop: false,
       activeName: 'layout',
       logoBlob: "",
       user: {},
@@ -228,9 +227,10 @@ export default {
     },
     // 获取滚动高度
     getScrollTop(obj) {
+      const el = document.querySelector('.to-top')
       obj.scrollTop >= 100
-        ? this.isShowBackTop = true
-        : this.isShowBackTop = false
+        ? this.$setStyle(el, 'transform', 'scale(1)')
+        : this.$setStyle(el, 'transform', 'scale(0)')
       this.$setMemorySes('scrollTop', obj.scrollTop)
     },
     // 事件监听

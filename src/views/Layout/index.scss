@@ -208,6 +208,11 @@ width: 63px;
   right: 50px;
   bottom: 100px;
 }
+.to-top {
+  position: relative;
+  transform: scale(0);
+  transition: .3s;
+}
 .radio-box {
   position: relative;
 }

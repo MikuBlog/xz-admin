@@ -238,6 +238,12 @@
   bottom: 100px;
 }
 
+.to-top {
+  position: relative;
+  transform: scale(0);
+  transition: .3s;
+}
+
 .radio-box {
   position: relative;
 }

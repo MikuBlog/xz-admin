@@ -159,7 +159,6 @@
               circle
               class="to-top"
               @click="backTop"
-              v-show="isShowBackTop"
             ></el-button>
           </div>
         </el-main>
