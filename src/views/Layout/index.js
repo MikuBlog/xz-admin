@@ -8,14 +8,15 @@ export default {
       isCollapse: false,
       isFullScreen: false,
       isSmall: false,
+      isMini: false,
       isMenuCollapse: false,
       isSetting: false,
-      isShowBackTop: false,
       activeName: 'layout',
       logoBlob: "",
       user: {},
       squareUrl: "",
-      logoUrl: ""
+      logoUrl: "",
+      interval: "",
     }
   },
   computed: {
@@ -29,21 +30,18 @@ export default {
       menuList: state => state.menu.menuList,
     }),
     menuBackgroundColor() {
-      return this.menuStyle === 'dark' 
-      ? this.defaultConfig.menuStyle.dark.backgroundColor
-      : this.defaultConfig.menuStyle.light.backgroundColor
+      return this.menuStyle === 'dark'
+        ? this.defaultConfig.menuStyle.dark.backgroundColor
+        : this.defaultConfig.menuStyle.light.backgroundColor
     },
     menuTextColor() {
-      return this.menuStyle === 'dark' 
-      ? this.defaultConfig.menuStyle.dark.textColor 
-      : this.defaultConfig.menuStyle.light.textColor 
+      return this.menuStyle === 'dark'
+        ? this.defaultConfig.menuStyle.dark.textColor
+        : this.defaultConfig.menuStyle.light.textColor
     },
     activeTextColor() {
       return this.defaultConfig.menuStyle.activeTextColor
     }
-    // logoUrl() {
-    //   return this.defaultConfig.logoUrl
-    // }
   },
   created() {
     // 获取用户信息
@@ -52,10 +50,21 @@ export default {
     this.getLogo()
   },
   mounted() {
-    this.initialStyle()
-    this.initialListener() 
+	// 初始化样式
+	this.initialStyle()
+    this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
+	/**
+	 * @description 初始化页面样式
+	 * 由于菜单生成有滞后性，所以使用循环定时器进行页面初始化，如果菜单生成完毕，则初始化页面并停止循环定时器
+	 */
+	this.interval = setInterval(() => {
+	  if(document.querySelectorAll('.el-menu-item-group').length > 0) {
+      this.initialmenuItemGroupStyle()
+	    clearInterval(this.interval)
+	  }
+	})
   },
   methods: {
     ...mapMutations([
@@ -88,9 +97,9 @@ export default {
     // 退出登录
     logout() {
       this
-        .$showMsgBox({ 
-          msg: `是否注销当前账号?`, 
-          iconClass: 'el-icon-question' 
+        .$showMsgBox({
+          msg: `是否注销当前账号?`,
+          iconClass: 'el-icon-question'
         })
         .then(result => {
           // 退出前先清空用户访问记录
@@ -134,9 +143,16 @@ export default {
         menuScrollBar = document.querySelector('.menu-scrollbar'),
         menuProp = document.querySelectorAll('.el-menu--popup'),
         menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
-        drawerContent = document.querySelector('.ivu-drawer-content')
+        drawerContent = document.querySelector('.ivu-drawer-content'),
+        horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
       this.$setStyle(
         menuScrollBar,
+        'background',
+        this.menuStyle === 'dark'
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor)
+      this.$setStyle(
+        horizontalScrollbar,
         'background',
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
@@ -147,7 +163,7 @@ export default {
         '1px solid #dcdfe6'
       )
       this.$setStyle(
-        drawerContent, 
+        drawerContent,
         'background',
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
@@ -155,26 +171,41 @@ export default {
       menuProp.forEach(val => {
         this.menuStyle === 'dark'
           ? this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
           : this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
       menuItemGroup.forEach(val => {
         this.menuStyle === 'dark'
           ? this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
           : this.$setStyle(
-            val, 
-            'background', 
+            val,
+            'background',
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
     },
+	// 初始化子菜单样式
+	initialmenuItemGroupStyle() {
+		const menuItemGroup = document.querySelectorAll('.el-menu-item-group')
+		menuItemGroup.forEach(val => {
+		  this.menuStyle === 'dark'
+		    ? this.$setStyle(
+		      val,
+		      'background',
+		      this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
+		    : this.$setStyle(
+		      val,
+		      'background',
+		      this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
+		})
+	},
     // 显示菜单
     showMenu() {
       this.isSmall
@@ -190,12 +221,16 @@ export default {
       window.innerWidth < 1100
         ? (this.isSmall = true, this.isCollapse = true, this.isMenuCollapse = false)
         : this.isSmall = false
+      window.innerWidth < 768
+      ? this.isMini = true
+      : this.isMini = false
     },
     // 获取滚动高度
     getScrollTop(obj) {
+      const el = document.querySelector('.to-top')
       obj.scrollTop >= 100
-        ? this.isShowBackTop = true
-        : this.isShowBackTop = false
+        ? this.$setStyle(el, 'transform', 'scale(1)')
+        : this.$setStyle(el, 'transform', 'scale(0)')
       this.$setMemorySes('scrollTop', obj.scrollTop)
     },
     // 事件监听

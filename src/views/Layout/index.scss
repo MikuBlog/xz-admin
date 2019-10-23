@@ -142,8 +142,14 @@ width: 63px;
   /deep/ {
     .el-scrollbar__wrap {
       overflow-x: hidden;
-    }
+    } 
   }
+}
+.search-menu-input {
+  position: relative;
+  display: inline-block;
+  top: -8px;
+  left: -19px;
 }
 .menu-horizontal {
   position: relative;
@@ -201,6 +207,11 @@ width: 63px;
   z-index: 1500;
   right: 50px;
   bottom: 100px;
+}
+.to-top {
+  position: relative;
+  transform: scale(0);
+  transition: .3s;
 }
 .radio-box {
   position: relative;

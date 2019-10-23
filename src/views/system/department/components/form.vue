@@ -1,7 +1,7 @@
 <template>
   <el-dialog :append-to-body="true" :visible.sync="dialog" :title="isAdd ? '新增部门' : '编辑部门'" width="500px">
     <el-form ref="departmentForm" :model="departmentForm" :rules="rules" size="small" label-width="80px">
-      <el-form-item label="名称" prop="name">
+      <el-form-item status-icon label="名称" prop="name">
         <el-input v-model="departmentForm.name" style="width: 370px;"/>
       </el-form-item>
       <el-form-item v-if="departmentForm.pid !== 0" label="状态" prop="enabled">

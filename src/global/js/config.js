@@ -5,6 +5,8 @@ export default {
   loginSetting: true,
   // 是否显示合作网站账号登录框
   otherLoginMethods: true,
+  // 是否显示自动登录框
+  isAutoLogin: true,
   // 菜单颜色
   menuStyle: {
     light: {
@@ -21,10 +23,12 @@ export default {
   },
   // logo地址
   logoUrl: "https://myinterface.xuanzai.top/getPicture?type=logo&id=1",
+  // 是否显示搜索菜单
+  searchMenu: true,
   // 文档icon
   helpPage: true,
   // 系统设置icon
   systemSetting: true,
   // 全屏icon
-  fullScreen: true
+  fullScreen: true,
 }

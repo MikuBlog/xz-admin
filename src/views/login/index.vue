@@ -23,7 +23,7 @@
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')" style="width: 100%;">登录</el-button>
         </el-form-item>
-        <el-form-item>
+        <el-form-item v-show="defaultConfig.isAutoLogin">
           <el-checkbox v-model="ruleForm.checked" @change="autoLogin">自动登录</el-checkbox>
         </el-form-item>
       </el-form>

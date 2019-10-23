@@ -5,6 +5,7 @@ import { edit } from '@/api/user';
         :visible.sync="isShowAddBox"
         width="450px">
             <el-form 
+            status-icon
             :model="addForm"
             ref="addForm"
             :rules="addFormRules"

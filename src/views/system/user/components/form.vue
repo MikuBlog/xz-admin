@@ -1,6 +1,6 @@
 <template>
   <el-dialog :visible.sync="dialog" :title="isAdd ? '新增用户' : '编辑用户'" width="570px">
-    <el-form ref="userForm" :inline="true" :model="userForm" :rules="rules" size="small" label-width="66px">
+    <el-form status-icon ref="userForm" :inline="true" :model="userForm" :rules="rules" size="small" label-width="66px">
       <el-form-item label="用户名" prop="username">
         <el-input v-model="userForm.username"/>
       </el-form-item>

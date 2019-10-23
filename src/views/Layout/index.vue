@@ -102,6 +102,9 @@
               </div>
             </el-dropdown>
             <div class="icon-box">
+              <el-tooltip class="item" effect="dark" content="搜索菜单项" placement="bottom" v-show="defaultConfig.searchMenu && !isMini">
+                <search class="search-menu-input"/>
+              </el-tooltip>
               <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom" v-show="defaultConfig.helpPage">
                 <i class="el-icon-question" @click="toHelp"></i>
               </el-tooltip>
@@ -136,7 +139,7 @@
                 <i class="el-icon-circle-close" @click="removeTags" title="删除所有标签页"></i>
               </el-tooltip>
             </div>
-            <div class="breadcrumb" v-show="showBreadcrumb">
+            <div class="breadcrumb" v-show="showBreadcrumb && !isMini">
               <Breadcrumb></Breadcrumb>
             </div>
           </div>
@@ -156,7 +159,6 @@
               circle
               class="to-top"
               @click="backTop"
-              v-show="isShowBackTop"
             ></el-button>
           </div>
         </el-main>

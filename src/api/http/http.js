@@ -129,5 +129,6 @@
 	export default {
 		http_normal,
 		http_json,
-		http_file
+		http_file,
+		axios
 	}
