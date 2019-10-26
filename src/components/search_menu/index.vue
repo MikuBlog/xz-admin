@@ -28,7 +28,7 @@ export default {
       searchPool: [],
       show: false,
       fuse: undefined,
-      regexp: new RegExp(/search-icon$/g)
+      regexp: new RegExp(/^http/g)
     }
   },
   computed: {
@@ -74,7 +74,9 @@ export default {
     },
     // 输入框值改变时调用
     change(val) {
-      this.$router.push(val.path)
+      this.regexp.test(val.path)
+      ? window.open(val.path)
+      : this.$router.push(val.path)
       this.search = ''
       this.options = []
       this.$nextTick(() => {
@@ -98,7 +100,7 @@ export default {
         if (!router.enabled) { continue }
         // 为每个路由创建一个简单的对象
         const data = {
-          path: path.resolve(basePath, router.path || "/"),
+          path: router.path || "/",
           title: [...prefixTitle]
         }
         if (router.meta && router.meta.title) {
