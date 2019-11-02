@@ -106,4 +106,7 @@ export default {
 .bread-list-leave-to {
   transform: translateX(-25px);
 }
+.bread-list-move {
+  transition: all .5s;
+}
 </style>
