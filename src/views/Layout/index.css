@@ -268,5 +268,5 @@
 
 .top {
   position: relative;
-  overflow-y: hidden;
+  overflow-x: hidden;
 }

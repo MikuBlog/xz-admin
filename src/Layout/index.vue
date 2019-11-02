@@ -25,7 +25,4 @@ export default {};
   opacity: 0;
   transform: translateX(25px);
 }
-// .xz-animation-move {
-//   transition: all 1s;
-// }
 </style>

@@ -211,7 +211,6 @@ export default {
   created() {
     // 初始化字典列表
     this.getDictionaryList();
-    this.getDetailList();
   },
   methods: {
     // 添加字典
