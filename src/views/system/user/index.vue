@@ -57,7 +57,7 @@
                   :value="item.value"
                 ></el-option>
               </el-select>
-              <el-button icon="el-icon-search" class="margin-box" circle></el-button>
+              <el-button icon="el-icon-search" class="margin-box" @click="search_2" circle></el-button>
               <el-button
                 type="primary"
                 icon="el-icon-plus"
