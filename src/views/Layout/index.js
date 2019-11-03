@@ -91,9 +91,6 @@ export default {
     openNewPage() {
       window.open('https://github.com/MikuBlog/xz-admin')
     },
-    toHelp() {
-      window.open('http://xzadmin-docs.xuanzai.top')
-    },
     // 退出登录
     logout() {
       this

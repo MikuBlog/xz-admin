@@ -110,7 +110,7 @@
                 placement="bottom"
                 v-show="defaultConfig.helpPage"
               >
-                <i class="el-icon-question" @click="toHelp"></i>
+                <i class="el-icon-question" @click="$router.push({ path: '/home/docs' })"></i>
               </el-tooltip>
               <el-tooltip
                 class="item"
@@ -171,7 +171,9 @@
           <div class="back-top">
             <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop"></el-button>
           </div>
-          <div class="coppy-right">© 2019 XuanZai Wteam.All rights reserved.</div>
+          <div class="coppy-right">
+            <span>© 2019 XuanZai Wteam.All rights reserved.</span>
+          </div>
         </el-main>
       </el-container>
     </el-container>
