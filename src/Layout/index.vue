@@ -11,8 +11,12 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.router {
+  position: absolute;
+  width: 100%;
+}
 .xz-animation-enter-active {
-  transition: all .5s .6s;
+  transition: all .5s .4s;
 }
 .xz-animation-leave-active {
   transition: all .5s;
