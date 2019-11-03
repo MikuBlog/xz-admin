@@ -86,6 +86,7 @@
             </el-row>
           </div>
           <el-table 
+          ref="userTable"
           :data="userList" 
           :highlight-current-row="true" 
           style="width: 100%;"
@@ -255,7 +256,7 @@ export default {
           data: this.selectList.map(val => val.id)
         }).then(() => {
           this.$successMsg("删除成功");
-          this.selectList.splice(0)
+          this.$refs.userTable.clearSelection()
           this.getUserList();
         });
       });

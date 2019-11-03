@@ -30,6 +30,7 @@
             ></el-button>
           </div>
           <el-table
+            ref="onlineUserTable"
             :data="onlineUserList"
             :highlight-current-row="true"
             style="width: 100%"
@@ -126,7 +127,7 @@ export default {
           data: this.selectList.map(val => val.key)
         }).then(() => {
           this.$successMsg("批量踢出成功");
-          this.selectList.splice(0)
+          this.$refs.onlineUserTable.clearSelection()
           this.getOnlineUserList();
         });
       });
