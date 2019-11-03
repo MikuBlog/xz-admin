@@ -12,6 +12,15 @@
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
             <el-button
+              type="primary"
+              icon="el-icon-s-promotion"
+              class="margin-box"
+              @click="kickOutAll"
+              :disabled="!selectList.length"
+              title="批量踢出"
+              circle
+            ></el-button>
+            <el-button
               type="warning"
               icon="el-icon-download"
               class="margin-box"
@@ -20,7 +29,14 @@
               circle
             ></el-button>
           </div>
-          <el-table :data="onlineUserList" :highlight-current-row="true" style="width: 100%">
+          <el-table
+            :data="onlineUserList"
+            :highlight-current-row="true"
+            style="width: 100%"
+            @selection-change="handleSelectionChange"
+            :row-key="getRowKey"
+          >
+            <el-table-column type="selection" width="55" />
             <el-table-column label="用户名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px" class="name-wrapper">{{ scope.row.username }}</span>
@@ -53,11 +69,7 @@
             </el-table-column>
             <el-table-column label="操作" fixed="right" width="150" align="center">
               <template slot-scope="scope">
-                <el-button
-                  type="text"
-                  @click="kickOut(scope.row)"
-                  size="small"
-                >踢出</el-button>
+                <el-button type="text" @click="kickOut(scope.row)" size="small">踢出</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -84,6 +96,7 @@ export default {
     return {
       searchVal: "",
       onlineUserList: [],
+      selectList: [],
       // 当前页数
       nowPage: 1,
       // 当前页条数
@@ -97,6 +110,27 @@ export default {
     this.getOnlineUserList();
   },
   methods: {
+    getRowKey(row) {
+      return row.id;
+    },
+    // 选择标签
+    handleSelectionChange(val) {
+      this.selectList = val;
+    },
+    // 批量踢出
+    kickOutAll() {
+      this.$showMsgBox({ msg: `是否踢出所选中用户?` }).then(() => {
+        this.$http_json({
+          url: `/auth/online/delBatch`,
+          method: "post",
+          data: this.selectList.map(val => val.key)
+        }).then(() => {
+          this.$successMsg("批量踢出成功");
+          this.selectList.splice(0)
+          this.getOnlineUserList();
+        });
+      });
+    },
     // 踢出
     kickOut(item) {
       this.$showMsgBox({ msg: `是否踢出当前用户?` }).then(() => {
@@ -113,22 +147,25 @@ export default {
     downloadUserList() {
       this.$http_json({
         url: "/auth/online/download",
-        responseType: 'blob',
+        responseType: "blob",
         method: "get"
       }).then(result => {
-        this.$download(result.data, `在线用户列表-${this.$formDate(new Date(), true)}.xls`, true)
-      })
+        this.$download(
+          result.data,
+          `在线用户列表-${this.$formDate(new Date(), true)}.xls`,
+          true
+        );
+      });
     },
     // 点击搜索
     search() {
       this.nowPage = 1;
-      this.getOnlineUserList()
+      this.getOnlineUserList();
     },
     // 回车搜索
     searchEnter(e) {
       this.nowPage = 1;
-      e.keyCode === 13 &&
-      this.getOnlineUserList()
+      e.keyCode === 13 && this.getOnlineUserList();
     },
     // 条数变化
     handleSizeChange(size) {
