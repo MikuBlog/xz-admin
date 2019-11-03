@@ -13,6 +13,15 @@
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
           <el-table :data="generateCodeList" :highlight-current-row="true" style="width: 100%">
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="备注" class="expand-line">
+                    <span>{{ props.row.remark ? props.row.remark : "无" }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
             <el-table-column label="表名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.tableName }}</span>
@@ -26,11 +35,6 @@
             <el-table-column label="字符编码集" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.coding }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="备注" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <div slot="reference">{{ scope.row.remark ? scope.row.remark : "无" }}</div>
               </template>
             </el-table-column>
             <el-table-column label="创建日期" width="180">

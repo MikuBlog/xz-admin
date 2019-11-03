@@ -249,13 +249,15 @@ export default {
         msg: `<p>是否删除选中用户?</p>`,
         isHTML: true
       }).then(() => {
-        // this.$http_json({
-        //   url: `/api/user/del/${item.id}`,
-        //   method: "post"
-        // }).then(() => {
-        //   this.$successMsg("删除成功");
-        //   this.getUserList();
-        // });
+        this.$http_json({
+          url: `/api/user/delBatch`,
+          method: "post",
+          data: this.selectList.map(val => val.id)
+        }).then(() => {
+          this.$successMsg("删除成功");
+          this.selectList.splice(0)
+          this.getUserList();
+        });
       });
     },
     // 删除用户

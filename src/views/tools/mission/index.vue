@@ -29,6 +29,24 @@
             <el-button icon="el-icon-document-copy" type="warning" class="margin-box" @click="showLogList" circle></el-button>
           </div>
           <el-table :data="missionList" :highlight-current-row="true" style="width: 100%">
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="执行方法" class="expand-line">
+                    <span>{{ props.row.methodName }}</span>
+                  </el-form-item>
+                  <el-form-item label="执行参数" class="expand-line">
+                    <span>{{ props.row.params }}</span>
+                  </el-form-item>
+                  <el-form-item label="cron表达式" class="expand-line">
+                    <span>{{ props.row.cronExpression }}</span>
+                  </el-form-item>
+                  <el-form-item label="描述" class="expand-line">
+                    <span>{{ props.row.remark }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
             <el-table-column label="任务名称" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.jobName }}</div>
@@ -37,21 +55,6 @@
             <el-table-column label="Bean名称" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.beanName }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="执行方法" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <div slot="reference">{{ scope.row.methodName }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="参数" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <div slot="reference">{{ scope.row.params }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="cron表达式" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                  <div slot="reference" class="name-wrapper">{{ scope.row.cronExpression }}</div>
               </template>
             </el-table-column>
             <el-table-column label="状态" align="center">
@@ -63,11 +66,6 @@
                     : '运行中' }}
                   </el-tag>
                 </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="描述" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <div slot="reference" class="name-wrapper">{{ scope.row.remark }}</div>
               </template>
             </el-table-column>
             <el-table-column label="更新日期" width="180">

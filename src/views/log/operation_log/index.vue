@@ -21,6 +21,18 @@
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
           <el-table :data="operationLogList" :highlight-current-row="true" style="width: 100%">
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="请求方法" class="expand-line">
+                    <span>{{ props.row.method }}</span>
+                  </el-form-item>
+                  <el-form-item label="请求参数" class="expand-line">
+                    <span>{{ props.row.params }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
             <el-table-column label="用户名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.username }}</span>
@@ -33,38 +45,12 @@
             </el-table-column>
             <el-table-column label="IP来源" :show-overflow-tooltip="true">
               <template slot-scope="scope">
-                <div slot="reference">{{ scope.row.address }}</div>
+                <div slot="reference" class="name-wrapper">{{ scope.row.address }}</div>
               </template>
             </el-table-column>
             <el-table-column label="描述" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.description }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="方法名称" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <el-tooltip
-                  slot="reference"
-                  class="item"
-                  effect="dark"
-                  :content="scope.row.method"
-                  placement="top"
-                >
-                  <div class="name-wrapper">{{ scope.row.method }}</div>
-                </el-tooltip>
-              </template>
-            </el-table-column>
-            <el-table-column label="参数" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <el-tooltip
-                  slot="reference"
-                  class="item"
-                  effect="dark"
-                  :content="scope.row.params"
-                  placement="top"
-                >
-                  <div class="name-wrapper">{{ scope.row.params }}</div>
-                </el-tooltip>
               </template>
             </el-table-column>
             <el-table-column label="请求耗时" align="center">

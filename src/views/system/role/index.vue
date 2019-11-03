@@ -35,9 +35,18 @@
             :highlight-current-row="true"
             @row-click="getRoleItem"
           >
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="角色描述" class="expand-line">
+                    <span>{{ props.row.remark }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
             <el-table-column label="名称" :show-overflow-tooltip="true">
               <template slot-scope="scope">
-                <span style="margin-left: 10px">{{ scope.row.name }}</span>
+                <span>{{ scope.row.name }}</span>
               </template>
             </el-table-column>
             <el-table-column label="数据权限" :show-overflow-tooltip="true">
@@ -48,11 +57,6 @@
             <el-table-column label="角色级别" align="center" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.level }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="描述" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <div slot="reference" class="name-wrapper">{{ scope.row.remark }}</div>
               </template>
             </el-table-column>
             <el-table-column label="创建日期" width="180">
@@ -143,7 +147,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <eForm ref="form" :is-add="isAdd"/>
+    <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>
 
