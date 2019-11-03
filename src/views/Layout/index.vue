@@ -83,7 +83,7 @@
             </el-menu>
           </el-scrollbar>
         </div>
-        <el-header style="height: 50px;">
+        <el-header class="navbar-box" style="height: 50px;">
           <div class="navbar">
             <el-dropdown trigger="click">
               <div class="avatar-box">

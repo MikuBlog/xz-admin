@@ -217,12 +217,20 @@ width: 63px;
   position: relative;
 }
 .xz-animation-enter-active {
-  transition: all .6s .7s;
+  transition: all .4s .5s;
 }
 .xz-animation-leave-active {
-  transition: all .6s;
+  transition: all .4s;
 }
-.xz-animation-enter, .xz-animation-leave-to {
-  transform: translateX(-50px);
+.xz-animation-enter {
   opacity: 0;
+  transform: translateX(-25px);
+}
+.xz-animation-leave-to {
+  opacity: 0;
+  transform: translateX(25px);
+}
+.top {
+  position: relative;
+  overflow-x: hidden;
 }

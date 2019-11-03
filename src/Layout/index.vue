@@ -1,26 +1,28 @@
 <template>
-    <div>
-        <transition name="xz-animation">
-            <router-view></router-view>
-        </transition>
-    </div>
+  <div>
+    <transition name="xz-animation">
+      <router-view class="router"></router-view>
+    </transition>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>
-    .xz-animation-enter-active {
-        transition: all .6s .7s;
-    }
-    .xz-animation-leave-active {
-        transition: all .6s;
-    }
-    .xz-animation-enter, .xz-animation-leave-to {
-        transform: translateX(-50px);
-        opacity: 0;
-    }
+.xz-animation-enter-active {
+  transition: all .4s .5s;
+}
+.xz-animation-leave-active {
+  transition: all .4s;
+}
+.xz-animation-enter {
+  opacity: 0;
+  transform: translateX(-25px);
+}
+.xz-animation-leave-to {
+  opacity: 0;
+  transform: translateX(25px);
+}
 </style>
