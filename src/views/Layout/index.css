@@ -248,17 +248,12 @@
   position: relative;
 }
 
-.router {
-  position: absolute;
-  width: 100%;
-}
-
 .xz-animation-enter-active {
-  transition: all .5s .4s;
+  transition: all .4s .5s;
 }
 
 .xz-animation-leave-active {
-  transition: all .5s;
+  transition: all .4s;
 }
 
 .xz-animation-enter {
