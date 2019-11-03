@@ -268,5 +268,19 @@
 
 .top {
   position: relative;
+  padding-bottom: 40px;
   overflow-x: hidden;
+}
+
+.coppy-right {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  transform: translateX(-20px);
+  line-height: 30px;
+  bottom: 0;
+  background: #fefefe;
+  border-top: 1px solid #dcdfe6;
+  white-space: pre-wrap;
+  text-indent: 1rem;
 }
