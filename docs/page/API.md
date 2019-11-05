@@ -112,6 +112,43 @@ this.$urlQuery([url]) // url: http://myinterface.xuanzai.top/getPicture?type=头
 this.$sortList(list, true, 'level') 
 ```
 
+## Date
+
+日期格式化方法。
+
+### formatDate
+
+描述：将日期格式化为`yyyy-MM-dd HH:mm:ss`
+
+参数：
+
++ `date`: 日期对象[`Date`]（必填）
++ `isAccurate`: 是否精确到时分秒[`Boolean`]（选填：默认为false）
+
+示例：
+```js
+this.$formatDate(new Date()) // 2019-11-05
+this.$formatDate(new Date(), true) // 2019-11-05 10:06:31
+```
+
+### dateDiff
+
+描述：返回两个日期的天数差
+
+参数：
+
++ `sDate1`: 结束日期[`Date`]（必填）
++ `sDate2`: 开始日期[`Date`]（必填）
++ `isNegative`: 只能是结束日期减开始日期，返回的值可能为负值（选填：默认为false）
+
+示例：
+```js
+this.$dateDiff(new Date('2019-11-05'), new Date('2019-11-01')) // 4
+this.$dateDiff(new Date('2019-11-01'), new Date('2019-11-05')) // 4
+this.$dateDiff(new Date('2019-11-05'), new Date('2019-11-01'), true) // 4
+this.$dateDiff(new Date('2019-11-01'), new Date('2019-11-05'), true) // -4
+```
+
 ## storage
 
 通过`sessionStorage`与`localStorage`进行简单的封装。
