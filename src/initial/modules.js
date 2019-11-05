@@ -30,7 +30,7 @@ import 'mavon-editor/dist/css/index.css'
 // 引入树状选择器
 import Treeselect from '@riophae/vue-treeselect'
 // 引入时间格式化函数
-import Date from '@/api/other/form_date'
+import Date from '@/api/other/format_date'
 // 引入获取URL参数函数
 import UrlQuery from '@/api/other/url_query'
 // 引入设置样式函数
@@ -147,7 +147,7 @@ Vue.prototype.$showTipDiy = Notification.showTipDiy
  * @description 引入时间格式化函数
  * @param {String | Date} date 日期格式化
  */
-Vue.prototype.$formDate = Date.formDate
+Vue.prototype.$formatDate = Date.formatDate
 /**
   * @author xuanzai
   * @description 获取url后的参数
