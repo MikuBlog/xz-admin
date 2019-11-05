@@ -20,7 +20,7 @@ const formatDate = (dateTime, isAccurate = false) => {
  * @param {Date} sDate2 时间戳
  * @param {Boolean} isNegative true，返回结果可以为负值，否则都为正值
  */
-const dateDiff = (sDate1, sDate2, isNegative = false) => {
+const dateDiff = (sDate1, sDate2, isNegative) => {
   let iDays = ""
   isNegative
     ? iDays = new Date(sDate1) - new Date(sDate2)
