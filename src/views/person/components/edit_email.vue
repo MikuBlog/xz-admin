@@ -5,7 +5,7 @@
         <el-input v-model="userForm.email" style="width: 360px;"/>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="userForm.password" style="width: 360px;"/>
+        <el-input type="password" v-model="userForm.password" style="width: 360px;"/>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">

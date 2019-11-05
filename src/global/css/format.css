@@ -25,51 +25,6 @@ label {
   color: #7c9bc4;
 }
 
-.el-form--label-top .el-form-item__label {
-  padding: 0!important;
-}
-
-.el-select {
-  position: relative;
-  width: 100%;
-}
-
-.el-input-number {
-  width: 100%;
-}
-
-.el-container {
-  flex-basis: 0;
-}
-
-.el-menu {
-  border-right: none;
-}
-
-.el-table {
-  margin: 1rem 0;
-}
-
-.el-menu-item {
-  background: none!important;
-}
-
-.el-menu-item:hover {
-  background: rgba(0, 183, 255, 0.3)!important;
-}
-
-.el-breadcrumb__inner {
-  color: #8a8a95;
-}
-
-.el-col-8 {
-  padding: 0!important;
-}
-
-.el-menu-item-group__title {
-  padding: 0!important;
-}
-
 .interval-top {
   margin-top: 1rem;
 }
@@ -101,14 +56,6 @@ label {
 .is-circle {
   margin: 0;
   padding: 0;
-}
-
-.el-range-separator {
-  width: 2rem!important;
-}
-
-.el-date-editor--datetimerange {
-  width: 20rem!important;
 }
 
 .left-border {
@@ -171,48 +118,6 @@ label {
   top: 2px;
 }
 
-.el-submenu__title {
-  overflow: hidden!important;
-}
-
-.el-submenu__title:hover {
-  background: rgba(0, 183, 255, 0.3)!important;
-}
-
-.el-submenu__title {
-  background: none!important;
-}
-
 .top-floor {
   z-index: 9999!important;
-}
-
-@media screen and (min-width: 1920px) {
-  .card-gutter-xl {
-    margin-top: 1rem;
-  }
-}
-
-@media screen and (max-width: 1920px) {
-  .card-gutter-lg {
-    margin-top: 1rem;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .card-gutter-md {
-    margin-top: 1rem;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .card-gutter-sm {
-    margin-top: 1rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .card-gutter-xs {
-    margin-top: 1rem;
-  }
 }

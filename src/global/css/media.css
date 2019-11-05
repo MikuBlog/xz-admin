@@ -1,0 +1,29 @@
+@media screen and (min-width: 1920px) {
+  .card-gutter-xl {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .card-gutter-lg {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .card-gutter-md {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .card-gutter-sm {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card-gutter-xs {
+    margin-top: 1rem;
+  }
+}
