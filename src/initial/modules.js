@@ -39,14 +39,14 @@ import SetStyle from '@/api/dom/set_style'
 import SetClass from '@/api/dom/set_class'
 // 引入插入元素模块
 import InsertAfter from '@/api/dom/insert_after'
-// 引入文件下载模块
-import Download from '@/api/dom/download'
 // 引入文本复制模块
 import Copy from '@/api/dom/copy'
 // 引入全屏函数
 import FullScreen from '@/api/other/full_screen'
 // 引入存储模块
 import Memory from '@/api/storage/storage'
+// 引入文件下载模块
+import Download from '@/api/file/download'
 // 引入图片读取模块
 import ReadImg from '@/api/file/get_file_image'
 // 引入文件预览模块
