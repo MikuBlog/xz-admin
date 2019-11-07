@@ -41,6 +41,7 @@
             :data="dictionaryList"
             style="width: 100%;"
             :highlight-current-row="true"
+            :stripe="true"
             @row-click="getDictName"
           >
             <el-table-column label="名称" :show-overflow-tooltip="true">
@@ -109,7 +110,7 @@
               <el-button icon="el-icon-search" @click="search_2" circle></el-button>
             </el-row>
           </div>
-          <el-table :data="detailList" :highlight-current-row="true" style="width: 100%">
+          <el-table :data="detailList" :highlight-current-row="true" style="width: 100%" :stripe="true">
             <el-table-column label="所属字典" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ beloneDictName }}</span>

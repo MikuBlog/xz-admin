@@ -28,7 +28,7 @@
             <el-button icon="el-icon-plus" type="primary" class="margin-box" @click="addItem" circle></el-button>
             <el-button icon="el-icon-document-copy" type="warning" class="margin-box" @click="showLogList" circle></el-button>
           </div>
-          <el-table :data="missionList" :highlight-current-row="true" style="width: 100%">
+          <el-table :data="missionList" :highlight-current-row="true" style="width: 100%" :stripe="true">
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">

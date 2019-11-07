@@ -41,6 +41,7 @@
           :data="departmentList" 
           :columns="columns" 
           :renderHeader="renderHeader"
+          :stripe="true"
           size="small">
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">

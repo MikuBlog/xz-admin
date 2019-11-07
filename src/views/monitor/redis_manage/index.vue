@@ -20,7 +20,7 @@ import { MessageBox } from 'mint-ui';
               circle
             ></el-button>
           </div>
-          <el-table :data="redisList" :highlight-current-row="true" style="width: 100%">
+          <el-table :data="redisList" :highlight-current-row="true" style="width: 100%" :stripe="true">
             <el-table-column :show-overflow-tooltip="true" label="KEY">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.key }}</div>

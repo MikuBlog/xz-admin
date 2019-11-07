@@ -34,7 +34,7 @@
               circle
             ></el-button>
           </div>
-          <el-table :data="stationList" :highlight-current-row="true" style="width: 100%">
+          <el-table :data="stationList" :highlight-current-row="true" style="width: 100%" :stripe="true">
             <el-table-column label="名称" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.name }}</span>

@@ -27,6 +27,7 @@
           :expand-all="expand" 
           :columns="columns" 
           :renderHeader="renderHeader"
+          :stripe="true"
           size="small">
             <el-table-column prop="icon" label="图标" align="center">
               <template slot-scope="scope">

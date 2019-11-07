@@ -27,6 +27,7 @@
           :expand-all="expand" 
           :columns="columns" 
           :renderHeader="renderHeader"
+          :stripe="true"
           size="small">
             <el-table-column prop="alias" label="别名" :show-overflow-tooltip="true">
               <template slot-scope="scope">

@@ -43,7 +43,7 @@
             ></el-date-picker>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="authorityLogList" :highlight-current-row="true" style="width: 100%">
+          <el-table :data="authorityLogList" :highlight-current-row="true" style="width: 100%" :stripe="true">
             <el-table-column label="操作者">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.creatorName }}</span>
