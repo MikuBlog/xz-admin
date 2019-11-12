@@ -1,5 +1,12 @@
 import { mapState } from 'vuex'
+import convertHttp from '@/utils/convertHttp'
 export default {
+  created() {
+    // 获取用户信息
+    this.getUserInfo()
+    // 获取Logo信息
+    this.getLogo()
+  },
   computed: {
     ...mapState({
       showLogo: state => state.setting.showLogo,
@@ -12,7 +19,7 @@ export default {
     }),
     menuBackgroundColor() {
       return this.menuStyle === 'dark'
-        ? this.defaultConfig.menuStyle.dark.backgroundColor
+        ? this.defaultConfig.menuStyle.dark.backgreundColor
         : this.defaultConfig.menuStyle.light.backgroundColor
     },
     menuTextColor() {

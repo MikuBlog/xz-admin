@@ -1,0 +1,64 @@
+.chart {
+  position: relative;
+}
+.box-card {
+  position: relative;
+  margin: 0.5rem 0;
+}
+.el-icon-user-solid,
+.el-icon-document,
+.el-icon-coin,
+.el-icon-shopping-cart-1 {
+  position: relative;
+  line-height: 5rem;
+  font-size: 4rem;
+  color: #3fc8c5;
+  padding: 1rem;
+  transition: 0.5s;
+  border-radius: 1rem;
+}
+.el-icon-user-solid:hover {
+  color: #fefefe;
+  background: #3fc8c5;
+}
+.el-icon-document {
+  color: #38a3f5;
+}
+.el-icon-document:hover {
+  color: #fefefe;
+  background: #38a3f5;
+}
+.el-icon-coin {
+  color: #f3516b;
+}
+.el-icon-coin:hover {
+  color: #fefefe;
+  background: #f3516b;
+}
+.el-icon-shopping-cart-1 {
+  color: #ffd900;
+}
+.el-icon-shopping-cart-1:hover {
+  color: #fefefe;
+  background: #ffd900;
+}
+.content-box {
+  position: relative;
+  top: 1.8rem;
+  font-size: 1.1rem;
+  color: #8b8b8b;
+  text-align: right;
+  padding-right: 0.5rem;
+}
+.number {
+  font-weight: bolder;
+  color: #656565;
+  font-size: 1.2rem;
+}
+@media screen and (max-width: 768px) {
+  .content-box {
+    text-align: center;
+    top: 0;
+    padding-right: 0;
+  }
+}

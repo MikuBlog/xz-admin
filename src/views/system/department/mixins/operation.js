@@ -1,0 +1,68 @@
+export default {
+  methods: {
+    // 是否展开全部
+    isExpandAll(e) {
+      this.expand = !this.expand;
+      this.expand
+        ? (e.target.className = "el-icon-remove-outline")
+        : (e.target.className = "el-icon-circle-plus-outline");
+      this.getDepartmentList();
+    },
+    // 初始化表头
+    renderHeader(h, { column }) {
+      return h("div", [
+        h("i", {
+          class: "el-icon-remove-outline",
+          style: {
+            color: "#2196F3",
+            paddingRight: "3px" 
+          },
+          on: {
+            click: this.isExpandAll
+          }
+        }),
+        h("span", column.label)
+      ]);
+    },
+    // 删除部门
+    deleteDepartment(item) {
+      this.$showMsgBox({ msg: `是否删除${item.name}部门?` }).then(() => {
+        this.$http_json({
+          url: `/api/dept/del/${item.id}`,
+          method: "post"
+        }).then(() => {
+          this.$successMsg("删除成功");
+          this.getDepartmentList();
+        });
+      });
+    },
+    // 显示添加部门窗口
+    showAddDepartment() {
+      this.isAdd = true;
+      this.$refs.form.dialog = true;
+      this.$refs.form.resetForm();
+    },
+    // 显示编辑部门窗口
+    showEditDepartment() {
+      this.isAdd = false;
+      this.$refs.form.dialog = true;
+    },
+    // 编辑部门
+    editDepartmentItem(item) {
+      const departmentForm = this.$refs.form.departmentForm;
+      this.$refs.form.departmentId = item.id;
+      departmentForm.name = item.name;
+      departmentForm.enabled = item.enabled.toString();
+      departmentForm.parentId = item.parentId;
+      this.showEditDepartment();
+    },
+    // 点击搜索
+    search(val) {
+      this.getDepartmentList();
+    },
+    // 回车搜索
+    searchEnter(e) {
+      e.keyCode === 13 && this.getDepartmentList();
+    },
+  }
+}

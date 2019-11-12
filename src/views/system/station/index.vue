@@ -103,129 +103,13 @@
 </template>
 
 <script>
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
 import stationForm from "./components/form";
 export default {
-  components: { stationForm },
-  data() {
-    return {
-      searchVal: "",
-      selectType: "",
-      stationList: [],
-      dicts: [],
-      isAdd: true,
-      // 当前页数
-      nowPage: 1,
-      // 当前页条数
-      nowSize: 10,
-      // 总条数
-      totalElements: 0,
-      options: [
-        {
-          value: "true",
-          label: "正常"
-        },
-        {
-          value: "false",
-          label: "禁用"
-        }
-      ]
-    };
-  },
-  created() {
-    // 初始化页面数据
-    this.getStationList();
-    // 获取岗位字典
-    this.getDictsList("job_status");
-  },
-  methods: {
-    // 删除岗位
-    deleteStation(item) {
-      this.$showMsgBox({ msg: `是否删除${item.name}岗位?` }).then(() => {
-        this.$http_json({
-          url: `/api/job/del/${item.id}`,
-          method: "post"
-        }).then(() => {
-          this.$successMsg("删除成功");
-          this.getStationList();
-        });
-      });
-    },
-    // 显示添加岗位窗口
-    showAddStation() {
-      this.isAdd = true;
-      this.$refs.form.dialog = true;
-      this.$refs.form.resetForm();
-    },
-    // 显示编辑岗位窗口
-    showEditStation() {
-      this.isAdd = false;
-      this.$refs.form.dialog = true;
-    },
-    // 编辑岗位
-    editStationItem(item) {
-      const stationForm = this.$refs.form.stationForm;
-      this.$refs.form.stationId = item.id;
-      stationForm.name = item.name;
-      stationForm.sort = item.sort;
-      stationForm.enabled = item.enabled.toString();
-      stationForm.dept.id = item.dept.id;
-      this.showEditStation();
-    },
-    // 点击搜索
-    search(val) {
-      this.nowPage = 1;
-      this.getStationList();
-    },
-    // 回车搜索
-    searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 && this.getStationList();
-    },
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getStationList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getStationList();
-    },
-    // 分页处理
-    initialPage(totalElements) {
-      this.totalElements = totalElements;
-    },
-    // 初始化岗位列表
-    initialStationList(list) {
-      this.stationList.splice(0);
-      list.forEach(value => {
-        this.stationList.push(value);
-      });
-    },
-    // 获取岗位信息
-    getStationList() {
-      this.$http_normal({
-        url: `/api/job/page?page=${this.nowPage - 1}&size=${
-          this.nowSize
-        }&sort=sort,asc${this.searchVal ? `&name=${this.searchVal}` : ""}${
-          this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""
-        }`,
-        method: "get"
-      }).then(result => {
-        const data = result.data;
-        this.initialPage(data.totalElements);
-        this.initialStationList(data.content);
-      });
-    },
-    // 获取岗位字典
-    getDictsList(dictName) {
-      this.$http_json({
-        url: `/api/dictDetail/page?page=0&size=9999&sort=sort,asc&dictName=${dictName}`
-      }).then(result => {
-        this.dicts = result.data.content;
-      });
-    }
-  }
+  mixins: [ Initial, Operation, Property ],
+  components: { stationForm }
 };
 </script>
 

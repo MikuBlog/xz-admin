@@ -77,92 +77,13 @@
 </template>
 
 <script>
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
 import GeneratorBox from './components/form'
 export default {
-  components: { GeneratorBox },
-  data() {
-    return {
-      searchVal: "",
-      generateCodeList: [],
-      // 当前页数
-      nowPage: 1,
-      // 当前页条数
-      nowSize: 10,
-      // 总条数
-      totalElements: 0,
-      options: [
-        {
-          value: "username",
-          label: "用户名"
-        },
-        {
-          value: "description",
-          label: "描述"
-        }
-      ]
-    };
-  },
-  created() {
-    // 初始化页面数据
-    this.getGenerateCodeList();
-  },
-  methods: {
-    // 弹窗
-    showGeneratorCodeBox(item) {
-      const generatorBox = this.$refs.form
-      generatorBox.dialog = true
-      generatorBox.form.remark = item.remark
-      generatorBox.getFormMsg()
-      generatorBox.getTableList(item.tableName)
-    },
-    // 点击搜索
-    search() {
-      this.nowPage = 1;
-      this.getGenerateCodeList()
-    },
-    // 回车搜索
-    searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13
-      && this.getGenerateCodeList()
-    },
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getGenerateCodeList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getGenerateCodeList();
-    },
-    // 分页处理
-    initialPage(totalElements) {
-      this.totalElements = totalElements;
-    },
-    // 初始化操作日志列表
-    initialGenerateCodeList(list) {
-      this.generateCodeList.splice(0);
-      list.forEach(value => {
-        this.generateCodeList.push(value);
-      });
-    },
-    // 获取操作日志信息
-    getGenerateCodeList() {
-      this.$http_normal({
-        url: `/api/generator/tables?page=${this.nowPage - 1}&size=${
-          this.nowSize
-        }&sort=createTime,desc${
-          this.searchVal ? `&name=${this.searchVal}` : ""
-        }`,
-        method: "get"
-      }).then(result => {
-        const data = result.data;
-        this.initialPage(data.totalElements);
-        this.initialGenerateCodeList(data.content);
-      });
-    }
-  }
+  mixins: [ Initial, Operation, Property ],
+  components: { GeneratorBox }
 };
 </script>
 

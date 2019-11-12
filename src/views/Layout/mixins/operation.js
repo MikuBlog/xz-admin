@@ -1,32 +1,5 @@
 import { mapMutations } from 'vuex'
-import InitialStyle from './mixins/initial_style'
-import settingDrawer from './components/setting_drawer'
-import convertHttp from '@/utils/convertHttp'
 export default {
-  mixins: [ InitialStyle ],
-  components: { settingDrawer },
-  data() {
-    return {
-      isCollapse: false,
-      isFullScreen: false,
-      isSmall: false,
-      isMini: false,
-      isMenuCollapse: false,
-      isSetting: false,
-      activeName: 'layout',
-      logoBlob: "",
-      user: {},
-      squareUrl: "",
-      logoUrl: "",
-      interval: "",
-    }
-  },
-  created() {
-    // 获取用户信息
-    this.getUserInfo()
-    // 获取Logo信息
-    this.getLogo()
-  },
   methods: {
     ...mapMutations([
       "setUserInfo",

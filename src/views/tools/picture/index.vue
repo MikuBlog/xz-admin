@@ -89,120 +89,13 @@
 </template>
 
 <script>
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
 import eForm from "./components/form";
-import convertHttp from '@/utils/convertHttp'
 export default {
-  components: { eForm },
-  data() {
-    return {
-      searchVal: "",
-      // 当前页数
-      nowPage: 1,
-      // 当前页条数
-      nowSize: 10,
-      // 总条数
-      totalElements: 0,
-      dialogVisible: false,
-      isShowButton: false,
-      pictureList: [],
-      idList: []
-    };
-  },
-  created() {
-    // 初始化页面数据
-    this.getPictureList();
-  },
-  methods: {
-    // 复制图片地址
-    copy(item) {
-      this.$copyText(item.url).then(() => {
-        this.$successMsg("复制成功");
-      });
-    },
-    // 删除选中的图片
-    deleteSelect() {
-      this.$showMsgBox({ msg: `是否删除选中图片?` }).then(() => {
-        this.$http_json({
-          url: `/api/picture/del`,
-          method: "post",
-          data: this.idList
-        }).then(() => {
-          this.$successMsg("删除成功");
-          this.getPictureList();
-        });
-      });
-    },
-    // 删除图片
-    deletePicture(item) {
-      this.$showMsgBox({ msg: `是否删除当前图片?` }).then(() => {
-        this.$http_json({
-          url: `/api/picture/del`,
-          method: "post",
-          data: [item.id]
-        }).then(() => {
-          this.$successMsg("删除成功");
-          this.getPictureList();
-        });
-      });
-    },
-    // 上传图片
-    uploadPic() {
-      this.$refs.form.dialog = true;
-    },
-    // 选中图片
-    selectItem(picArray) {
-      this.idList = picArray.map(val => val.id);
-      this.idList.length != 0
-        ? (this.isShowButton = true)
-        : (this.isShowButton = false);
-    },
-    // 点击搜索
-    search() {
-      this.nowPage = 1;
-      this.getPictureList();
-    },
-    // 回车搜索
-    searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 && this.getPictureList();
-    },
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getPictureList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getPictureList();
-    },
-    // 分页处理
-    initialPage(totalElements) {
-      this.totalElements = totalElements;
-    },
-    // 初始化错误日志列表
-    initialPictureList(list) {
-      this.pictureList.splice(0);
-      list.forEach(value => {
-        value.url = convertHttp(value.url)
-        this.pictureList.push(value);
-      });
-    },
-    // 获取图片列表
-    getPictureList() {
-      this.$http_normal({
-        url: `/api/picture/page?page=${this.nowPage - 1}&size=${this.nowSize}${
-            this.searchVal ? `&filename=${this.searchVal}` : ""
-          }`
-        ,
-        method: "get"
-      }).then(result => {
-        const data = result.data;
-        this.initialPage(data.totalElements);
-        this.initialPictureList(data.content);
-      });
-    }
-  }
+  mixins: [ Initial, Operation, Property ],
+  components: { eForm }
 };
 </script>
 

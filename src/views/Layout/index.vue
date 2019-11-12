@@ -181,7 +181,13 @@
   </div>
 </template>
 <script>
-import Main from "./index";
-export default Main;
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
+import settingDrawer from './components/setting_drawer'
+export default {
+  mixins: [ Initial, Operation, Property ],
+  components: { settingDrawer },
+}
 </script>
-<style scoped src="./index.scss" lang="scss"></style>
+<style lang="scss" scoped src="./style/index.scss"></style>

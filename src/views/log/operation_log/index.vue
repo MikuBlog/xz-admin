@@ -84,87 +84,11 @@
 </template>
 
 <script>
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
 export default {
-  data() {
-    return {
-      searchVal: "",
-      selectType: "",
-      operationLogList: [],
-      // 当前页数
-      nowPage: 1,
-      // 当前页条数
-      nowSize: 10,
-      // 总条数
-      totalElements: 0,
-      options: [
-        {
-          value: "username",
-          label: "用户名"
-        },
-        {
-          value: "description",
-          label: "描述"
-        }
-      ]
-    };
-  },
-  created() {
-    // 初始化页面数据
-    this.getOpertionLogList();
-  },
-  methods: {
-    // 点击搜索
-    search() {
-      this.nowPage = 1;
-      this.selectType
-        ? this.getOpertionLogList()
-        : this.$warnMsg("请选择搜索类型");
-    },
-    // 回车搜索
-    searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 &&
-        (this.selectType
-          ? this.getOpertionLogList()
-          : this.$warnMsg("请选择搜索类型"));
-    },
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getOpertionLogList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getOpertionLogList();
-    },
-    // 分页处理
-    initialPage(totalElements) {
-      this.totalElements = totalElements;
-    },
-    // 初始化操作日志列表
-    initialOpertionLogList(list) {
-      this.operationLogList.splice(0);
-      list.forEach(value => {
-        this.operationLogList.push(value);
-      });
-    },
-    // 获取操作日志信息
-    getOpertionLogList() {
-      this.$http_normal({
-        url: `/log/page?page=${this.nowPage - 1}&size=${
-          this.nowSize
-        }&sort=createTime,desc${
-          this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
-        }`,
-        method: "get"
-      }).then(result => {
-        const data = result.data;
-        this.initialPage(data.totalElements);
-        this.initialOpertionLogList(data.content);
-      });
-    }
-  }
+  mixins: [ Initial, Operation, Property ]
 };
 </script>
 
