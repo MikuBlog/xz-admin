@@ -1,0 +1,41 @@
+.bread-list-enter-active, .bread-list-leave-active {
+  transition: all 0.5s;
+}
+
+.bread-list-leave-active {
+  position: absolute;
+}
+
+.bread-list-enter, .bread-list-leave-to {
+  opacity: 0;
+}
+
+.bread-list-enter {
+  transform: translateX(25px);
+}
+
+.bread-list-leave-to {
+  transform: translateX(-25px);
+}
+
+.bread-list-move {
+  transition: all .5s;
+}
+
+.xz-animation-enter-active {
+  transition: all .4s .5s;
+}
+
+.xz-animation-leave-active {
+  transition: all .4s;
+}
+
+.xz-animation-enter {
+  opacity: 0;
+  transform: translateX(-25px);
+}
+
+.xz-animation-leave-to {
+  opacity: 0;
+  transform: translateX(25px);
+}

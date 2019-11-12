@@ -6,12 +6,24 @@
  * @param {Boolean} isBlob 是否为二进制文件
  */
 function download(url, fileName, isBlob) {
+  if(Array.isArray(url)) {
+    url.forEach(val => {
+      const iframe = document.createElement('iframe')
+      iframe.style.display = "none"
+      iframe.src = val
+      document.body.appendChild(iframe)
+      setTimeout(() => {
+        iframe.remove()
+      }, 1000)
+    })
+    return
+  }
   const 
 		ele = document.createElement('a'),
     event = new MouseEvent('click')
   ele.href = isBlob ? window.URL.createObjectURL(new Blob([url])) : url
   ele.download = fileName || ""
-	ele.dispatchEvent(event)
+  ele.dispatchEvent(event)
 }
 
 export default download

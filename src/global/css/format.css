@@ -1,0 +1,123 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+label {
+  font-weight: bold;
+}
+
+.expand-line {
+  position: relative;
+  display: block!important;
+  margin-bottom: 0!important;
+}
+
+.expand-line /deep/ .el-form-item__label {
+  color: #7c9bc4;
+}
+
+.interval-top {
+  margin-top: 1rem;
+}
+
+.interval-left {
+  margin-left: 1rem;
+}
+
+.interval-right {
+  margin-right: 1rem;
+}
+
+.interval-bottom {
+  margin-bottom: 1rem;
+}
+
+.select-input {
+  width: 6rem;
+}
+
+.search-input {
+  width: 12rem!important;
+}
+
+.margin-box {
+  margin: .3rem!important;
+}
+
+.is-circle {
+  margin: 0;
+  padding: 0;
+}
+
+.left-border {
+  position: relative;
+  border-left: 4px solid #3366cc;
+  padding-left: 10px;
+  font-size: 1rem;
+}
+
+.border {
+  position: relative;
+  border-top: 1px solid #dbdee5;
+}
+
+.button-box {
+  position: relative;
+  margin: 1rem 0 2rem 0;
+}
+
+.tree-box {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.title {
+  font-size: 14px;
+  line-height: 40px;
+  color: #606266;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.line {
+  position: relative;
+  text-align: center;
+}
+
+.pagination {
+  position: relative;
+  text-align: right;
+}
+
+.name-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.button-right {
+  margin-right: .3rem;
+}
+
+.button-right-circle {
+  margin-right: .7rem;
+}
+
+.menu-icon {
+  position: relative;
+  margin: 0 4px;
+  top: 2px;
+}
+
+.top-floor {
+  z-index: 9999!important;
+}

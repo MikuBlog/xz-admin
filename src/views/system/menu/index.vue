@@ -27,6 +27,7 @@
           :expand-all="expand" 
           :columns="columns" 
           :renderHeader="renderHeader"
+          :stripe="true"
           size="small">
             <el-table-column prop="icon" label="图标" align="center">
               <template slot-scope="scope">
@@ -89,123 +90,13 @@
 </template>
 
 <script>
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
 import eForm from "./components/form";
 export default {
-  components: { eForm },
-  data() {
-    return {
-      expand: true,
-      searchVal: "",
-      isAdd: true,
-      menuList: [],
-      columns: [
-        {
-          text: "名称",
-          value: "name"
-        }
-      ]
-    };
-  },
-  created() {
-    // 初始化获取菜单列表
-    this.getMenuList();
-  },
-  methods: {
-    // 是否展开全部
-    isExpandAll(e) {
-      this.expand = !this.expand;
-      this.expand
-      ? e.target.className = "el-icon-remove-outline"
-      : e.target.className = "el-icon-circle-plus-outline"
-      this.getMenuList();
-    },
-    // 初始化表头
-    renderHeader(h, { column }) {
-      return h(
-        "div",
-        [
-          h("i", {
-            class: "el-icon-remove-outline",
-            style: {
-              color: "#2196F3",
-              paddingRight: "3px" 
-            },
-            on: {
-              click: this.isExpandAll
-            }
-          }),
-          h("span", column.label)
-        ]
-      )
-    },
-    // 删除菜单
-    deleteMenuItem(item) {
-      this.$showMsgBox({
-        msg: `<p>是否删除${item.name}菜单?</p><p>如果菜单包含子菜单，则会一并删除！</p>`,
-        isHTML: true
-      }).then(() => {
-        this.$http_json({
-          url: `/api/menu/del/${item.id}`,
-          method: "post"
-        }).then(() => {
-          this.$successMsg("删除成功");
-          this.getMenuList();
-        });
-      });
-    },
-    // 显示添加菜单窗口
-    showAddMenu() {
-      this.isAdd = true;
-      this.$refs.form.dialog = true;
-      this.$refs.form.resetForm();
-    },
-    // 显示编辑菜单窗口
-    showEditMenu() {
-      this.isAdd = false;
-      this.$refs.form.dialog = true;
-    },
-    // 编辑菜单项
-    editMenuItem(item) {
-      const menuItem = this.$refs.form.menuForm;
-      this.$refs.form.menuId = item.id;
-      menuItem.name = item.name;
-      menuItem.sort = item.sort;
-      menuItem.path = item.path;
-      menuItem.component = item.component;
-      menuItem.iframe = item.iframe.toString();
-      menuItem.roles = item.roles;
-      menuItem.enabled = item.enabled.toString();
-      menuItem.parentId = item.parentId;
-      menuItem.icon = item.icon;
-      this.showEditMenu();
-    },
-    // 点击搜索
-    search() {
-      this.getMenuList();
-    },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13 && this.getMenuList();
-    },
-    // 初始化菜单列表
-    initialMenuList(list) {
-      this.menuList.splice(0);
-      list.forEach(value => {
-        this.menuList.push(value);
-      });
-    },
-    // 获取菜单列表
-    getMenuList() {
-      this.$http_json({
-        url: `/api/menu/get?sort=createTime,desc${
-          this.searchVal ? `&name=${this.searchVal}` : ""
-        }`,
-        method: "get"
-      }).then(result => {
-        this.initialMenuList(result.data.content);
-      });
-    }
-  }
+  mixins: [ Initial, Operation, Property ],
+  components: { eForm }
 };
 </script>
 

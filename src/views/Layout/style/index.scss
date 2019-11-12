@@ -216,21 +216,20 @@ width: 63px;
 .radio-box {
   position: relative;
 }
-.xz-animation-enter-active {
-  transition: all .4s .5s;
-}
-.xz-animation-leave-active {
-  transition: all .4s;
-}
-.xz-animation-enter {
-  opacity: 0;
-  transform: translateX(-25px);
-}
-.xz-animation-leave-to {
-  opacity: 0;
-  transform: translateX(25px);
-}
 .top {
   position: relative;
+  padding-bottom: 40px; 
   overflow-x: hidden;
+}
+.coppy-right {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  transform: translateX(-20px);
+  line-height: 30px;
+  bottom: 0;
+  background: #fefefe;
+  border-top: 1px solid #dcdfe6;
+  white-space: pre-wrap;
+  text-indent: 1.3rem;
 }

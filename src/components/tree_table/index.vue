@@ -2,6 +2,7 @@
   <el-table 
   :data="formatData" 
   :row-style="showRow" 
+  :stripe="stripe"
   v-bind="$attrs"
   :highlight-current-row="true">
     <el-table-column 
@@ -58,6 +59,10 @@ export default {
     },
     evalFunc: Function,
     evalArgs: Array,
+    stripe: {
+      type: Boolean,
+      default: false
+    },
     expandAll: {
       type: Boolean,
       default: false

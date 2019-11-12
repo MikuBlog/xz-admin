@@ -18,7 +18,10 @@ import '@/icons'
 import './UI/elementUI'
 import './UI/iviewUI'
 // 引入全局样式
-import '@/global/css/style.css'
+import '@/global/css/animation.css'
+import '@/global/css/elementUI.css'
+import '@/global/css/format.css'
+import '@/global/css/media.css'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'iview/dist/styles/iview.css'
@@ -27,7 +30,7 @@ import 'mavon-editor/dist/css/index.css'
 // 引入树状选择器
 import Treeselect from '@riophae/vue-treeselect'
 // 引入时间格式化函数
-import Date from '@/api/other/form_date'
+import Date from '@/api/other/format_date'
 // 引入获取URL参数函数
 import UrlQuery from '@/api/other/url_query'
 // 引入设置样式函数
@@ -36,14 +39,14 @@ import SetStyle from '@/api/dom/set_style'
 import SetClass from '@/api/dom/set_class'
 // 引入插入元素模块
 import InsertAfter from '@/api/dom/insert_after'
-// 引入文件下载模块
-import Download from '@/api/dom/download'
 // 引入文本复制模块
 import Copy from '@/api/dom/copy'
 // 引入全屏函数
 import FullScreen from '@/api/other/full_screen'
 // 引入存储模块
 import Memory from '@/api/storage/storage'
+// 引入文件下载模块
+import Download from '@/api/file/download'
 // 引入图片读取模块
 import ReadImg from '@/api/file/get_file_image'
 // 引入文件预览模块
@@ -144,7 +147,7 @@ Vue.prototype.$showTipDiy = Notification.showTipDiy
  * @description 引入时间格式化函数
  * @param {String | Date} date 日期格式化
  */
-Vue.prototype.$formDate = Date.formDate
+Vue.prototype.$formatDate = Date.formatDate
 /**
   * @author xuanzai
   * @description 获取url后的参数

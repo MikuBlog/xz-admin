@@ -11,18 +11,18 @@
           :text-color="menuTextColor"
           :unique-opened="true"
         >
-          <el-image 
-          :src="logoUrl" 
-          fit="cover"
-          class="logo-verticle" 
-          v-show="showLogo" 
-          v-if="!isCollapse">
-              <div slot="error" class="image-slot">
-                <i class="el-icon-picture-outline"></i>
-              </div>
-            </el-image>
-          <el-divider 
-          v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
+          <el-image
+            :src="logoUrl"
+            fit="cover"
+            class="logo-verticle"
+            v-show="showLogo"
+            v-if="!isCollapse"
+          >
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i>
+            </div>
+          </el-image>
+          <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
           <NavMenu :navMenus="menuList"></NavMenu>
         </el-menu>
       </el-scrollbar>
@@ -44,11 +44,7 @@
             :unique-opened="true"
             @select="isMenuCollapse = false"
           >
-            <el-image 
-            :src="logoUrl" 
-            fit="cover"
-            class="logo-verticle"
-            v-show="showLogo">
+            <el-image :src="logoUrl" fit="cover" class="logo-verticle" v-show="showLogo">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -70,11 +66,7 @@
               mode="horizontal"
               style="width: 100%"
             >
-              <el-image 
-              :src="logoUrl" 
-              fit="contain"
-              class="logo-horizontal"
-              v-show="showLogo">
+              <el-image :src="logoUrl" fit="contain" class="logo-horizontal" v-show="showLogo">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -102,16 +94,40 @@
               </div>
             </el-dropdown>
             <div class="icon-box">
-              <el-tooltip class="item" effect="dark" content="搜索菜单项" placement="bottom" v-show="defaultConfig.searchMenu && !isMini">
-                <search class="search-menu-input"/>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="搜索菜单项"
+                placement="bottom"
+                v-show="defaultConfig.searchMenu && !isMini"
+              >
+                <search class="search-menu-input" />
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="查看帮助" placement="bottom" v-show="defaultConfig.helpPage">
-                <i class="el-icon-question" @click="toHelp"></i>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="查看帮助"
+                placement="bottom"
+                v-show="defaultConfig.helpPage"
+              >
+                <i class="el-icon-question" @click="$router.push({ path: '/home/docs' })"></i>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="样式设置" placement="bottom" v-show="defaultConfig.systemSetting">
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="样式设置"
+                placement="bottom"
+                v-show="defaultConfig.systemSetting"
+              >
                 <i class="el-icon-s-tools" @click="showSetting"></i>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="全屏" placement="bottom" v-show="defaultConfig.fullScreen">
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="全屏"
+                placement="bottom"
+                v-show="defaultConfig.fullScreen"
+              >
                 <svg-icon
                   icon-class="全屏"
                   style="width: 24px; height: 24px; top: 1px"
@@ -153,13 +169,10 @@
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
           <div class="back-top">
-            <el-button
-              type="primary"
-              icon="el-icon-top"
-              circle
-              class="to-top"
-              @click="backTop"
-            ></el-button>
+            <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop"></el-button>
+          </div>
+          <div class="coppy-right">
+            <span>© 2019 XuanZai Wteam.All rights reserved.</span>
           </div>
         </el-main>
       </el-container>
@@ -168,7 +181,13 @@
   </div>
 </template>
 <script>
-import Main from "./index";
-export default Main;
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
+import settingDrawer from './components/setting_drawer'
+export default {
+  mixins: [ Initial, Operation, Property ],
+  components: { settingDrawer },
+}
 </script>
-<style scoped src="./index.scss" lang="scss"></style>
+<style lang="scss" scoped src="./style/index.scss"></style>

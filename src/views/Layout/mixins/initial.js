@@ -1,23 +1,10 @@
-import { mapState, mapMutations } from 'vuex'
-import settingDrawer from './components/setting_drawer'
-import convertHttp from '@/utils/convertHttp'
+import { mapState } from 'vuex'
 export default {
-  components: { settingDrawer },
-  data() {
-    return {
-      isCollapse: false,
-      isFullScreen: false,
-      isSmall: false,
-      isMini: false,
-      isMenuCollapse: false,
-      isSetting: false,
-      activeName: 'layout',
-      logoBlob: "",
-      user: {},
-      squareUrl: "",
-      logoUrl: "",
-      interval: "",
-    }
+  created() {
+    // 获取用户信息
+    this.getUserInfo()
+    // 获取Logo信息
+    this.getLogo()
   },
   computed: {
     ...mapState({
@@ -31,7 +18,7 @@ export default {
     }),
     menuBackgroundColor() {
       return this.menuStyle === 'dark'
-        ? this.defaultConfig.menuStyle.dark.backgroundColor
+        ? this.defaultConfig.menuStyle.dark.backgreundColor
         : this.defaultConfig.menuStyle.light.backgroundColor
     },
     menuTextColor() {
@@ -43,100 +30,24 @@ export default {
       return this.defaultConfig.menuStyle.activeTextColor
     }
   },
-  created() {
-    // 获取用户信息
-    this.getUserInfo()
-    // 获取Logo信息
-    this.getLogo()
-  },
   mounted() {
-	// 初始化样式
-	this.initialStyle()
+    // 初始化样式
+    this.initialStyle()
     this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
-	/**
-	 * @description 初始化页面样式
-	 * 由于菜单生成有滞后性，所以使用循环定时器进行页面初始化，如果菜单生成完毕，则初始化页面并停止循环定时器
-	 */
-	this.interval = setInterval(() => {
-	  if(document.querySelectorAll('.el-menu-item-group').length > 0) {
-      this.initialmenuItemGroupStyle()
-	    clearInterval(this.interval)
-	  }
-	})
+    /**
+     * @description 初始化页面样式
+     * 由于菜单生成有滞后性，所以使用循环定时器进行页面初始化，如果菜单生成完毕，则初始化页面并停止循环定时器
+     */
+    this.interval = setInterval(() => {
+      if (document.querySelectorAll('.el-menu-item-group').length > 0) {
+        this.initialmenuItemGroupStyle()
+        clearInterval(this.interval)
+      }
+    })
   },
   methods: {
-    ...mapMutations([
-      "setUserInfo",
-      "removeAllTags"
-    ]),
-    // 获取用户信息
-    getUserInfo() {
-      this.$http_json({
-        url: "/auth/info",
-        method: "get"
-      }).then(result => {
-        result.data.avatar = convertHttp(result.data.avatar)
-        this.setUserInfo(result.data)
-        this.user = this.$store.state.user
-        this.squareUrl = this.user.avatar
-      })
-    },
-    // 返回顶部
-    backTop(delay = 500) {
-      $('.top').animate({ scrollTop: 0 }, delay)
-    },
-    // 前往项目地址
-    openNewPage() {
-      window.open('https://github.com/MikuBlog/xz-admin')
-    },
-    toHelp() {
-      window.open('http://xzadmin-docs.xuanzai.top')
-    },
-    // 退出登录
-    logout() {
-      this
-        .$showMsgBox({
-          msg: `是否注销当前账号?`,
-          iconClass: 'el-icon-question'
-        })
-        .then(result => {
-          // 退出前先清空用户访问记录
-          this.$setMemoryPmt('token', '')
-          this.$router.push({ path: '/login' })
-        })
-    },
-    // 获取Logo
-    getLogo() {
-      this.$http_json({
-        url: "/api/showConfig/getByName/logo",
-        method: "get"
-      }).then(result => {
-        this.logoUrl = result.data.value
-        this.$refs.setting.logo = result.data.value
-      })
-    },
-    // 打开设置抽屉
-    showSetting() {
-      this.$refs.setting.isSetting = true
-    },
-    // 移除所有标签
-    removeTags() {
-      this.removeAllTags()
-      this.navigateTo('/home/welcome')
-    },
-    // 跳转路由
-    navigateTo(path) {
-      this.$router.push({ path })
-    },
-    // 设置全屏与取消全屏
-    fullScreen() {
-      this.isFullScreen
-        ? this.$cancelFullScreen()
-        : this.$setFullScreen()
-      this.isFullScreen = !this.isFullScreen
-    },
     // 初始化样式
     initialStyle() {
       const
@@ -191,30 +102,20 @@ export default {
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
     },
-	// 初始化子菜单样式
-	initialmenuItemGroupStyle() {
-		const menuItemGroup = document.querySelectorAll('.el-menu-item-group')
-		menuItemGroup.forEach(val => {
-		  this.menuStyle === 'dark'
-		    ? this.$setStyle(
-		      val,
-		      'background',
-		      this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
-		    : this.$setStyle(
-		      val,
-		      'background',
-		      this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
-		})
-	},
-    // 显示菜单
-    showMenu() {
-      this.isSmall
-        ? this.isMenuCollapse = !this.isMenuCollapse
-        : this.isCollapse = !this.isCollapse
-      // 重渲染展开菜单项
-      setTimeout(() => {
-        this.initialStyle()
-      }, 400)
+    // 初始化子菜单样式
+    initialmenuItemGroupStyle() {
+      const menuItemGroup = document.querySelectorAll('.el-menu-item-group')
+      menuItemGroup.forEach(val => {
+        this.menuStyle === 'dark'
+          ? this.$setStyle(
+            val,
+            'background',
+            this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor)
+          : this.$setStyle(
+            val,
+            'background',
+            this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
+      })
     },
     // 获取屏幕宽度
     getWindowWidth() {
@@ -222,8 +123,8 @@ export default {
         ? (this.isSmall = true, this.isCollapse = true, this.isMenuCollapse = false)
         : this.isSmall = false
       window.innerWidth < 768
-      ? this.isMini = true
-      : this.isMini = false
+        ? this.isMini = true
+        : this.isMini = false
     },
     // 获取滚动高度
     getScrollTop(obj) {

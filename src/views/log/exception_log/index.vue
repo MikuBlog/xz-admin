@@ -21,7 +21,19 @@ import { MessageBox } from 'mint-ui';
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="exceptionLogList" :highlight-current-row="true" style="width: 100%">
+          <el-table :data="exceptionLogList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="请求方法" class="expand-line">
+                    <span>{{ props.row.method }}</span>
+                  </el-form-item>
+                  <el-form-item label="请求参数" class="expand-line">
+                    <span>{{ props.row.params }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
             <el-table-column label="用户名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.username }}</span>
@@ -40,16 +52,6 @@ import { MessageBox } from 'mint-ui';
             <el-table-column label="描述" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.description }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="方法名称" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <div slot="reference" class="name-wrapper">{{ scope.row.method }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="参数" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <div class="name-wrapper" slot="reference">{{ scope.row.params }}</div>
               </template>
             </el-table-column>
             <el-table-column label="创建日期" width="180">
@@ -86,99 +88,11 @@ import { MessageBox } from 'mint-ui';
 </template>
 
 <script>
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
 export default {
-  data() {
-    return {
-      searchVal: "",
-      selectType: "",
-      exceptionLogList: [],
-      // 当前页数
-      nowPage: 1,
-      // 当前页条数
-      nowSize: 10,
-      // 总条数
-      totalElements: 0,
-      dialogVisible: false,
-      exceptionDetail: "",
-      options: [
-        {
-          value: "username",
-          label: "用户名"
-        },
-        {
-          value: "description",
-          label: "描述"
-        }
-      ]
-    };
-  },
-  created() {
-    // 初始化页面数据
-    this.getExceptionLogList();
-  },
-  methods: {
-    // 点击搜索
-    search() {
-      this.nowPage = 1;
-      this.selectType
-        ? this.getExceptionLogList()
-        : this.$warnMsg("请选择搜索类型");
-    },
-    // 回车搜索
-    searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 &&
-        (this.selectType
-          ? this.getExceptionLogList()
-          : this.$warnMsg("请选择搜索类型"));
-    },
-    // 显示具体错误信息
-    showDetail(id) {
-      this.$http_json({
-        url: `/log/page/error/${id}`,
-        method: "get"
-      }).then(result => {
-        this.dialogVisible = true;
-        this.exceptionDetail = result.data;
-      });
-    },
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getExceptionLogList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getExceptionLogList();
-    },
-    // 分页处理
-    initialPage(totalElements) {
-      this.totalElements = totalElements;
-    },
-    // 初始化错误日志列表
-    initialExceptionLogList(list) {
-      this.exceptionLogList.splice(0);
-      list.forEach(value => {
-        this.exceptionLogList.push(value);
-      });
-    },
-    // 获取错误日志信息
-    getExceptionLogList() {
-      this.$http_normal({
-        url: `/log/page/error?page=${this.nowPage - 1}&size=${
-          this.nowSize
-        }&sort=createTime,desc${
-          this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
-        }`,
-        method: "get"
-      }).then(result => {
-        const data = result.data;
-        this.initialPage(data.totalElements);
-        this.initialExceptionLogList(data.content);
-      });
-    }
-  }
+  mixins: [ Initial, Operation, Property ]
 };
 </script>
 

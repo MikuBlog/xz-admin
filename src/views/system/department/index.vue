@@ -41,6 +41,7 @@
           :data="departmentList" 
           :columns="columns" 
           :renderHeader="renderHeader"
+          :stripe="true"
           size="small">
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">
@@ -80,134 +81,13 @@
 </template>
 
 <script>
+import Initial from './mixins/initial'
+import Operation from './mixins/operation'
+import Property from './mixins/property'
 import eForm from "./components/form";
 export default {
-  components: { eForm },
-  data() {
-    return {
-      expand: true,
-      delLoading: false,
-      searchVal: "",
-      selectType: "",
-      isAdd: true,
-      dicts: [],
-      departmentList: [],
-      options: [
-        {
-          value: "true",
-          label: "正常"
-        },
-        {
-          value: "false",
-          label: "禁用"
-        }
-      ],
-      columns: [
-        {
-          text: "名称",
-          value: "name"
-        }
-      ]
-    };
-  },
-  created() {
-    // 初始化获取部门列表
-    this.getDepartmentList();
-    // 获取岗位字典
-    this.getDictsList("dept_status");
-  },
-  methods: {
-    // 是否展开全部
-    isExpandAll(e) {
-      this.expand = !this.expand;
-      this.expand
-        ? (e.target.className = "el-icon-remove-outline")
-        : (e.target.className = "el-icon-circle-plus-outline");
-      this.getDepartmentList();
-    },
-    // 初始化表头
-    renderHeader(h, { column }) {
-      return h("div", [
-        h("i", {
-          class: "el-icon-remove-outline",
-          style: {
-            color: "#2196F3",
-            paddingRight: "3px" 
-          },
-          on: {
-            click: this.isExpandAll
-          }
-        }),
-        h("span", column.label)
-      ]);
-    },
-    // 删除部门
-    deleteDepartment(item) {
-      this.$showMsgBox({ msg: `是否删除${item.name}部门?` }).then(() => {
-        this.$http_json({
-          url: `/api/dept/del/${item.id}`,
-          method: "post"
-        }).then(() => {
-          this.$successMsg("删除成功");
-          this.getDepartmentList();
-        });
-      });
-    },
-    // 显示添加部门窗口
-    showAddDepartment() {
-      this.isAdd = true;
-      this.$refs.form.dialog = true;
-      this.$refs.form.resetForm();
-    },
-    // 显示编辑部门窗口
-    showEditDepartment() {
-      this.isAdd = false;
-      this.$refs.form.dialog = true;
-    },
-    // 编辑部门
-    editDepartmentItem(item) {
-      const departmentForm = this.$refs.form.departmentForm;
-      this.$refs.form.departmentId = item.id;
-      departmentForm.name = item.name;
-      departmentForm.enabled = item.enabled.toString();
-      departmentForm.parentId = item.parentId;
-      this.showEditDepartment();
-    },
-    // 点击搜索
-    search(val) {
-      this.getDepartmentList();
-    },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13 && this.getDepartmentList();
-    },
-    // 初始化部门列表
-    initialDepartmentList(list) {
-      this.departmentList.splice(0);
-      list.forEach(value => {
-        this.departmentList.push(value);
-      });
-    },
-    // 获取部门列表
-    getDepartmentList() {
-      this.$http_json({
-        url: `/api/dept/get?sort=createTime,desc${
-          this.searchVal ? `&name=${this.searchVal}` : ""
-        }${this.selectType ? `&enabled=${this.selectType}` : ""}`,
-        method: "get"
-      }).then(result => {
-        this.initialDepartmentList(result.data.content);
-      });
-    },
-    // 获取岗位字典
-    getDictsList(dictName) {
-      this.$http_json({
-        url: `/api/dictDetail/page?page=0&size=9999&sort=sort,asc&dictName=${dictName}`
-      }).then(result => {
-        this.dicts = result.data.content;
-      });
-    }
-  }
+  mixins: [ Initial, Operation, Property ],
+  components: { eForm }
 };
 </script>
 
