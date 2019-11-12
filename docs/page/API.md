@@ -24,13 +24,16 @@ this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
 
 参数：
 
-+ `url`：地址 [`String`]（必填）
++ `url`：地址 [`String`/`Array`]（必填）
 + `fileName`: 文件名称 [`String`]（必填）
 + `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]（选填：默认为false）
 
 示例：
 ```js
+// 单文件下载
 this.$download(url, fileName)
+// 批量文件下载（url为下载链接数组）
+this.$download(url) // url : [http://xxx.com, http://xxxx.com]
 ```
 
 ##  getImgFile

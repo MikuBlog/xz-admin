@@ -46,6 +46,7 @@ npm run serve
 │  ├─editor
 │  ├─icon_select
 │  ├─scrollpane
+│  ├─search_menu
 │  ├─SvgIcon
 │  ├─tag
 │  ├─tree_menu
@@ -55,41 +56,103 @@ npm run serve
 │  └─js
 ├─icons // 存放SVG图标
 │  └─svg
-├─initial // 第三方插件、过滤器、自定义指令初始化
+├─initial // 第三方插件、过滤器、自定义指令、样式初始化
+│  └─UI
 ├─Layout // 布局组件
-├─router // 路由核心文件
+├─router // 路由模块
 ├─store // vuex
 │  └─modules
 ├─utils // 工具类函数
 └─views // 页面组件
     ├─article
     ├─chart
+    │  ├─mixins
+    │  └─style
     ├─common
     │  ├─editor
     │  ├─file
     │  ├─icon
+    │  │  ├─mixins
+    │  │  └─style
     │  └─markdown
+    │      └─mixins
+    ├─docs
     ├─error
     ├─introduction
     ├─Layout
+    │  ├─components
+    │  ├─mixins
+    │  └─style
     ├─log
+    │  ├─authority_log
+    │  │  ├─components
+    │  │  └─mixins
+    │  ├─exception_log
+    │  │  └─mixins
+    │  └─operation_log
+    │      └─mixins
     ├─login
+    │  ├─mixins
+    │  └─style
     ├─menu_1
     ├─menu_2
     ├─menu_3
     ├─monitor
+    │  ├─online_user
+    │  │  └─mixins
+    │  └─redis_manage
+    │      └─mixins
     ├─order
     ├─person
+    │  └─components
     ├─system
     │  ├─authority
+    │  │  ├─components
+    │  │  └─mixins
     │  ├─department
+    │  │  ├─components
+    │  │  └─mixins
     │  ├─dictionary
+    │  │  ├─components
+    │  │  └─mixins
     │  ├─menu
+    │  │  ├─components
+    │  │  └─mixins
     │  ├─role
+    │  │  ├─components
+    │  │  └─mixins
     │  ├─station
+    │  │  ├─components
+    │  │  └─mixins
     │  └─user
+    │      ├─components
+    │      └─mixins
     ├─tools
+    │  ├─file
+    │  │  └─components
+    │  ├─generator
+    │  │  ├─components
+    │  │  └─mixins
     │  ├─mission
+    │  │  ├─components
+    │  │  └─mixins
     │  └─picture
+    │      ├─components
+    │      └─mixins
     └─welcome
+```
+
+## 页面模块结构
+
+为了方便后期维护开发，本后台管理系统模板对每个页面模块拆分成如下结构：
+
+```
+│  ├─menu // 页面模块名称
+│  │  ├─components // 页面组件
+│  │  └─style // 页面样式
+│  │  │  └─index.scss
+│  │  └─mixins // 业务逻辑模块
+│  │  │  └─initial.js // 初始化文件
+│  │  │  └─operation.js // 页面逻辑文件
+│  │  │  └─property.js // 响应式属性管理文件
 ```
