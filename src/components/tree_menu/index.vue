@@ -3,7 +3,7 @@
     <template v-for="navMenu in navMenus">
       <el-menu-item 
                     v-show="navMenu.enabled"
-                    v-if="navMenu.children==null"
+                    v-if="navMenu.children == null || !navMenu.children.some(val => val.enabled)"
                     :key="navMenu.name" 
                     :index="navMenu.path" 
                     @click="navigateTo(navMenu)"
@@ -14,7 +14,7 @@
 
       <el-submenu 
                   v-show="navMenu.enabled"
-                  v-if="navMenu.children"
+                  v-if="navMenu.children && navMenu.children.some(val => val.enabled)"
                   :key="navMenu.name" 
                   :index="navMenu.name"
                   :class="[navMenu.parentId != 0 ? 'black' : '']"
