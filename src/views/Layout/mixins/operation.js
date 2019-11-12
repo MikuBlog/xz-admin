@@ -1,4 +1,5 @@
 import { mapMutations } from 'vuex'
+import convertHttp from '@/utils/convertHttp'
 export default {
   methods: {
     ...mapMutations([

@@ -1,5 +1,4 @@
 import { mapState } from 'vuex'
-import convertHttp from '@/utils/convertHttp'
 export default {
   created() {
     // 获取用户信息
