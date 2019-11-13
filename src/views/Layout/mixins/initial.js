@@ -56,6 +56,12 @@ export default {
         menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
         drawerContent = document.querySelector('.ivu-drawer-content'),
         horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
+      //   elMenu = document.querySelectorAll('.el-menu')
+      // elMenu.forEach(val => {
+      //   this.$setStyle(val, 'background', this.menuStyle === 'dark'
+      //   ? this.defaultConfig.menuStyle.dark.backgroundColor
+      //   : this.defaultConfig.menuStyle.light.backgroundColor)
+      // })
       this.$setStyle(
         menuScrollBar,
         'background',
