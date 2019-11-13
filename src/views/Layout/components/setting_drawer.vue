@@ -33,7 +33,7 @@
         </div>
         <h2 style="margin: 2rem 0">菜单布局风格</h2>
         <div class="radio-box">
-          <el-radio-group v-model="$store.state.setting.isVerticleMenu">
+          <el-radio-group v-model="$store.state.setting.isVerticleMenu" @change="$nextTick(() => { $parent.initialStyle() })">
             <el-radio :label="true">垂直</el-radio>
             <el-radio :label="false">水平</el-radio>
           </el-radio-group>

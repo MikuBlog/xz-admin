@@ -46,20 +46,7 @@
           this.$router.push({ path: item.path })
         }
       },
-    },
-    mounted() {
-      document
-        .querySelectorAll('.black .el-submenu__title')
-        .forEach(value => {
-          this.$setStyle(value, 'background', '#1e2c3c')
-          value.addEventListener('mouseenter', () => {
-            this.$setStyle(value, 'background', '#263344')
-          })
-          value.addEventListener('mouseleave', () => {
-            this.$setStyle(value, 'background', '#1e2c3c')
-          })
-        })
-    },
+    }
   }
 </script>
 
