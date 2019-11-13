@@ -114,11 +114,11 @@ export default {
         this.userForm.job.id = this.jobId
         this.$refs.userForm.validate((valid) => {
             if (valid) {
-                if (this.deptId === null || this.deptId === undefined) {
+                if (!this.deptId) {
                     this.$warnMsg("部门不能为空")
                     return
                 }
-                if (this.jobId === null) {
+                if (!this.jobId) {
                     this.$warnMsg("岗位不能为空")
                     return
                 }
