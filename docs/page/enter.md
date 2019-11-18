@@ -63,7 +63,7 @@ npm run serve
 ├─store // vuex
 │  └─modules
 ├─utils // 工具类函数
-└─views // 页面组件
+└─views // 页面
     ├─article
     ├─chart
     │  ├─mixins
@@ -155,4 +155,5 @@ npm run serve
 │  │  │  └─initial.js // 初始化文件
 │  │  │  └─operation.js // 页面逻辑文件
 │  │  │  └─property.js // 响应式属性管理文件
+│  │  ├─index.vue // 页面
 ```
