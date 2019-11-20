@@ -57,7 +57,7 @@ import JsonPretty from '@/api/json/json_pretty'
 import ImageLoad from '@/api/other/image_load'
 // 引入排序函数
 import SortList from '@/api/other/sort'
-// 引入图片加载动画模块
+// 引入全局配置模块
 import DefaultConfig from '@/global/js/config'
 /**
  * @author xuanzai
