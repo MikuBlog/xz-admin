@@ -191,7 +191,7 @@ this.$getMemorySes("name")
 
 + `key`: 键 [`String`]（必填）
 + `value`: 值 [`Any`]（必填）
-+ 
+  
 示例：
 ```js
 this.$setMemoryPmt("name", "xuanzai")

@@ -95,8 +95,10 @@ sever {
   - 配置`admin.conf`文件
 
   ```
-  vim h5-docs.conf
+  vim admin.conf
   ```
+
+  - 填入如下配置内容：
 
   ```
   server {
@@ -112,22 +114,25 @@ sever {
 
 - 新建前端静态文件目录
    
-```
-cd /usr/share/nginx
+  - 进入到如下目录：
 
-```
+  ```
+  cd /usr/share/nginx
+  ```
 
-```
-mkdir admin
-```
+  - 创建`admin`文件夹：
 
-```
-cd admin
-```
+  ```
+  mkdir admin
+  ```
+
+  - 进入到`admin`文件夹目录下：
+
+  ```
+  cd admin
+  ```
 
 - 将打包好的文件上传至该文件夹里，`admin`内文件目录如下：
-
-> 如果使用finalshell，则可直接拖拽文件上传，否则请使用linux第三方上传工具进行远程上传
 
 ```
 ├─assets
@@ -141,6 +146,8 @@ cd admin
 └─ueditor
 ```
 
+> 如果使用finalshell，则可直接拖拽文件上传，否则请使用linux第三方上传工具进行远程上传
+
 - 重启`nginx`
 
 ```
@@ -150,6 +157,23 @@ nginx -s reload
 <br/>
 
 > 打开浏览器输入您的域名，按下回车键，开始你的愉快分享之旅吧！
+
+<br/>
+<br/>
+
+## 配置gzip
+
+<br/>
+
+> 配置gzip后，静态文件将被压缩成更小的文件，大大提升浏览器访问静态文件的速度。
+
+- 打开`nginx.conf`，并在`http`模块任意行加入如下代码：
+
+```
+gzip on;
+gzip_types application/javascript text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png application/json;
+```
+`window`与`linux`的配置方式完全一致，只需要找到`nginx.conf`配置文件进行如上操作即可。
 
 <br/>
 <br/>

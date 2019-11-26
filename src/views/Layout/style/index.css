@@ -126,6 +126,7 @@
 }
 
 .el-icon-full-screen, .el-icon-s-tools, .iconfullscreenexit, .el-icon-question {
+  cursor: pointer;
   transition: .3s;
 }
 
@@ -257,7 +258,7 @@
 
 .coppy-right {
   position: fixed;
-  z-index: 1500;
+  z-index: 999;
   width: 100%;
   transform: translateX(-20px);
   line-height: 30px;
