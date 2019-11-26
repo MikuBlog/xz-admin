@@ -14,7 +14,6 @@ function getImgFile(limit = 2) {
             data = {}
         fileEle.type = "file"
         fileEle.accept = "image/jpeg, image/png"
-        fileEle.dispatchEvent(event)
         fileEle.addEventListener('change', () => {
             const files = fileEle.files[0]
             data.raw = files
@@ -28,6 +27,7 @@ function getImgFile(limit = 2) {
             data.url = reader.result
             resolve(data)
         })
+        fileEle.dispatchEvent(event)
     })
 }
 
