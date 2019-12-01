@@ -17,6 +17,7 @@
             class="logo-verticle"
             v-show="showLogo"
             v-if="!isCollapse"
+            @click.native="$router.push({ path: '/home/welcome' })"
           >
             <div slot="error" class="image-slot">
               <i class="el-icon-picture-outline"></i>
@@ -44,7 +45,7 @@
             :unique-opened="true"
             @select="isMenuCollapse = false"
           >
-            <el-image :src="logoUrl" fit="cover" class="logo-verticle" v-show="showLogo">
+            <el-image :src="logoUrl" fit="cover" class="logo-verticle" v-show="showLogo" @click.native="$router.push({ path: '/home/welcome' })">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -66,7 +67,7 @@
               mode="horizontal"
               style="width: 100%"
             >
-              <el-image :src="logoUrl" fit="contain" class="logo-horizontal" v-show="showLogo">
+              <el-image :src="logoUrl" fit="contain" class="logo-horizontal" v-show="showLogo" @click.native="$router.push({ path: '/home/welcome' })">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -181,13 +182,13 @@
   </div>
 </template>
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
-import settingDrawer from './components/setting_drawer'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
+import settingDrawer from "./components/setting_drawer";
 export default {
-  mixins: [ Initial, Operation, Property ],
-  components: { settingDrawer },
-}
+  mixins: [Initial, Operation, Property],
+  components: { settingDrawer }
+};
 </script>
 <style lang="scss" scoped src="./style/index.scss"></style>
