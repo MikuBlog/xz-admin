@@ -15,7 +15,8 @@ const
     : true,
     menuStyle: storage.getMemoryPmt('setting') 
     ? storage.getMemoryPmt('setting').menuStyle 
-    : 'light'
+    : 'light',
+    theme: "#409eff"
   }
 
 export default {

@@ -1,12 +1,35 @@
 <template>
   <Drawer v-model="isSetting" width="350px" title="系统设置" class="drawer-setting">
     <el-tabs v-model="activeName" type="card">
-      <el-tab-pane label="布局" name="layout"></el-tab-pane>
-      <el-tab-pane label="菜单" name="menu"></el-tab-pane>
+      <el-tab-pane label="DIY" name="layout"></el-tab-pane>
       <el-tab-pane label="Logo" name="logo"></el-tab-pane>
     </el-tabs>
-    <el-scrollbar style="height: 80%">
+    <el-scrollbar style="height: 100%">
       <div v-show="activeName === 'layout'">
+        <h2 style="margin: 2rem 0">菜单颜色风格</h2>
+        <div class="radio-box" @change="$nextTick(() => { $parent.initialStyle() })">
+          <el-radio-group v-model="$store.state.setting.menuStyle">
+            <el-radio label="light">白昼</el-radio>
+            <el-radio label="dark">夜晚</el-radio>
+          </el-radio-group>
+        </div>
+        <h2 style="margin: 2rem 0">菜单布局风格</h2>
+        <div class="radio-box">
+          <el-radio-group
+            v-model="$store.state.setting.isVerticleMenu"
+            @change="$nextTick(() => { $parent.initialStyle() })"
+          >
+            <el-radio :label="true">垂直</el-radio>
+            <el-radio :label="false">水平</el-radio>
+          </el-radio-group>
+        </div>
+        <h2 style="margin: 2rem 0">系统主题设置</h2>
+        <div class="switch-box">
+          <div class="box">
+            <span class="tips">更换主题</span>
+            <Theme />
+          </div>
+        </div>
         <h2 style="margin: 2rem 0">系统布局设置</h2>
         <div class="switch-box">
           <div class="box">
@@ -21,22 +44,6 @@
             <span class="tips">显示面包屑</span>
             <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
           </div>
-        </div>
-      </div>
-      <div v-show="activeName === 'menu'">
-        <h2 style="margin: 2rem 0">菜单颜色风格</h2>
-        <div class="radio-box" @change="$nextTick(() => { $parent.initialStyle() })">
-          <el-radio-group v-model="$store.state.setting.menuStyle">
-            <el-radio label="light">白昼</el-radio>
-            <el-radio label="dark">夜晚</el-radio>
-          </el-radio-group>
-        </div>
-        <h2 style="margin: 2rem 0">菜单布局风格</h2>
-        <div class="radio-box">
-          <el-radio-group v-model="$store.state.setting.isVerticleMenu" @change="$nextTick(() => { $parent.initialStyle() })">
-            <el-radio :label="true">垂直</el-radio>
-            <el-radio :label="false">水平</el-radio>
-          </el-radio-group>
         </div>
       </div>
       <div v-show="activeName === 'logo'">
@@ -57,8 +64,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import convertHttp from '@/utils/convertHttp'
+import { mapState } from "vuex";
+import convertHttp from "@/utils/convertHttp";
 export default {
   data() {
     return {
@@ -74,7 +81,7 @@ export default {
   },
   methods: {
     // 选择Logo
-    selectLogo() { 
+    selectLogo() {
       this.$getImgFile()
         .then(({ raw, url }) => {
           this.logo = url;
@@ -85,7 +92,7 @@ export default {
         });
     },
     uploadLogo() {
-      const regexp = new RegExp(/^http/g)
+      const regexp = new RegExp(/^http/g);
       if (!this.logo || regexp.test(this.logo)) {
         this.$warnMsg("请选择Logo");
       } else {
@@ -96,7 +103,7 @@ export default {
             file: this.logoBlob
           }
         }).then(result => {
-          this.$parent.logoUrl = convertHttp(result.data.value)
+          this.$parent.logoUrl = convertHttp(result.data.value);
           this.$successMsg("上传成功");
         });
       }
@@ -127,7 +134,7 @@ export default {
 }
 .box {
   position: relative;
-  margin: 1rem .5rem;
+  margin: 1rem 0.5rem;
 }
 .tips {
   position: absolute;
@@ -137,7 +144,7 @@ export default {
 }
 .button {
   position: relative;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 .button-bottom {
   position: relative;

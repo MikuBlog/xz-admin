@@ -306,7 +306,7 @@ export default {
 }
 
 /*webkit*/
-@-webkit-keyframes blues {
+@keyframes blues {
   0% {
     opacity: 0;
   }
@@ -314,7 +314,7 @@ export default {
     opacity: 1;
   }
 }
-@-webkit-keyframes whites {
+@keyframes whites {
   0% {
     opacity: 0;
   }
@@ -326,7 +326,7 @@ export default {
   }
 }
 
-@-webkit-keyframes yellows {
+@keyframes yellows {
   0% {
     opacity: 0;
   }
@@ -339,7 +339,7 @@ export default {
 }
 
 /*moz*/
-@-moz-keyframes blues {
+@keyframes blues {
   0% {
     opacity: 0;
   }
@@ -347,7 +347,7 @@ export default {
     opacity: 1;
   }
 }
-@-moz-keyframes whites {
+@keyframes whites {
   0% {
     opacity: 0;
   }
@@ -359,7 +359,7 @@ export default {
   }
 }
 
-@-moz-keyframes yellows {
+@keyframes yellows {
   0% {
     opacity: 0;
   }
@@ -483,7 +483,7 @@ i:nth-child(n + 3) {
   animation-name: "zoom-c";
 }
 
-@-webkit-keyframes zoom-d {
+@keyframes zoom-d {
   0% {
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
@@ -510,7 +510,7 @@ i:nth-child(n + 3) {
   }
 }
 
-@-webkit-keyframes zoom-b {
+@keyframes zoom-b {
   0% {
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
@@ -532,7 +532,7 @@ i:nth-child(n + 3) {
   }
 }
 
-@-webkit-keyframes zoom-g {
+@keyframes zoom-g {
   0% {
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
@@ -554,7 +554,7 @@ i:nth-child(n + 3) {
   }
 }
 
-@-webkit-keyframes zoom-k {
+@keyframes zoom-k {
   0% {
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
@@ -576,7 +576,7 @@ i:nth-child(n + 3) {
   }
 }
 
-@-webkit-keyframes zoom-c {
+@keyframes zoom-c {
   0% {
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
@@ -700,7 +700,7 @@ i:nth-child(n + 3) {
 	transform: rotate(6deg) skew(0,0) translate(-60%,-5px);*/
 }
 
-@-webkit-keyframes not {
+@keyframes not {
   0% {
   }
   25% {
@@ -775,7 +775,7 @@ i:nth-child(n + 3) {
   clear: left;
 }
 
-@-webkit-keyframes funny {
+@keyframes funny {
   0% {
     -webkit-box-shadow: 0px 0px 0px whitesmoke;
   }
@@ -786,7 +786,7 @@ i:nth-child(n + 3) {
     -webkit-box-shadow: 0px 0px 0px whitesmoke;
   }
 }
-@-moz-keyframes funny {
+@keyframes funny {
   0% {
     -moz-box-shadow: 0px 0px 0px whitesmoke;
   }

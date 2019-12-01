@@ -1,31 +1,38 @@
 <template>
   <div class="home" ref="home" id="home">
     <el-container>
-      <el-scrollbar style="height:100%" class="menu-scrollbar" v-show="!isSmall && isVerticleMenu">
-        <el-menu
-          :default-active="$route.path"
-          :collapse="isCollapse"
-          class="el-menu-vertical-demo collapse-menu"
-          :background-color="menuBackgroundColor"
-          :active-text-color="activeTextColor"
-          :text-color="menuTextColor"
-          :unique-opened="true"
+      <el-aside width="auto">
+        <el-scrollbar
+          style="height:100%"
+          class="menu-scrollbar"
+          v-show="!isSmall && isVerticleMenu"
         >
-          <el-image
-            :src="logoUrl"
-            fit="cover"
-            class="logo-verticle"
-            v-show="showLogo"
-            v-if="!isCollapse"
+          <el-menu
+            :default-active="$route.path"
+            :collapse="isCollapse"
+            class="el-menu-vertical-demo collapse-menu"
+            :background-color="menuBackgroundColor"
+            :active-text-color="activeTextColor"
+            :text-color="menuTextColor"
+            :unique-opened="true"
           >
-            <div slot="error" class="image-slot">
-              <i class="el-icon-picture-outline"></i>
-            </div>
-          </el-image>
-          <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
-          <NavMenu :navMenus="menuList"></NavMenu>
-        </el-menu>
-      </el-scrollbar>
+            <el-image
+              :src="logoUrl"
+              fit="cover"
+              class="logo-verticle"
+              v-show="showLogo"
+              v-if="!isCollapse"
+              @click.native="$router.push({ path: '/home/welcome' })"
+            >
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
+            <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
+            <NavMenu :navMenus="menuList"></NavMenu>
+          </el-menu>
+        </el-scrollbar>
+      </el-aside>
       <Drawer
         class="drawer-menu"
         v-show="isSmall"
@@ -44,7 +51,13 @@
             :unique-opened="true"
             @select="isMenuCollapse = false"
           >
-            <el-image :src="logoUrl" fit="cover" class="logo-verticle" v-show="showLogo">
+            <el-image
+              :src="logoUrl"
+              fit="cover"
+              class="logo-verticle"
+              v-show="showLogo"
+              @click.native="$router.push({ path: '/home/welcome' })"
+            >
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -66,7 +79,13 @@
               mode="horizontal"
               style="width: 100%"
             >
-              <el-image :src="logoUrl" fit="contain" class="logo-horizontal" v-show="showLogo">
+              <el-image
+                :src="logoUrl"
+                fit="contain"
+                class="logo-horizontal"
+                v-show="showLogo"
+                @click.native="$router.push({ path: '/home/welcome' })"
+              >
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -181,13 +200,13 @@
   </div>
 </template>
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
-import settingDrawer from './components/setting_drawer'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
+import settingDrawer from "./components/setting_drawer";
 export default {
-  mixins: [ Initial, Operation, Property ],
-  components: { settingDrawer },
-}
+  mixins: [Initial, Operation, Property],
+  components: { settingDrawer }
+};
 </script>
 <style lang="scss" scoped src="./style/index.scss"></style>

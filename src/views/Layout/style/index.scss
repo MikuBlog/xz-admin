@@ -38,7 +38,7 @@
   width: 200px;
 }
 .el-menu--collapse {
-width: 63px;
+  width: 63px;
 }
 .el-menu-item {
   position: relative;
@@ -232,6 +232,9 @@ width: 63px;
   bottom: 0;
   background: #fefefe;
   border-top: 1px solid #dcdfe6;
+  color: #666;
   white-space: pre-wrap;
   text-indent: 1.3rem;
+  letter-spacing: 1px;
+  font-size: .7rem;
 }

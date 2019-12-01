@@ -1,8 +1,11 @@
+.icon-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
 .box {
   position: relative;
   display: inline-block;
-  width: 100px;
-  height: 100px;
   margin: 1rem 1rem;
   text-align: center;
   border-radius: 1rem;
@@ -21,4 +24,8 @@
 .icon-name {
   margin: 0.5rem 0;
   font-size: 1rem;
+}
+
+i {
+  font-size: 2rem;
 }
