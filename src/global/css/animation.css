@@ -22,20 +22,17 @@
   transition: all .5s;
 }
 
-.xz-animation-enter-active {
-  transition: all .4s .5s;
-}
-
+.xz-animation-enter-active,
 .xz-animation-leave-active {
-  transition: all .4s;
+  transition: all .5s;
 }
 
 .xz-animation-enter {
   opacity: 0;
-  transform: translateX(-25px);
+  transform: translateX(-30px);
 }
 
 .xz-animation-leave-to {
   opacity: 0;
-  transform: translateX(25px);
+  transform: translateX(30px);
 }

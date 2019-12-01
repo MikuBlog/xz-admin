@@ -187,7 +187,7 @@
           <Tag :tagsList="tagsList" />
         </div>
         <el-main class="top" id="top">
-          <transition name="xz-animation">
+          <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
           <div class="back-top">
