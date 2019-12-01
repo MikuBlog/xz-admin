@@ -7,8 +7,6 @@
 .box {
   position: relative;
   display: inline-block;
-  width: 100px;
-  height: 100px;
   margin: 1rem 1rem;
   text-align: center;
   border-radius: 1rem;

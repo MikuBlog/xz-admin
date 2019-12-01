@@ -35,6 +35,10 @@
   flex-basis: 0;
 }
 
+.el-color-picker {
+  height: auto!important;
+}
+
 .el-menu {
   border-right: none;
 }
