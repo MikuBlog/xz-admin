@@ -73,40 +73,4 @@ export default {
     cursor: text;
   }
 }
-.el-breadcrumb__item {
-  position: relative;
-  top: -21px;
-  left: -15px;
-}
-// .bread-list-enter-active {
-//   transition: all 0.6s 0.7s;
-// }
-// .bread-list-leave-active {
-//   transition: all 0.6s;
-// }
-// .bread-list-enter,
-// .bread-list-leave-to {
-//   transform: translateX(-25px);
-//   opacity: 0;
-// }
-.bread-list-enter-active,
-.bread-list-leave-active  {
-  transition: all 0.5s;
-}
-.bread-list-leave-active {
-  position: absolute;
-}
-.bread-list-enter,
-.bread-list-leave-to {
-  opacity: 0;
-}
-.bread-list-enter {
-  transform: translateX(25px);
-}
-.bread-list-leave-to {
-  transform: translateX(-25px);
-}
-.bread-list-move {
-  transition: all .5s;
-}
 </style>

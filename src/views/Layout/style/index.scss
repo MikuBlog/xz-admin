@@ -50,12 +50,6 @@
 .el-icon-circle-close:active {
   color: rgb(19, 180, 255);
 }
-.el-breadcrumb {
-  position: relative;
-  float: left;
-  left: 20px;
-  top: 20px;
-}
 .el-dropdown {
   position: relative;
   float: right;
@@ -77,6 +71,11 @@
   position: absolute;
   right: 0;
   bottom: 0;
+}
+.breadcrumb {
+  position: relative;
+  top: -1px;
+  left: 5px;
 }
 .avatar-box {
   position: relative;
