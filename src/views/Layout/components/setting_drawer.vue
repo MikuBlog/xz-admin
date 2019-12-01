@@ -52,7 +52,7 @@
         <el-image
           style="width: 100%; height: 159px"
           :src="$store.state.setting.background.url"
-          fit="scale-down"
+          fit="cover"
           ref="image"
           class="con-background"
         ></el-image>
