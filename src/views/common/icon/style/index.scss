@@ -1,3 +1,8 @@
+.icon-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
 .box {
   position: relative;
   display: inline-block;
