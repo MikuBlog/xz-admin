@@ -25,7 +25,7 @@ export default {
     }
   },
   created() {
-    this.$store.state.setting.theme = this.$getMemoryPmt("theme")
+    this.$store.state.setting.theme = this.$getMemoryPmt("theme") || "#409eff"
   },
   watch: {
     defaultTheme: {
