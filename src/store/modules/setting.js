@@ -16,7 +16,21 @@ const
     menuStyle: storage.getMemoryPmt('setting') 
     ? storage.getMemoryPmt('setting').menuStyle 
     : 'light',
-    theme: "#409eff"
+    background: {
+      url: storage.getMemoryPmt('setting') 
+      ? storage.getMemoryPmt('setting').background.url 
+      : '',
+      blur: storage.getMemoryPmt('setting') 
+      ? storage.getMemoryPmt('setting').background.blur 
+      : 0,
+      mask: storage.getMemoryPmt('setting') 
+      ? storage.getMemoryPmt('setting').background.mask 
+      : 0,
+      opacity: storage.getMemoryPmt('setting') 
+      ? storage.getMemoryPmt('setting').background.opacity 
+      : 100,
+    },
+    theme: "#409eff",
   }
 
 export default {

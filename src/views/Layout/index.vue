@@ -67,7 +67,10 @@
           </el-menu>
         </el-scrollbar>
       </Drawer>
-      <el-container>
+      <el-container class="container-background">
+        <div class="background" ref="background">
+          <div class="mask" ref="mask"></div>
+        </div>
         <div class="menu" v-show="!isVerticleMenu">
           <el-scrollbar style="height:60px; width: 100%;" class="menu-horizontal-scrollbar">
             <el-menu

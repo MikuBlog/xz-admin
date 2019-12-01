@@ -13,6 +13,7 @@ export default {
       showBreadcrumb: state => state.setting.showBreadcrumb,
       showTags: state => state.setting.showTags,
       menuStyle: state => state.setting.menuStyle,
+      background: state => state.setting.background,
       tagsList: state => state.tags.tagsList,
       menuList: state => state.menu.menuList,
     }),
@@ -55,13 +56,23 @@ export default {
         menuProp = document.querySelectorAll('.el-menu--popup'),
         menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
         drawerContent = document.querySelector('.ivu-drawer-content'),
-        horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
-      //   elMenu = document.querySelectorAll('.el-menu')
-      // elMenu.forEach(val => {
-      //   this.$setStyle(val, 'background', this.menuStyle === 'dark'
-      //   ? this.defaultConfig.menuStyle.dark.backgroundColor
-      //   : this.defaultConfig.menuStyle.light.backgroundColor)
-      // })
+        horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap'),
+        ele = this.$refs.background,
+        mask = this.$refs.mask
+      this.background.url &&
+        (this.$setStyle(ele, "background-image", `url(${this.background.url})`),
+          this.$setStyle(ele, "opacity", `${this.background.opacity / 100}`),
+          this.$setStyle(ele, "filter", `blur(${this.background.blur}px)`),
+          this.$setStyle(
+            ele,
+            "background-size",
+            `${this.size == "fill" ? "100% 100%" : this.size}`
+          ),
+          this.$setStyle(
+            mask,
+            "background",
+            `rgba(0, 0, 0, ${this.background.mask / 100})`
+          ));
       this.$setStyle(
         menuScrollBar,
         'background',
