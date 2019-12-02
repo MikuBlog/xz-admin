@@ -31,4 +31,6 @@ export default {
   systemSetting: true,
   // 全屏icon
   fullScreen: true,
+  // 布局大小icon
+  layoutSize: true
 }

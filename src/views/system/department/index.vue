@@ -42,7 +42,7 @@
           :columns="columns" 
           :renderHeader="renderHeader"
           :stripe="true"
-          size="small">
+          >
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">
                 <el-tag
@@ -55,19 +55,17 @@
                 <span>{{ scope.row.createTime }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="130px" align="center">
+            <el-table-column label="操作" width="180" align="center">
               <template slot-scope="scope">
                 <el-button
                   type="primary"
                   icon="el-icon-edit"
                   @click="editDepartmentItem(scope.row)"
-                  size="small"
                 />
                 <el-button
                   slot="reference"
                   type="danger"
                   icon="el-icon-delete"
-                  size="small"
                   @click="deleteDepartment(scope.row)"
                 />
               </template>

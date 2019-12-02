@@ -54,21 +54,19 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.remark }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="150" fixed="right" align="center">
+            <el-table-column label="操作" width="180" fixed="right" align="center">
               <template slot-scope="scope">
                 <el-button
                   type="primary"
                   icon="el-icon-edit"
                   class="margin-box"
                   @click="editDictionary(scope.row)"
-                  size="small"
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   class="margin-box"
                   @click="deleteDictionary(scope.row)"
-                  size="small"
                 ></el-button>
               </template>
             </el-table-column>
@@ -137,13 +135,11 @@
                   type="primary"
                   icon="el-icon-edit"
                   @click="editDetail(scope.row)"
-                  size="small"
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   @click="deleteDetail(scope.row)"
-                  size="small"
                 ></el-button>
               </template>
             </el-table-column>

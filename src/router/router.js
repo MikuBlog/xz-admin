@@ -4,9 +4,9 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const 
-  Login = () => import('@/views/login/index.vue'),
-  Error = () => import('@/views/error/404.vue'),
-  Permission = () => import('@/views/error/403.vue')
+  Login = () => import('@/views/login/index'),
+  Error = () => import('@/views/error/404'),
+  Permission = () => import('@/views/error/403')
 
 const router = new Router({
   mode: 'history',

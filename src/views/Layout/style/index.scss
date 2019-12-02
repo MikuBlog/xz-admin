@@ -98,6 +98,12 @@
   text-align: center;
   transition: 0.3s;
 }
+.table-size {
+  position: relative;
+  top: -4px;
+  margin-left: .8rem;
+  font-size: 20px;
+}
 .el-icon-s-tools,
 .el-icon-question {
   position: relative;
@@ -229,15 +235,19 @@
   overflow-x: hidden;
 }
 .footer {
-  height: 30px !important;
-  line-height: 30px;
   padding: 0;
-  background: #fefefe;
-  color: #666;
-  white-space: pre-wrap;
-  text-indent: 1.3rem;
-  letter-spacing: 1px;
-  font-size: 0.7rem;
+  .coppy-right {
+    position: relative;
+    line-height: 29px;
+    height: 29px;
+    background: #fefefe;
+    border-top: 1px solid #dcdfe6;
+    color: #666;
+    white-space: pre-wrap;
+    text-indent: 1.3rem;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+  }
 }
 .background {
   position: absolute;

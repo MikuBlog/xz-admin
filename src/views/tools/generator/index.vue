@@ -52,7 +52,6 @@
                       slot="reference"
                       type="primary"
                       icon="el-icon-magic-stick"
-                      size="small"
                       @click="showGeneratorCodeBox(scope.row)"
                     >生成代码</el-button>
                   </template>

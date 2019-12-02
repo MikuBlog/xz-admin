@@ -1,10 +1,11 @@
+import Vue from 'vue'
 import { mapMutations } from 'vuex'
 import convertHttp from '@/utils/convertHttp'
 export default {
   methods: {
     ...mapMutations([
-      "setUserInfo",
-      "removeAllTags"
+      "SET_USER_INFO",
+      "REMOVE_ALL_TAGS"
     ]),
     // 获取用户信息
     getUserInfo() {
@@ -13,9 +14,18 @@ export default {
         method: "get"
       }).then(result => {
         result.data.avatar = convertHttp(result.data.avatar)
-        this.setUserInfo(result.data)
+        this.SET_USER_INFO(result.data)
         this.user = this.$store.state.user
         this.squareUrl = this.user.avatar
+      })
+    },
+    // 设置表格大小
+    setTableSize(size) {
+      this.$store.state.setting.layoutSize = size
+      this.$setMemoryPmt('setting', this.$store.state.setting)
+      this.initialSize()
+      this.$router.replace({
+        path: `/home/redirect?path=${this.$route.fullPath}`
       })
     },
     // 返回顶部
@@ -55,7 +65,7 @@ export default {
     },
     // 移除所有标签
     removeTags() {
-      this.removeAllTags()
+      this.REMOVE_ALL_TAGS()
       this.navigateTo('/home/welcome')
     },
     // 跳转路由

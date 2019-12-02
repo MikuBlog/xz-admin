@@ -57,7 +57,7 @@
           class="con-background"
         ></el-image>
         <div class="block" style="margin-top: 2rem; padding: 0 10px">
-          <span class="demonstration">透明度：</span>
+          <span class="demonstration">背景透明度：</span>
           <el-slider
             v-model="$store.state.setting.background.opacity"
             :format-tooltip="formatTooltip"
@@ -65,7 +65,15 @@
           ></el-slider>
         </div>
         <div class="block" style="padding: 0 10px">
-          <span class="demonstration">模糊度：</span>
+          <span class="demonstration">卡片透明度：</span>
+          <el-slider
+            v-model="$store.state.setting.background.cardOpacity"
+            :format-tooltip="formatTooltip"
+            @change="setCard"
+          ></el-slider>
+        </div>
+        <div class="block" style="padding: 0 10px">
+          <span class="demonstration">背景模糊度：</span>
           <el-slider
             v-model="$store.state.setting.background.blur"
             :format-tooltip="formatTooltip"
@@ -73,7 +81,7 @@
           ></el-slider>
         </div>
         <div class="block" style="padding: 0 10px">
-          <span class="demonstration">遮罩浓度：</span>
+          <span class="demonstration">背景遮罩浓度：</span>
           <el-slider
             v-model="$store.state.setting.background.mask"
             :format-tooltip="formatTooltip"
@@ -121,6 +129,8 @@ export default {
     setTimeout(() => {
       // 插入元素
       this.insertEle();
+      // 初始化卡片样式
+      this.setCard()
     });
   },
   methods: {
@@ -152,6 +162,28 @@ export default {
                 bottom: 0;
                 background: rgba(0, 0, 0, ${this.settings.background.mask / 100});
             `;
+    },
+    // 设置卡片
+    setCard() {
+      const style = document.querySelector('.card-opacity')
+      if(style) {
+        style.innerText = style.innerText = `
+          .el-card {
+            opacity: ${this.settings.background.cardOpacity / 100}!important;
+          }
+        `
+      }else {
+        const 
+          style = document.createElement('style'),
+          head = document.querySelector('head')
+        style.innerText = `
+          .el-card {
+            opacity: ${this.settings.background.cardOpacity / 100}!important;
+          }
+        `
+        style.className = "card-opacity"
+        head.appendChild(style)
+      }
     },
     // 值格式化
     formatTooltip(val) {
@@ -235,7 +267,7 @@ export default {
 }
 .button-bottom {
   position: relative;
-  margin-top: 3rem;
+  margin: 0.5rem 0 3rem 0;
 }
 .switch-box {
   position: relative;

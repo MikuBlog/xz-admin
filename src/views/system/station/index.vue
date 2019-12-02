@@ -55,7 +55,6 @@
                 <div slot="reference" class="name-wrapper">
                   <el-tag
                     :type="scope.row.enabled ? '' : 'info'"
-                    size="small"
                   >{{ scope.row.enabled ? "正常" : "禁用"}}</el-tag>
                 </div>
               </template>
@@ -65,21 +64,19 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" fixed="right" width="150" align="center">
+            <el-table-column label="操作" fixed="right" width="180" align="center">
               <template slot-scope="scope">
                 <el-button
                   type="primary"
                   icon="el-icon-edit"
                   @click="editStationItem(scope.row)"
                   class="margin-box"
-                  size="small"
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   @click="deleteStation(scope.row)"
-                  class="margin-box"
-                  size="small"
+                  class="margin-box"    
                 ></el-button>
               </template>
             </el-table-column>

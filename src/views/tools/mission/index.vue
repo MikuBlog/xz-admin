@@ -60,7 +60,7 @@
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">
                 <div slot="reference">
-                  <el-tag :type="scope.row.paused ? 'info' : 'success'" size="small">
+                  <el-tag :type="scope.row.paused ? 'info' : 'success'">
                     {{ scope.row.paused
                     ? '已暂停'
                     : '运行中' }}
@@ -75,10 +75,10 @@
             </el-table-column>
             <el-table-column label="操作" width="200" fixed="right" align="center">
               <template slot-scope="scope">
-                <el-button type="text" @click="editItem(scope.row)" size="small">编辑</el-button>
-                <el-button type="text" @click="executeItem(scope.row)" size="small">执行</el-button>
-                <el-button type="text" @click="recoverItem(scope.row)" size="small">{{ scope.row.paused ? '恢复' : '暂停'}}</el-button>
-                <el-button type="text" @click="deleteItem(scope.row)" size="small">删除</el-button>
+                <el-button type="text" @click="editItem(scope.row)">编辑</el-button>
+                <el-button type="text" @click="executeItem(scope.row)">执行</el-button>
+                <el-button type="text" @click="recoverItem(scope.row)">{{ scope.row.paused ? '恢复' : '暂停'}}</el-button>
+                <el-button type="text" @click="deleteItem(scope.row)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>

@@ -99,7 +99,7 @@
         </div>
         <el-header class="navbar-box" style="height: 50px;">
           <div class="navbar">
-            <el-dropdown trigger="click">
+            <el-dropdown trigger="click" size="small">
               <div class="avatar-box">
                 <div class="block">
                   <el-avatar shape="square" :size="45" :src="squareUrl">
@@ -133,6 +133,25 @@
                 v-show="defaultConfig.helpPage"
               >
                 <i class="el-icon-question" @click="$router.push({ path: '/home/docs' })"></i>
+              </el-tooltip>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="布局大小"
+                placement="bottom"
+                v-show="defaultConfig.layoutSize"
+              >
+                <el-dropdown trigger="click" size="small">
+                  <div>
+                    <svg-icon icon-class="font-size" class="table-size" />
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item :disabled="layoutSize === ''" @click.native="setTableSize('')">Default</el-dropdown-item>
+                      <el-dropdown-item :disabled="layoutSize === 'medium'" @click.native="setTableSize('medium')">Medium</el-dropdown-item>
+                      <el-dropdown-item :disabled="layoutSize === 'small'" @click.native="setTableSize('small')">Small</el-dropdown-item>
+                      <el-dropdown-item :disabled="layoutSize === 'mini'" @click.native="setTableSize('mini')">Mini</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </div>
+                </el-dropdown>
               </el-tooltip>
               <el-tooltip
                 class="item"
@@ -191,12 +210,12 @@
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
           <div class="back-top">
-            <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop"></el-button>
+            <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop" size="large"></el-button>
           </div>
         </el-main>
-        <el-footer class="footer">
+        <el-footer class="footer" height="30px">
           <div class="coppy-right">
-            <span>© 2019 XuanZai Wteam.All rights reserved.</span>
+            <span>© 2019 xuanzai Wteam.All rights reserved.</span>
           </div>
         </el-footer>
       </el-container>

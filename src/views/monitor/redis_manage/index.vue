@@ -29,7 +29,7 @@ import { MessageBox } from 'mint-ui';
             <el-table-column label="VALUE" width="100" align="center">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">
-                  <el-button @click="showDetail(scope.row.value)" type="text" size="small">查看详情</el-button>
+                  <el-button @click="showDetail(scope.row.value)" type="text" >查看详情</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -39,7 +39,6 @@ import { MessageBox } from 'mint-ui';
                   type="danger"
                   icon="el-icon-delete"
                   @click="deleteRedis(scope.row)"
-                  size="small"
                 ></el-button>
               </template>
             </el-table-column>

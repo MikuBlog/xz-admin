@@ -62,7 +62,7 @@ import { MessageBox } from 'mint-ui';
             <el-table-column label="异常详情" align="center">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">
-                  <el-button @click="showDetail(scope.row.id)" type="text" size="small">查看详情</el-button>
+                  <el-button @click="showDetail(scope.row.id)" type="text">查看详情</el-button>
                 </div>
               </template>
             </el-table-column>

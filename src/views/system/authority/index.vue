@@ -45,14 +45,12 @@
                   type="primary"
                   icon="el-icon-edit"
                   @click="editAuthorityItem(scope.row)"
-                  size="small"
                 />
                 <el-button
                   slot="reference"
                   type="danger"
                   @click="deleteAuthorityItem(scope.row)"
                   icon="el-icon-delete"
-                  size="small"
                 />
               </template>
             </el-table-column>

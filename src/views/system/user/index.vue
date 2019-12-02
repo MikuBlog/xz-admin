@@ -92,7 +92,8 @@
           style="width: 100%;"
           @selection-change="handleSelectionChange"
           :row-key="getRowKey"
-          :stripe="true">
+          :stripe="true"
+          >
             <el-table-column type="selection" width="55" />
             <el-table-column label="用户名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
@@ -139,13 +140,11 @@
                   type="primary"
                   icon="el-icon-edit"
                   @click="editUserItem(scope.row)"
-                  size="small"
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   @click="deleteUserItem(scope.row)"
-                  size="small"
                 ></el-button>
               </template>
             </el-table-column>

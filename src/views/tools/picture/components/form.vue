@@ -16,7 +16,7 @@
       <img :src="dialogImageUrl" width="100%" alt />
     </el-dialog>
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="updateList">确认</el-button>
+      <el-button type="primary" @click="updateList" size="small">确认</el-button>
     </div>
   </el-dialog>
 </template>

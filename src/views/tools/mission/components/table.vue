@@ -56,7 +56,7 @@
             </el-table-column>
             <el-table-column label="耗时" align="center">
               <template slot-scope="scope" :show-overflow-tooltip="true">
-                <el-tag type="primary" size="small">
+                <el-tag type="primary">
                   {{ scope.row.time }}ms
                 </el-tag>
               </template>
@@ -64,7 +64,7 @@
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">
                 <div slot="reference">
-                  <el-tag :type="scope.row.successful ? 'success' : 'info'" size="small">
+                  <el-tag :type="scope.row.successful ? 'success' : 'info'">
                     {{ scope.row.successful
                     ? '成功'
                     : '失败' }}

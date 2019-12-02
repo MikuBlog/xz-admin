@@ -32,7 +32,6 @@
             :data="pictureList"
             :highlight-current-row="true"
             :stripe="true"
-            size="small"
             style="width: 100%;"
             @selection-change="selectItem"
           >
@@ -59,13 +58,11 @@
                   type="success"
                   icon="el-icon-share"
                   @click="copy(scope.row)"
-                  size="small"
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   @click="deletePicture(scope.row)"
-                  size="small"
                 ></el-button>
               </template>
             </el-table-column>

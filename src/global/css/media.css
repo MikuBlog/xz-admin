@@ -4,25 +4,25 @@
   }
 }
 
-@media screen and (max-width: 1920px) {
+@media screen and (max-width: 1919px) {
   .card-gutter-lg {
     margin-top: 1rem;
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1199px) {
   .card-gutter-md {
     margin-top: 1rem;
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .card-gutter-sm {
     margin-top: 1rem;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .card-gutter-xs {
     margin-top: 1rem;
   }

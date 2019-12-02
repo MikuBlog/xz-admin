@@ -11,7 +11,7 @@
         <el-form-item label="生成路径" prop="path">
           <el-input placeholder="请输入路径" v-model="form.path"/>
         </el-form-item>
-        <el-table :data="tableList" size="small" style="width: 100%;margin-bottom: 15px">
+        <el-table :data="tableList" style="width: 100%;margin-bottom: 15px">
           <el-table-column label="序号" width="80" align="center">
             <template slot-scope="scope">
               <div>{{ scope.$index + 1 }}</div>
@@ -89,8 +89,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="text" size="small" @click="cancel">取消</el-button>
-        <el-button type="primary" size="small" @click="doSubmit">生成</el-button>
+        <el-button type="text" @click="cancel" size="small">取消</el-button>
+        <el-button type="primary" @click="doSubmit" size="small">生成</el-button>
       </div>
     </el-dialog>
   </div>
