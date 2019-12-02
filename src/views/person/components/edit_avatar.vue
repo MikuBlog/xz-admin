@@ -45,7 +45,7 @@
           <img :src="previews.url" :style="previews.img" />
         </div>
         <div class="ensure-button-box">
-          <el-button type="primary" @click="uploadAvatar">保 存</el-button>
+          <el-button type="primary" @click="uploadAvatar" size="small">保 存</el-button>
         </div>
       </div>
     </div>

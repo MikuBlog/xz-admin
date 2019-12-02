@@ -89,8 +89,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="text" @click="cancel">取消</el-button>
-        <el-button type="primary" @click="doSubmit">生成</el-button>
+        <el-button type="text" @click="cancel" size="small">取消</el-button>
+        <el-button type="primary" @click="doSubmit" size="small">生成</el-button>
       </div>
     </el-dialog>
   </div>
