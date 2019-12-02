@@ -263,15 +263,20 @@
 }
 
 .footer {
-  height: 30px !important;
   line-height: 30px;
   padding: 0;
-  background: #fefefe;
   color: #666;
   white-space: pre-wrap;
   text-indent: 1.3rem;
   letter-spacing: 1px;
   font-size: 0.7rem;
+}
+
+.footer .coppy-right {
+  position: relative;
+  height: 29px;
+  background: #fefefe;
+  border-top: 1px solid #dcdfe6;
 }
 
 .background {

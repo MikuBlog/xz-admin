@@ -194,7 +194,7 @@
             <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop"></el-button>
           </div>
         </el-main>
-        <el-footer class="footer">
+        <el-footer class="footer" height="30px">
           <div class="coppy-right">
             <span>© 2019 XuanZai Wteam.All rights reserved.</span>
           </div>
