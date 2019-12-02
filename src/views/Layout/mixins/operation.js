@@ -65,7 +65,7 @@ export default {
     },
     // 移除所有标签
     removeTags() {
-      this.removeAllTags()
+      this.REMOVE_ALL_TAGS()
       this.navigateTo('/home/welcome')
     },
     // 跳转路由
