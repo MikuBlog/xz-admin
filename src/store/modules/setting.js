@@ -17,7 +17,13 @@ const
       ? storage.getMemoryPmt('setting').menuStyle
       : 'light',
     background: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').background)
-      ? storage.getMemoryPmt('setting').background
+      ? {
+        url: storage.getMemoryPmt('setting').background.url ? storage.getMemoryPmt('setting').background.url : "",
+        blur: storage.getMemoryPmt('setting').background.blur ? storage.getMemoryPmt('setting').background.blur : 0,
+        mask: storage.getMemoryPmt('setting').background.mask ? storage.getMemoryPmt('setting').background.mask : 0,
+        opacity: storage.getMemoryPmt('setting').background.opacity ? storage.getMemoryPmt('setting').background.opacity : 100,
+        cardOpacity: storage.getMemoryPmt('setting').background.cardOpacity ? storage.getMemoryPmt('setting').background.cardOpacity : 90
+      }
       : {
         url: "",
         blur: 0,
