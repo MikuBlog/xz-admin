@@ -118,10 +118,6 @@ label {
   top: 2px;
 }
 
-.el-card {
-  opacity: .9!important;
-}
-
 .top-floor {
   z-index: 9999!important;
 }

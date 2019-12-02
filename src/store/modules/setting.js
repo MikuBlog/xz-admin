@@ -22,7 +22,8 @@ const
         url: "",
         blur: 0,
         mask: 0,
-        opacity: 100
+        opacity: 100,
+        cardOpacity: 90
       },
     theme: "#409eff",
   }

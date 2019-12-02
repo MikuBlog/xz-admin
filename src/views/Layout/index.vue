@@ -196,7 +196,7 @@
         </el-main>
         <el-footer class="footer" height="30px">
           <div class="coppy-right">
-            <span>© 2019 XuanZai Wteam.All rights reserved.</span>
+            <span>© 2019 xuanzai Wteam.All rights reserved.</span>
           </div>
         </el-footer>
       </el-container>
