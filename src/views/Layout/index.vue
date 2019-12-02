@@ -67,7 +67,10 @@
           </el-menu>
         </el-scrollbar>
       </Drawer>
-      <el-container>
+      <el-container class="container-background">
+        <div class="background" ref="background">
+          <div class="mask" ref="mask"></div>
+        </div>
         <div class="menu" v-show="!isVerticleMenu">
           <el-scrollbar style="height:60px; width: 100%;" class="menu-horizontal-scrollbar">
             <el-menu
@@ -184,16 +187,18 @@
           <Tag :tagsList="tagsList" />
         </div>
         <el-main class="top" id="top">
-          <transition name="xz-animation">
+          <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
           <div class="back-top">
             <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop"></el-button>
           </div>
+        </el-main>
+        <el-footer class="footer">
           <div class="coppy-right">
             <span>© 2019 XuanZai Wteam.All rights reserved.</span>
           </div>
-        </el-main>
+        </el-footer>
       </el-container>
     </el-container>
     <settingDrawer ref="setting" />

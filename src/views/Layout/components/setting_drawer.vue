@@ -1,11 +1,12 @@
 <template>
-  <Drawer v-model="isSetting" width="350px" title="系统设置" class="drawer-setting">
+  <Drawer v-model="isSetting" width="350px" title="自定义" class="drawer-setting">
     <el-tabs v-model="activeName" type="card">
-      <el-tab-pane label="DIY" name="layout"></el-tab-pane>
-      <el-tab-pane label="Logo" name="logo"></el-tab-pane>
+      <el-tab-pane label="系统样式" name="DIY"></el-tab-pane>
+      <el-tab-pane label="系统背景" name="Background"></el-tab-pane>
+      <el-tab-pane label="系统图标" name="Logo"></el-tab-pane>
     </el-tabs>
     <el-scrollbar style="height: 100%">
-      <div v-show="activeName === 'layout'">
+      <div v-show="activeName === 'DIY'">
         <h2 style="margin: 2rem 0">菜单颜色风格</h2>
         <div class="radio-box" @change="$nextTick(() => { $parent.initialStyle() })">
           <el-radio-group v-model="$store.state.setting.menuStyle">
@@ -46,7 +47,44 @@
           </div>
         </div>
       </div>
-      <div v-show="activeName === 'logo'">
+      <div v-show="activeName === 'Background'">
+        <h2 style="margin: 2rem 0">系统背景设置</h2>
+        <el-image
+          style="width: 100%; height: 159px"
+          :src="$store.state.setting.background.url"
+          fit="cover"
+          ref="image"
+          class="con-background"
+        ></el-image>
+        <div class="block" style="margin-top: 2rem; padding: 0 10px">
+          <span class="demonstration">透明度：</span>
+          <el-slider
+            v-model="$store.state.setting.background.opacity"
+            :format-tooltip="formatTooltip"
+            @change="getVal"
+          ></el-slider>
+        </div>
+        <div class="block" style="padding: 0 10px">
+          <span class="demonstration">模糊度：</span>
+          <el-slider
+            v-model="$store.state.setting.background.blur"
+            :format-tooltip="formatTooltip"
+            @change="getVal"
+          ></el-slider>
+        </div>
+        <div class="block" style="padding: 0 10px">
+          <span class="demonstration">遮罩浓度：</span>
+          <el-slider
+            v-model="$store.state.setting.background.mask"
+            :format-tooltip="formatTooltip"
+            @change="getVal"
+          ></el-slider>
+        </div>
+        <div class="button">
+          <el-button type="primary" style="width: 100%" @click="selectBackground">选择背景</el-button>
+        </div>
+      </div>
+      <div v-show="activeName === 'Logo'">
         <h2 style="margin: 2rem 0">系统Logo设置</h2>
         <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
         <div class="button" v-permission="['ADMIN']">
@@ -71,7 +109,7 @@ export default {
     return {
       logo: "",
       isSetting: false,
-      activeName: "layout"
+      activeName: "DIY"
     };
   },
   computed: {
@@ -79,13 +117,61 @@ export default {
       settings: state => state.setting
     })
   },
+  mounted() {
+    setTimeout(() => {
+      // 插入元素
+      this.insertEle();
+    });
+  },
   methods: {
+    // 插入元素
+    insertEle() {
+      const image =
+        document.querySelector(".el-image__inner") ||
+        document.querySelector(".el-image__error"),
+        mask = document.createElement("div");
+      mask.className = "small-mask";
+      try {
+        this.$insertAfter(mask, image);
+        this.getVal();
+      } catch (e) { }
+    },
+    // 图片预览
+    getVal() {
+      const 
+        child = document.querySelector(".con-background .el-image__inner"),
+        mask = document.querySelector(".small-mask");
+      this.settings.background.url &&
+        (this.$setStyle(child, "opacity", `${this.settings.background.opacity / 100}`),
+        this.$setStyle(child, "filter", `blur(${this.settings.background.blur}px)`));
+      mask.style.cssText = `
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, ${this.settings.background.mask / 100});
+            `;
+    },
+    // 值格式化
+    formatTooltip(val) {
+      return val / 100;
+    },
     // 选择Logo
     selectLogo() {
       this.$getImgFile()
         .then(({ raw, url }) => {
           this.logo = url;
           this.logoBlob = raw;
+        })
+        .catch(e => {
+          this.$warnMsg(e);
+        });
+    },
+    selectBackground() {
+      this.$getImgFile()
+        .then(({ url }) => {
+          this.settings.background.url = url;
         })
         .catch(e => {
           this.$warnMsg(e);
@@ -112,6 +198,7 @@ export default {
     saveSetting() {
       this.$setMemoryPmt("setting", this.settings);
       this.$successMsg("保存设置成功");
+      this.$parent.initialStyle();
     }
   }
 };
