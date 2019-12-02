@@ -70,14 +70,12 @@
                 <el-button
                   type="primary"
                   icon="el-icon-edit"
-                  @click="editRoleItem(scope.row)"
-                  size="small"
+                  @click="editRoleItem(scope.row)" 
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
-                  @click="deleteRole( scope.row)"
-                  size="small"
+                  @click="deleteRole( scope.row)"                  
                 ></el-button>
               </template>
             </el-table-column>
@@ -129,7 +127,6 @@
               style="float: right; padding: 5px 10px"
               :disabled="!showButton"
               @click="savePermission"
-              size="mini"
             >
               <i class="el-icon-check el-icon--left"></i>保存
             </el-button>

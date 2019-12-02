@@ -1,10 +1,13 @@
 import { mapState } from 'vuex'
+import Vue from 'vue'
 export default {
   created() {
     // 获取用户信息
     this.getUserInfo()
     // 获取Logo信息
     this.getLogo()
+    // 初始化布局大小
+    this.initialSize()
   },
   computed: {
     ...mapState({
@@ -14,6 +17,7 @@ export default {
       showTags: state => state.setting.showTags,
       menuStyle: state => state.setting.menuStyle,
       background: state => state.setting.background,
+      layoutSize: state => state.setting.layoutSize,
       tagsList: state => state.tags.tagsList,
       menuList: state => state.menu.menuList,
     }),
@@ -49,6 +53,9 @@ export default {
     })
   },
   methods: {
+    initialSize() {
+      Vue.prototype.$ELEMENT = { size: this.layoutSize, zIndex: 2000 }
+    },
     // 初始化样式
     initialStyle() {
       const

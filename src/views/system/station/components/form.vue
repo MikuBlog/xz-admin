@@ -1,6 +1,6 @@
 <template>
   <el-dialog :append-to-body="true" :visible.sync="dialog" :title="isAdd ? '新增岗位' : '编辑岗位'" width="500px">
-    <el-form status-icon ref="stationForm" :model="stationForm" :rules="rules" size="small" label-width="80px">
+    <el-form status-icon ref="stationForm" :model="stationForm" :rules="rules" label-width="80px">
       <el-form-item label="名称" prop="name">
         <el-input v-model="stationForm.name" style="width: 370px;"/>
       </el-form-item>
@@ -15,8 +15,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button type="text" @click="hideBox" size="small" class="margin-box">取消</el-button>
-      <el-button type="primary" @click="doSubmit" size="small" class="margin-box">确认</el-button>
+      <el-button type="text" @click="hideBox" class="margin-box">取消</el-button>
+      <el-button type="primary" @click="doSubmit" class="margin-box">确认</el-button>
     </div>
   </el-dialog>
 </template>

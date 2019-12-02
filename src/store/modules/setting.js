@@ -25,6 +25,9 @@ const
         opacity: 100,
         cardOpacity: 90
       },
+      layoutSize: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').layoutSize !== undefined)
+    ? storage.getMemoryPmt('setting').layoutSize
+    : 'medium',
     theme: "#409eff",
   }
 export default {

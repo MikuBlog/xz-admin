@@ -32,11 +32,11 @@ import { edit } from '@/api/user';
             <div slot="footer" class="dialog-footer">
                 <el-button 
                 @click="isShowAddBox = false" 
-                size="small">取 消</el-button>
+                >取 消</el-button>
                 <el-button 
                 type="primary" 
                 @click="submitForm('addForm')"
-                size="small">确 定</el-button>
+                >确 定</el-button>
             </div>
         </el-dialog>
 </template>

@@ -55,7 +55,6 @@
                 <div slot="reference" class="name-wrapper">
                   <el-tag
                     :type="scope.row.enabled ? '' : 'info'"
-                    size="small"
                   >{{ scope.row.enabled ? "正常" : "禁用"}}</el-tag>
                 </div>
               </template>
@@ -72,14 +71,14 @@
                   icon="el-icon-edit"
                   @click="editStationItem(scope.row)"
                   class="margin-box"
-                  size="small"
+                  
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   @click="deleteStation(scope.row)"
                   class="margin-box"
-                  size="small"
+                  
                 ></el-button>
               </template>
             </el-table-column>

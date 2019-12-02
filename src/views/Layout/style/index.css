@@ -119,6 +119,13 @@
   transition: 0.3s;
 }
 
+.table-size {
+  position: relative;
+  top: -4px;
+  margin-left: .8rem;
+  font-size: 20px;
+}
+
 .el-icon-s-tools,
 .el-icon-question {
   position: relative;

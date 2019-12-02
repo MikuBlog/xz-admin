@@ -71,7 +71,7 @@
             </el-table-column>
             <el-table-column label="操作" fixed="right" width="150" align="center">
               <template slot-scope="scope">
-                <el-button type="text" @click="kickOut(scope.row)" size="small">踢出</el-button>
+                <el-button type="text" @click="kickOut(scope.row)">踢出</el-button>
               </template>
             </el-table-column>
           </el-table>

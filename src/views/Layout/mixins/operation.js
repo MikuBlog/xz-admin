@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { mapMutations } from 'vuex'
 import convertHttp from '@/utils/convertHttp'
 export default {
@@ -16,6 +17,15 @@ export default {
         this.setUserInfo(result.data)
         this.user = this.$store.state.user
         this.squareUrl = this.user.avatar
+      })
+    },
+    // 设置表格大小
+    setTableSize(size) {
+      this.$store.state.setting.layoutSize = size
+      this.$setMemoryPmt('setting', this.$store.state.setting)
+      this.initialSize()
+      this.$router.replace({
+        path: `/home/redirect?path=${this.$route.fullPath}`
       })
     },
     // 返回顶部

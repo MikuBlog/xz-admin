@@ -42,7 +42,7 @@
           :columns="columns" 
           :renderHeader="renderHeader"
           :stripe="true"
-          size="small">
+          >
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">
                 <el-tag
@@ -61,13 +61,11 @@
                   type="primary"
                   icon="el-icon-edit"
                   @click="editDepartmentItem(scope.row)"
-                  size="small"
                 />
                 <el-button
                   slot="reference"
                   type="danger"
                   icon="el-icon-delete"
-                  size="small"
                   @click="deleteDepartment(scope.row)"
                 />
               </template>

@@ -28,7 +28,7 @@
           :columns="columns" 
           :renderHeader="renderHeader"
           :stripe="true"
-          size="small">
+          >
             <el-table-column prop="icon" label="图标" align="center">
               <template slot-scope="scope">
                 <svg-icon :icon-class="scope.row.icon" />
@@ -44,7 +44,6 @@
             <el-table-column prop="iframe" label="内部菜单" align="center">
               <template slot-scope="scope">
                 <el-tag
-                  size="small"
                   effect="dark"
                   :type="!scope.row.iframe ? 'success' : 'info'"
                 >{{!scope.row.iframe ? '是' : '否'}}</el-tag>
@@ -53,7 +52,6 @@
             <el-table-column prop="enabled" label="是否显示" align="center">
               <template slot-scope="scope">
                 <el-tag
-                  size="small"
                   effect="dark"
                   :type="scope.row.enabled ? 'success' : 'info'"
                 >{{scope.row.enabled ? '是' : '否'}}</el-tag>
@@ -70,14 +68,12 @@
                   type="primary"
                   icon="el-icon-edit"
                   @click="editMenuItem(scope.row)"
-                  size="small"
                 />
                 <el-button
                   slot="reference"
                   type="danger"
                   @click="deleteMenuItem(scope.row)"
                   icon="el-icon-delete"
-                  size="small"
                 />
               </template>
             </el-table-column>

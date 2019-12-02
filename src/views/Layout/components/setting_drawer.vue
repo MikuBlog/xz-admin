@@ -129,6 +129,7 @@ export default {
     setTimeout(() => {
       // 插入元素
       this.insertEle();
+      // 初始化卡片样式
       this.setCard()
     });
   },
@@ -162,6 +163,7 @@ export default {
                 background: rgba(0, 0, 0, ${this.settings.background.mask / 100});
             `;
     },
+    // 设置卡片
     setCard() {
       const style = document.querySelector('.card-opacity')
       if(style) {
