@@ -11,8 +11,8 @@ module.exports = {
     //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin) 
     // 解决IE打开空白页面问题
     config.module
-      .rule('iview')
-      .test(/iview.src.*?js$/)
+      .rule('view-design')
+      .test(/view-design.src.*?js$/)
       .use('babel')
       .loader('babel-loader')
       .end()
