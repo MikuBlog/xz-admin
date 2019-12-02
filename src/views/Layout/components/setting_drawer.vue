@@ -235,7 +235,7 @@ export default {
 }
 .button-bottom {
   position: relative;
-  margin-top: 3rem;
+  margin: .5rem 0 3rem 0;
 }
 .switch-box {
   position: relative;
