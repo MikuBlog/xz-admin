@@ -11,19 +11,19 @@ const
   },
   mutations = {
     // 添加标签页
-    addTags(state, tags) {
+    ADD_TAGS(state, tags) {
       state.tagsList.push(tags)
       // 缓存tags
       storage.setMemorySes('tags', state.tagsList)
     },
     // 删除指定标签
-    removeTags(state, index) {
+    REMOVE_TAGS(state, index) {
       state.tagsList.splice(index, 1)
       // 缓存tags
       storage.setMemorySes('tags', state.tagsList)
     },
     // 移除所有标签页
-    removeAllTags(state) {
+    REMOVE_ALL_TAGS(state) {
       state.tagsList.splice(1)
       // 清除tags缓存
       storage.setMemorySes('tags', "")

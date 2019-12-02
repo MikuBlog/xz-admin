@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["removeTags"]),
+    ...mapMutations(["REMOVE_TAGS"]),
     moveToCurrentTag() {
       const tags = this.$refs.tag;
       this.$nextTick(() => {
@@ -74,7 +74,7 @@ export default {
           if (item.path == this.$route.path && i != len - 1) {
             this.$router.push({ path: this.tagsList[i + 1].path });
           }
-          this.removeTags(i);
+          this.REMOVE_TAGS(i);
         }
       }
     },

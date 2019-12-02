@@ -104,7 +104,7 @@ function getRouter() {
       method: "get"
     }).then(result => {
       const list = result.data
-      store.commit("setMenuList", list)
+      store.commit("SET_MENU_LIST", list)
       generateRouter(list, layout)
       router.addRoutes([layout])
       router.addRoutes([{
@@ -128,7 +128,7 @@ function addTags(tag) {
       return
     }
   }
-  store.commit('addTags', {
+  store.commit('ADD_TAGS', {
     name: tag.name,
     meta: tag.meta,
     path: tag.path
@@ -138,7 +138,7 @@ function addTags(tag) {
 // 清除缓存
 function removeRedis() {
   store.commit("setMenuList", [])
-  store.commit("removeAllTags")
+  store.commit("REMOVE_ALL_TAGS")
 }
 
 // 动态生成路由并做拦截

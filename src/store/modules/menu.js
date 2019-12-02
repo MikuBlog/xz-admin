@@ -4,7 +4,7 @@ const
   },
   mutations = {
     // 设置菜单
-    setMenuList(state, obj) {
+    SET_MENU_LIST(state, obj) {
       state.menuList = obj
     }
   }

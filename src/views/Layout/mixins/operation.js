@@ -4,8 +4,8 @@ import convertHttp from '@/utils/convertHttp'
 export default {
   methods: {
     ...mapMutations([
-      "setUserInfo",
-      "removeAllTags"
+      "SET_USER_INFO",
+      "REMOVE_ALL_TAGS"
     ]),
     // 获取用户信息
     getUserInfo() {
@@ -14,7 +14,7 @@ export default {
         method: "get"
       }).then(result => {
         result.data.avatar = convertHttp(result.data.avatar)
-        this.setUserInfo(result.data)
+        this.SET_USER_INFO(result.data)
         this.user = this.$store.state.user
         this.squareUrl = this.user.avatar
       })

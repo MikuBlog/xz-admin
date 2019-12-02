@@ -12,7 +12,7 @@ const
   },
   mutations = {
     // 保存用户信息
-    setUserInfo(state, obj) {
+    SET_USER_INFO(state, obj) {
       for(let key in obj)
         state[key] = obj[key]
     },
