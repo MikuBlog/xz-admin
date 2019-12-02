@@ -193,10 +193,12 @@
           <div class="back-top">
             <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop"></el-button>
           </div>
+        </el-main>
+        <el-footer class="footer">
           <div class="coppy-right">
             <span>© 2019 XuanZai Wteam.All rights reserved.</span>
           </div>
-        </el-main>
+        </el-footer>
       </el-container>
     </el-container>
     <settingDrawer ref="setting" />
