@@ -88,23 +88,21 @@
             <el-table-column label="操作值" align="center">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">
-                  <el-button @click="showDetail(scope.row)" type="text" size="small">查看详情</el-button>
+                  <el-button @click="showDetail(scope.row)" type="text">查看详情</el-button>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" fixed="right" width="150" align="center">
+            <el-table-column label="操作" fixed="right" width="180" align="center">
               <template slot-scope="scope">
                 <el-button
                   type="success"
                   icon="el-icon-refresh-left"
                   @click="recoverAuthority(scope.row)"
-                  size="small"
                 ></el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   @click="deleteAuthority(scope.row)"
-                  size="small"
                 ></el-button>
               </template>
             </el-table-column>
