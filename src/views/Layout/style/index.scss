@@ -229,18 +229,18 @@
   overflow-x: hidden;
 }
 .footer {
-  line-height: 30px;
   padding: 0;
-  color: #666;
-  white-space: pre-wrap;
-  text-indent: 1.3rem;
-  letter-spacing: 1px;
-  font-size: 0.7rem;
   .coppy-right {
     position: relative;
+    line-height: 29px;
     height: 29px;
     background: #fefefe;
     border-top: 1px solid #dcdfe6;
+    color: #666;
+    white-space: pre-wrap;
+    text-indent: 1.3rem;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
   }
 }
 .background {
