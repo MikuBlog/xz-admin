@@ -5,7 +5,7 @@ export default {
       ? this.$copyText(str).then(() => {
         this.$successMsg("复制成功");
       })
-      : this.$copyText(`< i class="${str}" />`).then(() => {
+      : this.$copyText(`<i class="${str}" />`).then(() => {
         this.$successMsg("复制成功");
       })
     }

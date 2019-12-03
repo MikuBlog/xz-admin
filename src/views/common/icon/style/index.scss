@@ -12,15 +12,12 @@
   cursor: pointer;
   transition: 0.3s;
 }
-.box:hover {
-  background: rgb(245, 245, 245);
-}
 .svg-icon {
   position: relative;
-  margin-top: 15px;
+  margin: .5rem 0;
   width: 40px;
   height: 40px;
-}
+} 
 .icon-name {
   margin: 0.5rem 0;
   font-size: 1rem;
