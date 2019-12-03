@@ -14,7 +14,7 @@
                   class="box"
                   v-for="items in iconList"
                   :key="items.key"
-                  @dblclick="copy(items.tag, 'icons')"
+                  @dblclick="copy(items.tag)"
                 >
                   <el-tooltip class="item" effect="dark" :content="items.tag" placement="top">
                     <div class="tip-box">
@@ -31,11 +31,28 @@
                   class="box"
                   v-for="items in elementIcon"
                   :key="items.key"
-                  @dblclick="copy(items, 'element')"
+                  @dblclick="copy(`<i class='${items}' />`)"
                 >
                   <el-tooltip class="item" effect="dark" :content="`<i class='${items}' />`" placement="top">
                     <div class="tip-box">
                       <i :class="items" />
+                      <div class="icon-name">{{items}}</div>
+                    </div>
+                  </el-tooltip>
+                </div>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="Font Awesome Icons" name="third">
+              <div class="icon-list">
+                <div
+                  class="box"
+                  v-for="items in fontAwesomeIcon"
+                  :key="items.key"
+                  @dblclick="copy(`<i class='fa fa-${items}' />`)"
+                >
+                  <el-tooltip class="item" effect="dark" :content="`<i class='fa fa-${items}' />`" placement="top">
+                    <div class="tip-box">
+                      <i :class="`fa fa-${items}`" />
                       <div class="icon-name">{{items}}</div>
                     </div>
                   </el-tooltip>

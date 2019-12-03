@@ -3,6 +3,7 @@ import { edit } from '@/api/user';
     <el-dialog 
         :title="isAdd ? '添加字典' : '编辑字典'" 
         :visible.sync="isShowAddBox"
+        append-to-body
         width="450px">
             <el-form 
             status-icon

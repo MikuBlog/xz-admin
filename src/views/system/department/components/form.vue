@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :append-to-body="true" :visible.sync="dialog" :title="isAdd ? '新增部门' : '编辑部门'" width="500px">
+  <el-dialog append-to-body :visible.sync="dialog" :title="isAdd ? '新增部门' : '编辑部门'" width="500px">
     <el-form ref="departmentForm" :model="departmentForm" :rules="rules" size="small" label-width="80px">
       <el-form-item status-icon label="名称" prop="name">
         <el-input v-model="departmentForm.name" style="width: 370px;"/>
