@@ -38,6 +38,8 @@ export default {
   mounted() {
     // 初始化样式
     this.initialStyle()
+    // 初始化滚动条
+    this.initialScrollBar()
     this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
@@ -53,6 +55,15 @@ export default {
     })
   },
   methods: {
+    // 初始化滚动条样式
+    initialScrollBar() {
+      $("#top").niceScroll({
+        cursorcolor: "rgba(156, 156, 156, 0.6)",
+        cursorwidth: "10",
+        cursorborder: "none"
+      });
+    },
+    // 初始化布局大小
     initialSize() {
       Vue.prototype.$ELEMENT = { size: this.layoutSize, zIndex: 2000 }
     },

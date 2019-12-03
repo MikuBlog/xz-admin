@@ -24,13 +24,17 @@ export default {
       this.$store.state.setting.layoutSize = size
       this.$setMemoryPmt('setting', this.$store.state.setting)
       this.initialSize()
-      this.$router.replace({
-        path: `/home/redirect?path=${this.$route.fullPath}`
-      })
+      this.refreshPage()
     },
     // 返回顶部
     backTop(delay = 500) {
       $('.top').animate({ scrollTop: 0 }, delay)
+    },
+    // 刷新页面
+    refreshPage() {
+      this.$router.replace({
+        path: `/home/redirect?path=${this.$route.fullPath}`
+      })
     },
     // 前往项目地址
     openNewPage() {
