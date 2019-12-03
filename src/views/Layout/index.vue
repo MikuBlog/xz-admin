@@ -99,7 +99,7 @@
         </div>
         <el-header class="navbar-box" style="height: 50px;">
           <div class="navbar">
-            <el-dropdown trigger="click" size="small">
+            <el-dropdown trigger="click" size="small" class="avatar-dropdown">
               <div class="avatar-box">
                 <div class="block">
                   <el-avatar shape="square" :size="45" :src="squareUrl">

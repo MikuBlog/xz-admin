@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="更换头像" :visible.sync="dialogVisible" width="600px">
+  <el-dialog title="更换头像" :visible.sync="dialogVisible" width="600px" append-to-body>
     <div class="flex-box">
       <div class="cropper-box">
         <div class="select-button-box">

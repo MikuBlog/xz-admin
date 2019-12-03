@@ -107,6 +107,11 @@
   position: relative;
 }
 
+.avatar-dropdown {
+  position: relative;
+  height: 40px;
+}
+
 .icon-box {
   position: relative;
   float: right;
