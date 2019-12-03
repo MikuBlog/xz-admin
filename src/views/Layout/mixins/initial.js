@@ -57,11 +57,14 @@ export default {
   methods: {
     // 初始化滚动条样式
     initialScrollBar() {
-      $("#top").niceScroll({
-        cursorcolor: "rgba(156, 156, 156, 0.6)",
-        cursorwidth: "10",
-        cursorborder: "none"
-      });
+      Scrollbar.init(document.querySelector('#top'))
+      // $("#top").mCustomScrollbar({
+      //   theme: "y-axis",
+      //   setWidth: "100%",
+      //   setHeight: '100%',
+      //   setLeft: "10px",
+      //   scrollInertia: 100,
+      // })
     },
     // 初始化布局大小
     initialSize() {
