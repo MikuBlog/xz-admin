@@ -177,6 +177,8 @@ export default {
   systemSetting: true,
   // 是否显示全屏icon
   fullScreen: true,
+  // 布局大小icon
+  layoutSize: true
 }
 ```
 
