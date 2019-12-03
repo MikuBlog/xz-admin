@@ -124,6 +124,13 @@ svg {
   transition: 0.5s;
 }
 
+.security {
+  position: relative;
+  left: -10px;
+  width: 16px;
+  height: 16px;
+}
+
 svg:first-of-type {
   margin-left: 1rem;
 }
@@ -156,4 +163,15 @@ svg:hover {
   left: 0;
   top: 40%;
   transform: translateY(-50%);
+}
+
+.flex-box {
+  position: relative;
+  display: flex;
+}
+
+.code-box {
+  position: relative;
+  width: 10rem;
+  margin: 0 .5rem;
 }
