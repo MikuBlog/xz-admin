@@ -36,6 +36,18 @@ export default {
         path: `/home/redirect?path=${this.$route.fullPath}`
       })
     },
+    // 清除缓存
+    clearStorage() {
+      this.$showMsgBox({
+        msg: `<p>是否清除缓存?</p>
+        <p>您所设置的所有系统样式及背景将被重置!</p>`,
+        isHTML: true,
+        iconClass: 'el-icon-question'
+      }).then(() => {
+        localStorage.clear()
+        window.location.reload()
+      })
+    },
     // 前往项目地址
     openNewPage() {
       window.open('https://github.com/MikuBlog/xz-admin')

@@ -168,6 +168,15 @@
               <el-tooltip
                 class="item"
                 effect="dark"
+                content="清除缓存"
+                placement="bottom"
+                v-show="defaultConfig.clearStorage"
+              >
+                <i class="el-icon-delete-solid" @click="clearStorage"></i>
+              </el-tooltip>
+              <el-tooltip
+                class="item"
+                effect="dark"
                 content="样式设置"
                 placement="bottom"
                 v-show="defaultConfig.systemSetting"

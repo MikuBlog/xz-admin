@@ -10,7 +10,7 @@ function download(url, fileName, isBlob) {
     url.forEach(val => {
       const iframe = document.createElement('iframe')
       iframe.style.display = "none"
-      iframe.src = val
+      iframe.src = isBlob ? window.URL.createObjectURL(new Blob([val])) : val
       document.body.appendChild(iframe)
       setTimeout(() => {
         iframe.remove()
