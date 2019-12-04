@@ -38,6 +38,8 @@ export default {
   mounted() {
     // 初始化样式
     this.initialStyle()
+    // 初始化滚动条
+    this.initialScrollBar()
     this.initialListener()
     // 获取视窗大小
     this.getWindowWidth()
@@ -53,6 +55,22 @@ export default {
     })
   },
   methods: {
+    // 初始化滚动条样式
+    initialScrollBar() {
+      if (!this.$isMobile()) {
+        Scrollbar.init(document.querySelector('#top'), {
+          damping: .2,
+          continuousScrolling: true
+        })
+        const scrollContent = document.querySelector('.scroll-content')
+        this.$setCssText(scrollContent, `
+          position: relative;
+          padding: 20px;
+          height: 100%;
+        `)
+      }
+    },
+    // 初始化布局大小
     initialSize() {
       Vue.prototype.$ELEMENT = { size: this.layoutSize, zIndex: 2000 }
     },

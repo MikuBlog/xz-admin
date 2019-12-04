@@ -9,5 +9,12 @@ function setStyle(el, ruleName, value) {
 	el.style[ruleName] = value
 }
 
-export default setStyle
+function setCssText(el, rule) {
+  el.style.cssText = rule
+}
+
+export default {
+  setStyle,
+  setCssText
+}
     

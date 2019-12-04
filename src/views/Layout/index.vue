@@ -99,7 +99,7 @@
         </div>
         <el-header class="navbar-box" style="height: 50px;">
           <div class="navbar">
-            <el-dropdown trigger="click" size="small">
+            <el-dropdown trigger="click" size="small" class="avatar-dropdown">
               <div class="avatar-box">
                 <div class="block">
                   <el-avatar shape="square" :size="45" :src="squareUrl">
@@ -145,10 +145,22 @@
                   <div>
                     <svg-icon icon-class="font-size" class="table-size" />
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item :disabled="layoutSize === ''" @click.native="setTableSize('')">Default</el-dropdown-item>
-                      <el-dropdown-item :disabled="layoutSize === 'medium'" @click.native="setTableSize('medium')">Medium</el-dropdown-item>
-                      <el-dropdown-item :disabled="layoutSize === 'small'" @click.native="setTableSize('small')">Small</el-dropdown-item>
-                      <el-dropdown-item :disabled="layoutSize === 'mini'" @click.native="setTableSize('mini')">Mini</el-dropdown-item>
+                      <el-dropdown-item
+                        :disabled="layoutSize === ''"
+                        @click.native="setTableSize('')"
+                      >Default</el-dropdown-item>
+                      <el-dropdown-item
+                        :disabled="layoutSize === 'medium'"
+                        @click.native="setTableSize('medium')"
+                      >Medium</el-dropdown-item>
+                      <el-dropdown-item
+                        :disabled="layoutSize === 'small'"
+                        @click.native="setTableSize('small')"
+                      >Small</el-dropdown-item>
+                      <el-dropdown-item
+                        :disabled="layoutSize === 'mini'"
+                        @click.native="setTableSize('mini')"
+                      >Mini</el-dropdown-item>
                     </el-dropdown-menu>
                   </div>
                 </el-dropdown>
@@ -193,7 +205,7 @@
                 placement="bottom"
                 v-show="$store.state.setting.showTags"
               >
-                <i class="el-icon-circle-close" @click="removeTags" title="删除所有标签页"></i>
+                <i class="el-icon-circle-close" @click="removeTags"></i>
               </el-tooltip>
             </div>
             <div class="breadcrumb" v-show="showBreadcrumb && !isMini">
@@ -203,14 +215,30 @@
           <div class="border" style="border-color: #f0f0f0"></div>
         </el-header>
         <div class="tabs" v-show="showTags">
-          <Tag :tagsList="tagsList" />
+          <div class="flex-box">
+            <Tag :tagsList="tagsList" class="tag-list" />
+            <el-button
+              class="refresh-button"
+              :round="false"
+              icon="el-icon-refresh-left"
+              @click="refreshPage()"
+              size="small"
+            ></el-button>
+          </div>
         </div>
         <el-main class="top" id="top">
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
           <div class="back-top">
-            <el-button type="primary" icon="el-icon-top" circle class="to-top" @click="backTop" size="large"></el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-top"
+              circle
+              class="to-top"
+              @click="backTop"
+              size="large"
+            ></el-button>
           </div>
         </el-main>
         <el-footer class="footer" height="30px">

@@ -137,7 +137,7 @@ function addTags(tag) {
 
 // 清除缓存
 function removeRedis() {
-  store.commit("setMenuList", [])
+  store.commit("SET_MENU_LIST", [])
   store.commit("REMOVE_ALL_TAGS")
 }
 

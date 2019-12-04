@@ -2,6 +2,7 @@
     <el-dialog 
         :title="isAdd ? '添加字典详情' : '编辑字典详情'" 
         :visible.sync="isShowDetailBox"
+        append-to-body
         width="450px"
         >
             <el-form 

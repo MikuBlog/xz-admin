@@ -17,60 +17,6 @@
 this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
 ```
 
-
-## download
-
-描述：文件下载
-
-参数：
-
-+ `url`：地址 [`String`/`Array`]（必填）
-+ `fileName`: 文件名称 [`String`]（必填）
-+ `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]（选填：默认为false）
-
-示例：
-```js
-// 单文件下载
-this.$download(url, fileName)
-// 批量文件下载（url为下载链接数组）
-this.$download(url) // url : [http://xxx.com, http://xxxx.com]
-```
-
-##  getImgFile
-
-描述：获取图片信息，图片预览
-
-参数：
-
-+ `limit`：文件大小 [`Number`] 单位：兆（选填：默认限制文件大小为2M）
-
-返回值：`Promise`
-
-+ `raw`：二进制文件
-+ `url`: base64图像文件
-
-示例：
-```js
-this
-	.$getImgFile(limit)
-	.then((raw, url) => {
-		console.log(raw, url)
-	})
-```
-
-## previewFile
-
-描述：预览文件
-
-参数：
-
-+ `url`：文件路径 [`String`]（必填）
-
-示例：
-```js
-this.$previewFile(url)
-```
-
 ## copyText
 
 描述：复制文本
@@ -113,6 +59,82 @@ this.$urlQuery([url]) // url: http://myinterface.xuanzai.top/getPicture?type=头
 示例
 ```js
 this.$sortList(list, true, 'level') 
+```
+
+## File
+
+### download
+
+描述：文件下载
+
+参数：
+
++ `url`：地址 [`String`/`Array`]（必填）
++ `fileName`: 文件名称 [`String`]（必填）
++ `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]（选填：默认为false）
+
+示例：
+```js
+// 单文件下载
+this.$download(url, fileName)
+// 批量文件下载（url为下载链接数组）
+this.$download(url) // url : [http://xxx.com, http://xxxx.com]
+```
+
+###  getImgFile
+
+描述：获取图片信息，图片预览
+
+参数：
+
++ `limit`：文件大小 [`Number`] 单位：兆（选填：默认限制文件大小为2M）
+
+返回值：`Promise`
+
++ `raw`：二进制文件
++ `url`: base64图像文件
+
+示例：
+```js
+this
+	.$getImgFile(limit)
+	.then((raw, url) => {
+		console.log(raw, url)
+	})
+```
+
+###  getFile
+
+描述：获取文件信息
+
+参数：
+
++ `limit`：文件大小 [`Number`] 单位：兆（选填：默认限制文件大小为2M）
+
+返回值：`Promise`
+
++ `raw`：二进制文件
+
+示例：
+```js
+this
+	.$getImgFile(limit)
+	.then(raw => {
+		console.log(raw)
+	})
+```
+
+### previewFile
+
+描述：预览文件
+
+参数：
+
++ `url`：文件路径 [`String`]（必填）
+
+示例：
+```js
+this.$previewFile(url)
 ```
 
 ## Date
@@ -386,3 +408,9 @@ this.$http_file({
 	console.log(result.data)
 })
 ```
+
+## jquery
+
+描述：该项目引入了`jquery`，可在任何组件或页面中使用。
+
+具体`API`请参考网上文档。

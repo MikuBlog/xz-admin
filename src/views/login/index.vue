@@ -13,12 +13,21 @@
           <el-input v-model="ruleForm.username" prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input
-            v-model="ruleForm.password"
-            prefix-icon="el-icon-lock"
-            type="password"
-            @keyup.native="pressEnter"
-          ></el-input>
+          <el-input v-model="ruleForm.password" prefix-icon="el-icon-lock" type="password"></el-input>
+        </el-form-item>
+        <el-form-item prop="vcode">
+          <div class="flex-box">
+            <el-input
+              v-model="ruleForm.vcode"
+              @keyup.native="pressEnter"
+              prefix-icon="el-icon-s-check"
+            ></el-input>
+            <el-image class="code-box" :src="codeUrl" fit="fill" @click="getCode">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
+          </div>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')" style="width: 100%;">登录</el-button>
@@ -122,11 +131,11 @@
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 export default {
-  mixins: [ Initial, Operation, Property ]
+  mixins: [Initial, Operation, Property]
 };
 </script>
 

@@ -201,7 +201,7 @@ export default {
         });
     },
     selectBackground() {
-      this.$getImgFile()
+      this.$getImgFile(4)
         .then(({ url }) => {
           this.settings.background.url = url;
         })

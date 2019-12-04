@@ -92,7 +92,7 @@
 
 .breadcrumb {
   position: relative;
-  display: inline-block;
+  float: left;
   top: -1px;
   left: 5px;
 }
@@ -100,11 +100,16 @@
 .avatar-box {
   position: relative;
   float: right;
-  margin-right: 15px;
+  margin-right: 5px;
 }
 
 .avatar-box-horizontal {
   position: relative;
+}
+
+.avatar-dropdown {
+  position: relative;
+  height: 40px;
 }
 
 .icon-box {
@@ -122,7 +127,7 @@
 .table-size {
   position: relative;
   top: -4px;
-  margin-left: .8rem;
+  margin-left: 0.8rem;
   font-size: 20px;
 }
 
@@ -266,6 +271,8 @@
 
 .top {
   position: relative;
+  padding: 0;
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -305,4 +312,14 @@
   left: 0;
   bottom: 0;
   background: transparent;
+}
+
+.flex-box {
+  position: relative;
+  display: flex;
+}
+
+.refresh-button {
+  position: relative;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
 }

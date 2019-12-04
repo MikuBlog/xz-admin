@@ -202,7 +202,8 @@ export default {
             method: "post",
             data: {
               username: this.ruleForm.username,
-              password: this.ruleForm.password
+              password: this.ruleForm.password,
+              vcode: this.ruleForm.vcode
             }
           }).then(result => {
             this.$setMemoryPmt("token", result.data.token);

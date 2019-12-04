@@ -9,7 +9,8 @@ export default {
       opacity: 100,
       mask: 0,
       blur: 0,
-      height: this.defaultConfig.otherLoginMethods ? 62 : 41,
+      codeUrl: "",
+      height: 68,
       width: 50,
       fontSize: 30,
       iconSize: 30,
@@ -22,16 +23,20 @@ export default {
       ruleForm: {
         username: "",
         password: "",
+        vcode: "",
         checked: false
       },
       rules: {
         username: [
-          { required: true, message: "账号不能为空", trigger: "blur" },
-          { min: 2, max: 21, message: "账号长度在2到20个字符", trigger: "blur" }
+          { required: true, message: "账号不能为空", trigger: "change" },
+          { min: 2, max: 21, message: "账号长度在2到20个字符", trigger: "change" }
         ],
         password: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 3, max: 21, message: "账号长度在3到21个字符", trigger: "blur" }
+          { required: true, message: "密码不能为空", trigger: "change" },
+          { min: 3, max: 21, message: "账号长度在3到21个字符", trigger: "change" }
+        ],
+        vcode: [
+          { required: true, message: "验证码不能为空", trigger: "change" }
         ]
       }
     };

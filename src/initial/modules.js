@@ -59,6 +59,8 @@ import JsonPretty from '@/api/json/json_pretty'
 import ImageLoad from '@/api/other/image_load'
 // 引入排序函数
 import SortList from '@/api/other/sort'
+// 引入客户端类型判断
+import Agent from '@/api/other/agent'
 // 引入全局配置模块
 import DefaultConfig from '@/global/js/config'
 /**
@@ -170,7 +172,14 @@ Vue.prototype.$dateDiff = Date.dateDiff
  * @param {String} ruleName CSS属性
  * @param {String} value CSS值
  */
-Vue.prototype.$setStyle = SetStyle
+Vue.prototype.$setStyle = SetStyle.setStyle
+/**
+ * @author xuanzai
+ * @description 给元素设置内联样式（温馨提示：会覆盖原有样式）
+ * @param {DOM Object} ele DOM元素
+ * @param {String} rule CSS写法
+ */
+Vue.prototype.$setCssText = SetStyle.setCssText
 /**
  * @author xuanzai
  * @description 设置全屏函数与取消全屏函数
@@ -278,6 +287,12 @@ Vue.prototype.$imageLoad = ImageLoad
  * @returns {Array} 返回新的数组
  */
 Vue.prototype.$sortList = SortList
+/**
+ * @author xuanzai
+ * @description 判断是否为移动端
+ * @returns {Boolean} 返回判断结果
+ */
+Vue.prototype.$isMobile = Agent.isMobile
 /**
  * @author xuanzai
  * @description 全局通用配置

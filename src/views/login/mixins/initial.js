@@ -2,6 +2,7 @@ export default {
   created() {
     document.title = "登录";
     this.isAutoLogin();
+    this.getCode()
   },
   mounted() {
     this.initialStyle();
@@ -24,7 +25,7 @@ export default {
       this.opacity = +this.$getMemoryPmt("opacity") || this.opacity;
       this.blur = +this.$getMemoryPmt("blur") || this.blur;
       this.mask = +this.$getMemoryPmt("mask") || this.mask;
-      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 62 : this.height);
+      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 68 : this.height);
       this.width = +this.$getMemoryPmt("width") || this.width;
       this.fontSize = +this.$getMemoryPmt("fontSize") || this.fontSize;
       this.isItalic = this.$getMemoryPmt("isItalic") !== "" ? Boolean(this.$getMemoryPmt("isItalic")) : this.isItalic;
@@ -35,5 +36,14 @@ export default {
       this.fontColor = this.$getMemoryPmt("fontColor") || this.fontColor;
       this.ruleForm.checked = this.$getMemoryPmt("isAutoLogin") || this.ruleForm.checked;
     },
+    getCode() {
+      this.$http({
+        url: `${baseUrl}/auth/vCode`,
+        method: "get"
+      }).then(result => {
+        const data = JSON.parse(result.request.response)
+        this.codeUrl = `data:image/jpeg;base64,${data.img}`
+      })
+    }
   }
 }
