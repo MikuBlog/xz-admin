@@ -68,6 +68,8 @@ export default {
           padding: 20px;
           height: 100%;
         `)
+      }else {
+        this.$setStyle(document.querySelector('#top'), 'padding', '20px')
       }
     },
     // 初始化布局大小

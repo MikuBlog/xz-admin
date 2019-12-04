@@ -11,7 +11,7 @@ function removePrintHeader(page) {
  * @param { HTML } page 
  */
 function toPrint(page = "") {
-const newPage = window.open()
+const newPage = window.open('', 'print')
 newPage.document.body.innerHTML = page
 removePrintHeader(newPage)
 newPage.print()
