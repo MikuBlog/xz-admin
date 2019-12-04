@@ -47,6 +47,8 @@ import FullScreen from '@/api/other/full_screen'
 import Memory from '@/api/storage/storage'
 // 引入文件下载模块
 import Download from '@/api/file/download'
+// 引入打印功能
+import Print from '@/api/file/print'
 // 引入图片读取模块
 import ReadImg from '@/api/file/get_file_image'
 // 引入文件读取模块
@@ -293,6 +295,12 @@ Vue.prototype.$sortList = SortList
  * @returns {Boolean} 返回判断结果
  */
 Vue.prototype.$isMobile = Agent.isMobile
+/**
+ * @author xuanzai
+ * @description 判断是否为移动端
+ * @param {HTML}
+ */
+Vue.prototype.$print = Print
 /**
  * @author xuanzai
  * @description 全局通用配置

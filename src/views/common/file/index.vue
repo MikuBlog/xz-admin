@@ -11,6 +11,7 @@
                     <el-button class="margin-box" type="info" @click="previewFile('http://file.xuanzai.top/test/test_3.pptx')">查看ppt</el-button>
                     <el-button class="margin-box" type="warning" @click="previewFile('http://file.xuanzai.top/test/test_5.jpg')">查看图片</el-button>
                     <el-button class="margin-box" type="danger" @click="previewFile('http://file.xuanzai.top/test/test_1.txt')">查看txt</el-button>
+                    <el-button class="margin-box" type="danger" @click="$print()">打印</el-button>
                 </el-card>
             </el-col>
         </el-row>
