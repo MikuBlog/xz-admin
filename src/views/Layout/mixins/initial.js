@@ -57,11 +57,18 @@ export default {
   methods: {
     // 初始化滚动条样式
     initialScrollBar() {
-      Scrollbar.init(document.querySelector('#top'), {
-        damping: .2,
-        continuousScrolling: true
-      })
-      this.$setStyle(document.querySelector('.scroll-content'), 'padding', '20px')
+      if (!this.$isMobile()) {
+        Scrollbar.init(document.querySelector('#top'), {
+          damping: .2,
+          continuousScrolling: true
+        })
+        const scrollContent = document.querySelector('.scroll-content')
+        this.$setCssText(scrollContent, `
+          position: relative;
+          padding: 20px;
+          height: 100%;
+        `)
+      }
     },
     // 初始化布局大小
     initialSize() {
