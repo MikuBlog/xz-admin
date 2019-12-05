@@ -36,7 +36,8 @@
   background: rgba(0, 0, 0, 0);
 }
 .setting {
-  position: relative;
+  position: absolute;
+  z-index: 1;
   top: 1rem;
   left: 1rem;
   width: 3rem;
@@ -149,4 +150,16 @@ svg:hover {
   position: relative;
   width: 10rem;
   margin: 0 .5rem;
+}
+
+@media screen and (max-width: 650px) {
+  .login-box {
+    width: 22.5rem!important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .login-box {
+    width: 100%!important;
+  }
 }

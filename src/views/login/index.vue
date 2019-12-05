@@ -8,7 +8,7 @@
     </div>
     <div class="login-box" ref="loginBox">
       <div class="header" ref="header">{{ defaultConfig.loginHeader }}</div>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" size="medium">
         <el-form-item prop="username">
           <el-input v-model="ruleForm.username" prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>

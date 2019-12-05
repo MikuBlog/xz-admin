@@ -32,12 +32,12 @@ export default {
       this.$setStyle(
         loginBox,
         "height",
-        `${(this.height = this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 62 : 41)) / 2}rem`
+        `${(this.height = this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 66 : 41)) / 2}rem`
       );
       this.$setStyle(
         loginBox,
         "width",
-        `${(this.width = this.$getMemoryPmt("width") || 50) / 2}rem`
+        `${(this.width = this.$getMemoryPmt("width") || 45) / 2}rem`
       );
       this.$setStyle(
         loginBox,
