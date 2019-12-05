@@ -21,18 +21,17 @@ import 'iview/dist/styles/iview.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import 'mavon-editor/dist/css/index.css'
 // 引入全局提示模块
-import Message from '@/api/message/message'
-import Notification from '@/api/message/notification'
+import Message from '@/api/message'
 // 引入树状选择器
 import Treeselect from '@riophae/vue-treeselect'
 // 引入浏览器数据库模块
-import Database from '@/api/database/database'
+import Database from '@/api/database'
 // 引入二次封装的axios模块
-import Http from '@/api/http/http'
+import Http from '@/api/http'
 // 引入websocket模块
-import Socket from '@/api/websocket/socket'
+import Socket from '@/api/websocket'
 // 引入时间格式化函数
-import Date from '@/api/date/date'
+import Date from '@/api/date'
 // 引入获取URL参数函数
 import UrlQuery from '@/api/other/url_query'
 // 引入设置样式函数
@@ -46,7 +45,7 @@ import Copy from '@/api/dom/copy'
 // 引入全屏函数
 import FullScreen from '@/api/other/full_screen'
 // 引入存储模块
-import Memory from '@/api/storage/storage'
+import Memory from '@/api/storage'
 // 引入文件下载模块
 import Download from '@/api/file/download'
 // 引入打印功能
@@ -58,13 +57,15 @@ import ReadFile from '@/api/file/get_file_image'
 // 引入文件预览模块
 import PreviewFile from '@/api/file/preview_file'
 // 引入json美化模块
-import JsonPretty from '@/api/json/json_pretty'
+import JsonPretty from '@/api/json'
 // 引入图片加载动画模块
 import ImageLoad from '@/api/other/image_load'
-// 引入排序函数
-import SortList from '@/api/other/sort'
+// 引入数组模块
+import ArrayMethod from '@/api/array'
 // 引入客户端类型判断
 import Agent from '@/api/other/agent'
+// 引入控制流量模块
+import control from '@/api/control'
 // 引入全局配置模块
 import DefaultConfig from '@/global/js/config'
 /**
@@ -138,9 +139,9 @@ Vue.prototype.$errorMsg = Message.errorMsg
  * @param {String} msg 通知内容
  * @param {String} title 标题
  */
-Vue.prototype.$successTip = Notification.successTip
-Vue.prototype.$warnTip = Notification.warnTip
-Vue.prototype.$errorTip = Notification.errorTip
+Vue.prototype.$successTip = Message.successTip
+Vue.prototype.$warnTip = Message.warnTip
+Vue.prototype.$errorTip = Message.errorTip
 /**
  * @author xuanzai
  * @description 引入全局弹框
@@ -291,13 +292,22 @@ Vue.prototype.$jsonPretty = JsonPretty
 Vue.prototype.$imageLoad = ImageLoad
 /**
  * @author xuanzai
+ * @description 排序（只排字段值为数字和日期）
+ * @param {Array} list 需要排序的数组
+ * @param {Boolean} isDes 是否倒序
+ * @param {String} property 如果排序元素为对象，可指定需要排序的字段
+ * @returns {Array} 返回新的数组
+ */
+Vue.prototype.$sortList = ArrayMethod.sortList
+/**
+ * @author xuanzai
  * @description 排序
  * @param {Array} list 需要排序的数组
  * @param {Boolean} isDes 是否倒序
  * @param {String} property 如果排序元素为对象，可指定需要排序的字段
  * @returns {Array} 返回新的数组
  */
-Vue.prototype.$sortList = SortList
+Vue.prototype.$searchResult = ArrayMethod.searchResult
 /**
  * @author xuanzai
  * @description 判断是否为移动端
@@ -310,6 +320,23 @@ Vue.prototype.$isMobile = Agent.isMobile
  * @param {HTML}
  */
 Vue.prototype.$print = Print
+/**
+ * @author xuanzai
+ * @description 防抖函数
+ * @param {Function} callback 回调函数
+ * @param {Number} time 单位ms
+ * @param {Boolean} immediate 第一次是否调用
+ * @returns {Function}
+ */
+Vue.prototype.$debounce = control.debounce
+/**
+ * @author xuanzai
+ * @description 节流函数
+ * @param {Function} callback 回调函数
+ * @param {Number} wait 单位ms
+ * @returns {Function}
+ */
+Vue.prototype.$throttled = control.throttled
 /**
  * @author xuanzai
  * @description 全局通用配置

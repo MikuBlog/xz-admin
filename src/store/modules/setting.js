@@ -1,4 +1,4 @@
-import storage from '@/api/storage/storage'
+import storage from '@/api/storage'
 const
   state = {
     showLogo: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showLogo)

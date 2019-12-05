@@ -4,14 +4,14 @@
  * @param {Object} option 
  * @returns {WebSocket}
  */
-function createSocket(
+export default (
   {
     url,
     onOpen,
     onMessage,
     onError,
     onClose
-  }) {
+  }) => {
   if (!url) {
     throw new Error("请填写连接url")
   }
@@ -30,5 +30,3 @@ function createSocket(
   })
   return ws
 }
-
-export default createSocket

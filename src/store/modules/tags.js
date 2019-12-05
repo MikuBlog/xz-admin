@@ -1,4 +1,4 @@
-import storage from '@/api/storage/storage'
+import storage from '@/api/storage'
 const 
   state = {
     // 保存标签页列表
