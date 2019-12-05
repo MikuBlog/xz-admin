@@ -1,5 +1,3 @@
-# 介绍
-
 ## 技术栈
 
 使用了`Vue`、`ElementUI`、`Spring Boot`、`Redis`、`JPA`等前后端前沿技术开发。
