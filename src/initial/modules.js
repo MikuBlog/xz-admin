@@ -32,7 +32,7 @@ import Http from '@/api/http/http'
 // 引入websocket模块
 import Socket from '@/api/websocket/socket'
 // 引入时间格式化函数
-import Date from '@/api/other/format_date'
+import Date from '@/api/date/date'
 // 引入获取URL参数函数
 import UrlQuery from '@/api/other/url_query'
 // 引入设置样式函数
