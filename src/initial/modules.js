@@ -1,11 +1,4 @@
 import Vue from 'vue'
-// 引入浏览器数据库模块
-import Database from '@/api/database/database'
-// 引入二次封装的axios模块
-import Http from '@/api/http/http'
-// 引入全局提示模块
-import Message from '@/api/message/message'
-import Notification from '@/api/message/notification'
 // 引入markdown编辑器
 import mavonEditor from 'mavon-editor'
 // 引入导航栏折叠
@@ -27,8 +20,17 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'iview/dist/styles/iview.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import 'mavon-editor/dist/css/index.css'
+// 引入全局提示模块
+import Message from '@/api/message/message'
+import Notification from '@/api/message/notification'
 // 引入树状选择器
 import Treeselect from '@riophae/vue-treeselect'
+// 引入浏览器数据库模块
+import Database from '@/api/database/database'
+// 引入二次封装的axios模块
+import Http from '@/api/http/http'
+// 引入websocket模块
+import Socket from '@/api/websocket/socket'
 // 引入时间格式化函数
 import Date from '@/api/other/format_date'
 // 引入获取URL参数函数
@@ -115,6 +117,13 @@ Vue.prototype.$http_normal = Http.http_normal
 Vue.prototype.$http_json = Http.http_json
 Vue.prototype.$http_file = Http.http_file
 Vue.prototype.$http = Http.axios
+/**
+ * @author xuanzai
+ * @description 创建websocket实例
+ * @param {Object} option 
+ * @returns {WebSocket}
+ */
+Vue.prototype.$createSokect = Socket
 /**
  * @author xuanzai
  * @description 引入全局提示
