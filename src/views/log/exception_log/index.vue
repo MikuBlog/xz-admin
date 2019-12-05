@@ -74,7 +74,8 @@ import { MessageBox } from 'mint-ui';
               :page-sizes="[10, 25, 50, 100]"
               :page-size.sync="nowSize"
               :pager-count="5"
-              layout="total, sizes, prev, pager, next, jumper"
+              :small="this.defaultConfig.paginationSize"
+              :layout="this.defaultConfig.paginationLayout"
               :total="totalElements"
             ></el-pagination>
           </div>

@@ -157,7 +157,7 @@ Vue.prototype.$showMsgBox = Message.showMsgBox
  * @param {String} msg 内容
  * @param {Boolean} isHTML 内容是否为html
  */
-Vue.prototype.$showTipDiy = Notification.showTipDiy
+Vue.prototype.$showTipDiy = Message.showTipDiy
 /**
  * @author xuanzai
  * @description 引入时间格式化函数

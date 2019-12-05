@@ -1,3 +1,4 @@
+import Agent from '@/api/other/agent'
 export default {
   // 登录标题
   loginHeader: "XZ-Admin",
@@ -32,5 +33,11 @@ export default {
   // 全屏icon
   fullScreen: true,
   // 布局大小icon
-  layoutSize: true
+  layoutSize: true,
+  // 分页组件
+  paginationLayout: `${ Agent.isMobile() 
+    ? 'prev, pager, next' 
+    : 'total, sizes, prev, pager, next, jumper'}`,
+  // 分页大小
+  paginationSize: Agent.isMobile()
 }
