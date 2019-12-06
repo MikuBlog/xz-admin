@@ -32,12 +32,12 @@ export default {
       this.$setStyle(
         loginBox,
         "height",
-        `${(this.height = this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 62 : 41)) / 2}rem`
+        `${(this.height = this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 66 : 41)) / 2}rem`
       );
       this.$setStyle(
         loginBox,
         "width",
-        `${(this.width = this.$getMemoryPmt("width") || 50) / 2}rem`
+        `${(this.width = this.$getMemoryPmt("width") || 45) / 2}rem`
       );
       this.$setStyle(
         loginBox,
@@ -207,8 +207,10 @@ export default {
             }
           }).then(result => {
             this.$setMemoryPmt("token", result.data.token);
+            this.$getMemorySes("redirect") 
+            ? this.$router.push({ path: this.$getMemorySes("redirect")  })
+            : this.$router.push({ path: "/home/welcome" });
             this.$clearMemorySes();
-            this.$router.push({ path: "/home/welcome" });
           });
         } else {
           return false;

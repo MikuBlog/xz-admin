@@ -74,16 +74,15 @@ import { MessageBox } from 'mint-ui';
               :page-sizes="[10, 25, 50, 100]"
               :page-size.sync="nowSize"
               :pager-count="5"
-              layout="total, sizes, prev, pager, next, jumper"
+              :small="this.defaultConfig.paginationSize"
+              :layout="this.defaultConfig.paginationLayout"
               :total="totalElements"
             ></el-pagination>
           </div>
         </el-card>
       </el-col>
     </el-row>
-    <el-dialog title="详情信息" :visible.sync="dialogVisible" :fullscreen="true" width="30%">
-      <span>{{exceptionDetail}}</span>
-    </el-dialog>
+    <Detail ref="Detail" />
   </div>
 </template>
 
@@ -91,8 +90,10 @@ import { MessageBox } from 'mint-ui';
 import Initial from './mixins/initial'
 import Operation from './mixins/operation'
 import Property from './mixins/property'
+import Detail from './components/detail'
 export default {
-  mixins: [ Initial, Operation, Property ]
+  mixins: [ Initial, Operation, Property ],
+  components: { Detail } 
 };
 </script>
 

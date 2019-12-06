@@ -25,7 +25,7 @@ export default {
       this.opacity = +this.$getMemoryPmt("opacity") || this.opacity;
       this.blur = +this.$getMemoryPmt("blur") || this.blur;
       this.mask = +this.$getMemoryPmt("mask") || this.mask;
-      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 68 : this.height);
+      this.height = +this.$getMemoryPmt("height") || (this.defaultConfig.otherLoginMethods ? 66 : this.height);
       this.width = +this.$getMemoryPmt("width") || this.width;
       this.fontSize = +this.$getMemoryPmt("fontSize") || this.fontSize;
       this.isItalic = this.$getMemoryPmt("isItalic") !== "" ? Boolean(this.$getMemoryPmt("isItalic")) : this.isItalic;

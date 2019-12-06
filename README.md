@@ -3,7 +3,7 @@
 <br/>
 <br/>
 
-# :smirk: 页面浏览 
+## :smirk: 页面浏览 
 
 https://xzadmin.xuanzai.top
 
@@ -12,7 +12,7 @@ https://xzadmin.xuanzai.top
 
 <br/>
 
-# :star: 安装步骤
+## :star: 安装步骤
 
 安装：在项目目录下`npm install`
 
@@ -25,12 +25,12 @@ https://xzadmin.xuanzai.top
 <br/>
 
 
-# :sparkling_heart: 技术栈
+## :sparkling_heart: 技术栈
 使用了`vue`、`element-ui`作为主要技术栈
 
 <br/>
 
-# :electric_plug: 插件
+## :electric_plug: 插件
 
 + 图表：`VCharts`
 + 数字滚动：`vue-count-to`

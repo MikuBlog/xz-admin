@@ -1,8 +1,8 @@
 	import axios from 'axios'
 	import router from '@/router'
 	import { Loading  } from 'element-ui'
-	import storage from '../storage/storage'
-	import Message from '../message/message'
+	import storage from '@/api/storage'
+	import Message from '@/api/message'
 
 	/**
 	 * @author xuanzai

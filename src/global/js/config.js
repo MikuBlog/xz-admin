@@ -1,3 +1,4 @@
+import Agent from '@/api/other/agent'
 export default {
   // 登录标题
   loginHeader: "XZ-Admin",
@@ -21,16 +22,22 @@ export default {
     },
     activeTextColor: '#429ee2'
   },
-  // logo地址
-  logoUrl: "https://myinterface.xuanzai.top/getPicture?type=logo&id=1",
-  // 是否显示搜索菜单
+  // 搜索菜单icon
   searchMenu: true,
   // 文档icon
   helpPage: true,
+  // 清除缓存icon
+  clearStorage: true,
   // 系统设置icon
   systemSetting: true,
   // 全屏icon
   fullScreen: true,
   // 布局大小icon
-  layoutSize: true
+  layoutSize: true,
+  // 分页组件
+  paginationLayout: `${ Agent.isMobile() 
+    ? 'prev, pager, next' 
+    : 'total, sizes, prev, pager, next, jumper'}`,
+  // 分页大小
+  paginationSize: Agent.isMobile()
 }

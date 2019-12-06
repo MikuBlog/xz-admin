@@ -1,5 +1,3 @@
-# 开发手册
-
 ## 添加路由
 
 路由是通过后台返回的数据动态生成的，所以，只需要在菜单管理处添加菜单的同时添加组件的路径即可。
@@ -167,15 +165,13 @@ export default {
     },
     activeTextColor: '#429ee2'
   },
-  // logo地址
-  logoUrl: "https://myinterface.xuanzai.top/getPicture?type=logo&id=1",
-  // 是否显示搜索菜单
+  // 是否显示搜索菜单icon
   searchMenu: true,
-  // 是否显示文档icon
+  // 文档icon
   helpPage: true,
-  // 是否显示系统设置icon
+  // 系统设置icon
   systemSetting: true,
-  // 是否显示全屏icon
+  // 全屏icon
   fullScreen: true,
   // 布局大小icon
   layoutSize: true

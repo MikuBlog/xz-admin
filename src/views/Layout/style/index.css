@@ -132,7 +132,8 @@
 }
 
 .el-icon-s-tools,
-.el-icon-question {
+.el-icon-question,
+.el-icon-delete-solid {
   position: relative;
   top: 1px;
   margin-right: 0.8rem;
@@ -270,10 +271,7 @@
 }
 
 .top {
-  position: relative;
   padding: 0;
-  height: 100%;
-  overflow-x: hidden;
 }
 
 .footer {
