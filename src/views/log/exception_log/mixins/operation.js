@@ -21,8 +21,9 @@ export default {
         url: `/log/page/error/${id}`,
         method: "get"
       }).then(result => {
-        this.dialogVisible = true;
-        this.exceptionDetail = result.data;
+        const Detail = this.$refs.Detail
+        Detail.dialogVisible = true;
+        Detail.exceptionDetail = result.data;
       });
     }
   }
