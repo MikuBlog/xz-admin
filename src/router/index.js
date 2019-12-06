@@ -164,6 +164,8 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
+    // 保存重定向地址
+    Storage.setMemorySes("redirect", to.path)
     next({ path: "/login" })
   }
 })

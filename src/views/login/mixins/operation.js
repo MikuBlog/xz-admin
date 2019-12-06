@@ -207,8 +207,10 @@ export default {
             }
           }).then(result => {
             this.$setMemoryPmt("token", result.data.token);
+            this.$getMemorySes("redirect") 
+            ? this.$router.push({ path: this.$getMemorySes("redirect")  })
+            : this.$router.push({ path: "/home/welcome" });
             this.$clearMemorySes();
-            this.$router.push({ path: "/home/welcome" });
           });
         } else {
           return false;
