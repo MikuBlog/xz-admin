@@ -63,11 +63,7 @@ export default {
           continuousScrolling: true
         })
         const scrollContent = document.querySelector('.scroll-content')
-        this.$setCssText(scrollContent, `
-          position: relative;
-          padding: 20px;
-          height: 100%;
-        `)
+        this.$setStyle(scrollContent, 'padding', '15px 20px')
       }else {
         this.$setStyle(document.querySelector('#top'), 'padding', '20px')
       }
