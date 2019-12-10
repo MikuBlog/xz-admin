@@ -253,13 +253,6 @@
   line-height: 50px;
 }
 
-.back-top {
-  position: fixed;
-  z-index: 1500;
-  right: 50px;
-  bottom: 100px;
-}
-
 .to-top {
   position: relative;
   transform: scale(0);

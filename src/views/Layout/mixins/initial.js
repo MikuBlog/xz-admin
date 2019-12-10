@@ -166,22 +166,10 @@ export default {
         ? this.isMini = true
         : this.isMini = false
     },
-    // 获取滚动高度
-    getScrollTop(obj) {
-      const el = document.querySelector('.to-top')
-      obj.scrollTop >= 100
-        ? this.$setStyle(el, 'transform', 'scale(1)')
-        : this.$setStyle(el, 'transform', 'scale(0)')
-      this.$setMemorySes('scrollTop', obj.scrollTop)
-    },
     // 事件监听
     initialListener() {
-      const _this = this
       window.addEventListener('resize', () => {
         this.getWindowWidth()
-      })
-      document.querySelector('.top').addEventListener('scroll', function () {
-        _this.getScrollTop(this)
       })
     }
   }

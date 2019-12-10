@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { mapMutations } from 'vuex'
 import convertHttp from '@/utils/convertHttp'
 export default {
@@ -25,10 +24,6 @@ export default {
       this.$setMemoryPmt('setting', this.$store.state.setting)
       this.initialSize()
       this.refreshPage()
-    },
-    // 返回顶部
-    backTop(delay = 500) {
-      $('.top').animate({ scrollTop: 0 }, delay)
     },
     // 刷新页面
     refreshPage() {

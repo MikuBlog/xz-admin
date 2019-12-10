@@ -239,16 +239,6 @@
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
-          <div class="back-top">
-            <el-button
-              type="primary"
-              icon="el-icon-top"
-              circle
-              class="to-top"
-              @click="backTop"
-              size="large"
-            ></el-button>
-          </div>
         </el-main>
         <el-footer class="footer" height="30px">
           <div class="coppy-right">
