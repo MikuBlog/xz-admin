@@ -35,7 +35,7 @@
 			.interceptors
 			.response
 			.use(response => {
-				loading.close()
+        loading.close()
 				return response;
 			}, err => {
         const regexp = new RegExp(/timeout/g)
@@ -44,7 +44,8 @@
 					? Message
 						.showMsgBox({ title: "系统提示", msg: "登录信息已过期，是否重新登录？", type: "warning" })
 						.then(() => {
-							storage.setMemoryPmt('token', '')
+              storage.setMemoryPmt('token', '')
+              Storage.setMemorySes("redirect", router.history.current.fullPath)
 							router.push({ path: "/login" })
 						})
           : err.response.status === 403
