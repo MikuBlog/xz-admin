@@ -165,25 +165,12 @@ export default {
     },
     // 设置卡片
     setCard() {
-      const style = document.querySelector('.card-opacity')
-      if(style) {
-        style.innerText = style.innerText = `
+      this.$createStyle(
+        `
           .el-card {
             opacity: ${this.settings.background.cardOpacity / 100}!important;
           }
-        `
-      }else {
-        const 
-          style = document.createElement('style'),
-          head = document.querySelector('head')
-        style.innerText = `
-          .el-card {
-            opacity: ${this.settings.background.cardOpacity / 100}!important;
-          }
-        `
-        style.className = "card-opacity"
-        head.appendChild(style)
-      }
+        `, 'card-opacity')
     },
     // 值格式化
     formatTooltip(val) {

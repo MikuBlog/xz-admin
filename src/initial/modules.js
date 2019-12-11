@@ -194,6 +194,13 @@ Vue.prototype.$setStyle = SetStyle.setStyle
 Vue.prototype.$setCssText = SetStyle.setCssText
 /**
  * @author xuanzai
+ * @description 设置全局样式
+ * @param {String} css css代码
+ * @param {String} className 类名
+ */
+Vue.prototype.$createStyle = SetStyle.createStyle
+/**
+ * @author xuanzai
  * @description 设置全屏函数与取消全屏函数
  * @param {DOM Object} element DOM元素
  */
