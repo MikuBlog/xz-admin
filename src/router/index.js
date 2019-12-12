@@ -119,7 +119,7 @@ function getRouter() {
 function addTags(tag) {
   const tagsList = store.state.tags.tagsList
   // 不添加标签页
-  if (tag.meta.title === "404" || tag.meta.title === "403" || tag.meta.title === '重定向') {
+  if (tag.meta.title === "500" || tag.meta.title === "404" || tag.meta.title === "403" || tag.meta.title === '重定向') {
     return
   }
   // 如果已存在标签，不添加标签

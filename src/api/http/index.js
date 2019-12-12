@@ -50,6 +50,8 @@
 						})
           : err.response.status === 403
           ? router.push({ path: "/403" })
+          :err.response.status === 500
+          ? router.push({ path: "/500" })
           : Message
 						.errorMsg(
 							JSON.parse(err.response.request.response).message 

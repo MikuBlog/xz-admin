@@ -8,42 +8,46 @@
     <el-scrollbar style="height: 100%">
       <div v-show="activeName === 'DIY'">
         <h2 style="margin: 2rem 0">菜单颜色风格</h2>
-        <div class="radio-box" @change="$nextTick(() => { $parent.initialStyle() })">
+        <div class="radio-box" v-show="defaultConfig.diy.menu" @change="$nextTick(() => { $parent.initialStyle() })">
           <el-radio-group v-model="$store.state.setting.menuStyle">
             <el-radio label="light">白昼</el-radio>
             <el-radio label="dark">夜晚</el-radio>
           </el-radio-group>
         </div>
         <h2 style="margin: 2rem 0">菜单布局风格</h2>
-        <div class="radio-box">
+        <div class="radio-box" v-show="defaultConfig.diy.menu">
           <el-radio-group
             v-model="$store.state.setting.isVerticleMenu"
             @change="$nextTick(() => { $parent.initialStyle() })"
           >
-            <el-radio :label="true">垂直</el-radio>
-            <el-radio :label="false">水平</el-radio>
+            <el-radio :label="true" :disabled="!defaultConfig.diy.menu">垂直</el-radio>
+            <el-radio :label="false" :disabled="!defaultConfig.diy.menu">水平</el-radio>
           </el-radio-group>
         </div>
         <h2 style="margin: 2rem 0">系统主题设置</h2>
         <div class="switch-box">
-          <div class="box">
+          <div class="box" v-show="defaultConfig.diy.theme">
             <span class="tips">更换主题</span>
             <Theme />
           </div>
         </div>
         <h2 style="margin: 2rem 0">系统布局设置</h2>
         <div class="switch-box">
-          <div class="box">
+          <div class="box" v-show="defaultConfig.diy.logo">
             <span class="tips">显示Logo</span>
             <el-switch v-model="$store.state.setting.showLogo"></el-switch>
           </div>
-          <div class="box">
+          <div class="box" v-show="defaultConfig.diy.tagViews">
             <span class="tips">显示标签页</span>
             <el-switch v-model="$store.state.setting.showTags"></el-switch>
           </div>
-          <div class="box">
+          <div class="box" v-show="defaultConfig.diy.breadcrumb">
             <span class="tips">显示面包屑</span>
             <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
+          </div>
+          <div class="box" v-show="defaultConfig.diy.footer">
+            <span class="tips">显示页脚</span>
+            <el-switch v-model="$store.state.setting.showFooter"></el-switch>
           </div>
         </div>
       </div>
@@ -56,7 +60,11 @@
           ref="image"
           class="con-background"
         ></el-image>
-        <div class="block" style="margin-top: 2rem; padding: 0 10px">
+        <div
+          class="block"
+          style="margin-top: 2rem; padding: 0 10px"
+          v-show="defaultConfig.diy.backgroundOpacity"
+        >
           <span class="demonstration">背景透明度：</span>
           <el-slider
             v-model="$store.state.setting.background.opacity"
@@ -64,7 +72,7 @@
             @change="getVal"
           ></el-slider>
         </div>
-        <div class="block" style="padding: 0 10px">
+        <div class="block" style="padding: 0 10px" v-show="defaultConfig.diy.cardOpacity">
           <span class="demonstration">卡片透明度：</span>
           <el-slider
             v-model="$store.state.setting.background.cardOpacity"
@@ -72,7 +80,7 @@
             @change="setCard"
           ></el-slider>
         </div>
-        <div class="block" style="padding: 0 10px">
+        <div class="block" style="padding: 0 10px" v-show="defaultConfig.diy.backgroundBlur">
           <span class="demonstration">背景模糊度：</span>
           <el-slider
             v-model="$store.state.setting.background.blur"
@@ -80,7 +88,7 @@
             @change="getVal"
           ></el-slider>
         </div>
-        <div class="block" style="padding: 0 10px">
+        <div class="block" style="padding: 0 10px" v-show="defaultConfig.diy.backgroundMask">
           <span class="demonstration">背景遮罩浓度：</span>
           <el-slider
             v-model="$store.state.setting.background.mask"
@@ -88,7 +96,7 @@
             @change="getVal"
           ></el-slider>
         </div>
-        <div class="button">
+        <div class="button" v-show="defaultConfig.diy.selectBackrgoundButton">
           <el-button type="primary" style="width: 100%" @click="selectBackground">选择背景</el-button>
         </div>
       </div>
@@ -130,37 +138,45 @@ export default {
       // 插入元素
       this.insertEle();
       // 初始化卡片样式
-      this.setCard()
+      this.setCard();
     });
   },
   methods: {
     // 插入元素
     insertEle() {
       const image =
-        document.querySelector(".el-image__inner") ||
-        document.querySelector(".el-image__error"),
+          document.querySelector(".el-image__inner") ||
+          document.querySelector(".el-image__error"),
         mask = document.createElement("div");
       mask.className = "small-mask";
       try {
         this.$insertAfter(mask, image);
         this.getVal();
-      } catch (e) { }
+      } catch (e) {}
     },
     // 图片预览
     getVal() {
-      const 
-        child = document.querySelector(".con-background .el-image__inner"),
+      const child = document.querySelector(".con-background .el-image__inner"),
         mask = document.querySelector(".small-mask");
       this.settings.background.url &&
-        (this.$setStyle(child, "opacity", `${this.settings.background.opacity / 100}`),
-        this.$setStyle(child, "filter", `blur(${this.settings.background.blur}px)`));
+        (this.$setStyle(
+          child,
+          "opacity",
+          `${this.settings.background.opacity / 100}`
+        ),
+        this.$setStyle(
+          child,
+          "filter",
+          `blur(${this.settings.background.blur}px)`
+        ));
       mask.style.cssText = `
                 position: absolute;
                 top: 0;
                 right: 0;
                 left: 0;
                 bottom: 0;
-                background: rgba(0, 0, 0, ${this.settings.background.mask / 100});
+                background: rgba(0, 0, 0, ${this.settings.background.mask /
+                  100});
             `;
     },
     // 设置卡片
@@ -170,7 +186,9 @@ export default {
           .el-card {
             opacity: ${this.settings.background.cardOpacity / 100}!important;
           }
-        `, 'card-opacity')
+        `,
+        "card-opacity"
+      );
     },
     // 值格式化
     formatTooltip(val) {

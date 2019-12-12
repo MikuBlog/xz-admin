@@ -15,6 +15,7 @@ export default {
       isVerticleMenu: state => state.setting.isVerticleMenu,
       showBreadcrumb: state => state.setting.showBreadcrumb,
       showTags: state => state.setting.showTags,
+      showFooter: state => state.setting.showFooter,
       menuStyle: state => state.setting.menuStyle,
       background: state => state.setting.background,
       layoutSize: state => state.setting.layoutSize,

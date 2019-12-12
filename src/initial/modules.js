@@ -5,6 +5,10 @@ import mavonEditor from 'mavon-editor'
 import Fragment from 'vue-fragment'
 // 引入图片剪裁组件
 import VueCropper from 'vue-cropper'
+// 引入表单生成器
+import FormMaking from 'form-making'
+// 引入表单生成器富文本
+import VueEditor from "vue2-editor"
 // 引入icon组件
 import '@/icons'
 // 引入UI框架
@@ -20,6 +24,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'iview/dist/styles/iview.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import 'mavon-editor/dist/css/index.css'
+import 'form-making/dist/FormMaking.css'
 // 引入全局提示模块
 import Message from '@/api/message'
 // 引入树状选择器
@@ -363,5 +368,9 @@ Vue.component('treeselect', Treeselect)
 Vue.use(Fragment.Plugin)
 // 引入图片剪裁组件
 Vue.use(VueCropper)
+// 引入表单生成器
+Vue.use(FormMaking)
+// 引入表单生成器富文本
+Vue.use(VueEditor)
 
 Vue.config.productionTip = false

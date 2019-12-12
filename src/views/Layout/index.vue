@@ -20,7 +20,7 @@
               :src="logoUrl"
               fit="cover"
               class="logo-verticle"
-              v-show="showLogo"
+              v-show="showLogo && defaultConfig.diy.logo"
               v-if="!isCollapse"
               @click.native="$router.push({ path: '/home/welcome' })"
             >
@@ -28,7 +28,9 @@
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>
-            <el-divider v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"></el-divider>
+            <el-divider
+              v-if="menuStyle !== 'dark' && isCollapse === false && showLogo && defaultConfig.diy.logo"
+            ></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
         </el-scrollbar>
@@ -55,14 +57,14 @@
               :src="logoUrl"
               fit="cover"
               class="logo-verticle"
-              v-show="showLogo"
+              v-show="showLogo && defaultConfig.diy.logo"
               @click.native="$router.push({ path: '/home/welcome' })"
             >
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>
-            <el-divider v-if="menuStyle !== 'dark' && showLogo"></el-divider>
+            <el-divider v-if="menuStyle !== 'dark' && showLogo && defaultConfig.diy.logo"></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
         </el-scrollbar>
@@ -86,7 +88,7 @@
                 :src="logoUrl"
                 fit="contain"
                 class="logo-horizontal"
-                v-show="showLogo"
+                v-show="showLogo && defaultConfig.diy.logo"
                 @click.native="$router.push({ path: '/home/welcome' })"
               >
                 <div slot="error" class="image-slot">
@@ -217,13 +219,16 @@
                 <i class="el-icon-circle-close" @click="removeTags"></i>
               </el-tooltip>
             </div>
-            <div class="breadcrumb" v-show="showBreadcrumb && !isMini">
+            <div
+              class="breadcrumb"
+              v-show="showBreadcrumb && !isMini && defaultConfig.diy.breadcrumb"
+            >
               <Breadcrumb></Breadcrumb>
             </div>
           </div>
           <div class="border" style="border-color: #f0f0f0"></div>
         </el-header>
-        <div class="tabs" v-show="showTags">
+        <div class="tabs" v-show="showTags && defaultConfig.diy.tagViews">
           <div class="flex-box">
             <Tag :tagsList="tagsList" class="tag-list" />
             <el-button
@@ -240,7 +245,7 @@
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
         </el-main>
-        <el-footer class="footer" height="30px">
+        <el-footer class="footer" height="30px" v-show="showFooter && defaultConfig.diy.footer">
           <div class="coppy-right">
             <span>© 2019 xuanzai Wteam.All rights reserved.</span>
           </div>

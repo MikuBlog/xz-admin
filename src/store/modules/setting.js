@@ -1,16 +1,19 @@
 import storage from '@/api/storage'
 const
   state = {
-    showLogo: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showLogo)
+    showLogo: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showLogo !== undefined)
       ? storage.getMemoryPmt('setting').showLogo
       : true,
-    showTags: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showTags)
+    showTags: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showTags !== undefined)
       ? storage.getMemoryPmt('setting').showTags
       : true,
-    showBreadcrumb: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showBreadcrumb)
+    showBreadcrumb: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showBreadcrumb !== undefined)
       ? storage.getMemoryPmt('setting').showBreadcrumb
       : true,
-    isVerticleMenu: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').isVerticleMenu)
+    showFooter: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showFooter !== undefined)
+    ? storage.getMemoryPmt('setting').showFooter
+    : true,
+    isVerticleMenu: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').isVerticleMenu !== undefined)
       ? storage.getMemoryPmt('setting').isVerticleMenu
       : true,
     menuStyle: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').menuStyle)
