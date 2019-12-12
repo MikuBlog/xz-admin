@@ -5,7 +5,7 @@ function isIE() {
 
 // 判断环境是否为移动端
 function isMobile() {
-  const 
+  const
     mobileAgent = new Array("iphone", "ipod", "ipad", "android", "mobile", "blackberry", "webos", "incognito", "webmate", "bada", "nokia", "lg", "ucweb", "skyfire"),
     browser = navigator.userAgent.toLowerCase()
   for (var i = 0, len = mobileAgent.length; i < len; i++) {
@@ -16,7 +16,16 @@ function isMobile() {
   return false
 }
 
+function isIpad() {
+  const
+    mobileAgent = "ipad",
+    browser = navigator.userAgent.toLowerCase()
+  if (browser.indexOf(mobileAgent) != -1) {
+    return true
+  }
+}
 export default {
   isIE,
+  isIpad,
   isMobile
 }

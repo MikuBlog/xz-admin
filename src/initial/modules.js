@@ -317,10 +317,16 @@ Vue.prototype.$sortList = ArrayMethod.sortList
 Vue.prototype.$searchResult = ArrayMethod.searchResult
 /**
  * @author xuanzai
- * @description 判断是否为移动端
+ * @description 判断设备是否为移动端
  * @returns {Boolean} 返回判断结果
  */
 Vue.prototype.$isMobile = Agent.isMobile
+/**
+ * @author xuanzai
+ * @description 判断设备是否为ipad
+ * @returns {Boolean} 返回判断结果
+ */
+Vue.prototype.$isIpad = Agent.isIpad
 /**
  * @author xuanzai
  * @description 判断是否为移动端

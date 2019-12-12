@@ -35,9 +35,17 @@ export default {
   // 布局大小icon
   layoutSize: true,
   // 分页组件
-  paginationLayout: `${ Agent.isMobile() 
+  paginationLayout: `${ 
+    Agent.isMobile() && !Agent.isIpad()
     ? 'prev, pager, next' 
-    : 'total, sizes, prev, pager, next, jumper'}`,
+    : 'total, sizes, prev, pager, next, jumper'
+  }`,
   // 分页大小
-  paginationSize: Agent.isMobile()
+  paginationSize: Agent.isMobile(),
+  // 图片预览尺寸
+  previewImageSize: `${
+    Agent.isMobile() && !Agent.isIpad() 
+    ? '90%'
+    : '500px'
+  }`
 }
