@@ -16,6 +16,7 @@
     "element-ui": "^2.13.0",
     "flow-chart-editor": "^0.1.3",
     "flowchart.js": "^1.12.1",
+    "form-making": "^1.2.7",
     "mavon-editor": "^2.7.5",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",
@@ -29,6 +30,7 @@
     "vue-fragment": "^1.5.1",
     "vue-router": "^3.0.3",
     "vue-ueditor-wrap": "^2.4.1",
+    "vue2-editor": "^2.10.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
