@@ -18,6 +18,9 @@ export default {
     .icon {
       display: inline!important;
     }
+    .center-container {
+      min-width: 500px;
+    }
   }
 }
 </style>
