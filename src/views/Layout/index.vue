@@ -179,7 +179,7 @@
               <el-tooltip
                 class="item"
                 effect="dark"
-                content="样式设置"
+                content="自定义样式"
                 placement="bottom"
                 v-show="defaultConfig.systemSetting"
               >

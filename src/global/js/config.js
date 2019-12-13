@@ -36,6 +36,8 @@ export default {
     theme: true,
     // 颜色翻转
     colorRotate: true,
+    // 底片模式
+    weakness: true,
     // 系统亮度
     brightness: true,
     // 更换菜单样式

@@ -360,5 +360,11 @@ $col-ground: #f6f9fa;
   .main-text {
     transform: translateY(-25%);
   }
+  .mound_text {
+    transform: translateY(-15%) rotate(6deg) scale(.8);
+  }
+  .ground {
+    height: 100px;
+  }
 }
 </style>

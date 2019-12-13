@@ -41,6 +41,9 @@ const
     colorRotate: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').colorRotate !== undefined)
     ? storage.getMemoryPmt('setting').colorRotate
     : false,
+    weakness: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').weakness !== undefined)
+    ? storage.getMemoryPmt('setting').weakness
+    : false,
     brightness: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').brightness !== undefined)
     ? storage.getMemoryPmt('setting').brightness
     : 100,

@@ -30,24 +30,28 @@
         </div>
         <h2 style="margin: 2rem 0">系统主题设置</h2>
         <div class="switch-box">
-          <div class="box" v-show="defaultConfig.diy.theme">
-            <span class="tips">更换主题</span>
+          <div class="box" style="top: 4px" v-show="defaultConfig.diy.theme">
+            <span class="tips" style="top: 0">更换主题</span>
             <Theme />
           </div>
           <div class="box" v-show="defaultConfig.diy.colorRotate">
             <span class="tips">颜色反转</span>
-            <el-switch v-model="$store.state.setting.colorRotate" @change="changeColorAndBright"></el-switch>
+            <el-switch v-model="$store.state.setting.colorRotate" @change="changeColorBrightInvert"></el-switch>
+          </div>
+          <div class="box" v-show="defaultConfig.diy.weakness">
+            <span class="tips">色弱模式</span>
+            <el-switch v-model="$store.state.setting.weakness" @change="changeColorBrightInvert"></el-switch>
           </div>
           <div
             class="block"
-            style="font-size: 1rem; margin-top: 1.5rem; padding: 0 8px; text-align: left"
+            style="font-size: 1rem; margin-top: 1rem; padding: 0 8px; text-align: left"
             v-show="defaultConfig.diy.brightness"
           >
             <span class="demonstration">系统亮度</span>
             <el-slider
               v-model="$store.state.setting.brightness"
               :format-tooltip="formatTooltip"
-              @change="changeColorAndBright"
+              @change="changeColorBrightInvert"
             ></el-slider>
           </div>
         </div>
@@ -161,7 +165,7 @@ export default {
       // 初始化卡片样式
       this.setCard();
     });
-    this.changeColorAndBright()
+    this.changeColorBrightInvert()
   },
   methods: {
     // 插入元素
@@ -177,13 +181,11 @@ export default {
       } catch (e) {}
     },
     // 系统亮度
-    changeColorAndBright() {
+    changeColorBrightInvert() {
       if(this.settings.brightness < 10) {
         this.settings.brightness = 10
       }
-      this.settings.colorRotate
-      ? this.$setStyle(this.app, "filter", `hue-rotate(180deg) brightness(${ this.settings.brightness / 100 })`)
-      : this.$setStyle(this.app, "filter", `brightness(${ this.settings.brightness / 100 })`)
+     this.$setStyle(this.app, "filter", `${this.settings.colorRotate ? 'hue-rotate(180deg)' : ""} ${this.settings.weakness ? 'invert(.8)' : ""} brightness(${ this.settings.brightness / 100 })`)
     },
     // 图片预览
     getVal() {

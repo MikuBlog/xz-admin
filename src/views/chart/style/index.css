@@ -67,7 +67,7 @@
   font-size: 1.2rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .content-box {
     text-align: center;
     top: 0;
