@@ -8,7 +8,11 @@
     <el-scrollbar style="height: 100%">
       <div v-show="activeName === 'DIY'">
         <h2 style="margin: 2rem 0">菜单颜色风格</h2>
-        <div class="radio-box" v-show="defaultConfig.diy.menu" @change="$nextTick(() => { $parent.initialStyle() })">
+        <div
+          class="radio-box"
+          v-show="defaultConfig.diy.menu"
+          @change="$nextTick(() => { $parent.initialStyle() })"
+        >
           <el-radio-group v-model="$store.state.setting.menuStyle">
             <el-radio label="light">白昼</el-radio>
             <el-radio label="dark">夜晚</el-radio>
@@ -29,6 +33,22 @@
           <div class="box" v-show="defaultConfig.diy.theme">
             <span class="tips">更换主题</span>
             <Theme />
+          </div>
+          <div class="box" v-show="defaultConfig.diy.colorRotate">
+            <span class="tips">颜色反转</span>
+            <el-switch v-model="$store.state.setting.colorRotate" @change="changeColorAndBright"></el-switch>
+          </div>
+          <div
+            class="block"
+            style="font-size: 1rem; margin-top: 1.5rem; padding: 0 8px; text-align: left"
+            v-show="defaultConfig.diy.brightness"
+          >
+            <span class="demonstration">系统亮度</span>
+            <el-slider
+              v-model="$store.state.setting.brightness"
+              :format-tooltip="formatTooltip"
+              @change="changeColorAndBright"
+            ></el-slider>
           </div>
         </div>
         <h2 style="margin: 2rem 0">系统布局设置</h2>
@@ -125,7 +145,8 @@ export default {
     return {
       logo: "",
       isSetting: false,
-      activeName: "DIY"
+      activeName: "DIY",
+      app: document.querySelector('#app')
     };
   },
   computed: {
@@ -140,6 +161,7 @@ export default {
       // 初始化卡片样式
       this.setCard();
     });
+    this.changeColorAndBright()
   },
   methods: {
     // 插入元素
@@ -153,6 +175,15 @@ export default {
         this.$insertAfter(mask, image);
         this.getVal();
       } catch (e) {}
+    },
+    // 系统亮度
+    changeColorAndBright() {
+      if(this.settings.brightness < 10) {
+        this.settings.brightness = 10
+      }
+      this.settings.colorRotate
+      ? this.$setStyle(this.app, "filter", `hue-rotate(180deg) brightness(${ this.settings.brightness / 100 })`)
+      : this.$setStyle(this.app, "filter", `brightness(${ this.settings.brightness / 100 })`)
     },
     // 图片预览
     getVal() {

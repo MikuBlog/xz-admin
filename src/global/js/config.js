@@ -34,6 +34,10 @@ export default {
     footer: true,
     // 更换主题
     theme: true,
+    // 颜色翻转
+    colorRotate: true,
+    // 系统亮度
+    brightness: true,
     // 更换菜单样式
     menu: true,
     // 背景透明度

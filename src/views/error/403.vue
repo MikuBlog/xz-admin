@@ -12,7 +12,7 @@ export default {
   mounted() {
     const ele = this.$refs.layout
     ele.title = "403"
-    ele.content = "Access to this interface is forbidden."
+    ele.content = "This interface is forbidden."
   },
 }
 </script>

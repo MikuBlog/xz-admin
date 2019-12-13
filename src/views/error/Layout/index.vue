@@ -34,11 +34,13 @@ export default {
     initialStyle() {
       const ele = document.querySelector(".content"),
         main = document.querySelector(".top");
-      this.$setStyle(ele, "position", `absolute`);
-      this.$setStyle(ele, "height", `${main.offsetHeight}px`);
-      this.$setStyle(ele, "width", `100%`);
-      this.$setStyle(ele, "top", `0`);
-      this.$setStyle(ele, "left", `0`);
+      if (main) {
+        this.$setStyle(ele, "position", `absolute`);
+        this.$setStyle(ele, "height", `${main.offsetHeight}px`);
+        this.$setStyle(ele, "width", `100%`);
+        this.$setStyle(ele, "top", `0`);
+        this.$setStyle(ele, "left", `0`);
+      }
     },
     initialListener() {
       window.addEventListener("resize", this.initialStyle);

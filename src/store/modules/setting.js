@@ -38,6 +38,12 @@ const
     ? storage.getMemoryPmt('setting').layoutSize
     : 'medium',
     theme: "#409eff",
+    colorRotate: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').colorRotate !== undefined)
+    ? storage.getMemoryPmt('setting').colorRotate
+    : false,
+    brightness: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').brightness !== undefined)
+    ? storage.getMemoryPmt('setting').brightness
+    : 100,
   }
 export default {
   state
