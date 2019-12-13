@@ -9,10 +9,12 @@ import 'nprogress/nprogress.css';
 import Layout from '@/views/Layout/index.vue'
 // 默认路由页，用来存放子路由的纯路由页面
 import DefaultPage from '@/Layout/index.vue'
-// 默认首页加载
-import Welcome from '@/views/welcome/index.vue'
-// 默认重定向页面加载
-import Redirect from '@/views/redirect/index'
+
+const 
+  Error = () => import('@/views/error/500'),
+  Permission = () => import('@/views/error/403'),
+  Redirect = () => import('@/views/redirect/index'),
+  Welcome = () => import('@/views/welcome/index.vue')
 
 // 默认后台管理模板
 const layout = {
@@ -33,7 +35,21 @@ const layout = {
     },
     path: 'redirect',
     component: Redirect
-  },]
+  }, {
+    name: '403',
+    meta: {
+      title: "403"
+    },
+    path: '403',
+    component: Permission
+  }, {
+    name: '500',
+    meta: {
+      title: "500"
+    },
+    path: '500',
+    component: Error
+  }]
 }
 
 // 动态生成路由
@@ -62,7 +78,7 @@ function generateRouter(list, pre, now) {
           meta: value.meta,
           component: () => {
             if (value.component === "Layout") {
-              router.push({ path: "/404" })
+              router.push({ path: "/home/404" })
             } else {
               return import(`@/views${value.component}`)
             }
@@ -85,7 +101,7 @@ function generateRouter(list, pre, now) {
           meta: value.meta,
           component: () => {
             if (value.component === "Layout") {
-              router.push({ path: "/404" })
+              router.push({ path: "/home/404" })
             } else {
               return import(`@/views${value.component}`)
             }

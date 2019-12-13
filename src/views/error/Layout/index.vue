@@ -2,7 +2,7 @@
   <div class="content">
     <canvas class="snow" id="snow"></canvas>
     <div class="main-text">
-      <h1 style="margin: 1rem 0;">Sorry</h1>
+      <h1 class="sorry">Sorry</h1>
       <h3>{{ content }}</h3>
       <a class="home-link" @click="turnBack">Back to home</a>
     </div>
@@ -21,94 +21,116 @@ export default {
     return {
       title: "",
       content: ""
-    }
+    };
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.initialStyle);
   },
   methods: {
     turnBack() {
       this.$clearMemorySes();
       this.$router.push({ path: "/home/welcome" });
-    }
-  },
-  mounted() {
-    function ready(fn) {
-      if (document.readyState != "loading") {
-        fn();
-      } else {
-        document.addEventListener("DOMContentLoaded", fn);
-      }
-    }
-
-    function makeSnow(el) {
-      var ctx = el.getContext("2d");
-      var width = 0;
-      var height = 0;
-      var particles = [];
-
-      var Particle = function() {
-        this.x = this.y = this.dx = this.dy = 0;
-        this.reset();
-      };
-
-      Particle.prototype.reset = function() {
-        this.y = Math.random() * height;
-        this.x = Math.random() * width;
-        this.dx = Math.random() * 1 - 0.5;
-        this.dy = Math.random() * 0.5 + 0.5;
-      };
-
-      function createParticles(count) {
-        if (count != particles.length) {
-          particles = [];
-          for (var i = 0; i < count; i++) {
-            particles.push(new Particle());
-          }
+    },
+    initialStyle() {
+      const ele = document.querySelector(".content"),
+        main = document.querySelector(".top");
+      this.$setStyle(ele, "position", `absolute`);
+      this.$setStyle(ele, "height", `${main.offsetHeight}px`);
+      this.$setStyle(ele, "width", `100%`);
+      this.$setStyle(ele, "top", `0`);
+      this.$setStyle(ele, "left", `0`);
+    },
+    initialListener() {
+      window.addEventListener("resize", this.initialStyle);
+    },
+    initialOperation() {
+      function ready(fn) {
+        if (document.readyState != "loading") {
+          fn();
+        } else {
+          document.addEventListener("DOMContentLoaded", fn);
         }
       }
 
-      function onResize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        el.width = width;
-        el.height = height;
+      function makeSnow(el) {
+        var ctx = el.getContext("2d");
+        var width = 0;
+        var height = 0;
+        var particles = [];
 
-        createParticles((width * height) / 10000);
+        var Particle = function() {
+          this.x = this.y = this.dx = this.dy = 0;
+          this.reset();
+        };
+
+        Particle.prototype.reset = function() {
+          this.y = Math.random() * height;
+          this.x = Math.random() * width;
+          this.dx = Math.random() * 1 - 0.5;
+          this.dy = Math.random() * 0.5 + 0.5;
+        };
+
+        function createParticles(count) {
+          if (count != particles.length) {
+            particles = [];
+            for (var i = 0; i < count; i++) {
+              particles.push(new Particle());
+            }
+          }
+        }
+
+        function onResize() {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          el.width = width;
+          el.height = height;
+
+          createParticles((width * height) / 10000);
+        }
+
+        function updateParticles() {
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = "#f6f9fa";
+
+          particles.forEach(function(particle) {
+            particle.y += particle.dy;
+            particle.x += particle.dx;
+
+            if (particle.y > height) {
+              particle.y = 0;
+            }
+
+            if (particle.x > width) {
+              particle.reset();
+              particle.y = 0;
+            }
+
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, 5, 0, Math.PI * 2, false);
+            ctx.fill();
+          });
+
+          window.requestAnimationFrame(updateParticles);
+        }
+
+        onResize();
+        updateParticles();
+
+        window.addEventListener("resize", onResize);
       }
 
-      function updateParticles() {
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = "#f6f9fa";
-
-        particles.forEach(function(particle) {
-          particle.y += particle.dy;
-          particle.x += particle.dx;
-
-          if (particle.y > height) {
-            particle.y = 0;
-          }
-
-          if (particle.x > width) {
-            particle.reset();
-            particle.y = 0;
-          }
-
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, 5, 0, Math.PI * 2, false);
-          ctx.fill();
-        });
-
-        window.requestAnimationFrame(updateParticles);
-      }
-
-      onResize();
-      updateParticles();
-
-      window.addEventListener("resize", onResize);
+      ready(function() {
+        var canvas = document.getElementById("snow");
+        makeSnow(canvas);
+      });
     }
-
-    ready(function() {
-      var canvas = document.getElementById("snow");
-      makeSnow(canvas);
-    });
+  },
+  mounted() {
+    if (this.$route.path !== "/404") {
+      this.initialStyle();
+      this.initialListener();
+    }
+    this.initialOperation();
   }
 };
 </script>
@@ -139,16 +161,10 @@ $col-ground: #f6f9fa;
   box-shadow: $shadow;
 }
 
-// html,
-// body {
-//   height: 100%;
-//   min-height: 450px;
-
-//   font-family: "Dosis", sans-serif;
-//   font-size: 32px;
-//   font-weight: 500;
-//   color: $col-fg;
-// }
+.sorry {
+  position: relative;
+  margin: 1rem;
+}
 
 .content {
   font-family: "Dosis", sans-serif;
@@ -175,8 +191,9 @@ $col-ground: #f6f9fa;
 }
 
 .main-text {
+  position: relative;
   padding: 20vh 20px 0 20px;
-
+  transform: translateY(-15%);
   text-align: center;
   line-height: 2em;
   font-size: 5vh;
@@ -323,7 +340,6 @@ $col-ground: #f6f9fa;
     bottom: 98%;
     left: 50%;
     margin-left: -20%;
-
     background: $col-blood;
   }
 
@@ -333,9 +349,14 @@ $col-ground: #f6f9fa;
     top: -$handle-height - 25px;
     left: 0%;
     box-sizing: border-box;
-
     border: 10px solid $col-blood;
     border-radius: 4px 4px 20px 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main-text {
+    transform: translateY(-25%);
   }
 }
 </style>
