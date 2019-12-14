@@ -168,7 +168,53 @@ nginx -s reload
 gzip on;
 gzip_types application/javascript text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png application/json;
 ```
-`window`与`linux`的配置方式完全一致，只需要找到`nginx.conf`配置文件进行如上操作即可。
+
+- 保存并重启`nginx`
+
+`window`与`linux`的配置方式完全一致，只需要找到`nginx.conf`配置文件进行如上操作即可
+
+<br/>
+<br/>
+
+## 负载均衡
+
+> 有效处理服务器高并发，同时也适用于平滑部署
+
+- 打开`nginx.conf`，并在`http`模块任意行加入如下代码：
+
+```
+upstream xuanzai {
+	server xxx.com weight=10; # 服务器1
+	server xxx.com weight=10; # 服务器2
+}
+```
+
+- 配置`server`模块
+
+```
+server {
+	listen 80;
+	server_name xzadmin.xuanzai.top; # 暴露给用户访问的域名
+	location / {
+		proxy_pass http://xuanzai; # 名称与负载均衡配置的名称一致
+		proxy_redirect default;
+		index index.html;	
+		root html;
+	}	
+}
+```
+
+- 保存并重启`nginx`
+
+这样，简单的负载均衡就配置完成了！<br/>
+此时如果两个（或多个）服务器已开启，那么可尝试访问已配置好的域名，查看是否配置成功<br/>
+`window`与`linux`的配置方式完全一致，只需要找到`nginx.conf`配置文件进行如上操作即可
+
+<br/>
+
+- 平滑部署
+
+> 如果没有使用服务器负载均衡，那么每次部署都势必会影响用户的访问。使用了负载均衡，则在部署期间可逐个服务器部署而不影响用户的使用体验。（部署前先停止该服务器的运行`nginx -s stop`，否则用户访问便可能会报502、404等类似的错误）
 
 <br/>
 <br/>

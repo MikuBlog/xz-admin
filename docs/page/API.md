@@ -30,36 +30,10 @@ this.$copyText(this.$refs.contentBox)
 + `key`: 参数名称
 + `value`: 参数值
 
-示例
+示例：
 ```js
 this.$urlQuery([url]) // url: http://myinterface.xuanzai.top/getPicture?type=头像&id=1  result: { type: '头像', id: 1 }
 
-```
-
-## sortList
-
-描述：对元素为对象的数组进行排序
-
-参数：
-
-+ `list`: 需要排序的数组 [`Array`]（必填）
-+ `isDes`: 是否倒序（选填：默认为false）
-+ `property`: 对象排序字段（选填：默认为空）
-
-示例
-```js
-this.$sortList(list, true, 'level') 
-```
-
-## isMobile
-
-描述：判断运行环境是否为移动端
-
-返回值：`Boolean`
-
-示例:
-```js
-this.$isMobile() // true or false
 ```
 
 ## print
@@ -70,11 +44,215 @@ this.$isMobile() // true or false
 
 参数：
 
-+ `page`：`HTML`字符串[`String`]（必填）
++ `page`：`HTML`字符串[`String`]（选填：默认为空）
 
-示例:
+示例：
 ```js
 this.$print(page)
+```
+
+## createSocket
+
+描述：连接`wesocket`
+
+参数：
+
++ `option`：看示例[`Object`]（选填）
+
+返回值：`WebSocket`实例
+
+示例：
+```js
+this
+  .$createSocket(
+    {
+      url: "ws://xxx.com/xxx", // 连接websocket地址（必填）
+      onOpen(e) {}, // websokcet打开后的回调（选填）
+      onMessage(e) {}, // websocket接收到信息后的回调（选填）
+      onError(e) {}, // websocket出错后的回调（选填）
+      onClose(e) {} // websocket关闭后的回调（选填）
+    }
+  ) // 返回WebSocket实例
+```
+
+## Theme
+
+所有主题模式都用在`body`标签上，也就是所有样式都会被改为对应的主题模式。
+
+如果有的元素不想被主题样式覆盖掉，请前往`src/global/js/config.js`文件进行配置：
+
+```js
+// 不受主题影响的元素（标签、类、id）
+excludeEles: [
+  "img", // 图片
+  "video", // 视频
+  "iframe", // 内嵌网站
+  "embed", // 插件
+  "object",
+  '.login', // 登录页面
+  '.el-message', // 提示信息
+  '.el-notification', // 通知信息
+  /* 背景图 */
+  '[style*="background:url"]',
+  '[style*="background-image:url"]',
+  '[style*="background: url"]',
+  '[style*="background-image: url"]',
+  '[style*="background-image"][style*="image-set"]'
+],
+```
+
+### darkMode
+
+描述：夜间模式主题
+
+参数：
+
+`isDark`：是否为黑暗模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
+
+示例
+```js
+this.$darkMode() // 开启夜间模式
+this.$darkMode(false) // 关闭夜间模式
+```
+
+### weaknessMode
+
+描述：色弱模式
+
+参数：
+
+`isWeakness`：是否为色弱模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
+
+示例
+```js
+this.$weaknessMode() // 开启色弱模式
+this.$weaknessMode(false) // 关闭色弱模式
+```
+
+### hueRotateMode
+
+描述：反转模式
+
+参数：
+
+`isHueRotate`：是否为反转模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
+
+示例
+```js
+this.$hueRotateMode() // 开启描述：反转模式
+this.$hueRotateMode(false) // 关闭描述：反转模式
+```
+
+## Client
+
+### isMobile
+
+描述：判断运行环境是否为移动端
+
+返回值：`Boolean`
+
+示例：
+```js
+this.$isMobile() // true or false
+```
+
+### isIpad
+
+描述：判断运行环境是否为`ipad`
+
+返回值：`Boolean`
+
+示例：
+```js
+this.$isIpad() // true or false
+```
+
+## Array
+
+### sortList
+
+描述：对元素为对象的数组进行排序
+
+注意：只对值为日期、数字、字符串为数字的字段进行排序。原数组会改变。
+
+参数：
+
++ `list`: 需要排序的数组 [`Array`]（必填）
++ `isDes`: 是否倒序[`Boolean`]（选填：默认为false）
++ `property`: 对象排序字段[`String`]（选填：默认为空）
+
+返回值：`Array`
+
+示例：
+```js
+let list = [{ name: "旋仔", level: 3 }, 
+{ name: "旋仔", level: 1 }, 
+{ name: "旋仔", level: 2 }]
+this.$sortList(list, true, 'level') // [{ name: "旋仔", level: 3 }, { name: "旋仔", level: 2 }, { name: "旋仔", level: 1 }]
+```
+
+### searchResult
+
+描述：查找元素（模糊搜索）
+
+参数：
+
++ `list`: 需要查找的数组 [`Array`]（必填）
++ `keys`: 查找包含的字段[`Array`]（必填）
++ `value`: 需要查找的值[`String`]（必填）
+
+返回值：`Array`
+
+示例：
+```js
+let list = [{ name: "旋仔", age: 20 }, { name: "小伙子", age: 16 }]
+this.$searchResult(list, ['name'], '旋仔') // [{ name: "旋仔", age: 20 }]
+this.$searchResult(list, ['name'], 'xxx') // []
+```
+
+## control
+
+### debounce
+
+描述：防抖函数
+
+效果：用户交互行为不触发回调函数，一段时间后
+
+参数：
+
++ `callback`：回调函数（必填）
++ `time`：防抖时间间隔（必填）
++ `immediate`：第一次点击是否立刻执行（选填：默认为true）
+
+返回值：`Function`
+
+示例：
+```js
+const callback = () => {
+  // todo
+}
+const debounceFun = this.$debounce(callback, 2500, true)
+```
+
+### throttled
+
+描述：节流函数
+
+效果：用户交互行为间隔触发回调，防止用户频繁点击
+
+参数：
+
++ `callback`：回调函数（必填）
++ `wait`：节流时间间隔（必填）
+
+返回值：`Function`
+
+示例：
+```js
+const callback = () => {
+  // todo
+}
+const throttledFun = this.$throttled(callback, 2500)
 ```
 
 ## Style
@@ -89,7 +267,7 @@ this.$print(page)
 + `ruleName`：CSS属性 [`String`]（必填）
 + `style`：CSS属性值 [`String`]（必填）
 
-示例:
+示例：
 ```js
 this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
 ```
@@ -105,11 +283,30 @@ this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
 + `DOM`：`DOM`元素 [`DOM Object`]（必填）
 + `CSS`：CSS语法 [`String`]（必填）
 
-示例:
+示例：
 ```js
 this.$setCssText(this.$refs.background, `
   background: #666;
   padding: 20px;
+`)
+```
+
+### createStyle
+
+描述：创建全局样式，原理便是通过创建`style`标签并动态追加到`head`标签内完成样式的全局覆盖。
+
+参数：
+
++ `css`：CSS语法 [`String`]（必填）
++ `className`：类名[`String`]（选填，如果不填该属性，则每次调用都会创建一个新的`style`标签）
+
+示例：
+```js
+this.$createStyle(`
+  body {
+    background: #666;
+    padding: 20px;
+  }
 `)
 ```
 
@@ -151,7 +348,7 @@ this.$download(url) // url : [http://xxx.com, http://xxxx.com]
 this
 	.$getImgFile(limit)
 	.then((raw, url) => {
-		console.log(raw, url)
+		// todo
 	})
 ```
 
@@ -176,13 +373,15 @@ this
 this
 	.$getImgFile(limit)
 	.then(raw => {
-		console.log(raw)
+		// todo
 	})
 ```
 
 ### previewFile
 
 描述：预览文件
+
+注意：该`api`使用了微软的预览接口，因此，需要预览的文件（文档）需要存放在线上（能通过外网访问静态文件）。
 
 参数：
 
@@ -417,7 +616,7 @@ this.$http_normal({
 		age: ""
 	}
 }).then(result => {
-	console.log(result.data)
+	// todo
 })
 ```
 
@@ -439,7 +638,7 @@ this.$http_json({
 		age: ""
 	}
 }).then(result => {
-	console.log(result.data)
+	// todo
 })
 ```
 
@@ -463,7 +662,7 @@ this.$http_file({
 		file_2: raw_2
 	}
 }).then(result => {
-	console.log(result.data)
+	// todo
 })
 ```
 
@@ -475,10 +674,14 @@ this.$http_file({
 
 示例：
 ```js
+// 获取DOM
+$("head")
+
+// 请求
 $.ajax({
   url: "xxx",
   type: "get"
 }).then(result => {
-  console.log(result)
+  // todo
 })
 ```
