@@ -93,7 +93,7 @@ function weaknessMode(isWeakness = true) {
  * @description 反转模式
  * @param {Boolean} isHueRotate 
  */
-function hueRotate(isHueRotate = true) {
+function hueRotateMode(isHueRotate = true) {
   let ts = defaultConfig.excludeEles
   ts =
     "body," +
@@ -121,6 +121,6 @@ export default {
   createStyle,
   darkMode,
   weaknessMode,
-  hueRotate
+  hueRotateMode
 }
 

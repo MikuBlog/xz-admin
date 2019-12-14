@@ -58,7 +58,7 @@ export default {
   methods: {
     // 初始化滚动条样式
     initialScrollBar() {
-      if (!this.$isMobile() && !this.$isIpad()) {
+      if (!this.$isMobile()) {
         Scrollbar.init(document.querySelector('#top'), {
           damping: .2,
           continuousScrolling: true

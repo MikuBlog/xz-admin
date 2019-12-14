@@ -95,22 +95,22 @@ export default {
         case "lightMode":
           this.$darkMode(false);
           this.$weaknessMode(false);
-          this.$hueRotate(false);
+          this.$hueRotateMode(false);
           break;
         case "darkMode":
           this.$darkMode(true);
           this.$weaknessMode(false);
-          this.$hueRotate(false);
+          this.$hueRotateMode(false);
           break;
         case "weaknessMode":
           this.$darkMode(false);
           this.$weaknessMode(true);
-          this.$hueRotate(false);
+          this.$hueRotateMode(false);
           break;
         case "hueRotateMode":
           this.$darkMode(false);
           this.$weaknessMode(false);
-          this.$hueRotate(true);
+          this.$hueRotateMode(true);
           break;
       }
     },

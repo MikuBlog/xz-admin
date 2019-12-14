@@ -52,15 +52,17 @@ export default {
     // 选择背景按钮
     selectBackrgoundButton: true,
   },
-  // 不受主题影响的元素
+  // 不受主题影响的元素（标签、类、id）
   excludeEles: [
-    "img",
-    "video",
-    "iframe",
-    "embed",
+    "img", // 图片
+    "video", // 视频
+    "iframe", // 内嵌网站
+    "embed", // 插件
     "object",
-    '.el-message',
-    '.el-notification',
+    '.login', // 登录页面
+    '.el-message', // 提示信息
+    '.el-notification', // 通知信息
+    /* 背景图 */
     '[style*="background:url"]',
     '[style*="background-image:url"]',
     '[style*="background: url"]',

@@ -15,7 +15,7 @@ function isMobile() {
   }
   return false
 }
-
+// 判断环境是否为ipad
 function isIpad() {
   const
     mobileAgent = "ipad",

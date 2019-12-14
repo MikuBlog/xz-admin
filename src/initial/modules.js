@@ -221,7 +221,7 @@ Vue.prototype.$weaknessMode = SetStyle.weaknessMode
  * @description 设置反转模式
  * @param {Boolean} isHueRotate 是否夜间（默认为true）
  */
-Vue.prototype.$hueRotate = SetStyle.hueRotate
+Vue.prototype.$hueRotateMode = SetStyle.hueRotateMode
 /**
  * @author xuanzai
  * @description 设置全屏函数与取消全屏函数
