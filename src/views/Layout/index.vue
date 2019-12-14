@@ -259,7 +259,7 @@
 import Initial from "./mixins/initial";
 import Operation from "./mixins/operation";
 import Property from "./mixins/property";
-import settingDrawer from "./components/setting_drawer";
+import settingDrawer from "./components/drawer";
 export default {
   mixins: [Initial, Operation, Property],
   components: { settingDrawer }

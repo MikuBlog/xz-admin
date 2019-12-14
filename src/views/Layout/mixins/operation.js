@@ -69,7 +69,6 @@ export default {
         method: "get"
       }).then(result => {
         this.logoUrl = result.data.value
-        this.$refs.setting.logo = result.data.value
       })
     },
     // 打开设置抽屉
