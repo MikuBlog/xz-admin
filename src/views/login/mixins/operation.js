@@ -1,17 +1,5 @@
 export default {
   methods: {
-    // 插入元素
-    insertEle() {
-      const image =
-        document.querySelector(".el-image__inner") ||
-        document.querySelector(".el-image__error"),
-        mask = document.createElement("div");
-      mask.className = "small-mask";
-      try {
-        this.$insertAfter(mask, image);
-        this.getVal();
-      } catch (e) { }
-    },
     // 判断是否自动登录
     isAutoLogin() {
       this.$getMemoryPmt("isAutoLogin") &&
@@ -23,9 +11,9 @@ export default {
     },
     // 关闭抽屉样式恢复
     closeDrawer() {
-      const loginBox = this.$refs.loginBox,
+      const
+        loginBox = this.$refs.loginBox,
         header = this.$refs.header,
-        background = this.$refs.background,
         svg = document.querySelectorAll("svg"),
         checkBox = document.querySelector(".el-checkbox"),
         tip = document.querySelector(".tip");
@@ -104,8 +92,8 @@ export default {
     },
     // 图片预览
     getVal() {
-      const child = document.querySelector(".el-image__inner"),
-        mask = document.querySelector(".small-mask");
+      const child = document.querySelector(".login-background .el-image__inner"),
+        mask = document.querySelector(".login-background .small-mask");
       this.backgroundUrl &&
         (this.$setStyle(child, "opacity", `${this.opacity / 100}`),
           this.$setStyle(child, "filter", `blur(${this.blur}px)`));
@@ -207,9 +195,9 @@ export default {
             }
           }).then(result => {
             this.$setMemoryPmt("token", result.data.token);
-            this.$getMemorySes("redirect") 
-            ? this.$router.push({ path: this.$getMemorySes("redirect")  })
-            : this.$router.push({ path: "/home/welcome" });
+            this.$getMemorySes("redirect")
+              ? this.$router.push({ path: this.$getMemorySes("redirect") })
+              : this.$router.push({ path: "/home/welcome" });
             this.$clearMemorySes();
           });
         } else {

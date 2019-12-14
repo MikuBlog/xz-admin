@@ -79,7 +79,7 @@ export default {
         menuScrollBar = document.querySelector('.menu-scrollbar'),
         menuProp = document.querySelectorAll('.el-menu--popup'),
         menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
-        drawerContent = document.querySelector('.ivu-drawer-content'),
+        drawerContent = document.querySelector('.drawer-menu .ivu-drawer-content'),
         horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
       this.$setStyle(
         menuScrollBar,

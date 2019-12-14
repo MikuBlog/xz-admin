@@ -206,6 +206,11 @@ Vue.prototype.$setCssText = SetStyle.setCssText
 Vue.prototype.$createStyle = SetStyle.createStyle
 /**
  * @author xuanzai
+ * @description 设置白昼模式
+ */
+Vue.prototype.$clearMode = SetStyle.clearMode
+/**
+ * @author xuanzai
  * @description 设置夜间模式
  * @param {Boolean} isDark 是否夜间（默认为true）
  */

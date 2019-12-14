@@ -5,7 +5,7 @@
       class="radio-box"
       style="text-align: left"
       v-show="defaultConfig.diy.menu"
-      @change="$nextTick(() => { $parent.initialStyle() })"
+      @change="$nextTick(() => { initialMenuStyle() })"
     >
       <el-radio-group v-model="$store.state.setting.menuStyle">
         <el-radio label="light">白昼</el-radio>
@@ -16,10 +16,19 @@
     <div class="radio-box" style="text-align: left" v-show="defaultConfig.diy.menu">
       <el-radio-group
         v-model="$store.state.setting.isVerticleMenu"
-        @change="$nextTick(() => { $parent.initialStyle() })"
+        @change="$nextTick(() => { initialMenuStyle() })"
       >
         <el-radio :label="true" :disabled="!defaultConfig.diy.menu">垂直</el-radio>
         <el-radio :label="false" :disabled="!defaultConfig.diy.menu">水平</el-radio>
+      </el-radio-group>
+    </div>
+    <h2 style="margin: 2rem 0">系统布局设置</h2>
+    <div class="radio-box" v-show="defaultConfig.layoutSize">
+      <el-radio-group v-model="$store.state.setting.layoutSize" @change="changeLayoutSize">
+        <el-radio label="default">较大</el-radio>
+        <el-radio label="medium">中等</el-radio>
+        <el-radio label="small">较小</el-radio>
+        <el-radio label="mini">迷你</el-radio>
       </el-radio-group>
     </div>
     <h2 style="margin: 2rem 0">系统主题设置</h2>
@@ -33,7 +42,7 @@
           <el-radio label="lightMode">白昼</el-radio>
           <el-radio label="darkMode">夜间</el-radio>
           <el-radio label="weaknessMode">色弱</el-radio>
-          <el-radio label="hueRotateMode">反转</el-radio>
+          <el-radio label="hueRotateMode">转换</el-radio>
         </el-radio-group>
       </div>
       <div
@@ -72,10 +81,12 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapState } from "vuex";
 export default {
   data() {
     return {
+      interval: "",
       app: document.querySelector("#app")
     };
   },
@@ -89,27 +100,89 @@ export default {
     this.changeThemeStyle();
   },
   methods: {
+    // 初始化菜单样式
+    initialMenuStyle() {
+      const menuScrollBar = document.querySelector(".menu-scrollbar"),
+        menuProp = document.querySelectorAll(".el-menu--popup"),
+        menuItemGroup = document.querySelectorAll(".el-menu-item-group"),
+        drawerContent = document.querySelector(
+          ".drawer-menu .ivu-drawer-content"
+        ),
+        horizontalScrollbar = document.querySelector(
+          ".menu-horizontal-scrollbar>.el-scrollbar__wrap"
+        );
+      this.$setStyle(
+        menuScrollBar,
+        "background",
+        this.settings.menuStyle === "dark"
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor
+      );
+      this.$setStyle(
+        horizontalScrollbar,
+        "background",
+        this.settings.menuStyle === "dark"
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor
+      );
+      this.$setStyle(menuScrollBar, "border-right", "1px solid #dcdfe6");
+      this.$setStyle(
+        drawerContent,
+        "background",
+        this.settings.menuStyle === "dark"
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor
+      );
+      menuProp.forEach(val => {
+        this.settings.menuStyle === "dark"
+          ? this.$setStyle(
+              val,
+              "background",
+              this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor
+            )
+          : this.$setStyle(
+              val,
+              "background",
+              this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor
+            );
+      });
+      menuItemGroup.forEach(val => {
+        this.settings.menuStyle === "dark"
+          ? this.$setStyle(
+              val,
+              "background",
+              this.defaultConfig.menuStyle.dark.subMenuItemBackgroundColor
+            )
+          : this.$setStyle(
+              val,
+              "background",
+              this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor
+            );
+      });
+    },
+    // 更换系统布局大小
+    changeLayoutSize() {
+      Vue.prototype.$ELEMENT = { size: this.$store.state.setting.layoutSize, zIndex: 2000 }
+      this.$router.replace({
+        path: `/home/redirect?path=${this.$route.fullPath}`
+      })
+    },
     // 更换主题风格
     changeThemeStyle() {
       switch (this.settings.themeStyle) {
         case "lightMode":
-          this.$darkMode(false);
-          this.$weaknessMode(false);
-          this.$hueRotateMode(false);
+          this.$clearMode();
           break;
         case "darkMode":
+          this.$clearMode();
           this.$darkMode(true);
-          this.$weaknessMode(false);
-          this.$hueRotateMode(false);
           break;
         case "weaknessMode":
-          this.$darkMode(false);
+          this.$clearMode();
           this.$weaknessMode(true);
-          this.$hueRotateMode(false);
           break;
         case "hueRotateMode":
-          this.$darkMode(false);
-          this.$weaknessMode(false);
+          this.$clearMode();
           this.$hueRotateMode(true);
           break;
       }

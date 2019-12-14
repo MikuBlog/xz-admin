@@ -41,6 +41,8 @@ export default {
     brightness: true,
     // 更换菜单样式
     menu: true,
+    // 背景颜色
+    backgroundColor: true,
     // 背景透明度
     backgroundOpacity: true,
     // 卡片透明度
@@ -59,9 +61,9 @@ export default {
     "iframe", // 内嵌网站
     "embed", // 插件
     "object",
-    '.login', // 登录页面
     '.el-message', // 提示信息
     '.el-notification', // 通知信息
+    '.mask',
     /* 背景图 */
     '[style*="background:url"]',
     '[style*="background-image:url"]',
