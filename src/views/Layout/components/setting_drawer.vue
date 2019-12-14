@@ -10,6 +10,7 @@
         <h2 style="margin: 2rem 0">菜单颜色风格</h2>
         <div
           class="radio-box"
+          style="text-align: left"
           v-show="defaultConfig.diy.menu"
           @change="$nextTick(() => { $parent.initialStyle() })"
         >
@@ -19,7 +20,7 @@
           </el-radio-group>
         </div>
         <h2 style="margin: 2rem 0">菜单布局风格</h2>
-        <div class="radio-box" v-show="defaultConfig.diy.menu">
+        <div class="radio-box" style="text-align: left" v-show="defaultConfig.diy.menu">
           <el-radio-group
             v-model="$store.state.setting.isVerticleMenu"
             @change="$nextTick(() => { $parent.initialStyle() })"
@@ -30,17 +31,17 @@
         </div>
         <h2 style="margin: 2rem 0">系统主题设置</h2>
         <div class="switch-box">
-          <div class="box" style="top: 4px" v-show="defaultConfig.diy.theme">
+          <div class="box" style="top: 4px" v-show="defaultConfig.diy.themeColor">
             <span class="tips" style="top: 0">更换主题</span>
             <Theme />
           </div>
-          <div class="box" v-show="defaultConfig.diy.colorRotate">
-            <span class="tips">颜色反转</span>
-            <el-switch v-model="$store.state.setting.colorRotate" @change="changeColorBrightInvert"></el-switch>
-          </div>
-          <div class="box" v-show="defaultConfig.diy.weakness">
-            <span class="tips">色弱模式</span>
-            <el-switch v-model="$store.state.setting.weakness" @change="changeColorBrightInvert"></el-switch>
+          <div class="radio-box" v-show="defaultConfig.diy.themeStyle">
+            <el-radio-group v-model="$store.state.setting.themeStyle" @change="changeThemeStyle">
+              <el-radio label="lightMode">白昼</el-radio>
+              <el-radio label="darkMode">夜间</el-radio>
+              <el-radio label="weaknessMode">色弱</el-radio>
+              <el-radio label="hueRotateMode">反转</el-radio>
+            </el-radio-group>
           </div>
           <div
             class="block"
@@ -51,7 +52,7 @@
             <el-slider
               v-model="$store.state.setting.brightness"
               :format-tooltip="formatTooltip"
-              @change="changeColorBrightInvert"
+              @change="changeBrightness"
             ></el-slider>
           </div>
         </div>
@@ -150,7 +151,8 @@ export default {
       logo: "",
       isSetting: false,
       activeName: "DIY",
-      app: document.querySelector('#app')
+      app: document.querySelector("#app"),
+      themeStyle: "lightMode"
     };
   },
   computed: {
@@ -165,7 +167,9 @@ export default {
       // 初始化卡片样式
       this.setCard();
     });
-    this.changeColorBrightInvert()
+    this.setBackground()
+    this.changeBrightness()
+    this.changeThemeStyle()
   },
   methods: {
     // 插入元素
@@ -180,12 +184,45 @@ export default {
         this.getVal();
       } catch (e) {}
     },
-    // 系统亮度
-    changeColorBrightInvert() {
-      if(this.settings.brightness < 10) {
-        this.settings.brightness = 10
+    // 更换主题风格
+    changeThemeStyle() {
+      switch (this.settings.themeStyle) {
+        case "lightMode":
+          this.$darkMode(false);
+          this.$weaknessMode(false);
+          this.$hueRotate(false);
+          break;
+        case "darkMode":
+          this.$darkMode(true);
+          this.$weaknessMode(false);
+          this.$hueRotate(false);
+          break;
+        case "weaknessMode":
+          this.$darkMode(false);
+          this.$weaknessMode(true);
+          this.$hueRotate(false);
+          break;
+        case "hueRotateMode":
+          this.$darkMode(false);
+          this.$weaknessMode(false);
+          this.$hueRotate(true);
+          break;
       }
-     this.$setStyle(this.app, "filter", `${this.settings.colorRotate ? 'hue-rotate(180deg)' : ""} ${this.settings.weakness ? 'invert(.8)' : ""} brightness(${ this.settings.brightness / 100 })`)
+    },
+    // 更换主题
+    changeBrightness() {
+      if (this.settings.brightness < 10) {
+        this.settings.brightness = 10;
+      }
+      if (!this.settings.dark) {
+        this.$setStyle(
+          this.app,
+          "filter",
+          `brightness(${this.settings.brightness / 100} ${
+            this.settings.dark ? "hue-rotate(180deg) invert(1)" : ""
+          })`
+        );
+      }
     },
     // 图片预览
     getVal() {
@@ -211,6 +248,21 @@ export default {
                 background: rgba(0, 0, 0, ${this.settings.background.mask /
                   100});
             `;
+    },
+    // 设置背景
+    setBackground() {
+      const 
+        ele = document.querySelector('.background'),
+        mask = document.querySelector('.mask')
+      this.settings.background.url &&
+        (this.$setStyle(ele, "background-image", `url(${this.settings.background.url})`),
+        this.$setStyle(ele, "opacity", `${this.settings.background.opacity / 100}`),
+        this.$setStyle(ele, "filter", `blur(${this.settings.background.blur}px)}`),
+        this.$setStyle(
+          mask,
+          "background",
+          `rgba(0, 0, 0, ${this.settings.background.mask / 100})`
+        ));
     },
     // 设置卡片
     setCard() {
@@ -268,7 +320,7 @@ export default {
     saveSetting() {
       this.$setMemoryPmt("setting", this.settings);
       this.$successMsg("保存设置成功");
-      this.$parent.initialStyle();
+      this.setBackground();
     }
   }
 };
@@ -311,5 +363,10 @@ export default {
   position: relative;
   margin: 1rem 0;
   text-align: right;
+}
+.radio-box {
+  position: relative;
+  margin: 1.3rem 0;
+  text-align: center;
 }
 </style>

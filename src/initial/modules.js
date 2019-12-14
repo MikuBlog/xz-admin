@@ -206,6 +206,24 @@ Vue.prototype.$setCssText = SetStyle.setCssText
 Vue.prototype.$createStyle = SetStyle.createStyle
 /**
  * @author xuanzai
+ * @description 设置夜间模式
+ * @param {Boolean} isDark 是否夜间（默认为true）
+ */
+Vue.prototype.$darkMode = SetStyle.darkMode
+/**
+ * @author xuanzai
+ * @description 设置色弱模式
+ * @param {Boolean} isWeakness 是否夜间（默认为true）
+ */
+Vue.prototype.$weaknessMode = SetStyle.weaknessMode
+/**
+ * @author xuanzai
+ * @description 设置反转模式
+ * @param {Boolean} isHueRotate 是否夜间（默认为true）
+ */
+Vue.prototype.$hueRotate = SetStyle.hueRotate
+/**
+ * @author xuanzai
  * @description 设置全屏函数与取消全屏函数
  * @param {DOM Object} element DOM元素
  */

@@ -37,13 +37,10 @@ const
       layoutSize: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').layoutSize !== undefined)
     ? storage.getMemoryPmt('setting').layoutSize
     : 'medium',
-    theme: "#409eff",
-    colorRotate: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').colorRotate !== undefined)
-    ? storage.getMemoryPmt('setting').colorRotate
-    : false,
-    weakness: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').weakness !== undefined)
-    ? storage.getMemoryPmt('setting').weakness
-    : false,
+    themeColor: "#409eff",
+    themeStyle: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').themeStyle !== undefined)
+    ? storage.getMemoryPmt('setting').themeStyle
+    : 'lightMode',
     brightness: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').brightness !== undefined)
     ? storage.getMemoryPmt('setting').brightness
     : 100,

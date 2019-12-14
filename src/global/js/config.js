@@ -1,4 +1,5 @@
 import Agent from '@/api/other/agent'
+// 布尔类型的值改为false则表示不允许设置
 export default {
   // 登录标题
   loginHeader: "XZ-Admin",
@@ -32,12 +33,10 @@ export default {
     logo: true,
     // 页脚
     footer: true,
-    // 更换主题
-    theme: true,
-    // 颜色翻转
-    colorRotate: true,
-    // 底片模式
-    weakness: true,
+    // 更换主题颜色
+    themeColor: true,
+    // 更换主题风格
+    themeStyle: true,
     // 系统亮度
     brightness: true,
     // 更换菜单样式
@@ -53,6 +52,21 @@ export default {
     // 选择背景按钮
     selectBackrgoundButton: true,
   },
+  // 不受主题影响的元素
+  excludeEles: [
+    "img",
+    "video",
+    "iframe",
+    "embed",
+    "object",
+    '.el-message',
+    '.el-notification',
+    '[style*="background:url"]',
+    '[style*="background-image:url"]',
+    '[style*="background: url"]',
+    '[style*="background-image: url"]',
+    '[style*="background-image"][style*="image-set"]'
+  ],
   // 搜索菜单icon
   searchMenu: true,
   // 文档icon

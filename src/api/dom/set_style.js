@@ -1,3 +1,4 @@
+import defaultConfig from '@/global/js/config'
 /**
  * @author xuanzai
  * @description 设置样式
@@ -38,10 +39,88 @@ function createStyle(css = "", className = "") {
     document.querySelector('head').appendChild(style)
   }
 }
+/**
+ * @author xuanzai
+ * @description 黑暗模式
+ * @param {Boolean} isDark 
+ */
+function darkMode(isDark = true) {
+  let ts = defaultConfig.excludeEles
+  ts =
+    "body," +
+    ts.join(",") +
+    "{filter:invert(100%) hue-rotate(180deg)!important}" +
+    ts
+      .map(function(p) {
+        return ts
+          .map(function(p2) {
+            return p + " " + p2;
+          })
+          .join(",");
+      })
+      .join(",") +
+    "{filter:invert(0%) hue-rotate(180deg);}"
+  createStyle(`${isDark ? ts : ''}`, 'dark-mode')
+}
+/**
+ * @author xuanzai
+ * @description 色弱模式
+ * @param {Boolean} isWeakness 
+ */
+function weaknessMode(isWeakness = true) {
+  let ts = defaultConfig.excludeEles
+  ts =
+    "body," +
+    ts.join(",") +
+    "{filter:invert(.8)!important}" +
+    ts
+      .map(function(p) {
+        return ts
+          .map(function(p2) {
+            return p + " " + p2;
+          })
+          .join(",");
+      })
+      .join(",") +
+    "{filter:invert(0%)}"
+  createStyle(`
+  ${ isWeakness
+  ? ts
+  : ""}`, 'weakness-mode')
+}
+/**
+ * @author xuanzai
+ * @description 反转模式
+ * @param {Boolean} isHueRotate 
+ */
+function hueRotate(isHueRotate = true) {
+  let ts = defaultConfig.excludeEles
+  ts =
+    "body," +
+    ts.join(",") +
+    "{filter:hue-rotate(180deg)!important}" +
+    ts
+      .map(function(p) {
+        return ts
+          .map(function(p2) {
+            return p + " " + p2;
+          })
+          .join(",");
+      })
+      .join(",") +
+    "{filter: hue-rotate(0deg)}"
+  createStyle(`
+  ${ isHueRotate
+  ? ts
+  : ""}`, 'hue-rotate-mode')
+}
 
 export default {
   setStyle,
   setCssText,
-  createStyle
+  createStyle,
+  darkMode,
+  weaknessMode,
+  hueRotate
 }
 
