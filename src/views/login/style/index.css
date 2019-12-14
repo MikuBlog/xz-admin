@@ -177,6 +177,11 @@ svg:hover {
   margin: 0 .5rem;
 }
 
+.demonstration {
+  position: relative;
+  font-size: .9rem;
+}
+
 @media screen and (max-width: 650px) {
   .login-box {
     width: 22.5rem !important;

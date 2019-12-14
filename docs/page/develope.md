@@ -142,14 +142,15 @@ req
 这些属性时暂时的，往后会推出更多可配置项~
 
 ```js
+// 布尔类型的值改为false则表示不允许设置
 export default {
   // 登录标题
   loginHeader: "XZ-Admin",
-  // 是否显示自定义登录界面按钮
+  // 自定义登录界面按钮
   loginSetting: true,
-  // 是否显示合作网站账号登录框
+  // 合作网站账号登录框
   otherLoginMethods: true,
-  // 是否显示自动登录框
+  // 自动登录框
   isAutoLogin: true,
   // 菜单颜色
   menuStyle: {
@@ -165,16 +166,81 @@ export default {
     },
     activeTextColor: '#429ee2'
   },
-  // 是否显示搜索菜单icon
+  // 系统样式设置
+  diy: {
+    // 面包屑
+    breadcrumb: true,
+    // 标签栏
+    tagViews: true,
+    // LOGO
+    logo: true,
+    // 页脚
+    footer: true,
+    // 更换主题颜色
+    themeColor: true,
+    // 更换主题风格
+    themeStyle: true,
+    // 系统亮度
+    brightness: true,
+    // 更换菜单样式
+    menu: true,
+    // 背景透明度
+    backgroundOpacity: true,
+    // 卡片透明度
+    cardOpacity: true,
+    // 背景模糊度
+    backgroundBlur: true,
+    // 背景遮罩浓度
+    backgroundMask: true,
+    // 选择背景按钮
+    selectBackrgoundButton: true,
+  },
+  // 不受主题影响的元素（标签、类、id）
+  excludeEles: [
+    "img",
+    "video",
+    "iframe",
+    "embed",
+    "object",
+    '.el-message',
+    '.el-notification',
+    '[style*="background:url"]',
+    '[style*="background-image:url"]',
+    '[style*="background: url"]',
+    '[style*="background-image: url"]',
+    '[style*="background-image"][style*="image-set"]'
+  ],
+  // 搜索菜单icon
   searchMenu: true,
   // 文档icon
   helpPage: true,
+  // 清除缓存icon
+  clearStorage: true,
   // 系统设置icon
   systemSetting: true,
   // 全屏icon
   fullScreen: true,
   // 布局大小icon
-  layoutSize: true
+  layoutSize: true,
+  // 分页组件
+  paginationLayout: `${
+    // 是否为ipad
+    Agent.isIpad()
+      ? 'total, sizes, prev, pager, next'
+      // 是否为移动设备
+      : Agent.isMobile()
+        ? 'prev, pager, next'
+        // pc设备
+        : 'total, sizes, prev, pager, next, jumper'
+    }`,
+  // 分页大小
+  paginationSize: Agent.isMobile() && !Agent.isIpad(),
+  // 图片预览尺寸
+  previewImageSize: `${
+    Agent.isMobile() && !Agent.isIpad()
+      ? '90%'
+      : '500px'
+    }`
 }
 ```
 

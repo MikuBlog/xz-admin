@@ -46,9 +46,10 @@
               align="center"
             >
               <template slot-scope="scope">
-                <a :href="scope.row.url" style="color: #42b983" target="_blank">
+                <!-- <a :href="scope.row.url" style="color: #42b983" target="_blank">
                   <img :src="scope.row.url" alt="点击打开" class="el-avatar xz-image" />
-                </a>
+                </a> -->
+                <img :src="scope.row.url" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true, url = scope.row.url)"/>
               </template>
             </el-table-column>
             <el-table-column prop="size" label="文件大小" :show-overflow-tooltip="true" />
@@ -83,6 +84,7 @@
       </el-col>
     </el-row>
     <eForm ref="form" />
+    <ImagePreview :show-modal.sync="isShow" :url="url" />
   </div>
 </template>
 

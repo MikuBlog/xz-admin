@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { isMobile, isEmail } from '@/utils/validate'
 export default {
   props: {
     isAdd: {
@@ -59,9 +60,18 @@ export default {
     // 验证电话号码
     const validPhone = (rule, value, callback) => {
       if (!value) {
-        callback(new Error('请输入电话号码'))
-      } else if (!this.isvalidPhone(value)) {
+        callback(new Error('请输入手机号码'))
+      } else if (!isMobile(value)) {
         callback(new Error('请输入正确的11位手机号码'))
+      } else {
+        callback()
+      }
+    }
+    const validEmail = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('请输入邮箱'))
+      } else if (!isEmail(value)) {
+        callback(new Error('请输入正确的邮箱格式'))
       } else {
         callback()
       }
@@ -78,11 +88,10 @@ export default {
           { min: 2, max: 21, message: '长度在 2 到 21 个字符', trigger: 'blur' }
         ],
         email: [
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
+          { required: true, trigger: 'change', validator: validEmail }
         ],
         phone: [
-          { required: true, trigger: 'blur', validator: validPhone }
+          { required: true, trigger: 'change', validator: validPhone }
         ],
         enabled: [
           { required: true, message: '状态不能为空', trigger: 'blur' }
@@ -99,11 +108,6 @@ export default {
     }
   },
   methods: {
-    // 判断电话是否有效
-    isvalidPhone(str) {
-      const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
-      return reg.test(str)
-    },
     // 隐藏窗口
     hideBox() {
       this.dialog = false

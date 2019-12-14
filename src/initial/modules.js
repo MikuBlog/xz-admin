@@ -5,6 +5,10 @@ import mavonEditor from 'mavon-editor'
 import Fragment from 'vue-fragment'
 // 引入图片剪裁组件
 import VueCropper from 'vue-cropper'
+// 引入表单生成器
+import FormMaking from 'form-making'
+// 引入表单生成器富文本
+import VueEditor from "vue2-editor"
 // 引入icon组件
 import '@/icons'
 // 引入UI框架
@@ -20,6 +24,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'iview/dist/styles/iview.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import 'mavon-editor/dist/css/index.css'
+import 'form-making/dist/FormMaking.css'
 // 引入全局提示模块
 import Message from '@/api/message'
 // 引入树状选择器
@@ -194,6 +199,31 @@ Vue.prototype.$setStyle = SetStyle.setStyle
 Vue.prototype.$setCssText = SetStyle.setCssText
 /**
  * @author xuanzai
+ * @description 设置全局样式
+ * @param {String} css css代码
+ * @param {String} className 类名
+ */
+Vue.prototype.$createStyle = SetStyle.createStyle
+/**
+ * @author xuanzai
+ * @description 设置夜间模式
+ * @param {Boolean} isDark 是否夜间（默认为true）
+ */
+Vue.prototype.$darkMode = SetStyle.darkMode
+/**
+ * @author xuanzai
+ * @description 设置色弱模式
+ * @param {Boolean} isWeakness 是否夜间（默认为true）
+ */
+Vue.prototype.$weaknessMode = SetStyle.weaknessMode
+/**
+ * @author xuanzai
+ * @description 设置反转模式
+ * @param {Boolean} isHueRotate 是否夜间（默认为true）
+ */
+Vue.prototype.$hueRotateMode = SetStyle.hueRotateMode
+/**
+ * @author xuanzai
  * @description 设置全屏函数与取消全屏函数
  * @param {DOM Object} element DOM元素
  */
@@ -310,10 +340,16 @@ Vue.prototype.$sortList = ArrayMethod.sortList
 Vue.prototype.$searchResult = ArrayMethod.searchResult
 /**
  * @author xuanzai
- * @description 判断是否为移动端
+ * @description 判断设备是否为移动端
  * @returns {Boolean} 返回判断结果
  */
 Vue.prototype.$isMobile = Agent.isMobile
+/**
+ * @author xuanzai
+ * @description 判断设备是否为ipad
+ * @returns {Boolean} 返回判断结果
+ */
+Vue.prototype.$isIpad = Agent.isIpad
 /**
  * @author xuanzai
  * @description 判断是否为移动端
@@ -350,5 +386,9 @@ Vue.component('treeselect', Treeselect)
 Vue.use(Fragment.Plugin)
 // 引入图片剪裁组件
 Vue.use(VueCropper)
+// 引入表单生成器
+Vue.use(FormMaking)
+// 引入表单生成器富文本
+Vue.use(VueEditor)
 
 Vue.config.productionTip = false

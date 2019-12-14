@@ -11,7 +11,9 @@ export default {
       // 总条数
       totalElements: 0,
       pictureList: [],
-      idList: []
+      idList: [],
+      isShow: false,
+      url: "https://myinterface.xuanzai.top/getPicture"
     }
   }
 }

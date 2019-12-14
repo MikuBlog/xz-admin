@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     defaultTheme() {
-      return this.$store.state.setting.theme;
+      return this.$store.state.setting.themeColor;
     }
   },
   created() {

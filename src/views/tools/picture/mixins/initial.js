@@ -30,7 +30,7 @@ export default {
     // 获取图片列表
     getPictureList() {
       this.$http_normal({
-        url: `/api/picture/page?page=${this.nowPage - 1}&size=${this.nowSize}${
+        url: `/api/picture/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=id,desc${
           this.searchVal ? `&filename=${this.searchVal}` : ""
           }`
         ,

@@ -5,8 +5,7 @@ Vue.use(Router)
 
 const 
   Login = () => import('@/views/login/index'),
-  Error = () => import('@/views/error/404'),
-  Permission = () => import('@/views/error/403')
+  NotFound = () => import('@/views/error/404')
 
 const router = new Router({
   mode: 'history',
@@ -21,14 +20,7 @@ const router = new Router({
     meta: {
       title: "404"
     },
-    component: Error
-  }, {
-    path: '/403',
-    name: '403',
-    meta: {
-      title: "403"
-    },
-    component: Permission
+    component: NotFound
   }] 
 })
 

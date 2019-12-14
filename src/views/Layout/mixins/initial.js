@@ -15,6 +15,7 @@ export default {
       isVerticleMenu: state => state.setting.isVerticleMenu,
       showBreadcrumb: state => state.setting.showBreadcrumb,
       showTags: state => state.setting.showTags,
+      showFooter: state => state.setting.showFooter,
       menuStyle: state => state.setting.menuStyle,
       background: state => state.setting.background,
       layoutSize: state => state.setting.layoutSize,
@@ -63,11 +64,7 @@ export default {
           continuousScrolling: true
         })
         const scrollContent = document.querySelector('.scroll-content')
-        this.$setCssText(scrollContent, `
-          position: relative;
-          padding: 20px;
-          height: 100%;
-        `)
+        this.$setStyle(scrollContent, 'padding', '15px 20px')
       }else {
         this.$setStyle(document.querySelector('#top'), 'padding', '20px')
       }
@@ -83,23 +80,7 @@ export default {
         menuProp = document.querySelectorAll('.el-menu--popup'),
         menuItemGroup = document.querySelectorAll('.el-menu-item-group'),
         drawerContent = document.querySelector('.ivu-drawer-content'),
-        horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap'),
-        ele = this.$refs.background,
-        mask = this.$refs.mask
-      this.background.url &&
-        (this.$setStyle(ele, "background-image", `url(${this.background.url})`),
-          this.$setStyle(ele, "opacity", `${this.background.opacity / 100}`),
-          this.$setStyle(ele, "filter", `blur(${this.background.blur}px)`),
-          this.$setStyle(
-            ele,
-            "background-size",
-            `${this.size == "fill" ? "100% 100%" : this.size}`
-          ),
-          this.$setStyle(
-            mask,
-            "background",
-            `rgba(0, 0, 0, ${this.background.mask / 100})`
-          ));
+        horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
       this.$setStyle(
         menuScrollBar,
         'background',
@@ -170,22 +151,10 @@ export default {
         ? this.isMini = true
         : this.isMini = false
     },
-    // 获取滚动高度
-    getScrollTop(obj) {
-      const el = document.querySelector('.to-top')
-      obj.scrollTop >= 100
-        ? this.$setStyle(el, 'transform', 'scale(1)')
-        : this.$setStyle(el, 'transform', 'scale(0)')
-      this.$setMemorySes('scrollTop', obj.scrollTop)
-    },
     // 事件监听
     initialListener() {
-      const _this = this
       window.addEventListener('resize', () => {
         this.getWindowWidth()
-      })
-      document.querySelector('.top').addEventListener('scroll', function () {
-        _this.getScrollTop(this)
       })
     }
   }
