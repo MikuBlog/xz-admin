@@ -20,7 +20,6 @@
 <script>
 import { mapState } from "vuex";
 import { isMobile } from "@/utils/agent";
-import convertHttp from "@/utils/convertHttp";
 import System from "./system";
 import Background from "./background";
 import Logo from "./logo";
