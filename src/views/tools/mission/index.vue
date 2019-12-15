@@ -25,8 +25,9 @@
               ></el-option>
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
-            <el-button icon="el-icon-plus" type="primary" class="margin-box" @click="addItem" circle></el-button>
-            <el-button icon="el-icon-document-copy" type="warning" class="margin-box" @click="showLogList" circle></el-button>
+            <el-button icon="el-icon-plus" type="primary" class="margin-box" 
+            title="添加定时任务" @click="addItem" circle></el-button>
+            <el-button icon="el-icon-document-copy" type="warning" class="margin-box" title="查看执行日志" @click="showLogList" circle></el-button>
           </div>
           <el-table :data="missionList" :highlight-current-row="true" style="width: 100%" :stripe="true">
             <el-table-column type="expand">
@@ -97,6 +98,10 @@
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @addItem="addItem"
+    @showLogList="showLogList"/>
     <Form 
     ref="form" 
     :is-add="isAdd"

@@ -23,7 +23,7 @@
                 type="primary"
                 icon="el-icon-plus"
                 class="margin-box"
-                @click="showAddRole()"
+                @click="showAddRole"
                 title="添加角色"
                 circle
               ></el-button>
@@ -146,6 +146,9 @@
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @showAddRole="showAddRole"/>
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>

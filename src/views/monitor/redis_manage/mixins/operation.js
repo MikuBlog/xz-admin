@@ -27,8 +27,9 @@ export default {
     },
     // 显示弹窗
     showDetail(detail) {
-      this.redisDetail = detail;
-      this.dialogVisible = true;
+      const visitDetail = this.$refs.visitDetail
+      visitDetail.redisDetail = detail;
+      visitDetail.dialogVisible = true;
     },
     // 点击搜索
     search() {

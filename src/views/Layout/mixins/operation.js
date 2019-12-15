@@ -1,3 +1,4 @@
+import { isMobile } from '@/utils/agent'
 import { mapMutations } from 'vuex'
 import convertHttp from '@/utils/convertHttp'
 export default {
@@ -6,6 +7,12 @@ export default {
       "SET_USER_INFO",
       "REMOVE_ALL_TAGS"
     ]),
+    // 返回顶部
+    backTop(delay = 500) {
+      isMobile()
+      ? $('#top').animate({ scrollTop: 0 }, delay)
+      : $('.os-viewport').animate({ scrollTop: 0 }, delay)
+    },
     // 获取用户信息
     getUserInfo() {
       this.$http_json({

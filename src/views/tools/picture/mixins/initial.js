@@ -19,7 +19,7 @@ export default {
     initialPage(totalElements) {
       this.totalElements = totalElements;
     },
-    // 初始化错误日志列表
+    // 初始化图片列表
     initialPictureList(list) {
       this.pictureList.splice(0);
       list.forEach(value => {

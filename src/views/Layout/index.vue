@@ -205,10 +205,19 @@
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
+          <div class="back-top" ref="backtop">
+            <el-button
+              type="primary"
+              icon="el-icon-caret-top"
+              circle
+              class="to-top"
+              @click="backTop"
+            ></el-button>
+          </div>
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter && defaultConfig.diy.footer">
           <div class="coppy-right">
-            <span>© 2019 xuanzai Wteam.All rights reserved.</span>
+            <span>© 2019 xuanzai Wteam.All rights reserved - 粤ICP备19008964号-2</span>
           </div>
         </el-footer>
       </el-container>

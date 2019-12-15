@@ -96,6 +96,9 @@
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @showAddStation="showAddStation"/>
     <stationForm ref="form" :is-add="isAdd" :dicts="dicts"/>
   </div>
 </template>

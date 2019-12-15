@@ -11,12 +11,27 @@ function removePrintHeader(page) {
  * @param { HTML } page 
  */
 function toPrint(page = "") {
-  const newPage = window.open('', 'print')
-  removePrintHeader(newPage)
-  newPage.onload = () => {
-    newPage.print()
+  const iframe = document.createElement('iframe')
+  iframe.style.cssText = `
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: none;
+  `
+  document.body.appendChild(iframe)
+  const doc = iframe.contentWindow.document
+  if((typeof page).toLowerCase() === 'string') {
+    doc.write(page)
+  }else {
+    doc.body.appendChild(page)
   }
-  newPage.document.body.innerHTML = page
+  doc.close()
+  removePrintHeader(iframe.contentWindow)
+  iframe.contentWindow.focus()
+  iframe.contentWindow.print()
+  setTimeout(() => {
+    document.body.removeChild(iframe)
+  }, 1000)
 }
 
 

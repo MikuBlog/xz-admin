@@ -1,3 +1,4 @@
+import { isMobile } from '@/utils/agent'
 import { mapState } from 'vuex'
 import Vue from 'vue'
 export default {
@@ -58,15 +59,14 @@ export default {
   methods: {
     // 初始化滚动条样式
     initialScrollBar() {
-      if (!this.$isMobile()) {
-        Scrollbar.init(document.querySelector('#top'), {
-          damping: .2,
-          continuousScrolling: true
+      if (!isMobile()) {
+        $('.top').overlayScrollbars({
+          scrollbars: {
+            autoHide: "move"
+          }
         })
-        const scrollContent = document.querySelector('.scroll-content')
-        this.$setStyle(scrollContent, 'padding', '15px 20px')
-      }else {
-        this.$setStyle(document.querySelector('#top'), 'padding', '20px')
+        const scrollContent = document.querySelector('.os-viewport')
+        this.$setStyle(scrollContent, 'padding-bottom', '20px')
       }
     },
     // 初始化布局大小
@@ -151,11 +151,29 @@ export default {
         ? this.isMini = true
         : this.isMini = false
     },
+    // 获取滚动高度
+    getScrollTop(obj) {
+      const backtop = document.querySelector('.to-top')
+      obj.scrollTop >= 100
+        ? this.$setStyle(backtop, 'transform', 'scale(1)')
+        : this.$setStyle(backtop, 'transform', 'scale(0)')
+      this.$setMemorySes('scrollTop', obj.scrollTop)
+    },
     // 事件监听
     initialListener() {
+      const _this = this
       window.addEventListener('resize', () => {
         this.getWindowWidth()
       })
+      if(!isMobile()) {
+        document.querySelector('.os-viewport').addEventListener('scroll', function () {
+          _this.getScrollTop(this)
+        })
+      }else {
+        document.querySelector('#top').addEventListener('scroll', function () {
+          _this.getScrollTop(this)
+        })
+      }
     }
   }
 }

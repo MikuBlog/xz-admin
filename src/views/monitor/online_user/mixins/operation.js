@@ -9,6 +9,10 @@ export default {
     },
     // 批量踢出
     kickOutAll() {
+      if(this.selectList.length == 0) {
+        this.$warnMsg("请勾选用户进行批量踢出")
+        return
+      }
       this.$showMsgBox({ msg: `是否踢出所选中用户?` }).then(() => {
         this.$http_json({
           url: `/auth/online/delBatch`,

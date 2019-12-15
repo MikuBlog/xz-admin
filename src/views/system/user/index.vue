@@ -94,7 +94,7 @@
           :row-key="getRowKey"
           :stripe="true"
           >
-            <el-table-column type="selection" width="55" />
+            <el-table-column type="selection" width="55" reserve-selection/>
             <el-table-column label="用户名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.username }}</span>
@@ -164,6 +164,11 @@
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @showAddUser="showAddUser"
+    @deleteAll="deleteAll"
+    @downloadUserList="downloadUserList"/>
     <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>

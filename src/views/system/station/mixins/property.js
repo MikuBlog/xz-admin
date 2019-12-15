@@ -21,7 +21,12 @@ export default {
           value: "false",
           label: "禁用"
         }
-      ]
+      ],
+      buttonOptions: [{
+        icons: 'el-icon-plus',
+        title: "添加岗位",
+        method: "showAddStation"
+      }]
     };
   }
 }

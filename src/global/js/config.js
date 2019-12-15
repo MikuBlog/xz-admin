@@ -1,4 +1,4 @@
-import Agent from '@/api/other/agent'
+import { isMobile, isIpad } from '@/utils/agent'
 // 布尔类型的值改为false则表示不允许设置
 export default {
   // 登录标题
@@ -86,19 +86,19 @@ export default {
   // 分页组件
   paginationLayout: `${
     // 是否为ipad
-    Agent.isIpad()
+    isIpad()
       ? 'total, sizes, prev, pager, next'
       // 是否为移动设备
-      : Agent.isMobile()
+      : isMobile()
         ? 'prev, pager, next'
         // pc设备
         : 'total, sizes, prev, pager, next, jumper'
     }`,
   // 分页大小
-  paginationSize: Agent.isMobile() && !Agent.isIpad(),
+  paginationSize: isMobile() && !isIpad(),
   // 图片预览尺寸
   previewImageSize: `${
-    Agent.isMobile() && !Agent.isIpad()
+    isMobile() && !isIpad()
       ? '90%'
       : '500px'
     }`

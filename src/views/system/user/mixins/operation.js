@@ -3,7 +3,7 @@ export default {
     getRowKey(row) {
       return row.id;
     },
-    // 选择标签
+    // 选中用户
     handleSelectionChange(val) {
       this.selectList = val;
     },
@@ -14,13 +14,17 @@ export default {
         responseType: 'blob',
         method: "get"
       }).then(result => {
-        this.$download(result.data, `用户列表-${this.$formDate(new Date(), true)}.xls`, true)
+        this.$download(result.data, `用户列表-${this.$formatDate(new Date(), true)}.xls`, true)
       }).catch(e => {
-        console.log(e)
+        this.$errorMsg(e)
       })
     },
     // 删除选中用户
     deleteAll() {
+      if(this.selectList.length == 0) {
+        this.$warnMsg("请勾选用户进行批量删除")
+        return
+      }
       this.$showMsgBox({
         msg: `<p>是否删除选中用户?</p>`,
         isHTML: true

@@ -4,25 +4,32 @@ export default {
     isExpandAll(e) {
       this.expand = !this.expand;
       this.expand
-        ? (e.target.className = "el-icon-remove-outline")
-        : (e.target.className = "el-icon-circle-plus-outline");
+      ? e.target.className = "el-icon-remove-outline"
+      : e.target.className = "el-icon-circle-plus-outline"
+      this.isShow = false
+      this.$nextTick(() => {
+        this.isShow = true
+      })
       this.getAuthorityList();
     },
     // 初始化表头
     renderHeader(h, { column }) {
-      return h("div", [
-        h("i", {
-          class: "el-icon-remove-outline",
-          style: {
-            color: "#2196F3",
-            paddingRight: "3px"
-          },
-          on: {
-            click: this.isExpandAll
-          }
-        }),
-        h("span", column.label)
-      ]);
+      return h(
+        "div",
+        [
+          h("i", {
+            class: this.expand ? "el-icon-remove-outline" : "el-icon-circle-plus-outline",
+            style: {
+              color: "#2196F3",
+              paddingRight: "3px" 
+            },
+            on: {
+              click: this.isExpandAll
+            }
+          }),
+          h("span", column.label)
+        ]
+      )
     },
     // 删除权限
     deleteAuthorityItem(item) {

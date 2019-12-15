@@ -1,13 +1,20 @@
 export default {
   methods: {
+    getRowKey(row) {
+      return row.id;
+    },
     // 复制图片地址
     copy(item) {
       this.$copyText(item.url).then(() => {
         this.$successMsg("复制成功");
       });
     },
-    // 删除选中的图片
-    deleteSelect() {
+    // 批量删除图片
+    deleteAll() {
+      if(this.idList.length == 0) {
+        this.$warnMsg("请勾选图片进行批量删除")
+        return
+      }
       this.$showMsgBox({ msg: `是否删除选中图片?` }).then(() => {
         this.$http_json({
           url: `/api/picture/del`,
@@ -15,6 +22,7 @@ export default {
           data: this.idList
         }).then(() => {
           this.$successMsg("删除成功");
+          this.$refs.pictureTable.clearSelection()
           this.getPictureList();
         });
       });
@@ -39,9 +47,6 @@ export default {
     // 选中图片
     selectItem(picArray) {
       this.idList = picArray.map(val => val.id);
-      this.idList.length != 0
-        ? (this.isShowButton = true)
-        : (this.isShowButton = false);
     },
     // 点击搜索
     search() {

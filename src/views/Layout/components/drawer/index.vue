@@ -19,6 +19,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { isMobile } from "@/utils/agent";
 import convertHttp from "@/utils/convertHttp";
 import System from "./system";
 import Background from "./background";
@@ -33,10 +34,13 @@ export default {
   },
   mounted() {
     // 初始化进度条
-    Scrollbar.init(document.querySelector(".drawer-setting .ivu-drawer-body"), {
-      damping: 0.2,
-      continuousScrolling: true
-    });
+    if (!isMobile()) {
+      $(".drawer-setting .ivu-drawer-body").overlayScrollbars({
+        scrollbars: {
+          autoHide: "move"
+        }
+      });
+    }
   },
   computed: {
     ...mapState({
@@ -55,20 +59,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.drawer-setting {
-  /deep/ {
-    .ivu-drawer-body {
-      overflow: hidden;
-      .el-scrollbar {
-        /deep/ {
-          .el-scrollbar__wrap {
-            overflow-x: hidden;
-          }
-        }
-      }
-    }
-  }
-}
 .button-bottom {
   position: relative;
   margin: 0.5rem 0 3rem 0;
