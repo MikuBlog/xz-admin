@@ -77,9 +77,9 @@ this
 
 ## Theme
 
-所有主题模式都用在`body`标签上，也就是所有样式都会被改为对应的主题模式。
+所有主题模式都用在`body`标签上，也就是所有样式都会被改为对应的主题模式
 
-注意：不兼容`IE`
+注意：一次性设置多种主题不会重叠，而是相互覆盖。（不兼容`IE`）
 
 如果有的元素不想被主题样式覆盖掉，请前往`src/global/js/config.js`文件进行配置：
 
@@ -141,16 +141,16 @@ this.$weaknessMode(false) // 关闭色弱模式
 
 ### hueRotateMode
 
-描述：反转模式
+描述：转换模式
 
 参数：
 
-`isHueRotate`：是否为反转模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
+`isHueRotate`：是否为转换模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
 
 示例
 ```js
-this.$hueRotateMode() // 开启描述：反转模式
-this.$hueRotateMode(false) // 关闭描述：反转模式
+this.$hueRotateMode() // 开启描述：转换模式
+this.$hueRotateMode(false) // 关闭描述：转换模式
 ```
 
 ## Array
