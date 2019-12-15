@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       interval: "",
-      app: document.querySelector("#app")
+      app: document.querySelector("html")
     };
   },
   computed: {
