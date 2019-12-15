@@ -9,7 +9,18 @@ export default {
       // 当前页条数
       nowSize: 10,
       // 总条数
-      totalElements: 0
+      totalElements: 0,
+      buttonOptions: [{
+        type: "primary",
+        icons: 'el-icon-develop',
+        title: "批量踢出",
+        method: "deleteAll"
+      }, {
+        type: "warning",
+        icons: 'el-icon-download',
+        title: "导出用户列表",
+        method: "downloadUserList"
+      }]
     }
   }
 }

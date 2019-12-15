@@ -12,7 +12,6 @@ export default {
       user: {},
       squareUrl: "",
       logoUrl: "",
-      interval: "",
     }
   }
 }

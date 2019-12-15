@@ -33,7 +33,17 @@ export default {
           value: "remark",
           label: "描述"
         }
-      ]
+      ],
+      buttonOptions: [{
+        icons: 'el-icon-plus',
+        title: "添加字典",
+        method: "addDictionary"
+      }, {
+        type: "warning",
+        icons: 'el-icon-plus',
+        title: "添加字典详情",
+        method: "addDetail"
+      }]
     };
   }
 }

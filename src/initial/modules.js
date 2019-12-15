@@ -21,7 +21,7 @@ import '@/global/css/format.css'
 import '@/global/css/media.css'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
-import 'iview/dist/styles/iview.css'
+import 'view-design/dist/styles/iview.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import 'mavon-editor/dist/css/index.css'
 import 'form-making/dist/FormMaking.css'
@@ -67,8 +67,6 @@ import JsonPretty from '@/api/json'
 import ImageLoad from '@/api/other/image_load'
 // 引入数组模块
 import ArrayMethod from '@/api/array'
-// 引入客户端类型判断
-import Agent from '@/api/other/agent'
 // 引入控制流量模块
 import control from '@/api/control'
 // 引入全局配置模块
@@ -206,6 +204,11 @@ Vue.prototype.$setCssText = SetStyle.setCssText
 Vue.prototype.$createStyle = SetStyle.createStyle
 /**
  * @author xuanzai
+ * @description 设置白昼模式
+ */
+Vue.prototype.$clearMode = SetStyle.clearMode
+/**
+ * @author xuanzai
  * @description 设置夜间模式
  * @param {Boolean} isDark 是否夜间（默认为true）
  */
@@ -338,18 +341,6 @@ Vue.prototype.$sortList = ArrayMethod.sortList
  * @returns {Array} 返回新的数组
  */
 Vue.prototype.$searchResult = ArrayMethod.searchResult
-/**
- * @author xuanzai
- * @description 判断设备是否为移动端
- * @returns {Boolean} 返回判断结果
- */
-Vue.prototype.$isMobile = Agent.isMobile
-/**
- * @author xuanzai
- * @description 判断设备是否为ipad
- * @returns {Boolean} 返回判断结果
- */
-Vue.prototype.$isIpad = Agent.isIpad
 /**
  * @author xuanzai
  * @description 判断是否为移动端

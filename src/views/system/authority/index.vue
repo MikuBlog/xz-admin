@@ -22,19 +22,17 @@
               ></el-button>
             </el-row>
           </div>
-          <tree-table 
-          :data="authorityList" 
-          :expand-all="expand" 
-          :columns="columns" 
-          :renderHeader="renderHeader"
-          :stripe="true"
-          size="small">
-            <el-table-column prop="alias" label="别名" :show-overflow-tooltip="true">
-              <template slot-scope="scope">
-                <span>{{scope.row.alias}}</span>
-              </template>
+          <el-table
+            :data="authorityList"
+            style="width: 100%;margin-bottom: 20px;"
+            row-key="id"
+            v-if="isShow"
+            :default-expand-all="expand"
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
+            <el-table-column prop="name" label="名称" :render-header="renderHeader">
             </el-table-column>
-            <el-table-column prop="createTime" label="创建日期" width="150">
+            <el-table-column prop="createTime" label="创建日期" width="180">
               <template slot-scope="scope">
                 <span>{{ scope.row.createTime }}</span>
               </template>
@@ -54,10 +52,13 @@
                 />
               </template>
             </el-table-column>
-          </tree-table>
+          </el-table>
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @showAddAuthority="showAddAuthority"/>
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>

@@ -13,7 +13,18 @@ export default {
       pictureList: [],
       idList: [],
       isShow: false,
-      url: "https://myinterface.xuanzai.top/getPicture"
+      url: "https://myinterface.xuanzai.top/getPicture",
+      buttonOptions: [{
+        type: "primary",
+        icons: 'el-icon-upload',
+        title: "上传图片",
+        method: "uploadPic"
+      }, {
+        type: "danger",
+        icons: 'el-icon-delete',
+        title: "批量删除",
+        method: "deleteAll"
+      }]
     }
   }
 }

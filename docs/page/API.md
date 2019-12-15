@@ -79,6 +79,8 @@ this
 
 所有主题模式都用在`body`标签上，也就是所有样式都会被改为对应的主题模式。
 
+注意：不兼容`IE`
+
 如果有的元素不想被主题样式覆盖掉，请前往`src/global/js/config.js`文件进行配置：
 
 ```js
@@ -89,7 +91,6 @@ excludeEles: [
   "iframe", // 内嵌网站
   "embed", // 插件
   "object",
-  '.login', // 登录页面
   '.el-message', // 提示信息
   '.el-notification', // 通知信息
   /* 背景图 */
@@ -99,6 +100,15 @@ excludeEles: [
   '[style*="background-image: url"]',
   '[style*="background-image"][style*="image-set"]'
 ],
+```
+
+### clearMode
+
+描述：白昼模式主题，也称为正常模式，调用该方法后会重置所有主题样式。
+
+示例
+```js
+this.$clearMode() // 开启白昼模式
 ```
 
 ### darkMode
@@ -141,30 +151,6 @@ this.$weaknessMode(false) // 关闭色弱模式
 ```js
 this.$hueRotateMode() // 开启描述：反转模式
 this.$hueRotateMode(false) // 关闭描述：反转模式
-```
-
-## Client
-
-### isMobile
-
-描述：判断运行环境是否为移动端
-
-返回值：`Boolean`
-
-示例：
-```js
-this.$isMobile() // true or false
-```
-
-### isIpad
-
-描述：判断运行环境是否为`ipad`
-
-返回值：`Boolean`
-
-示例：
-```js
-this.$isIpad() // true or false
 ```
 
 ## Array

@@ -25,7 +25,12 @@ export default {
       permissions: [],
       permissionIds: [],
       menus: [],
-      menuIds: []
+      menuIds: [],
+      buttonOptions: [{
+        icons: 'el-icon-plus',
+        title: "添加角色",
+        method: "showAddRole"
+      }]
     };
   }
 }

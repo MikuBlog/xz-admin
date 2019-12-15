@@ -6,6 +6,8 @@ export default {
   },
   mounted() {
     this.initialStyle();
+    // 清除所有主题样式
+    this.$clearMode()
     this.getBoxVal();
     this.useBg();
     setTimeout(() => {
@@ -14,6 +16,18 @@ export default {
     });
   },
   methods: {
+    // 插入元素
+    insertEle() {
+      const image =
+        document.querySelector(".login-background .el-image__inner") ||
+        document.querySelector(".login-background .el-image__error"),
+        mask = document.createElement("div");
+      mask.className = "small-mask";
+      try {
+        this.$insertAfter(mask, image);
+        this.getVal();
+      } catch (e) { }
+    },
     // 值格式化
     formatTooltip(val) {
       return val / 100;

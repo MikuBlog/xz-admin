@@ -90,6 +90,10 @@
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @deleteAll="deleteAll"
+    @downloadUserList="downloadUserList"/>
   </div>
 </template>
 

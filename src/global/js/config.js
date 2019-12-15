@@ -1,4 +1,4 @@
-import Agent from '@/api/other/agent'
+import { isMobile, isIpad } from '@/utils/agent'
 // 布尔类型的值改为false则表示不允许设置
 export default {
   // 登录标题
@@ -41,6 +41,8 @@ export default {
     brightness: true,
     // 更换菜单样式
     menu: true,
+    // 背景颜色
+    backgroundColor: true,
     // 背景透明度
     backgroundOpacity: true,
     // 卡片透明度
@@ -59,9 +61,9 @@ export default {
     "iframe", // 内嵌网站
     "embed", // 插件
     "object",
-    '.login', // 登录页面
     '.el-message', // 提示信息
     '.el-notification', // 通知信息
+    '.mask',
     /* 背景图 */
     '[style*="background:url"]',
     '[style*="background-image:url"]',
@@ -84,19 +86,19 @@ export default {
   // 分页组件
   paginationLayout: `${
     // 是否为ipad
-    Agent.isIpad()
+    isIpad()
       ? 'total, sizes, prev, pager, next'
       // 是否为移动设备
-      : Agent.isMobile()
+      : isMobile()
         ? 'prev, pager, next'
         // pc设备
         : 'total, sizes, prev, pager, next, jumper'
     }`,
   // 分页大小
-  paginationSize: Agent.isMobile() && !Agent.isIpad(),
+  paginationSize: isMobile() && !isIpad(),
   // 图片预览尺寸
   previewImageSize: `${
-    Agent.isMobile() && !Agent.isIpad()
+    isMobile() && !isIpad()
       ? '90%'
       : '500px'
     }`

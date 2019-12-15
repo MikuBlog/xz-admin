@@ -13,6 +13,7 @@
 
 <script>
 import { mapState } from "vuex";
+import convertHttp from "@/utils/convertHttp";
 export default {
   data() {
     return {
@@ -63,9 +64,19 @@ export default {
         }).then(result => {
           this.$parent.logoUrl = convertHttp(result.data.value);
           this.$successMsg("上传成功");
+          setTimeout(() => {
+            window.location.reload()
+          }, 500)
         });
       }
     },
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.button {
+  position: relative;
+  margin: 0.5rem 0;
+}
+</style>

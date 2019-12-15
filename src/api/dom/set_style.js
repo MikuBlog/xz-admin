@@ -59,7 +59,7 @@ function darkMode(isDark = true) {
           .join(",");
       })
       .join(",") +
-    "{filter:invert(0%) hue-rotate(180deg);}"
+    "{filter:invert(0%) hue-rotate(180deg)!important;}"
   createStyle(`${isDark ? ts : ''}`, 'dark-mode')
 }
 /**
@@ -82,7 +82,7 @@ function weaknessMode(isWeakness = true) {
           .join(",");
       })
       .join(",") +
-    "{filter:invert(0%)}"
+    "{filter:invert(0%)!important}"
   createStyle(`
   ${ isWeakness
   ? ts
@@ -108,17 +108,24 @@ function hueRotateMode(isHueRotate = true) {
           .join(",");
       })
       .join(",") +
-    "{filter: hue-rotate(0deg)}"
+    "{filter: hue-rotate(0deg)!important}"
   createStyle(`
   ${ isHueRotate
   ? ts
   : ""}`, 'hue-rotate-mode')
 }
 
+function clearMode() {
+  createStyle("", 'dark-mode')
+  createStyle("", 'weakness-mode')
+  createStyle("", 'hue-rotate-mode')
+}
+
 export default {
   setStyle,
   setCssText,
   createStyle,
+  clearMode,
   darkMode,
   weaknessMode,
   hueRotateMode

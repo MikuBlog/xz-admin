@@ -1,6 +1,7 @@
 export default {
   data() {
     return {
+      isShow: true,
       expand: true,
       delLoading: false,
       searchVal: "",
@@ -18,12 +19,11 @@ export default {
           label: "禁用"
         }
       ],
-      columns: [
-        {
-          text: "名称",
-          value: "name"
-        }
-      ]
+      buttonOptions: [{
+        icons: 'el-icon-plus',
+        title: "添加部门",
+        method: "showAddDepartment"
+      }]
     };
   }
 }

@@ -1,16 +1,16 @@
 export default {
   data() {
     return {
+      isShow: true,
       expand: true,
       searchVal: "",
       isAdd: true,
       menuList: [],
-      columns: [
-        {
-          text: "名称",
-          value: "name"
-        }
-      ]
+      buttonOptions: [{
+        icons: 'el-icon-plus',
+        title: "添加菜单",
+        method: "showAddMenu"
+      }]
     };
   }
-}
+} 

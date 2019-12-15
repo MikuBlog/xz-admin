@@ -237,10 +237,18 @@
 }
 .top {
   position: relative;
-  padding: 0;
+  padding: 20px;
+}
+.back-top {
+  position: fixed;
+  z-index: 1500;
+  right: 40px;
+  bottom: 60px;
 }
 .footer {
   padding: 0;
+  overflow: auto;
+  background: #fefefe;
   .coppy-right {
     position: relative;
     line-height: 29px;
@@ -248,7 +256,7 @@
     background: #fefefe;
     border-top: 1px solid #dcdfe6;
     color: #666;
-    white-space: pre-wrap;
+    white-space: nowrap;
     text-indent: 1.3rem;
     letter-spacing: 1px;
     font-size: 0.7rem;

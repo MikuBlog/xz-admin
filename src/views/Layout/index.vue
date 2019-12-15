@@ -101,7 +101,7 @@
         </div>
         <el-header class="navbar-box" style="height: 50px;">
           <div class="navbar">
-            <el-dropdown trigger="click" size="small" class="avatar-dropdown">
+            <el-dropdown trigger="click" size="large" class="avatar-dropdown">
               <div class="avatar-box">
                 <div class="block">
                   <el-avatar shape="square" :size="45" :src="squareUrl">
@@ -109,11 +109,12 @@
                   </el-avatar>
                 </div>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item @click.native="navigateTo('/home/welcome')">首页</el-dropdown-item>
-                  <el-dropdown-item @click.native="navigateTo('/home/person')">个人中心</el-dropdown-item>
-                  <el-dropdown-item @click.native="openNewPage()">项目地址</el-dropdown-item>
+                  <el-dropdown-item @click.native="navigateTo('/home/welcome')"><i class='el-icon-s-home' />首页</el-dropdown-item>
+                  <el-dropdown-item @click.native="navigateTo('/home/person')"><i class='el-icon-s-custom' />个人中心</el-dropdown-item>
+                  <el-dropdown-item v-show="defaultConfig.systemSetting" @click.native="showSetting"><i class='el-icon-setting' />系统设置</el-dropdown-item>
+                  <el-dropdown-item @click.native="openNewPage()"><i class='fa fa-github-alt' />项目地址</el-dropdown-item>
                   <div class="line"></div>
-                  <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+                  <el-dropdown-item @click.native="logout"><i class='fa fa-paper-plane' />退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </div>
             </el-dropdown>
@@ -139,51 +140,11 @@
               <el-tooltip
                 class="item"
                 effect="dark"
-                content="布局大小"
-                placement="bottom"
-                v-show="defaultConfig.layoutSize"
-              >
-                <el-dropdown trigger="click" size="small">
-                  <div>
-                    <svg-icon icon-class="font-size" class="table-size" />
-                    <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item
-                        :disabled="layoutSize === ''"
-                        @click.native="setTableSize('')"
-                      >Default</el-dropdown-item>
-                      <el-dropdown-item
-                        :disabled="layoutSize === 'medium'"
-                        @click.native="setTableSize('medium')"
-                      >Medium</el-dropdown-item>
-                      <el-dropdown-item
-                        :disabled="layoutSize === 'small'"
-                        @click.native="setTableSize('small')"
-                      >Small</el-dropdown-item>
-                      <el-dropdown-item
-                        :disabled="layoutSize === 'mini'"
-                        @click.native="setTableSize('mini')"
-                      >Mini</el-dropdown-item>
-                    </el-dropdown-menu>
-                  </div>
-                </el-dropdown>
-              </el-tooltip>
-              <el-tooltip
-                class="item"
-                effect="dark"
                 content="清除缓存"
                 placement="bottom"
                 v-show="defaultConfig.clearStorage"
               >
                 <i class="el-icon-delete-solid" @click="clearStorage"></i>
-              </el-tooltip>
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="自定义样式"
-                placement="bottom"
-                v-show="defaultConfig.systemSetting"
-              >
-                <i class="el-icon-s-tools" @click="showSetting"></i>
               </el-tooltip>
               <el-tooltip
                 class="item"
@@ -244,10 +205,19 @@
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
+          <div class="back-top" ref="backtop">
+            <el-button
+              type="primary"
+              icon="el-icon-caret-top"
+              circle
+              class="to-top"
+              @click="backTop"
+            ></el-button>
+          </div>
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter && defaultConfig.diy.footer">
           <div class="coppy-right">
-            <span>© 2019 xuanzai Wteam.All rights reserved.</span>
+            <span>© 2019 xuanzai Wteam.All rights reserved - 粤ICP备19008964号-2</span>
           </div>
         </el-footer>
       </el-container>

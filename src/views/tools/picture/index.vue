@@ -16,26 +16,29 @@
               icon="el-icon-upload"
               class="margin-box"
               @click="uploadPic"
+              title="上传图片"
               circle
             ></el-button>
             <el-button
               type="danger"
               icon="el-icon-delete"
               class="margin-box"
-              @click="deleteSelect"
-              :disabled="!isShowButton"
+              @click="deleteAll"
+              :disabled="!this.idList.length"
+              title="批量删除"
               circle
             ></el-button>
           </div>
           <el-table
-            ref="table"
+            ref="pictureTable"
             :data="pictureList"
             :highlight-current-row="true"
             :stripe="true"
             style="width: 100%;"
+            :row-key="getRowKey"
             @selection-change="selectItem"
           >
-            <el-table-column type="selection" width="55" />
+            <el-table-column type="selection" width="55" reserve-selection/>
             <el-table-column prop="filename" label="文件名" :show-overflow-tooltip="true" />
             <el-table-column prop="username" label="上传者" :show-overflow-tooltip="true" />
             <el-table-column
@@ -46,14 +49,11 @@
               align="center"
             >
               <template slot-scope="scope">
-                <!-- <a :href="scope.row.url" style="color: #42b983" target="_blank">
-                  <img :src="scope.row.url" alt="点击打开" class="el-avatar xz-image" />
-                </a> -->
                 <img :src="scope.row.url" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true, url = scope.row.url)"/>
               </template>
             </el-table-column>
             <el-table-column prop="size" label="文件大小" :show-overflow-tooltip="true" />
-            <el-table-column label="操作" fixed="right" align="center">
+            <el-table-column label="操作" fixed="right" align="center" width="180">
               <template slot-scope="scope">
                 <el-button
                   type="success"
@@ -83,6 +83,10 @@
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @uploadPic="uploadPic"
+    @deleteAll="deleteAll"/>
     <eForm ref="form" />
     <ImagePreview :show-modal.sync="isShow" :url="url" />
   </div>

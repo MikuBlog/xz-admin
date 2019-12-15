@@ -20,7 +20,7 @@
             <el-input
               v-model="ruleForm.vcode"
               @keyup.native="pressEnter"
-              prefix-icon="el-icon-s-check"
+              prefix-icon="fa fa-shield"
             ></el-input>
             <el-image class="code-box" :src="codeUrl" fit="fill" @click="getCode">
               <div slot="error" class="image-slot">
@@ -68,7 +68,7 @@
           <span class="label">背景是否重复：</span>
           <el-switch v-model="repeat"></el-switch>
         </div>
-        <el-image style="width: 100%; height: 159px" :src="backgroundUrl" :fit="size" ref="image"></el-image>
+        <el-image class="login-background" style="width: 100%; height: 159px" :src="backgroundUrl" :fit="size" ref="image"></el-image>
         <div class="radio-box">
           <el-radio v-model="size" label="cover">覆盖</el-radio>
           <el-radio v-model="size" label="contain">适应</el-radio>

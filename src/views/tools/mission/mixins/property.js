@@ -20,7 +20,18 @@ export default {
           label: "运行中",
           value: false
         }
-      ]
+      ],
+      buttonOptions: [{
+        type: "primary",
+        icons: 'el-icon-plus',
+        title: "添加定时任务",
+        method: "addItem"
+      }, {
+        type: "warning",
+        icons: 'el-icon-document-copy',
+        title: "查看执行日志",
+        method: "showLogList"
+      }]
     };
   }
 }

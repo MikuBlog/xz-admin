@@ -36,13 +36,16 @@
               ></el-button>
             </el-row>
           </div>
-          <tree-table 
-          :expand-all="expand" 
-          :data="departmentList" 
-          :columns="columns" 
-          :renderHeader="renderHeader"
-          :stripe="true"
+          <el-table
+            :data="departmentList"
+            style="width: 100%;margin-bottom: 20px;"
+            row-key="id"
+            v-if="isShow"
+            :default-expand-all="expand"
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
           >
+            <el-table-column prop="name" label="名称" :render-header="renderHeader">
+            </el-table-column>
             <el-table-column label="状态" align="center">
               <template slot-scope="scope">
                 <el-tag
@@ -50,7 +53,7 @@
                 >{{ scope.row.enabled ? "正常" : "停用" }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :show-overflow-tooltip="true" prop="createTime" label="创建日期">
+            <el-table-column :show-overflow-tooltip="true" width="180" prop="createTime" label="创建日期">
               <template slot-scope="scope">
                 <span>{{ scope.row.createTime }}</span>
               </template>
@@ -70,10 +73,13 @@
                 />
               </template>
             </el-table-column>
-          </tree-table>
+          </el-table>
         </el-card>
       </el-col>
     </el-row>
+    <operation-box 
+    :options="buttonOptions"
+    @showAddDepartment="showAddDepartment"/>
     <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>

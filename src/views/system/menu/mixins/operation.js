@@ -6,6 +6,10 @@ export default {
       this.expand
       ? e.target.className = "el-icon-remove-outline"
       : e.target.className = "el-icon-circle-plus-outline"
+      this.isShow = false
+      this.$nextTick(() => {
+        this.isShow = true
+      })
       this.getMenuList();
     },
     // 初始化表头
@@ -14,7 +18,7 @@ export default {
         "div",
         [
           h("i", {
-            class: "el-icon-remove-outline",
+            class: this.expand ? "el-icon-remove-outline" : "el-icon-circle-plus-outline",
             style: {
               color: "#2196F3",
               paddingRight: "3px" 

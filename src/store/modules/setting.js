@@ -22,12 +22,14 @@ const
     background: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').background)
       ? {
         url: storage.getMemoryPmt('setting').background.url ? storage.getMemoryPmt('setting').background.url : "",
+        color: storage.getMemoryPmt('setting').background.color ? storage.getMemoryPmt('setting').background.color : "",
         mask: storage.getMemoryPmt('setting').background.mask ? storage.getMemoryPmt('setting').background.mask : 0,
         opacity: storage.getMemoryPmt('setting').background.opacity ? storage.getMemoryPmt('setting').background.opacity : 100,
         cardOpacity: storage.getMemoryPmt('setting').background.cardOpacity ? storage.getMemoryPmt('setting').background.cardOpacity : 90
       }
       : {
         url: "",
+        color: "",
         mask: 0,
         opacity: 100,
         cardOpacity: 90
