@@ -93,10 +93,10 @@ export default {
   width: 100%;
   /deep/ {
     .el-scrollbar__bar {
-      bottom: 0px;
+      bottom: 10px;
     }
     .el-scrollbar__wrap {
-      height: 40px;
+      height: 50px;
     }
   }
 }
