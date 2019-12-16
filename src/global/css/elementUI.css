@@ -66,3 +66,16 @@
 .el-menu-item-group__title {
   padding: 0!important;
 }
+
+/* 格式化卡片样式 */
+.el-card {
+  border: 1px solid transparent!important;
+  box-shadow: none!important;
+  -webkit-box-shadow: none!important;
+}
+
+.el-card:hover {
+  border: 1px solid #EBEEF5!important;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
+  -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
+}

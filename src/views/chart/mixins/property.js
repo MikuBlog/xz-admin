@@ -1,5 +1,6 @@
 export default {
   data() {
+    this.colors = ['#13af7b','#3497e4', '#ee2546','#ffbb00','#7538c7','#ff5100'],
     this.lineSettings = {
       stack: { 用户: ["访问用户", "下单用户"] },
       area: true

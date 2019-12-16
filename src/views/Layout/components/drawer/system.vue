@@ -12,76 +12,81 @@
         <el-radio label="dark">夜晚</el-radio>
       </el-radio-group>
     </div>
-    <h2 style="margin: 2rem 0">菜单布局风格</h2>
-    <div class="radio-box" style="text-align: left" v-show="defaultConfig.diy.menu">
-      <el-radio-group
-        v-model="$store.state.setting.isVerticleMenu"
-        @change="$nextTick(() => { initialMenuStyle() })"
-      >
-        <el-radio :label="true" :disabled="!defaultConfig.diy.menu">垂直</el-radio>
-        <el-radio :label="false" :disabled="!defaultConfig.diy.menu">水平</el-radio>
-      </el-radio-group>
-    </div>
-    <h2 style="margin: 2rem 0">系统布局设置</h2>
-    <div class="radio-box" v-show="defaultConfig.layoutSize">
-      <el-radio-group v-model="$store.state.setting.layoutSize" @change="changeLayoutSize">
-        <el-radio label="default">较大</el-radio>
-        <el-radio label="medium">中等</el-radio>
-        <el-radio label="small">较小</el-radio>
-        <el-radio label="mini">迷你</el-radio>
-      </el-radio-group>
-    </div>
-    <h2 style="margin: 2rem 0">系统主题设置</h2>
-    <div class="switch-box">
-      <div class="box" style="top: 4px" v-show="defaultConfig.diy.themeColor">
-        <span class="tips" style="top: 0">更换主题</span>
-        <Theme />
-      </div>
-      <div class="radio-box" v-show="defaultConfig.diy.themeStyle">
-        <el-radio-group v-model="$store.state.setting.themeStyle" @change="changeThemeStyle">
-          <el-radio label="lightMode">白昼</el-radio>
-          <el-radio label="darkMode">夜间</el-radio>
-          <el-radio label="weaknessMode">色弱</el-radio>
-          <el-radio label="hueRotateMode">转换</el-radio>
+    <div v-show="defaultConfig.diy.menu">
+      <h2 style="margin: 2rem 0">菜单布局风格</h2>
+      <div class="radio-box" style="text-align: left">
+        <el-radio-group
+          v-model="$store.state.setting.isVerticleMenu"
+          @change="$nextTick(() => { initialMenuStyle() })"
+        >
+          <el-radio :label="true" :disabled="!defaultConfig.diy.menu">垂直</el-radio>
+          <el-radio :label="false" :disabled="!defaultConfig.diy.menu">水平</el-radio>
         </el-radio-group>
       </div>
-      <div
-        class="block"
-        style="font-size: 1rem; margin-top: 1rem; padding: 0 8px; text-align: left"
-        v-show="defaultConfig.diy.brightness"
-      >
-        <span class="demonstration">系统亮度</span>
-        <el-slider
-          v-model="$store.state.setting.brightness"
-          :format-tooltip="formatTooltip"
-          @change="changeBrightness"
-        ></el-slider>
+    </div>
+    <div v-show="defaultConfig.diy.theme">
+      <h2 style="margin: 2rem 0">系统主题设置</h2>
+      <div class="switch-box">
+        <div class="box" style="top: 4px" v-show="defaultConfig.diy.themeColor">
+          <span class="tips" style="top: 0">更换主题</span>
+          <Theme />
+        </div>
+        <div class="radio-box" v-show="defaultConfig.diy.themeStyle">
+          <el-radio-group v-model="$store.state.setting.themeStyle" @change="changeThemeStyle">
+            <el-radio label="lightMode">白昼</el-radio>
+            <el-radio label="darkMode">夜间</el-radio>
+            <el-radio label="weaknessMode">色弱</el-radio>
+            <el-radio label="hueRotateMode">转换</el-radio>
+          </el-radio-group>
+        </div>
+        <div
+          class="block"
+          style="font-size: 1rem; margin-top: 1rem; padding: 0 8px; text-align: left"
+          v-show="defaultConfig.diy.brightness"
+        >
+          <span class="demonstration">系统亮度</span>
+          <el-slider
+            v-model="$store.state.setting.brightness"
+            :format-tooltip="formatTooltip"
+            @change="changeBrightness"
+          ></el-slider>
+        </div>
       </div>
     </div>
-    <h2 style="margin: 2rem 0">系统布局设置</h2>
-    <div class="switch-box">
-      <div class="box" v-show="defaultConfig.diy.logo">
-        <span class="tips">显示Logo</span>
-        <el-switch v-model="$store.state.setting.showLogo"></el-switch>
-      </div>
-      <div class="box" v-show="defaultConfig.diy.tagViews">
-        <span class="tips">显示标签页</span>
-        <el-switch v-model="$store.state.setting.showTags"></el-switch>
-      </div>
-      <div class="box" v-show="defaultConfig.diy.breadcrumb">
-        <span class="tips">显示面包屑</span>
-        <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
-      </div>
-      <div class="box" v-show="defaultConfig.diy.footer">
-        <span class="tips">显示页脚</span>
-        <el-switch v-model="$store.state.setting.showFooter"></el-switch>
+    <div v-show="defaultConfig.diy.layout">
+      <h2 style="margin: 2rem 0">系统布局设置</h2>
+      <div class="switch-box">
+        <div class="box" v-show="defaultConfig.diy.logo">
+          <span class="tips">显示Logo</span>
+          <el-switch v-model="$store.state.setting.showLogo"></el-switch>
+        </div>
+        <div class="box" v-show="defaultConfig.diy.tagViews">
+          <span class="tips">显示标签页</span>
+          <el-switch v-model="$store.state.setting.showTags"></el-switch>
+        </div>
+        <div class="box" v-show="defaultConfig.diy.breadcrumb">
+          <span class="tips">显示面包屑</span>
+          <el-switch v-model="$store.state.setting.showBreadcrumb"></el-switch>
+        </div>
+        <div class="box" v-show="defaultConfig.diy.footer">
+          <span class="tips">显示页脚</span>
+          <el-switch v-model="$store.state.setting.showFooter"></el-switch>
+        </div>
+        <div class="radio-box" v-show="defaultConfig.diy.layoutSize">
+          <el-radio-group v-model="$store.state.setting.layoutSize" @change="changeLayoutSize">
+            <el-radio label="default">较大</el-radio>
+            <el-radio label="medium">中等</el-radio>
+            <el-radio label="small">较小</el-radio>
+            <el-radio label="mini">迷你</el-radio>
+          </el-radio-group>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import { mapState } from "vuex";
 export default {
   data() {
@@ -162,10 +167,13 @@ export default {
     },
     // 更换系统布局大小
     changeLayoutSize() {
-      Vue.prototype.$ELEMENT = { size: this.$store.state.setting.layoutSize, zIndex: 2000 }
+      Vue.prototype.$ELEMENT = {
+        size: this.$store.state.setting.layoutSize,
+        zIndex: 2000
+      };
       this.$router.replace({
         path: `/home/redirect?path=${this.$route.fullPath}`
-      })
+      });
     },
     // 更换主题风格
     changeThemeStyle() {

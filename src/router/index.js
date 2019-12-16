@@ -180,8 +180,9 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
+    console.log(to)
     // 保存重定向地址
-    Storage.setMemorySes("redirect", to.path)
+    Storage.setMemorySes("redirect", to.fullPath)
     next({ path: "/login" })
   }
 })

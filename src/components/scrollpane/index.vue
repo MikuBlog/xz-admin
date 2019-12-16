@@ -88,7 +88,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .scroll-container {
   white-space: nowrap;
-  position: relative;
+  position: relative; 
   overflow: hidden;
   width: 100%;
   /deep/ {
