@@ -1,22 +1,10 @@
 export default {
   created() {
-    // 初始化角色列表
-    this.getRoleList();
     // 初始化选项列表
     this.getMenuTree();
     this.getAuthorityTree();
   },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getRoleList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getRoleList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -94,9 +82,10 @@ export default {
       });
     },
     // 获取角色信息
-    getRoleList() {
+    getRoleList(page, size) {
+      this.nowSize = size || this.nowSize
       this.$http_normal({
-        url: `/api/role/page?page=${this.nowPage - 1}&size=${
+        url: `/api/role/page?page=${page - 1}&size=${
           this.nowSize
           }&sort=createTime,desc${
           this.searchVal ? `&name=${this.searchVal}` : ""

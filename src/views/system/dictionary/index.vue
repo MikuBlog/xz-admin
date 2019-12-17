@@ -71,17 +71,10 @@
               </template>
             </el-table-column>
           </el-table>
-          <div class="pagination">
-            <el-pagination
-              @size-change="handleSizeChange_1"
-              @current-change="handleCurrentChange_1"
-              :page-sizes="[10, 25, 50, 100]"
-              :page-size="nowSize_1"
-              :pager-count="5"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="totalElements_1"
-            ></el-pagination>
-          </div>
+          <pagination
+            :get-data="getDictionaryList"
+            :total="totalElements_1"
+          />
         </el-card>
       </el-col>
       <el-col :sm="24" :md="12">
@@ -108,7 +101,12 @@
               <el-button icon="el-icon-search" @click="search_2" circle></el-button>
             </el-row>
           </div>
-          <el-table :data="detailList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="detailList"
+            :highlight-current-row="true"
+            style="width: 100%"
+            :stripe="true"
+          >
             <el-table-column label="所属字典" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ beloneDictName }}</span>
@@ -131,50 +129,32 @@
             </el-table-column>
             <el-table-column label="操作" width="150" fixed="right" align="center">
               <template slot-scope="scope">
-                <el-button
-                  type="primary"
-                  icon="el-icon-edit"
-                  @click="editDetail(scope.row)"
-                ></el-button>
-                <el-button
-                  type="danger"
-                  icon="el-icon-delete"
-                  @click="deleteDetail(scope.row)"
-                ></el-button>
+                <el-button type="primary" icon="el-icon-edit" @click="editDetail(scope.row)"></el-button>
+                <el-button type="danger" icon="el-icon-delete" @click="deleteDetail(scope.row)"></el-button>
               </template>
             </el-table-column>
           </el-table>
-          <div class="pagination">
-            <el-pagination
-              @size-change="handleSizeChange_2"
-              @current-change="handleCurrentChange_2"
-              :page-sizes="[10, 25, 50, 100]"
-              :page-size="nowSize_2"
-              :pager-count="5"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="totalElements_2"
-            ></el-pagination>
-          </div>
+          <pagination
+            :get-data="getDetailList"
+            :total="totalElements_2"
+          />
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @addDictionary="addDictionary"
-    @addDetail="addDetail"/>
-    <Form-Add ref="formAdd" :isAdd="isAdd_1"/>
+    <operation-box :options="buttonOptions" @addDictionary="addDictionary" @addDetail="addDetail" />
+    <Form-Add ref="formAdd" :isAdd="isAdd_1" />
     <Form-Edit ref="formEdit" :isAdd="isAdd_2" @updateDetailList="getDetailList" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 import FormAdd from "./components/add";
 import FormEdit from "./components/edit";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { FormAdd, FormEdit }
 };
 </script>

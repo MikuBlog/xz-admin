@@ -4,15 +4,14 @@ export default {
     search() {
       this.nowPage = 1;
       this.selectType
-        ? this.getOpertionLogList()
+        ? this.getOpertionLogList(1, this.nowSize)
         : this.$warnMsg("请选择搜索类型");
     },
     // 回车搜索
     searchEnter(e) {
-      this.nowPage = 1;
       e.keyCode === 13 &&
         (this.selectType
-          ? this.getOpertionLogList()
+          ? this.getOpertionLogList(1, this.nowSize)
           : this.$warnMsg("请选择搜索类型"));
     }
   }

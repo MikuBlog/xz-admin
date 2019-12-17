@@ -106,12 +106,25 @@
                   </el-avatar>
                 </div>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item @click.native="navigateTo('/home/welcome')"><i class='el-icon-s-home' />首页</el-dropdown-item>
-                  <el-dropdown-item @click.native="navigateTo('/home/person')"><i class='el-icon-s-custom' />个人中心</el-dropdown-item>
-                  <el-dropdown-item v-show="defaultConfig.systemSetting" @click.native="showSetting"><i class='el-icon-setting' />系统设置</el-dropdown-item>
-                  <el-dropdown-item @click.native="openNewPage()"><i class='fa fa-github-alt' />项目地址</el-dropdown-item>
+                  <el-dropdown-item @click.native="navigateTo('/home/welcome')">
+                    <i class="el-icon-s-home" />首页
+                  </el-dropdown-item>
+                  <el-dropdown-item @click.native="navigateTo('/home/person')">
+                    <i class="el-icon-s-custom" />个人中心
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    v-show="defaultConfig.systemSetting"
+                    @click.native="showSetting"
+                  >
+                    <i class="el-icon-setting" />系统设置
+                  </el-dropdown-item>
+                  <el-dropdown-item @click.native="openNewPage()">
+                    <i class="fa fa-github-alt" />项目地址
+                  </el-dropdown-item>
                   <div class="line"></div>
-                  <el-dropdown-item @click.native="logout"><i class='fa fa-paper-plane' />退出登录</el-dropdown-item>
+                  <el-dropdown-item @click.native="logout">
+                    <i class="fa fa-paper-plane" />退出登录
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </div>
             </el-dropdown>
@@ -198,19 +211,13 @@
             ></el-button>
           </div>
         </div>
+        <div class="back-top" ref="backtop">
+          <el-button type="primary" icon="el-icon-caret-top" circle class="to-top" @click="backTop"></el-button>
+        </div>
         <el-main class="top" id="top">
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
-          <div class="back-top" ref="backtop">
-            <el-button
-              type="primary"
-              icon="el-icon-caret-top"
-              circle
-              class="to-top"
-              @click="backTop"
-            ></el-button>
-          </div>
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter && defaultConfig.diy.footer">
           <div class="coppy-right">

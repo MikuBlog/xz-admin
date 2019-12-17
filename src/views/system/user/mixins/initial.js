@@ -4,23 +4,11 @@ export default {
     this.getDepartmentList();
     // 获取岗位字典
     this.getDictsList("user_status");
-    // 获取用户列表
-    this.getUserList();
   },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getUserList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getUserList();
     },
     // 初始化用户列表
     initialUserList(list) {
@@ -30,9 +18,10 @@ export default {
       });
     },
     // 获取用户列表信息
-    getUserList() {
+    getUserList(page, size) {
+      this.nowSize = size || this.nowSize
       this.$http_normal({
-        url: `/api/user/page?page=${this.nowPage - 1}&size=${
+        url: `/api/user/page?page=${page - 1}&size=${
           this.nowSize
         }&sort=createTime,desc&deptId=${this.deptId}${
           this.selectType ? `&${this.selectType}=${this.searchVal_2}` : ""

@@ -1,19 +1,5 @@
 export default {
-  created() {
-    // 初始化页面数据
-    this.getGenerateCodeList();
-  },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getGenerateCodeList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getGenerateCodeList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -26,9 +12,10 @@ export default {
       });
     },
     // 获取操作日志信息
-    getGenerateCodeList() {
+    getGenerateCodeList(page, size) {
+      this.nowSize = size || this.nowSize
       this.$http_normal({
-        url: `/api/generator/tables?page=${this.nowPage - 1}&size=${
+        url: `/api/generator/tables?page=${page - 1}&size=${
           this.nowSize
         }&sort=createTime,desc${
           this.searchVal ? `&name=${this.searchVal}` : ""

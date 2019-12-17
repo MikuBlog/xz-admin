@@ -67,18 +67,10 @@ import { MessageBox } from 'mint-ui';
               </template>
             </el-table-column>
           </el-table>
-          <div class="pagination">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :page-sizes="[10, 25, 50, 100]"
-              :page-size.sync="nowSize"
-              :pager-count="5"
-              :small="this.defaultConfig.paginationSize"
-              :layout="this.defaultConfig.paginationLayout"
-              :total="totalElements"
-            ></el-pagination>
-          </div>
+          <pagination
+            :get-data="getExceptionLogList"
+            :total="totalElements"
+          />
         </el-card>
       </el-col>
     </el-row>

@@ -1,19 +1,5 @@
 export default {
-  created() {
-    // 初始化页面数据
-    this.getOpertionLogList();
-  },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getOpertionLogList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getOpertionLogList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -26,11 +12,10 @@ export default {
       });
     },
     // 获取操作日志信息
-    getOpertionLogList() {
+    getOpertionLogList(page, size) {
+      this.nowSize = size || this.nowSize
       this.$http_normal({
-        url: `/log/page?page=${this.nowPage - 1}&size=${
-          this.nowSize
-          }&sort=createTime,desc${
+        url: `/log/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${
           this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
           }`,
         method: "get"

@@ -19,7 +19,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { isMobile } from "@/utils/agent";
+import { isMobile, isSafari } from "@/utils/agent";
 import System from "./system";
 import Background from "./background";
 import Logo from "./logo";
@@ -33,7 +33,7 @@ export default {
   },
   mounted() {
     // 初始化进度条
-    if (!isMobile()) {
+    if (!isMobile() && !isSafari()) {
       $(".drawer-setting .ivu-drawer-body").overlayScrollbars({
         scrollbars: {
           autoHide: "move"

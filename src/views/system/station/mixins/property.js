@@ -6,8 +6,6 @@ export default {
       stationList: [],
       dicts: [],
       isAdd: true,
-      // 当前页数
-      nowPage: 1,
       // 当前页条数
       nowSize: 10,
       // 总条数
@@ -23,6 +21,7 @@ export default {
         }
       ],
       buttonOptions: [{
+        type: "primary",
         icons: 'el-icon-plus',
         title: "添加岗位",
         method: "showAddStation"

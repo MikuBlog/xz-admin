@@ -33,13 +33,11 @@ export default {
     },
     // 点击搜索
     search() {
-      this.nowPage = 1;
-      this.getRedisList();
+      this.getRedisList(1, this.nowSize);
     },
     // 回车搜索
     searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 && this.getRedisList();
+      e.keyCode === 13 && this.getRedisList(1, this.nowSize);
     },
   }
 }

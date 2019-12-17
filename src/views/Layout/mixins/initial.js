@@ -1,4 +1,4 @@
-import { isMobile } from '@/utils/agent'
+import { isMobile, isSafari } from '@/utils/agent'
 import { mapState } from 'vuex'
 import Vue from 'vue'
 export default {
@@ -59,8 +59,8 @@ export default {
   methods: {
     // 初始化滚动条样式
     initialScrollBar() {
-      if (!isMobile()) {
-        $('.top').overlayScrollbars({
+      if (!isMobile() && !isSafari()) {
+        $('#top').overlayScrollbars({
           scrollbars: {
             autoHide: "move"
           }
@@ -165,7 +165,7 @@ export default {
       window.addEventListener('resize', () => {
         this.getWindowWidth()
       })
-      if(!isMobile()) {
+      if(!isMobile() && !isSafari()) {
         document.querySelector('.os-viewport').addEventListener('scroll', function () {
           _this.getScrollTop(this)
         })
