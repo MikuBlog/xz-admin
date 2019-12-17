@@ -93,11 +93,6 @@ label {
   text-align: center;
 }
 
-.pagination {
-  position: relative;
-  text-align: right;
-}
-
 .name-wrapper {
   overflow: hidden;
   white-space: nowrap;
