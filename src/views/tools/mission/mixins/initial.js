@@ -13,7 +13,7 @@ export default {
     },
     // 获取定时任务信息
     getMissionList(page, size) {
-      this.nowSize = size || this.nowSize
+      this.nowSize = size
       this.$http_normal({
         url: `/api/quartz/page?page=${page - 1}&size=${
           this.nowSize

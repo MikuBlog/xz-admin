@@ -31,7 +31,7 @@ export default {
     },
     // 获取权限日志信息
     getAuthorityLogList(page, size) {
-      this.nowSize = size || this.nowSize
+      this.nowSize = size
       this.$http_normal({
         url: `/api/authLog/page?page=${page - 1}&size=${
           this.nowSize

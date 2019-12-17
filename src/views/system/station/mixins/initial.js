@@ -17,7 +17,7 @@ export default {
     },
     // 获取岗位信息
     getStationList(page, size) {
-      this.nowSize = size || this.nowSize
+      this.nowSize = size
       this.$http_normal({
         url: `/api/job/page?page=${page - 1}&size=${
           this.nowSize

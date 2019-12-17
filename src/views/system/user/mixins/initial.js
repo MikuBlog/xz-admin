@@ -19,7 +19,7 @@ export default {
     },
     // 获取用户列表信息
     getUserList(page, size) {
-      this.nowSize = size || this.nowSize
+      this.nowSize = size
       this.$http_normal({
         url: `/api/user/page?page=${page - 1}&size=${
           this.nowSize

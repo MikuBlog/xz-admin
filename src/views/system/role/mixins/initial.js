@@ -83,7 +83,7 @@ export default {
     },
     // 获取角色信息
     getRoleList(page, size) {
-      this.nowSize = size || this.nowSize
+      this.nowSize = size
       this.$http_normal({
         url: `/api/role/page?page=${page - 1}&size=${
           this.nowSize

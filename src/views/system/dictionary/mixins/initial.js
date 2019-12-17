@@ -13,7 +13,7 @@ export default {
     },
     // 获取字典信息
     getDictionaryList(page, size) {
-      this.nowSize_1 = size || this.nowSize_1
+      this.nowSize_1 = size
       this.$http_normal({
         url: `/api/dict/page?page=${page - 1}&size=${
           this.nowSize_1
@@ -36,7 +36,7 @@ export default {
     },
     // 获取字典详情信息
     getDetailList(page, size) {
-      this.nowSize_2 = size || this.nowSize_2
+      this.nowSize_2 = size
       if (this.dictName) {
         this.$http_normal({
           url: `/api/dictDetail/page?page=${page - 1}&size=${
