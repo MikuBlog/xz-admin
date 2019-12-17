@@ -6,13 +6,11 @@ export default {
     },
     // 点击搜索
     search() {
-      this.nowPage = 1;
-      this.getOpertionLogList();
+      this.getOpertionLogList(1, this.nowSize);
     },
     // 回车搜索
     searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 && this.getOpertionLogList();
+      e.keyCode === 13 && this.getOpertionLogList(1, this.nowSize);
     },
     // 修改密码
     showEditPassword() {

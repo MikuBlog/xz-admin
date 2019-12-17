@@ -1,19 +1,5 @@
 export default {
-  created() {
-    // 初始化页面数据
-    this.getExceptionLogList();
-  },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getExceptionLogList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getExceptionLogList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -26,11 +12,10 @@ export default {
       });
     },
     // 获取错误日志信息
-    getExceptionLogList() {
+    getExceptionLogList(page, size) {
+      this.nowSize = size || this.nowSize
       this.$http_normal({
-        url: `/log/page/error?page=${this.nowPage - 1}&size=${
-          this.nowSize
-          }&sort=createTime,desc${
+        url: `/log/page/error?page=${page - 1}&size=${this.nowSize}&sort=createTime,desc${
           this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
           }`,
         method: "get"

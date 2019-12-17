@@ -99,20 +99,18 @@ export default {
     },
     // 点击搜索
     search_2() {
-      this.nowPage = 1;
-      this.selectType ? this.getUserList() : this.$warnMsg("请选择搜索类型");
+      this.selectType ? this.getUserList(1, this.nowSize) : this.$warnMsg("请选择搜索类型");
     },
     // 回车搜索
     searchEnter_2(e) {
-      this.nowPage = 1;
       e.keyCode === 13 &&
         (this.selectType
-          ? this.getUserList()
+          ? this.getUserList(1, this.nowSize)
           : this.$warnMsg("请选择搜索类型"));
     },
     // 搜索状态
     getStatus() {
-      this.getUserList();
+      this.getUserList(1, this.nowSize);
     },
     handleNodeClick(val) {
       this.deptId = val.id;

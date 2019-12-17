@@ -1,4 +1,4 @@
-import { isMobile } from '@/utils/agent'
+import { isMobile, isSafari } from '@/utils/agent'
 import { mapMutations } from 'vuex'
 import convertHttp from '@/utils/convertHttp'
 export default {
@@ -9,7 +9,7 @@ export default {
     ]),
     // 返回顶部
     backTop(delay = 500) {
-      isMobile()
+      (isMobile() || isSafari())
       ? $('#top').animate({ scrollTop: 0 }, delay)
       : $('.os-viewport').animate({ scrollTop: 0 }, delay)
     },

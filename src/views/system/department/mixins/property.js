@@ -20,6 +20,7 @@ export default {
         }
       ],
       buttonOptions: [{
+        type: "primary",
         icons: 'el-icon-plus',
         title: "添加部门",
         method: "showAddDepartment"

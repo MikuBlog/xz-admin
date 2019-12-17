@@ -1,20 +1,6 @@
 import convertHttp from '@/utils/convertHttp'
 export default {
-  created() {
-    // 初始化页面数据
-    this.getPictureList();
-  },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getPictureList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getPictureList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -28,9 +14,10 @@ export default {
       });
     },
     // 获取图片列表
-    getPictureList() {
+    getPictureList(page, size) {
+      this.nowSize = size || this.nowSize
       this.$http_normal({
-        url: `/api/picture/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=id,desc${
+        url: `/api/picture/page?page=${page - 1}&size=${this.nowSize}&sort=id,desc${
           this.searchVal ? `&filename=${this.searchVal}` : ""
           }`
         ,

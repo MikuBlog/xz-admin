@@ -5,6 +5,11 @@ export function isIE() {
   return /trident/ig.test(navigator.userAgent)
 }
 
+// 判断是否为safari浏览器
+export function isSafari() {
+  return /safari/ig.test(navigator.userAgent) && !/chrome/ig.test(navigator.userAgent)
+}
+
 /* 判断设备类型 */
 
 // 判断环境是否为移动端
@@ -20,7 +25,7 @@ export function isMobile() {
   return false
 }
 
-// 判断环境是否为ipad
+// 判断环境是否为ipad（safari浏览器上失效）
 export function isIpad() {
   const
     mobileAgent = "ipad",

@@ -5,7 +5,7 @@
         <el-card>
           <div class="button-box" v-for="items in options">
             <el-button
-              :type="items.type || 'primary'"
+              :type="items.type || ''"
               :icon="items.icons || 'el-icon-question'"
               :circle="!items.name"
               :title="items.title"
@@ -24,7 +24,7 @@
  * @author xuanzai
  * @description 悬浮操作窗口（用于列表过长不方便操作的页面）
  */
-import { isMobile } from "@/utils/agent";
+import { isMobile, isSafari } from "@/utils/agent";
 export default {
   name: "operation-box",
   props: {
@@ -34,7 +34,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if (!isMobile()) {
+    if (!isMobile() && !isSafari()) {
       document.querySelector(".os-viewport").removeEventListener("scroll", this.getScrollTop);
     } else {
       document.querySelector("#top").removeEventListener("scroll", this.getScrollTop);
@@ -54,7 +54,7 @@ export default {
     },
     initialListener() {
       const _this = this;
-      if (!isMobile()) {
+      if (!isMobile() && !isSafari()) {
         document
           .querySelector(".os-viewport")
           .addEventListener("scroll", this.getScrollTop);
