@@ -12,7 +12,6 @@
             :collapse="isCollapse"
             class="el-menu-vertical-demo collapse-menu"
             :background-color="menuBackgroundColor"
-            :active-text-color="activeTextColor"
             :text-color="menuTextColor"
             :unique-opened="true"
           >
@@ -46,7 +45,6 @@
           <el-menu
             :default-active="$route.path"
             class="el-menu-vertical-demo menu-list"
-            :background-color="menuBackgroundColor"
             :active-text-color="activeTextColor"
             :text-color="menuTextColor"
             width="200px"
@@ -78,7 +76,6 @@
             <el-menu
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
-              :background-color="menuBackgroundColor"
               :active-text-color="activeTextColor"
               :text-color="menuTextColor"
               mode="horizontal"

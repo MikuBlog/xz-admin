@@ -1,73 +1,57 @@
 <template>
   <div>
-    <h2 style="margin: 2rem 0">系统背景颜色设置</h2>
-    <div class="color-box" v-show="defaultConfig.diy.backgroundColor">
-      <div class="color c-fefefe" @click="setBackgroundColor('#fefefe')">
-        <svg-icon class="tick" icon-class="勾" style="color: #666" v-show="settings.background.color === '#fefefe'"/>
-      </div>
-      <div class="color c-f5222d" @click="setBackgroundColor('#f5222d')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#f5222d'"/>
-      </div>
-      <div class="color c-fa541c" @click="setBackgroundColor('#fa541c')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#fa541c'"/>
-      </div>
-      <div class="color c-fbb937" @click="setBackgroundColor('#fbb937')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#fbb937'"/>
-      </div>
-      <div class="color c-13c2c2" @click="setBackgroundColor('#13c2c2')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#13c2c2'"/>
-      </div>
-      <div class="color c-52c41a" @click="setBackgroundColor('#52c41a')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#52c41a'"/>
-      </div>
-      <div class="color c-1890ff" @click="setBackgroundColor('#1890ff')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#1890ff'"/>
-      </div>
-      <div class="color c-2f54eb" @click="setBackgroundColor('#2f54eb')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#2f54eb'"/>
-      </div>
-      <div class="color c-722ed1" @click="setBackgroundColor('#722ed1')">
-        <svg-icon class="tick" icon-class="勾" v-show="settings.background.color === '#722ed1'"/>
-      </div>
+    <div v-show="defaultConfig.diy.backgroundColor">
+      <h2 style="margin: 2rem 0">系统背景颜色设置</h2>
+      <color-select 
+      :initial="setBackgroundColor"
+      :nowColor="settings.background.color"
+      :method="setBackgroundColor"
+      :colorArray="colorArray" />
     </div>
-    <h2 style="margin: 2rem 0">系统背景图片设置</h2>
-    <el-image
-      style="width: 100%; height: 159px"
-      :src="$store.state.setting.background.url"
-      fit="cover"
-      ref="image"
-      class="con-background"
-    ></el-image>
-    <div
-      class="block"
-      style="margin-top: 2rem; padding: 0 10px"
-      v-show="defaultConfig.diy.backgroundOpacity"
-    >
-      <span class="demonstration">背景透明度</span>
-      <el-slider
-        v-model="$store.state.setting.background.opacity"
-        :format-tooltip="formatTooltip"
-        @change="getVal"
-      ></el-slider>
-    </div>
-    <div class="block" style="padding: 0 10px" v-show="defaultConfig.diy.backgroundMask">
-      <span class="demonstration">背景遮罩度</span>
-      <el-slider
-        v-model="$store.state.setting.background.mask"
-        :format-tooltip="formatTooltip"
-        @change="getVal"
-      ></el-slider>
-    </div>
-    <div class="block" style="padding: 0 10px" v-show="defaultConfig.diy.cardOpacity">
-      <span class="demonstration">卡片透明度</span>
-      <el-slider
-        v-model="$store.state.setting.background.cardOpacity"
-        :format-tooltip="formatTooltip"
-        @change="setCard"
-      ></el-slider>
-    </div>
-    <div class="button" v-show="defaultConfig.diy.selectBackrgoundButton">
-      <el-button type="primary" style="width: 100%" @click="selectBackground">选择背景</el-button>
+    <div v-show="defaultConfig.diy.background">
+      <h2 style="margin: 2rem 0">系统背景图片设置</h2>
+      <el-image
+        style="width: 100%; height: 159px"
+        :src="$store.state.setting.background.url"
+        fit="cover"
+        ref="image"
+        class="con-background"
+      ></el-image>
+      <div
+        class="block"
+        style="margin-top: 2rem; padding: 0 10px"
+        v-show="defaultConfig.diy.backgroundOpacity"
+      >
+        <span class="demonstration">背景透明度</span>
+        <el-slider
+          v-model="$store.state.setting.background.opacity"
+          :format-tooltip="formatTooltip"
+          @change="getVal"
+        ></el-slider>
+      </div>
+      <div class="block" style="padding: 0 10px" v-show="defaultConfig.diy.backgroundMask">
+        <span class="demonstration">背景遮罩度</span>
+        <el-slider
+          v-model="$store.state.setting.background.mask"
+          :format-tooltip="formatTooltip"
+          @change="getVal"
+        ></el-slider>
+      </div>
+      <div
+        class="block"
+        style="padding: 0 10px"
+        v-show="defaultConfig.diy.cardOpacity"
+      >
+        <span class="demonstration">卡片透明度</span>
+        <el-slider
+          v-model="$store.state.setting.background.cardOpacity"
+          :format-tooltip="formatTooltip"
+          @change="setCard"
+        ></el-slider>
+      </div>
+      <div class="button" v-show="defaultConfig.diy.selectBackrgoundButton">
+        <el-button type="primary" style="width: 100%" @click="selectBackground">选择背景</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -75,6 +59,11 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  data() {
+    return {
+      colorArray: ['#eef0f3', '#f5222d', '#fa541c', '#fbb937', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1']
+    }
+  },
   computed: {
     ...mapState({
       settings: state => state.setting
@@ -124,6 +113,7 @@ export default {
           "opacity",
           `${this.settings.background.opacity / 100}`
         );
+
       mask.style.cssText = `
                 position: absolute;
                 top: 0;
@@ -201,7 +191,7 @@ export default {
 }
 .tick {
   left: 4px;
-  top: 1px;
+  top: 0;
   color: #fefefe;
 }
 .color {
@@ -221,6 +211,9 @@ export default {
 .c-fefefe {
   background: #fefefe;
   border: 1px solid #666;
+}
+.c-eef0f3 {
+  background: #eef0f3;
 }
 .c-f5222d {
   background: #f5222d;

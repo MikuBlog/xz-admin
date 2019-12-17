@@ -4,7 +4,7 @@
       <router-link
         v-for="tag in tagsList"
         ref="tag"
-        :class="isActive(tag) ? 'active' : ''"
+        :class="isActive(tag) ? 'activetag' : ''"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
         :key="tag.path"
         tag="span"
@@ -120,7 +120,7 @@ export default {
       &:last-of-type {
         margin-right: 15px;
       }
-      &.active {
+      &.activetag {
         background-color: #409efe;
         color: #fff;
         border-color: #409efe;

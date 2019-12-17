@@ -270,7 +270,7 @@
 
 .back-top {
   position: fixed;
-  z-index: 1500;
+  z-index: 99;
   right: 40px;
   bottom: 60px;
 }

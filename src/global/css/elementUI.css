@@ -3,7 +3,7 @@
 }
 
 .el-submenu__title:hover {
-  background: rgba(0, 183, 255, 0.3)!important;
+  background: rgba(206, 206, 206, 0.3)!important;
 }
 
 .el-submenu__title {
@@ -52,7 +52,7 @@
 }
 
 .el-menu-item:hover {
-  background: rgba(0, 183, 255, 0.3)!important;
+  background: rgba(206, 206, 206, 0.3)!important;
 }
 
 .el-breadcrumb__inner {
@@ -65,4 +65,17 @@
 
 .el-menu-item-group__title {
   padding: 0!important;
+}
+
+/* 格式化卡片样式 */
+.el-card {
+  border: 1px solid transparent!important;
+  box-shadow: none!important;
+  -webkit-box-shadow: none!important;
+}
+
+.el-card:hover {
+  border: 1px solid #EBEEF5!important;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
+  -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
 }

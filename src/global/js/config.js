@@ -20,11 +20,14 @@ export default {
       textColor: '#becad8',
       backgroundColor: '#2f4055',
       subMenuItemBackgroundColor: '#1e2c3c'
-    },
-    activeTextColor: '#429ee2'
+    }
   },
   // 系统样式设置
   diy: {
+    /* 系统布局模块 */
+    layout: true,
+    // 系统布局大小
+    layoutSize: true,
     // 面包屑
     breadcrumb: true,
     // 标签栏
@@ -33,6 +36,8 @@ export default {
     logo: true,
     // 页脚
     footer: true,
+    /* 系统主题模块 */
+    theme: true,
     // 更换主题颜色
     themeColor: true,
     // 更换主题风格
@@ -41,6 +46,8 @@ export default {
     brightness: true,
     // 更换菜单样式
     menu: true,
+    /* 系统模块 */
+    background: true,
     // 背景颜色
     backgroundColor: true,
     // 背景透明度
@@ -81,8 +88,6 @@ export default {
   systemSetting: true,
   // 全屏icon
   fullScreen: true,
-  // 布局大小icon
-  layoutSize: true,
   // 分页组件
   paginationLayout: `${
     // 是否为ipad
