@@ -15,7 +15,7 @@ export default {
     getOpertionLogList(page, size) {
       this.nowSize = size || this.nowSize
       this.$http_normal({
-        url: `/log/page?page=${this.nowPage - 1}&size=${this.nowSize}&sort=createTime,desc${
+        url: `/log/page?page=${page - 1}&size=${this.nowSize}&sort=createTime,desc${
           this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
           }`,
         method: "get"
