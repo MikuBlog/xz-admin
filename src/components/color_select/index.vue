@@ -17,6 +17,10 @@
 </template>
 
 <script>
+/**
+ * @author xuanzai
+ * @description 颜色选择器
+ */
 export default {
   name: "color-select",
   props: {

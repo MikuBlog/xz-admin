@@ -20,8 +20,7 @@ export default {
       textColor: '#becad8',
       backgroundColor: '#2f4055',
       subMenuItemBackgroundColor: '#1e2c3c'
-    },
-    activeTextColor: '#429ee2'
+    }
   },
   // 系统样式设置
   diy: {

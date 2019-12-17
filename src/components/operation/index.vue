@@ -11,7 +11,7 @@
               :title="items.title"
               :disabled="items.disabled"
               @click="items.method ? $emit(items.method) : () => {}"
-            >{{ items.name }}</el-button>
+            ><span v-if="items.name">{{ items.name }}</span></el-button>
           </div>
         </el-card>
       </el-col>
@@ -71,6 +71,7 @@ export default {
   position: fixed;
   right: 0;
   top: 50%;
+  z-index: 99;
   transform: translateY(-50%) scale(0);
   background: #fefefe;
   transition: 0.3s;
@@ -86,11 +87,10 @@ export default {
   position: relative;
   margin: 0.5rem 0;
 }
-.el-button {
-  /deep/ {
-    span {
-      margin-left: 0;
-    }
-  }
+/* 格式化卡片样式 */
+.el-card {
+  border: 1px solid transparent!important;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
+  -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
 }
 </style>

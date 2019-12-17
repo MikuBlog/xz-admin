@@ -10,7 +10,7 @@
 <script>
 const version = require("element-ui/package.json").version; // element-ui version from node_modules
 const ORIGINAL_THEME = "#409eff"; // default color
-
+import { mapState } from 'vuex';
 export default {
   name: "Theme",
   data() {
@@ -22,10 +22,10 @@ export default {
   computed: {
     defaultTheme() {
       return this.$store.state.setting.themeColor;
-    }
+    },
   },
   created() {
-    this.$store.state.setting.theme = this.$getMemoryPmt("theme") || "#409eff"
+    this.theme = this.$getMemoryPmt("theme") || "#409eff"
   },
   watch: {
     defaultTheme: {
@@ -97,7 +97,7 @@ export default {
       });
 
       this.$emit("change", val);
-
+      this.setTagColor()
       $message.close();
       this.$successMsg("更换主题成功");
       this.$setMemoryPmt("theme", this.theme)
@@ -105,6 +105,14 @@ export default {
   },
 
   methods: {
+    setTagColor() {
+      this.$createStyle(`
+        .activetag {
+          background: ${this.theme}!important;
+          border-color: ${this.theme}!important;
+        }
+      `, 'tag-color')
+    },
     updateStyle(style, oldCluster, newCluster) {
       let newStyle = style;
       oldCluster.forEach((color, index) => {

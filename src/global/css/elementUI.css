@@ -3,7 +3,7 @@
 }
 
 .el-submenu__title:hover {
-  background: rgba(0, 183, 255, 0.3)!important;
+  background: rgba(206, 206, 206, 0.3)!important;
 }
 
 .el-submenu__title {
@@ -52,7 +52,7 @@
 }
 
 .el-menu-item:hover {
-  background: rgba(0, 183, 255, 0.3)!important;
+  background: rgba(206, 206, 206, 0.3)!important;
 }
 
 .el-breadcrumb__inner {
