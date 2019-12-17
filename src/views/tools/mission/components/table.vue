@@ -132,7 +132,7 @@ export default {
     },
     // 获取定时任务信息
     getMissionLogList(page, size) {
-      this.nowSize = size || this.nowSize
+      this.nowSize = size
       this.$http_normal({
         url: `/api/quartz/jobLogs?page=${page - 1}&size=${
           this.nowSize

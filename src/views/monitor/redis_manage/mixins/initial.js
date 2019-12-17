@@ -13,7 +13,7 @@ export default {
     },
     // 获取缓存信息
     getRedisList(page, size) {
-      this.nowSize = size || this.nowSize
+      this.nowSize = size
       this.$http_normal({
         url: `/api/redis/page?page=${page - 1}&size=${
           this.nowSize
