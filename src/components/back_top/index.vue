@@ -21,7 +21,19 @@ export default {
   name: "back-top",
   props: {
     options: {
-      type: Object
+      type: Object,
+      default: () => {
+        return {
+          target: "body",
+          type: "primary",
+          delay: 500,
+          isCircle: true,
+          icon: "el-icon-caret-top",
+          right: "40px",
+          bottom: "60px",
+          visibility: 100
+        }
+      }
     }
   },
   data() {
