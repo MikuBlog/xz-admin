@@ -7,6 +7,10 @@
 </template>
 
 <script>
+/**
+  * @author xuanzai
+  * @description 简单的图片预览组件
+  */
 export default {
   name: "ImagePreview",
   props: {

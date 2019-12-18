@@ -5,7 +5,7 @@
       <color-select 
       :initial="setBackgroundColor"
       :nowColor="settings.background.color"
-      :method="setBackgroundColor"
+      :select-color="setBackgroundColor"
       :colorArray="colorArray" />
     </div>
     <div v-show="defaultConfig.diy.background">

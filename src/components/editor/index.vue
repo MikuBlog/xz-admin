@@ -9,7 +9,10 @@ export default {
   name: "Editor",
   components: { VueUeditorWrap },
   props: {
-    msg: ""
+    msg: {
+		type: String,
+		default: ""
+	}
   },
   data() {
     return {
@@ -29,9 +32,13 @@ export default {
     };
   },
   watch: {
-    data(value) {
-      this.$emit("getValue", value);
-      return value;
+	// 当父组件异步传入参数的时候，改变富文本的值
+	msg(val) {
+	  this.data = val
+	},
+	// 当富文本的值改变的时候，更新父组件的值
+    data(val) {
+      this.$emit("@update:msg", val);
     }
   }
 };
