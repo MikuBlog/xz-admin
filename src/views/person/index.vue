@@ -21,7 +21,7 @@
               </el-avatar>
               <div 
               class="hover-plus"
-              @click="$refs.avatarForm.dialogVisible = true">
+              @click="isShow = true">
                 <svg-icon 
                 icon-class="add" 
                 class="add-avatar"/>
@@ -109,7 +109,7 @@
     </el-row>
     <editPassword ref="pswForm" />
     <editEmail ref="emailForm" @updateUserInfo="updateUserInfo" />
-    <editAvatar ref="avatarForm" @updateUserInfo="updateUserInfo" />
+    <upload-avatar :is-show.sync="isShow" :upload-avatar="uploadAvatar" />
   </div>
 </template>
 
@@ -119,10 +119,9 @@ import Operation from './mixins/operation'
 import Property from './mixins/property'
 import editPassword from "./components/edit_password";
 import editEmail from "./components/edit_email";
-import editAvatar from "./components/edit_avatar";
 export default {
   mixins: [ Initial, Operation, Property ],
-  components: { editPassword, editEmail, editAvatar }
+  components: { editPassword, editEmail }
 };
 </script>
 

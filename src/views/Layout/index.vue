@@ -211,9 +211,9 @@
             ></el-button>
           </div>
         </div>
-        <div class="back-top" ref="backtop">
-          <el-button type="primary" icon="el-icon-caret-top" circle class="to-top" @click="backTop"></el-button>
-        </div>
+        <back-top :options="{
+          target: (isMobile() || isSafari()) ? '#top' : '.os-viewport'
+        }"/>
         <el-main class="top" id="top">
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />

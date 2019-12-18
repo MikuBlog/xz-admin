@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { isMobile, isSafari } from "@/utils/agent";
 import System from "./system";
 import Background from "./background";
@@ -41,15 +40,10 @@ export default {
       });
     }
   },
-  computed: {
-    ...mapState({
-      settings: state => state.setting
-    })
-  },
   methods: {
     // 保存设置
     saveSetting() {
-      this.$setMemoryPmt("setting", this.settings);
+      this.$setMemoryPmt("setting", this.$store.state.setting);
       this.$refs.background.setBackgroundImage();
       this.$successMsg("保存设置成功");
     }

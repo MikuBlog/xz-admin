@@ -31,6 +31,10 @@ export default {
     options: {
       type: Array,
       default: () => []
+    },
+    visibility: {
+      type: Number,
+      default: 100
     }
   },
   beforeDestroy() {
@@ -48,7 +52,7 @@ export default {
   methods: {
     getScrollTop(e) {
       const backtop = document.querySelector(".operation-box");
-      e.target.scrollTop >= 100
+      e.target.scrollTop >= this.visibility
         ? this.$setStyle(backtop, "transform", "translateY(-50%) scale(1)")
         : this.$setStyle(backtop, "transform", "translateY(-50%) scale(0)");
     },

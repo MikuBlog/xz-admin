@@ -12,6 +12,19 @@ export default {
     searchEnter(e) {
       e.keyCode === 13 && this.getOpertionLogList(1, this.nowSize);
     },
+    uploadAvatar(result) {
+      this.$http_file({
+        url: '/api/user/updateAvatar',
+        method: 'post',
+        data: {
+          file: result
+        }
+      }).then(() => {
+        this.isShow = false;
+        this.updateUserInfo()
+        this.$successMsg('更换头像成功，正在缓慢加载中~');
+      })
+    },
     // 修改密码
     showEditPassword() {
       this.$refs.pswForm.dialog = true;

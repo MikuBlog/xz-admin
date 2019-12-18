@@ -8,7 +8,7 @@
             <i class="el-icon-question" style="float: right; font-size: 1.3rem; cursor: pointer" @click="$refs.Help.dialogVisible = true"/>
           </div>
           <el-tabs v-model="activeName" type="card">
-            <el-tab-pane label="Icons" name="first">
+            <el-tab-pane label="Svg Icons" name="first">
               <div class="icon-list">
                 <div
                   class="box"
