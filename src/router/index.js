@@ -168,6 +168,11 @@ router.beforeEach((to, from, next) => {
     next()
     return
   }
+  // 如果直接输入域名,重定向到登录界面
+  if(to.path === '/') {
+  	next({ path: '/login' })
+	return
+  }
   if (Storage.getMemoryPmt('token')) {
     if (to.path === "/") {
       next({ path: '/login' })
@@ -180,7 +185,6 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    console.log(to)
     // 保存重定向地址
     Storage.setMemorySes("redirect", to.fullPath)
     next({ path: "/login" })
