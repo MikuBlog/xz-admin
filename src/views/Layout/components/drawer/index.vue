@@ -34,7 +34,7 @@ export default {
   mounted() {
     // 初始化进度条
     if (!isMobile() && !isSafari()) {
-      $(".drawer-setting .ivu-drawer-body").overlayScrollbars({
+      OverlayScrollbars(document.querySelector(".drawer-setting .ivu-drawer-body"), {
         scrollbars: {
           autoHide: "move"
         }

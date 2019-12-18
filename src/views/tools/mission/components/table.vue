@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" append-to-body title="执行日志" width="90%">
+  <el-dialog :visible.sync="dialog" append-to-body v-dialogDrag title="执行日志" width="90%">
     <div class="search">
       <el-input
         v-model="searchVal"
@@ -132,7 +132,7 @@ export default {
     },
     // 获取定时任务信息
     getMissionLogList(page, size) {
-      this.nowSize = size
+      this.nowSize = size;
       this.$http_normal({
         url: `/api/quartz/jobLogs?page=${page - 1}&size=${
           this.nowSize

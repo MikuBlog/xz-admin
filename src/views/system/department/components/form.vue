@@ -1,14 +1,36 @@
 <template>
-  <el-dialog append-to-body :visible.sync="dialog" :title="isAdd ? '新增部门' : '编辑部门'" width="500px">
-    <el-form ref="departmentForm" :model="departmentForm" :rules="rules" size="small" label-width="80px">
+  <el-dialog
+    append-to-body
+    v-dialogDrag
+    :visible.sync="dialog"
+    :title="isAdd ? '新增部门' : '编辑部门'"
+    width="500px"
+  >
+    <el-form
+      ref="departmentForm"
+      :model="departmentForm"
+      :rules="rules"
+      size="small"
+      label-width="80px"
+    >
       <el-form-item status-icon label="名称" prop="name">
-        <el-input v-model="departmentForm.name" style="width: 370px;"/>
+        <el-input v-model="departmentForm.name" style="width: 370px;" />
       </el-form-item>
       <el-form-item v-if="departmentForm.pid !== 0" label="状态" prop="enabled">
-        <el-radio v-for="item in dicts" :key="item.id" v-model="departmentForm.enabled" :label="item.value">{{ item.label }}</el-radio>
+        <el-radio
+          v-for="item in dicts"
+          :key="item.id"
+          v-model="departmentForm.enabled"
+          :label="item.value"
+        >{{ item.label }}</el-radio>
       </el-form-item>
       <el-form-item v-if="departmentForm.parentId !== 0" style="margin-bottom: 0px;" label="上级部门">
-        <treeselect v-model="departmentForm.parentId" :options="depts" style="width: 370px;" placeholder="选择上级类目" />
+        <treeselect
+          v-model="departmentForm.parentId"
+          :options="depts"
+          style="width: 370px;"
+          placeholder="选择上级类目"
+        />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -32,95 +54,93 @@ export default {
   },
   data() {
     return {
-      dialog: false, depts: [], departmentId: "",
+      dialog: false,
+      depts: [],
+      departmentId: "",
       departmentForm: {
-        id: '',
-        name: '',
+        id: "",
+        name: "",
         parentId: 1,
-        enabled: 'true'
+        enabled: "true"
       },
       rules: {
-        name: [
-          { required: true, message: '请输入名称', trigger: 'blur' }
-        ]
+        name: [{ required: true, message: "请输入名称", trigger: "blur" }]
       }
-    }
+    };
   },
   created() {
     // 请求部门列表
-    this.getDepartmentList()
+    this.getDepartmentList();
   },
   methods: {
     // 隐藏弹窗
     hideBox() {
-      this.dialog = false
+      this.dialog = false;
     },
     // 提交数据
     doSubmit() {
-      this.$refs.departmentForm.validate((valid) => {
+      this.$refs.departmentForm.validate(valid => {
         if (valid) {
           if (this.departmentForm.parentId == undefined) {
-            this.$warnMsg("请选择上级部门")
-            return
-          } 
-          this.isAdd
-          ? this.addDepartment()
-          : this.editDepartment()
-        }else {
-          return false
+            this.$warnMsg("请选择上级部门");
+            return;
+          }
+          this.isAdd ? this.addDepartment() : this.editDepartment();
+        } else {
+          return false;
         }
-      })
+      });
     },
     // 添加部门
     addDepartment() {
-      delete this.departmentForm.id
+      delete this.departmentForm.id;
       this.$http_json({
         url: "/api/dept/add",
         method: "post",
         data: this.departmentForm
       }).then(result => {
-        this.$successMsg('添加成功')
-        this.hideBox()
-        this.getDepartmentList()
-        this.$parent.getDepartmentList()
-      }) 
+        this.$successMsg("添加成功");
+        this.hideBox();
+        this.getDepartmentList();
+        this.$parent.getDepartmentList();
+      });
     },
     // 编辑部门
     editDepartment() {
-      this.departmentForm.id = this.departmentId
+      this.departmentForm.id = this.departmentId;
       this.$http_json({
         url: "/api/dept/edit",
         method: "post",
         data: this.departmentForm
       }).then(result => {
-        this.$successMsg('编辑成功')
-        this.hideBox()
-        this.getDepartmentList()
-        this.$parent.getDepartmentList()
-      }) 
+        this.$successMsg("编辑成功");
+        this.hideBox();
+        this.getDepartmentList();
+        this.$parent.getDepartmentList();
+      });
     },
     resetForm() {
       try {
         this.departmentForm = {
-          id: '',
-          name: '',
+          id: "",
+          name: "",
           parentId: 1,
-          enabled: 'true'
-        }
-        this.$refs.departmentForm.resetFields()
-      }catch(e) {}
+          enabled: "true"
+        };
+        this.$refs.departmentForm.resetFields();
+      } catch (e) {}
     },
     // 获取部门列表
     getDepartmentList() {
-        this.$http_json({
-          url: "/api/dept/get?enabled=true",
-          method: "get"
-        }).then(result => {
-          this.depts = result.data.content
-        })
+      this.$http_json({
+        url: "/api/dept/get?enabled=true",
+        method: "get"
+      }).then(result => {
+        this.depts = result.data.content;
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>

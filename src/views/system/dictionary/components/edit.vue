@@ -3,6 +3,7 @@
         :title="isAdd ? '添加字典详情' : '编辑字典详情'" 
         :visible.sync="isShowDetailBox"
         append-to-body
+        v-dialogDrag
         width="450px"
         >
             <el-form 

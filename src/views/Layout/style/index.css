@@ -277,14 +277,14 @@
 
 .footer {
   padding: 0;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
   background: #fefefe;
 }
 
 .footer .coppy-right {
   position: relative;
-  line-height: 29px;
-  height: 29px;
+  line-height: 30px;
   background: #fefefe;
   border-top: 1px solid #dcdfe6;
   color: #666;

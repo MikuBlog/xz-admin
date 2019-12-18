@@ -67,13 +67,12 @@
   </div>
 </template>
 <script>
-import Data from "./mixins/data";
 import Initial from "./mixins/initial";
 import Operation from "./mixins/operation";
 import Property from "./mixins/property";
 import Help from './components/help'
 export default {
-  mixins: [ Data, Initial, Operation, Property ],
+  mixins: [ Initial, Operation, Property ],
   components: { Help }
 };
 </script>
