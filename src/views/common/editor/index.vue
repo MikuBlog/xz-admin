@@ -6,10 +6,7 @@
                     <div slot="header">
                         <span style="font-size: 1rem">富文本编辑器</span>
                     </div>
-                    <Editor 
-                    :msg="msg"
-                    ref="editor"
-                    @getValue="getValue" />
+                    <Editor :msg.sync="msg"/>
                 </el-card>
             </el-col>
         </el-row>
@@ -21,11 +18,6 @@ export default {
     data() {
         return {
             msg: "<h1 style='text-align: center'>欢迎使用现代化Ueditor富文本编辑器</h1>"
-        }
-    },
-    methods: {
-        getValue(val) {
-            this.msg = val
         }
     }
 }

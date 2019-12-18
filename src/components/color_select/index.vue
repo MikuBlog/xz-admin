@@ -3,7 +3,7 @@
     <div
       class="color"
       v-for="items in colorArray"
-      @click="method(items)"
+      @click="selectColor(items)"
       :style="{ background: items }"
     >
       <svg-icon
@@ -32,7 +32,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    method: {
+    selectColor: {
       type: Function,
       default: () => {}
     },

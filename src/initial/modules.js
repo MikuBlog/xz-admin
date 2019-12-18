@@ -3,8 +3,6 @@ import Vue from 'vue'
 import mavonEditor from 'mavon-editor'
 // 引入导航栏折叠
 import Fragment from 'vue-fragment'
-// 引入图片剪裁组件
-import VueCropper from 'vue-cropper'
 // 引入表单生成器
 import FormMaking from 'form-making'
 // 引入表单生成器富文本
@@ -380,8 +378,6 @@ Vue.use(mavonEditor)
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠
 Vue.use(Fragment.Plugin)
-// 引入图片剪裁组件
-Vue.use(VueCropper)
 // 引入表单生成器
 Vue.use(FormMaking)
 // 引入表单生成器富文本

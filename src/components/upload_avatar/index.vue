@@ -7,7 +7,7 @@
             <i class="el-icon-upload el-icon--left"></i>选择头像
           </el-button>
         </div>
-        <vueCropper
+        <VueCropper
           ref="cropper"
           :info="true"
           :centerBox="true"
@@ -19,7 +19,7 @@
           :autoCropHeight="options.autoCropHeight"
           :fixedBox="options.fixedBox"
           @realTime="realTime"
-        ></vueCropper>
+        ></VueCropper>
         <div class="correct-button-box">
           <el-button @click="$refs.cropper.changeScale(1)" size="medium" icon="el-icon-plus"></el-button>
           <el-button @click="$refs.cropper.changeScale(-1)" size="medium" icon="el-icon-minus"></el-button>
@@ -44,8 +44,15 @@
 </template>
 
 <script>
+/**
+ * @author xuanzai
+ * @description 上传头像
+ */
+// 引入图片剪裁组件
+import VueCropper from 'vue-cropper'
 export default {
   name: "upload-avatar",
+  components: { VueCropper: VueCropper.vueCropper },
   props: {
     uploadAvatar: {
       type: Function,
