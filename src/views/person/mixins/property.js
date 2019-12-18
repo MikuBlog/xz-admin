@@ -8,7 +8,8 @@ export default {
       nowSize: 10,
       // 总条数
       totalElements: 0,
-      operationLogList: []
+      operationLogList: [],
+      isShow: false
     }
   },
   computed: {

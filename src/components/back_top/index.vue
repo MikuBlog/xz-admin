@@ -32,13 +32,12 @@ export default {
           right: "40px",
           bottom: "60px",
           visibility: 100
-        }
+        };
       }
     }
   },
   data() {
     return {
-      listen: "",
       timeout: "",
       backTopOptions: {}
     };
@@ -58,7 +57,7 @@ export default {
   beforeDestroy() {
     document
       .querySelector(this.backTopOptions.target)
-      .removeEventListener("scroll", this.listen);
+      .removeEventListener("scroll", this.getScrollTop);
   },
   mounted() {
     this.initialStyle();
@@ -84,20 +83,18 @@ export default {
       );
     },
     // 获取滚动高度
-    getScrollTop(obj) {
+    getScrollTop(e) {
       const backtop = document.querySelector(".to-top");
-      obj.scrollTop >= this.backTopOptions.visibility
+      e.target.scrollTop >= this.backTopOptions.visibility
         ? this.$setStyle(backtop, "transform", "scale(1)")
         : this.$setStyle(backtop, "transform", "scale(0)");
-      this.$setMemorySes("scrollTop", obj.scrollTop);
+      this.$setMemorySes("scrollTop", e.target.scrollTop);
     },
     initialListener() {
       const _this = this;
       document.querySelector(this.backTopOptions.target).addEventListener(
         "scroll",
-        (this.listen = function() {
-          _this.getScrollTop(this);
-        })
+        this.getScrollTop
       );
     }
   }

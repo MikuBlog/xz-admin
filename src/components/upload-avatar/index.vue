@@ -36,7 +36,7 @@
           <img :src="previews.url" :style="previews.img" />
         </div>
         <div class="ensure-button-box">
-          <el-button type="primary" @click="uploadAvatar" size="small">保 存</el-button>
+          <el-button type="primary" @click="sendRequest" size="small">保 存</el-button>
         </div>
       </div>
     </div>
@@ -45,6 +45,17 @@
 
 <script>
 export default {
+  name: "upload-avatar",
+  props: {
+    uploadAvatar: {
+      type: Function,
+      default: () => {}
+    },
+    isShow: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       dialogVisible: false,
@@ -60,6 +71,14 @@ export default {
       }
     };
   },
+  watch: {
+    isShow(val) {
+      this.dialogVisible = val;
+    },
+    dialogVisible(val) {
+      this.$emit("update:isShow", val);
+    }
+  },
   methods: {
     realTime(data) {
       this.previews = data;
@@ -71,20 +90,10 @@ export default {
       });
     },
     // 上传头像
-    uploadAvatar() {
+    sendRequest() {
       if (this.options.img) {
         this.$refs.cropper.getCropBlob(result => {
-          this.$http_file({
-            url: "/api/user/updateAvatar",
-            method: "post",
-            data: {
-              file: result
-            }
-          }).then(result => {
-            this.dialogVisible = false;
-            this.$emit("updateUserInfo");
-            this.$successMsg("更换头像成功，正在缓慢加载中~");
-          });
+          this.uploadAvatar(result);
         });
       } else {
         this.$warnMsg("请选择图片");
