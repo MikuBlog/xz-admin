@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="更换头像" :visible.sync="dialogVisible" width="600px" append-to-body>
+  <el-dialog title="更换头像" :visible.sync="dialogVisible" width="600px" append-to-body v-dialogDrag>
     <div class="flex-box">
       <div class="cropper-box">
         <div class="select-button-box">
@@ -21,18 +21,9 @@
           @realTime="realTime"
         ></vueCropper>
         <div class="correct-button-box">
-          <el-button 
-          @click="$refs.cropper.changeScale(1)" 
-          size="medium" 
-          icon="el-icon-plus"></el-button>
-          <el-button 
-          @click="$refs.cropper.changeScale(-1)" 
-          size="medium" 
-          icon="el-icon-minus"></el-button>
-          <el-button 
-          @click="$refs.cropper.rotateLeft()" 
-          size="medium" 
-          icon="el-icon-refresh-left"></el-button>
+          <el-button @click="$refs.cropper.changeScale(1)" size="medium" icon="el-icon-plus"></el-button>
+          <el-button @click="$refs.cropper.changeScale(-1)" size="medium" icon="el-icon-minus"></el-button>
+          <el-button @click="$refs.cropper.rotateLeft()" size="medium" icon="el-icon-refresh-left"></el-button>
           <el-button
             @click="$refs.cropper.rotateRight()"
             size="medium"

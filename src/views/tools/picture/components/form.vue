@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" append-to-body width="600px" @close="updateList">
+  <el-dialog :visible.sync="dialog" append-to-body v-dialogDrag width="600px" @close="updateList">
     <el-upload
       :on-preview="handlePictureCardPreview"
       :before-remove="handleBeforeRemove"

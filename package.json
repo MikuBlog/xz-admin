@@ -19,6 +19,7 @@
     "form-making": "^1.2.7",
     "mavon-editor": "^2.7.5",
     "nprogress": "^0.2.0",
+    "overlayscrollbars": "^1.10.0",
     "path": "^0.12.7",
     "path-to-regexp": "^3.0.0",
     "svg-sprite-loader": "^4.1.6",
@@ -31,6 +32,7 @@
     "vue-router": "^3.0.3",
     "vue-ueditor-wrap": "^2.4.1",
     "vue2-editor": "^2.10.2",
+    "vuedraggable": "^2.23.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

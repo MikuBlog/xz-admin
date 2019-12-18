@@ -105,6 +105,10 @@ export default {
   },
 
   methods: {
+    /**
+     * @author xuanzai
+     * @description 标签应用主题色
+     */
     setTagColor() {
       this.$createStyle(`
         .activetag {

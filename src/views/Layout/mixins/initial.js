@@ -60,7 +60,7 @@ export default {
     // 初始化滚动条样式
     initialScrollBar() {
       if (!isMobile() && !isSafari()) {
-        $('#top').overlayScrollbars({
+        OverlayScrollbars(document.querySelector('#top'), {
           scrollbars: {
             autoHide: "move"
           }

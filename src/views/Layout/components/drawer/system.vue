@@ -240,7 +240,7 @@ export default {
 }
 .radio-box {
   position: relative;
-  margin: 1.3rem 0;
+  margin: 1.3rem .2rem;
   text-align: center;
 }
 </style>
