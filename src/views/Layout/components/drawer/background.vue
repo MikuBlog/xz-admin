@@ -181,62 +181,8 @@ export default {
   position: relative;
   font-size: 0.9rem;
 }
-.color-box {
-  position: relative;
-  margin: 1rem 0;
-}
 .button {
   position: relative;
   margin-top: 1rem;
-}
-.tick {
-  left: 4px;
-  top: 0;
-  color: #fefefe;
-}
-.color {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  width: 20px;
-  height: 20px;
-  margin: 0 0.4rem;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.color:hover {
-  opacity: 0.7;
-}
-.c-fefefe {
-  background: #fefefe;
-  border: 1px solid #666;
-}
-.c-eef0f3 {
-  background: #eef0f3;
-}
-.c-f5222d {
-  background: #f5222d;
-}
-.c-fa541c {
-  background: #fa541c;
-}
-.c-fbb937 {
-  background: #fbb937;
-}
-.c-13c2c2 {
-  background: #13c2c2;
-}
-.c-52c41a {
-  background: #52c41a;
-}
-.c-1890ff {
-  background: #1890ff;
-}
-.c-2f54eb {
-  background: #2f54eb;
-}
-.c-722ed1 {
-  background: #722ed1;
 }
 </style>

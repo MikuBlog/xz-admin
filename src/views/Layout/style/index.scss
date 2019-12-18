@@ -221,23 +221,12 @@
     }
   }
 }
-.to-top {
-  position: relative;
-  transform: scale(0);
-  transition: 0.3s;
-}
 .radio-box {
   position: relative;
 }
 .top {
   position: relative;
   padding: 20px;
-}
-.back-top {
-  position: fixed;
-  z-index: 99;
-  right: 40px;
-  bottom: 60px;
 }
 .footer {
   padding: 0;

@@ -7,12 +7,8 @@ export default {
       "SET_USER_INFO",
       "REMOVE_ALL_TAGS"
     ]),
-    // 返回顶部
-    backTop(delay = 500) {
-      (isMobile() || isSafari())
-      ? $('#top').animate({ scrollTop: 0 }, delay)
-      : $('.os-viewport').animate({ scrollTop: 0 }, delay)
-    },
+    isMobile,
+    isSafari,
     // 获取用户信息
     getUserInfo() {
       this.$http_json({
