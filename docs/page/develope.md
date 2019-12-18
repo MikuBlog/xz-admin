@@ -64,6 +64,11 @@ export default {
 }
 ```
 
+在任意组件中使用：
+```js
+{{ property | demo }}
+```
+
 <br/>
 
 ## 注册指令
@@ -74,7 +79,7 @@ export default {
 
 示例：
 ```js
-// 在原有基础上添加，变量名即为指令名称
+// 在原有基础上添加，变量名即为指令名称，如下为（v-demo）
 const demo = (el, binding) => {
 	// todo
 }
@@ -83,6 +88,11 @@ export default {
 	demo,
 	...
 }
+```
+
+在任意组件中使用指令：
+```js
+<component v-demo="property" />
 ```
 
 如要使用其他方式进行指令绑定，请在`main.js`文件进行修改。
@@ -131,6 +141,20 @@ req
     const component = req(val).default
     Vue.component(component.name, component)
   })
+```
+
+注意：自动注册组件依赖组件名称，因此，请在封装组件时给组件加上`name`字段。
+
+```js
+export default {
+  name: "component", // 组件名称
+  // todo
+}
+```
+
+在任意组件中使用：
+```js
+<component/>
 ```
 
 <br/>
