@@ -8,10 +8,14 @@ export default {
       beloneDictName: "",
       isAdd_1: true,
       isAdd_2: true,
+      // 当前页数
+      nowPage_1: 1,
       // 当前页条数
       nowSize_1: 10,
       // 总条数
       totalElements_1: 0,
+      // 当前页数
+      nowPage_2: 1, 
       // 当前页条数
       nowSize_2: 10,
       // 总条数

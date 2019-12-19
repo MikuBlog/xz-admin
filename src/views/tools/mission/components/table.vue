@@ -81,7 +81,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination :get-data="getMissionLogList" :total="totalElements" />
+    <pagination
+      ref="pagination"
+      :get-data="getMissionLogList"
+      :now-page.sync="nowPage"
+      :now-size.sync="nowSize"
+      :total="totalElements"
+    />
   </el-dialog>
 </template>
 
@@ -91,6 +97,8 @@ export default {
     return {
       searchVal: "",
       selectType: "",
+      // 当前页数
+      nowPage: 1,
       // 当前页条数
       nowSize: 10,
       // 总条数
@@ -113,11 +121,11 @@ export default {
   methods: {
     // 点击搜索
     search() {
-      this.getMissionLogList(1, this.nowSize);
+      this.$refs.pagination.toFirstPage()
     },
     // 回车搜索
     searchEnter(e) {
-      e.keyCode === 13 && this.getMissionLogList(1, this.nowSize);
+      e.keyCode === 13 && this.$refs.pagination.toFirstPage()
     },
     // 分页处理
     initialPage(totalElements) {

@@ -19,10 +19,9 @@ export default {
     },
     // 获取用户列表信息
     getUserList(page, size) {
-      this.nowSize = size
       this.$http_normal({
         url: `/api/user/page?page=${page - 1}&size=${
-          this.nowSize
+          size
         }&sort=createTime,desc&deptId=${this.deptId}${
           this.selectType ? `&${this.selectType}=${this.searchVal_2}` : ""
         }${this.selectStatus ? `&enabled=${this.selectStatus}` : ""}`,

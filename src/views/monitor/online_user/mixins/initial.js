@@ -13,10 +13,9 @@ export default {
     },
     // 获取操作日志信息
     getOnlineUserList(page, size) {
-      this.nowSize = size
       this.$http_normal({
         url: `/auth/online?page=${page - 1}&size=${
-          this.nowSize
+          size
           }&sort=createTime,desc${
           this.searchVal ? `&filter=${this.searchVal}` : ""
           }`,

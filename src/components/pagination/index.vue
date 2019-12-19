@@ -3,7 +3,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :page-sizes="[10, 25, 50, 100]"
+      :page-sizes="defaultPageSizes"
       :pager-count="5"
       :small="this.defaultConfig.paginationSize"
       :layout="this.defaultConfig.paginationLayout"
@@ -28,16 +28,31 @@ export default {
       type: Function,
       default: () => {}
     },
+    nowPage: {
+      type: Number,
+      default: 1
+    },
+    nowSize: {
+      type: Number,
+      size: 10
+    }
   },
   watch: {
-    total() {
-      this.currentPage = 1
+    nowPage(val) {
+      this.currentPage = val
+    },
+    currentPage(val) {
+      this.$emit("update:nowPage", val)
+    },
+    pageSize(val) {
+      this.$emit("update:nowSize", val)
     }
   },
   data() {
     return {
-      currentPage: 1,
-      pageSize: 10
+      currentPage: this.nowPage,
+      pageSize: this.nowSize,
+      defaultPageSizes: [this.nowSize, parseInt(this.nowSize * 2.5), parseInt(this.nowSize * 5), parseInt(this.nowSize * 10)]
     }
   },
   created() {
@@ -45,6 +60,11 @@ export default {
     this.getData(this.currentPage, this.pageSize)
   },
   methods: {
+    // 跳转到第一页
+    toFirstPage() {
+      this.currentPage = 1
+      this.getData(this.currentPage, this.pageSize)
+    },
     handleSizeChange(size) {
       this.currentPage = 1
       this.pageSize = size

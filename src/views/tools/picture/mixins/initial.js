@@ -15,9 +15,8 @@ export default {
     },
     // 获取图片列表
     getPictureList(page, size) {
-      this.nowSize = size
       this.$http_normal({
-        url: `/api/picture/page?page=${page - 1}&size=${this.nowSize}&sort=id,desc${
+        url: `/api/picture/page?page=${page - 1}&size=${size}&sort=id,desc${
           this.searchVal ? `&filename=${this.searchVal}` : ""
           }`
         ,

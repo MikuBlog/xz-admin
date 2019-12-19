@@ -72,7 +72,10 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination_1"
             :get-data="getDictionaryList"
+            :now-page.sync="nowPage_1"
+            :now-size.sync="nowSize_1"
             :total="totalElements_1"
           />
         </el-card>
@@ -135,7 +138,10 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination_2"
             :get-data="getDetailList"
+            :now-page.sync="nowPage_2"
+            :now-size.sync="nowSize_2"
             :total="totalElements_2"
           />
         </el-card>

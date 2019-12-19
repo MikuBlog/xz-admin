@@ -17,10 +17,9 @@ export default {
     },
     // 获取岗位信息
     getStationList(page, size) {
-      this.nowSize = size
       this.$http_normal({
         url: `/api/job/page?page=${page - 1}&size=${
-          this.nowSize
+          size
           }&sort=sort,asc${this.searchVal ? `&name=${this.searchVal}` : ""}${
           this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""
           }`,

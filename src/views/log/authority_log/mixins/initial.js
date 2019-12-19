@@ -31,11 +31,8 @@ export default {
     },
     // 获取权限日志信息
     getAuthorityLogList(page, size) {
-      this.nowSize = size
       this.$http_normal({
-        url: `/api/authLog/page?page=${page - 1}&size=${
-          this.nowSize
-          }&sort=createTime,desc${
+        url: `/api/authLog/page?page=${page - 1}&size=${size}&sort=createTime,desc${
           this.selectType_1 ? `&${this.selectType_1}=${this.searchVal}` : ""
           }${
           this.date

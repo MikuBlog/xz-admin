@@ -34,14 +34,14 @@ export default {
     // 点击搜索
     search() {
       this.selectType_1
-        ? this.getAuthorityLogList(1, this.nowSize)
+        ? this.$refs.pagination.toFirstPage()
         : this.$warnMsg("请选择搜索类型");
     },
     // 回车搜索
     searchEnter(e) {
       e.keyCode === 13 &&
         (this.selectType_1
-          ? this.getAuthorityLogList(1, this.nowSize)
+          ? this.$refs.pagination.toFirstPage()
           : this.$warnMsg("请选择搜索类型"));
     },
     // 日期格式化
@@ -55,12 +55,12 @@ export default {
     },
     // 获取操作类型
     getOperationType() {
-      this.getAuthorityLogList();
+      this.$refs.pagination.toFirstPage()
     },
     // 获取日期
     getDate() {
       this.initialDate();
-      this.getAuthorityLogList();
+      this.$refs.pagination.toFirstPage()
     }
   }
 }

@@ -8,23 +8,17 @@
           </div>
           <div class="avatar-box">
             <div class="avatar">
-              <el-button 
-              icon="el-icon-upload" 
-              class="upload-button"
-              circle
-              @click="$refs.avatarForm.dialogVisible = true"></el-button>
-              <el-avatar
-                :size="120"
-                :src="user.avatar"
-              >
+              <el-button
+                icon="el-icon-upload"
+                class="upload-button"
+                circle
+                @click="$refs.avatarForm.dialogVisible = true"
+              ></el-button>
+              <el-avatar :size="120" :src="user.avatar">
                 <img src="https://myinterface.xuanzai.top/getPicture?type=error" />
               </el-avatar>
-              <div 
-              class="hover-plus"
-              @click="isShow = true">
-                <svg-icon 
-                icon-class="add" 
-                class="add-avatar"/>
+              <div class="hover-plus" @click="isShow = true">
+                <svg-icon icon-class="add" class="add-avatar" />
               </div>
             </div>
             <div class="avatar-detail">
@@ -71,7 +65,12 @@
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="operationLogList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="operationLogList"
+            :highlight-current-row="true"
+            style="width: 100%"
+            :stripe="true"
+          >
             <el-table-column label="行为" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.description }}</span>
@@ -101,7 +100,10 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getOpertionLogList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>
@@ -114,13 +116,13 @@
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 import editPassword from "./components/edit_password";
 import editEmail from "./components/edit_email";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { editPassword, editEmail }
 };
 </script>

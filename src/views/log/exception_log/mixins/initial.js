@@ -13,9 +13,8 @@ export default {
     },
     // 获取错误日志信息
     getExceptionLogList(page, size) {
-      this.nowSize = size
       this.$http_normal({
-        url: `/log/page/error?page=${page - 1}&size=${this.nowSize}&sort=createTime,desc${
+        url: `/log/page/error?page=${page - 1}&size=${size}&sort=createTime,desc${
           this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
           }`,
         method: "get"
