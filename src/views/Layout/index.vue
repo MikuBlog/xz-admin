@@ -141,7 +141,7 @@
               <el-tooltip
                 class="item"
                 effect="dark"
-                content="查看帮助"
+                content="查阅文档"
                 placement="bottom"
                 v-show="defaultConfig.helpPage"
               >
@@ -212,7 +212,8 @@
           </div>
         </div>
         <back-top :options="{
-          target: (isMobile() || isSafari()) ? '#top' : '.os-viewport'
+          target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
+		  isMove: true
         }"/>
         <el-main class="top" id="top">
           <transition name="xz-animation" mode="out-in">

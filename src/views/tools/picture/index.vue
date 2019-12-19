@@ -69,7 +69,6 @@
             </el-table-column>
           </el-table>
           <pagination
-            ref="pagination"
             :get-data="getPictureList"
             :now-page.sync="nowPage"
             :now-size.sync="nowSize"
