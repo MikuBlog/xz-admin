@@ -32,11 +32,11 @@
           <el-table
             ref="onlineUserTable"
             :data="onlineUserList"
-            :highlight-current-row="true"
             style="width: 100%"
             @selection-change="handleSelectionChange"
             :row-key="getRowKey"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column type="selection" width="55" />
             <el-table-column label="用户名" :show-overflow-tooltip="true">

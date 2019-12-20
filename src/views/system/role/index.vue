@@ -32,8 +32,8 @@
           <el-table
             :data="roleList"
             style="width: 100%;"
-            :highlight-current-row="true"
-            :stripe="true"
+            highlight-current-row
+            stripe
             @row-click="getRoleItem"
           >
             <el-table-column type="expand">

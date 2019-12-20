@@ -14,9 +14,9 @@
           </div>
           <el-table
             :data="generateCodeList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column type="expand">
               <template slot-scope="props">

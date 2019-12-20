@@ -67,9 +67,9 @@
           </div>
           <el-table
             :data="operationLogList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column label="行为" :show-overflow-tooltip="true">
               <template slot-scope="scope">

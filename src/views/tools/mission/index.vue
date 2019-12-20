@@ -44,9 +44,9 @@
           </div>
           <el-table
             :data="missionList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column type="expand">
               <template slot-scope="props">

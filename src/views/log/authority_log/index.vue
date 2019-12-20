@@ -45,9 +45,9 @@
           </div>
           <el-table
             :data="authorityLogList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column label="操作者">
               <template slot-scope="scope">

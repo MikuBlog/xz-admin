@@ -36,9 +36,9 @@
           </div>
           <el-table
             :data="stationList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column label="名称" :show-overflow-tooltip="true">
               <template slot-scope="scope">

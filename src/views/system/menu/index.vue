@@ -29,6 +29,8 @@
             v-if="isShow"
             :default-expand-all="expand"
             :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+            highlight-current-row
+            stripe
           >
             <el-table-column prop="name" label="名称" width="250px" :render-header="renderHeader"></el-table-column>
             <el-table-column prop="icon" label="图标" align="center">
