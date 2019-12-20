@@ -22,9 +22,9 @@
           </div>
           <el-table
             :data="operationLogList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column type="expand">
               <template slot-scope="props">
@@ -72,7 +72,10 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getOpertionLogList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>

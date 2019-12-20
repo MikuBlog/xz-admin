@@ -3,14 +3,14 @@ export default {
     // 点击搜索
     search() {
       this.selectType
-        ? this.getExceptionLogList(1, this.nowSize)
+        ? this.$refs.pagination.toFirstPage()
         : this.$warnMsg("请选择搜索类型");
     },
     // 回车搜索
     searchEnter(e) {
       e.keyCode === 13 &&
         (this.selectType
-          ? this.getExceptionLogList(1, this.nowSize)
+          ? this.$refs.pagination.toFirstPage()
           : this.$warnMsg("请选择搜索类型"));
     },
     // 显示具体错误信息

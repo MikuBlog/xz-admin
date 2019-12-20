@@ -6,7 +6,7 @@
                     <div slot="header">
                         <span style="font-size: 1rem">富文本编辑器</span>
                     </div>
-                    <Editor :msg.sync="msg"/>
+                    <Editor v-model="msg"/>
                 </el-card>
             </el-col>
         </el-row>

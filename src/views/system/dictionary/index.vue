@@ -40,9 +40,9 @@
           <el-table
             :data="dictionaryList"
             style="width: 100%;"
-            :highlight-current-row="true"
-            :stripe="true"
             @row-click="getDictName"
+            highlight-current-row
+            stripe
           >
             <el-table-column label="名称" :show-overflow-tooltip="true">
               <template slot-scope="scope">
@@ -72,7 +72,10 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination_1"
             :get-data="getDictionaryList"
+            :now-page.sync="nowPage_1"
+            :now-size.sync="nowSize_1"
             :total="totalElements_1"
           />
         </el-card>
@@ -103,9 +106,9 @@
           </div>
           <el-table
             :data="detailList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column label="所属字典" :show-overflow-tooltip="true">
               <template slot-scope="scope">
@@ -135,7 +138,10 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination_2"
             :get-data="getDetailList"
+            :now-page.sync="nowPage_2"
+            :now-size.sync="nowSize_2"
             :total="totalElements_2"
           />
         </el-card>

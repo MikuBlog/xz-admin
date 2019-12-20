@@ -148,8 +148,8 @@ export default {
         ? (this.isSmall = true, this.isCollapse = true, this.isMenuCollapse = false)
         : this.isSmall = false
       window.innerWidth < 768
-        ? this.isMini = true
-        : this.isMini = false
+        ? (this.$refs.iconBox.isMini = true, this.isMini = true)
+        : (this.$refs.iconBox.isMini = false, this.isMini = false)
     },
     // 获取滚动高度
     getScrollTop(obj) {

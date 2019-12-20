@@ -13,9 +13,8 @@ export default {
     },
     // 获取操作日志信息
     getOpertionLogList(page, size) {
-      this.nowSize = size
       this.$http_normal({
-        url: `/log/page?page=${page - 1}&size=${this.nowSize}&sort=createTime,desc${
+        url: `/log/page?page=${page - 1}&size=${size}&sort=createTime,desc${
           this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
           }`,
         method: "get"

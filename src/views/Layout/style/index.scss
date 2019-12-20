@@ -44,13 +44,6 @@
 .el-menu-item {
   position: relative;
 }
-.el-icon-circle-close {
-  position: relative;
-  margin-left: 0.8rem;
-}
-.el-icon-circle-close:active {
-  color: rgb(19, 180, 255);
-}
 .el-dropdown {
   position: relative;
   float: right;
@@ -79,18 +72,6 @@
   top: -1px;
   left: 5px;
 }
-.avatar-box {
-  position: relative;
-  float: right;
-  margin-right: 5px;
-}
-.avatar-box-horizontal {
-  position: relative;
-}
-.avatar-dropdown {
-  position: relative;
-  height: 40px;
-}
 .icon-box {
   position: relative;
   float: right;
@@ -107,36 +88,6 @@
   top: -4px;
   margin-left: 0.8rem;
   font-size: 20px;
-}
-.el-icon-s-tools,
-.el-icon-question,
-.el-icon-delete-solid {
-  position: relative;
-  top: 1px;
-  margin-right: 0.8rem;
-  font-size: 25px;
-}
-.el-icon-full-screen,
-.el-icon-s-tools,
-.iconfullscreenexit,
-.el-icon-question {
-  cursor: pointer;
-  transition: 0.3s;
-}
-.el-icon-full-screen:active {
-  color: rgb(19, 180, 255);
-}
-.el-icon-s-tools:active {
-  color: rgb(19, 180, 255);
-}
-.el-icon-question:active {
-  color: rgb(19, 180, 255);
-}
-.iconfullscreenexit:active {
-  color: rgb(19, 180, 255);
-}
-.el-icon-full-screen {
-  font-size: 22px;
 }
 .drawer-menu {
   /deep/ {
@@ -163,12 +114,6 @@
       overflow-x: hidden;
     }
   }
-}
-.search-menu-input {
-  position: relative;
-  display: inline-block;
-  top: -8px;
-  left: -19px;
 }
 .menu-horizontal {
   position: relative;

@@ -5,7 +5,7 @@
     <div class="button" v-permission="['ADMIN']">
       <el-button type="primary" style="width: 100%" @click="selectLogo">选择Logo</el-button>
     </div>
-    <div class="button" v-permission="['ADMIN']">
+    <div class="button last-button" v-permission="['ADMIN']">
       <el-button type="warning" style="width: 100%" @click="uploadLogo">上传Logo</el-button>
     </div>
   </div>
@@ -78,5 +78,8 @@ export default {
 .button {
   position: relative;
   margin: 0.5rem 0;
+}
+.last-button {
+  margin-bottom: 0;
 }
 </style>

@@ -11,7 +11,7 @@ import '@/initial/modules'
  * @author xuanzai
  * @description 全局过滤器初始化。在如下路径文件下全局注册过滤器即可。
  */
-import filters from '@/initial/filter'
+import filters from '@/initial/filter/index'
 
 // 全局注册过滤器
 Object
@@ -24,15 +24,23 @@ Object
  * @author xuanzai
  * @description 全局指令初始化。在如下路径文件下全局注册指令即可。
  */
-import directives from '@/initial/directives'
+import directives from '@/initial/directives/index'
 
 // 全局注册指令
 Object
   .keys(directives)
   .forEach(key => {
     Vue.directive(key, {
-      inserted: directives[key],
-      componentUpdated: directives[key]
+      // 只调用一次，指令第一次绑定到元素时调用
+      bind: directives[key].bind || (() => {}),
+      // 被绑定元素插入父节点时调用
+      inserted: directives[key].inserted || (() => {}),
+      // 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前
+      update: directives[key].update || (() => {}),
+      // 指令所在组件的 VNode 及其子 VNode 全部更新后调用
+      componentUpdated: directives[key].componentUpdated || (() => {}),
+      // 只调用一次，指令与元素解绑时调用
+      unbind: directives[key].unbind || (() => {})
     })
   })
 

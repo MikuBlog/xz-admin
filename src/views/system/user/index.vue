@@ -85,16 +85,16 @@
               ></el-button>
             </el-row>
           </div>
-          <el-table 
-          ref="userTable"
-          :data="userList" 
-          :highlight-current-row="true" 
-          style="width: 100%;"
-          @selection-change="handleSelectionChange"
-          :row-key="getRowKey"
-          :stripe="true"
+          <el-table
+            ref="userTable"
+            :data="userList"
+            style="width: 100%;"
+            @selection-change="handleSelectionChange"
+            :row-key="getRowKey"
+            highlight-current-row
+            stripe
           >
-            <el-table-column type="selection" width="55" reserve-selection/>
+            <el-table-column type="selection" width="55" reserve-selection />
             <el-table-column label="用户名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.username }}</span>
@@ -136,42 +136,38 @@
             </el-table-column>
             <el-table-column label="操作" width="150" fixed="right" align="center">
               <template slot-scope="scope">
-                <el-button
-                  type="primary"
-                  icon="el-icon-edit"
-                  @click="editUserItem(scope.row)"
-                ></el-button>
-                <el-button
-                  type="danger"
-                  icon="el-icon-delete"
-                  @click="deleteUserItem(scope.row)"
-                ></el-button>
+                <el-button type="primary" icon="el-icon-edit" @click="editUserItem(scope.row)"></el-button>
+                <el-button type="danger" icon="el-icon-delete" @click="deleteUserItem(scope.row)"></el-button>
               </template>
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getUserList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @showAddUser="showAddUser"
-    @deleteAll="deleteAll"
-    @downloadUserList="downloadUserList"/>
+    <operation-box
+      :options="buttonOptions"
+      @showAddUser="showAddUser"
+      @deleteAll="deleteAll"
+      @downloadUserList="downloadUserList"
+    />
     <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 import eForm from "./components/form";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { eForm }
 };
 </script>

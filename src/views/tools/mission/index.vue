@@ -25,11 +25,29 @@
               ></el-option>
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
-            <el-button icon="el-icon-plus" type="primary" class="margin-box" 
-            title="添加定时任务" @click="addItem" circle></el-button>
-            <el-button icon="el-icon-document-copy" type="warning" class="margin-box" title="查看执行日志" @click="showLogList" circle></el-button>
+            <el-button
+              icon="el-icon-plus"
+              type="primary"
+              class="margin-box"
+              title="添加定时任务"
+              @click="addItem"
+              circle
+            ></el-button>
+            <el-button
+              icon="el-icon-document-copy"
+              type="warning"
+              class="margin-box"
+              title="查看执行日志"
+              @click="showLogList"
+              circle
+            ></el-button>
           </div>
-          <el-table :data="missionList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="missionList"
+            style="width: 100%"
+            highlight-current-row
+            stripe
+          >
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
@@ -78,39 +96,38 @@
               <template slot-scope="scope">
                 <el-button type="text" @click="editItem(scope.row)">编辑</el-button>
                 <el-button type="text" @click="executeItem(scope.row)">执行</el-button>
-                <el-button type="text" @click="recoverItem(scope.row)">{{ scope.row.paused ? '恢复' : '暂停'}}</el-button>
+                <el-button
+                  type="text"
+                  @click="recoverItem(scope.row)"
+                >{{ scope.row.paused ? '恢复' : '暂停'}}</el-button>
                 <el-button type="text" @click="deleteItem(scope.row)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getMissionList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @addItem="addItem"
-    @showLogList="showLogList"/>
-    <Form 
-    ref="form" 
-    :is-add="isAdd"
-    />
-    <Table 
-    ref="table"/>
+    <operation-box :options="buttonOptions" @addItem="addItem" @showLogList="showLogList" />
+    <Form ref="form" :is-add="isAdd" />
+    <Table ref="table" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
-import Form from './components/form'
-import Table from './components/table'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
+import Form from "./components/form";
+import Table from "./components/table";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { Form, Table }
 };
 </script>

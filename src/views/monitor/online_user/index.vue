@@ -32,11 +32,11 @@
           <el-table
             ref="onlineUserTable"
             :data="onlineUserList"
-            :highlight-current-row="true"
             style="width: 100%"
             @selection-change="handleSelectionChange"
             :row-key="getRowKey"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column type="selection" width="55" />
             <el-table-column label="用户名" :show-overflow-tooltip="true">
@@ -76,25 +76,29 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getOnlineUserList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @deleteAll="deleteAll"
-    @downloadUserList="downloadUserList"/>
+    <operation-box
+      :options="buttonOptions"
+      @deleteAll="deleteAll"
+      @downloadUserList="downloadUserList"
+    />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 export default {
-  mixins: [ Initial, Operation, Property ]
+  mixins: [Initial, Operation, Property]
 };
 </script>
 

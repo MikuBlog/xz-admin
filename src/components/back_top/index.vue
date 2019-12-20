@@ -31,7 +31,8 @@ export default {
           icon: "el-icon-caret-top",
           right: "40px",
           bottom: "60px",
-          visibility: 100
+          visibility: 100,
+		      isMove: false
         };
       }
     }
@@ -51,7 +52,8 @@ export default {
       icon: this.options.icon || "el-icon-caret-top",
       right: this.options.right || "40px",
       bottom: this.options.bottom || "60px",
-      visibility: this.options.visibility || 100
+      visibility: this.options.visibility || 100,
+	    isMove: this.options.isMove,
     };
   },
   beforeDestroy() {
@@ -74,6 +76,7 @@ export default {
       const backtop = this.$refs.backtop;
       this.$setStyle(backtop, "bottom", this.backTopOptions.bottom);
       this.$setStyle(backtop, "right", this.backTopOptions.right);
+      this.backTopOptions.isMove && this.$setStyle(backtop, "transform", `translate(${parseInt(this.backTopOptions.right)}px, ${parseInt(this.backTopOptions.bottom)}px)`)
     },
     // 返回顶部
     backTop() {
@@ -85,9 +88,10 @@ export default {
     // 获取滚动高度
     getScrollTop(e) {
       const backtop = document.querySelector(".to-top");
+	  const box = this.$refs.backtop;
       e.target.scrollTop >= this.backTopOptions.visibility
-        ? this.$setStyle(backtop, "transform", "scale(1)")
-        : this.$setStyle(backtop, "transform", "scale(0)");
+        ? (this.$setStyle(backtop, "transform", "scale(1)"), this.backTopOptions.isMove && this.$setStyle(box, "transform", `translate(0, 0)`))
+        : (this.$setStyle(backtop, "transform", "scale(0)"), this.backTopOptions.isMove && this.$setStyle(box, "transform", `translate(${parseInt(this.backTopOptions.right)}px, ${parseInt(this.backTopOptions.bottom)}px)`));
       this.$setMemorySes("scrollTop", e.target.scrollTop);
     },
     initialListener() {
@@ -107,6 +111,7 @@ export default {
   z-index: 99;
   right: 40px;
   bottom: 60px;
+  transition: .3s;
 }
 .to-top {
   position: relative;

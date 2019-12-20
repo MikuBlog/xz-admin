@@ -43,7 +43,12 @@
             ></el-date-picker>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="authorityLogList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="authorityLogList"
+            style="width: 100%"
+            highlight-current-row
+            stripe
+          >
             <el-table-column label="操作者">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.creatorName }}</span>
@@ -99,16 +104,15 @@
                   icon="el-icon-refresh-left"
                   @click="recoverAuthority(scope.row)"
                 ></el-button>
-                <el-button
-                  type="danger"
-                  icon="el-icon-delete"
-                  @click="deleteAuthority(scope.row)"
-                ></el-button>
+                <el-button type="danger" icon="el-icon-delete" @click="deleteAuthority(scope.row)"></el-button>
               </template>
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getAuthorityLogList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>
@@ -119,12 +123,12 @@
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
-import Detail from './components/detail'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
+import Detail from "./components/detail";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { Detail }
 };
 </script>

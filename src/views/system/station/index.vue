@@ -34,7 +34,12 @@
               circle
             ></el-button>
           </div>
-          <el-table :data="stationList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="stationList"
+            style="width: 100%"
+            highlight-current-row
+            stripe
+          >
             <el-table-column label="名称" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.name }}</span>
@@ -76,32 +81,33 @@
                   type="danger"
                   icon="el-icon-delete"
                   @click="deleteStation(scope.row)"
-                  class="margin-box"    
+                  class="margin-box"
                 ></el-button>
               </template>
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getStationList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @showAddStation="showAddStation"/>
-    <stationForm ref="form" :is-add="isAdd" :dicts="dicts"/>
+    <operation-box :options="buttonOptions" @showAddStation="showAddStation" />
+    <stationForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 import stationForm from "./components/form";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { stationForm }
 };
 </script>

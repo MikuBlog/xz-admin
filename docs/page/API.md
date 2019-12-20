@@ -106,7 +106,7 @@ excludeEles: [
 
 描述：白昼模式主题，也称为正常模式，调用该方法后会重置所有主题样式。
 
-示例
+示例：
 ```js
 this.$clearMode() // 开启白昼模式
 ```
@@ -119,7 +119,7 @@ this.$clearMode() // 开启白昼模式
 
 `isDark`：是否为黑暗模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
 
-示例
+示例：
 ```js
 this.$darkMode() // 开启夜间模式
 this.$darkMode(false) // 关闭夜间模式
@@ -133,7 +133,7 @@ this.$darkMode(false) // 关闭夜间模式
 
 `isWeakness`：是否为色弱模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
 
-示例
+示例：
 ```js
 this.$weaknessMode() // 开启色弱模式
 this.$weaknessMode(false) // 关闭色弱模式
@@ -147,10 +147,10 @@ this.$weaknessMode(false) // 关闭色弱模式
 
 `isHueRotate`：是否为转换模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
 
-示例
+示例：
 ```js
-this.$hueRotateMode() // 开启描述：转换模式
-this.$hueRotateMode(false) // 关闭描述：转换模式
+this.$hueRotateMode() // 开启转换模式
+this.$hueRotateMode(false) // 关闭转换模式
 ```
 
 ## Array

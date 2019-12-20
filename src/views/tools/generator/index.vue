@@ -12,7 +12,12 @@
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="generateCodeList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="generateCodeList"
+            style="width: 100%"
+            highlight-current-row
+            stripe
+          >
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
@@ -42,22 +47,24 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
               </template>
             </el-table-column>
-            <el-table-column 
-            label="操作" 
-            width="130px" 
-            align="center" 
-            fixed="right">
-                  <template slot-scope="scope">
-                    <el-button
-                      slot="reference"
-                      type="primary"
-                      icon="el-icon-magic-stick"
-                      @click="showGeneratorCodeBox(scope.row)"
-                    >生成代码</el-button>
-                  </template>
-                </el-table-column>
+            <el-table-column label="操作" width="130px" align="center" fixed="right">
+              <template slot-scope="scope">
+                <el-button
+                  slot="reference"
+                  type="primary"
+                  icon="el-icon-magic-stick"
+                  @click="showGeneratorCodeBox(scope.row)"
+                >生成代码</el-button>
+              </template>
+            </el-table-column>
           </el-table>
-          <pagination :get-data="getGenerateCodeList" :total="totalElements" />
+          <pagination
+            ref="pagination"
+            :get-data="getGenerateCodeList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
+            :total="totalElements"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -66,12 +73,12 @@
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
-import GeneratorBox from './components/form'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
+import GeneratorBox from "./components/form";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { GeneratorBox }
 };
 </script>

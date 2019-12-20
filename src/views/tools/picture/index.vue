@@ -32,11 +32,11 @@
           <el-table
             ref="pictureTable"
             :data="pictureList"
-            :highlight-current-row="true"
-            :stripe="true"
             style="width: 100%;"
             :row-key="getRowKey"
             @selection-change="selectItem"
+            highlight-current-row
+            stripe
           >
             <el-table-column type="selection" width="55" reserve-selection/>
             <el-table-column prop="filename" label="文件名" :show-overflow-tooltip="true" />
@@ -70,6 +70,8 @@
           </el-table>
           <pagination
             :get-data="getPictureList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
             :total="totalElements"
           />
         </el-card>
