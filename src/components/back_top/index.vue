@@ -32,7 +32,7 @@ export default {
           right: "40px",
           bottom: "60px",
           visibility: 100,
-		  isMove: false
+		      isMove: false
         };
       }
     }
@@ -53,7 +53,7 @@ export default {
       right: this.options.right || "40px",
       bottom: this.options.bottom || "60px",
       visibility: this.options.visibility || 100,
-	  isMove: this.options.isMove,
+	    isMove: this.options.isMove,
     };
   },
   beforeDestroy() {
@@ -89,8 +89,8 @@ export default {
       const backtop = document.querySelector(".to-top");
 	  const box = this.$refs.backtop;
       e.target.scrollTop >= this.backTopOptions.visibility
-        ? (this.$setStyle(backtop, "transform", "scale(1)"), this.backTopOptions.isMove && this.$setStyle(box, "right", this.backTopOptions.right))
-        : (this.$setStyle(backtop, "transform", "scale(0)"), this.backTopOptions.isMove && this.$setStyle(box, "right", `${-40}px`));
+        ? (this.$setStyle(backtop, "transform", "scale(1)"), this.backTopOptions.isMove && this.$setStyle(box, "transform", `translate(0, 0)`))
+        : (this.$setStyle(backtop, "transform", "scale(0)"), this.backTopOptions.isMove && this.$setStyle(box, "transform", `translate(${parseInt(this.backTopOptions.right)}px, ${parseInt(this.backTopOptions.bottom)}px)`));
       this.$setMemorySes("scrollTop", e.target.scrollTop);
     },
     initialListener() {

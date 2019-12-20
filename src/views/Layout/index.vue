@@ -101,7 +101,10 @@
             <DropDown ref="dropDown" @showSetting="$refs.setting.isSetting = true" />
             <IconBox ref="iconBox" />
             <MenuButton ref="menuButton" @showMenu="showMenu" />
-            <Breadcrumb class="breadcrumb" v-show="showBreadcrumb && !isMini && defaultConfig.diy.breadcrumb"></Breadcrumb>
+            <Breadcrumb
+              class="breadcrumb"
+              v-show="showBreadcrumb && !isMini && defaultConfig.diy.breadcrumb"
+            ></Breadcrumb>
           </div>
           <div class="border" style="border-color: #f0f0f0"></div>
         </el-header>
@@ -117,16 +120,16 @@
             ></el-button>
           </div>
         </div>
-        <back-top
-          :options="{
-          target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
-		      isMove: true
-        }"
-        />
         <el-main class="top" id="top">
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
           </transition>
+          <back-top
+            :options="{
+              target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
+              isMove: true
+            }"
+          />
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter && defaultConfig.diy.footer">
           <div class="coppy-right">
@@ -145,7 +148,7 @@ import Property from "./mixins/property";
 import settingDrawer from "./components/drawer";
 import IconBox from "./components/icon_box";
 import DropDown from "./components/drop_down";
-import MenuButton from './components/menu_button'
+import MenuButton from "./components/menu_button";
 export default {
   mixins: [Initial, Operation, Property],
   components: { settingDrawer, IconBox, DropDown, MenuButton }
