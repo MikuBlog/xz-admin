@@ -32,6 +32,5 @@ function drag(el) {
 }
 
 export default {
-  inserted: drag,
-  componentUpdated: drag
+  bind: drag
 }
