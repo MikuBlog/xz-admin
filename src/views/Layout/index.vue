@@ -98,104 +98,10 @@
         </div>
         <el-header class="navbar-box" style="height: 50px;">
           <div class="navbar">
-            <el-dropdown trigger="click" size="large" class="avatar-dropdown">
-              <div class="avatar-box">
-                <div class="block">
-                  <el-avatar shape="square" :size="45" :src="squareUrl">
-                    <img src="https://myinterface.xuanzai.top/getPicture?type=error" />
-                  </el-avatar>
-                </div>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item @click.native="navigateTo('/home/welcome')">
-                    <i class="el-icon-s-home" />首页
-                  </el-dropdown-item>
-                  <el-dropdown-item @click.native="navigateTo('/home/person')">
-                    <i class="el-icon-s-custom" />个人中心
-                  </el-dropdown-item>
-                  <el-dropdown-item
-                    v-show="defaultConfig.systemSetting"
-                    @click.native="showSetting"
-                  >
-                    <i class="el-icon-setting" />系统设置
-                  </el-dropdown-item>
-                  <el-dropdown-item @click.native="openNewPage()">
-                    <i class="fa fa-github-alt" />项目地址
-                  </el-dropdown-item>
-                  <div class="line"></div>
-                  <el-dropdown-item @click.native="logout">
-                    <i class="fa fa-paper-plane" />退出登录
-                  </el-dropdown-item>
-                </el-dropdown-menu>
-              </div>
-            </el-dropdown>
-            <div class="icon-box">
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="搜索菜单项"
-                placement="bottom"
-                v-show="defaultConfig.searchMenu && !isMini"
-              >
-                <search class="search-menu-input" />
-              </el-tooltip>
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="查阅文档"
-                placement="bottom"
-                v-show="defaultConfig.helpPage"
-              >
-                <i class="el-icon-question" @click="$router.push({ path: '/home/docs' })"></i>
-              </el-tooltip>
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="清除缓存"
-                placement="bottom"
-                v-show="defaultConfig.clearStorage"
-              >
-                <i class="el-icon-delete-solid" @click="clearStorage"></i>
-              </el-tooltip>
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="全屏"
-                placement="bottom"
-                v-show="defaultConfig.fullScreen"
-              >
-                <svg-icon
-                  icon-class="全屏"
-                  style="width: 24px; height: 24px; top: 1px"
-                  @click.native="fullScreen"
-                />
-              </el-tooltip>
-            </div>
-            <div class="menu-button">
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="展开菜单"
-                placement="bottom"
-                v-if="isVerticleMenu"
-              >
-                <i class="el-icon-s-unfold" @click="showMenu"></i>
-              </el-tooltip>
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="删除所有标签页"
-                placement="bottom"
-                v-show="$store.state.setting.showTags"
-              >
-                <i class="el-icon-circle-close" @click="removeTags"></i>
-              </el-tooltip>
-            </div>
-            <div
-              class="breadcrumb"
-              v-show="showBreadcrumb && !isMini && defaultConfig.diy.breadcrumb"
-            >
-              <Breadcrumb></Breadcrumb>
-            </div>
+            <DropDown ref="dropDown" @showSetting="$refs.setting.isSetting = true" />
+            <IconBox ref="iconBox" />
+            <MenuButton ref="menuButton" @showMenu="showMenu" />
+            <Breadcrumb class="breadcrumb" v-show="showBreadcrumb && !isMini && defaultConfig.diy.breadcrumb"></Breadcrumb>
           </div>
           <div class="border" style="border-color: #f0f0f0"></div>
         </el-header>
@@ -211,10 +117,12 @@
             ></el-button>
           </div>
         </div>
-        <back-top :options="{
+        <back-top
+          :options="{
           target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
-		  isMove: true
-        }"/>
+		      isMove: true
+        }"
+        />
         <el-main class="top" id="top">
           <transition name="xz-animation" mode="out-in">
             <router-view @updateUserInfo="getUserInfo" class="router" />
@@ -235,9 +143,12 @@ import Initial from "./mixins/initial";
 import Operation from "./mixins/operation";
 import Property from "./mixins/property";
 import settingDrawer from "./components/drawer";
+import IconBox from "./components/icon_box";
+import DropDown from "./components/drop_down";
+import MenuButton from './components/menu_button'
 export default {
   mixins: [Initial, Operation, Property],
-  components: { settingDrawer }
+  components: { settingDrawer, IconBox, DropDown, MenuButton }
 };
 </script>
 <style lang="scss" scoped src="./style/index.scss"></style>

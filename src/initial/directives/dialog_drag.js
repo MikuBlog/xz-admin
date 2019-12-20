@@ -1,19 +1,8 @@
-import Permission from '@/utils/permission'
-/**
- * @author xuanzai
- * @description 通过v-permission调用该指令
- */
-const permission = (el, binding) => {
-  Permission(binding.value)
-    ? el.style.display = "block"
-    : el.style.display = "none"
-}
-
 /**
  * @author xuanzai
  * @description 拖拽dialog
  */
-const dialogDrag = (el) => {
+function drag(el) {
   const 
     dialogHeaderEl = el.querySelector('.el-dialog__header'),
     dragDom = el.querySelector('.el-dialog'),
@@ -43,7 +32,6 @@ const dialogDrag = (el) => {
 }
 
 export default {
-  permission,
-  dialogDrag
+  inserted: drag,
+  componentUpdated: drag
 }
-

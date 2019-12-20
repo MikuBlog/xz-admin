@@ -2,7 +2,6 @@ export default {
   data() {
     return {
       isCollapse: false,
-      isFullScreen: false,
       isSmall: false,
       isMini: false,
       isMenuCollapse: false,
@@ -10,7 +9,6 @@ export default {
       activeName: 'layout',
       logoBlob: "",
       user: {},
-      squareUrl: "",
       logoUrl: "",
     }
   }
