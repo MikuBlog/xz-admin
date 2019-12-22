@@ -2,11 +2,12 @@
   <div>
     <div v-show="defaultConfig.diy.backgroundColor">
       <h2 style="margin: 2rem 0">系统背景颜色设置</h2>
-      <color-select 
-      :initial="setBackgroundColor"
-      :nowColor="settings.background.color"
-      :select-color="setBackgroundColor"
-      :colorArray="colorArray" />
+      <color-select
+        :initial="setBackgroundColor"
+        :nowColor="settings.background.color"
+        :select-color="setBackgroundColor"
+        :colorArray="colorArray"
+      />
     </div>
     <div v-show="defaultConfig.diy.background">
       <h2 style="margin: 2rem 0">系统背景图片设置</h2>
@@ -37,16 +38,12 @@
           @change="getVal"
         ></el-slider>
       </div>
-      <div
-        class="block"
-        style="padding: 0 10px"
-        v-show="defaultConfig.diy.cardOpacity"
-      >
-        <span class="demonstration">卡片透明度</span>
+      <div class="block" style="padding: 0 10px" v-show="defaultConfig.diy.cardOpacity">
+        <span class="demonstration">布局透明度</span>
         <el-slider
           v-model="$store.state.setting.background.cardOpacity"
           :format-tooltip="formatTooltip"
-          @change="setCard"
+          @change="setLayoutOpacity"
         ></el-slider>
       </div>
       <div class="button" v-show="defaultConfig.diy.selectBackrgoundButton">
@@ -61,8 +58,18 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      colorArray: ['#eef0f3', '#f5222d', '#fa541c', '#fbb937', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1']
-    }
+      colorArray: [
+        "#eef0f3",
+        "#f5222d",
+        "#fa541c",
+        "#fbb937",
+        "#13c2c2",
+        "#52c41a",
+        "#1890ff",
+        "#2f54eb",
+        "#722ed1"
+      ]
+    };
   },
   computed: {
     ...mapState({
@@ -74,7 +81,7 @@ export default {
       // 插入元素
       this.insertEle();
       // 初始化卡片样式
-      this.setCard();
+      this.setLayoutOpacity();
     });
     this.setBackgroundColor();
     this.setBackgroundImage();
@@ -141,16 +148,10 @@ export default {
       const ele = document.querySelector(".background"),
         mask = document.querySelector(".mask");
       this.settings.background.url &&
-        (this.$setStyle(
-          ele,
-          "background-image",
-          `url(${this.settings.background.url})`
-        ),
-        this.$setStyle(
-          ele,
-          "opacity",
-          `${this.settings.background.opacity / 100}`
-        ),
+        (this.$setStyle(ele, {
+          backgroundImage: `url(${this.settings.background.url})`,
+          opacity: `${this.settings.background.opacity / 100}`
+        }),
         this.$setStyle(
           mask,
           "background",
@@ -158,14 +159,12 @@ export default {
         ));
     },
     // 设置卡片
-    setCard() {
+    setLayoutOpacity() {
       this.$createStyle(
-        `
-          .el-card {
-            opacity: ${this.settings.background.cardOpacity / 100}!important;
-          }
-        `,
-        "card-opacity"
+        this.defaultConfig.layoutOpacity.map(val => {
+          return `${val} { opacity: ${this.settings.background.cardOpacity / 100}!important; }`
+        }).join(" "),
+        "layout-opacity"
       );
     },
     // 值格式化

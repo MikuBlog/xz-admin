@@ -74,8 +74,10 @@ export default {
     // 初始化样式
     initialStyle() {
       const backtop = this.$refs.backtop;
-      this.$setStyle(backtop, "bottom", this.backTopOptions.bottom);
-      this.$setStyle(backtop, "right", this.backTopOptions.right);
+      this.$setStyle(backtop, {
+        bottom: this.backTopOptions.bottom,
+        right: this.backTopOptions.right
+      });
       this.backTopOptions.isMove && this.$setStyle(backtop, "transform", `translate(${parseInt(this.backTopOptions.right)}px, ${parseInt(this.backTopOptions.bottom)}px)`)
     },
     // 返回顶部

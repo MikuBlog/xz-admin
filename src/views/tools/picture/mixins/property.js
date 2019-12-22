@@ -10,6 +10,7 @@ export default {
       nowSize: 10,
       // 总条数
       totalElements: 0,
+      selectImageList: [],
       pictureList: [],
       idList: [],
       isShow: false,
@@ -19,6 +20,11 @@ export default {
         icons: 'el-icon-upload',
         title: "上传图片",
         method: "uploadPic"
+      }, {
+        type: "warning",
+        icons: 'el-icon-download',
+        title: "批量导出图片",
+        method: "exportImage"
       }, {
         type: "danger",
         icons: 'el-icon-delete',

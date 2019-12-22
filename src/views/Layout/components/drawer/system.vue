@@ -113,18 +113,15 @@ export default {
         drawerContent = document.querySelector(
           ".drawer-menu .ivu-drawer-content"
         ),
-        horizontalScrollbar = document.querySelector(
-          ".menu-horizontal-scrollbar>.el-scrollbar__wrap"
-        );
-      this.$setStyle(
-        menuScrollBar,
-        "background",
-        this.settings.menuStyle === "dark"
-          ? this.defaultConfig.menuStyle.dark.backgroundColor
-          : this.defaultConfig.menuStyle.light.backgroundColor
-      );
+        horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
       this.$setStyle(
         horizontalScrollbar,
+        'background',
+        this.menuStyle === 'dark'
+          ? this.defaultConfig.menuStyle.dark.backgroundColor
+          : this.defaultConfig.menuStyle.light.backgroundColor)
+      this.$setStyle(
+        menuScrollBar,
         "background",
         this.settings.menuStyle === "dark"
           ? this.defaultConfig.menuStyle.dark.backgroundColor

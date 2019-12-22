@@ -69,6 +69,7 @@
 
 /* 格式化卡片样式 */
 .el-card {
+  opacity: .9!important;
   border: 1px solid transparent!important;
   box-shadow: none!important;
   -webkit-box-shadow: none!important;

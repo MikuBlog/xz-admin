@@ -16,23 +16,23 @@ export default {
   data() {
     return {
       chalk: "", // content of theme-chalk css
-      theme: ""
+      theme: "#409eff"
     };
   },
   computed: {
     defaultTheme() {
       return this.$store.state.setting.themeColor;
     },
+    ...mapState({
+      settings: state => state.setting
+    })
   },
   created() {
-    this.theme = this.$getMemoryPmt("theme") || "#409eff"
+    this.theme = this.settings.themeColor || "#409eff"
   },
   watch: {
-    defaultTheme: {
-      handler: function(val, oldVal) {
-        this.theme = val;
-      },
-      immediate: true
+    defaultTheme(val) {
+      this.theme = val
     },
     async theme(val) {
       const oldVal = this.chalk ? this.theme : ORIGINAL_THEME;
@@ -100,7 +100,7 @@ export default {
       this.setTagColor()
       $message.close();
       this.$successMsg("更换主题成功");
-      this.$setMemoryPmt("theme", this.theme)
+      this.settings.themeColor = this.theme
     }
   },
 

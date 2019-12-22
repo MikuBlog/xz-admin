@@ -97,7 +97,6 @@ export default {
   position: relative;
   height: 34px;
   width: calc(100% - 44px);
-  background: #fff;
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   .tags-view-wrapper {

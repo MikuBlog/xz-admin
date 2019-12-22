@@ -1,6 +1,5 @@
 <template>
   <iframe
-    v-initialSize="'#top'"
     ref="iframe"
     src="https://xzadmin-docs.xuanzai.top"
     frameborder="0"
@@ -11,6 +10,7 @@ iframe {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100% !important;
+  height: calc(100% + 20px);
+  width: 100%;
 }
 </style>

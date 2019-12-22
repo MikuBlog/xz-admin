@@ -218,11 +218,14 @@ export default {
       textColor: '#becad8',
       backgroundColor: '#2f4055',
       subMenuItemBackgroundColor: '#1e2c3c'
-    },
-    activeTextColor: '#429ee2'
+    }
   },
   // 系统样式设置
   diy: {
+    /* 系统布局模块 */
+    layout: true,
+    // 系统布局大小
+    layoutSize: true,
     // 面包屑
     breadcrumb: true,
     // 标签栏
@@ -231,6 +234,8 @@ export default {
     logo: true,
     // 页脚
     footer: true,
+    /* 系统主题模块 */
+    theme: true,
     // 更换主题颜色
     themeColor: true,
     // 更换主题风格
@@ -239,6 +244,10 @@ export default {
     brightness: true,
     // 更换菜单样式
     menu: true,
+    /* 系统模块 */
+    background: true,
+    // 背景颜色
+    backgroundColor: true,
     // 背景透明度
     backgroundOpacity: true,
     // 卡片透明度
@@ -250,15 +259,26 @@ export default {
     // 选择背景按钮
     selectBackrgoundButton: true,
   },
+  // 布局透明元素（系统设置中的背景设置）
+  layoutOpacity: [
+    '.el-card',
+    '.el-scrollbar',
+    '.el-header',
+    '.tabs',
+    '.el-footer',
+    '.opacity-box'
+  ],
   // 不受主题影响的元素（标签、类、id）
   excludeEles: [
-    "img",
-    "video",
-    "iframe",
-    "embed",
+    "img", // 图片
+    "video", // 视频
+    "iframe", // 内嵌网站
+    "embed", // 插件
     "object",
-    '.el-message',
-    '.el-notification',
+    '.el-message', // 提示信息
+    '.el-notification', // 通知信息
+    '.mask',
+    /* 背景图 */
     '[style*="background:url"]',
     '[style*="background-image:url"]',
     '[style*="background: url"]',
@@ -275,24 +295,22 @@ export default {
   systemSetting: true,
   // 全屏icon
   fullScreen: true,
-  // 布局大小icon
-  layoutSize: true,
   // 分页组件
   paginationLayout: `${
     // 是否为ipad
-    Agent.isIpad()
+    isIpad()
       ? 'total, sizes, prev, pager, next'
       // 是否为移动设备
-      : Agent.isMobile()
+      : isMobile()
         ? 'prev, pager, next'
         // pc设备
         : 'total, sizes, prev, pager, next, jumper'
     }`,
   // 分页大小
-  paginationSize: Agent.isMobile() && !Agent.isIpad(),
+  paginationSize: isMobile() && !isIpad(),
   // 图片预览尺寸
   previewImageSize: `${
-    Agent.isMobile() && !Agent.isIpad()
+    isMobile() && !isIpad()
       ? '90%'
       : '500px'
     }`

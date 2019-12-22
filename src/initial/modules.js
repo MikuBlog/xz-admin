@@ -72,6 +72,10 @@ import ImageLoad from '@/api/other/image_load'
 import ArrayMethod from '@/api/array'
 // 引入控制流量模块
 import control from '@/api/control'
+// 引入导出excel模块
+import exportExcel from '@/api/file/export_excel'
+// 引入导出图片模块
+import exportFile from '@/api/file/export_file'
 // 引入全局配置模块
 import DefaultConfig from '@/global/js/config'
 /**
@@ -367,6 +371,20 @@ Vue.prototype.$debounce = control.debounce
  * @returns {Function}
  */
 Vue.prototype.$throttled = control.throttled
+/**
+ * @author xuanzai
+ * @description 导出excel
+ * @param {DOM} obj 
+ * @param {String} name 
+ */
+Vue.prototype.$exportExcel = exportExcel
+/**
+ * @author xuanzai
+ * @description 导出图片
+ * @param {Array} fileList 文件地址数组
+ * @param {fileName} fileName 压缩文件名称
+ */
+Vue.prototype.$exportFile = exportFile
 /**
  * @author xuanzai
  * @description 全局通用配置

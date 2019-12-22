@@ -37,7 +37,9 @@ const
       layoutSize: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').layoutSize !== undefined)
     ? storage.getMemoryPmt('setting').layoutSize
     : 'medium',
-    themeColor: "#409eff",
+    themeColor: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').themeColor !== undefined)
+    ? storage.getMemoryPmt('setting').themeColor
+    : "#409eff",
     themeStyle: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').themeStyle !== undefined)
     ? storage.getMemoryPmt('setting').themeStyle
     : 'lightMode',
