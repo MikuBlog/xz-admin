@@ -1,5 +1,8 @@
 <template>
   <div class="home" ref="home" id="home">
+    <div class="background" ref="background">
+      <div class="mask" ref="mask"></div>
+    </div>
     <el-container>
       <el-aside width="auto">
         <el-scrollbar
@@ -68,15 +71,13 @@
         </el-scrollbar>
       </Drawer>
       <el-container class="container-background">
-        <div class="background" ref="background">
-          <div class="mask" ref="mask"></div>
-        </div>
         <div class="menu" v-show="!isVerticleMenu">
-          <el-scrollbar style="height:60px; width: 100%;" class="menu-horizontal-scrollbar">
+          <el-scrollbar class="menu-horizontal-scrollbar">
             <el-menu
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
-              :active-text-color="activeTextColor"
+              :background-color="menuBackgroundColor"
+              :active-text-color="themeColor"
               :text-color="menuTextColor"
               mode="horizontal"
               style="width: 100%"

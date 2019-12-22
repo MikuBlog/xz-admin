@@ -247,15 +247,24 @@ const throttledFun = this.$throttled(callback, 2500)
 
 描述：为`DOM`元素设置样式
 
+注意：设置的样式为内联样式，不会覆盖所有内联样式，而是通过追加的形式添加样式
+
 参数：
 
 + `DOM`：`DOM`元素 [`DOM Object`]（必填）
-+ `ruleName`：CSS属性 [`String`]（必填）
++ `ruleName`：CSS属性或组合CSS对象 [`String` | `Object`]（必填）
 + `style`：CSS属性值 [`String`]（必填）
 
 示例：
 ```js
+// 设置单个属性
 this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
+// 设置对个属性
+this.$setStyle(this.$refs.background, {
+  backgroundImage: 'url(xxx)',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat'
+})
 ```
 
 ### setCssText
@@ -279,7 +288,9 @@ this.$setCssText(this.$refs.background, `
 
 ### createStyle
 
-描述：创建全局样式，原理便是通过创建`style`标签并动态追加到`head`标签内完成样式的全局覆盖。
+描述：创建全局样式
+
+注意：通过创建`style`标签并动态追加到`head`标签内完成样式的全局覆盖
 
 参数：
 
@@ -300,20 +311,19 @@ this.$createStyle(`
 
 ### download
 
-描述：文件下载
+描述：文件下载（自带`tips`以及`loading`）
+
+> [批量下载文件](#exportfile)
 
 参数：
 
-+ `url`：地址 [`String`/`Array`]（必填）
-+ `fileName`: 文件名称 [`String`]（单文件下载时必填，多文件下载时不填）
-+ `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]（选填：默认为false）
++ `url`：文件地址 [`String`]（必填）
++ `fileName`: 文件名称 [`String`]（选填：默认为原文件名称）
 
 示例：
 ```js
-// 单文件下载
+// 文件下载
 this.$download(url, fileName)
-// 批量文件下载（url为下载链接数组）
-this.$download(url) // url : [http://xxx.com, http://xxxx.com]
 ```
 
 ###  getImgFile
@@ -342,10 +352,6 @@ this
 
 描述：获取文件信息
 
-返回值：`Promise`
-
-+ `raw`：二进制文件
-
 参数：
 
 + `limit`：文件大小 [`Number`] 单位：兆（选填：默认限制文件大小为2M）
@@ -357,7 +363,7 @@ this
 示例：
 ```js
 this
-	.$getImgFile(limit)
+	.$getFile(limit)
 	.then(raw => {
 		// todo
 	})
@@ -367,7 +373,7 @@ this
 
 描述：预览文件
 
-注意：该`api`使用了微软的预览接口，因此，需要预览的文件（文档）需要存放在线上（能通过外网访问静态文件）。
+注意：该`api`使用了微软的预览接口，因此，请保证网络状态良好且文件必须能通过外链被访问到。
 
 参数：
 
@@ -376,6 +382,37 @@ this
 示例：
 ```js
 this.$previewFile(url)
+```
+
+### exportExcel
+
+描述：将表格导出到`excel`文件中
+
+注意：导出的数据为当前表格的数据，而不是所有表格数据
+
+参数：
+
++ `obj`：选中的表格元素 [`DOM | Array(DOM)`]（必填）
++ `name`: 文件名称[`String`]（选填：默认为table）
+
+示例：
+```js
+this.$exportExcel(document.querySelector('table'), 'data') // 导出一整个表格
+this.$exportExcel(document.querySelectorAll('tr'), 'data') // 导出选中元素的表格（数组元素必须为tr标签元素）
+```
+
+### exportFile
+
+描述：批量导出文件并以`zip`文件保存（包括图片、excel、word等各种类型的文件，自带`tips`以及`loading`）
+
+参数：
+
++ `fileList`：文件地址列表 [Array]（必填）
++ `fileName`：压缩文件名称 [String]（选填：默认为file）
+
+示例：
+```js
+this.$exportFile(fileList, 'images')
 ```
 
 ## Date

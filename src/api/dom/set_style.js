@@ -3,11 +3,17 @@ import defaultConfig from '@/global/js/config'
  * @author xuanzai
  * @description 设置样式
  * @param {DOM} el 
- * @param {String} ruleName 
+ * @param {String | Object} ruleName 
  * @param {String} value 
  */
 function setStyle(el, ruleName, value) {
-  el.style[ruleName] = value
+  if ((typeof ruleName).toLowerCase() === 'string') {
+    el.style[ruleName] = value
+  } else {
+    for (let key in ruleName) {
+      el.style[key] = ruleName[key]
+    }
+  }
 }
 
 /**
@@ -51,9 +57,9 @@ function darkMode(isDark = true) {
     ts.join(",") +
     "{filter:invert(100%) hue-rotate(180deg)!important}" +
     ts
-      .map(function(p) {
+      .map(function (p) {
         return ts
-          .map(function(p2) {
+          .map(function (p2) {
             return p + " " + p2;
           })
           .join(",");
@@ -74,9 +80,9 @@ function weaknessMode(isWeakness = true) {
     ts.join(",") +
     "{filter:invert(.8)!important}" +
     ts
-      .map(function(p) {
+      .map(function (p) {
         return ts
-          .map(function(p2) {
+          .map(function (p2) {
             return p + " " + p2;
           })
           .join(",");
@@ -85,8 +91,8 @@ function weaknessMode(isWeakness = true) {
     "{filter:invert(0%)!important}"
   createStyle(`
   ${ isWeakness
-  ? ts
-  : ""}`, 'weakness-mode')
+      ? ts
+      : ""}`, 'weakness-mode')
 }
 /**
  * @author xuanzai
@@ -100,9 +106,9 @@ function hueRotateMode(isHueRotate = true) {
     ts.join(",") +
     "{filter:hue-rotate(180deg)!important}" +
     ts
-      .map(function(p) {
+      .map(function (p) {
         return ts
-          .map(function(p2) {
+          .map(function (p2) {
             return p + " " + p2;
           })
           .join(",");
@@ -111,8 +117,8 @@ function hueRotateMode(isHueRotate = true) {
     "{filter: hue-rotate(0deg)!important}"
   createStyle(`
   ${ isHueRotate
-  ? ts
-  : ""}`, 'hue-rotate-mode')
+      ? ts
+      : ""}`, 'hue-rotate-mode')
 }
 
 function clearMode() {

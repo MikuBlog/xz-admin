@@ -72,7 +72,7 @@
 
 .tabs {
   position: relative;
-  background: #ffffff;
+  background: #fefefe;
 }
 
 .el-icon-caret-bottom {
@@ -119,14 +119,18 @@
   background: #2e3f54;
 }
 
-.menu-scrollbar,
-.menu-horizontal-scrollbar {
+.menu-scrollbar, .menu-horizontal-scrollbar {
+  border-right: none !important;
   background: #2d3e53;
+  overflow: hidden;
 }
 
-.menu-scrollbar /deep/ .el-scrollbar__wrap,
-.menu-horizontal-scrollbar /deep/ .el-scrollbar__wrap {
+.menu-scrollbar /deep/ .el-scrollbar__wrap {
   overflow-x: hidden;
+}
+
+.menu-horizontal-scrollbar /deep/ .el-scrollbar__bar {
+  bottom: 0px;
 }
 
 .menu-horizontal {
@@ -204,7 +208,6 @@
 .footer .coppy-right {
   position: relative;
   line-height: 30px;
-  background: #fefefe;
   border-top: 1px solid #dcdfe6;
   color: #666;
   white-space: nowrap;

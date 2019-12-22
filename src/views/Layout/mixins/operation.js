@@ -51,7 +51,7 @@ export default {
       // 重渲染展开菜单项
       setTimeout(() => {
         this.initialStyle()
-      }, 400)
+      }, 500)
     }
   }
 }

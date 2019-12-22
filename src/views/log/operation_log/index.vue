@@ -21,6 +21,7 @@
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
           <el-table
+            class="table"
             :data="operationLogList"
             style="width: 100%"
             highlight-current-row

@@ -6,7 +6,7 @@ export default {
     // 复制图片地址
     copy(item) {
       this.$copyText(item.url).then(() => {
-        this.$successMsg("复制成功");
+        this.$successMsg("复制链接成功");
       });
     },
     // 批量删除图片
@@ -46,6 +46,7 @@ export default {
     },
     // 选中图片
     selectItem(picArray) {
+      this.selectImageList = picArray.map(val => val.url)
       this.idList = picArray.map(val => val.id);
     },
     // 点击搜索
@@ -55,6 +56,13 @@ export default {
     // 回车搜索
     searchEnter(e) {
       e.keyCode === 13 && this.$refs.pagination.toFirstPage();
+    },
+    exportImage() {
+      if(this.selectImageList.length == 0) {
+        this.$warnMsg("请勾选图片进行批量导出")
+        return
+      }
+      this.$exportFile(this.selectImageList, 'images')
     }
   }
 }

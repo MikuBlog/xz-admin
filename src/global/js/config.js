@@ -61,6 +61,16 @@ export default {
     // 选择背景按钮
     selectBackrgoundButton: true,
   },
+  // 布局透明元素（系统设置-->背景设置-->布局透明度）
+  layoutOpacity: [
+    '.el-card',
+    '.el-header',
+    '.menu-scrollbar',
+    '.menu-horizontal-scrollbar',
+    '.tabs',
+    '.el-footer',
+    '.opacity-box',
+  ],
   // 不受主题影响的元素（标签、类、id）
   excludeEles: [
     "img", // 图片
