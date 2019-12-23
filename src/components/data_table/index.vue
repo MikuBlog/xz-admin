@@ -45,7 +45,7 @@
 <script>
 /**
  * @author xuanzai
- * @description 封装了包含分页组件的表格
+ * @description （废弃）
  */
 export default {
   name: "data-table",

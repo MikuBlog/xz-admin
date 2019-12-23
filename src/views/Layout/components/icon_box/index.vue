@@ -30,13 +30,26 @@
     <el-tooltip
       class="item"
       effect="dark"
+      content="查看错误日志"
+      placement="bottom"
+      v-show="defaultConfig.errorLog"
+    >
+      <svg-icon
+        class="bug"
+        icon-class="bug"
+        @click.native="$emit('showErrorLogBox')"
+      />
+    </el-tooltip>
+    <el-tooltip
+      class="item"
+      effect="dark"
       content="全屏"
       placement="bottom"
       v-show="defaultConfig.fullScreen"
     >
       <svg-icon
+        class="fullscreen"
         icon-class="全屏"
-        style="width: 24px; height: 24px; top: 1px"
         @click.native="fullScreen"
       />
     </el-tooltip>
@@ -88,15 +101,11 @@ export default {
   margin-right: 0.8rem;
   font-size: 25px;
 }
-.el-icon-full-screen,
 .el-icon-s-tools,
 .iconfullscreenexit,
 .el-icon-question {
   cursor: pointer;
   transition: 0.3s;
-}
-.el-icon-full-screen:active {
-  color: rgb(19, 180, 255);
 }
 .el-icon-s-tools:active {
   color: rgb(19, 180, 255);
@@ -107,7 +116,16 @@ export default {
 .iconfullscreenexit:active {
   color: rgb(19, 180, 255);
 }
-.el-icon-full-screen {
-  font-size: 22px;
+.bug {
+  width: 24px!important; 
+  height: 24px!important; 
+  top: 2px; 
+  margin-right: 0.8rem; 
+  color: red
+}
+.fullscreen {
+  width: 24px!important; 
+  height: 24px!important; 
+  top: 1px
 }
 </style>

@@ -11,7 +11,10 @@ export default {
         icons: 'el-icon-plus',
         title: "添加菜单",
         method: "showAddMenu"
-      }]
+      }],
+      options: {
+        animation: 150,
+      }
     };
   }
 } 

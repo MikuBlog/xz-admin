@@ -25,7 +25,7 @@ function getImageFile(url) {
  * @param {Array} fileList 压缩文件名称
  * @param {fileName} fileName 文件名称
  */
-export default async (fileList, fileName = 'file') => {
+export default (fileList, fileName = 'file') => {
   const 
     zip = new JSZip(),
     promises = []
@@ -35,7 +35,7 @@ export default async (fileList, fileName = 'file') => {
     type: 'info',
     customClass: "top-floor"
   })
-  await fileList.forEach(val => {
+  fileList.forEach(val => {
     const promise = getImageFile(val).then(data => {
       const arr = val.split("/")
       const fileName = arr[arr.length - 1]

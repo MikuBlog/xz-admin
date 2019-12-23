@@ -96,6 +96,8 @@ export default {
   clearStorage: true,
   // 系统设置icon
   systemSetting: true,
+  // 错误日志icon
+  errorLog: true,
   // 全屏icon
   fullScreen: true,
   // 分页组件

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="详情信息" :visible.sync="dialogVisible" :fullscreen="true" append-to-body>
+  <el-dialog title="详情信息" :visible.sync="dialogVisible" fullscreen append-to-body>
     <el-row :gutter="20">
       <el-col :sm="24" :md="12">
         <h3>操作前的值</h3>
