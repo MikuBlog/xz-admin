@@ -4,6 +4,7 @@ import user from './modules/user'
 import menu from './modules/menu'
 import tags from './modules/tags'
 import setting from './modules/setting'
+import error from './modules/error'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     user,
     menu,
     tags,
-    setting
+    setting,
+    error
   }
 })

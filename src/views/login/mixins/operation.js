@@ -198,7 +198,6 @@ export default {
             this.$getMemorySes("redirect")
               ? this.$router.push({ path: this.$getMemorySes("redirect") })
               : this.$router.push({ path: "/home/welcome" })
-            this.$successTip({ msg: "欢迎回来", title: "Welcome" })
           });
         } else {
           return false;

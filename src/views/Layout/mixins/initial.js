@@ -9,6 +9,7 @@ export default {
     this.getLogo()
     // 初始化布局大小
     this.initialSize()
+    this.$successTip({ msg: "欢迎回来", title: "Welcome" })
   },
   computed: {
     ...mapState({

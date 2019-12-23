@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["REMOVE_TAGS"]),
+    ...mapMutations([ "REMOVE_TAGS" ]),
     moveToCurrentTag() {
       const tags = this.$refs.tag;
       this.$nextTick(() => {

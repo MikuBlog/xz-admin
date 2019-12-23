@@ -4,6 +4,10 @@
 </template>
 
 <script>
+/**
+ * @author xuanzai
+ * @description 二次封装百度富文本编辑器
+ */
 import VueUeditorWrap from "vue-ueditor-wrap";
 export default {
   name: "Editor",

@@ -1,16 +1,22 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" :width="defaultConfig.previewImageSize" :before-close="handleClose" append-to-body destroy-on-close>
+  <el-dialog
+    :visible.sync="dialogVisible"
+    :width="defaultConfig.previewImageSize"
+    :before-close="handleClose"
+    append-to-body
+    destroy-on-close
+  >
     <div ref="box" class="box" v-loading="loading">
-      <img :src="imageUrl">
+      <img :src="imageUrl" />
     </div>
   </el-dialog>
 </template>
 
 <script>
 /**
-  * @author xuanzai
-  * @description 简单的图片预览组件
-  */
+ * @author xuanzai
+ * @description 简单的图片预览组件
+ */
 export default {
   name: "ImagePreview",
   props: {
@@ -28,7 +34,7 @@ export default {
       dialogVisible: false,
       loading: false,
       image: {}
-    }
+    };
   },
   computed: {
     imageUrl() {
@@ -37,23 +43,23 @@ export default {
   },
   watch: {
     showModal(val) {
-      if(val) {
-        this.loading = true
-        this.image.src = this.imageUrl
+      if (val) {
+        this.loading = true;
+        this.image.src = this.imageUrl;
         this.image.onload = () => {
-          this.loading = false
-        }
+          this.loading = false;
+        };
       }
       this.dialogVisible = this.showModal;
     }
   },
   created() {
-    this.image = new Image()
+    this.image = new Image();
   },
   methods: {
     handleClose() {
-      this.dialogVisible = false
-      this.$emit('update:showModal', false)
+      this.dialogVisible = false;
+      this.$emit("update:showModal", false);
     }
   }
 };

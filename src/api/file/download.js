@@ -17,18 +17,18 @@ function download(url, fileName) {
     customClass: "top-floor"
   })
   axios({
-		url,
-		method: "get",
-		responseType: 'blob'
-	}).then(result => {
-    const 
+    url,
+    method: "get",
+    responseType: 'blob'
+  }).then(result => {
+    const
       a = document.createElement('a'),
       arr = url.split('/')
-		a.download = fileName || arr[arr.length - 1]
-		a.href = window.URL.createObjectURL(result.data)
+    a.download = fileName || arr[arr.length - 1]
+    a.href = window.URL.createObjectURL(result.data)
     a.click()
     loading.close()
-	}).catch(e => {
+  }).catch(e => {
     Message({
       message: e,
       type: 'error',

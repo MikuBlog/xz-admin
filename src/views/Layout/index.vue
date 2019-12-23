@@ -100,7 +100,7 @@
         <el-header class="navbar-box" style="height: 50px;">
           <div class="navbar">
             <DropDown ref="dropDown" @showSetting="$refs.setting.isSetting = true" />
-            <IconBox ref="iconBox" />
+            <IconBox ref="iconBox" @showErrorLogBox="$refs.errorLogBox.dialogVisible = true" />
             <MenuButton ref="menuButton" @showMenu="showMenu" />
             <Breadcrumb
               class="breadcrumb"
@@ -140,6 +140,7 @@
       </el-container>
     </el-container>
     <settingDrawer ref="setting" />
+    <error-log ref="errorLogBox" />
   </div>
 </template>
 <script>
