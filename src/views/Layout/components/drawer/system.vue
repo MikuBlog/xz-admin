@@ -9,7 +9,7 @@
     >
       <el-radio-group v-model="$store.state.setting.menuStyle">
         <el-radio label="light">白昼</el-radio>
-        <el-radio label="dark">夜晚</el-radio>
+        <el-radio label="dark">夜间</el-radio>
       </el-radio-group>
     </div>
     <div v-show="defaultConfig.diy.menu">
@@ -107,7 +107,8 @@ export default {
   methods: {
     // 初始化菜单样式
     initialMenuStyle() {
-      const menuScrollBar = document.querySelector(".menu-scrollbar"),
+      const 
+        menuScrollBar = document.querySelector(".menu-scrollbar"),
         menuProp = document.querySelectorAll(".el-menu--popup"),
         menuItemGroup = document.querySelectorAll(".el-menu-item-group"),
         drawerContent = document.querySelector(
@@ -117,7 +118,7 @@ export default {
       this.$setStyle(
         horizontalScrollbar,
         'background',
-        this.menuStyle === 'dark'
+        this.settings.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
           : this.defaultConfig.menuStyle.light.backgroundColor)
       this.$setStyle(
@@ -127,7 +128,6 @@ export default {
           ? this.defaultConfig.menuStyle.dark.backgroundColor
           : this.defaultConfig.menuStyle.light.backgroundColor
       );
-      this.$setStyle(menuScrollBar, "border-right", "1px solid #dcdfe6");
       this.$setStyle(
         drawerContent,
         "background",
@@ -198,13 +198,19 @@ export default {
         this.settings.brightness = 10;
       }
       if (!this.settings.dark) {
-        this.$setStyle(
+        this.settings.brightness !== 100
+        ? this.$setStyle(
           this.app,
           "filter",
           `brightness(${this.settings.brightness / 100} ${
             this.settings.dark ? "hue-rotate(180deg) invert(1)" : ""
           })`
-        );
+        )
+        : this.$setStyle(
+          this.app,
+          "filter",
+          ""
+        )
       }
     },
     // 值格式化

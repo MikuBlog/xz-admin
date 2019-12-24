@@ -4,8 +4,7 @@
  * @param {Object} option 
  * @returns {WebSocket}
  */
-export default (
-  {
+export default ({
     url,
     onOpen,
     onMessage,

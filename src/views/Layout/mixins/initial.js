@@ -11,6 +11,9 @@ export default {
     this.initialSize()
     this.$successTip({ msg: "欢迎回来", title: "Welcome" })
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.getWindowWidth)
+  },
   computed: {
     ...mapState({
       themeColor: state => state.setting.themeColor,
@@ -92,8 +95,8 @@ export default {
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
           : this.defaultConfig.menuStyle.light.backgroundColor)
+      
       this.$setStyle( menuScrollBar, {
-        borderRight: '1px solid #dcdfe6',
         background: this.menuStyle === 'dark'
         ? this.defaultConfig.menuStyle.dark.backgroundColor
         : this.defaultConfig.menuStyle.light.backgroundColor
@@ -162,9 +165,7 @@ export default {
     // 事件监听
     initialListener() {
       const _this = this
-      window.addEventListener('resize', () => {
-        this.getWindowWidth()
-      })
+      window.addEventListener('resize', this.getWindowWidth)
       if(!isMobile() && !isSafari()) {
         document.querySelector('.os-viewport').addEventListener('scroll', function () {
           _this.getScrollTop(this)

@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <div>
     <template v-for="navMenu in navMenus">
       <el-menu-item 
                     v-show="navMenu.enabled"
@@ -30,7 +30,7 @@
         </el-menu-item-group>
       </el-submenu>
     </template>
-  </fragment>
+  </div>
 </template>
 
 <script>
@@ -49,4 +49,17 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .menu-title {
+    position: relative;
+    margin-left: 7px!important;
+  }
+  svg {
+    position: relative;
+    right: 6px!important;
+    vertical-align: -0.15em!important;
+    width: 1rem!important;
+  }
+</style>
 

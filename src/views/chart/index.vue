@@ -81,7 +81,10 @@
     <el-row style="margin-top: 1rem">
       <el-col :span="24">
         <el-card class="box-card">
-          <ve-line :data="lineData" :settings="lineSettings" :colors="colors"></ve-line>
+          <ve-line :data="lineData" :settings="lineSettings" :colors="colors" :after-config="(options) => {
+            options.animationDuration = 3000
+            return options
+        }"></ve-line>
         </el-card>
       </el-col>
     </el-row>

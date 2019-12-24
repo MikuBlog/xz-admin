@@ -5,7 +5,7 @@ import { Message, MessageBox, Notification } from 'element-ui'
  * @description 提示
  * @param {String} msg 
  */
-const successMsg = (msg) => {
+const successMsg = msg => {
   Message({
     message: msg,
     type: 'success',
@@ -13,7 +13,7 @@ const successMsg = (msg) => {
   })
 }
 
-const warnMsg = (msg) => {
+const warnMsg = msg => {
   Message({
     message: msg,
     type: 'warning',
@@ -21,7 +21,7 @@ const warnMsg = (msg) => {
   })
 }
 
-const errorMsg = (msg) => {
+const errorMsg = msg => {
   Message({
     message: msg,
     type: 'error',

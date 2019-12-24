@@ -1,8 +1,6 @@
 import Vue from 'vue'
 // 引入markdown编辑器
 import mavonEditor from 'mavon-editor'
-// 引入导航栏折叠
-import Fragment from 'vue-fragment'
 // 引入表单生成器
 import FormMaking from 'form-making'
 // 引入表单生成器富文本
@@ -396,8 +394,6 @@ Vue.prototype.defaultConfig = DefaultConfig
 Vue.use(mavonEditor)
 // 引入树状选择器组件
 Vue.component('treeselect', Treeselect)
-// 引入导航栏折叠
-Vue.use(Fragment.Plugin)
 // 引入表单生成器
 Vue.use(FormMaking)
 // 引入表单生成器富文本
