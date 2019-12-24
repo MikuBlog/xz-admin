@@ -5,6 +5,9 @@ export default {
       stack: { 用户: ["访问用户", "下单用户"] },
       area: true
     };
+    this.lineExtend = {
+      animationDuration: 10000
+    }
     this.ringSettings = {
       roseType: "radius"
     };

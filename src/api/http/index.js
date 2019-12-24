@@ -69,8 +69,8 @@
 	let loading
 	// 给所有的实例配置请求根路径
 	axios.defaults.baseURL = baseUrl
-    // 配置请求时限
-	axios.defaults.timeout = 10000 
+    // 配置请求时限（15s）
+	axios.defaults.timeout = 15000 
 	// 给所有的实例配置同一的返回数据格式
 	axios.defaults.transformResponse = [(data) => {
 		try {

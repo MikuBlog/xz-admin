@@ -5,41 +5,38 @@ import { Loading, Message } from 'element-ui'
 
 let loading = ""
 
-function getImageFile(url) {
-  return new Promise((resolve, reject) => {
-    axios({
-      url,
-      method: "get",
-      responseType: 'blob'
-    }).then(data => {
-      resolve(data.data)
-    }).catch(err => {
-      reject(err)
-    })
+function getFile(url) {
+  return axios({
+    url,
+    method: "get",
+    responseType: 'blob'
   })
 }
-
 /**
  * @author xuanzai
  * @description 批量导出文件
- * @param {Array} fileList 压缩文件名称
- * @param {fileName} fileName 文件名称
+ * @param {Array} fileList 文件地址列表
+ * @param {fileName} fileName 压缩文件名称
  */
 export default (fileList, fileName = 'file') => {
-  const 
+  const
     zip = new JSZip(),
     promises = []
-  loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
+  loading = Loading.service({ 
+    fullscreen: true, 
+    background: "rgba(255, 255, 255, .4)", 
+    customClass: 'top-floor' 
+  })
   Message({
     message: "正在导出，请耐心等待",
     type: 'info',
     customClass: "top-floor"
   })
-  fileList.forEach(val => {
-    const promise = getImageFile(val).then(data => {
-      const arr = val.split("/")
+  fileList.forEach(url => {
+    const promise = getFile(url).then(data => {
+      const arr = url.split("/")
       const fileName = arr[arr.length - 1]
-      zip.file(fileName, data)
+      zip.file(fileName, data.data)
     })
     promises.push(promise)
   })

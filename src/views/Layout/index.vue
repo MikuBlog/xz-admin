@@ -41,8 +41,9 @@
         class="drawer-menu"
         v-show="isSmall"
         v-model="isMenuCollapse"
-        width="200"
+        width="205"
         placement="left"
+        :closable="false"
       >
         <el-scrollbar style="height:100%">
           <el-menu

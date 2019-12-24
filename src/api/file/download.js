@@ -10,7 +10,11 @@ import { Loading, Message } from 'element-ui'
 let loading = ""
 
 function download(url, fileName) {
-  loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
+  loading = Loading.service({ 
+    fullscreen: true, 
+    background: "rgba(255, 255, 255, .4)", 
+    customClass: 'top-floor' 
+  })
   Message({
     message: "正在下载文件，请耐心等待",
     type: 'info',

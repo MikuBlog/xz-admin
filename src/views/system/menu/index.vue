@@ -22,11 +22,6 @@
               ></el-button>
             </el-row>
           </div>
-          <draggable
-          v-model="menuList"
-          :options="options"
-          style="min-height: 100px"
-        >
           <el-table
             :data="menuList"
             style="width: 100%;margin-bottom: 20px;"
@@ -83,7 +78,6 @@
               </template>
             </el-table-column>
           </el-table>
-          </draggable>
         </el-card>
       </el-col>
     </el-row>

@@ -36,10 +36,10 @@
 }
 .el-menu {
   background: transparent;
-  width: 200px;
+  width: 205px;
 }
 .el-menu--collapse {
-  width: 63px;
+  width: 53px;
 }
 .el-menu-item {
   position: relative;
@@ -147,8 +147,8 @@
   margin-top: 0;
 }
 .menu-horizontal-item {
-  flex: 1;
-  display: inline-block;
+  position: relative;
+  display: flex;
 }
 .logo-horizontal {
   position: relative;
@@ -176,6 +176,7 @@
 }
 .top {
   position: relative;
+  overflow-x: hidden;
   padding: 20px;
 }
 .footer {
