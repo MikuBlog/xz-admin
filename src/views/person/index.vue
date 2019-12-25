@@ -86,7 +86,7 @@
                 <div slot="reference">{{ scope.row.address }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="请求耗时" :show-overflow-tooltip="true">
+            <el-table-column label="请求耗时" align="center">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">
                   <el-tag>{{ scope.row.time }}ms</el-tag>

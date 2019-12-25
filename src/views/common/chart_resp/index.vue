@@ -82,4 +82,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.box-card {
+  position: relative;
+  margin: 0.5rem 0;
+}
 </style>

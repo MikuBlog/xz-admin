@@ -146,9 +146,12 @@ npm run serve
 │  │  ├─components // 页面组件
 │  │  └─style // 页面样式
 │  │  │  └─index.scss
+│  │  └─data // 静态数据模块
 │  │  └─mixins // 业务逻辑模块
 │  │  │  └─initial.js // 初始化文件
 │  │  │  └─operation.js // 页面逻辑文件
 │  │  │  └─property.js // 响应式属性管理文件
 │  │  ├─index.vue // 页面
 ```
+
+当然，怎么开发舒爽怎么来也是没问题的~~~
