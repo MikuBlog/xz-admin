@@ -2,7 +2,7 @@
  * @author xuanzai
  * @description 会话缓存
  * @param {String} key
- * @param {Number | Boolean | String | Object} data 
+ * @param {Any} data 
  */
 function setMemorySes(key, data) {
     sessionStorage.setItem(key, JSON.stringify(data))

@@ -32,7 +32,7 @@
       effect="dark"
       content="查看错误日志"
       placement="bottom"
-      v-show="defaultConfig.errorLog"
+      v-show="defaultConfig.errorLog && errorLogList.length"
     >
       <svg-icon
         class="bug"
@@ -57,12 +57,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       isFullScreen: false,
       isMini: false
     };
+  },
+  computed: {
+    ...mapState({
+      errorLogList: state => state.error.errorLogList
+    })
   },
   methods: {
     // 清除缓存
