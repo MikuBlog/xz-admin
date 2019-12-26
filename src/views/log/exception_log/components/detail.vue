@@ -1,6 +1,6 @@
 <template>
   <el-dialog title="详情信息" :visible.sync="dialogVisible" :fullscreen="true" append-to-body>
-      <span>{{ exceptionDetail }}</span>
+      <div class="code">{{ exceptionDetail }}</div>
     </el-dialog>
 </template>
 
@@ -14,3 +14,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .code {
+    white-space: pre-wrap;
+  }
+</style>

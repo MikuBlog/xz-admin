@@ -21,7 +21,7 @@ export default {
       }).then(result => {
         const Detail = this.$refs.Detail
         Detail.dialogVisible = true;
-        Detail.exceptionDetail = result.data;
+        Detail.exceptionDetail = result.data.exception;
       });
     }
   }

@@ -10,6 +10,7 @@
       clearable
       remote
       @on-change="change"
+			@click.native.stop="show = true"
       ref="headerSearchSelect"
       transfer
     >
@@ -41,6 +42,9 @@ export default {
       return this.$store.state.menu.menuList;
     }
   },
+	beforeDestroy() {
+		document.body.removeEventListener("click", this.close)
+	},
   watch: {
     // 当路由发生变化的时候重新生成路由
     routes() {
@@ -49,16 +53,10 @@ export default {
     // 当路由列表发生变化时，重新初始化fuse列表
     searchPool(list) {
       this.initFuse(list);
-    },
-    show(value) {
-      if (value) {
-        document.body.addEventListener("click", this.close);
-      } else {
-        document.body.removeEventListener("click", this.close);
-      }
     }
   },
   mounted() {
+		document.body.addEventListener("click", this.close)
     this.searchPool = this.generateRoutes(this.routes);
   },
   methods: {
