@@ -259,7 +259,7 @@ const throttledFun = this.$throttled(callback, 2500)
 ```js
 // 设置单个属性
 this.$setStyle(this.$refs.background, 'background-image', 'url(xxxx)')
-// 设置对个属性
+// 设置多个属性
 this.$setStyle(this.$refs.background, {
   backgroundImage: 'url(xxx)',
   backgroundSize: 'cover',
