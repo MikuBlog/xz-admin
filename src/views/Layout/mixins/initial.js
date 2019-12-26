@@ -9,7 +9,7 @@ export default {
     this.getLogo()
     // 初始化布局大小
     this.initialSize()
-    this.$successTip({ msg: `欢迎您${this.$getMemorySes('username')}`, title: `Welcome` })
+    this.$successTip({ msg: `欢迎您${this.$getMemoryPmt('username')}`, title: `Welcome` })
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.getWindowWidth)
