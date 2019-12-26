@@ -42,5 +42,5 @@
 + 富文本编辑器：`UEditor`
 + markdown编辑器：`mavonEditor`
 
-
+> 暂不考虑开源后端代码
 
