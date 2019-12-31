@@ -8,6 +8,11 @@ export default {
       generatorBox.getFormMsg()
       generatorBox.getTableList(item.tableName)
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.$refs.pagination.toFirstPage()
+    },
     // 点击搜索
     search() {
       this.$refs.pagination.toFirstPage()

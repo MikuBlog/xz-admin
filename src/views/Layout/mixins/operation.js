@@ -49,9 +49,12 @@ export default {
         ? this.isMenuCollapse = !this.isMenuCollapse
         : this.isCollapse = !this.isCollapse
       // 重渲染展开菜单项
-      setTimeout(() => {
-        this.initialStyle()
-      }, 400)
+      this.interval = setInterval(() => {
+        if (window.getComputedStyle(document.querySelector('.collapse-menu .el-menu-item-group'))['background-color'] === 'rgba(0, 0, 0, 0)') {
+          this.initialStyle()
+          clearInterval(this.interval)
+        }
+      }, 40)
     }
   }
 }

@@ -12,6 +12,7 @@
                 @keyup.native="searchEnter"
               ></el-input>
               <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+              <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
               <el-button
                 type="primary"
                 icon="el-icon-plus"
@@ -43,8 +44,8 @@
                 <el-tag>{{ scope.row.sort }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :show-overflow-tooltip="true" prop="path" label="链接地址" />
-            <el-table-column :show-overflow-tooltip="true" prop="component" label="组件路径" />
+            <el-table-column show-overflow-tooltip prop="path" label="链接地址" />
+            <el-table-column show-overflow-tooltip prop="component" label="组件路径" />
             <el-table-column prop="iframe" label="内部菜单" align="center" width="80px">
               <template slot-scope="scope">
                 <el-tag

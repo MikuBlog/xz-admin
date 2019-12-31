@@ -11,9 +11,10 @@
               @keyup.native="searchEnter"
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
             <el-button
               type="primary"
-              icon="el-icon-s-promotion"
+              icon="fa fa-user-times"
               class="margin-box"
               @click="kickOutAll"
               :disabled="!selectList.length"
@@ -87,7 +88,7 @@
     </el-row>
     <operation-box
       :options="buttonOptions"
-      @deleteAll="deleteAll"
+      @kickOutAll="kickOutAll"
       @downloadUserList="downloadUserList"
     />
   </div>

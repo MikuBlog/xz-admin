@@ -66,6 +66,11 @@ export default {
       authorityItem.parentId = item.parentId;
       this.showEditAuthority();
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.getAuthorityList()
+    },
     // 点击搜索
     search() {
       this.getAuthorityList();

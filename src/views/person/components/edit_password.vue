@@ -9,7 +9,7 @@
       label-width="80px"
     >
       <el-form-item label="旧密码" prop="oldPass">
-        <el-input v-model="userForm.oldPass" style="width: 360px;" />
+        <el-input v-model="userForm.oldPass" type="password" style="width: 360px;" />
       </el-form-item>
       <el-form-item label="新密码" prop="newPass">
         <el-input v-model="userForm.newPass" type="password" style="width: 360px;" />
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { encrypt } from '@/utils/encrypt'
 export default {
   data() {
     var checkPassword = (rule, value, callback) => {
@@ -65,13 +66,15 @@ export default {
       } catch (e) {}
     },
     doSubmit() {
-      delete this.userForm.checkPass;
       this.$refs.userForm.validate(valid => {
         if (valid) {
           this.$http_json({
             url: "/api/user/updatePassword",
             method: "post",
-            data: this.userForm
+            data: {
+              oldPass: encrypt(this.userForm.oldPass),
+              newPass: encrypt(this.userForm.newPass)
+            }
           }).then(() => {
             this.hideBox();
             this.$successMsg("修改成功，请重新登录");

@@ -14,7 +14,7 @@ export default {
         type: "primary",
         icons: 'el-icon-develop',
         title: "批量踢出",
-        method: "deleteAll"
+        method: "kickOutAll"
       }, {
         type: "warning",
         icons: 'el-icon-download',

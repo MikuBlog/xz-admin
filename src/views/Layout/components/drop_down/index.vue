@@ -45,9 +45,13 @@ export default {
         msg: `是否注销当前账号?`,
         iconClass: "el-icon-question"
       }).then(result => {
-        // 退出前先清空用户访问记录
-        this.$setMemoryPmt("token", "");
-        this.$router.push({ path: "/login" });
+        this.$http_normal({
+          url: "/auth/logout",
+          method: "post"
+        }).then(() => {
+          this.$setMemoryPmt("token", "");
+          this.$router.push({ path: "/login" });
+        })
       });
     },
     // 前往项目地址
@@ -75,5 +79,10 @@ export default {
   position: relative;
   height: 0;
   border: 1px solid #eee;
+}
+.el-avatar {
+	img {
+		width: 100%;
+	}
 }
 </style>

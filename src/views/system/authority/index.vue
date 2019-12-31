@@ -12,6 +12,7 @@
                 @keyup.native="searchEnter"
               ></el-input>
               <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+              <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
               <el-button
                 circle
                 type="primary"
@@ -33,6 +34,8 @@
             stripe
           >
             <el-table-column prop="name" label="名称" :render-header="renderHeader">
+            </el-table-column>
+            <el-table-column prop="alias" label="别名">
             </el-table-column>
             <el-table-column prop="createTime" label="创建日期" width="180">
               <template slot-scope="scope">

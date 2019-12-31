@@ -11,13 +11,16 @@
               @keyup.native="searchEnter"
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button
+              type="success"
+              icon="el-icon-refresh"
+              class="margin-box"
+              @click="refresh"
+              circle
+              title="重置"
+            ></el-button>
           </div>
-          <el-table
-            :data="generateCodeList"
-            style="width: 100%"
-            highlight-current-row
-            stripe
-          >
+          <el-table :data="generateCodeList" style="width: 100%" highlight-current-row stripe>
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
@@ -27,17 +30,17 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column label="表名" :show-overflow-tooltip="true">
+            <el-table-column label="表名" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.tableName }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="数据库引擎" :show-overflow-tooltip="true">
+            <el-table-column label="数据库引擎" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.engine }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="字符编码集" :show-overflow-tooltip="true">
+            <el-table-column label="字符编码集" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.coding }}</div>
               </template>

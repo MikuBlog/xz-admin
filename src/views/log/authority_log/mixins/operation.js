@@ -31,6 +31,14 @@ export default {
       detail.authorityOldDetail = this.$jsonPretty(item.oldValue, 1);
       detail.authorityNewDetail = this.$jsonPretty(item.newValue, 1);
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.selectType_1 = ""
+      this.selectType_2 = ""
+      this.date = ""
+      this.$refs.pagination.toFirstPage()
+    },
     // 点击搜索
     search() {
       this.selectType_1
@@ -49,8 +57,8 @@ export default {
       this.dateArray.splice(0, this.dateArray.length);
       this.date &&
         this.dateArray.push(
-          this.$formDate(this.date[0], true),
-          this.$formDate(this.date[1], true)
+          this.$formatDate(this.date[0], true),
+          this.$formatDate(this.date[1], true)
         );
     },
     // 获取操作类型

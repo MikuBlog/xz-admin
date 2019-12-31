@@ -25,6 +25,7 @@
               ></el-option>
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
             <el-button
               type="primary"
               class="margin-box"
@@ -40,22 +41,22 @@
             highlight-current-row
             stripe
           >
-            <el-table-column label="名称" :show-overflow-tooltip="true">
+            <el-table-column label="名称" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.name }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="所属部门" :show-overflow-tooltip="true">
+            <el-table-column label="所属部门" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.dept.name }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="排序" :show-overflow-tooltip="true">
+            <el-table-column label="排序" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.sort }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="状态" align="center" :show-overflow-tooltip="true">
+            <el-table-column label="状态" align="center" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">
                   <el-tag

@@ -21,8 +21,9 @@ export default {
       isItalic: true,
       unLock: false,
       ruleForm: {
-        username: "xuanzai",
+        username: "admin",
         password: "123456",
+        uuid: "",
         vcode: "",
         checked: false
       },

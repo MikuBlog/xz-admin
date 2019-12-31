@@ -35,6 +35,14 @@
                 ></el-option>
               </el-select>
               <el-button icon="el-icon-search" class="margin-box" @click="search_1" circle></el-button>
+              <el-button
+                type="success"
+                icon="el-icon-refresh"
+                class="margin-box"
+                @click="refresh_1"
+                circle
+                title="重置"
+              ></el-button>
             </el-row>
           </div>
           <el-table
@@ -44,12 +52,12 @@
             highlight-current-row
             stripe
           >
-            <el-table-column label="名称" :show-overflow-tooltip="true">
+            <el-table-column label="名称" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.name }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="描述" :show-overflow-tooltip="true">
+            <el-table-column label="描述" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.remark }}</div>
               </template>
@@ -94,22 +102,24 @@
           </div>
           <div class="search">
             <el-row :gutter="10">
-              <el-col :span="12">
-                <el-input
-                  v-model="searchVal_2"
-                  placeholder="按字典标签内容搜索"
-                  @keyup.native="searchEnter_2"
-                ></el-input>
-              </el-col>
-              <el-button icon="el-icon-search" @click="search_2" circle></el-button>
+              <el-input
+                v-model="searchVal_2"
+                class="search-input margin-box"
+                placeholder="按字典标签内容搜索"
+                @keyup.native="searchEnter_2"
+              ></el-input>
+              <el-button icon="el-icon-search" @click="search_2" class="margin-box" circle></el-button>
+              <el-button
+                type="success"
+                icon="el-icon-refresh"
+                class="margin-box"
+                @click="refresh_2"
+                circle
+                title="重置"
+              ></el-button>
             </el-row>
           </div>
-          <el-table
-            :data="detailList"
-            style="width: 100%"
-            highlight-current-row
-            stripe
-          >
+          <el-table :data="detailList" style="width: 100%" highlight-current-row stripe>
             <el-table-column label="所属字典" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ beloneDictName }}</span>

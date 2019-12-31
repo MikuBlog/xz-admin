@@ -19,6 +19,7 @@
                 @keyup.native="searchEnter"
               ></el-input>
               <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+              <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
               <el-button
                 type="primary"
                 icon="el-icon-plus"
@@ -45,12 +46,12 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column label="名称" :show-overflow-tooltip="true">
+            <el-table-column label="名称" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span>{{ scope.row.name }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="数据权限" :show-overflow-tooltip="true">
+            <el-table-column label="数据权限" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.dataScope }}</div>
               </template>

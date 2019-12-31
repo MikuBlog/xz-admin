@@ -56,7 +56,8 @@ export default {
         method: "get"
       }).then(result => {
         const data = JSON.parse(result.request.response)
-        this.codeUrl = `data:image/jpeg;base64,${data.img}`
+        this.ruleForm.uuid = data.uuid
+        this.codeUrl = data.img
       })
     }
   }

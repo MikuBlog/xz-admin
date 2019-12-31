@@ -14,14 +14,16 @@ export default {
         responseType: 'blob',
         method: "get"
       }).then(result => {
-        this.$download(result.data, `用户列表-${this.$formatDate(new Date(), true)}.xls`, true)
+        const a = document.createElement('a')
+        a.href = window.URL.createObjectURL(result.data)
+        a.click()
       }).catch(e => {
         this.$errorMsg(e)
       })
     },
     // 删除选中用户
     deleteAll() {
-      if(this.selectList.length == 0) {
+      if (this.selectList.length == 0) {
         this.$warnMsg("请勾选用户进行批量删除")
         return
       }
@@ -30,7 +32,7 @@ export default {
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/user/delBatch`,
+          url: `/api/user/del`,
           method: "post",
           data: this.selectList.map(val => val.id)
         }).then(() => {
@@ -47,8 +49,9 @@ export default {
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/user/del/${item.id}`,
-          method: "post"
+          url: `/api/user/del`,
+          method: "post",
+          data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getUserList();
@@ -88,6 +91,13 @@ export default {
       component.deptId = item.dept.id;
       component.getJobs(item.dept.id, item.job.id);
       this.showEditUser();
+    },
+    // 重置
+    refresh() {
+      this.searchVal_2 = ""
+      this.selectType = ""
+      this.selectStatus = ""
+      this.$refs.pagination.toFirstPage()
     },
     // 点击搜索
     search_1() {

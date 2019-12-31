@@ -68,6 +68,16 @@ export default {
     showDetailBox() {
       this.$refs.formEdit.isShowDetailBox = true;
     },
+    // 重置
+    refresh_1() {
+      this.searchVal_1 = ""
+      this.selectType_1 = ""
+      this.$refs.pagination_1.toFirstPage()
+    },
+    refresh_2() {
+      this.searchVal_2 = ""
+      this.$refs.pagination_2.toFirstPage()
+    },
     // 回车搜索
     searchEnter_1(e) {
       e.keyCode === 13 &&

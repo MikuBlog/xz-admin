@@ -14,13 +14,9 @@
   transition: 0.3s;
 }
 
-.box:hover {
-  background: whitesmoke;
-}
-
 .svg-icon {
   position: relative;
-  margin-top: 15px;
+  margin: .5rem 0;
   width: 40px;
   height: 40px;
 }

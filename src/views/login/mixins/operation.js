@@ -1,3 +1,4 @@
+import { encrypt } from '@/utils/encrypt'
 export default {
   methods: {
     // 判断是否自动登录
@@ -190,8 +191,9 @@ export default {
             method: "post",
             data: {
               username: this.ruleForm.username,
-              password: this.ruleForm.password,
-              vcode: this.ruleForm.vcode
+              password: encrypt(this.ruleForm.password),
+              vcode: this.ruleForm.vcode,
+              uuid: this.ruleForm.uuid
             }
           }).then(result => {
             this.$setMemoryPmt("token", result.data.token)
@@ -200,6 +202,7 @@ export default {
               ? this.$router.push({ path: this.$getMemorySes("redirect") })
               : this.$router.push({ path: "/home/welcome" })
           });
+          this.getCode()
         } else {
           return false;
         }

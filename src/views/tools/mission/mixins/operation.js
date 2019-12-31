@@ -72,6 +72,12 @@ export default {
       this.isAdd = false
       form.dialog = true
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.selectType = ""
+      this.$refs.pagination.toFirstPage()
+    },
     // 点击搜索
     search() {
       this.$refs.pagination.toFirstPage()

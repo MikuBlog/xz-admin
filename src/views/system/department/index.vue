@@ -26,6 +26,7 @@
                 ></el-option>
               </el-select>
               <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+              <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
               <el-button
                 circle
                 type="primary"
@@ -55,7 +56,7 @@
                 >{{ scope.row.enabled ? "正常" : "停用" }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :show-overflow-tooltip="true" width="180" prop="createTime" label="创建日期">
+            <el-table-column show-overflow-tooltip width="180" prop="createTime" label="创建日期">
               <template slot-scope="scope">
                 <span>{{ scope.row.createTime }}</span>
               </template>

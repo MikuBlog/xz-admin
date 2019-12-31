@@ -63,6 +63,12 @@ export default {
       departmentForm.parentId = item.parentId;
       this.showEditDepartment();
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.selectType = ""
+      this.getDepartmentList()
+    },
     // 点击搜索
     search(val) {
       this.getDepartmentList();

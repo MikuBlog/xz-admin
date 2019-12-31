@@ -7,6 +7,11 @@ export default {
     handleSelectionChange(val) {
       this.selectList = val;
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.$refs.pagination.toFirstPage()
+    },
     // 批量踢出
     kickOutAll() {
       if(this.selectList.length == 0) {

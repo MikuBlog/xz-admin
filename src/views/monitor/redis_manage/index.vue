@@ -12,6 +12,7 @@ import { MessageBox } from 'mint-ui';
               @keyup.native="searchEnter"
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
             <el-button
               type="danger"
               class="margin-box"

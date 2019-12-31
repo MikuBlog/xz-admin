@@ -49,6 +49,11 @@ export default {
       this.selectImageList = picArray.map(val => val.url)
       this.idList = picArray.map(val => val.id);
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.$refs.pagination.toFirstPage()
+    },
     // 点击搜索
     search() {
       this.$refs.pagination.toFirstPage()

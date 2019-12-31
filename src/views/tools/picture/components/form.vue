@@ -16,6 +16,7 @@
       <img :src="dialogImageUrl" width="100%" alt />
     </el-dialog>
     <div slot="footer" class="dialog-footer">
+      <el-button size="small" @click="dialog = false">取消</el-button>
       <el-button type="primary" @click="updateList" size="small">确认</el-button>
     </div>
   </el-dialog>
@@ -25,7 +26,7 @@
 export default {
   data() {
     return {
-      imagesUploadApi: "https://aboot.missiono.cn/api/picture/upload",
+      imagesUploadApi: `${baseUrl}/api/picture/upload`,
       fileList: [],
       pictures: [],
       dialogImageUrl: "",
@@ -43,7 +44,7 @@ export default {
       this.dialogVisible = false;
       this.dialogImageUrl = "";
       this.dialog = false;
-      this.$parent.getPictureList();
+      this.$parent.getPictureList(this.$parent.nowPage, this.$parent.nowSize);
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;

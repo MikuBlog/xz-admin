@@ -72,6 +72,11 @@ export default {
       menuItem.icon = item.icon;
       this.showEditMenu();
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.getMenuList()
+    },
     // 点击搜索
     search() {
       this.getMenuList();

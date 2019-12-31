@@ -31,6 +31,11 @@ export default {
       visitDetail.redisDetail = detail;
       visitDetail.dialogVisible = true;
     },
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.$refs.pagination.toFirstPage()
+    },
     // 点击搜索
     search() {
       this.$refs.pagination.toFirstPage()

@@ -26,6 +26,14 @@
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
             <el-button
+              type="success"
+              icon="el-icon-refresh"
+              class="margin-box"
+              @click="refresh"
+              circle
+              title="重置"
+            ></el-button>
+            <el-button
               icon="el-icon-plus"
               type="primary"
               class="margin-box"
@@ -42,12 +50,7 @@
               circle
             ></el-button>
           </div>
-          <el-table
-            :data="missionList"
-            style="width: 100%"
-            highlight-current-row
-            stripe
-          >
+          <el-table :data="missionList" style="width: 100%" highlight-current-row stripe>
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
@@ -66,12 +69,12 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column label="任务名称" :show-overflow-tooltip="true">
+            <el-table-column label="任务名称" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.jobName }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="Bean名称" :show-overflow-tooltip="true">
+            <el-table-column label="Bean名称" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.beanName }}</div>
               </template>

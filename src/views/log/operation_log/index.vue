@@ -19,8 +19,17 @@
               ></el-option>
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button
+              type="success"
+              icon="el-icon-refresh"
+              class="margin-box"
+              @click="refresh"
+              circle
+              title="重置"
+            ></el-button>
           </div>
           <el-table
+            ref="table"
             class="table"
             :data="operationLogList"
             style="width: 100%"
@@ -39,22 +48,22 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column label="用户名" :show-overflow-tooltip="true">
+            <el-table-column label="用户名" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.username }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="IP" :show-overflow-tooltip="true">
+            <el-table-column label="IP" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.requestIp }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="IP来源" :show-overflow-tooltip="true">
+            <el-table-column label="IP来源" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.address }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="描述" :show-overflow-tooltip="true">
+            <el-table-column label="描述" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.description }}</div>
               </template>
