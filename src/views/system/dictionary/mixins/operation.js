@@ -34,14 +34,29 @@ export default {
       this.$refs.formEdit.detailForm.label = item.label;
       this.$refs.formEdit.detailForm.value = item.value;
       this.$refs.formEdit.detailForm.sort = item.sort;
-      this.showDetailBox();
+      this.showDetailBox()
     },
+		// 导出字典
+		downloadList() {
+			this.$http_json({
+			  url: "/api/dict/download",
+			  responseType: 'blob',
+			  method: "get"
+			}).then(result => {
+			  const a = document.createElement('a')
+			  a.href = window.URL.createObjectURL(result.data)
+			  a.click()
+			}).catch(e => {
+			  this.$errorMsg(e)
+			})
+		},
     // 删除字典
     deleteDictionary(item) {
       this.$showMsgBox({ msg: `是否删除${item.name}字典?` }).then(() => {
         this.$http_json({
-          url: `/api/dict/del/${item.id}`,
-          method: "post"
+          url: `/api/dict/del`,
+          method: "post",
+					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getDictionaryList();
@@ -52,8 +67,9 @@ export default {
     deleteDetail(item) {
       this.$showMsgBox({ msg: `是否删除${item.label}字典详情?` }).then(() => {
         this.$http_json({
-          url: `/api/dictDetail/del/${item.id}`,
-          method: "post"
+          url: `/api/dictDetail/del`,
+          method: "post",
+					data: [ item.id ] 
         }).then(result => {
           this.$successMsg("删除成功");
           this.getDetailList();

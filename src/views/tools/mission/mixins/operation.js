@@ -41,8 +41,9 @@ export default {
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/quartz/del/${item.id}`,
-          method: "post"
+          url: `/api/quartz/del`,
+          method: "post",
+					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getMissionList();

@@ -20,7 +20,7 @@ export default {
       }
       this.$showMsgBox({ msg: `是否踢出所选中用户?` }).then(() => {
         this.$http_json({
-          url: `/auth/online/delBatch`,
+          url: `/auth/online/del`,
           method: "post",
           data: this.selectList.map(val => val.key)
         }).then(() => {
@@ -34,8 +34,9 @@ export default {
     kickOut(item) {
       this.$showMsgBox({ msg: `是否踢出当前用户?` }).then(() => {
         this.$http_json({
-          url: `/auth/online/${item.key}`,
-          method: "post"
+          url: `/auth/online/del`,
+          method: "post",
+					data: [ item.key ]
         }).then(() => {
           this.$successMsg("踢出成功");
           this.getOnlineUserList();

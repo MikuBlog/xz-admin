@@ -8,6 +8,21 @@ export default {
     preview(item) {
       this.$previewFile(convertHttp(item.url))
     },
+		// 下载文件
+		downloadFile(item) {
+			this.$http_json({
+				url: `/api/qiNiuContent/downloadStorage?id=${item.id}&expireInSeconds=3600`,
+				method: "get"
+			}).then(result => {
+				this.$download(result.data.url, item.name)
+			})
+		},
+		// 分享链接
+		shareLink(item) {
+			const share = this.$refs.share
+			share.fileId = item.id
+			share.dialogVisible = true
+		},
     // 批量删除文件
     deleteAll() {
       if(this.idList.length == 0) {
@@ -16,7 +31,7 @@ export default {
       }
       this.$showMsgBox({ msg: `是否删除选中文件?` }).then(() => {
         this.$http_json({
-          url: `/api/localStorage/del`,
+          url: `/api/qiNiuContent/del`,
           method: "post",
           data: this.idList
         }).then(() => {
@@ -30,9 +45,9 @@ export default {
     deleteFile(item) {
       this.$showMsgBox({ msg: `是否删除当前文件?` }).then(() => {
         this.$http_json({
-          url: `/api/localStorage/del`,
+          url: `/api/qiNiuContent/del`,
           method: "post",
-          data: [item.id]
+          data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getFileList(this.nowPage, this.nowSize);
@@ -53,7 +68,19 @@ export default {
       this.searchVal = ""
       this.date = ""
       this.$refs.pagination.toFirstPage()
+			this.$http_json({
+				url: "/api/qiNiuContent/synchronize",
+				method: "post"
+			}).then(result => {
+				this.$refs.pagination.toFirstPage()
+			})
     },
+		// 弹出配置窗口
+		showConfigModal() {
+			const configBox = this.$refs.config
+			configBox.dialog = true
+			configBox.getConfigData()
+		},
     // 点击搜索
     search() {
       this.$refs.pagination.toFirstPage()

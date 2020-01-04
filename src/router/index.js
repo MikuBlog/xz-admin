@@ -7,8 +7,6 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 // 后台管理页面模板
 import Layout from '@/views/Layout/index.vue'
-// 默认路由页，用来存放子路由的纯路由页面
-import DefaultPage from '@/Layout/index.vue'
 
 const 
   Error = () => import('@/views/error/500'),
@@ -52,76 +50,69 @@ const layout = {
   }]
 }
 
-// 动态生成路由
-function generateRouter(list, pre, now) {
-  // 如果含有重定向（含有子菜单），则继续遍历添加
-  if (now && now.redirect) {
-    let options = {
-      path: now.path || "/",
-      name: now.meta.title,
-      component: DefaultPage,
-      meta: now.meta,
-      redirect: now.redirect,
-      children: []
-    }
-    list.forEach(value => {
-      value.meta.iframe = value.iframe
-      // 如果子菜单存在，重新遍历
-      if (value.children) {
-        generateRouter(value.children, options, value)
-      }
-      // 如果当前的路由为父级路由，将子路由添加到父路由下
-      if (!value.redirect) {
-        options.children.push({
-          path: value.path,
-          name: value.name,
-          meta: value.meta,
-          component: () => {
-            if (value.component === "Layout") {
-              router.push({ path: "/home/404" })
-            } else {
-              return import(`@/views${value.component}`)
-            }
-          }
-        })
-      }
-    })
-    pre.children.push(options)
-  } else {
-    list.forEach(value => {
-      // 如果子菜单存在，继续递归
-      if (value.children) {
-        generateRouter(value.children, pre, value)
-      }
-      // 将没有重定向的菜单先将入到layout路由里作为子路由，避免路由重复
-      if (!value.redirect) {
-        pre.children.push({
-          path: value.path,
-          name: value.name,
-          meta: value.meta,
-          component: () => {
-            if (value.component === "Layout") {
-              router.push({ path: "/home/404" })
-            } else {
-              return import(`@/views${value.component}`)
-            }
-          }
-        })
-      }
-    })
-  }
+// 扁平化生成路由
+function generateRouter(routes, newRoutes = []) {
+	routes.map(item => {
+		if(item.children && item.children.length > 0) {
+			generateRouter(item.children, newRoutes)
+		}
+		item.meta.iframe = item.iframe
+		item.meta.cache = item.cache
+		item.meta.id = item.id
+		item.meta.parentId = item.parentId
+		newRoutes.push({
+			path: item.path || "/",
+			name: item.name,
+			meta: item.meta,
+			component: () => {
+				const component = import(`@/views${item.component}`)
+				component.then(result => {
+					const aliasName = item.path.replace(/\//g, "")
+					result.default.name = aliasName
+				})
+				return component
+			}
+		})
+	})
+	return newRoutes
+}
+
+// 扁平化列表
+function flatList(list) {
+	let allList = []
+	for(let i = 0, len = list.length; i < len; i ++) {
+		allList.push(list[i])
+		if(list[i].children && list[i].children.length > 0) {
+			allList = allList.concat(flatList(list[i].children))
+		}
+	}
+	return allList
+}
+
+// 生成面包屑
+function generateBreadcrumb(route, list) {
+	let breadcrumbList = []
+	if(route.meta.title === '首页') return
+	breadcrumbList.unshift(route)
+	for(let i = 0, len = list.length; i < len; i ++) {
+		if(list[i].id === (route.meta.parentId || route.parentId)) {
+			breadcrumbList.unshift(...generateBreadcrumb(list[i], list))
+		}
+	}
+	return breadcrumbList
 }
 
 // 获取菜单与路由
-function getRouter() {
+function getData() {
   if (store.state.menu.menuList.length == 0) {
     Http.http_json({
       url: "/api/menu/build",
       method: "get"
     }).then(result => {
       const list = result.data
-      store.commit("SET_MENU_LIST", list)
-      generateRouter(list, layout)
+      store.commit("SET_MENU_LIST", list) 
+			store.commit("SET_CACHE_VIEWS", flatList(list))
+			layout.children.push(...generateRouter(list))
       router.addRoutes([layout])
       router.addRoutes([{
         path: "*",
@@ -129,26 +120,6 @@ function getRouter() {
       }])
     })
   }
-}
-
-// 添加标签页
-function addTags(tag) {
-  const tagsList = store.state.tags.tagsList
-  // 不添加标签页
-  if (tag.meta.title === "500" || tag.meta.title === "404" || tag.meta.title === "403" || tag.meta.title === '重定向') {
-    return
-  }
-  // 如果已存在标签，不添加标签
-  for (let i = 0, len = tagsList.length; i < len; i++) {
-    if (tagsList[i].meta.title === tag.meta.title || !tag.name) {
-      return
-    }
-  }
-  store.commit('ADD_TAGS', {
-    name: tag.name,
-    meta: tag.meta,
-    path: tag.path
-  })
 }
 
 // 清除缓存
@@ -171,7 +142,7 @@ router.beforeEach((to, from, next) => {
   // 如果直接输入域名,重定向到登录界面
   if(to.path === '/') {
   	next({ path: '/login' })
-	return
+		return
   }
   if (Storage.getMemoryPmt('token')) {
     if (to.path === "/") {
@@ -179,14 +150,16 @@ router.beforeEach((to, from, next) => {
     } else {
       // 如果菜单信息不存在（直接访问），重新拉取动态路由与菜单
       if (store.state.menu.menuList.length == 0) {
-        getRouter()
+        getData()
       }
-      addTags(to)
+			// 添加标签页
+			store.commit('ADD_TAGS', to)
       next()
     }
   } else {
-    // 保存重定向地址
-    Storage.setMemorySes("redirect", to.fullPath)
+		if(to.fullPath !== '/login') {
+			Storage.setMemorySes("redirect", to.fullPath)
+		}
     next({ path: "/login" })
   }
 })
@@ -194,6 +167,9 @@ router.beforeEach((to, from, next) => {
 // 跳转路由后触发
 router.afterEach((to, from) => {
   NProgress.done()
+	store.commit("CLEAR_CRUMB_LIST")
+	store.state.menu.menuList.length > 0 
+	&& store.commit("SET_CRUMB_LIST", generateBreadcrumb(to, flatList(store.state.menu.menuList)))
 })
 
 export default router

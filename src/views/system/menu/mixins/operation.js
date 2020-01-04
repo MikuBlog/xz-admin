@@ -38,10 +38,11 @@ export default {
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/menu/del/${item.id}`,
-          method: "post"
+          url: `/api/menu/del/`,
+          method: "post",
+					data: [ item.id ]
         }).then(() => {
-          this.$successMsg("删除成功");
+          this.$successMsg("删除成功，刷新页面即可生效");
           this.getMenuList();
         });
       });
@@ -70,6 +71,9 @@ export default {
       menuItem.enabled = item.enabled.toString();
       menuItem.parentId = item.parentId;
       menuItem.icon = item.icon;
+			menuItem.cache = item.cache
+			? item.cache.toString() 
+			: "false";
       this.showEditMenu();
     },
     // 重置

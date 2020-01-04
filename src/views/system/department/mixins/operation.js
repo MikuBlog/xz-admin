@@ -35,8 +35,9 @@ export default {
     deleteDepartment(item) {
       this.$showMsgBox({ msg: `是否删除${item.name}部门?` }).then(() => {
         this.$http_json({
-          url: `/api/dept/del/${item.id}`,
-          method: "post"
+          url: `/api/dept/del`,
+          method: "post",
+					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getDepartmentList();

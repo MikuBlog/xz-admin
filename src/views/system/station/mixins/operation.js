@@ -4,8 +4,9 @@ export default {
     deleteStation(item) {
       this.$showMsgBox({ msg: `是否删除${item.name}岗位?` }).then(() => {
         this.$http_json({
-          url: `/api/job/del/${item.id}`,
-          method: "post"
+          url: `/api/job/del`,
+          method: "post",
+					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getStationList();

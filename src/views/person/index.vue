@@ -31,8 +31,12 @@
             <span class="word">个人信息</span>
             <div class="border"></div>
           </div>
+					<div style="margin: .5rem 0; font-size: .8rem;">
+					  <i class="el-icon-s-custom"></i>
+					  昵称：{{user.nickname || "无"}}
+					</div>
           <div style="margin: .5rem 0; font-size: .8rem;">
-            <i class="el-icon-s-custom"></i>
+            <i class='el-icon-office-building' />
             部门：{{user.dept}}
           </div>
           <div style="margin: .5rem 0; font-size: .8rem;">

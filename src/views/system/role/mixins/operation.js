@@ -4,11 +4,12 @@ export default {
     deleteRole(item) {
       this.$showMsgBox({ msg: `是否删除${item.name}角色?` }).then(() => {
         this.$http_json({
-          url: `/api/role/del/${item.id}`,
-          method: "post"
+          url: `/api/role/del`,
+          method: "post",
+					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getDictionaryList();
+          this.getRoleList(this.nowPage, this.nowSize);
         });
       });
     },

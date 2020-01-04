@@ -24,6 +24,11 @@ export default {
   },
   // 系统样式设置
   diy: {
+		/* 动画 */
+		// 路由过渡动画
+		routerAnimation: true,
+		// 面包屑过渡动画
+		breadcrumbAnimation: true,
     /* 系统布局模块 */
     layout: true,
     // 系统布局大小

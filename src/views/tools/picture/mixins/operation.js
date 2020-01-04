@@ -33,7 +33,7 @@ export default {
         this.$http_json({
           url: `/api/picture/del`,
           method: "post",
-          data: [item.id]
+          data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getPictureList();

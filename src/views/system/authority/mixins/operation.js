@@ -38,8 +38,9 @@ export default {
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/permission/del/${item.id}`,
-          method: "post"
+          url: `/api/permission/del`,
+          method: "post",
+					data: [ item.id ] 
         }).then(() => {
           this.$successMsg("删除成功");
           this.getAuthorityList();

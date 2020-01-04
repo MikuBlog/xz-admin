@@ -43,6 +43,14 @@
                 circle
                 title="重置"
               ></el-button>
+							<el-button
+							  type="warning"
+							  icon="el-icon-download"
+							  class="margin-box"
+							  @click="downloadList"
+							  title="导出用户列表"
+							  circle
+							></el-button>
             </el-row>
           </div>
           <el-table

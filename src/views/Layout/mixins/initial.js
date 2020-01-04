@@ -27,6 +27,7 @@ export default {
       layoutSize: state => state.setting.layoutSize,
       tagsList: state => state.tags.tagsList,
       menuList: state => state.menu.menuList,
+			cacheViews: state => state.cacheViews.cacheViews
     }),
     menuBackgroundColor() {
       return this.menuStyle === 'dark'

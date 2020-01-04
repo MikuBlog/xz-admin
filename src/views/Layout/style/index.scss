@@ -55,6 +55,7 @@
 .tabs {
   position: relative;
   background: #fefefe;
+	z-index: 99;
 }
 .el-icon-caret-bottom {
   position: absolute;
@@ -215,12 +216,3 @@
   background: rgba(0, 0, 0, 0);
 }
 
-.flex-box {
-  position: relative;
-  display: flex;
-}
-
-.refresh-button {
-  position: relative;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
-}

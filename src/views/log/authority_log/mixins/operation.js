@@ -1,8 +1,8 @@
 export default {
   methods: {
-    // 还原操作日志
+    // 还原权限日志
     recoverAuthority(item) {
-      this.$showMsgBox({ msg: `是否恢复${item.name}操作日志?` }).then(() => {
+      this.$showMsgBox({ msg: `是否恢复${item.name}权限日志?` }).then(() => {
         this.$http_json({
           url: `/api/authLog/recover/${item.id}`,
           method: "post"
@@ -12,12 +12,13 @@ export default {
         });
       });
     },
-    // 删除操作日志
+    // 删除权限日志
     deleteAuthority(item) {
-      this.$showMsgBox({ msg: `是否删除${item.name}操作日志?` }).then(() => {
+      this.$showMsgBox({ msg: `是否删除${item.name}权限日志?` }).then(() => {
         this.$http_json({
-          url: `/api/authLog/del/${item.id}`,
-          method: "post"
+          url: `/api/authLog/del`,
+          method: "post",
+					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
           this.getAuthorityLogList();

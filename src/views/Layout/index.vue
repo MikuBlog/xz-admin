@@ -111,21 +111,15 @@
           <div class="border" style="border-color: #f0f0f0"></div>
         </el-header>
         <div class="tabs" v-show="showTags && defaultConfig.diy.tagViews">
-          <div class="flex-box">
-            <Tag :tagsList="tagsList" class="tag-list" />
-            <el-button
-              class="refresh-button"
-              :round="false"
-              icon="el-icon-refresh-left"
-              @click="refreshPage()"
-              size="small"
-            ></el-button>
-          </div>
+          <Tag :tagsList="tagsList" class="tag-list" />
         </div>
         <el-main class="top" id="top">
-          <transition name="xz-animation" mode="out-in">
-            <router-view @updateUserInfo="getUserInfo" class="router" />
-          </transition>
+					<transition name="xz-animation" mode="out-in">
+						<keep-alive :include="cacheViews">
+							<router-view class="router" />
+						</keep-alive>
+<!-- 						<router-view v-else="!$route.meta.cache" class="router" /> -->
+					</transition>
           <back-top
             :options="{
               target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',

@@ -17,7 +17,7 @@ import { MessageBox } from 'mint-ui';
               type="danger"
               class="margin-box"
               icon="el-icon-delete"
-              @click="deleteAll"
+              @click="$refs.deleteAll.dialogVisible = true"
               title="批量删除"
               circle
             ></el-button>
@@ -58,17 +58,19 @@ import { MessageBox } from 'mint-ui';
     </el-row>
     <operation-box :options="buttonOptions" @deleteAll="deleteAll" />
     <VisitDetail ref="visitDetail" />
+		<DeleteAll ref="deleteAll" />
   </div>
 </template>
 
 <script>
 import VisitDetail from "./components/visit_detail";
+import DeleteAll from './components/delete_all'
 import Initial from "./mixins/initial";
 import Operation from "./mixins/operation";
 import Property from "./mixins/property";
 export default {
   mixins: [Initial, Operation, Property],
-  components: { VisitDetail }
+  components: { VisitDetail, DeleteAll }
 };
 </script>
 
