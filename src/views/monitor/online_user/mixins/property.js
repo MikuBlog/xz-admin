@@ -11,8 +11,8 @@ export default {
       // 总条数
       totalElements: 0,
       buttonOptions: [{
-        type: "primary",
-        icons: 'el-icon-develop',
+        type: "danger",
+        icons: 'fa fa-user-times',
         title: "批量踢出",
         method: "kickOutAll"
       }, {

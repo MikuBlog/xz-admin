@@ -27,7 +27,12 @@ export default {
         icons: 'el-icon-plus',
         title: "添加岗位",
         method: "showAddStation"
-      }]
+      }, {
+				type: "warning",
+				icons: "el-icon-download",
+				title: "导出岗位列表",
+				method: "downloadList"
+			}]
     };
   }
 }

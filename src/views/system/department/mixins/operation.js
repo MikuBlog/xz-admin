@@ -31,6 +31,20 @@ export default {
         ]
       )
     },
+		// 导出部门列表
+		downloadList() {
+			this.$http_json({
+			  url: "/api/dept/download",
+			  responseType: 'blob',
+			  method: "get"
+			}).then(result => {
+			  const a = document.createElement('a')
+			  a.href = window.URL.createObjectURL(result.data)
+			  a.click()
+			}).catch(e => {
+			  this.$errorMsg(e)
+			})
+		},
     // 删除部门
     deleteDepartment(item) {
       this.$showMsgBox({ msg: `是否删除${item.name}部门?` }).then(() => {

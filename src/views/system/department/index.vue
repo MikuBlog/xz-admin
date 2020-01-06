@@ -35,6 +35,14 @@
                 @click="showAddDepartment"
                 title="添加部门"
               ></el-button>
+							<el-button
+							  type="warning"
+							  icon="el-icon-download"
+							  class="margin-box"
+							  @click="downloadList"
+							  title="导出部门列表"
+							  circle
+							></el-button>
             </el-row>
           </div>
           <el-table
@@ -82,7 +90,8 @@
     </el-row>
     <operation-box 
     :options="buttonOptions"
-    @showAddDepartment="showAddDepartment"/>
+    @showAddDepartment="showAddDepartment"
+		@downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>

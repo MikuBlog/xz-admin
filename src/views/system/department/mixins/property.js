@@ -24,7 +24,12 @@ export default {
         icons: 'el-icon-plus',
         title: "添加部门",
         method: "showAddDepartment"
-      }]
+      }, {
+				type: "warning",
+				icons: "el-icon-download",
+				title: "导出部门列表",
+				method: "downloadList"
+			}]
     };
   }
 }

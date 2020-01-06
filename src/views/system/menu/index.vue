@@ -21,6 +21,14 @@
                 title="添加菜单"
                 circle
               ></el-button>
+							<el-button
+							  type="warning"
+							  icon="el-icon-download"
+							  class="margin-box"
+							  @click="downloadList"
+							  title="导出菜单列表"
+							  circle
+							></el-button>
             </el-row>
           </div>
           <el-table
@@ -84,7 +92,8 @@
     </el-row>
     <operation-box 
     :options="buttonOptions"
-    @showAddMenu="showAddMenu"/>
+    @showAddMenu="showAddMenu"
+		@downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>

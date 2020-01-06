@@ -36,7 +36,7 @@ export default {
       this.$refs.formEdit.detailForm.sort = item.sort;
       this.showDetailBox()
     },
-		// 导出字典
+		// 导出字典列表
 		downloadList() {
 			this.$http_json({
 			  url: "/api/dict/download",

@@ -34,6 +34,14 @@
               title="添加岗位"
               circle
             ></el-button>
+						<el-button
+						  type="warning"
+						  icon="el-icon-download"
+						  class="margin-box"
+						  @click="downloadList"
+						  title="导出岗位列表"
+						  circle
+						></el-button>
           </div>
           <el-table
             :data="stationList"
@@ -97,7 +105,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @showAddStation="showAddStation" />
+    <operation-box :options="buttonOptions" @showAddStation="showAddStation" @downloadList="downloadList"/>
     <stationForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>

@@ -142,7 +142,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @showAddRole="showAddRole" />
+    <operation-box :options="buttonOptions" @showAddRole="showAddRole" @downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>

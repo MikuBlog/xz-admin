@@ -28,13 +28,13 @@
 							<el-tag>{{ scope.row.suffix }}</el-tag>
 						</template>
 					</el-table-column>
-					<el-table-column prop="type" label="文件类别" show-overflow-tooltip align="center">
+					<el-table-column prop="size" label="文件大小" show-overflow-tooltip />
+					<el-table-column prop="type" label="类别" show-overflow-tooltip align="center">
 						<template slot-scope="scope">
 							<el-tag type="success">{{ scope.row.type }}</el-tag>
 						</template>
 					</el-table-column>
-					<el-table-column prop="size" label="文件大小" show-overflow-tooltip />
-					<el-table-column prop="operate" label="操作人" :show-overflow-tooltip="true" />
+					<el-table-column prop="operator" label="操作人" :show-overflow-tooltip="true" />
 					<el-table-column label="创建日期" width="180">
 						<template slot-scope="scope">
 							<div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
@@ -42,7 +42,7 @@
 					</el-table-column>
 					<el-table-column label="操作" fixed="right" align="center" width="300">
 						<template slot-scope="scope">
-							<el-button type="success" icon="el-icon-view" @click="preview(scope.row)"></el-button>
+							<el-button type="success" icon="el-icon-view" @click="preview(scope.row)" v-show="scope.row.type === '公开'"></el-button>
 							<el-button type="primary" icon="el-icon-download" @click="downloadFile(scope.row)"></el-button>
 							<el-button type="warning" icon="el-icon-share" @click="shareLink(scope.row)"></el-button>
 							<el-button type="danger" icon="el-icon-delete" @click="deleteFile(scope.row)"></el-button>

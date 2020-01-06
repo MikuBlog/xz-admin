@@ -40,11 +40,16 @@ export default {
         title: "添加字典",
         method: "addDictionary"
       }, {
-        type: "warning",
+        type: "success",
         icons: 'el-icon-plus',
         title: "添加字典详情",
         method: "addDetail"
-      }]
+      }, {
+				type: "warning",
+				icons: "el-icon-download",
+				title: "导出字典列表",
+				method: "downloadList"
+			}]
     };
   }
 }

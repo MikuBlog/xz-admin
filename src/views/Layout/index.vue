@@ -116,9 +116,8 @@
         <el-main class="top" id="top">
 					<transition name="xz-animation" mode="out-in">
 						<keep-alive :include="cacheViews">
-							<router-view class="router" />
+							<router-view @updateUserInfo="getUserInfo" class="router" />
 						</keep-alive>
-<!-- 						<router-view v-else="!$route.meta.cache" class="router" /> -->
 					</transition>
           <back-top
             :options="{

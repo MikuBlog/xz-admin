@@ -43,18 +43,16 @@ export default {
         });
       });
     },
-    // 导出用户列表
-    downloadUserList() {
+    // 导出在线列表
+    downloadList() {
       this.$http_json({
         url: "/auth/online/download",
         responseType: "blob",
         method: "get"
       }).then(result => {
-        this.$download(
-          result.data,
-          `在线用户列表-${this.$formDate(new Date(), true)}.xls`,
-          true
-        );
+				const a = document.createElement('a')
+				a.href = window.URL.createObjectURL(result.data)
+				a.click()
       });
     },
     // 点击搜索

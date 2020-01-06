@@ -31,6 +31,20 @@ export default {
         ]
       )
     },
+		// 导出权限列表
+		downloadList() {
+		  this.$http_json({
+		    url: "/api/permission/download",
+		    responseType: 'blob',
+		    method: "get"
+		  }).then(result => {
+		    const a = document.createElement('a')
+		    a.href = window.URL.createObjectURL(result.data)
+		    a.click()
+		  }).catch(e => {
+		    this.$errorMsg(e)
+		  })
+		},
     // 删除权限
     deleteAuthorityItem(item) {
       this.$showMsgBox({

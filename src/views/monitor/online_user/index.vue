@@ -25,7 +25,7 @@
               type="warning"
               icon="el-icon-download"
               class="margin-box"
-              @click="downloadUserList"
+              @click="downloadList"
               title="导出用户列表"
               circle
             ></el-button>
@@ -94,7 +94,7 @@
     <operation-box
       :options="buttonOptions"
       @kickOutAll="kickOutAll"
-      @downloadUserList="downloadUserList"
+      downloadList="downloadList"
     />
   </div>
 </template>

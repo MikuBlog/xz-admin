@@ -31,6 +31,20 @@ export default {
         ]
       )
     },
+		// 导出菜单列表
+		downloadList() {
+		  this.$http_json({
+		    url: "/api/menu/download",
+		    responseType: 'blob',
+		    method: "get"
+		  }).then(result => {
+		    const a = document.createElement('a')
+		    a.href = window.URL.createObjectURL(result.data)
+		    a.click()
+		  }).catch(e => {
+		    this.$errorMsg(e)
+		  })
+		},
     // 删除菜单
     deleteMenuItem(item) {
       this.$showMsgBox({

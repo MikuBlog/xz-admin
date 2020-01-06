@@ -13,6 +13,20 @@ export default {
         });
       });
     },
+		// 导出角色列表
+		downloadList() {
+		  this.$http_json({
+		    url: "/api/role/download",
+		    responseType: 'blob',
+		    method: "get"
+		  }).then(result => {
+		    const a = document.createElement('a')
+		    a.href = window.URL.createObjectURL(result.data)
+		    a.click()
+		  }).catch(e => {
+		    this.$errorMsg(e)
+		  })
+		},
     // 添加角色弹窗
     showAddRole() {
       this.isAdd = true;

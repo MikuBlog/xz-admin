@@ -50,14 +50,28 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="130px" align="center" fixed="right">
+            <el-table-column label="操作" width="200" align="center" fixed="right">
               <template slot-scope="scope">
+								<el-button
+								  slot="reference"
+								  type="text"
+								  @click="showGeneratorCodeBox(scope.row)"
+								>预览</el-button>
+								<el-button
+								  slot="reference"
+								  type="text"
+								  @click="downloadCode(scope.row)"
+								>下载</el-button>
+								<el-button
+								  slot="reference"
+								  type="text"
+								  @click="showGeneratorCodeBox(scope.row)"
+								>编辑</el-button>
                 <el-button
                   slot="reference"
-                  type="primary"
-                  icon="el-icon-magic-stick"
+                  type="text"
                   @click="showGeneratorCodeBox(scope.row)"
-                >生成代码</el-button>
+                >生成</el-button>
               </template>
             </el-table-column>
           </el-table>

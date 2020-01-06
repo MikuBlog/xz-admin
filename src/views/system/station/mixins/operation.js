@@ -13,6 +13,20 @@ export default {
         });
       });
     },
+		// 导出岗位列表
+		downloadList() {
+		  this.$http_json({
+		    url: "/api/job/download",
+		    responseType: 'blob',
+		    method: "get"
+		  }).then(result => {
+		    const a = document.createElement('a')
+		    a.href = window.URL.createObjectURL(result.data)
+		    a.click()
+		  }).catch(e => {
+		    this.$errorMsg(e)
+		  })
+		},
     // 显示添加岗位窗口
     showAddStation() {
       this.isAdd = true;
