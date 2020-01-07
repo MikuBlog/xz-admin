@@ -124,9 +124,9 @@
 </template>
 
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import Detail from "./components/detail";
 export default {
   mixins: [Initial, Operation, Property],

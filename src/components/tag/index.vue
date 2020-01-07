@@ -46,8 +46,12 @@ export default {
 			affixTags: []
 		};
 	},
+	created() {
+		this.setTagColor()
+	},
 	watch: {
 		$route() {
+			console.log()
 			this.moveToCurrentTag();
 		},
 		visible(value) {
@@ -60,6 +64,14 @@ export default {
 	},
 	methods: {
 		...mapMutations(['REMOVE_TAGS', 'REMOVE_ALL_TAGS', 'REMOVE_RANGE_TAGS']),
+		setTagColor() {
+		  this.$createStyle(`
+		    .activetag {
+		      background: ${this.defaultConfig.default.tagsColor}!important;
+		      border-color: ${this.defaultConfig.default.tagsColor}!important;
+		    }
+		  `, 'tag-color')
+		},
 		refreshPage() {
 			this.$router.replace({
 				path: `/home/redirect?path=${this.selectedTag.fullPath}`
@@ -194,9 +206,9 @@ export default {
 				margin-right: 15px;
 			}
 			&.activetag {
-				background-color: #409efe;
+				background-color: #409eff;
 				color: #fff;
-				border-color: #409efe;
+				border-color: #409eff;
 				&::before {
 					content: '';
 					background: #fff;

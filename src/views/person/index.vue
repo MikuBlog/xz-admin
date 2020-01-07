@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import Operation from './mixins/operation';
-import Property from './mixins/property';
+import Operation from './js/operation';
+import Property from './js/property';
 import Basic from './components/basic'
 import editPassword from './components/edit_password';
 import editEmail from './components/edit_email';
@@ -79,4 +79,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./style/index.scss" />
+<style lang="scss" scoped src="./scss/index.scss" />

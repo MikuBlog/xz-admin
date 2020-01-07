@@ -2,6 +2,7 @@ import router from './router'
 import Http from '@/api/http'
 import store from '@/store'
 import Storage from '@/api/storage'
+import pages from '@/global/js/pages.js'
 // 引入进度条插件
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -50,7 +51,10 @@ const layout = {
   }]
 }
 
-// 扁平化生成路由
+/**
+ * @author xuanzai
+ * @description 路由扁平化
+ */
 function generateRouter(routes, newRoutes = []) {
 	routes.map(item => {
 		if(item.children && item.children.length > 0) {
@@ -77,7 +81,10 @@ function generateRouter(routes, newRoutes = []) {
 	return newRoutes
 }
 
-// 扁平化列表
+/**
+ * @author xuanzai
+ * @description 列表扁平化
+ */
 function flatList(list) {
 	let allList = []
 	for(let i = 0, len = list.length; i < len; i ++) {
@@ -89,7 +96,10 @@ function flatList(list) {
 	return allList
 }
 
-// 生成面包屑
+/**
+ * @author xuanzai
+ * @description 生成面包屑
+ */
 function generateBreadcrumb(route, list) {
 	let breadcrumbList = []
 	if(route.meta.title === '首页') return breadcrumbList
@@ -133,6 +143,11 @@ router.beforeEach((to, from, next) => {
   to.meta.title
     && (document.title = to.meta.title)
   NProgress.start()
+	// 对于一些公共页面不进行处理,直接跳转
+	if(pages.includes(to.name)) {
+		next()
+		return
+	}
   if (to.name === "login") {
     // 重新登录清空缓存
     removeRedis()

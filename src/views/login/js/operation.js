@@ -191,7 +191,8 @@ export default {
             method: "post",
             data: {
               username: this.ruleForm.username,
-              password: encrypt(this.ruleForm.password),
+							// password: encrypt(this.ruleForm.password),
+              password: this.ruleForm.password,
               vcode: this.ruleForm.vcode,
               uuid: this.ruleForm.uuid
             }

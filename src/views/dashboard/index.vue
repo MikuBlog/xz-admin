@@ -110,8 +110,8 @@
 
 <script>
 // 引入v-chart
-import Property from "./mixins/property";
-import Initial from "./mixins/initial";
+import Property from "./js/property";
+import Initial from "./js/initial";
 import countTo from "vue-count-to";
 import VeLine from "v-charts/lib/line.common";
 import VePie from "v-charts/lib/pie.common";
@@ -124,4 +124,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./style/index.scss" scoped></style>
+<style lang="scss" src="./scss/index.scss" scoped></style>

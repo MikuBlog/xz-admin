@@ -8,8 +8,7 @@ export default {
       isSetting: false,
       activeName: 'layout',
       logoBlob: "",
-      user: {},
-      logoUrl: "",
+      user: {}
     }
   }
 }

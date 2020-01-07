@@ -61,9 +61,9 @@
 </template>
 
 <script>
-import Initial from './mixins/initial';
-import Operation from './mixins/operation';
-import Property from './mixins/property';
+import Initial from './js/initial';
+import Operation from './js/operation';
+import Property from './js/property';
 import eForm from './components/form';
 import Config from './components/config'
 import Share from './components/share'

@@ -4,22 +4,22 @@ const
   state = {
     showLogo: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showLogo !== undefined)
       ? storage.getMemoryPmt('setting').showLogo
-      : true,
+      : defaultConfig.default.showLogo,
     showTags: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showTags !== undefined)
       ? storage.getMemoryPmt('setting').showTags
-      : true,
+      : defaultConfig.default.showTags,
     showBreadcrumb: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showBreadcrumb !== undefined)
       ? storage.getMemoryPmt('setting').showBreadcrumb
-      : true,
+      : defaultConfig.default.showBreadcrumb,
     showFooter: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showFooter !== undefined)
     ? storage.getMemoryPmt('setting').showFooter
-    : true,
+    : defaultConfig.default.showFooter,
     isVerticleMenu: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').isVerticleMenu !== undefined)
       ? storage.getMemoryPmt('setting').isVerticleMenu
-      : true,
+      : defaultConfig.default.menuLayout,
     menuStyle: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').menuStyle)
       ? storage.getMemoryPmt('setting').menuStyle
-      : defaultConfig.menuStyleType,
+      : defaultConfig.default.menuStyleType,
     background: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').background)
       ? {
         url: storage.getMemoryPmt('setting').background.url ? storage.getMemoryPmt('setting').background.url : "",
@@ -37,16 +37,16 @@ const
       },
       layoutSize: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').layoutSize !== undefined)
     ? storage.getMemoryPmt('setting').layoutSize
-    : defaultConfig.layoutSize,
+    : defaultConfig.default.layoutSize,
     themeColor: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').themeColor !== undefined)
     ? storage.getMemoryPmt('setting').themeColor
-    : defaultConfig.themeColor,
+    : defaultConfig.default.themeColor,
     themeStyle: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').themeStyle !== undefined)
     ? storage.getMemoryPmt('setting').themeStyle
-    : defaultConfig.themeStyle,
+    : defaultConfig.default.themeStyle,
     brightness: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').brightness !== undefined)
     ? storage.getMemoryPmt('setting').brightness
-    : defaultConfig.brightness
+    : defaultConfig.default.brightness
   }
 export default {
   state

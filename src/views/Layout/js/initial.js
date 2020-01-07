@@ -15,6 +15,7 @@ export default {
   computed: {
     ...mapState({
       themeColor: state => state.setting.themeColor,
+			logoUrl: state => state.global.logoUrl,
       showLogo: state => state.setting.showLogo,
       isVerticleMenu: state => state.setting.isVerticleMenu,
       showBreadcrumb: state => state.setting.showBreadcrumb,
@@ -42,6 +43,7 @@ export default {
     }
   },
   mounted() {
+		console.log(this.logoUrl)
     // 初始化样式
     this.initialStyle()
     // 初始化滚动条
@@ -128,6 +130,14 @@ export default {
             'background',
             this.defaultConfig.menuStyle.light.subMenuItemBackgroundColor)
       })
+			this.$createStyle(`
+			  .el-submenu__title:hover {
+			    background: ${this.defaultConfig.menuStyle.hoverBackgroundColor}!important;
+			  }
+				.el-menu-item:hover {
+					background: ${this.defaultConfig.menuStyle.hoverBackgroundColor}!important;
+				}
+			`, 'menu-style')
     },
     // 初始化子菜单样式
     initialmenuItemGroupStyle() {

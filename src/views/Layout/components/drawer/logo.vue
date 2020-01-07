@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import convertHttp from "@/utils/convertHttp";
 export default {
   data() {
@@ -29,6 +29,9 @@ export default {
     this.getLogo()
   },
   methods: {
+		...mapMutations([
+			"SET_LOGO_URL"
+		]),
     // 获取logo
     getLogo() {
       this.$http_json({
@@ -36,6 +39,7 @@ export default {
         method: "get"
       }).then(result => {
         this.logo = result.data.value
+				this.SET_LOGO_URL(result.data.value)
       })
     },
     // 选择Logo

@@ -65,9 +65,9 @@ import { MessageBox } from 'mint-ui';
 <script>
 import VisitDetail from "./components/visit_detail";
 import DeleteAll from './components/delete_all'
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 export default {
   mixins: [Initial, Operation, Property],
   components: { VisitDetail, DeleteAll }
