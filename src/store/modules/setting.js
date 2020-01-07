@@ -1,4 +1,5 @@
 import storage from '@/api/storage'
+import defaultConfig from '@/global/js/config'
 const
   state = {
     showLogo: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').showLogo !== undefined)
@@ -18,7 +19,7 @@ const
       : true,
     menuStyle: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').menuStyle)
       ? storage.getMemoryPmt('setting').menuStyle
-      : 'light',
+      : defaultConfig.menuStyleType,
     background: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').background)
       ? {
         url: storage.getMemoryPmt('setting').background.url ? storage.getMemoryPmt('setting').background.url : "",
@@ -36,16 +37,16 @@ const
       },
       layoutSize: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').layoutSize !== undefined)
     ? storage.getMemoryPmt('setting').layoutSize
-    : 'medium',
+    : defaultConfig.layoutSize,
     themeColor: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').themeColor !== undefined)
     ? storage.getMemoryPmt('setting').themeColor
-    : "#409eff",
+    : defaultConfig.themeColor,
     themeStyle: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').themeStyle !== undefined)
     ? storage.getMemoryPmt('setting').themeStyle
-    : 'lightMode',
+    : defaultConfig.themeStyle,
     brightness: (storage.getMemoryPmt('setting') && storage.getMemoryPmt('setting').brightness !== undefined)
     ? storage.getMemoryPmt('setting').brightness
-    : 100,
+    : defaultConfig.brightness
   }
 export default {
   state

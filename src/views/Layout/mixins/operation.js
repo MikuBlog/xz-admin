@@ -34,15 +34,6 @@ export default {
         path: `/home/redirect?path=${this.$route.fullPath}`
       })
     },
-    // 获取Logo
-    getLogo() {
-      this.$http_json({
-        url: "/api/showConfig/getByName/logo",
-        method: "get"
-      }).then(result => {
-        this.logoUrl = result.data.value
-      })
-    },
     // 显示菜单
     showMenu() {
       this.isSmall

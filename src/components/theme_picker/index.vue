@@ -99,7 +99,6 @@ export default {
       this.$emit("change", val);
       this.setTagColor()
       $message.close();
-      this.$successMsg("更换主题成功");
       this.settings.themeColor = this.theme
     }
   },

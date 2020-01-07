@@ -2,14 +2,14 @@ import { isMobile, isIpad } from '@/utils/agent'
 // 布尔类型的值改为false则表示不允许设置
 export default {
   // 登录标题
-  loginHeader: "XZ-Admin",
+  loginHeader: "XZ-ADMIN",
   // 自定义登录界面按钮
   loginSetting: true,
   // 合作网站账号登录框
   otherLoginMethods: true,
   // 自动登录框
   isAutoLogin: true,
-  // 菜单颜色
+  // 菜单风格
   menuStyle: {
     light: {
       textColor: '#444',
@@ -22,7 +22,17 @@ export default {
       subMenuItemBackgroundColor: '#1e2c3c'
     }
   },
-  // 系统样式设置
+	// 默认主题颜色
+	themeColor: "#409eff",
+	// 默认布局大小
+	layoutSize: 'medium',
+	// 默认主题样式(lightMode/darkMode/weaknessMode/hueRotateMode)
+	themeStyle: 'lightMode',
+	// 默认系统亮度
+	brightness: 100,
+	// 默认菜单风格(light/dark)
+	menuStyleType: 'light',
+  // 系统样式配置项
   diy: {
 		/* 动画 */
 		// 路由过渡动画
@@ -33,13 +43,13 @@ export default {
     layout: true,
     // 系统布局大小
     layoutSize: true,
-    // 面包屑
+    // 面包屑(false不显示面包屑)
     breadcrumb: true,
-    // 标签栏
+    // 标签栏(false不显示标签栏)
     tagViews: true,
-    // LOGO
+    // LOGO(false不显示logo)
     logo: true,
-    // 页脚
+    // 页脚(false不显示页脚)
     footer: true,
     /* 系统主题模块 */
     theme: true,

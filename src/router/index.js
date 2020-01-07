@@ -92,7 +92,7 @@ function flatList(list) {
 // 生成面包屑
 function generateBreadcrumb(route, list) {
 	let breadcrumbList = []
-	if(route.meta.title === '首页') return
+	if(route.meta.title === '首页') return breadcrumbList
 	breadcrumbList.unshift(route)
 	for(let i = 0, len = list.length; i < len; i ++) {
 		if(list[i].id === (route.meta.parentId || route.parentId)) {

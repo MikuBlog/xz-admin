@@ -5,8 +5,6 @@ export default {
   created() {
     // 获取用户信息
     this.getUserInfo()
-    // 获取Logo信息
-    this.getLogo()
     // 初始化布局大小
     this.initialSize()
     this.$successTip({ msg: `欢迎您${this.$getMemoryPmt('username')}`, title: `Welcome` })
