@@ -3,6 +3,8 @@ import { mapState } from 'vuex'
 import Vue from 'vue'
 export default {
   created() {
+		// 添加访问记录
+		this.getRecord()
     // 获取用户信息
     this.getUserInfo()
     // 初始化布局大小
@@ -63,6 +65,15 @@ export default {
     })
   },
   methods: {
+		// 添加访问记录
+		getRecord() {
+			this.$http_json({
+				url: "/api/visit/iv",
+				method: "post"
+			}).then(result => {
+				console.log(result)
+			})
+		},
     // 初始化滚动条样式
     initialScrollBar() {
       if (!isMobile() && !isSafari()) {

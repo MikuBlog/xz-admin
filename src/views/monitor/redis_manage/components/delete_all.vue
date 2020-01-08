@@ -7,7 +7,7 @@
 		v-dialogDrag
 	  >
 		<el-radio-group v-model="cache">
-	    <el-radio label="1">保留用户数据</el-radio>
+	    <el-radio label="1">仅保留用户数据</el-radio>
 	    <el-radio label="0">清除所有缓存</el-radio>
 	  </el-radio-group>
 	  <span slot="footer" class="dialog-footer">

@@ -67,9 +67,9 @@
   </div>
 </template>
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import Help from './components/help'
 export default {
   mixins: [ Initial, Operation, Property ],
@@ -77,4 +77,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./style/index.scss" scoped></style>
+<style lang="scss" src="./scss/index.scss" scoped></style>
