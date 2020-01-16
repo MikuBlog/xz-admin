@@ -45,7 +45,6 @@ export default {
     }
   },
   mounted() {
-		console.log(this.logoUrl)
     // 初始化样式
     this.initialStyle()
     // 初始化滚动条
@@ -67,12 +66,12 @@ export default {
   methods: {
 		// 添加访问记录
 		getRecord() {
-			this.$http_json({
-				url: "/api/visit/iv",
-				method: "post"
-			}).then(result => {
-				console.log(result)
-			})
+			// this.$http_json({
+			// 	url: "/api/visit/iv",
+			// 	method: "post"
+			// }).then(result => {
+			// 	console.log(result)
+			// })
 		},
     // 初始化滚动条样式
     initialScrollBar() {
