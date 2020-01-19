@@ -119,11 +119,11 @@
 						</el-form-item>
 						<div class="template-list-box">
 							<div class="list">
-								<div class="title">后端模板：</div>
+								<div class="title">后端模板</div>
 								<el-checkbox v-for="items in templateList" :key="items.name" v-if="items.type === 0" v-model="items.enabled">{{ items.name }}</el-checkbox>
 							</div>
 							<div class="list">
-								<div class="title">前端模板：</div>
+								<div class="title">前端模板</div>
 								<el-checkbox v-for="items in templateList" :key="items.name" v-if="items.type === 1" v-model="items.enabled">{{ items.name }}</el-checkbox>
 							</div>
 						</div>
@@ -197,14 +197,7 @@ export default {
 		},
 		initialFormMsg(data) {
 			for (let key in data) {
-				if (key === 'genTemplates') {
-					data[key].forEach(val => {
-						this.templateList.push(val);
-					});
-					this.form[key] = this.templateList;
-				} else {
-					this.form[key] = data[key];
-				}
+				this.form[key] = data[key];
 			}
 		},
 		// 获取表单数据
@@ -213,6 +206,11 @@ export default {
 				url: `/api/genConfig/get/${this.$route.query.tableName}`,
 				method: 'get'
 			}).then(result => {
+				if(!result.data.genTemplates) {
+					this.getTemplateList()
+				}else {
+					this.initialTemplateList(result.data.genTemplates)
+				}
 				this.initialFormMsg(result.data);
 			});
 		},
@@ -255,10 +253,18 @@ export default {
 				this.$successMsg('保存成功');
 			});
 		},
+		getTemplateList() {
+			this.$http_json({
+				url: '/api/genTemplate/list',
+				method: 'get'
+			}).then(result => {
+				this.initialTemplateList(result.data)
+			});
+		},
 		saveForm() {
-			console.log(this.form);
 			this.$refs['form'].validate(valid => {
 				if (valid) {
+					this.form.genTemplates = this.templateList
 					this.$http_json({
 						url: '/api/genConfig/edit',
 						method: 'post',

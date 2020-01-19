@@ -26,7 +26,7 @@ export default {
 			default: ''
 		},
 		height: {
-			type: String,
+			type: Number,
 			default: 500
 		}
 	},
@@ -66,7 +66,7 @@ export default {
 			this.$setStyle(
 				document.querySelector(".CodeMirror"),
 				'height',
-				`${this.height}px!important`
+				`${this.height}px`
 			)
 		}
 	}
