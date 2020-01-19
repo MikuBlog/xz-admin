@@ -42,7 +42,6 @@
 + 富文本编辑器：`UEditor`
 + markdown编辑器：`mavonEditor`
 
-> 仅提供前端代码，后端代码不开源~
 
 ## 商务合作
 
