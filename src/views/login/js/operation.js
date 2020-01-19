@@ -191,7 +191,8 @@ export default {
             method: "post",
             data: {
               username: this.ruleForm.username,
-              password: encrypt(this.ruleForm.password),
+							//  password: encrypt(this.ruleForm.password),
+              password: this.ruleForm.password,
               vcode: this.ruleForm.vcode,
               uuid: this.ruleForm.uuid
             }
@@ -199,8 +200,10 @@ export default {
             this.$setMemoryPmt("token", result.data.token)
             this.$setMemoryPmt('username', this.ruleForm.username)
             this.$getMemorySes("redirect")
-              ? this.$router.push({ path: this.$getMemorySes("redirect") })
-              : this.$router.push({ path: "/home/welcome" })
+            ? this.$router.push({ path: this.$getMemorySes("redirect") === '/login'
+						? '/home/welcome'
+						: this.$getMemorySes("redirect")})
+            : this.$router.push({ path: "/home/welcome" })
           });
           this.getCode()
         } else {

@@ -55,7 +55,7 @@
 								<el-button
 								  slot="reference"
 								  type="text"
-								  @click="showGeneratorCodeBox(scope.row)"
+								  @click="$router.push({ path: `/home/preview?tableName=${scope.row.tableName}` })"
 								>预览</el-button>
 								<el-button
 								  slot="reference"
@@ -65,12 +65,12 @@
 								<el-button
 								  slot="reference"
 								  type="text"
-								  @click="showGeneratorCodeBox(scope.row)"
+								  @click="editGeneratorCode(scope.row)"
 								>编辑</el-button>
                 <el-button
                   slot="reference"
                   type="text"
-                  @click="showGeneratorCodeBox(scope.row)"
+                  @click="generateCode(scope.row)"
                 >生成</el-button>
               </template>
             </el-table-column>

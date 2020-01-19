@@ -1,3 +1,7 @@
+/**
+ * @author xuanzai
+ * @description (菜单|面包屑|标签页|路由)生成器
+ */
 import router from './router'
 import Http from '@/api/http'
 import store from '@/store'

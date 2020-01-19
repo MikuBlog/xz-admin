@@ -1,12 +1,17 @@
+import { Loading } from 'element-ui'
 export default {
   methods: {
     // 弹窗
-    showGeneratorCodeBox(item) {
-      const generatorBox = this.$refs.form
-      generatorBox.dialog = true
-      generatorBox.form.remark = item.remark
-      generatorBox.getFormMsg()
-      generatorBox.getTableList(item.tableName)
+    editGeneratorCode(item) {
+      // const generatorBox = this.$refs.form
+      // generatorBox.dialog = true
+      // generatorBox.form.remark = item.remark
+      // generatorBox.getFormMsg()
+      // generatorBox.getTableList(item.tableName)
+			// console.log(item.tableName)
+			this.$router.push({
+				path: `/home/generator_config?tableName=${item.tableName}`
+			})
     },
     // 重置
     refresh() {
@@ -22,25 +27,25 @@ export default {
       e.keyCode === 13
       && this.$refs.pagination.toFirstPage()
     },
-		// 预览代码
-		previewCode(item) {
-			this.$http_json({
-				url: `/api/generator/handle/${item.tableName}/1`,
-				method: "post"
-			}).then(result => {
-				console.log(result.data)
-			})
-		},
 		// 下载代码
 		downloadCode(item) {
-			this.$http_json({
+			let loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
+			this.$http({
 				url: `/api/generator/handle/${item.tableName}/2`,
 				responseType: 'blob',
-				method: "post"
+				method: "post",
+				headers: {
+					'Authorization': `Bearer ${this.$getMemoryPmt('token')}`
+				}
 			}).then(result => {
 				const a = document.createElement('a')
 				a.href = window.URL.createObjectURL(result.data)
+				a.download = `${item.tableName}.zip`
 				a.click()
+				loading.close()
+			}).catch(e => {
+				this.$errorMsg('请先配置生成器')
+				loading.close()
 			})
 		},
 		// 生成代码

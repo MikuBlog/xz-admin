@@ -45,7 +45,8 @@
 						.showMsgBox({ title: "系统提示", msg: "登录信息已过期，是否重新登录？", type: "warning" })
 						.then(() => {
               storage.setMemoryPmt('token', '')
-              storage.setMemorySes("redirect", router.history.current.fullPath)
+							if(router.history.current.name !== 'login') 
+								storage.setMemorySes("redirect", router.history.current.fullPath)
 							router.push({ path: "/login" })
 						})
           : err.response.status === 403
