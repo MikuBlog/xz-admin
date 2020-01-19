@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Operation from './js/operation'
+import Property from './js/property'
 export default {
   mixins: [ Operation, Property ]
 };

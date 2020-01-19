@@ -61,7 +61,7 @@ import Print from '@/api/file/print'
 // 引入图片读取模块
 import ReadImg from '@/api/file/get_file_image'
 // 引入文件读取模块
-import ReadFile from '@/api/file/get_file_image'
+import ReadFile from '@/api/file/get_file'
 // 引入文件预览模块
 import PreviewFile from '@/api/file/preview_file'
 // 引入json美化模块

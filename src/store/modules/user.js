@@ -2,6 +2,8 @@ const
   state = {
     id: "",
     username: "",
+		sex: "",
+		nickname: "",
     avatar: "",
     createTime: "",
     dept: "",

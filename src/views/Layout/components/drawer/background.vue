@@ -80,7 +80,7 @@ export default {
     setTimeout(() => {
       // 插入元素
       this.insertEle();
-      // 初始化卡片样式
+      // 初始化布局样式
       this.setLayoutOpacity();
     });
     this.setBackgroundColor();

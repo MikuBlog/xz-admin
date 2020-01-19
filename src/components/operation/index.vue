@@ -1,5 +1,5 @@
 <template>
-  <div class="operation-box" v-show="options.length">
+  <div :class="[onlyKey, 'operation-box']" v-show="options.length">
     <el-row>
       <el-col>
         <el-card>
@@ -35,7 +35,11 @@ export default {
     visibility: {
       type: Number,
       default: 100
-    }
+    },
+		onlyKey: {
+			type: String,
+			default: ""
+		}
   },
   beforeDestroy() {
     if (!isMobile() && !isSafari()) {
@@ -51,7 +55,7 @@ export default {
   },
   methods: {
     getScrollTop(e) {
-      const backtop = document.querySelector(".operation-box");
+      const backtop = document.querySelector(`.${this.onlyKey || 'operation-box'}`);
       e.target.scrollTop >= this.visibility
         ? this.$setStyle(backtop, "transform", "translateY(-50%) scale(1)")
         : this.$setStyle(backtop, "transform", "translateY(-50%) scale(0)");
@@ -75,7 +79,7 @@ export default {
   position: fixed;
   right: 0;
   top: 50%;
-  z-index: 99;
+  z-index: 999;
   transform: translateY(-50%) scale(0);
   background: #fefefe;
   transition: 0.3s;

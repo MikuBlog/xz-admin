@@ -1,0 +1,128 @@
+<template>
+	<div class="tinymce"><textarea id="textarea"></textarea></div>
+</template>
+
+<script>
+/**
+ * @author xuanzai
+ * @description tinymce富文本编辑器
+ */
+import convertHttp from '@/utils/convertHttp.js';
+import plugins from './js/plugins';
+import toolbar from './js/toolbar';
+export default {
+	name: 'Tinymce',
+	model: {
+		prop: 'value',
+		event: 'input'
+	},
+	props: {
+		value: {
+			type: String,
+			default: ''
+		},
+		height: {
+			type: Number,
+			default: 500
+		},
+		limit: {
+			type: Number,
+			default: 3
+		}
+	},
+	data() {
+		return {
+			tinymce: ''
+		};
+	},
+	watch: {
+		value: {
+			handler(val) {
+				this.msg = val;
+			},
+			immediate: true
+		}
+	},
+	mounted() {
+		this.initTinymce()
+	},
+	activated() {
+		this.initTinymce()
+	},
+	destroyed() {
+		this.removeTinymce()
+	},
+	deactivated() {
+		this.removeTinymce()
+	},
+	data() {
+		return {
+			msg: ''
+		};
+	},
+	methods: {
+		removeTinymce() {
+			this.$setStyle(document.querySelector('#textarea'), 'opacity', 0)
+			this.tinymce.destroy();
+		},
+		initTinymce() {
+			const _this = this;
+			tinymce.init({
+				selector: `#textarea`,
+				language: 'zh_CN',
+				language_url: '/assets/js/tinymce/language/zh_CN.js',
+				plugins: plugins.plugins,
+				external_plugins: plugins.external_plugins,
+				toolbar,
+				height: this.height,
+				ax_wordlimit_num: this.limit,
+				ax_wordlimit_callback: function(editor, txt, num){
+					const str = editor.getContent()
+				  if(num === _this.limit) {
+						editor.setContent(str)
+					}
+				},
+				file_picker_callback: function(callback, value, meta) {
+					_this
+						.$getFile(100)
+						.then(raw => {
+							_this
+								.$http_file({
+									url: '/api/localStorage/upload',
+									method: 'post',
+									data: {
+										file: raw
+									}
+								})
+								.then(result => {
+									callback(convertHttp(result.data.url));
+								});
+						})
+				},
+				images_upload_handler(blobInfo, success, failure, progress) {
+					_this
+						.$http_file({
+							url: '/api/localStorage/upload',
+							method: 'post',
+							data: {
+								file: blobInfo.blob()
+							}
+						})
+						.then(result => {
+							success(convertHttp(result.data.url));
+						});
+				},
+				init_instance_callback(editor) {
+					_this.tinymce = editor;
+					if (_this.value) {
+						editor.setContent(_this.value);
+					}
+					editor.on('NodeChange Change KeyUp SetContent', () => {
+						_this.$emit('input', editor.getContent());
+					});
+				}
+			})
+		}
+	}
+};
+</script>

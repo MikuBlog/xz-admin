@@ -12,6 +12,14 @@
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
             <el-button
+              type="success"
+              icon="el-icon-refresh"
+              class="margin-box"
+              @click="refresh"
+              circle
+              title="重置"
+            ></el-button>
+            <el-button
               type="primary"
               icon="el-icon-upload"
               class="margin-box"
@@ -66,7 +74,7 @@
                 />
               </template>
             </el-table-column>
-            <el-table-column prop="size" label="文件大小" :show-overflow-tooltip="true" />
+            <el-table-column prop="size" label="文件大小" show-overflow-tooltip />
             <el-table-column label="操作" fixed="right" align="center" width="180">
               <template slot-scope="scope">
                 <el-button type="success" icon="el-icon-share" @click="copy(scope.row)"></el-button>
@@ -75,6 +83,7 @@
             </el-table-column>
           </el-table>
           <pagination
+            ref="pagination"
             :get-data="getPictureList"
             :now-page.sync="nowPage"
             :now-size.sync="nowSize"
@@ -83,16 +92,21 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @uploadPic="uploadPic" @deleteAll="deleteAll" @exportImage="exportImage"/>
+    <operation-box
+      :options="buttonOptions"
+      @uploadPic="uploadPic"
+      @deleteAll="deleteAll"
+      @exportImage="exportImage"
+    />
     <eForm ref="form" />
     <ImagePreview :show-modal.sync="isShow" :url="url" />
   </div>
 </template>
 
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import eForm from "./components/form";
 export default {
   mixins: [Initial, Operation, Property],

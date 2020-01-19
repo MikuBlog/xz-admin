@@ -11,13 +11,16 @@
               @keyup.native="searchEnter"
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button
+              type="success"
+              icon="el-icon-refresh"
+              class="margin-box"
+              @click="refresh"
+              circle
+              title="重置"
+            ></el-button>
           </div>
-          <el-table
-            :data="generateCodeList"
-            style="width: 100%"
-            highlight-current-row
-            stripe
-          >
+          <el-table :data="generateCodeList" style="width: 100%" highlight-current-row stripe>
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
@@ -27,17 +30,17 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column label="表名" :show-overflow-tooltip="true">
+            <el-table-column label="表名" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.tableName }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="数据库引擎" :show-overflow-tooltip="true">
+            <el-table-column label="数据库引擎" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.engine }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="字符编码集" :show-overflow-tooltip="true">
+            <el-table-column label="字符编码集" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.coding }}</div>
               </template>
@@ -47,14 +50,28 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="130px" align="center" fixed="right">
+            <el-table-column label="操作" width="200" align="center" fixed="right">
               <template slot-scope="scope">
+								<el-button
+								  slot="reference"
+								  type="text"
+								  @click="$router.push({ path: `/home/preview?tableName=${scope.row.tableName}` })"
+								>预览</el-button>
+								<el-button
+								  slot="reference"
+								  type="text"
+								  @click="downloadCode(scope.row)"
+								>下载</el-button>
+								<el-button
+								  slot="reference"
+								  type="text"
+								  @click="editGeneratorCode(scope.row)"
+								>编辑</el-button>
                 <el-button
                   slot="reference"
-                  type="primary"
-                  icon="el-icon-magic-stick"
-                  @click="showGeneratorCodeBox(scope.row)"
-                >生成代码</el-button>
+                  type="text"
+                  @click="generateCode(scope.row)"
+                >生成</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -73,9 +90,9 @@
 </template>
 
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import GeneratorBox from "./components/form";
 export default {
   mixins: [Initial, Operation, Property],

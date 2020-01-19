@@ -93,6 +93,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	.icon-box {
+	  position: relative;
+	  float: right;
+	  top: 0.2rem;
+	  right: 1rem;
+	  height: 50px;
+	  line-height: 50px;
+	  color: #676767;
+	  text-align: center;
+	  transition: 0.3s;
+	}
 .search-menu-input {
   position: relative;
   display: inline-block;

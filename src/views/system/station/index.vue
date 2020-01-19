@@ -25,6 +25,7 @@
               ></el-option>
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
             <el-button
               type="primary"
               class="margin-box"
@@ -33,6 +34,14 @@
               title="添加岗位"
               circle
             ></el-button>
+						<el-button
+						  type="warning"
+						  icon="el-icon-download"
+						  class="margin-box"
+						  @click="downloadList"
+						  title="导出岗位列表"
+						  circle
+						></el-button>
           </div>
           <el-table
             :data="stationList"
@@ -40,22 +49,22 @@
             highlight-current-row
             stripe
           >
-            <el-table-column label="名称" :show-overflow-tooltip="true">
+            <el-table-column label="名称" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.name }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="所属部门" :show-overflow-tooltip="true">
+            <el-table-column label="所属部门" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.dept.name }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="排序" :show-overflow-tooltip="true">
+            <el-table-column label="排序" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.sort }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="状态" align="center" :show-overflow-tooltip="true">
+            <el-table-column label="状态" align="center" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">
                   <el-tag
@@ -96,15 +105,15 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @showAddStation="showAddStation" />
+    <operation-box :options="buttonOptions" @showAddStation="showAddStation" @downloadList="downloadList"/>
     <stationForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>
 
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import stationForm from "./components/form";
 export default {
   mixins: [Initial, Operation, Property],

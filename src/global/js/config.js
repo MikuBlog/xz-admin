@@ -1,15 +1,15 @@
 import { isMobile, isIpad } from '@/utils/agent'
-// 布尔类型的值改为false则表示不允许设置
+// 布尔类型的值改为false则表示不允许设置,保存后刷新页面即可生效
 export default {
   // 登录标题
-  loginHeader: "XZ-Admin",
+  loginHeader: "XZ-ADMIN",
   // 自定义登录界面按钮
   loginSetting: true,
   // 合作网站账号登录框
   otherLoginMethods: true,
   // 自动登录框
   isAutoLogin: true,
-  // 菜单颜色
+  // 菜单风格
   menuStyle: {
     light: {
       textColor: '#444',
@@ -20,10 +20,44 @@ export default {
       textColor: '#becad8',
       backgroundColor: '#2f4055',
       subMenuItemBackgroundColor: '#1e2c3c'
-    }
+    },
+		// 设置后将无法通过"更改主题"进行修改
+		activeTextColor: "",
+		// 菜单悬浮颜色设置
+		hoverBackgroundColor: "rgba(206, 206, 206, 0.3)"
   },
-  // 系统样式设置
+	// 系统样式默认配置项
+	default: {
+		// 默认主题颜色
+		themeColor: "#409eff",
+		// 默认标签页颜色
+		tagsColor: '#409eff',
+		// 默认布局大小
+		layoutSize: 'medium',
+		// 默认主题样式(lightMode/darkMode/weaknessMode/hueRotateMode)
+		themeStyle: 'lightMode',
+		// 默认系统亮度
+		brightness: 100,
+		// 默认菜单风格(light/dark)
+		menuStyleType: 'light',
+		// 默认菜单布局(true为垂直,false为水平)
+		menuLayout: true,
+		// 默认显示Logo
+		showLogo: true,
+		// 默认显示标签页
+		showTags: true,
+		// 默认显示面包屑
+		showBreadcrumb: true,
+		// 默认显示页脚
+		showFooter: true
+	},
+  // 系统样式允许配置项
   diy: {
+		/* 动画 */
+		// 路由过渡动画
+		routerAnimation: true,
+		// 面包屑过渡动画
+		breadcrumbAnimation: true,
     /* 系统布局模块 */
     layout: true,
     // 系统布局大小

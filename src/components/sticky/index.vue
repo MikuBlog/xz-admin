@@ -7,7 +7,7 @@
 <script>
 /**
  * @author xuanzai
- * @description 固定元素到底部
+ * @description 固定元素到底部（废弃）
  */
 export default {
   name: "sticky",

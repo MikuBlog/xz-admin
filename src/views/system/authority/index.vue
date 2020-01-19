@@ -12,6 +12,7 @@
                 @keyup.native="searchEnter"
               ></el-input>
               <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+              <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
               <el-button
                 circle
                 type="primary"
@@ -20,6 +21,14 @@
                 @click="showAddAuthority()"
                 title="添加权限"
               ></el-button>
+							<el-button
+							  type="warning"
+							  icon="el-icon-download"
+							  class="margin-box"
+							  @click="downloadList"
+							  title="导出权限列表"
+							  circle
+							></el-button>
             </el-row>
           </div>
           <el-table
@@ -33,6 +42,8 @@
             stripe
           >
             <el-table-column prop="name" label="名称" :render-header="renderHeader">
+            </el-table-column>
+            <el-table-column prop="alias" label="别名">
             </el-table-column>
             <el-table-column prop="createTime" label="创建日期" width="180">
               <template slot-scope="scope">
@@ -60,15 +71,16 @@
     </el-row>
     <operation-box 
     :options="buttonOptions"
-    @showAddAuthority="showAddAuthority"/>
+    @showAddAuthority="showAddAuthority"
+		@downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from './js/initial'
+import Operation from './js/operation'
+import Property from './js/property'
 import Form from './components/form'
 import eForm from "./components/form";
 export default {

@@ -11,9 +11,10 @@
               @keyup.native="searchEnter"
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
             <el-button
-              type="primary"
-              icon="el-icon-s-promotion"
+              type="danger"
+              icon="fa fa-user-times"
               class="margin-box"
               @click="kickOutAll"
               :disabled="!selectList.length"
@@ -24,7 +25,7 @@
               type="warning"
               icon="el-icon-download"
               class="margin-box"
-              @click="downloadUserList"
+              @click="downloadList"
               title="导出用户列表"
               circle
             ></el-button>
@@ -41,9 +42,14 @@
             <el-table-column type="selection" width="55" />
             <el-table-column label="用户名" :show-overflow-tooltip="true">
               <template slot-scope="scope">
-                <span style="margin-left: 10px" class="name-wrapper">{{ scope.row.username }}</span>
+                <div class="name-wrapper">{{ scope.row.username }}</div>
               </template>
             </el-table-column>
+						<el-table-column label="昵称" :show-overflow-tooltip="true">
+						  <template slot-scope="scope">
+						    <div class="name-wrapper">{{ scope.row.nickname || "无" }}</div>
+						  </template>
+						</el-table-column>
             <el-table-column label="岗位" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.job }}</div>
@@ -71,7 +77,7 @@
             </el-table-column>
             <el-table-column label="操作" fixed="right" width="150" align="center">
               <template slot-scope="scope">
-                <el-button type="text" @click="kickOut(scope.row)">踢出</el-button>
+                <el-button type="text" @click="kickOut(scope.row)" style="color: #f4797a">踢出</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -87,16 +93,16 @@
     </el-row>
     <operation-box
       :options="buttonOptions"
-      @deleteAll="deleteAll"
-      @downloadUserList="downloadUserList"
+      @kickOutAll="kickOutAll"
+      downloadList="downloadList"
     />
   </div>
 </template>
 
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 export default {
   mixins: [Initial, Operation, Property]
 };

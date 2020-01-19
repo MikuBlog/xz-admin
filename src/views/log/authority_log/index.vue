@@ -42,6 +42,7 @@
               @change="getDate"
             ></el-date-picker>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+            <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
           </div>
           <el-table
             :data="authorityLogList"
@@ -54,17 +55,17 @@
                 <span style="margin-left: 10px">{{ scope.row.creatorName }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="IP" :show-overflow-tooltip="true">
+            <el-table-column label="IP" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.creatorIp }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="IP来源" :show-overflow-tooltip="true">
+            <el-table-column label="IP来源" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.address }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="描述" :show-overflow-tooltip="true">
+            <el-table-column label="描述" show-overflow-tooltip>
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.name }}</div>
               </template>
@@ -123,9 +124,9 @@
 </template>
 
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import Detail from "./components/detail";
 export default {
   mixins: [Initial, Operation, Property],

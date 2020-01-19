@@ -110,7 +110,8 @@
 
 <script>
 // 引入v-chart
-import Property from "./mixins/property";
+import Property from "./js/property";
+import Initial from "./js/initial";
 import countTo from "vue-count-to";
 import VeLine from "v-charts/lib/line.common";
 import VePie from "v-charts/lib/pie.common";
@@ -118,9 +119,9 @@ import VeRing from "v-charts/lib/ring.common";
 import VeHistogram from "v-charts/lib/histogram.common";
 import VeFunnel from "v-charts/lib/funnel.common";
 export default {
-  mixins: [Property],
+  mixins: [ Initial, Property ],
   components: { VeLine, VePie, VeRing, VeHistogram, VeFunnel, countTo }
 };
 </script>
 
-<style lang="scss" src="./style/index.scss" scoped></style>
+<style lang="scss" src="./scss/index.scss" scoped></style>

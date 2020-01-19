@@ -1,0 +1,207 @@
+.home {
+  position: relative;
+  height: 100%;
+  background: #eef0f3;
+}
+.el-container {
+  position: relative;
+  height: 100%;
+}
+.el-header {
+  position: relative;
+  background: #fefefe;
+  padding: 0;
+}
+.navbar {
+  position: relative;
+  line-height: 50px;
+  box-shadow: 0 2px 2px rgb(230, 230, 230);
+}
+.menu-button {
+  position: relative;
+  float: left;
+  margin-left: 1rem;
+  height: 50px;
+  font-size: 1.5rem;
+  color: #686868;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.el-icon-s-unfold,
+.el-icon-circle-close {
+  transition: 0.3s;
+}
+.el-icon-s-unfold:active {
+  color: rgb(19, 180, 255);
+}
+.el-menu {
+  background: transparent;
+  width: 205px;
+}
+.el-menu--collapse {
+  width: 53px;
+}
+.el-menu-item {
+  position: relative;
+}
+.el-dropdown {
+  position: relative;
+  float: right;
+}
+.image {
+  height: 100%;
+  border-radius: 1rem;
+}
+.tabs {
+  position: relative;
+	z-index: 10;
+  background: #fefefe;
+}
+.el-icon-caret-bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.breadcrumb {
+  position: relative;
+  float: left;
+  top: -1px;
+  left: 5px;
+}
+.table-size {
+  position: relative;
+  top: -4px;
+  margin-left: 0.8rem;
+  font-size: 20px;
+}
+.drawer-menu {
+  /deep/ {
+    .ivu-drawer-body {
+      padding: 0;
+      .el-scrollbar {
+        /deep/ {
+          .el-scrollbar__wrap {
+            overflow-x: hidden;
+          }
+        }
+      }
+    }
+    .ivu-drawer-content {
+      background: #2e3f54;
+    }
+  }
+}
+.menu-scrollbar, .menu-horizontal-scrollbar {
+  border-right: none!important;
+  background: #2d3e53;
+  overflow: hidden;
+}
+.menu-scrollbar {
+  /deep/ {
+    .el-scrollbar__wrap {
+      overflow-x: hidden;
+    }
+  }
+}
+.menu-horizontal-scrollbar {
+  /deep/ {
+    .el-scrollbar__bar {
+      bottom: 0px;
+    }
+  }
+}
+.menu-horizontal {
+  position: relative;
+  display: flex;
+}
+.logo-verticle {
+  position: relative;
+  margin: 23px 0;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
+  text-align: center;
+  /deep/ {
+    .image-slot {
+      position: relative;
+      background: #f5f7fa;
+      .el-icon-picture-outline {
+        position: relative;
+        line-height: 5rem;
+      }
+    }
+  }
+}
+.el-divider {
+  position: relative;
+  margin-top: 0;
+}
+.menu-horizontal-item {
+  position: relative;
+  display: flex;
+}
+.logo-horizontal {
+  position: relative;
+  display: inline-block;
+  padding: 0 1rem;
+  top: 0.4rem;
+  line-height: 3rem;
+  min-width: 10rem;
+  max-width: 10rem;
+  height: 50px;
+  text-align: center;
+  /deep/ {
+    .image-slot {
+      position: relative;
+      background: #f5f7fa;
+      .el-icon-picture-outline {
+        position: relative;
+        line-height: 50px;
+      }
+    }
+  }
+}
+.radio-box {
+  position: relative;
+}
+.top {
+  position: relative;
+  overflow-x: hidden;
+  padding: 20px;
+}
+.footer {
+  padding: 0;
+  overflow-y: hidden;
+  overflow-x: auto;
+  background: #fefefe;
+  .coppy-right {
+    position: relative;
+    line-height: 30px;
+    border-top: 1px solid #dcdfe6;
+    color: #666;
+    white-space: nowrap;
+    text-indent: 1.3rem;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+  }
+}
+.background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5;
+}
+.mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+}
+

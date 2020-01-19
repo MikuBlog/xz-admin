@@ -22,45 +22,48 @@
         ></el-option>
       </el-select>
       <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+      <el-button
+        type="success"
+        icon="el-icon-refresh"
+        class="margin-box"
+        @click="refresh"
+        circle
+        title="重置"
+      ></el-button>
     </div>
-    <el-table
-      :data="missionLogList"
-      style="width: 100%"
-      highlight-current-row
-      stripe
-    >
-      <el-table-column label="任务名称" :show-overflow-tooltip="true">
+    <el-table :data="missionLogList" style="width: 100%" highlight-current-row stripe>
+      <el-table-column label="任务名称" show-overflow-tooltip>
         <template slot-scope="scope">
           <div slot="reference" class="name-wrapper">{{ scope.row.jobName }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="Bean名称" :show-overflow-tooltip="true">
+      <el-table-column label="Bean名称" show-overflow-tooltip>
         <template slot-scope="scope">
           <div slot="reference">{{ scope.row.beanName }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="执行方法" :show-overflow-tooltip="true">
+      <el-table-column label="执行方法" show-overflow-tooltip>
         <template slot-scope="scope">
           <div slot="reference">{{ scope.row.methodName }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="参数" :show-overflow-tooltip="true">
+      <el-table-column label="参数" show-overflow-tooltip>
         <template slot-scope="scope">
           <div slot="reference">{{ scope.row.params }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="cron表达式" :show-overflow-tooltip="true">
+      <el-table-column label="cron表达式" show-overflow-tooltip>
         <template slot-scope="scope">
           <div slot="reference" class="name-wrapper">{{ scope.row.methodName }}</div>
         </template>
       </el-table-column>
       <el-table-column label="异常状况">
-        <template slot-scope="scope" :show-overflow-tooltip="true">
+        <template slot-scope="scope" show-overflow-tooltip>
           <div slot="reference" class="name-wrapper">{{ scope.row.exceptionDetail }}</div>
         </template>
       </el-table-column>
       <el-table-column label="耗时" align="center">
-        <template slot-scope="scope" :show-overflow-tooltip="true">
+        <template slot-scope="scope" show-overflow-tooltip>
           <el-tag type="primary">{{ scope.row.time }}ms</el-tag>
         </template>
       </el-table-column>
@@ -119,13 +122,19 @@ export default {
     };
   },
   methods: {
+    // 重置
+    refresh() {
+      this.searchVal = ""
+      this.selectType = ""
+      this.$refs.pagination.toFirstPage()
+    },
     // 点击搜索
     search() {
-      this.$refs.pagination.toFirstPage()
+      this.$refs.pagination.toFirstPage();
     },
     // 回车搜索
     searchEnter(e) {
-      e.keyCode === 13 && this.$refs.pagination.toFirstPage()
+      e.keyCode === 13 && this.$refs.pagination.toFirstPage();
     },
     // 分页处理
     initialPage(totalElements) {

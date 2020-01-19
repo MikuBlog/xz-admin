@@ -12,6 +12,7 @@
                 @keyup.native="searchEnter"
               ></el-input>
               <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+              <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
               <el-button
                 type="primary"
                 icon="el-icon-plus"
@@ -20,6 +21,14 @@
                 title="添加菜单"
                 circle
               ></el-button>
+							<el-button
+							  type="warning"
+							  icon="el-icon-download"
+							  class="margin-box"
+							  @click="downloadList"
+							  title="导出菜单列表"
+							  circle
+							></el-button>
             </el-row>
           </div>
           <el-table
@@ -43,8 +52,8 @@
                 <el-tag>{{ scope.row.sort }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :show-overflow-tooltip="true" prop="path" label="链接地址" />
-            <el-table-column :show-overflow-tooltip="true" prop="component" label="组件路径" />
+            <el-table-column show-overflow-tooltip prop="path" label="链接地址" />
+            <el-table-column show-overflow-tooltip prop="component" label="组件路径" />
             <el-table-column prop="iframe" label="内部菜单" align="center" width="80px">
               <template slot-scope="scope">
                 <el-tag
@@ -83,15 +92,16 @@
     </el-row>
     <operation-box 
     :options="buttonOptions"
-    @showAddMenu="showAddMenu"/>
+    @showAddMenu="showAddMenu"
+		@downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>
 
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import eForm from "./components/form";
 export default {
   mixins: [Initial, Operation, Property],

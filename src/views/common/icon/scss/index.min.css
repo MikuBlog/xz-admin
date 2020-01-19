@@ -1,0 +1,1 @@
+.icon-list{position:relative;display:grid;grid-template-columns:repeat(auto-fill, minmax(120px, 1fr))}.box{position:relative;display:inline-block;margin:1rem 1rem;text-align:center;border-radius:1rem;cursor:pointer;transition:0.3s}.svg-icon{position:relative;margin:.5rem 0;width:40px;height:40px}.icon-name{margin:0.5rem 0;font-size:1rem}i{font-size:2rem}

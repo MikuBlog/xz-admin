@@ -72,6 +72,10 @@
         <el-radio v-model="menuForm.enabled" label="true">是</el-radio>
         <el-radio v-model="menuForm.enabled" label="false">否</el-radio>
       </el-form-item>
+			<el-form-item label="是否缓存" prop="cache">
+			  <el-radio v-model="menuForm.cache" label="true">是</el-radio>
+			  <el-radio v-model="menuForm.cache" label="false">否</el-radio>
+			</el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
@@ -107,7 +111,8 @@ export default {
         roles: [],
         parentId: 0,
         icon: "",
-        enabled: true
+        enabled: true,
+				cache: false
       },
       rules: {
         name: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
@@ -118,6 +123,9 @@ export default {
         enabled: [
           { required: true, message: "请选择显示状态", trigger: "blur" }
         ],
+				cache: [
+				  { required: true, message: "请选择缓存状态", trigger: "blur" }
+				],
         path: [{ required: false, message: "请输入菜单路径", trigger: "blur" }],
         component: [
           { required: false, message: "请输入菜单组件", trigger: "blur" }
@@ -142,7 +150,8 @@ export default {
           roles: [],
           parentId: 0,
           icon: "",
-          enabled: "true"
+          enabled: "true",
+					cache: "false"
         };
         this.$refs.menuForm.resetFields();
       } catch (e) {}
@@ -173,7 +182,7 @@ export default {
         method: "post",
         data: this.menuForm
       }).then(result => {
-        this.$successMsg("添加成功");
+        this.$successMsg("添加成功，刷新页面即可生效");
         this.hideBox();
         this.getMenus();
         this.$parent.getMenuList();
@@ -187,7 +196,7 @@ export default {
         method: "post",
         data: this.menuForm
       }).then(result => {
-        this.$successMsg("编辑成功");
+        this.$successMsg("编辑成功，刷新页面即可生效");
         this.hideBox();
         this.getMenus();
         this.$parent.getMenuList();

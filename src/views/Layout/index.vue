@@ -16,13 +16,14 @@
             class="el-menu-vertical-demo collapse-menu"
             :background-color="menuBackgroundColor"
             :text-color="menuTextColor"
+						:active-text-color="activeTextColor"
             :unique-opened="true"
           >
             <el-image
               :src="logoUrl"
               fit="cover"
               class="logo-verticle"
-              v-show="showLogo && defaultConfig.diy.logo"
+              v-show="showLogo"
               v-if="!isCollapse"
               @click.native="$router.push({ path: '/home/welcome' })"
             >
@@ -31,7 +32,7 @@
               </div>
             </el-image>
             <el-divider
-              v-if="menuStyle !== 'dark' && isCollapse === false && showLogo && defaultConfig.diy.logo"
+              v-if="menuStyle !== 'dark' && isCollapse === false && showLogo"
             ></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
@@ -59,14 +60,14 @@
               :src="logoUrl"
               fit="cover"
               class="logo-verticle"
-              v-show="showLogo && defaultConfig.diy.logo"
+              v-show="showLogo"
               @click.native="$router.push({ path: '/home/welcome' })"
             >
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>
-            <el-divider v-if="menuStyle !== 'dark' && showLogo && defaultConfig.diy.logo"></el-divider>
+            <el-divider v-if="menuStyle !== 'dark' && showLogo"></el-divider>
             <NavMenu :navMenus="menuList"></NavMenu>
           </el-menu>
         </el-scrollbar>
@@ -78,7 +79,7 @@
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
               :background-color="menuBackgroundColor"
-              :active-text-color="themeColor"
+              :active-text-color="activeTextColor || themeColor"
               :text-color="menuTextColor"
               mode="horizontal"
               style="width: 100%"
@@ -87,7 +88,7 @@
                 :src="logoUrl"
                 fit="contain"
                 class="logo-horizontal"
-                v-show="showLogo && defaultConfig.diy.logo"
+                v-show="showLogo"
                 @click.native="$router.push({ path: '/home/welcome' })"
               >
                 <div slot="error" class="image-slot">
@@ -105,27 +106,20 @@
             <MenuButton ref="menuButton" @showMenu="showMenu" />
             <Breadcrumb
               class="breadcrumb"
-              v-show="showBreadcrumb && !isMini && defaultConfig.diy.breadcrumb"
+              v-show="showBreadcrumb && !isMini"
             ></Breadcrumb>
           </div>
           <div class="border" style="border-color: #f0f0f0"></div>
         </el-header>
-        <div class="tabs" v-show="showTags && defaultConfig.diy.tagViews">
-          <div class="flex-box">
-            <Tag :tagsList="tagsList" class="tag-list" />
-            <el-button
-              class="refresh-button"
-              :round="false"
-              icon="el-icon-refresh-left"
-              @click="refreshPage()"
-              size="small"
-            ></el-button>
-          </div>
+        <div class="tabs" v-show="showTags">
+          <Tag :tagsList="tagsList" class="tag-list" />
         </div>
         <el-main class="top" id="top">
-          <transition name="xz-animation" mode="out-in">
-            <router-view @updateUserInfo="getUserInfo" class="router" />
-          </transition>
+					<transition name="xz-animation" mode="out-in">
+						<keep-alive :include="cacheViews">
+							<router-view @updateUserInfo="getUserInfo" class="router" />
+						</keep-alive>
+					</transition>
           <back-top
             :options="{
               target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
@@ -133,7 +127,7 @@
             }"
           />
         </el-main>
-        <el-footer class="footer" height="30px" v-show="showFooter && defaultConfig.diy.footer">
+        <el-footer class="footer" height="30px" v-show="showFooter">
           <div class="coppy-right">
             <span>© 2019 xuanzai Wteam.All rights reserved - 粤ICP备19008964号-2</span>
           </div>
@@ -145,9 +139,9 @@
   </div>
 </template>
 <script>
-import Initial from "./mixins/initial";
-import Operation from "./mixins/operation";
-import Property from "./mixins/property";
+import Initial from "./js/initial";
+import Operation from "./js/operation";
+import Property from "./js/property";
 import settingDrawer from "./components/drawer";
 import IconBox from "./components/icon_box";
 import DropDown from "./components/drop_down";
@@ -157,4 +151,4 @@ export default {
   components: { settingDrawer, IconBox, DropDown, MenuButton }
 };
 </script>
-<style lang="scss" scoped src="./style/index.scss"></style>
+<style lang="scss" scoped src="./scss/index.scss"></style>

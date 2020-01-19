@@ -26,6 +26,7 @@
                 ></el-option>
               </el-select>
               <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
+              <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
               <el-button
                 circle
                 type="primary"
@@ -34,6 +35,14 @@
                 @click="showAddDepartment"
                 title="添加部门"
               ></el-button>
+							<el-button
+							  type="warning"
+							  icon="el-icon-download"
+							  class="margin-box"
+							  @click="downloadList"
+							  title="导出部门列表"
+							  circle
+							></el-button>
             </el-row>
           </div>
           <el-table
@@ -55,7 +64,7 @@
                 >{{ scope.row.enabled ? "正常" : "停用" }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :show-overflow-tooltip="true" width="180" prop="createTime" label="创建日期">
+            <el-table-column show-overflow-tooltip width="180" prop="createTime" label="创建日期">
               <template slot-scope="scope">
                 <span>{{ scope.row.createTime }}</span>
               </template>
@@ -81,15 +90,16 @@
     </el-row>
     <operation-box 
     :options="buttonOptions"
-    @showAddDepartment="showAddDepartment"/>
+    @showAddDepartment="showAddDepartment"
+		@downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from './js/initial'
+import Operation from './js/operation'
+import Property from './js/property'
 import eForm from "./components/form";
 export default {
   mixins: [ Initial, Operation, Property ],
