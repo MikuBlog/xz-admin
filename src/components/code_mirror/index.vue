@@ -26,7 +26,7 @@ export default {
 			default: ''
 		},
 		height: {
-			type: String,
+			type: Number,
 			default: 500
 		}
 	},
@@ -64,9 +64,9 @@ export default {
 	methods: {
 		initialStyle() {
 			this.$setStyle(
-				document.querySelector(".CodeMirror"),
+				document.querySelector(".CodeMirror-wrap"),
 				'height',
-				`${this.height}px!important`
+				`${this.height}px`
 			)
 		}
 	}

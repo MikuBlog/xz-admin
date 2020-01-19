@@ -47,8 +47,11 @@ export default {
 		})
 	},
 	watch: {
-		'user.email': function() {
-			this.userForm.email = this.user.email
+		'user.email': {
+			handler() {
+				this.userForm.email = this.user.email
+			},
+			immediate: true
 		}
 	},
   methods: {
