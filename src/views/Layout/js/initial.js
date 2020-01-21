@@ -171,7 +171,7 @@ export default {
         : this.isSmall = false
       window.innerWidth < 768
         ? (this.$refs.iconBox.isMini = true, this.isMini = true)
-        : (this.$refs.iconBox.isMini = false, this.isMini = false)
+        : (this.$refs.iconBox.isMini = false, this.isMini = false, this.initialStyle())
     },
     // 获取滚动高度
     getScrollTop(obj) {
