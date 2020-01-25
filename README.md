@@ -9,7 +9,7 @@
 
 [演示地址](https://xzadmin.xuanzai.top)
 
-账号：xuanzai
+账号：test
 密码：123456（只有查看权限）
 
 <br/>
