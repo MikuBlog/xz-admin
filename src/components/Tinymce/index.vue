@@ -27,7 +27,7 @@ export default {
 		},
 		limit: {
 			type: Number,
-			default: 3
+			default: 500
 		}
 	},
 	data() {
@@ -77,10 +77,7 @@ export default {
 				height: this.height,
 				ax_wordlimit_num: this.limit,
 				ax_wordlimit_callback: function(editor, txt, num){
-					const str = editor.getContent()
-				  if(num === _this.limit) {
-						editor.setContent(str)
-					}
+					// 字数限制
 				},
 				file_picker_callback: function(callback, value, meta) {
 					_this

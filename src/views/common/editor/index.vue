@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .content-box {
 	position: relative;
 	margin-top: 5rem;
