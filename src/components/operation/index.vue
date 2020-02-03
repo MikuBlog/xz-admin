@@ -6,7 +6,7 @@
           <div class="button-box" v-for="items in options">
             <el-button
               :type="items.type || ''"
-              :icon="items.icons || 'el-icon-question'"
+              :icon="items.icons || ''"
               :circle="!items.name"
               :title="items.title"
               :disabled="items.disabled"
