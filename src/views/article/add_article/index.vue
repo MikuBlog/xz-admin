@@ -56,6 +56,7 @@
               <el-col :span="24">
                 <el-form-item label="标签">
                   <el-tag
+                    class="tags"
                     :key="tag"
                     v-for="tag in dynamicTags"
                     closable

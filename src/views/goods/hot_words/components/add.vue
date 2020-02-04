@@ -1,13 +1,13 @@
 <template>
-  <el-dialog :visible.sync="dialog" title="新增资讯分类" width="570px" append-to-body v-dialogDrag>
+  <el-dialog :visible.sync="dialog" title="新增热词" width="570px" append-to-body v-dialogDrag>
     <el-form status-icon ref="form" :model="form" :rules="rules" size="small">
-      <el-form-item label="分类名称" prop="name">
+      <el-form-item label="热词名称" prop="name">
         <el-input v-model="form.name" />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
-      <el-button type="primary" @click="addArticleType" size="small">确认</el-button>
+      <el-button type="primary" @click="addHotWords" size="small">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -29,7 +29,7 @@ export default {
       level: 3,
       rules: {
         name: [
-          { required: true, message: "请输入分类名称", trigger: "blur" },
+          { required: true, message: "请输入热词", trigger: "blur" },
           {
             min: 2,
             max: 21,
@@ -45,8 +45,8 @@ export default {
     hideBox() {
       this.dialog = false;
     },
-    // 添加资讯分类
-    addArticleType() {
+    // 添加热词
+    addHotWords() {
       this.$refs.form.validate(valid => {
         if (valid) {
           this.$http_json({
@@ -56,7 +56,7 @@ export default {
           }).then(result => {
             this.$successMsg("添加成功");
             this.hideBox();
-            this.$parent.getArticleTypeList(this.$parent.nowPage, this.$parent.nowSize)
+            this.$parent.getHotWordsList(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
