@@ -13,18 +13,16 @@ export default {
 		},
 		// 获取资讯分类列表
 		getArticleTypeList(page, size) {
-		  // this.$http_normal({
-		  //   url: `/api/job/page?page=${page - 1}&size=${
-		  //     size
-		  //     }&sort=sort,asc${this.searchVal ? `&name=${this.searchVal}` : ""}${
-		  //     this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""
-		  //     }`,
-		  //   method: "get"
-		  // }).then(result => {
-		  //   const data = result.data;
-		  //   this.initialPage(data.totalElements);
-		  //   this.initialArticleTypeList(data.content);
-		  // });
+		  this.$http_normal({
+		    url: `/api/shop/articleType/page?page=${page - 1}&size=${
+		      size
+		      }&sort=id,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
+		    method: "get"
+		  }).then(result => {
+		    const data = result.data;
+		    this.initialPage(data.totalElements);
+		    this.initialArticleTypeList(data.content);
+		  });
 		},
 		// 批量删除资讯分类
 		deleteAllArticle() {
@@ -37,13 +35,13 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/user/del`,
+			    url: `/api/shop/articleType/del`,
 			    method: "post",
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-			    this.getUserList();
+			    this.getArticleTypeList(this.nowPage, this.nowSize)
 			  });
 			});
 		},
@@ -54,13 +52,13 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/user/del`,
+			    url: `/api/shop/articleType/del`,
 			    method: "post",
 			    data: [ item.id ]
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-			    this.getUserList();
+			    this.getArticleTypeList(this.nowPage, this.nowSize)
 			  });
 			});
 		},
@@ -89,10 +87,10 @@ export default {
 		},
 		// 点击搜索
 		search() {
-		  this.getArticleList();
+		  this.$refs.pagination.toFirstPage()
 		},
-		searchEnter() {
-			e.keyCode === 13 && this.getArticleList();
+		searchEnter(e) {
+			e.keyCode === 13 && this.$refs.pagination.toFirstPage()
 		}
 	}
 }

@@ -32,13 +32,21 @@ export default {
 	},
 	data() {
 		return {
-			tinymce: ''
+			tinymce: '',
+			asyncInit: true
 		};
 	},
 	watch: {
 		value: {
 			handler(val) {
-				this.msg = val;
+				console.log(this.asyncInit, val, this.tinymce)
+				if(this.asyncInit && val && this.tinymce) {
+					this.$nextTick(() => {
+						console.log(val)
+						this.asyncInit = false
+						this.tinymce.setContent(val)
+					})
+				}
 			},
 			immediate: true
 		}
@@ -54,11 +62,6 @@ export default {
 	},
 	deactivated() {
 		this.removeTinymce()
-	},
-	data() {
-		return {
-			msg: ''
-		};
 	},
 	methods: {
 		removeTinymce() {

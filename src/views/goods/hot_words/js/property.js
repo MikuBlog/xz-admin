@@ -4,7 +4,7 @@ export default {
 			searchVal: "",
 			selectType: "",
 			selectList: [],
-			articleTypeList: [],
+			hotWordsList: [],
 			isShow: false,
 			url: "",
 			// 当前页数

@@ -6,25 +6,23 @@ export default {
 		},
 		// 初始化资讯分类列表
 		initialHotWordsList(list) {
-		  this.articleTypeList.splice(0);
+		  this.hotWordsList.splice(0);
 		  list.forEach(value => {
-		    this.articleTypeList.push(value);
+		    this.hotWordsList.push(value);
 		  });
 		},
 		// 获取资讯分类列表
 		getHotWordsList(page, size) {
-		  // this.$http_normal({
-		  //   url: `/api/job/page?page=${page - 1}&size=${
-		  //     size
-		  //     }&sort=sort,asc${this.searchVal ? `&name=${this.searchVal}` : ""}${
-		  //     this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""
-		  //     }`,
-		  //   method: "get"
-		  // }).then(result => {
-		  //   const data = result.data;
-		  //   this.initialPage(data.totalElements);
-		  //   this.initialHotWordsList(data.content);
-		  // });
+		  this.$http_normal({
+		    url: `/api/shop/hotWord/page?page=${page - 1}&size=${
+		      size
+		      }&sort=id,desc${this.searchVal ? `&name=${this.searchVal}` : ""}`,
+		    method: "get"
+		  }).then(result => {
+		    const data = result.data;
+		    this.initialPage(data.totalElements);
+		    this.initialHotWordsList(data.content);
+		  });
 		},
 		// 批量删除资讯分类
 		deleteAllHotWords() {
@@ -33,34 +31,34 @@ export default {
 			  return
 			}
 			this.$showMsgBox({
-			  msg: `<p>是否删除选中资讯分类?</p>`,
+			  msg: `<p>是否删除选中热词?</p>`,
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/user/del`,
+			    url: `/api/shop/hotWord/del`,
 			    method: "post",
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-			    this.getUserList();
+			    this.getHotWordsList(this.nowPage, this.nowSize);
 			  });
 			});
 		},
 		// 删除资讯分类
 		deleteHotWords(item) {
 			this.$showMsgBox({
-			  msg: `<p>是否删除选中资讯分类?</p>`,
+			  msg: `<p>是否删除选中热词?</p>`,
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/user/del`,
+			    url: `/api/shop/hotWord/del`,
 			    method: "post",
 			    data: [ item.id ]
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-			    this.getUserList();
+			    this.getHotWordsList(this.nowPage, this.nowSize);
 			  });
 			});
 		},
@@ -89,10 +87,10 @@ export default {
 		},
 		// 点击搜索
 		search() {
-		  this.getArticleList();
+		  this.$refs.pagination.toFirstPage()
 		},
-		searchEnter() {
-			e.keyCode === 13 && this.getArticleList();
+		searchEnter(e) {
+			e.keyCode === 13 && this.$refs.pagination.toFirstPage()
 		}
 	}
 }

@@ -44,13 +44,14 @@ export default {
     // 隐藏窗口
     hideBox() {
       this.dialog = false;
+			this.resetForm()
     },
     // 添加资讯分类
     addArticleType() {
       this.$refs.form.validate(valid => {
         if (valid) {
           this.$http_json({
-            url: "/api/user/add",
+            url: "/api/shop/articleType/add",
             method: "post",
             data: this.form
           }).then(result => {

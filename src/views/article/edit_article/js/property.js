@@ -2,14 +2,20 @@ export default {
   data() {
     return {
       typeList: [],
-      imageUrl: "",
+      coverImage: "",
       articleForm: {
+				id: this.$route.query.id,
         title: "",
-        type: "",
+        types: [{
+      		name: "",
+      		id: ""
+      	}],
         content: "",
+      	coverImage: "",
+      	labels: "",
         sort: 999,
-        show: true,
-        top: false
+        isShow: true,
+        isTop: false
       },
       dynamicTags: [],
       inputVisible: false,

@@ -13,23 +13,29 @@
 					<el-table ref="table" :data="articleList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column prop="title" label="标题" :show-overflow-tooltip="true" />
-						<el-table-column prop="type" label="分类" :show-overflow-tooltip="true" />
+						<el-table-column prop="type" label="分类" :show-overflow-tooltip="true">
+							<template slot-scope="scope">
+								<div slot="reference" class="name-wrapper">
+									{{ scope.row.types.map(val => val.name).join("、") }}
+								</div>
+							</template>
+						</el-table-column>
 						<el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="缩略图" align="center">
 							<template slot-scope="scope">
-								<img :src="scope.row.url" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.url)" />
+								<img :src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.url)" />
 							</template>
 						</el-table-column>
 						<el-table-column label="是否显示" align="center" show-overflow-tooltip>
 							<template slot-scope="scope">
 								<div slot="reference" class="name-wrapper">
-									<el-tag :type="scope.row.enabled ? '' : 'info'">{{ scope.row.enabled ? '是' : '否' }}</el-tag>
+									<el-tag :type="scope.row.isShow ? '' : 'info'">{{ scope.row.isShow ? '是' : '否' }}</el-tag>
 								</div>
 							</template>
 						</el-table-column>
 						<el-table-column label="是否置顶" align="center" show-overflow-tooltip>
 							<template slot-scope="scope">
 								<div slot="reference" class="name-wrapper">
-									<el-tag :type="scope.row.enabled ? '' : 'info'">{{ scope.row.enabled ? '是' : '否' }}</el-tag>
+									<el-tag :type="scope.row.isTop ? '' : 'info'">{{ scope.row.isTop ? '是' : '否' }}</el-tag>
 								</div>
 							</template>
 						</el-table-column>

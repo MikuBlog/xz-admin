@@ -1,3 +1,4 @@
+import convertHttp from '@/utils/convertHttp'
 export default {
 	methods: {
 		// 分页处理
@@ -8,23 +9,22 @@ export default {
 		initialArticleList(list) {
 		  this.articleList.splice(0);
 		  list.forEach(value => {
+				value.coverImage = convertHttp(value.coverImage)
 		    this.articleList.push(value);
 		  });
 		},
 		// 获取资讯列表
 		getArticleList(page, size) {
-		  // this.$http_normal({
-		  //   url: `/api/job/page?page=${page - 1}&size=${
-		  //     size
-		  //     }&sort=sort,asc${this.searchVal ? `&name=${this.searchVal}` : ""}${
-		  //     this.selectType.length > 0 ? `&enabled=${this.selectType}` : ""
-		  //     }`,
-		  //   method: "get"
-		  // }).then(result => {
-		  //   const data = result.data;
-		  //   this.initialPage(data.totalElements);
-		  //   this.initialArticleList(data.content);
-		  // });
+		  this.$http_normal({
+		    url: `/api/shop/article/page?page=${page - 1}&size=${
+		      size
+		      }&sort=sort,asc${this.searchVal ? `&keyword=${this.searchVal}` : ""}`,
+		    method: "get"
+		  }).then(result => {
+		    const data = result.data;
+		    this.initialPage(data.totalElements);
+		    this.initialArticleList(data.content);
+		  });
 		},
 		// 批量删除资讯
 		deleteAllArticle() {
@@ -37,13 +37,13 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/user/del`,
+			    url: `/api/shop/article/del`,
 			    method: "post",
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-			    this.getUserList();
+			    this.getArticleList(this.nowPage, this.nowSize)
 			  });
 			});
 		},
@@ -54,13 +54,13 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/user/del`,
+			    url: `/api/shop/article/del`,
 			    method: "post",
 			    data: [ item.id ]
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-			    this.getUserList();
+					this.getArticleList(this.nowPage, this.nowSize)
 			  });
 			});
 		},
@@ -86,10 +86,10 @@ export default {
 		},
 		// 点击搜索
 		search() {
-		  this.getArticleList();
+		  this.$refs.pagination.toFirstPage()
 		},
-		searchEnter() {
-			e.keyCode === 13 && this.getArticleList();
+		searchEnter(e) {
+			e.keyCode === 13 && this.$refs.pagination.toFirstPage()
 		}
 	}
 }

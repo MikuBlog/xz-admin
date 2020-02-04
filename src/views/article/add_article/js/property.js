@@ -2,14 +2,19 @@ export default {
   data() {
     return {
       typeList: [],
-      imageUrl: "",
+      coverImage: "",
       articleForm: {
         title: "",
-        type: "",
+        types: [{
+					name: "",
+					id: ""
+				}],
         content: "",
+				coverImage: "",
+				labels: "",
         sort: 999,
-        show: true,
-        top: false
+        isShow: true,
+        isTop: false
       },
       dynamicTags: [],
       inputVisible: false,
@@ -20,10 +25,10 @@ export default {
           { min: 2, max: 21, message: "长度在 1 到 15 个字符", trigger: "change" }
         ],
         type: [
-          { required: true, message: "请选择资讯分类", trigger: "blur" }
+          { required: true, message: "请选择资讯分类", trigger: "change" }
         ],
         sort: [
-          { required: true, message: "请输入排序号码", trigger: "blur" }
+          { required: true, message: "请输入排序号码", trigger: "change" }
         ]
       },
       buttonOptions: [{

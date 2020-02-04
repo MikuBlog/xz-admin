@@ -51,7 +51,7 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
           this.$http_json({
-            url: "/api/user/add",
+            url: "/api/shop/articleType/edit",
             method: "post",
             data: this.form
           }).then(result => {

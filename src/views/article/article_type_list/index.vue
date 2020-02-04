@@ -12,7 +12,7 @@
 					</div>
 					<el-table ref="table" :data="articleTypeList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
-						<el-table-column prop="title" label="分类名称" :show-overflow-tooltip="true" />
+						<el-table-column prop="name" label="分类名称" :show-overflow-tooltip="true" />
 						<!-- <el-table-column label="创建日期" width="180">
 							<template slot-scope="scope">
 								<div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>

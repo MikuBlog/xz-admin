@@ -45,13 +45,14 @@ export default {
     // 隐藏窗口
     hideBox() {
       this.dialog = false;
+			this.resetForm()
     },
     // 编辑热词
     editHotWords() {
       this.$refs.form.validate(valid => {
         if (valid) {
           this.$http_json({
-            url: "/api/user/add",
+            url: "/api/shop/hotWord/edit",
             method: "post",
             data: this.form
           }).then(result => {

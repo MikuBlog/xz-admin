@@ -6,8 +6,8 @@
           <div slot="header" class="clearfix">
             <span class="left-border">添加资讯</span>
             <div class="select-box">
-              <el-checkbox v-model="articleForm.top">是否置顶</el-checkbox>
-              <el-checkbox v-model="articleForm.show">是否显示</el-checkbox>
+              <el-checkbox v-model="articleForm.isTop">是否置顶</el-checkbox>
+              <el-checkbox v-model="articleForm.isShow">是否显示</el-checkbox>
             </div>
           </div>
           <div class="button-box">
@@ -27,13 +27,14 @@
                 <el-form-item label="资讯标题" prop="title">
                   <el-input v-model="articleForm.title"></el-input>
                 </el-form-item>
-                <el-form-item label="资讯分类" prop="type">
+                <el-form-item label="资讯分类">
                   <el-autocomplete
-                    v-model="articleForm.type"
+                    v-model="articleForm.types[0].name"
                     :fetch-suggestions="querySearchAsync"
                     placeholder="请输入资讯分类进行搜索并选择"
                     @select="handleSelect"
                     style="width: 100%"
+										value-key="name"
                   ></el-autocomplete>
                 </el-form-item>
                 <el-form-item label="排序" prop="sort">
@@ -48,7 +49,7 @@
                     :show-file-list="false"
                     action="string"
                   >
-                    <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                    <img v-if="coverImage" :src="coverImage" class="avatar" />
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                   </el-upload>
                 </el-form-item>
@@ -56,6 +57,7 @@
               <el-col :span="24">
                 <el-form-item label="标签">
                   <el-tag
+										class="tags"
                     :key="tag"
                     v-for="tag in dynamicTags"
                     closable
