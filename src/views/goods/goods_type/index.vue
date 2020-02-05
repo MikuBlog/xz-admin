@@ -21,33 +21,43 @@
                 title="添加商品分类"
                 circle
               ></el-button>
-							<el-button
+<!-- 							<el-button
 							  type="warning"
 							  icon="el-icon-download"
 							  class="margin-box"
 							  @click="downloadList"
 							  title="导出商品分类列表"
 							  circle
-							></el-button>
+							></el-button> -->
+							<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllGoodsType" :disabled="!selectList.length" title="批量删除商品分类" circle></el-button>
             </el-row>
           </div>
           <el-table
+						ref="table"
             :data="goodsTypeList"
             style="width: 100%;margin-bottom: 20px;"
             row-key="id"
             v-if="isShow"
             :default-expand-all="expand"
             :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-            highlight-current-row
+            @selection-change="handleSelectionChange" 
+						:row-key="getRowKey" 
+						highlight-current-row stripe
             stripe
           >
-            <el-table-column prop="name" label="名称" width="250px" :render-header="renderHeader"></el-table-column>
-            <el-table-column prop="enabled" label="是否显示" align="center" width="80px">
+						<el-table-column type="selection" width="55" reserve-selection />
+            <el-table-column prop="name" label="名称" :render-header="renderHeader"></el-table-column>
+            <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="缩略图" align="center">
+            	<template slot-scope="scope">
+            		<img :src="scope.row.imageUrl || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShowPic = true), (url = scope.row.imageUrl)" />
+            	</template>
+            </el-table-column>
+						<el-table-column prop="enabled" label="是否显示" align="center" width="80px">
               <template slot-scope="scope">
                 <el-tag
                   effect="dark"
-                  :type="scope.row.enabled ? 'success' : 'info'"
-                >{{scope.row.enabled ? '是' : '否'}}</el-tag>
+                  :type="scope.row.isShow ? 'success' : 'info'"
+                >{{scope.row.isShow ? '是' : '否'}}</el-tag>
               </template>
             </el-table-column>
             <el-table-column prop="sort" align="center" label="排序">
@@ -55,18 +65,13 @@
                 <el-tag>{{ scope.row.sort }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="createTime" label="创建日期" width="180">
-              <template slot-scope="scope">
-                <span>{{ scope.row.createTime }}</span>
-              </template>
-            </el-table-column>
             <el-table-column label="操作" width="150" fixed="right" align="center">
               <template slot-scope="scope">
-                <el-button type="primary" icon="el-icon-edit" @click="editMenuItem(scope.row)" />
+                <el-button type="primary" icon="el-icon-edit" @click="showEditBox(scope.row)" />
                 <el-button
                   slot="reference"
                   type="danger"
-                  @click="deleteMenuItem(scope.row)"
+                  @click="deleteGoodsType(scope.row)"
                   icon="el-icon-delete"
                 />
               </template>
@@ -78,8 +83,10 @@
     <operation-box 
     :options="buttonOptions"
     @showAddBox="showAddBox"
-		@downloadList="downloadList"/>
-    <eForm ref="form" :is-add="isAdd" />
+		@downloadList="downloadList"
+		@deleteAllGoodsType="deleteAllGoodsType"/>
+		<ImagePreview :show-modal.sync="isShowPic" :url="url" />
+    <eForm ref="form" />
   </div>
 </template>
 

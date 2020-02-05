@@ -37,35 +37,37 @@ export default {
 		};
 	},
 	watch: {
-		value: {
-			handler(val) {
-				console.log(this.asyncInit, val, this.tinymce)
-				if(this.asyncInit && val && this.tinymce) {
-					this.$nextTick(() => {
-						console.log(val)
-						this.asyncInit = false
-						this.tinymce.setContent(val)
-					})
-				}
-			},
-			immediate: true
+		value(val) {
+			// 用于异步传值
+			if (this.asyncInit && val && this.tinymce) {
+				this.$nextTick(() => {
+					this.asyncInit = false;
+					this.tinymce.setContent(val);
+				});
+			}
+			// 用于清空编辑器
+			if (!val && this.tinymce) {
+				this.$nextTick(() => {
+					this.tinymce.setContent('');
+				});
+			}
 		}
 	},
 	mounted() {
-		this.initTinymce()
+		this.initTinymce();
 	},
 	activated() {
-		this.initTinymce()
+		this.initTinymce();
 	},
 	destroyed() {
-		this.removeTinymce()
+		this.removeTinymce();
 	},
 	deactivated() {
-		this.removeTinymce()
+		this.removeTinymce();
 	},
 	methods: {
 		removeTinymce() {
-			this.$setStyle(document.querySelector('#textarea'), 'opacity', 0)
+			this.$setStyle(document.querySelector('#textarea'), 'opacity', 0);
 			this.tinymce.destroy();
 		},
 		initTinymce() {
@@ -79,25 +81,23 @@ export default {
 				toolbar,
 				height: this.height,
 				ax_wordlimit_num: this.limit,
-				ax_wordlimit_callback: function(editor, txt, num){
+				ax_wordlimit_callback: function(editor, txt, num) {
 					// 字数限制
 				},
 				file_picker_callback: function(callback, value, meta) {
-					_this
-						.$getFile(100)
-						.then(raw => {
-							_this
-								.$http_file({
-									url: '/api/localStorage/upload',
-									method: 'post',
-									data: {
-										file: raw
-									}
-								})
-								.then(result => {
-									callback(convertHttp(result.data.url));
-								});
-						})
+					_this.$getFile(100).then(raw => {
+						_this
+							.$http_file({
+								url: '/api/localStorage/upload',
+								method: 'post',
+								data: {
+									file: raw
+								}
+							})
+							.then(result => {
+								callback(convertHttp(result.data.url));
+							});
+					});
 				},
 				images_upload_handler(blobInfo, success, failure, progress) {
 					_this
@@ -121,7 +121,7 @@ export default {
 						_this.$emit('input', editor.getContent());
 					});
 				}
-			})
+			});
 		}
 	}
 };

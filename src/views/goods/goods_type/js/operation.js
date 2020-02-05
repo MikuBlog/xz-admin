@@ -1,3 +1,4 @@
+import convertHttp from '@/utils/convertHttp'
 export default {
   methods: {
     // 是否展开全部
@@ -45,14 +46,33 @@ export default {
 		    this.$errorMsg(e)
 		  })
 		},
-    // 删除菜单
-    deleteMenuItem(item) {
+		deleteAllGoodsType() {
+			if (this.selectList.length == 0) {
+			  this.$warnMsg("请勾选商品分类进行批量删除")
+			  return
+			}
+			this.$showMsgBox({
+			  msg: `<p>是否删除选中商品分类?</p>`,
+			  isHTML: true
+			}).then(() => {
+			  this.$http_json({
+			    url: `/api/shop/productType/del`,
+			    method: "post",
+			    data: this.selectList.map(val => val.id)
+			  }).then(() => {
+			    this.$successMsg("删除成功");
+			    this.$refs.table.clearSelection()
+			    this.getGoodsTypeList()
+			  });
+			});
+		},
+    deleteGoodsType(item) {
       this.$showMsgBox({
         msg: `<p>是否删除${item.name}菜单?</p><p>如果菜单包含子菜单，则会一并删除！</p>`,
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/menu/del/`,
+          url: `/api/shop/productType/del`,
           method: "post",
 					data: [ item.id ]
         }).then(() => {
@@ -61,36 +81,30 @@ export default {
         });
       });
     },
-    // 显示添加菜单窗口
+		getRowKey(row) {
+		  return row.id;
+		},
+		handleSelectionChange(val) {
+		  this.selectList = val;
+		},
     showAddBox() {
       const form = this.$refs.form
-      this.isAdd = true;
       form.dialog = true;
+			form.isAdd = true
+			form.getTree()
       form.form.resetForm();
     },
-    // 显示编辑菜单窗口
-    showEditBox() {
+    showEditBox(item) {
       const form = this.$refs.form
-      this.isAdd = false;
-      form.dialog = true;
-    },
-    // 编辑菜单项
-    editMenuItem(item) {
-      const form = this.$refs.form.form;
-      this.$refs.form.menuId = item.id;
-      menuItem.name = item.name;
-      menuItem.sort = item.sort;
-      menuItem.path = item.path;
-      menuItem.component = item.component;
-      menuItem.iframe = item.iframe.toString();
-      menuItem.roles = item.roles;
-      menuItem.enabled = item.enabled.toString();
-      menuItem.parentId = item.parentId;
-      menuItem.icon = item.icon;
-			menuItem.cache = item.cache
-			? item.cache.toString() 
-			: "false";
-      this.showEditBox();
+			form.getTree()
+			form.isAdd = false
+			form.dialog = true;
+			form.imageUrl = convertHttp(item.image)
+			Object.keys(item).forEach(val => {
+				if(val !== 'children' && val !== 'imageUrl') {
+					form.form[val] = item[val]
+				}
+			})
     },
     // 重置
     refresh() {

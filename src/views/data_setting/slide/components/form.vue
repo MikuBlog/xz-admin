@@ -3,18 +3,24 @@
     append-to-body
     :before-close="hideBox"
     :visible.sync="dialog"
-    :title="isAdd ? '新增商品分类' : '编辑商品分类'"
+    :title="isAdd ? '新增幻灯片' : '编辑幻灯片'"
     width="500px"
     v-dialogDrag
   >
-    <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-      <el-form-item label="上级分类">
-        <treeselect v-model="form.parentId" :options="cates" style="width: 370px;" placeholder="选择上级类目" />
+    <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
+      <el-form-item label="标题" prop="name">
+        <el-input v-model="form.name" style="width: 350px;" />
       </el-form-item>
-      <el-form-item label="分类名称" prop="name">
-        <el-input v-model="form.name" style="width: 370px;" />
-      </el-form-item>
-      <el-form-item label="分类图片">
+			<el-form-item label="排序" prop="sort">
+			  <el-input type="number" v-model="form.sort" style="width: 350px;" />
+			</el-form-item>
+			<el-form-item label="链接url" prop="url">
+			  <el-input v-model="form.url" style="width: 350px;" />
+			</el-form-item>
+			<el-form-item label="小程序跳转url" prop="wxurl">
+			  <el-input v-model="form.url" style="width: 350px;" />
+			</el-form-item>
+      <el-form-item label="图片">
         <el-upload
           class="avatar-uploader"
           :http-request="uploadImage"
@@ -24,13 +30,6 @@
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-      </el-form-item>
-      <el-form-item label="排序" prop="sort">
-        <el-input type="number" v-model="form.sort" style="width: 370px;" />
-      </el-form-item>
-      <el-form-item label="是否显示" prop="enabled">
-        <el-radio v-model="form.isShow" :label="true">显示</el-radio>
-        <el-radio v-model="form.isShow" :label="false">隐藏</el-radio>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -53,18 +52,14 @@ export default {
       dialog: false,
 			isAdd: true,
       imageUrl: "",
-      cates: [{
-				id: 0,
-				label: "顶级类目",
-				children: []
-			}],
+      cates: [],
       form: {
         id: "",
-				parentId: 0,
         name: "",
+				url: "",
+				wxurl: "",
         sort: 999,
-        isShow: true,
-				image: ""
+        pic: "",
       },
       rules: {
         name: [{ required: true, message: "请输入商品分类名", trigger: "blur" }],
@@ -87,7 +82,6 @@ export default {
         timeout: 100000
       }).then(result => {
         this.imageUrl = convertHttp(result.data.url)
-				this.form.image = result.data.url
         this.$successMsg("上传成功！");
       });
     },
@@ -99,13 +93,13 @@ export default {
         if (valid) {
           delete this.form.id;
           this.$http_json({
-            url: "/api/shop/productType/add",
+            url: "/api/user/add",
             method: "post",
             data: this.form
           }).then(result => {
             this.$successMsg("添加成功");
             this.hideBox();
-            this.$parent.getGoodsTypeList();
+            this.$parent.getSlideList();
           });
         } else {
           return false;
@@ -115,17 +109,14 @@ export default {
     doEdit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-					if(this.form.parentId) {
-						
-					}
           this.$http_json({
-            url: "/api/shop/productType/edit",
+            url: "/api/user/edit",
             method: "post",
             data: this.form
           }).then(result => {
             this.$successMsg("编辑成功");
             this.hideBox();
-            this.$parent.getGoodsTypeList();
+            this.$parent.getSlideList();
           });
         } else {
           return false;
@@ -134,33 +125,18 @@ export default {
     },
     resetForm() {
       this.dialog = false;
-			this.imageUrl = ""
       this.$refs["form"].resetFields();
       this.form = {
         id: "",
-        parentId: 0,
-        name: "",
+				name: "",
+				url: "",
+				wxurl: "",
+        cateName: "",
         sort: 999,
-        isShow: true,
-        image: ""
+        pic: "",
       };
     },
-		initialCates(list) {
-			this.cates[0].children.splice(0)
-			list.forEach(val => {
-				delete val.children
-				val.label = val.name
-				this.cates[0].children.push(val)
-			})
-		},
-		getTree() {
-			this.$http_json({
-			  url: `/api/shop/productType/queryAll`,
-			  method: "get"
-			}).then(result => {
-			  this.initialCates(result.data.content)
-			});
-		},
+    getTree() {}
   }
 };
 </script>

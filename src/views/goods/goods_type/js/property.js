@@ -2,20 +2,22 @@ export default {
   data() {
     return {
       isShow: true,
-      expand: true,
+			isShowPic: false,
+			expand: true,
+      url: "",
       searchVal: "",
-      isAdd: true,
       goodsTypeList: [],
+			selectList: [],
       buttonOptions: [{
         type: "primary",
         icons: 'el-icon-plus',
         title: "添加商品分类",
         method: "showAddBox"
       }, {
-				type: "warning",
-				icons: "el-icon-download",
-				title: "导出商品分类列表",
-				method: "downloadList"
+				type: "danger",
+				icons: "el-icon-delete",
+				title: "批量删除商品分类",
+				method: "deleteAllGoodsType"
 			}],
       options: {
         animation: 150,

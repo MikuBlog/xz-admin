@@ -1,3 +1,4 @@
+import convertHttp from '@/utils/convertHttp'
 export default {
   created() {
     // 初始化获取菜单列表
@@ -8,13 +9,16 @@ export default {
     initialGoodsTypeList(list) {
       this.goodsTypeList.splice(0);
       list.forEach(value => {
+				value.imageUrl = value.image 
+				? convertHttp(value.image)
+				: ''
         this.goodsTypeList.push(value);
       });
     },
     // 获取菜单列表
     getGoodsTypeList() {
       this.$http_json({
-        url: `/api/menu/get?sort=createTime,desc${
+        url: `/api/shop/productType/queryAll?sort=sort,asc${
           this.searchVal ? `&name=${this.searchVal}` : ""
           }`,
         method: "get"
