@@ -128,19 +128,19 @@ export default {
 			let loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
 			this.$http({
 				url: `/api/wxPayConfig/downloadCredentials/${this.$route.query.id}`,
-				responseType: 'blob',
+				// responseType: 'blob',
 				method: "get",
 				headers: {
 					'Authorization': `Bearer ${this.$getMemoryPmt('token')}`
 				}
 			}).then(result => {
 				const a = document.createElement('a')
-				a.href = window.URL.createObjectURL(result.data)
+				a.href = window.URL.createObjectURL(new Blob([ result.data ]))
 				a.download = `${result.headers['content-disposition'].split("=")[1].split(".")[0]}.p12`
 				a.click()
 				loading.close()
 			}).catch(e => {
-				this.$errorMsg("证书未上传")
+				this.$errorMsg(JSON.parse(e.response.request.response).message)
 				loading.close()
 			})
 		},
