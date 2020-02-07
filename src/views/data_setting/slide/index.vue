@@ -13,11 +13,11 @@
 					<el-table ref="table" :data="slideList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column prop="title" label="标题" :show-overflow-tooltip="true" />
-						<el-table-column prop="title" label="链接url" :show-overflow-tooltip="true" />
-						<el-table-column prop="title" label="小程序跳转url" :show-overflow-tooltip="true" />
+						<el-table-column prop="linkUrl" label="链接url" :show-overflow-tooltip="true" />
+						<el-table-column prop="xcxUrl" label="小程序跳转url" :show-overflow-tooltip="true" />
 						<el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="缩略图" align="center">
 							<template slot-scope="scope">
-								<img :src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.url)" />
+								<img :src="scope.row.imageUrl || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.imageUrl)" />
 							</template>
 						</el-table-column>
 						<el-table-column label="排序" align="center" show-overflow-tooltip>

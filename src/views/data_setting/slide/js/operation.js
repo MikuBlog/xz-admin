@@ -1,30 +1,27 @@
 import convertHttp from '@/utils/convertHttp'
 export default {
+	created() {
+		this.getSlideList()
+	},
 	methods: {
-		// 分页处理
-		initialPage(totalElements) {
-		  this.totalElements = totalElements;
-		},
 		// 初始化资讯列表
 		initialSlideList(list) {
 		  this.slideList.splice(0);
 		  list.forEach(value => {
-				value.coverImage = convertHttp(value.coverImage)
+				value.imageUrl = value.image 
+				? convertHttp(value.image)
+				: ''
 		    this.slideList.push(value);
 		  });
 		},
 		// 获取幻灯片列表
-		getSlideList(page, size) {
-		  // this.$http_normal({
-		  //   url: `/api/shop/article/page?page=${page - 1}&size=${
-		  //     size
-		  //     }&sort=sort,asc${this.searchVal ? `&keyword=${this.searchVal}` : ""}`,
-		  //   method: "get"
-		  // }).then(result => {
-		  //   const data = result.data;
-		  //   this.initialPage(data.totalElements);
-		  //   this.initialSlideList(data.content);
-		  // });
+		getSlideList() {
+		  this.$http_json({
+		    url: `/api/shop/slide/queryAll${this.searchVal ? `?title=${this.searchVal}` : ""}`,
+		    method: "get"
+		  }).then(result => {
+		    this.initialSlideList(result.data);
+		  });
 		},
 		// 批量删除幻灯片
 		deleteAllSlide() {
@@ -37,7 +34,7 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/shop/article/del`,
+			    url: `/api/shop/slide/del`,
 			    method: "post",
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
@@ -54,7 +51,7 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/shop/article/del`,
+			    url: `/api/shop/slide/del`,
 			    method: "post",
 			    data: [ item.id ]
 			  }).then(() => {
@@ -82,6 +79,12 @@ export default {
 			const form = this.$refs.form
 			form.dialog = true
 			form.isAdd = false
+			Object.keys(item).forEach(val => {
+				if(val !== 'imageUrl') {
+					form.form[val] = item[val]
+				}
+			})
+			form.imageUrl = convertHttp(item.image)
 		},
 		// 重置
 		refresh() {

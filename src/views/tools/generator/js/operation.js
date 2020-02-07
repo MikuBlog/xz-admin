@@ -3,12 +3,6 @@ export default {
   methods: {
     // 弹窗
     editGeneratorCode(item) {
-      // const generatorBox = this.$refs.form
-      // generatorBox.dialog = true
-      // generatorBox.form.remark = item.remark
-      // generatorBox.getFormMsg()
-      // generatorBox.getTableList(item.tableName)
-			// console.log(item.tableName)
 			this.$router.push({
 				path: `/home/generator_config?tableName=${item.tableName}`
 			})

@@ -22,7 +22,7 @@ export default {
       rules: {
         title: [
           { required: true, message: "请输入资讯标题", trigger: "blur" },
-          { min: 2, max: 21, message: "长度在 1 到 15 个字符", trigger: "change" }
+          { min: 1, max: 15, message: "长度在 1 到 15 个字符", trigger: "change" }
         ],
         type: [
           { required: true, message: "请选择资讯分类", trigger: "change" }
