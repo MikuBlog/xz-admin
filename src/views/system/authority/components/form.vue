@@ -56,11 +56,18 @@ export default {
       }
     };
   },
+	beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
   created() {
     // 获取权限树状列表
     this.getPermissions();
+		document.addEventListener('keypress', this.submitEnter)
   },
   methods: {
+		submitEnter(e) {
+			e.keyCode === 13 && this.doSubmit()
+		},
     // 隐藏窗口
     hideBox() {
       this.dialog = false;

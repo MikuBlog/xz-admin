@@ -128,7 +128,6 @@ export default {
 			let loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
 			this.$http({
 				url: `/api/wxPayConfig/downloadCredentials/${this.$route.query.id}`,
-				// responseType: 'blob',
 				method: "get",
 				headers: {
 					'Authorization': `Bearer ${this.$getMemoryPmt('token')}`

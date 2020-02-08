@@ -82,7 +82,16 @@ export default {
       }
     };
   },
+	created() {
+		document.addEventListener('keypress', this.submitEnter)
+	},
+	beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
   methods: {
+		submitEnter(e) {
+			e.keyCode === 13 && this.doSubmit()
+		},
     // 隐藏弹窗
     hideBox() {
       this.dialog = false;

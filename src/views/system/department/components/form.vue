@@ -68,11 +68,18 @@ export default {
       }
     };
   },
+	beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
   created() {
     // 请求部门列表
     this.getDepartmentList();
+		document.addEventListener('keypress', this.submitEnter)
   },
   methods: {
+		submitEnter(e) {
+			e.keyCode === 13 && this.doSubmit()
+		},
     // 隐藏弹窗
     hideBox() {
       this.dialog = false;

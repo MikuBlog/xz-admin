@@ -54,7 +54,16 @@ export default {
       }
     };
   },
+	created() {
+		document.addEventListener('keypress', this.submitEnter)
+	},
+	beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
   methods: {
+		submitEnter(e) {
+			e.keyCode === 13 && this.submitForm()
+		},
     // 隐藏弹出框
     hideBox() {
       this.isShowAddBox = false;

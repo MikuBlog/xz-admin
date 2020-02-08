@@ -1,6 +1,6 @@
 <template>
   <el-dialog :visible.sync="dialog" title="新增热词" width="570px" append-to-body v-dialogDrag>
-    <el-form status-icon ref="form" :model="form" :rules="rules" size="small">
+    <el-form status-icon ref="form" :model="form" :rules="rules" size="small" @submit.native.prevent="editHotWords">
       <el-form-item label="热词名称" prop="name">
         <el-input v-model="form.name" />
       </el-form-item>

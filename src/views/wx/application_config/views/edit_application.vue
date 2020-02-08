@@ -142,7 +142,7 @@ export default {
 		  this.$refs.applicationForm.validate(valid => {
 		    if (valid) {
 		      this.$http_json({
-		        url: "/api/wxConfig/add",
+		        url: "/api/wxConfig/edit",
 		        method: "post",
 		        data: this.applicationForm
 		      }).then(result => {

@@ -1,6 +1,6 @@
 <template>
   <el-dialog :visible.sync="dialog" title="新增资讯分类" width="570px" append-to-body v-dialogDrag>
-    <el-form status-icon ref="form" :model="form" :rules="rules" size="small">
+    <el-form status-icon ref="form" :model="form" :rules="rules" size="small" @submit.native.prevent="addArticleType">
       <el-form-item label="分类名称" prop="name">
         <el-input v-model="form.name" />
       </el-form-item>
@@ -31,8 +31,8 @@ export default {
         name: [
           { required: true, message: "请输入分类名称", trigger: "blur" },
           {
-            min: 2,
-            max: 21,
+            min: 1,
+            max: 10,
             message: "长度在 1 到 10 个字符",
             trigger: "change"
           }
@@ -40,6 +40,11 @@ export default {
       }
     };
   },
+	// created() {
+		// document.addEventListener('keypress', (e) => {
+		// 	console.log(e.keyCode)
+		// })
+	// },
   methods: {
     // 隐藏窗口
     hideBox() {

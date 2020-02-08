@@ -136,6 +136,9 @@ export default {
       }
     };
   },
+	beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
   created() {
     const explorer = navigator.userAgent;
     if (explorer.indexOf("Chrome") >= 0) {
@@ -143,8 +146,12 @@ export default {
     } else {
       this.style = "width: 172px";
     }
+		document.addEventListener('keypress', this.submitEnter)
   },
   methods: {
+		submitEnter(e) {
+			e.keyCode === 13 && this.doSubmit()
+		},
     // 隐藏窗口
     hideBox() {
       this.dialog = false;
