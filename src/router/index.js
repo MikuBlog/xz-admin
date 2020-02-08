@@ -66,6 +66,7 @@ function generateRouter(routes, newRoutes = []) {
 		}
 		item.meta.iframe = item.iframe
 		item.meta.cache = item.cache
+		item.path && (item.meta.cacheName = item.path.replace(/\//g, ""))
 		item.meta.id = item.id
 		item.meta.parentId = item.parentId
 		newRoutes.push({
