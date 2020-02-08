@@ -1,7 +1,7 @@
 export default {
 	created() {
-		this.getChartData()
-		this.getVisitData()
+		// this.getChartData()
+		// this.getVisitData()
 	},
 	methods: {
 		// 获取访问记录统计表

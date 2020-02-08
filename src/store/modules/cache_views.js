@@ -11,7 +11,20 @@ const
 					state.cacheViews.push(cacheName)
 				}
 			})
-    }
+    },
+		// 添加缓存页面
+		ADD_CACHE_VIEWS(state, tag) {
+			if(tag.meta.cache) {
+				state.cacheViews.push(tag.meta.cacheName)
+			}
+		},
+		// 清除缓存页面
+		DEL_CACHE_VIEWS(state, tag) {
+			const index = state.cacheViews.indexOf(tag.meta.cacheName)
+			if(index > -1) {
+				state.cacheViews.splice(index, 1)
+			}
+		}
   }
 
 export default {
