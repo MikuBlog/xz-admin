@@ -17,7 +17,7 @@
 			</router-link>
 		</scroll-pane>
 		<ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
-			<li @click="refreshPage()">刷新</li>
+			<li @click="refreshPage(selectedTag)">刷新</li>
 			<li @click="closeTag()">关闭</li>
 			<li @click="closeOther()">关闭其他</li>
 			<li @click="closeAll()">关闭全部</li>
@@ -51,7 +51,6 @@ export default {
 	},
 	watch: {
 		$route() {
-			console.log()
 			this.moveToCurrentTag();
 		},
 		visible(value) {
@@ -63,7 +62,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(['REMOVE_TAGS', 'REMOVE_ALL_TAGS', 'REMOVE_RANGE_TAGS']),
+		...mapMutations(['REMOVE_TAGS', 'REMOVE_ALL_TAGS', 'REMOVE_RANGE_TAGS', 'DEL_CACHE_VIEWS', 'ADD_CACHE_VIEWS']),
 		setTagColor() {
 		  this.$createStyle(`
 		    .activetag {
@@ -72,7 +71,11 @@ export default {
 		    }
 		  `, 'tag-color')
 		},
-		refreshPage() {
+		refreshPage(tag) {
+			this.DEL_CACHE_VIEWS(tag)
+			setTimeout(() => {
+				this.ADD_CACHE_VIEWS(tag)
+			}, 1000)
 			this.$router.replace({
 				path: `/home/redirect?path=${this.selectedTag.fullPath}`
 			});
