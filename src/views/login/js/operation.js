@@ -203,8 +203,9 @@ export default {
 						? '/home/welcome'
 						: this.$getMemorySes("redirect")})
             : this.$router.push({ path: "/home/welcome" })
-          });
-          this.getCode()
+          }).catch(e => {
+						this.getCode()
+					})
         } else {
           return false;
         }

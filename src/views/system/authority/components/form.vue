@@ -66,7 +66,7 @@ export default {
   },
   methods: {
 		submitEnter(e) {
-			e.keyCode === 13 && this.doSubmit()
+			e.keyCode === 13 && this.dialog === true && this.doSubmit()
 		},
     // 隐藏窗口
     hideBox() {

@@ -62,7 +62,7 @@ export default {
 	},
   methods: {
 		submitEnter(e) {
-			e.keyCode === 13 && this.submitForm()
+			e.keyCode === 13 && this.isShowAddBox === true && this.submitForm()
 		},
     // 隐藏弹出框
     hideBox() {

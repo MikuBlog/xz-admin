@@ -34,7 +34,7 @@
 		},
 		methods: {
 			submitEnter(e) {
-				e.keyCode === 13 && this.copyLink()
+				e.keyCode === 13 && this.dialogVisible === true && this.copyLink()
 			},
 			// 删除所有缓存
 			copyLink() {

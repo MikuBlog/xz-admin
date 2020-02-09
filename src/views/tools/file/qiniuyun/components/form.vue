@@ -65,7 +65,7 @@ export default {
 	},
   methods: {
 		submitEnter(e) {
-			e.keyCode === 13 && this.updateList()
+			e.keyCode === 13 && this.dialog === true && this.updateList()
 		},
     // 刷新列表
     updateList() {

@@ -40,11 +40,6 @@ export default {
       }
     };
   },
-	// created() {
-		// document.addEventListener('keypress', (e) => {
-		// 	console.log(e.keyCode)
-		// })
-	// },
   methods: {
     // 隐藏窗口
     hideBox() {
