@@ -59,7 +59,7 @@ export default {
 					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getDictionaryList();
+          this.getDictionaryList(this.nowPage_1, this.nowSize_1);
         });
       });
     },
@@ -72,7 +72,7 @@ export default {
 					data: [ item.id ] 
         }).then(result => {
           this.$successMsg("删除成功");
-          this.getDetailList();
+          this.getDetailList(this.nowPage_2, this.nowSize_2);
         });
       });
     },

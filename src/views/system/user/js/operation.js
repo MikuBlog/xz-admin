@@ -38,7 +38,7 @@ export default {
         }).then(() => {
           this.$successMsg("删除成功");
           this.$refs.userTable.clearSelection()
-          this.getUserList();
+          this.getUserList(this.nowPage, this.nowSize);
         });
       });
     },
@@ -54,7 +54,7 @@ export default {
           data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getUserList();
+          this.getUserList(this.nowPage, this.nowSize);
         });
       });
     },

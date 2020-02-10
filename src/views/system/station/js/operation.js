@@ -9,7 +9,7 @@ export default {
 					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getStationList();
+          this.getStationList(this.nowPage, this.nowSize);
         });
       });
     },

@@ -23,7 +23,7 @@ export default {
         }).then(() => {
           this.$successMsg("删除成功");
           this.$refs.pictureTable.clearSelection()
-          this.getPictureList();
+          this.getPictureList(this.nowPage, this.nowSize);
         });
       });
     },
@@ -36,7 +36,7 @@ export default {
           data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getPictureList();
+          this.getPictureList(this.nowPage, this.nowSize)
         });
       });
     },
