@@ -48,6 +48,13 @@ export default {
       document.querySelector("#top").removeEventListener("scroll", this.getScrollTop);
     }
   },
+  deactivated() {
+    if (!isMobile() && !isSafari()) {
+      document.querySelector(".os-viewport").removeEventListener("scroll", this.getScrollTop);
+    } else {
+      document.querySelector("#top").removeEventListener("scroll", this.getScrollTop);
+    }
+  },
   mounted() {
     setTimeout(() => {
       this.initialListener();
