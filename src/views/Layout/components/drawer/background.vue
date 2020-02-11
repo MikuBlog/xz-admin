@@ -158,12 +158,12 @@ export default {
           `rgba(0, 0, 0, ${this.settings.background.mask / 100})`
         ));
     },
-    // 设置卡片
+    // 设置布局透明度
     setLayoutOpacity() {
       this.$createStyle(
         this.defaultConfig.layoutOpacity.map(val => {
           return `${val} { opacity: ${this.settings.background.cardOpacity / 100}!important; }`
-        }).join(" "),
+        }).join(" ") + ` .tabs { background-color: rgba(255, 255, 255, ${this.settings.background.cardOpacity / 100})!important; }`,
         "layout-opacity"
       );
     },

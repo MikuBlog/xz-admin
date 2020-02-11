@@ -142,13 +142,13 @@ export default {
 			const offsetLeft = this.$el.getBoundingClientRect().left; // container margin left
 			const offsetWidth = this.$el.offsetWidth; // container width
 			const maxLeft = offsetWidth - menuMinWidth; // left boundary
-			const left = e.clientX - offsetLeft + 15; // 15: margin right
+			const left = e.clientX - offsetLeft + 5; // 15: margin right
 			if (left > maxLeft) {
 				this.left = maxLeft;
 			} else {
 				this.left = left;
 			}
-			this.top = e.clientY - 35;
+			this.top = e.clientY - 45;
 			this.visible = true;
 			this.selectedTag = tag;
 		},
@@ -228,7 +228,7 @@ export default {
 	.contextmenu {
 		margin: 0;
 		background: #fff;
-		z-index: 9999;
+		z-index: 99;
 		position: absolute;
 		list-style-type: none;
 		padding: 5px 0;

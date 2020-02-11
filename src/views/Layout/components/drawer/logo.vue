@@ -2,7 +2,10 @@
   <div>
     <h2 style="margin: 2rem 0">系统Logo设置</h2>
     <el-image style="width: 100%; height: 159px" :src="logo" fit="scale-down" ref="image"></el-image>
-    <div class="button" v-permission="['ADMIN']">
+    <div class="button" v-permission="{
+      permission: ['ADMIN'],
+      style: 'block'
+    }">
       <el-button type="primary" style="width: 100%" @click="selectLogo">选择Logo</el-button>
     </div>
     <div class="button last-button" v-permission="['ADMIN']">
