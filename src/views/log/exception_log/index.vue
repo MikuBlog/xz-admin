@@ -9,7 +9,7 @@ import { MessageBox } from 'mint-ui';
               v-model="searchVal"
               placeholder="请选择类型进行搜索"
               class="search-input margin-box"
-              @keyup.native="searchEnter"
+              @keyup.native.enter="search"
             ></el-input>
             <el-select v-model="selectType" placeholder="类型" class="select-input margin-box">
               <el-option

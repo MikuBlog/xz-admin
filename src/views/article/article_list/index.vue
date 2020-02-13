@@ -4,7 +4,7 @@
 			<el-col :span="24">
 				<el-card class="box-card">
 					<div class="search">
-						<el-input v-model="searchVal" placeholder="搜索关键词" class="search-input margin-box" @keyup.native="searchEnter"></el-input>
+						<el-input v-model="searchVal" placeholder="搜索关键词" class="search-input margin-box" @keyup.native.enter="search"></el-input>
 						<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddArticlePage" title="添加资讯" circle></el-button>

@@ -94,16 +94,6 @@ export default {
       this.searchVal_2 = ""
       this.$refs.pagination_2.toFirstPage()
     },
-    // 回车搜索
-    searchEnter_1(e) {
-      e.keyCode === 13 &&
-        (this.selectType_1
-          ? this.$refs.pagination_1.toFirstPage()
-          : this.$warnMsg("请选择搜索类型"));
-    },
-    searchEnter_2(e) {
-      e.keyCode === 13 && this.$refs.pagination_2.toFirstPage()
-    },
     // 点击搜索
     search_1() {
       this.selectType_1

@@ -103,20 +103,9 @@ export default {
     search_1() {
       this.getDepartmentList();
     },
-    // 回车搜索
-    searchEnter_1(e) {
-      e.keyCode === 13 && this.getDepartmentList();
-    },
     // 点击搜索
     search_2() {
       this.selectType ? this.$refs.pagination.toFirstPage() : this.$warnMsg("请选择搜索类型");
-    },
-    // 回车搜索
-    searchEnter_2(e) {
-      e.keyCode === 13 &&
-        (this.selectType
-          ? this.$refs.pagination.toFirstPage()
-          : this.$warnMsg("请选择搜索类型"));
     },
     // 搜索状态
     getStatus() {

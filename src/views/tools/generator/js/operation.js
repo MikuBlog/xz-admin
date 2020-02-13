@@ -16,11 +16,6 @@ export default {
     search() {
       this.$refs.pagination.toFirstPage()
     },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13
-      && this.$refs.pagination.toFirstPage()
-    },
 		// 下载代码
 		downloadCode(item) {
 			let loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })

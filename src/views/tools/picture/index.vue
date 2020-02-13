@@ -8,7 +8,7 @@
               v-model="searchVal"
               placeholder="搜索图片名称"
               class="search-input margin-box"
-              @keyup.native="searchEnter"
+              @keyup.native.enter="search"
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
             <el-button

@@ -58,10 +58,6 @@ export default {
     search() {
       this.$refs.pagination.toFirstPage()
     },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13 && this.$refs.pagination.toFirstPage();
-    },
     exportImage() {
       if(this.selectImageList.length == 0) {
         this.$warnMsg("请勾选图片进行批量导出")

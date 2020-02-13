@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="search">
-			<el-input v-model="searchVal" placeholder="搜索行为名称" class="search-input margin-box" @keyup.native="searchEnter"></el-input>
+			<el-input v-model="searchVal" placeholder="搜索行为名称" class="search-input margin-box" @keyup.native.enter="search"></el-input>
 			<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 			<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 		</div>
@@ -82,10 +82,6 @@ export default {
 		// 点击搜索
 		search() {
 			this.$refs.pagination.toFirstPage();
-		},
-		// 回车搜索
-		searchEnter(e) {
-			e.keyCode === 13 && this.$refs.pagination.toFirstPage();
 		}
 	}
 };

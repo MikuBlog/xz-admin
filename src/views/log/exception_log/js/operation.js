@@ -12,13 +12,6 @@ export default {
         ? this.$refs.pagination.toFirstPage()
         : this.$warnMsg("请选择搜索类型");
     },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13 &&
-        (this.selectType
-          ? this.$refs.pagination.toFirstPage()
-          : this.$warnMsg("请选择搜索类型"));
-    },
     // 显示具体错误信息
     showDetail(id) {
       this.$http_json({

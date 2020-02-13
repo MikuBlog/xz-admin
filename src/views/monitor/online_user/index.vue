@@ -8,7 +8,7 @@
               v-model="searchVal"
               placeholder="全表模糊搜索"
               class="search-input margin-box"
-              @keyup.native="searchEnter"
+              @keyup.native.enter="search"
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
             <el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
