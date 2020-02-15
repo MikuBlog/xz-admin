@@ -116,3 +116,8 @@ label {
 .top-floor {
   z-index: 9999!important;
 }
+
+.tox-fullscreen {
+  right: 0;
+  bottom: 0;
+}

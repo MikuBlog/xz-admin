@@ -8,7 +8,7 @@
               v-model="searchVal"
               placeholder="搜索任务名称"
               class="search-input margin-box"
-              @keyup.native="searchEnter"
+              @keyup.native.enter="search"
             ></el-input>
             <el-select
               v-model="selectType"

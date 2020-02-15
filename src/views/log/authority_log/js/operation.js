@@ -46,13 +46,6 @@ export default {
         ? this.$refs.pagination.toFirstPage()
         : this.$warnMsg("请选择搜索类型");
     },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13 &&
-        (this.selectType_1
-          ? this.$refs.pagination.toFirstPage()
-          : this.$warnMsg("请选择搜索类型"));
-    },
     // 日期格式化
     initialDate() {
       this.dateArray.splice(0, this.dateArray.length);

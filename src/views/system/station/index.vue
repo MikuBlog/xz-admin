@@ -8,7 +8,7 @@
               v-model="searchVal"
               placeholder="搜索岗位名称"
               class="search-input margin-box"
-              @keyup.native="searchEnter"
+              @keyup.native.enter="search"
             ></el-input>
             <el-select
               v-model="selectType"
@@ -61,7 +61,7 @@
             </el-table-column>
             <el-table-column label="排序" show-overflow-tooltip>
               <template slot-scope="scope">
-                <div slot="reference" class="name-wrapper">{{ scope.row.sort }}</div>
+                <el-tag>{{ scope.row.sort }}</el-tag>
               </template>
             </el-table-column>
             <el-table-column label="状态" align="center" show-overflow-tooltip>

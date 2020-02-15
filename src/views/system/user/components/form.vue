@@ -18,14 +18,9 @@
       <el-form-item label="用户名" prop="username">
         <el-input v-model="userForm.username" />
       </el-form-item>
-      <el-form-item label="状态" prop="enabled">
-        <el-radio
-          v-for="item in dicts"
-          :key="item.id"
-          v-model="userForm.enabled"
-          :label="item.value"
-        >{{ item.label }}</el-radio>
-      </el-form-item>
+			<el-form-item label="昵称" prop="nickname">
+			  <el-input v-model="userForm.nickname" />
+			</el-form-item>
       <el-form-item label="电话" prop="phone">
         <el-input v-model.number="userForm.phone" />
       </el-form-item>
@@ -63,6 +58,14 @@
           />
         </el-select>
       </el-form-item>
+			<el-form-item label="状态" prop="enabled" class="status">
+			  <el-radio
+			    v-for="item in dicts"
+			    :key="item.id"
+			    v-model="userForm.enabled"
+			    :label="item.value"
+			  >{{ item.label }}</el-radio>
+			</el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
@@ -110,6 +113,7 @@ export default {
       level: "",
       userForm: {
         username: "",
+				nickname: "",
         email: "",
         enabled: "false",
         roles: [],
@@ -130,12 +134,18 @@ export default {
           { required: true, message: "请输入用户名", trigger: "blur" },
           { min: 2, max: 21, message: "长度在 2 到 21 个字符", trigger: "blur" }
         ],
+				nickname: [
+				  { required: true, message: "请输入昵称", trigger: "blur" }
+				],
         email: [{ required: true, trigger: "change", validator: validEmail }],
         phone: [{ required: true, trigger: "change", validator: validPhone }],
         enabled: [{ required: true, message: "状态不能为空", trigger: "blur" }]
       }
     };
   },
+	beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
   created() {
     const explorer = navigator.userAgent;
     if (explorer.indexOf("Chrome") >= 0) {
@@ -143,8 +153,12 @@ export default {
     } else {
       this.style = "width: 172px";
     }
+		document.addEventListener('keypress', this.submitEnter)
   },
   methods: {
+		submitEnter(e) {
+			e.keyCode === 13 && this.dialog === true && this.doSubmit()
+		},
     // 隐藏窗口
     hideBox() {
       this.dialog = false;
@@ -213,6 +227,7 @@ export default {
         this.roleIds = [];
         this.userForm = {
           username: "",
+					nickname: "",
           email: "",
           enabled: "false",
           roles: [],
@@ -283,5 +298,9 @@ export default {
 .vue-treeselect,
 .select-station {
   width: 188px !important;
+}
+.status {
+	display: block;
+	margin-top: 1rem;
 }
 </style>

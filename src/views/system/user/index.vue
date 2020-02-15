@@ -9,7 +9,7 @@
                 v-model="searchVal_1"
                 placeholder="搜索部门名称"
                 class="search-input margin-box"
-                @keyup.native="searchEnter_1"
+                @keyup.native.enter="search_1"
               ></el-input>
               <el-button icon="el-icon-search" class="margin-box" @click="search_1" circle></el-button>
             </el-row>
@@ -33,7 +33,7 @@
                 v-model="searchVal_2"
                 placeholder="请选择类型进行搜索"
                 class="search-input margin-box"
-                @keyup.native="searchEnter_2"
+                @keyup.native.enter="search_2"
               />
               <el-select v-model="selectType" clearable placeholder="类型" class="select-input">
                 <el-option

@@ -80,11 +80,18 @@ export default {
       }
     };
   },
+	beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
   created() {
     // 获取部门
     this.getDepartmentList();
+		document.addEventListener('keypress', this.submitEnter)
   },
   methods: {
+		submitEnter(e) {
+			e.keyCode === 13 && this.dialog === true && this.doSubmit()
+		},
     // 隐藏窗口
     hideBox() {
       this.dialog = false;

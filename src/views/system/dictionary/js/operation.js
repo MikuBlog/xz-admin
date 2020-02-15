@@ -59,7 +59,7 @@ export default {
 					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getDictionaryList();
+          this.getDictionaryList(this.nowPage_1, this.nowSize_1);
         });
       });
     },
@@ -72,7 +72,7 @@ export default {
 					data: [ item.id ] 
         }).then(result => {
           this.$successMsg("删除成功");
-          this.getDetailList();
+          this.getDetailList(this.nowPage_2, this.nowSize_2);
         });
       });
     },
@@ -93,16 +93,6 @@ export default {
     refresh_2() {
       this.searchVal_2 = ""
       this.$refs.pagination_2.toFirstPage()
-    },
-    // 回车搜索
-    searchEnter_1(e) {
-      e.keyCode === 13 &&
-        (this.selectType_1
-          ? this.$refs.pagination_1.toFirstPage()
-          : this.$warnMsg("请选择搜索类型"));
-    },
-    searchEnter_2(e) {
-      e.keyCode === 13 && this.$refs.pagination_2.toFirstPage()
     },
     // 点击搜索
     search_1() {

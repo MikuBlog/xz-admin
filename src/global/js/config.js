@@ -101,7 +101,6 @@ export default {
     '.el-header',
     '.menu-scrollbar',
     '.menu-horizontal-scrollbar',
-    '.tabs',
     '.el-footer',
     '.opacity-box',
   ],

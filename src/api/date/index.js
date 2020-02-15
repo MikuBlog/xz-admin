@@ -5,6 +5,9 @@
  * @param {Boolean} isAccurate 是否精确到时分秒 
  */
 const formatDate = (dateTime, isAccurate = false) => {
+  if((typeof dateTime).toLowerCase() === 'string') {
+    dateTime = dateTime.replace(/-/g, "/")
+  }
   let nowDate = new Date(dateTime)
   let date = new Date(nowDate.getTime() - (nowDate.getTimezoneOffset() * 60000))
   let newDate = date.toISOString().split("T")[0]

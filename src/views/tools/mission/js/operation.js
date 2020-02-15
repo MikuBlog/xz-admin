@@ -15,7 +15,7 @@ export default {
           method: "post"
         }).then(() => {
           this.$successMsg(`${item.paused ? '恢复' : '暂停'}成功`);
-          this.getMissionList();
+          this.getMissionList(this.nowPage, this.nowSize);
         });
       });
     },
@@ -30,7 +30,7 @@ export default {
           method: "post"
         }).then(() => {
           this.$successMsg("执行成功");
-          this.getMissionList();
+          this.getMissionList(this.nowPage, this.nowSize)
         });
       });
     },
@@ -46,7 +46,7 @@ export default {
 					data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getMissionList();
+          this.getMissionList(this.nowPage, this.nowSize)
         });
       });
     },
@@ -82,10 +82,6 @@ export default {
     // 点击搜索
     search() {
       this.$refs.pagination.toFirstPage()
-    },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13 && this.$refs.pagination.toFirstPage()
     }
   }
 }
