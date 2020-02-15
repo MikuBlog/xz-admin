@@ -82,6 +82,7 @@ export default {
       const userItem = this.$refs.form.userForm,
         component = this.$refs.form;
       userItem.username = item.username;
+			userItem.nickname = item.nickname;
       userItem.enabled = item.enabled.toString();
       userItem.phone = item.phone;
       userItem.email = item.email;
