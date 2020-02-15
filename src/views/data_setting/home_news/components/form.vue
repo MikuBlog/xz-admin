@@ -3,7 +3,7 @@
     append-to-body
     :before-close="hideBox"
     :visible.sync="dialog"
-    :title="isAdd ? '新增菜单项' : '编辑菜单项'"
+    :title="isAdd ? '新增滚动新闻' : '编辑滚动新闻'"
     width="500px"
     v-dialogDrag
   >
@@ -20,23 +20,15 @@
 			<el-form-item label="小程序跳转url" prop="wxurl">
 			  <el-input v-model="form.xcxUrl" style="width: 350px;" />
 			</el-form-item>
+			<el-form-item label="滚动内容" prop="content">
+			  <el-input type="textarea" :rows="4" v-model="form.content" style="width: 350px;" />
+			</el-form-item>
 			<el-form-item label="是否显示" prop="enabled">
 			  <el-radio-group v-model="form.enabled">
 			    <el-radio :label="true">是</el-radio>
 			    <el-radio :label="false">否</el-radio>
 			  </el-radio-group>
 			</el-form-item>
-      <el-form-item label="图片">
-        <el-upload
-          class="avatar-uploader"
-          :http-request="uploadImage"
-          :show-file-list="false"
-          action="string"
-        >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox">取消</el-button>
@@ -46,7 +38,6 @@
 </template>
 
 <script>
-import convertHttp from '@/utils/convertHttp'
 export default {
   data() {
     const numberValidate = (rule, value, callback) => {
@@ -65,12 +56,13 @@ export default {
 				xcxUrl: "",
 				enabled: true,
         sort: 999,
-        image: "",
-				groupName: "routine_home_menus"
+        content: "",
+				groupName: "routine_home_roll_news"
       },
       rules: {
         name: [{ required: true, message: "请输入标题", trigger: "blur" }],
         sort: [{ required: true, validator: numberValidate, trigger: "blur" }],
+				content: [{ required: true, message: "请输入滚动内容", trigger: "blur" }],
 				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }]
       }
     };
@@ -90,7 +82,6 @@ export default {
 				})
 			this.form.id = data.id
 			this.form.sort = +this.form.sort
-			this.imageUrl = convertHttp(this.form.image)
 		},
 		getDetail() {
 			this.$http_json({
@@ -100,21 +91,6 @@ export default {
 				this.initial(result.data)
 			})
 		},
-    // 上传封面
-    uploadImage(param) {
-      this.$http_file({
-        url: "/api/localStorage/upload",
-        method: "post",
-        data: {
-          file: param.file
-        },
-        timeout: 100000
-      }).then(result => {
-        this.imageUrl = convertHttp(result.data.url)
-				this.form.image = result.data.url
-        this.$successMsg("上传成功！");
-      });
-    },
     doSubmit() {
       this.isAdd ? this.doAdd() : this.doEdit();
     },
@@ -133,7 +109,7 @@ export default {
           }).then(result => {
             this.$successMsg("添加成功");
             this.hideBox();
-            this.$parent.getMenuList(this.$parent.nowPage, this.$parent.nowSize);
+            this.$parent.getNewsList(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -157,7 +133,7 @@ export default {
           }).then(result => {
             this.$successMsg("编辑成功");
             this.hideBox();
-            this.$parent.getMenuList(this.$parent.nowPage, this.$parent.nowSize);
+            this.$parent.getNewsList(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -175,7 +151,7 @@ export default {
         enabled: true,
         sort: 999,
         image: "",
-				groupName: "routine_home_menus"
+				groupName: "routine_home_roll_news"
       };
 			this.imageUrl = ""
     }

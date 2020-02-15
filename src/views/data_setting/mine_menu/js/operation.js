@@ -7,21 +7,31 @@ export default {
 		initialMenuList(list) {
 		  this.menuList.splice(0);
 		  list.forEach(value => {
-				value.coverImage = convertHttp(value.coverImage)
+				value.value = JSON.parse(value.value)
+				Object
+					.keys(value.value)
+					.forEach(val => {
+						if(val !== 'id') {
+							value[val] = value.value[val]
+						}
+					})
+				value.coverImage = value.image
+				? convertHttp(value.image)
+				: ''
 		    this.menuList.push(value);
 		  });
 		},
 		getMenuList(page, size) {
-		  // this.$http_normal({
-		  //   url: `/api/shop/article/page?page=${page - 1}&size=${
-		  //     size
-		  //     }&sort=sort,asc${this.searchVal ? `&keyword=${this.searchVal}` : ""}`,
-		  //   method: "get"
-		  // }).then(result => {
-		  //   const data = result.data;
-		  //   this.initialPage(data.totalElements);
-		  //   this.initialMenuList(data.content);
-		  // });
+		  this.$http_normal({
+		    url: `/api/groupData/page?page=${page - 1}&size=${
+		      size
+		      }&sort=sort,asc&groupName=routine_my_menus${this.searchVal ? `&value=${this.searchVal}` : ""}`,
+		    method: "get"
+		  }).then(result => {
+		    const data = result.data;
+		    this.initialPage(data.totalElements);
+		    this.initialMenuList(data.content);
+		  });
 		},
 		deleteAllMenu() {
 			if (this.selectList.length == 0) {
@@ -29,11 +39,11 @@ export default {
 			  return
 			}
 			this.$showMsgBox({
-			  msg: `<p>是否删除选中幻灯片?</p>`,
+			  msg: `<p>是否删除选中菜单?</p>`,
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/shop/article/del`,
+			    url: `/api/groupData/del`,
 			    method: "post",
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
@@ -49,7 +59,7 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/shop/article/del`,
+			    url: `/api/groupData/del`,
 			    method: "post",
 			    data: [ item.id ]
 			  }).then(() => {
@@ -62,7 +72,6 @@ export default {
 		getRowKey(row) {
 		  return row.id;
 		},
-		// 选中幻灯片
 		handleSelectionChange(val) {
 		  this.selectList = val;
 		},
@@ -73,6 +82,8 @@ export default {
 		},
 		showEditBox(item) {
 			const form = this.$refs.form
+			form.form.id = item.id
+			form.getDetail()
 			form.dialog = true
 			form.isAdd = false
 		},
@@ -84,9 +95,6 @@ export default {
 		// 点击搜索
 		search() {
 		  this.$refs.pagination.toFirstPage()
-		},
-		searchEnter(e) {
-			e.keyCode === 13 && this.$refs.pagination.toFirstPage()
 		}
 	}
 }

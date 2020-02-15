@@ -4,7 +4,7 @@
 			<el-col :span="24">
 				<el-card class="box-card">
 					<div class="search">
-						<el-input v-model="searchVal" placeholder="搜索名称" class="search-input margin-box" @keyup.native="searchEnter"></el-input>
+						<el-input v-model="searchVal" placeholder="搜索关键词" class="search-input margin-box" @keyup.native.enter="search"></el-input>
 						<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="showAddBox" title="添加菜单" circle></el-button>
@@ -12,9 +12,9 @@
 					</div>
 					<el-table ref="table" :data="menuList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
-						<el-table-column prop="title" label="名称" :show-overflow-tooltip="true" />
-						<el-table-column prop="title" label="链接url" :show-overflow-tooltip="true" />
-						<el-table-column prop="title" label="小程序跳转url" :show-overflow-tooltip="true" />
+						<el-table-column prop="name" label="名称" :show-overflow-tooltip="true" />
+						<el-table-column prop="linkUrl" label="链接url" :show-overflow-tooltip="true" />
+						<el-table-column prop="xcxUrl" label="小程序跳转url" :show-overflow-tooltip="true" />
 						<el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="图标" align="center">
 							<template slot-scope="scope">
 								<img :src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.url)" />
@@ -27,10 +27,17 @@
 								</div>
 							</template>
 						</el-table-column>
+						<el-table-column label="状态" align="center" show-overflow-tooltip>
+							<template slot-scope="scope">
+								<div slot="reference" class="name-wrapper">
+									<el-tag :type="scope.row.enabled ? 'primary' : 'info'">{{ scope.row.enabled ? '显示' : '隐藏' }}</el-tag>
+								</div>
+							</template>
+						</el-table-column>
 						<el-table-column label="操作" fixed="right" align="center" width="180">
 							<template slot-scope="scope">
 								<el-button type="primary" icon="el-icon-edit" @click="showEditBox(scope.row)"></el-button>
-								<el-button type="danger" icon="el-icon-delete" @click="deleteSlide(scope.row)"></el-button>
+								<el-button type="danger" icon="el-icon-delete" @click="deleteMenu(scope.row)"></el-button>
 							</template>
 						</el-table-column>
 					</el-table>

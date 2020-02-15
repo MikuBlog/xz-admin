@@ -8,17 +8,23 @@
     v-dialogDrag
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
-      <el-form-item label="标题" prop="title">
-        <el-input v-model="form.title" style="width: 350px;" />
+      <el-form-item label="名称" prop="name">
+        <el-input v-model="form.name" style="width: 350px;" />
       </el-form-item>
 			<el-form-item label="排序" prop="sort">
 			  <el-input type="number" v-model="form.sort" style="width: 350px;" />
 			</el-form-item>
-			<el-form-item label="链接url" prop="url">
+			<el-form-item label="链接url" prop="linkUrl">
 			  <el-input v-model="form.linkUrl" style="width: 350px;" />
 			</el-form-item>
 			<el-form-item label="小程序跳转url" prop="wxurl">
 			  <el-input v-model="form.xcxUrl" style="width: 350px;" />
+			</el-form-item>
+			<el-form-item label="是否显示" prop="enabled">
+			  <el-radio-group v-model="form.enabled">
+			    <el-radio :label="true">是</el-radio>
+			    <el-radio :label="false">否</el-radio>
+			  </el-radio-group>
 			</el-form-item>
       <el-form-item label="图片">
         <el-upload
@@ -52,37 +58,48 @@ export default {
       dialog: false,
 			isAdd: true,
       imageUrl: "",
-      cates: [],
       form: {
         id: "",
-        title: "",
+        name: "",
 				linkUrl: "",
 				xcxUrl: "",
+				enabled: true,
         sort: 999,
         image: "",
+				groupName: "routine_home_banner"
       },
       rules: {
-        title: [
-					{ required: true, message: "请输入商品分类名", trigger: "blur" },
-					{ min: 1, max: 15, message: "长度在 1 到 15 个字符", trigger: "change" }
-				],
+        name: [{ required: true, message: "请输入标题", trigger: "blur" }],
         sort: [{ required: true, validator: numberValidate, trigger: "blur" }],
+				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }]
       }
     };
   },
-	created() {
-		document.addEventListener('keypress', this.submitEnter)
-	},
-	beforeDestroy() {
-		document.removeEventListener('keypress', this.submitEnter)
-	},
   methods: {
-		submitEnter(e) {
-			e.keyCode === 13 && this.doSubmit()
-		},
     hideBox() {
       this.resetForm();
     },
+		initial(data) {
+			data.value = JSON.parse(data.value)
+			Object
+				.keys(data.value)
+				.forEach(val => {
+					if(val !== 'id') {
+						this.form[val] = data.value[val]
+					}
+				})
+			this.form.id = data.id
+			this.form.sort = +this.form.sort
+			this.imageUrl = convertHttp(this.form.image)
+		},
+		getDetail() {
+			this.$http_json({
+				url: `/api/groupData/get/${this.form.id}`,
+				method: "get"
+			}).then(result => {
+				this.initial(result.data)
+			})
+		},
     // 上传封面
     uploadImage(param) {
       this.$http_file({
@@ -104,15 +121,19 @@ export default {
     doAdd() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          delete this.form.id;
           this.$http_json({
-            url: "/api/shop/slide/add",
+            url: "/api/groupData/add",
             method: "post",
-            data: this.form
+            data: {
+							sort: this.form.sort,
+							value: JSON.stringify(this.form),
+							enabled: this.form.enabled,
+							groupName: this.form.groupName
+						}
           }).then(result => {
             this.$successMsg("添加成功");
             this.hideBox();
-            this.$parent.getSlideList();
+            this.$parent.getSlideList(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -122,14 +143,21 @@ export default {
     doEdit() {
       this.$refs.form.validate(valid => {
         if (valid) {
+					this.form.value = JSON.parse(JSON.stringify(this.form))
           this.$http_json({
-            url: "/api/shop/slide/edit",
+            url: "/api/groupData/edit",
             method: "post",
-            data: this.form
+            data: {
+							id: this.form.id,
+							sort: this.form.sort,
+							value: JSON.stringify(this.form),
+							enabled: this.form.enabled,
+							groupName: this.form.groupName
+						}
           }).then(result => {
             this.$successMsg("编辑成功");
             this.hideBox();
-            this.$parent.getSlideList();
+            this.$parent.getSlideList(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -141,15 +169,16 @@ export default {
       this.$refs["form"].resetFields();
       this.form = {
         id: "",
-				title: "",
-				linkUrl: "",
-				xcxUrl: "",
+        name: "",
+        linkUrl: "",
+        xcxUrl: "",
+        enabled: true,
         sort: 999,
         image: "",
+				groupName: "routine_home_banner"
       };
 			this.imageUrl = ""
-    },
-    getTree() {}
+    }
   }
 };
 </script>

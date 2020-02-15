@@ -14,11 +14,17 @@
 			<el-form-item label="排序" prop="sort">
 			  <el-input type="number" v-model="form.sort" style="width: 350px;" />
 			</el-form-item>
-			<el-form-item label="链接url" prop="url">
-			  <el-input v-model="form.url" style="width: 350px;" />
+			<el-form-item label="链接url" prop="linkUrl">
+			  <el-input v-model="form.linkUrl" style="width: 350px;" />
 			</el-form-item>
 			<el-form-item label="小程序跳转url" prop="wxurl">
-			  <el-input v-model="form.url" style="width: 350px;" />
+			  <el-input v-model="form.xcxUrl" style="width: 350px;" />
+			</el-form-item>
+			<el-form-item label="是否显示" prop="enabled">
+			  <el-radio-group v-model="form.enabled">
+			    <el-radio :label="true">是</el-radio>
+			    <el-radio :label="false">否</el-radio>
+			  </el-radio-group>
 			</el-form-item>
       <el-form-item label="图片">
         <el-upload
@@ -52,18 +58,20 @@ export default {
       dialog: false,
 			isAdd: true,
       imageUrl: "",
-      cates: [],
       form: {
         id: "",
         name: "",
-				url: "",
-				wxurl: "",
+				linkUrl: "",
+				xcxUrl: "",
+				enabled: true,
         sort: 999,
-        pic: "",
+        image: "",
+				groupName: "routine_my_menus"
       },
       rules: {
-        name: [{ required: true, message: "请输入商品分类名", trigger: "blur" }],
+        name: [{ required: true, message: "请输入标题", trigger: "blur" }],
         sort: [{ required: true, validator: numberValidate, trigger: "blur" }],
+				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }]
       }
     };
   },
@@ -71,6 +79,27 @@ export default {
     hideBox() {
       this.resetForm();
     },
+		initial(data) {
+			data.value = JSON.parse(data.value)
+			Object
+				.keys(data.value)
+				.forEach(val => {
+					if(val !== 'id') {
+						this.form[val] = data.value[val]
+					}
+				})
+			this.form.id = data.id
+			this.form.sort = +this.form.sort
+			this.imageUrl = convertHttp(this.form.image)
+		},
+		getDetail() {
+			this.$http_json({
+				url: `/api/groupData/get/${this.form.id}`,
+				method: "get"
+			}).then(result => {
+				this.initial(result.data)
+			})
+		},
     // 上传封面
     uploadImage(param) {
       this.$http_file({
@@ -82,6 +111,7 @@ export default {
         timeout: 100000
       }).then(result => {
         this.imageUrl = convertHttp(result.data.url)
+				this.form.image = result.data.url
         this.$successMsg("上传成功！");
       });
     },
@@ -91,15 +121,19 @@ export default {
     doAdd() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          delete this.form.id;
           this.$http_json({
-            url: "/api/user/add",
+            url: "/api/groupData/add",
             method: "post",
-            data: this.form
+            data: {
+							sort: this.form.sort,
+							value: JSON.stringify(this.form),
+							enabled: this.form.enabled,
+							groupName: this.form.groupName
+						}
           }).then(result => {
             this.$successMsg("添加成功");
             this.hideBox();
-            this.$parent.getSlideList();
+            this.$parent.getMenuList(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -109,14 +143,21 @@ export default {
     doEdit() {
       this.$refs.form.validate(valid => {
         if (valid) {
+					this.form.value = JSON.parse(JSON.stringify(this.form))
           this.$http_json({
-            url: "/api/user/edit",
+            url: "/api/groupData/edit",
             method: "post",
-            data: this.form
+            data: {
+							id: this.form.id,
+							sort: this.form.sort,
+							value: JSON.stringify(this.form),
+							enabled: this.form.enabled,
+							groupName: this.form.groupName
+						}
           }).then(result => {
             this.$successMsg("编辑成功");
             this.hideBox();
-            this.$parent.getSlideList();
+            this.$parent.getMenuList(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -128,15 +169,16 @@ export default {
       this.$refs["form"].resetFields();
       this.form = {
         id: "",
-				name: "",
-				url: "",
-				wxurl: "",
-        cateName: "",
+        name: "",
+        linkUrl: "",
+        xcxUrl: "",
+        enabled: true,
         sort: 999,
-        pic: "",
+        image: "",
+				groupName: "routine_my_menus"
       };
-    },
-    getTree() {}
+			this.imageUrl = ""
+    }
   }
 };
 </script>

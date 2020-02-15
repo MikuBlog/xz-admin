@@ -3,8 +3,8 @@ export default {
 		initialPage(totalElements) {
 		  this.totalElements = totalElements;
 		},
-		initialHotWordsList(list) {
-		  this.hotWordsList.splice(0);
+		initialNewsLlist(list) {
+		  this.newsList.splice(0);
 		  list.forEach(value => {
 				value.value = JSON.parse(value.value)
 				Object
@@ -14,28 +14,28 @@ export default {
 							value[val] = value.value[val]
 						}
 					})
-		    this.hotWordsList.push(value);
+		    this.newsList.push(value);
 		  });
 		},
-		getHotWordsList(page, size) {
+		getNewsList(page, size) {
 		  this.$http_normal({
 		    url: `/api/groupData/page?page=${page - 1}&size=${
 		      size
-		      }&sort=sort,asc&groupName=routine_hot_search${this.searchVal ? `&value=${this.searchVal}` : ""}`,
+		      }&sort=sort,asc&groupName=routine_home_roll_news${this.searchVal ? `&value=${this.searchVal}` : ""}`,
 		    method: "get"
 		  }).then(result => {
 		    const data = result.data;
 		    this.initialPage(data.totalElements);
-		    this.initialHotWordsList(data.content);
+		    this.initialNewsLlist(data.content);
 		  });
 		},
-		deleteAllHotWords() {
+		deleteAllNews() {
 			if (this.selectList.length == 0) {
-			  this.$warnMsg("请勾选热词进行批量删除")
+			  this.$warnMsg("请勾选滚动新闻进行批量删除")
 			  return
 			}
 			this.$showMsgBox({
-			  msg: `<p>是否删除选中热词?</p>`,
+			  msg: `<p>是否删除选中新闻?</p>`,
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
@@ -45,13 +45,13 @@ export default {
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-			    this.getHotWordsList(this.nowPage, this.nowSize)
+			    this.getNewsList(this.nowPage, this.nowSize)
 			  });
 			});
 		},
-		deleteHotWords(item) {
+		deleteNews(item) {
 			this.$showMsgBox({
-			  msg: `<p>是否删除选中热词?</p>`,
+			  msg: `<p>是否删除选中新闻?</p>`,
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
@@ -61,7 +61,7 @@ export default {
 			  }).then(() => {
 			    this.$successMsg("删除成功");
 			    this.$refs.table.clearSelection()
-					this.getHotWordsList(this.nowPage, this.nowSize)
+					this.getNewsList(this.nowPage, this.nowSize)
 			  });
 			});
 		},

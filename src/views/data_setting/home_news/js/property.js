@@ -4,7 +4,7 @@ export default {
 			searchVal: "",
 			selectType: "",
 			selectList: [],
-			hotWordsList: [],
+			newsList: [],
 			isShow: false,
 			// 当前页数
 			nowPage: 1,
@@ -16,13 +16,13 @@ export default {
 			buttonOptions: [{
 			  type: "primary",
 			  icons: 'el-icon-plus',
-			  title: "添加热词",
+			  title: "添加滚动新闻",
 			  method: "showAddBox"
 			}, {
 				type: "danger",
 				icons: "el-icon-delete",
-				title: "批量删除热词",
-				method: "deleteAllHotWords"
+				title: "批量删除滚动新闻",
+				method: "deleteAllNews"
 			}]
 		}
 	}
