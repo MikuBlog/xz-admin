@@ -4,9 +4,9 @@ import Permission from '@/utils/permission'
  * @description 通过v-permission调用该指令
  */
 function permission (el, binding) {
-  Permission(binding.value)
-    ? el.style.display = "block"
-    : el.style.display = "none"
+  Permission(binding.value.permission)
+  ? el.style.display = binding.value.style || 'block'
+  : el.style.display = "none"
 }
 
 export default {

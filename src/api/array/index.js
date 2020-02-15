@@ -6,7 +6,7 @@
  * @param {String} property 如果排序元素为对象，可指定需要排序的字段
  * @returns {Array} 返回新的数组
  */
-function sortList(list, isDes = false, property) {
+function sortList(list, property, isDes = false) {
   if (property) {
     if ((typeof list[0][property]).toLowerCase() === 'number') {
       return list.sort((a, b) => {

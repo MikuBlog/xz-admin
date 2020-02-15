@@ -57,14 +57,23 @@ export default {
 		})
 	},
 	watch: {
-		'user.nickname': function() {
-			this.userForm.nickname = this.user.nickname
+		'user.nickname': {
+			handler() {
+				this.userForm.nickname = this.user.nickname
+			},
+			immediate: true
 		},
-		'user.phone': function() {
-			this.userForm.phone = this.user.phone
+		'user.phone': {
+			handler() {
+				this.userForm.phone = this.user.phone
+			},
+			immediate: true
 		},
-		'user.sex': function() {
-			this.userForm.sex = `${this.user.sex === 0 ? '1' : this.user.sex}`
+		'user.sex': {
+			handler() {
+				this.userForm.sex = `${this.user.sex === 0 ? '1' : this.user.sex}`
+			},
+			immediate: true
 		}
 	},
   methods: {

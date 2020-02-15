@@ -3,7 +3,7 @@
 		<el-row>
 			<el-col :span="24">
 				<div class="search">
-					<el-input v-model="searchVal" placeholder="搜索文件名称" class="search-input margin-box" @keyup.native="searchEnter"></el-input>
+					<el-input v-model="searchVal" placeholder="搜索文件名称" class="search-input margin-box" @keyup.native.enter="search"></el-input>
 					<el-date-picker
 						v-model="date"
 						class="select-input margin-box"

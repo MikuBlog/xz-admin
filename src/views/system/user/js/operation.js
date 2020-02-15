@@ -38,7 +38,7 @@ export default {
         }).then(() => {
           this.$successMsg("删除成功");
           this.$refs.userTable.clearSelection()
-          this.getUserList();
+          this.getUserList(this.nowPage, this.nowSize);
         });
       });
     },
@@ -54,7 +54,7 @@ export default {
           data: [ item.id ]
         }).then(() => {
           this.$successMsg("删除成功");
-          this.getUserList();
+          this.getUserList(this.nowPage, this.nowSize);
         });
       });
     },
@@ -82,6 +82,7 @@ export default {
       const userItem = this.$refs.form.userForm,
         component = this.$refs.form;
       userItem.username = item.username;
+			userItem.nickname = item.nickname;
       userItem.enabled = item.enabled.toString();
       userItem.phone = item.phone;
       userItem.email = item.email;
@@ -103,20 +104,9 @@ export default {
     search_1() {
       this.getDepartmentList();
     },
-    // 回车搜索
-    searchEnter_1(e) {
-      e.keyCode === 13 && this.getDepartmentList();
-    },
     // 点击搜索
     search_2() {
       this.selectType ? this.$refs.pagination.toFirstPage() : this.$warnMsg("请选择搜索类型");
-    },
-    // 回车搜索
-    searchEnter_2(e) {
-      e.keyCode === 13 &&
-        (this.selectType
-          ? this.$refs.pagination.toFirstPage()
-          : this.$warnMsg("请选择搜索类型"));
     },
     // 搜索状态
     getStatus() {

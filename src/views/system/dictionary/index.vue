@@ -19,7 +19,7 @@
                 v-model="searchVal_1"
                 class="search-input margin-box"
                 placeholder="请选择类型进行搜索"
-                @keyup.native="searchEnter_1"
+                @keyup.native.enter="search_1"
               ></el-input>
               <el-select
                 v-model="selectType_1"
@@ -114,7 +114,7 @@
                 v-model="searchVal_2"
                 class="search-input margin-box"
                 placeholder="按字典标签内容搜索"
-                @keyup.native="searchEnter_2"
+                @keyup.native.enter="search_2"
               ></el-input>
               <el-button icon="el-icon-search" @click="search_2" class="margin-box" circle></el-button>
               <el-button

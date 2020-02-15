@@ -2,7 +2,10 @@
   <el-dialog :visible.sync="dialogVisible" fullscreen append-to-body>
     <div class="error-box-title" slot="title">
       <span>错误日志</span>
-      <el-button @click="removeAllErrorLog" type="danger" size="mini" icon="el-icon-delete">清空</el-button>
+      <el-button @click="() => {
+          this.removeAllErrorLog()
+          this.dialogVisible = false
+        }" type="danger" size="mini" icon="el-icon-delete">清空</el-button>
     </div>
     <el-row>
       <el-col :span="24">

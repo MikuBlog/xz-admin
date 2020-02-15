@@ -6,6 +6,7 @@ export default {
   methods: {
     // 初始化菜单列表
     initialMenuList(list) {
+			this.$sortList(list, 'sort')
       this.menuList.splice(0);
       list.forEach(value => {
         this.menuList.push(value);
@@ -14,7 +15,7 @@ export default {
     // 获取菜单列表
     getMenuList() {
       this.$http_json({
-        url: `/api/menu/get?sort=createTime,desc${
+        url: `/api/menu/get?sort=sort,asc${
           this.searchVal ? `&name=${this.searchVal}` : ""
           }`,
         method: "get"

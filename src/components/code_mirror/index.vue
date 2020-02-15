@@ -64,7 +64,7 @@ export default {
 	methods: {
 		initialStyle() {
 			this.$setStyle(
-				document.querySelector(".CodeMirror"),
+				document.querySelector(".CodeMirror-wrap"),
 				'height',
 				`${this.height}px`
 			)

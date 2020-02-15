@@ -99,10 +99,6 @@ export default {
       this.initialDate();
       this.$refs.pagination.toFirstPage()
     },
-    // 回车搜索
-    searchEnter(e) {
-      e.keyCode === 13 && this.$refs.pagination.toFirstPage();
-    },
     exportFile() {
       if(this.selectFileList.length == 0) {
         this.$warnMsg("请勾选文件进行批量导出")
