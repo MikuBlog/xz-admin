@@ -7,4 +7,4 @@ var
   // 接口统一请求前缀地址
   baseUrl = 'http://localhost:8087',
   // 静态资源请求前缀地址
-  prefixUrl = 'http://192.168.0.153:8087'
+  prefixUrl = 'http://localhost:8087'
