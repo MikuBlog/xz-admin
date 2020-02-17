@@ -8,7 +8,7 @@
 						<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="showAddBox" title="添加资讯分类" circle></el-button>
-						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllArticle" :disabled="!selectList.length" title="批量删除资讯" circle></el-button>
+						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllArticleType" :disabled="!selectList.length" title="批量删除资讯" circle></el-button>
 					</div>
 					<el-table ref="table" :data="articleTypeList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
@@ -21,7 +21,7 @@
 						<el-table-column label="操作" fixed="right" align="center" width="180">
 							<template slot-scope="scope">
 								<el-button type="primary" icon="el-icon-edit" @click="showEditBox(scope.row)"></el-button>
-								<el-button type="danger" icon="el-icon-delete" @click="deleteArticle(scope.row)"></el-button>
+								<el-button type="danger" icon="el-icon-delete" @click="deleteArticleType(scope.row)"></el-button>
 							</template>
 						</el-table-column>
 					</el-table>
@@ -29,7 +29,7 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllArticle="deleteAllArticle" />
+		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllArticleType="deleteAllArticleType" />
 		<AddForm ref="addForm" />
 		<EditForm ref="editForm" />
 	</div>

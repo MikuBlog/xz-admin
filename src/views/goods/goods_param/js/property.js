@@ -4,7 +4,7 @@ export default {
 			searchVal: "",
 			selectType: "",
 			selectList: [],
-			articleTypeList: [],
+			paramList: [],
 			isShow: false,
 			url: "",
 			// 当前页数
@@ -16,13 +16,13 @@ export default {
 			buttonOptions: [{
 			  type: "primary",
 			  icons: 'el-icon-plus',
-			  title: "添加资讯分类",
+			  title: "添加商品参数",
 			  method: "showAddBox"
 			}, {
 				type: "danger",
 				icons: "el-icon-delete",
-				title: "批量删除资讯分类",
-				method: "deleteAllArticleType"
+				title: "批量删除商品参数",
+				method: "deleteAllParam"
 			}]
 		}
 	}
