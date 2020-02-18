@@ -60,7 +60,7 @@
       <el-form-item v-if="menuForm.iframe === 'false'" label="组件路径" prop="component">
         <el-input v-model="menuForm.component" placeholder="菜单路径" style="width: 460px;" />
       </el-form-item>
-      <el-form-item label="上级类目">
+      <el-form-item label="上级类目" prop="parentId">
         <treeselect
           v-model="menuForm.parentId"
           :options="menus"
@@ -129,7 +129,10 @@ export default {
         path: [{ required: false, message: "请输入菜单路径", trigger: "blur" }],
         component: [
           { required: false, message: "请输入菜单组件", trigger: "blur" }
-        ]
+        ],
+        parentId: [
+          { required: true, message: "请选择上级类目", trigger: "blur" }
+        ],
       }
     };
   },
@@ -171,10 +174,6 @@ export default {
     doSubmit() {
       this.$refs["menuForm"].validate(valid => {
         if (valid) {
-          if (this.menuForm.parentId == undefined) {
-            this.$warnMsg("请选择上级类目");
-            return;
-          }
           this.isAdd ? this.addMenu() : this.editMenu();
         } else {
           return false;

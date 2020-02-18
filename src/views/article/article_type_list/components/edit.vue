@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" title="新增资讯分类" width="570px" append-to-body v-dialogDrag>
+  <el-dialog :visible.sync="dialog" title="编辑资讯分类" width="570px" append-to-body v-dialogDrag>
     <el-form status-icon ref="form" :model="form" :rules="rules" size="small" @submit.native.prevent="editArticleType">
       <el-form-item label="分类名称" prop="name">
         <el-input v-model="form.name" />

@@ -5,8 +5,6 @@ export default {
 			selectType: "",
 			selectList: [],
 			articleList: [],
-			isShow: false,
-			url: "",
 			// 当前页数
 			nowPage: 1,
 			// 当前页条数

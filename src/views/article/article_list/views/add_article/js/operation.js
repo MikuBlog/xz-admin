@@ -55,10 +55,6 @@ export default {
 					  this.$warnMsg("请选择资讯分类")
 					  return
 					}
-          if(!this.articleForm.content) {
-            this.$warnMsg("请填写资讯内容")
-            return
-          }
           this.articleForm.labels = this.dynamicTags.join(",")
           this.$http_json({
             url: "/api/shop/article/add",

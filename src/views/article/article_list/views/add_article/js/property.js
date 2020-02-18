@@ -4,15 +4,14 @@ export default {
       typeList: [],
       coverImage: "",
       articleForm: {
-				id: this.$route.query.id,
         title: "",
         types: [{
-      		name: "",
-      		id: ""
-      	}],
+					name: "",
+					id: ""
+				}],
         content: "",
-      	coverImage: "",
-      	labels: "",
+				coverImage: "",
+				labels: "",
         sort: 999,
         isShow: true,
         isTop: false
@@ -26,11 +25,14 @@ export default {
           { min: 1, max: 15, message: "长度在 1 到 15 个字符", trigger: "change" }
         ],
         type: [
-          { required: true, message: "请选择资讯分类", trigger: "blur" }
+          { required: true, message: "请选择资讯分类", trigger: "change" }
         ],
         sort: [
-          { required: true, message: "请输入排序号码", trigger: "blur" }
-        ]
+          { required: true, message: "请输入排序号码", trigger: "change" }
+        ],
+        content: [
+          { required: true, message: "请输入资讯内容", trigger: "change" }
+        ],
       },
       buttonOptions: [{
         type: "primary",

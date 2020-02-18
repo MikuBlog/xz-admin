@@ -22,7 +22,7 @@
 						</el-table-column>
 						<el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="缩略图" align="center">
 							<template slot-scope="scope">
-								<img :src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.url)" />
+								<img :src="scope.row.imageUrl || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.imageUrl)" />
 							</template>
 						</el-table-column>
 						<el-table-column label="是否显示" align="center" show-overflow-tooltip>

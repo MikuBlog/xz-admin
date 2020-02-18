@@ -4,8 +4,6 @@
 			<el-col :span="24">
 				<el-card class="box-card">
 					<div class="search">
-						<!-- <el-input v-model="searchVal" placeholder="搜索关键词" class="search-input margin-box" @keyup.native="searchEnter"></el-input> -->
-						<!-- <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button> -->
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddPayPage" title="添加支付配置" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllPay" :disabled="!selectList.length" title="批量删除支付配置" circle></el-button>
@@ -42,7 +40,6 @@
 			</el-col>
 		</el-row>
 		<operation-box :options="buttonOptions" @toAddPayPage="toAddPayPage" @deleteAllPay="deleteAllPay" />
-		<ImagePreview :show-modal.sync="isShow" :url="url" />
 	</div>
 </template>
 

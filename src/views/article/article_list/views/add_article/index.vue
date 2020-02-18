@@ -79,8 +79,10 @@
               <el-col :span="24">
                 <el-divider></el-divider>
               </el-col>
-              <el-col :span="24">
-                <Tinymce v-model="articleForm.content" />
+              <el-col :span="22">
+                <el-form-item label="资讯内容" prop="content">
+                  <Tinymce v-model="articleForm.content" />
+                </el-form-item>
               </el-col>
             </el-row>
           </el-form>

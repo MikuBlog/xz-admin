@@ -27,7 +27,7 @@
           :label="item.value"
         >{{ item.label }}</el-radio>
       </el-form-item>
-      <el-form-item label="所属部门">
+      <el-form-item label="所属部门" prop="dept.id">
         <treeselect
           v-model="stationForm.dept.id"
           :options="depts"
@@ -76,7 +76,9 @@ export default {
             trigger: "blur",
             type: "number"
           }
-        ]
+        ],
+        enabled: [{ required: true, message: "请选择状态", trigger: "blur" }],
+        'dept.id': [{ required: true, message: "请选择部门", trigger: "blur" }]
       }
     };
   },

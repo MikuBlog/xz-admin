@@ -1,27 +1,28 @@
 export default {
 	data() {
 		return {
+			blurry: "",
 			selectType: "",
 			selectList: [],
-			applicationList: [],
+			goodsList: [],
+			isShow: false,
+			url: "",
 			// 当前页数
 			nowPage: 1,
 			// 当前页条数
 			nowSize: 10,
-			options: [{
-				label: "公众号",
-				value: 0
-			}, {
-				label: "小程序",
-				value: 1
-			}],
 			// 总条数
 			totalElements: 0,
 			buttonOptions: [{
 			  type: "primary",
 			  icons: 'el-icon-plus',
-			  title: "添加应用",
-			  method: "toAddApplicationPage"
+			  title: "添加商品",
+			  method: "toAddArticlePage"
+			}, {
+				type: "danger",
+				icons: "el-icon-delete",
+				title: "批量删除商品",
+				method: "deleteAllGoods"
 			}]
 		}
 	}

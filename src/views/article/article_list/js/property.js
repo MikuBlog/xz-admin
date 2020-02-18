@@ -16,12 +16,12 @@ export default {
 			buttonOptions: [{
 			  type: "primary",
 			  icons: 'el-icon-plus',
-			  title: "添加资讯分类",
+			  title: "添加资讯",
 			  method: "toAddArticlePage"
 			}, {
 				type: "danger",
 				icons: "el-icon-delete",
-				title: "批量删除资讯分类",
+				title: "批量删除资讯",
 				method: "deleteAllArticle"
 			}]
 		}

@@ -65,7 +65,6 @@
 			</el-col>
 		</el-row>
 		<operation-box :options="buttonOptions" @toAddApplicationPage="toAddApplicationPage" />
-<!-- 		<ImagePreview :show-modal.sync="isShow" :url="url" /> -->
 	</div>
 </template>
 
