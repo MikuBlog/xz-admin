@@ -8,7 +8,9 @@ export default {
 		initialGoodsList(list) {
 		  this.goodsList.splice(0);
 		  list.forEach(value => {
-				value.coverImage = convertHttp(value.coverImage)
+				value.coverImage = value.cover
+				? convertHttp(value.cover)
+				: ''
 		    this.goodsList.push(value);
 		  });
 		},
@@ -16,7 +18,7 @@ export default {
 		  this.$http_normal({
 		    url: `/api/productSpu/page?page=${page - 1}&size=${
 		      size
-		      }&sort=createTime,desc${this.blurry ? `&blurry=${this.blurry}` : ""}`,
+		      }&sort=sort,asc${this.name ? `&name=${this.name}` : ""}`,
 		    method: "get"
 		  }).then(result => {
 		    const data = result.data;

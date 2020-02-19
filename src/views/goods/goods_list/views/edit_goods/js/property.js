@@ -1,9 +1,9 @@
 export default {
   data() {
     return {
+			sliderImage: [],
 			typeName: [],
 			typeId: [],
-			sliderImage:[],
       typeList: [],
       fileList: [],
       coverImage: "",
@@ -65,7 +65,6 @@ export default {
           totalStock: 0,
           typeId: [],
           typeName: [],
-					typeObj: [],
           unit: "",
           vipPrice: 0,
           visit: 0,

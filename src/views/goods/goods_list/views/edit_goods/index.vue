@@ -19,7 +19,6 @@
                 </el-form-item>
                 <el-form-item label="商品分类" prop="spu.typeId">
                   <el-cascader
-										v-model="form.spu.typeObj"
                     @change="selectGoodsType"
                     :options="goodsTypeList"
                     :props="typeProps"
@@ -86,6 +85,7 @@
                 </el-form-item>
                 <el-form-item label="宣传画廊">
                   <el-upload
+										:file-list="fileList"
                     list-type="picture-card"
                     class="avatar-uploader"
                     :http-request="uploadImage_2"

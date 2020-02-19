@@ -4,7 +4,7 @@
 			<el-col :span="24">
 				<el-card class="box-card">
 					<div class="search">
-						<el-input v-model="blurry" placeholder="搜索关键词" class="search-input margin-box" @keyup.native.enter="search"></el-input>
+						<el-input v-model="name" placeholder="搜索商品名" class="search-input margin-box" @keyup.native.enter="search"></el-input>
 						<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddGoodsPage" title="添加商品" circle></el-button>
@@ -12,20 +12,81 @@
 					</div>
 					<el-table ref="table" :data="goodsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
-            <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="商品图片" align="center">
-							<template slot-scope="scope">
-								<img :src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.url)" />
+						<el-table-column type="expand">
+							<template slot-scope="props">
+								<el-form label-position="left" inline class="demo-table-expand">
+									<el-form-item label="商品分类" class="expand-line">
+										<span>
+											{{
+												props.row.typeName
+													.replace(/^,/, '')
+													.replace(/,$/, '')
+													.split(',')
+													.join(' | ')
+											}}
+										</span>
+									</el-form-item>
+									<el-form-item label="商品品牌" class="expand-line">
+										<span>
+											{{ props.row.brandName }}
+										</span>
+									</el-form-item>
+									<el-form-item label="热卖单品" class="expand-line">
+										<el-tag :type="props.row.onHot ? 'primary' : 'info'">{{ props.row.onHot ? '是' : '否' }}</el-tag>
+									</el-form-item>
+									<el-form-item label="促销单品" class="expand-line">
+										<el-tag :type="props.row.onBenefit ? 'primary' : 'info'">{{ props.row.onBenefit ? '是' : '否' }}</el-tag>
+									</el-form-item>
+									<el-form-item label="新品首发" class="expand-line">
+										<el-tag :type="props.row.onNew ? 'primary' : 'info'">{{ props.row.onNew ? '是' : '否' }}</el-tag>
+									</el-form-item>
+									<el-form-item label="优品推荐" class="expand-line">
+										<el-tag :type="props.row.onRecommend ? 'primary' : 'info'">{{ props.row.onRecommend ? '是' : '否' }}</el-tag>
+									</el-form-item>
+									<el-form-item label="精品推荐" class="expand-line">
+										<el-tag :type="props.row.onBest ? 'primary' : 'info'">{{ props.row.onBest ? '是' : '否' }}</el-tag>
+									</el-form-item>
+									<el-form-item label="库存扣减" class="expand-line">
+										<el-tag :type="props.row.stockReduceType === 0 ? 'primary' : props.row.stockReduceType === 1 ? 'success' : 'warning'">
+											{{ props.row.stockReduceType === 0 ? '拍下减库存' : props.row.stockReduceType === 1 ? '付款减库存' : '永不减库存' }}
+										</el-tag>
+									</el-form-item>
+								</el-form>
 							</template>
 						</el-table-column>
-						<el-table-column prop="title" label="商品名称" :show-overflow-tooltip="true" />
-            <el-table-column prop="title" label="分类名称" :show-overflow-tooltip="true" />
-            <el-table-column prop="title" label="商品价格" :show-overflow-tooltip="true" />
-            <el-table-column prop="title" label="销量" :show-overflow-tooltip="true" />
-            <el-table-column prop="title" label="库存" :show-overflow-tooltip="true" />
+						<el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="商品图片" align="center">
+							<template slot-scope="scope">
+								<img
+									:src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'"
+									alt="点击打开"
+									class="el-avatar xz-image"
+									@click="(isShow = true), (url = scope.row.coverImage)"
+								/>
+							</template>
+						</el-table-column>
+						<el-table-column prop="name" label="商品名称" :show-overflow-tooltip="true" />
+						<el-table-column prop="salesPrice" label="商品价格(元)" :show-overflow-tooltip="true" align="center" />
+						<el-table-column prop="sales" label="销量" :show-overflow-tooltip="true" align="center" />
+						<el-table-column prop="totalStock" label="库存" :show-overflow-tooltip="true" align="center" />
+						<el-table-column label="排序" align="center" show-overflow-tooltip>
+							<template slot-scope="scope">
+								<div slot="reference" class="name-wrapper">
+									<el-tag type="primary">{{ scope.row.sort }}</el-tag>
+								</div>
+							</template>
+						</el-table-column>
 						<el-table-column label="状态" align="center" show-overflow-tooltip>
 							<template slot-scope="scope">
 								<div slot="reference" class="name-wrapper">
-									<el-tag :type="scope.row.isShow ? '' : 'info'">{{ scope.row.isShow ? '是' : '否' }}</el-tag>
+									<el-tag :type="scope.row.showStatus === 0 
+									? 'info' 
+									: scope.row.showStatus === 1
+									? 'primary'
+									: 'success'">{{ scope.row.showStatus === 0 
+									? '下架' 
+									: scope.row.showStatus === 1
+									? '上架'
+									: '赠品上架' }}</el-tag>
 								</div>
 							</template>
 						</el-table-column>
@@ -54,6 +115,6 @@
 import Operation from './js/operation';
 import Property from './js/property';
 export default {
-  mixins: [Operation, Property]
+	mixins: [Operation, Property]
 };
 </script>

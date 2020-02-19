@@ -1,7 +1,7 @@
 export default {
 	data() {
 		return {
-			blurry: "",
+			name: "",
 			selectType: "",
 			selectList: [],
 			goodsList: [],

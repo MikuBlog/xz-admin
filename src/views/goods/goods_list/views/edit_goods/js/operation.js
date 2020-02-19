@@ -1,6 +1,7 @@
 import convertHttp from '@/utils/convertHttp'
 export default {
 	created() {
+		this.getDetail()
 		this.getGoodsTypeList()
 		this.getSkuList()
 	},
@@ -60,7 +61,7 @@ export default {
 			this.$http_json({
 				url: "/api/localStorage/del",
 				method: "post",
-				data: [ this.fileList[index] ]
+				data: [ this.fileList[index].id ]
 			}).then(result => {
 				this.fileList.splice(index, 1)
 			})
@@ -173,7 +174,10 @@ export default {
 					id: data.id,
 					url: data.url
 				})
-				this.fileList.push(data.id)
+				this.fileList.push({
+					id: data.id,
+					url: convertHttp(data.url)
+				})
 				this.$successMsg("上传成功！");
 			});
 		},
@@ -340,13 +344,12 @@ export default {
 					this.form.spu.typeName = `,${this.typeName.join(",")},`
 					this.form.spu.typeId = `,${this.typeId.join(",")},`
 					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
-					console.log(this.form)
 					this.$http_json({
-						url: "/api/productSpu/add",
+						url: "/api/productSpu/edit",
 						method: "post",
 						data: this.form
 					}).then(result => {
-						this.$successMsg("添加成功");
+						this.$successMsg("编辑成功");
 						this.$router.push({
 							path: "/home/goods_list"
 						})
@@ -355,6 +358,51 @@ export default {
 					return false;
 				}
 			});
+		},
+		initialDetail(data) {
+			Object
+				.keys(data)
+				.forEach(val => {
+					if(val !== 'editor' 
+					|| val !== 'editTime' 
+					|| val !== 'deletion' 
+					|| val !== 'creator' 
+					|| val !== 'createTime') {
+						this.form.spu[val] = data[val]
+					}
+					if(val === 'cover') {
+						this.coverImage = data.cover
+						? convertHttp(data.cover)
+						: ''
+					}else if(val === 'typeName') {
+						this.typeName = data[val].replace(/^,/, '').replace(/,$/, '').split(",")
+						this.form.spu[val] = []
+					}else if(val === 'typeId') {
+						this.typeId = data[val].replace(/^,/, '').replace(/,$/, '').split(",")
+						this.form.spu[val] = []
+					}else if(val === 'brandName') {
+						this.brandName = data[val]
+					}else if(val === 'keyWords') {
+						this.dynamicTags = data[val].replace(/^,/, '').replace(/,$/, '').split(",")
+					}else if(val === 'sliderImage') {
+						const list = JSON.parse(data[val])
+						list.forEach(val => {
+							this.fileList.push({
+								id: val.id,
+								url: convertHttp(val.url)
+							})
+						})
+						this.sliderImage.push()
+					}
+				})
+		},
+		getDetail() {
+			this.$http_json({
+				url: `/api/productSpu/get/${this.$route.query.id}`,
+				method: "get"
+			}).then(result => {
+				this.initialDetail(result.data)
+			})
 		},
 		// 重置表单
 		resetForm() {
