@@ -62,7 +62,12 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(['REMOVE_TAGS', 'REMOVE_ALL_TAGS', 'REMOVE_RANGE_TAGS', 'DEL_CACHE_VIEWS', 'ADD_CACHE_VIEWS']),
+		...mapMutations([
+			'REMOVE_TAGS', 
+			'REMOVE_ALL_TAGS', 
+			'REMOVE_RANGE_TAGS', 
+			'DEL_CACHE_VIEWS', 
+			'ADD_CACHE_VIEWS']),
 		setTagColor() {
 		  this.$createStyle(`
 		    .activetag {
