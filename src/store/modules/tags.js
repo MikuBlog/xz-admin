@@ -24,7 +24,7 @@ const
 				query: tag.query,
 				fullPath: tag.fullPath
 			}
-			// 判断标签页是否相同
+			// 判断标签页是否相同,如果相同,替换掉原有标签
 			for (let i = 0, len = state.tagsList.length; i < len; i++) {
 			  if (state.tagsList[i].meta.title === tag.meta.title) {
 					state.tagsList[i] = myTag

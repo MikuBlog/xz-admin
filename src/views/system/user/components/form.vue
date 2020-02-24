@@ -27,7 +27,7 @@
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="userForm.email" />
       </el-form-item>
-      <el-form-item label="部门">
+      <el-form-item label="部门" prop="dept.id">
         <treeselect
           v-model="deptId"
           :options="depts"
@@ -37,7 +37,7 @@
           @input="jobSelect"
         />
       </el-form-item>
-      <el-form-item label="岗位">
+      <el-form-item label="岗位" prop="job.id">
         <el-select v-model="jobId" class="select-station" :style="style" placeholder="请先选择部门">
           <el-option
             v-for="(item, index) in jobs"
@@ -47,7 +47,7 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item style="margin-bottom: 0px;" label="角色">
+      <el-form-item style="margin-bottom: 0px;" label="角色" prop="roles">
         <el-select v-model="roleIds" style="width: 450px;" multiple placeholder="请选择">
           <el-option
             v-for="(item, index) in roles"
@@ -139,7 +139,13 @@ export default {
 				],
         email: [{ required: true, trigger: "change", validator: validEmail }],
         phone: [{ required: true, trigger: "change", validator: validPhone }],
-        enabled: [{ required: true, message: "状态不能为空", trigger: "blur" }]
+        enabled: [{ required: true, message: "状态不能为空", trigger: "blur" }],
+        'dept.id': [
+				  { required: true, message: "请选择部门", trigger: "blur" }
+				],
+        'job.id': [
+				  { required: true, message: "请选择岗位", trigger: "blur" }
+        ],
       }
     };
   },
@@ -169,14 +175,6 @@ export default {
       this.userForm.job.id = this.jobId;
       this.$refs.userForm.validate(valid => {
         if (valid) {
-          if (!this.deptId) {
-            this.$warnMsg("部门不能为空");
-            return;
-          }
-          if (!this.jobId) {
-            this.$warnMsg("岗位不能为空");
-            return;
-          }
           if (this.roleIds.length === 0) {
             this.$warnMsg("角色不能不为空");
             return;

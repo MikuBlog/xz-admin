@@ -24,7 +24,7 @@
           :label="item.value"
         >{{ item.label }}</el-radio>
       </el-form-item>
-      <el-form-item v-if="departmentForm.parentId !== 0" style="margin-bottom: 0px;" label="上级部门">
+      <el-form-item v-if="departmentForm.parentId !== 0" style="margin-bottom: 0px;" label="上级部门" prop="parentId">
         <treeselect
           v-model="departmentForm.parentId"
           :options="depts"
@@ -64,7 +64,9 @@ export default {
         enabled: "true"
       },
       rules: {
-        name: [{ required: true, message: "请输入名称", trigger: "blur" }]
+        name: [{ required: true, message: "请输入名称", trigger: "blur" }],
+        enabled: [{ required: true, message: "前选择状态", trigger: "blur" }],
+        parentId: [{ required: true, message: "请选择上级类目", trigger: "blur" }]
       }
     };
   },

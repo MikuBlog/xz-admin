@@ -185,8 +185,17 @@ Vue.prototype.$urlQuery = UrlQuery
  * @description 日期差(date_2 - date_1)
  * @param {String | Date} date_1
  * @param {String | Date} date_2
+ * @returns {Number} 返回日期差
  */
 Vue.prototype.$dateDiff = Date.dateDiff
+/**
+ * @author xuanzai
+ * @description 时间差
+ * @param {Date} time_1 时间戳
+ * @param {Date} time_2 时间戳
+ * @returns {String} 返回时间差 xx:xx:xx
+ */
+Vue.prototype.$timeDiff = Date.timeDiff
 /**
  * @author xuanzai
  * @description 给元素设置样式

@@ -20,7 +20,7 @@
       <el-form-item label="别名" prop="alias">
         <el-input v-model="authorityForm.alias" style="width: 360px;" />
       </el-form-item>
-      <el-form-item style="margin-bottom: 0px;" label="上级类目">
+      <el-form-item style="margin-bottom: 0px;" label="上级类目" prop="parentId">
         <treeselect
           v-model="authorityForm.parentId"
           :options="permissions"
@@ -52,7 +52,8 @@ export default {
       authorityForm: { name: "", alias: "", parentId: 0 },
       rules: {
         name: [{ required: true, message: "请输入名称", trigger: "blur" }],
-        alias: [{ required: true, message: "请输入别名", trigger: "blur" }]
+        alias: [{ required: true, message: "请输入别名", trigger: "blur" }],
+        parentId: [{ required: true, message: "请选择上级类目", trigger: "blur" }]
       }
     };
   },
@@ -76,10 +77,6 @@ export default {
     doSubmit() {
       this.$refs["authorityForm"].validate(valid => {
         if (valid) {
-          if (this.authorityForm.parentId == undefined) {
-            this.$warnMsg("请选择上级类目");
-            return;
-          }
           this.isAdd ? this.addAuthority() : this.editAuthority();
         } else {
           return false;
