@@ -111,6 +111,27 @@ export default {
 			} catch (e) {
 				this.$warnMsg("规格值不能为空")
 			}
+			this.$http_json({
+				url: "/api/productSpec/save",
+				method: "post",
+				data: this.selectSkuList.map((val, ind) => {
+					for(let i = 0, len = this.skuList.length; i < len; i ++) {
+						if(val.label === this.skuList[i].label) {
+							return {
+								id: this.skuList[i].id,
+								name: val.label,
+								value: JSON.stringify(val.children)
+							}
+						}
+					}
+					return {
+						name: val.label,
+						value: JSON.stringify(val.children)
+					}
+				})
+			}).then(result => {
+				this.getSkuList()
+			})
 		},
 		selectAllSku(e) {
 			if (e) {
@@ -244,6 +265,7 @@ export default {
 			let newList = []
 			list.forEach(val => {
 				newList.push({
+					id: val.id,
 					label: val.name,
 					value: val.name,
 					children: val.value ?

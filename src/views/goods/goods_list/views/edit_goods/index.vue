@@ -105,7 +105,7 @@
               </el-col>
               <el-col :span="22">
                 <el-form-item label="商品描述" prop="spu.description">
-                  <Tinymce v-model="form.spu.description" />
+                  <Tinymce height="800" v-model="form.spu.description" />
                 </el-form-item>
               </el-col>
               <el-col :span="24">
