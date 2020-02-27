@@ -65,7 +65,6 @@ export default {
           totalStock: 0,
           typeId: [],
           typeName: [],
-					typeObj: [],
           unit: "",
           vipPrice: 0,
           visit: 0,

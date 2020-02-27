@@ -19,7 +19,7 @@
                 </el-form-item>
                 <el-form-item label="商品分类" prop="spu.typeId">
                   <el-cascader
-										v-model="form.spu.typeObj"
+										v-model="typeName"
                     @change="selectGoodsType"
                     :options="goodsTypeList"
                     :props="typeProps"
@@ -197,63 +197,65 @@
               </el-form-item>
             </div>
             <el-divider v-if="generateSkuList.length"></el-divider>
-            <div v-if="generateSkuList.length">
+            <div v-if="generateSkuList.length && skuGroup === 'more'">
               <span class="key-value-box">
                 <el-checkbox @change="selectAllSku"></el-checkbox>
               </span>
               <el-button type="primary" size="small" @click="showEditBox">批量编辑</el-button>
               <el-button type="danger" size="small" @click="deleteAllSku">批量删除</el-button>
             </div>
-            <div v-for="(item, index) in generateSkuList" class="sku-list">
-              <span class="key-value-box">
-                <el-checkbox v-model="item.checked"></el-checkbox>
-              </span>
-              <span class="key-value-box" v-for="(val, key) in item.skuDesc">
-                <span class="key">{{ key }}</span>:
-                <span class="value">{{ val }}</span>
-              </span>
-              <span class="key-value-box">
-                <span class="key">售价(元)</span>
-                <el-input
-                  class="inline-input"
-                  type="number"
-                  @input="formatChildren('salesPrice', index)"
-                  v-model="item.salesPrice"
-                />
-              </span>
-              <span class="key-value-box">
-                <span class="key">库存</span>
-                <el-input
-                  v-model="item.stock"
-                  class="inline-input"
-                  type="number"
-                  @input="formatChildren('stock', index)"
-                />
-              </span>
-              <span class="key-value-box">
-                <span class="key">成本价(元)</span>
-                <el-input
-                  v-model="item.costPrice"
-                  class="inline-input"
-                  type="number"
-                  @input="formatChildren('costPrice', index)"
-                />
-              </span>
-              <span class="key-value-box" @click="setIndex(index)">
-                <el-upload
-                  class="avatar-uploader-small"
-                  :http-request="uploadImage_3"
-                  :show-file-list="false"
-                  action="string"
-                >
-                  <img v-if="item.coverImage" :src="item.coverImage" class="avatar-small" />
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload>
-              </span>
-              <span class="key-value-box">
-                <el-button type="danger" size="small" @click="deleteSku(index)">删除</el-button>
-              </span>
-            </div>
+						<div v-if="skuGroup === 'more'">
+							<div v-for="(item, index) in generateSkuList" class="sku-list">
+							  <span class="key-value-box">
+							    <el-checkbox v-model="item.checked"></el-checkbox>
+							  </span>
+							  <span class="key-value-box" v-for="(val, key) in item.skuDesc">
+							    <span class="key">{{ key }}</span>:
+							    <span class="value">{{ val }}</span>
+							  </span>
+							  <span class="key-value-box">
+							    <span class="key">售价(元)</span>
+							    <el-input
+							      class="inline-input"
+							      type="number"
+							      @input="formatChildren('salesPrice', index)"
+							      v-model="item.salesPrice"
+							    />
+							  </span>
+							  <span class="key-value-box">
+							    <span class="key">库存</span>
+							    <el-input
+							      v-model="item.stock"
+							      class="inline-input"
+							      type="number"
+							      @input="formatChildren('stock', index)"
+							    />
+							  </span>
+							  <span class="key-value-box">
+							    <span class="key">成本价(元)</span>
+							    <el-input
+							      v-model="item.costPrice"
+							      class="inline-input"
+							      type="number"
+							      @input="formatChildren('costPrice', index)"
+							    />
+							  </span>
+							  <span class="key-value-box" @click="setIndex(index)">
+							    <el-upload
+							      class="avatar-uploader-small"
+							      :http-request="uploadImage_3"
+							      :show-file-list="false"
+							      action="string"
+							    >
+							      <img v-if="item.coverImage" :src="item.coverImage" class="avatar-small" />
+							      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+							    </el-upload>
+							  </span>
+							  <span class="key-value-box">
+							    <el-button type="danger" size="small" @click="deleteSku(index)">删除</el-button>
+							  </span>
+							</div>
+						</div>
           </el-card>
         </el-col>
         <el-col :span="24">

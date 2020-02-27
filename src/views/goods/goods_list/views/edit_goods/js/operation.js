@@ -293,7 +293,6 @@ export default {
 			this.form.spu.brandId = item.id
 		},
 		selectGoodsType(item) {
-			this.typeName = []
 			this.typeId = []
 			this.form.spu.typeId.splice(0)
 			this.form.spu.typeName.splice(0)
@@ -302,7 +301,6 @@ export default {
 				this.form.spu.typeId.push(...val)
 			})
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
-				this.typeName.push(val.label)
 				this.form.spu.typeName.push(val.label)
 			})
 		},
@@ -335,7 +333,7 @@ export default {
 		submitForm() {
 			this.$refs.form.validate(valid => {
 				if (valid) {
-					if (this.generateSkuList.length) {
+					if (this.generateSkuList.length && this.skuGroup === 'more') {
 						this.form.spu.specs = JSON.stringify(this.selectSkuLabel)
 						this.form.skus = this.generateSkuList.map(val => {
 							return {
@@ -363,7 +361,7 @@ export default {
 						})
 					}
 					this.form.spu.keyWords = `,${this.dynamicTags.join(",")},`
-					this.form.spu.typeName = `,${this.typeName.join(",")},`
+					this.form.spu.typeName = JSON.stringify(this.typeName)
 					this.form.spu.typeId = `,${this.typeId.join(",")},`
 					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
 					this.$http_json({
@@ -397,11 +395,11 @@ export default {
 						? convertHttp(data.cover)
 						: ''
 					}else if(val === 'typeName') {
-						this.typeName = data[val].replace(/^,/, '').replace(/,$/, '').split(",")
-						this.form.spu[val] = []
+						this.typeName = JSON.parse(data[val])
+						this.form.spu[val] = this.typeName
 					}else if(val === 'typeId') {
 						this.typeId = data[val].replace(/^,/, '').replace(/,$/, '').split(",")
-						this.form.spu[val] = []
+						this.form.spu[val] = data[val]
 					}else if(val === 'brandName') {
 						this.brandName = data[val]
 					}else if(val === 'keyWords') {

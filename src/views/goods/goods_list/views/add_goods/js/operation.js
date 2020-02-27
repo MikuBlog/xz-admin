@@ -289,7 +289,6 @@ export default {
 			this.form.spu.brandId = item.id
 		},
 		selectGoodsType(item) {
-			this.typeName = []
 			this.typeId = []
 			this.form.spu.typeId.splice(0)
 			this.form.spu.typeName.splice(0)
@@ -298,7 +297,6 @@ export default {
 				this.form.spu.typeId.push(...val)
 			})
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
-				this.typeName.push(val.label)
 				this.form.spu.typeName.push(val.label)
 			})
 		},
@@ -331,7 +329,7 @@ export default {
 		submitForm() {
 			this.$refs.form.validate(valid => {
 				if (valid) {
-					if (this.generateSkuList.length) {
+					if (this.generateSkuList.length && this.skuGroup === 'more') {
 						this.form.spu.specs = JSON.stringify(this.selectSkuLabel)
 						this.form.skus = this.generateSkuList.map(val => {
 							return {
@@ -359,7 +357,7 @@ export default {
 						})
 					}
 					this.form.spu.keyWords = `,${this.dynamicTags.join(",")},`
-					this.form.spu.typeName = `,${this.typeName.join(",")},`
+					this.form.spu.typeName = JSON.stringify(this.typeName)
 					this.form.spu.typeId = `,${this.typeId.join(",")},`
 					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
 					console.log(this.form)

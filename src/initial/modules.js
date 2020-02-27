@@ -198,6 +198,16 @@ Vue.prototype.$dateDiff = Date.dateDiff
 Vue.prototype.$timeDiff = Date.timeDiff
 /**
  * @author xuanzai
+ * @description 获取指定日期
+ */
+Vue.prototype.$getFirstDate = Date.getFirstDate
+Vue.prototype.$getLastDate = Date.getLastDate
+Vue.prototype.$getPreMonth = Date.getPreMonth
+Vue.prototype.$getPreDate = Date.getPreDate
+Vue.prototype.$getLastMonth = Date.getAfterMonth
+Vue.prototype.$getLastDate = Date.getAfterDate
+/**
+ * @author xuanzai
  * @description 给元素设置样式
  * @param {DOM Object} ele DOM元素
  * @param {String} ruleName CSS属性
