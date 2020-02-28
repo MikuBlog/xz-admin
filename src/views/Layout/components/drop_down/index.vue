@@ -50,6 +50,7 @@ export default {
           method: "post"
         }).then(() => {
           this.$setMemoryPmt("token", "");
+					this.$setMemorySes("redirect", "")
           this.$router.push({ path: "/login" });
         })
       });
