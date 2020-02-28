@@ -303,7 +303,21 @@ export default {
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
 				this.form.spu.typeName.push(val.label)
 			})
-		},
+    },
+    merge(val) {
+      let arr = [], key = "", ind = 0
+      val.forEach(val => {
+        if(key === val[0]) {
+          ind --
+          arr[ind].push(val[1])
+        }else {
+          key = val[0]
+          arr[ind] = [val[0], val[1]]
+        }
+        ind ++
+      })
+      return arr
+    },
 		selectSkuType(item) {
 			const res = new Map();
 			const arr = []
@@ -319,7 +333,7 @@ export default {
 			this.selectSkuList = this.selectSkuList.filter(val => {
 				return arr.indexOf(val.label) === -1
 			})
-			item.forEach(val => {
+			this.merge(item).forEach(val => {
 				this.selectSkuList.push({
 					label: val[0],
 					inputVisible: false,
@@ -403,7 +417,9 @@ export default {
 					}else if(val === 'brandName') {
 						this.brandName = data[val]
 					}else if(val === 'keyWords') {
-						this.dynamicTags = data[val].replace(/^,/, '').replace(/,$/, '').split(",")
+            this.dynamicTags = data[val].replace(/^,/, '').replace(/,$/, '').length
+            ? data[val].replace(/^,/, '').replace(/,$/, '').split(",")
+            : []
 					}else if(val === 'sliderImage') {
 						const list = JSON.parse(data[val])
 						list.forEach(val => {

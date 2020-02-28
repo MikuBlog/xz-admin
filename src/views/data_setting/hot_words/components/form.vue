@@ -12,7 +12,7 @@
         <el-input v-model="form.name" style="width: 350px;" />
       </el-form-item>
 			<el-form-item label="排序" prop="sort">
-			  <el-input type="number" v-model="form.sort" style="width: 350px;" />
+			  <el-input-number controls-position="right" v-model="form.sort" style="width: 350px;" />
 			</el-form-item>
 			<el-form-item label="是否显示" prop="enabled">
 			  <el-radio-group v-model="form.enabled">
@@ -54,7 +54,16 @@ export default {
       }
     };
   },
+  beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
+  created() {
+		document.addEventListener('keypress', this.submitEnter)
+  },
   methods: {
+    submitEnter(e) {
+			e.keyCode === 13 && this.dialog === true && this.doSubmit()
+		},
     hideBox() {
       this.resetForm();
     },

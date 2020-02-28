@@ -41,7 +41,16 @@ export default {
       }
     };
   },
+  beforeDestroy() {
+		document.removeEventListener('keypress', this.submitEnter)
+	},
+  created() {
+		document.addEventListener('keypress', this.submitEnter)
+  },
   methods: {
+    submitEnter(e) {
+			e.keyCode === 13 && this.dialog === true && this.editParam()
+		},
     // 隐藏窗口
     hideBox() {
       this.dialog = false;

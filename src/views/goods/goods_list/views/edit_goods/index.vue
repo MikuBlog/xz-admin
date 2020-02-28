@@ -215,13 +215,15 @@
 							    <span class="value">{{ val }}</span>
 							  </span>
 							  <span class="key-value-box">
-							    <span class="key">售价(元)</span>
+							    <span class="key">售价</span>
 							    <el-input
 							      class="inline-input"
 							      type="number"
 							      @input="formatChildren('salesPrice', index)"
 							      v-model="item.salesPrice"
-							    />
+							    >
+                    <template slot="append">元</template>
+							    </el-input>
 							  </span>
 							  <span class="key-value-box">
 							    <span class="key">库存</span>
@@ -230,16 +232,20 @@
 							      class="inline-input"
 							      type="number"
 							      @input="formatChildren('stock', index)"
-							    />
+							    >
+                    <template slot="append">件</template>
+							    </el-input>
 							  </span>
 							  <span class="key-value-box">
-							    <span class="key">成本价(元)</span>
+							    <span class="key">成本价</span>
 							    <el-input
 							      v-model="item.costPrice"
 							      class="inline-input"
 							      type="number"
 							      @input="formatChildren('costPrice', index)"
-							    />
+							    >
+                    <template slot="append">元</template>
+							    </el-input>
 							  </span>
 							  <span class="key-value-box" @click="setIndex(index)">
 							    <el-upload
@@ -266,12 +272,12 @@
             </div>
             <el-row>
               <el-col :span="8">
-                <el-form-item label="商品售价(元)" prop="spu.salesPrice">
+                <el-form-item label="商品售价" prop="spu.salesPrice">
                   <el-select
                     v-if="generateSkuList.length"
                     v-model="form.spu.salesPrice"
                     filterable
-                    placeholder="请选择售价"
+                    placeholder="请选择售价(元)"
                   >
                     <el-option
                       v-for="item in generateSkuList"
@@ -285,10 +291,14 @@
                     type="number"
                     v-model="form.spu.salesPrice"
                     @input="format('salesPrice')"
-                  ></el-input>
+                  >
+                    <template slot="append">元</template>
+                  </el-input>
                 </el-form-item>
-                <el-form-item label="邮费(元)" prop="spu.postagePrice">
-                  <el-input type="number" v-model="form.spu.postagePrice" @input="getPostagePrice"></el-input>
+                <el-form-item label="邮费" prop="spu.postagePrice">
+                  <el-input type="number" v-model="form.spu.postagePrice" @input="getPostagePrice">
+                    <template slot="append">元</template>
+                  </el-input>
                 </el-form-item>
                 <el-form-item label="库存" prop="spu.totalStock">
                   <el-input
@@ -296,41 +306,51 @@
                     type="number"
                     v-model="form.spu.totalStock"
                     @input="format('totalStock')"
-                  ></el-input>
+                  >
+                    <template slot="append">件</template>
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="市场价(元)" prop="spu.marketPrice">
+                <el-form-item label="市场价" prop="spu.marketPrice">
                   <el-input
                     type="number"
                     v-model="form.spu.marketPrice"
                     @input="format('marketPrice')"
-                  ></el-input>
+                  >
+                    <template slot="append">元</template>
+                  </el-input>
                 </el-form-item>
                 <el-form-item label="排序" prop="spu.sort">
-                  <el-input type="number" v-model="form.spu.sort" @input="format('sort')"></el-input>
+                  <el-input-number controls-position="right" type="number" v-model="form.spu.sort" @input="format('sort')" />
                 </el-form-item>
                 <el-form-item label="获得积分" prop="spu.giveIntegral">
-                  <el-input
+                  <el-input-number controls-position="right"
                     type="number"
                     v-model="form.spu.giveIntegral"
                     @input="format('giveIntegral')"
-                  ></el-input>
+                  />
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="成本价(元)" prop="spu.costPrice">
-                  <el-input type="number" v-model="form.spu.costPrice" @input="format('costPrice')"></el-input>
+                <el-form-item label="成本价" prop="spu.costPrice">
+                  <el-input type="number" v-model="form.spu.costPrice" @input="format('costPrice')">
+                    <template slot="append">元</template>
+                  </el-input>
                 </el-form-item>
                 <el-form-item label="虚拟销量" prop="spu.fictiSales">
                   <el-input
                     type="number"
                     v-model="form.spu.fictiSales"
                     @input="format('fictiSales')"
-                  ></el-input>
+                  >
+                    <template slot="append">件</template>
+                  </el-input>
                 </el-form-item>
                 <el-form-item label="预警库存" prop="spu.warnStock">
-                  <el-input type="number" v-model="form.spu.warnStock" @input="format('warnStock')"></el-input>
+                  <el-input type="number" v-model="form.spu.warnStock" @input="format('warnStock')">
+                    <template slot="append">件</template>
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">

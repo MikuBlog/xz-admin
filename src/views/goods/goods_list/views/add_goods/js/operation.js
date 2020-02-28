@@ -299,7 +299,21 @@ export default {
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
 				this.form.spu.typeName.push(val.label)
 			})
-		},
+    },
+    merge(val) {
+      let arr = [], key = "", ind = 0
+      val.forEach(val => {
+        if(key === val[0]) {
+          ind --
+          arr[ind].push(val[1])
+        }else {
+          key = val[0]
+          arr[ind] = [val[0], val[1]]
+        }
+        ind ++
+      })
+      return arr
+    },
 		selectSkuType(item) {
 			const res = new Map();
 			const arr = []
@@ -315,7 +329,7 @@ export default {
 			this.selectSkuList = this.selectSkuList.filter(val => {
 				return arr.indexOf(val.label) === -1
 			})
-			item.forEach(val => {
+			this.merge(item).forEach(val => {
 				this.selectSkuList.push({
 					label: val[0],
 					inputVisible: false,
@@ -360,7 +374,6 @@ export default {
 					this.form.spu.typeName = JSON.stringify(this.typeName)
 					this.form.spu.typeId = `,${this.typeId.join(",")},`
 					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
-					console.log(this.form)
 					this.$http_json({
 						url: "/api/productSpu/add",
 						method: "post",

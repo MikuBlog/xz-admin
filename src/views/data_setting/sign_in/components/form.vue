@@ -3,22 +3,19 @@
     append-to-body
     :before-close="hideBox"
     :visible.sync="dialog"
-    :title="isAdd ? '新增幻灯片' : '编辑幻灯片'"
+    :title="isAdd ? '新增滚动新闻' : '编辑滚动新闻'"
     width="500px"
     v-dialogDrag
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
-      <el-form-item label="名称" prop="name">
-        <el-input v-model="form.name" style="width: 350px;" />
+      <el-form-item label="第几天" prop="day">
+        <el-input v-model="form.day" style="width: 350px;" />
+      </el-form-item>
+      <el-form-item label="获取积分" prop="integral">
+        <el-input @input="format('integral')" type="number" v-model="form.integral" style="width: 350px;" />
       </el-form-item>
 			<el-form-item label="排序" prop="sort">
 			  <el-input-number controls-position="right" v-model="form.sort" style="width: 350px;" />
-			</el-form-item>
-			<el-form-item label="链接url" prop="linkUrl">
-			  <el-input v-model="form.linkUrl" style="width: 350px;" />
-			</el-form-item>
-			<el-form-item label="小程序跳转url" prop="wxurl">
-			  <el-input v-model="form.xcxUrl" style="width: 350px;" />
 			</el-form-item>
 			<el-form-item label="是否显示" prop="enabled">
 			  <el-radio-group v-model="form.enabled">
@@ -26,17 +23,6 @@
 			    <el-radio :label="false">否</el-radio>
 			  </el-radio-group>
 			</el-form-item>
-      <el-form-item label="图片">
-        <el-upload
-          class="avatar-uploader"
-          :http-request="uploadImage"
-          :show-file-list="false"
-          action="string"
-        >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox">取消</el-button>
@@ -46,7 +32,6 @@
 </template>
 
 <script>
-import convertHttp from '@/utils/convertHttp'
 export default {
   data() {
     const numberValidate = (rule, value, callback) => {
@@ -60,16 +45,15 @@ export default {
       imageUrl: "",
       form: {
         id: "",
-        name: "",
-				linkUrl: "",
-				xcxUrl: "",
-				enabled: true,
+        day: "",
+        integral: "",
+        enabled: true,
         sort: 999,
-        image: "",
-				groupName: "routine_home_banner"
+				groupName: "sign_day_num"
       },
       rules: {
-        name: [{ required: true, message: "请输入标题", trigger: "blur" }],
+        day: [{ required: true, message: "请输入第几天", trigger: "blur" }],
+        integral: [{ required: true, message: "请输入签到积分", trigger: "blur" }],
         sort: [{ required: true, validator: numberValidate, trigger: "blur" }],
 				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }]
       }
@@ -85,6 +69,14 @@ export default {
     submitEnter(e) {
 			e.keyCode === 13 && this.dialog === true && this.doSubmit()
 		},
+    format(key) {
+      if(!this.form[key]) {
+        return
+      }
+      if(this.form[key] < 0) {
+        this.form[key] = 0
+      }
+    },
     hideBox() {
       this.resetForm();
     },
@@ -99,7 +91,6 @@ export default {
 				})
 			this.form.id = data.id
 			this.form.sort = +this.form.sort
-			this.imageUrl = convertHttp(this.form.image)
 		},
 		getDetail() {
 			this.$http_json({
@@ -109,21 +100,6 @@ export default {
 				this.initial(result.data)
 			})
 		},
-    // 上传封面
-    uploadImage(param) {
-      this.$http_file({
-        url: "/api/localStorage/upload",
-        method: "post",
-        data: {
-          file: param.file
-        },
-        timeout: 100000
-      }).then(result => {
-        this.imageUrl = convertHttp(result.data.url)
-				this.form.image = result.data.url
-        this.$successMsg("上传成功！");
-      });
-    },
     doSubmit() {
       this.isAdd ? this.doAdd() : this.doEdit();
     },
@@ -142,7 +118,7 @@ export default {
           }).then(result => {
             this.$successMsg("添加成功");
             this.hideBox();
-            this.$parent.getSlideList(this.$parent.nowPage, this.$parent.nowSize);
+            this.$parent.getSignInRules(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -166,7 +142,7 @@ export default {
           }).then(result => {
             this.$successMsg("编辑成功");
             this.hideBox();
-            this.$parent.getSlideList(this.$parent.nowPage, this.$parent.nowSize);
+            this.$parent.getSignInRules(this.$parent.nowPage, this.$parent.nowSize);
           });
         } else {
           return false;
@@ -178,15 +154,12 @@ export default {
       this.$refs["form"].resetFields();
       this.form = {
         id: "",
-        name: "",
-        linkUrl: "",
-        xcxUrl: "",
+        day: "",
+        integral: "",
         enabled: true,
         sort: 999,
-        image: "",
-				groupName: "routine_home_banner"
-      };
-			this.imageUrl = ""
+				groupName: "sign_day_num"
+      }
     }
   }
 };
