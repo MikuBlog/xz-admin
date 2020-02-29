@@ -32,6 +32,8 @@ export default {
 			}
 			if (inputValue && !this[key_3].includes(inputValue)) {
 				this[key_3].push(inputValue);
+			} else {
+				this.$warnMsg("不允许重复")
 			}
 			this[key_2] = false;
 			this[key_1] = '';
@@ -49,6 +51,8 @@ export default {
 			let inputValue = this.selectSkuList[index].inputValue;
 			if (inputValue && !this.selectSkuList[index].children.includes(inputValue)) {
 				this.selectSkuList[index].children.push(inputValue);
+			} else {
+				this.$warnMsg("不允许重复")
 			}
 			this.selectSkuList[index].inputVisible = false;
 			this.selectSkuList[index].inputValue = '';
@@ -61,7 +65,7 @@ export default {
 			this.$http_json({
 				url: "/api/localStorage/del",
 				method: "post",
-				data: [ this.fileList[index].id ]
+				data: [this.fileList[index].id]
 			}).then(result => {
 				this.fileList.splice(index, 1)
 			})
@@ -83,7 +87,7 @@ export default {
 							checked: false,
 							coverImage: ''
 						}
-					}),
+					})
 				})
 			})
 			try {
@@ -91,8 +95,7 @@ export default {
 					name,
 					category
 				}) => {
-					return ary.length ?
-						[].concat(...category.map(v => ary.map(
+					return ary.length ? [].concat(...category.map(v => ary.map(
 							res => ({
 								skuDesc: { ...res.skuDesc,
 									[name]: v.name
@@ -108,6 +111,7 @@ export default {
 							}));
 				}, []);
 				this.caculateSalesPrice()
+				this.ensureSkuList = JSON.parse(JSON.stringify(this.selectSkuList))
 			} catch (e) {
 				this.$warnMsg("规格值不能为空")
 			}
@@ -115,8 +119,8 @@ export default {
 				url: "/api/productSpec/save",
 				method: "post",
 				data: this.selectSkuList.map((val, ind) => {
-					for(let i = 0, len = this.skuList.length; i < len; i ++) {
-						if(val.label === this.skuList[i].label) {
+					for (let i = 0, len = this.skuList.length; i < len; i++) {
+						if (val.label === this.skuList[i].label) {
 							return {
 								id: this.skuList[i].id,
 								name: val.label,
@@ -158,12 +162,14 @@ export default {
 			this.$refs.editForm.dialog = true
 		},
 		caculateSalesPrice() {
-			let lowest = 999999999
+			let lowest = Infinity
+			this.salesPriceList.splice(0)
 			this.generateSkuList.forEach(val => {
 				if (val.salesPrice < lowest) {
 					lowest = val.salesPrice
 				}
 			})
+			this.salesPriceList = this.$removeRepeat(this.generateSkuList, 'salesPrice')
 			this.form.spu.salesPrice = lowest
 		},
 		// 上传封面
@@ -241,8 +247,7 @@ export default {
 					label: val.name,
 					value: val.id,
 					children: val.children ?
-						this.handleGoodsTypeList(val.children) :
-						null
+						this.handleGoodsTypeList(val.children) : null
 				})
 			})
 			return newList
@@ -274,8 +279,7 @@ export default {
 								label: val,
 								value: val
 							}
-						}) :
-						null
+						}) : null
 				})
 			})
 			return newList
@@ -295,29 +299,31 @@ export default {
 		selectGoodsType(item) {
 			this.typeId = []
 			this.form.spu.typeId.splice(0)
-			this.form.spu.typeName.splice(0)
+			this.typeName.splice(0)
 			item.forEach(val => {
 				this.typeId.push(...val)
 				this.form.spu.typeId.push(...val)
 			})
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
-				this.form.spu.typeName.push(val.label)
+				this.typeName.push(val.label)
 			})
-    },
-    merge(val) {
-      let arr = [], key = "", ind = 0
-      val.forEach(val => {
-        if(key === val[0]) {
-          ind --
-          arr[ind].push(val[1])
-        }else {
-          key = val[0]
-          arr[ind] = [val[0], val[1]]
-        }
-        ind ++
-      })
-      return arr
-    },
+		},
+		merge(val) {
+			let arr = [],
+				key = "",
+				ind = 0
+			val.forEach(val => {
+				if (key === val[0]) {
+					ind--
+					arr[ind].push(val[1])
+				} else {
+					key = val[0]
+					arr[ind] = [val[0], val[1]]
+				}
+				ind++
+			})
+			return arr
+		},
 		selectSkuType(item) {
 			const res = new Map();
 			const arr = []
@@ -348,7 +354,12 @@ export default {
 			this.$refs.form.validate(valid => {
 				if (valid) {
 					if (this.generateSkuList.length && this.skuGroup === 'more') {
-						this.form.spu.specs = JSON.stringify(this.selectSkuLabel)
+						this.form.spu.specs = JSON.stringify(this.ensureSkuList.map(val => {
+							return {
+								name: val.label,
+								value: val.children
+							}
+						}))
 						this.form.skus = this.generateSkuList.map(val => {
 							return {
 								costPrice: val.salesPrice,
@@ -370,12 +381,16 @@ export default {
 								'默认': '推荐'
 							})
 						})
-						this.form.spu.specs = JSON.stringify({
-							'默认': '推荐'
-						})
+						this.form.spu.specs = JSON.stringify([{
+							name: '默认',
+							value: ['推荐']
+						}])
 					}
 					this.form.spu.keyWords = `,${this.dynamicTags.join(",")},`
-					this.form.spu.typeName = JSON.stringify(this.typeName)
+					this.form.spu.typeName = JSON.stringify({
+						typeName: this.typeName,
+						typeObj: this.typeObj
+					})
 					this.form.spu.typeId = `,${this.typeId.join(",")},`
 					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
 					this.$http_json({
@@ -394,43 +409,75 @@ export default {
 			});
 		},
 		initialDetail(data) {
+			let
+				spu = data.spu,
+				skus = data.skus
 			Object
-				.keys(data)
+				.keys(spu)
 				.forEach(val => {
-					if(val !== 'editor' 
-					|| val !== 'editTime' 
-					|| val !== 'deletion' 
-					|| val !== 'creator' 
-					|| val !== 'createTime') {
-						this.form.spu[val] = data[val]
+					if (val !== 'editor' ||
+						val !== 'editTime' ||
+						val !== 'deletion' ||
+						val !== 'creator' ||
+						val !== 'createTime') {
+						this.form.spu[val] = spu[val]
 					}
-					if(val === 'cover') {
-						this.coverImage = data.cover
-						? convertHttp(data.cover)
-						: ''
-					}else if(val === 'typeName') {
-						this.typeName = JSON.parse(data[val])
-						this.form.spu[val] = this.typeName
-					}else if(val === 'typeId') {
-						this.typeId = data[val].replace(/^,/, '').replace(/,$/, '').split(",")
-						this.form.spu[val] = data[val]
-					}else if(val === 'brandName') {
-						this.brandName = data[val]
-					}else if(val === 'keyWords') {
-            this.dynamicTags = data[val].replace(/^,/, '').replace(/,$/, '').length
-            ? data[val].replace(/^,/, '').replace(/,$/, '').split(",")
-            : []
-					}else if(val === 'sliderImage') {
-						const list = JSON.parse(data[val])
+					if (val === 'cover') {
+						this.coverImage = spu[val] ?
+							convertHttp(spu[val]) :
+							''
+					} else if (val === 'typeName') {
+						this.typeName = JSON.parse(spu[val]).typeName
+						this.typeObj = JSON.parse(spu[val]).typeObj
+						this.form.spu[val] = spu[val]
+					} else if (val === 'typeId') {
+						this.typeId = spu[val].replace(/^,/, '').replace(/,$/, '').split(",")
+						this.form.spu[val] = spu[val]
+					} else if (val === 'brandName') {
+						this.brandName = spu[val]
+					} else if (val === 'keyWords') {
+						this.dynamicTags = spu[val].replace(/^,/, '').replace(/,$/, '').length ?
+							spu[val].replace(/^,/, '').replace(/,$/, '').split(",") :
+							[]
+					} else if (val === 'specs') {
+						const specs = JSON.parse(spu[val])
+						if(specs[0].name !== '默认') {
+							specs.forEach(val => {
+								this.ensureSkuList.push({
+									label: val.name,
+									children: val.value
+								})
+							})
+						}
+					} else if (val === 'sliderImage') {
+						const list = JSON.parse(spu[val])
 						list.forEach(val => {
 							this.fileList.push({
 								id: val.id,
 								url: convertHttp(val.url)
 							})
+							this.sliderImage.push({
+								id: val.id,
+								url: val.url
+							})
 						})
-						this.sliderImage.push()
 					}
 				})
+			if (new RegExp(/默认/g).test(skus[0].value)) {
+				this.skuGroup = 'default'
+			} else {
+				this.skuGroup = 'more'
+				this.generateSkuList = skus.map(val => {
+					return {
+						skuDesc: JSON.parse(val.value),
+						coverImage: val.image
+						? convertHttp(val.image)
+						: '',
+						checked: false,
+						...val,
+					}
+				})
+			}
 		},
 		getDetail() {
 			this.$http_json({

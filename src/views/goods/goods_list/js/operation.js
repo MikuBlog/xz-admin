@@ -10,7 +10,9 @@ export default {
 		  list.forEach(value => {
 				value.coverImage = value.cover
 				? convertHttp(value.cover)
-				: ''
+				: '',
+				value.typeName = JSON.parse(value.typeName)
+				value.specs = JSON.parse(value.specs)
 		    this.goodsList.push(value);
 		  });
 		},

@@ -31,6 +31,8 @@ export default {
 			}
 			if (inputValue && !this[key_3].includes(inputValue)) {
 				this[key_3].push(inputValue);
+			}else {
+				this.$warnMsg("不允许重复")
 			}
 			this[key_2] = false;
 			this[key_1] = '';
@@ -48,6 +50,8 @@ export default {
 			let inputValue = this.selectSkuList[index].inputValue;
 			if (inputValue && !this.selectSkuList[index].children.includes(inputValue)) {
 				this.selectSkuList[index].children.push(inputValue);
+			}else {
+				this.$warnMsg("不允许重复")
 			}
 			this.selectSkuList[index].inputVisible = false;
 			this.selectSkuList[index].inputValue = '';
@@ -107,6 +111,7 @@ export default {
 							}));
 				}, []);
 				this.caculateSalesPrice()
+				this.ensureSkuList = JSON.parse(JSON.stringify(this.selectSkuList))
 			} catch (e) {
 				this.$warnMsg("规格值不能为空")
 			}
@@ -157,12 +162,14 @@ export default {
 			this.$refs.editForm.dialog = true
 		},
 		caculateSalesPrice() {
-			let lowest = 999999999
+			let lowest = Infinity
+			this.salesPriceList.splice(0)
 			this.generateSkuList.forEach(val => {
 				if (val.salesPrice < lowest) {
 					lowest = val.salesPrice
 				}
 			})
+			this.salesPriceList = this.$removeRepeat(this.generateSkuList, 'salesPrice')
 			this.form.spu.salesPrice = lowest
 		},
 		// 上传封面
@@ -291,13 +298,13 @@ export default {
 		selectGoodsType(item) {
 			this.typeId = []
 			this.form.spu.typeId.splice(0)
-			this.form.spu.typeName.splice(0)
+			this.typeName.splice(0)
 			item.forEach(val => {
 				this.typeId.push(...val)
 				this.form.spu.typeId.push(...val)
 			})
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
-				this.form.spu.typeName.push(val.label)
+				this.typeName.push(val.label)
 			})
     },
     merge(val) {
@@ -344,7 +351,12 @@ export default {
 			this.$refs.form.validate(valid => {
 				if (valid) {
 					if (this.generateSkuList.length && this.skuGroup === 'more') {
-						this.form.spu.specs = JSON.stringify(this.selectSkuLabel)
+						this.form.spu.specs = JSON.stringify(this.ensureSkuList.map(val => {
+							return {
+								name: val.label,
+								value: val.children
+							}
+						}))
 						this.form.skus = this.generateSkuList.map(val => {
 							return {
 								costPrice: val.salesPrice,
@@ -366,12 +378,16 @@ export default {
 								'默认': '推荐'
 							})
 						})
-						this.form.spu.specs = JSON.stringify({
-							'默认': '推荐'
-						})
+						this.form.spu.specs = JSON.stringify([{
+							name: '默认',
+							value: ["推荐"]
+						}])
 					}
 					this.form.spu.keyWords = `,${this.dynamicTags.join(",")},`
-					this.form.spu.typeName = JSON.stringify(this.typeName)
+					this.form.spu.typeName = JSON.stringify({
+						typeName: this.typeName,
+						typeObj: this.typeObj
+					})
 					this.form.spu.typeId = `,${this.typeId.join(",")},`
 					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
 					this.$http_json({

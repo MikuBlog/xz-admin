@@ -369,6 +369,14 @@ Vue.prototype.$sortList = ArrayMethod.sortList
 Vue.prototype.$searchResult = ArrayMethod.searchResult
 /**
  * @author xuanzai
+ * @description 去重
+ * @param {Array} arr 需要去重的数组
+ * @param {String} key 数组元素为对象，可传入key值进行排序（对象键值为一层）
+ * @returns {Array} 返回新的数组
+ */
+Vue.prototype.$removeRepeat = ArrayMethod.removeRepeat
+/**
+ * @author xuanzai
  * @description 判断是否为移动端
  * @param {HTML}
  */

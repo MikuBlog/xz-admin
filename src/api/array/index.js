@@ -7,27 +7,27 @@
  * @returns {Array} 返回新的数组
  */
 function sortList(list, property, isDes = false) {
-  if (property) {
-    if ((typeof list[0][property]).toLowerCase() === 'number') {
-      return list.sort((a, b) => {
-        return isDes
-          ? b[property] - a[property]
-          : a[property] - b[property]
-      })
-    } else {
-      return list.sort((a, b) => {
-        return isDes
-          ? new Date(b[property]).getTime() - new Date(a[property]).getTime()
-          : new Date(a[property]).getTime() - new Date(b[property]).getTime()
-      })
-    }
-  } else {
-    return list.sort((a, b) => {
-      return isDes
-        ? b - a
-        : a - b
-    })
-  }
+	if (property) {
+		if ((typeof list[0][property]).toLowerCase() === 'number') {
+			return list.sort((a, b) => {
+				return isDes ?
+					b[property] - a[property] :
+					a[property] - b[property]
+			})
+		} else {
+			return list.sort((a, b) => {
+				return isDes ?
+					new Date(b[property]).getTime() - new Date(a[property]).getTime() :
+					new Date(a[property]).getTime() - new Date(b[property]).getTime()
+			})
+		}
+	} else {
+		return list.sort((a, b) => {
+			return isDes ?
+				b - a :
+				a - b
+		})
+	}
 }
 /**
  * @description 模糊搜索数组
@@ -36,19 +36,45 @@ function sortList(list, property, isDes = false) {
  * @param {String} value 需要搜索的值
  */
 function searchResult(list, keys, value) {
-  return new Fuse(list, {
-    matchAllTokens: true,
-    findAllMatches: true,
-    threshold: 0.6,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys
-  }).search(value)
+	return new Fuse(list, {
+		matchAllTokens: true,
+		findAllMatches: true,
+		threshold: 0.6,
+		location: 0,
+		distance: 100,
+		maxPatternLength: 32,
+		minMatchCharLength: 1,
+		keys
+	}).search(value)
+}
+
+/**
+ * @author xuanzai
+ * @description 去重
+ * @param {Array} arr 需要去重的数组
+ * @param {String} key 数组元素为对象，可传入key值进行排序（对象键值为一层）
+ * @returns {Array} 返回新的数组
+ */
+function removeRepeat(arr, key) {
+	let newArr = []
+	if (key) {
+		let hash = {}
+		newArr = arr.reduce((prev, next) => {
+			!hash[next[key]] && (hash[next[key]] = true, prev.push(next))
+			return prev
+		}, [])
+	} else {
+		arr.forEach(val => {
+			if (!newArr.includes(val)) {
+				newArr.push(val)
+			}
+		})
+	}
+	return newArr
 }
 
 export default {
-  sortList,
-  searchResult
+	sortList,
+	searchResult,
+	removeRepeat
 }

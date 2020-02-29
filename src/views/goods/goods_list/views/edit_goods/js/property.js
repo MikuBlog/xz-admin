@@ -2,6 +2,7 @@ export default {
   data() {
     return {
 			sliderImage: [],
+			typeObj: [],
 			typeName: [],
 			typeId: [],
       typeList: [],
@@ -10,6 +11,7 @@ export default {
       goodsTypeList: [],
       skuType: [],
       skuList: [],
+			salesPriceList: [],
       typeProps: { multiple: true },
       skuProps: { multiple: true },
       dialogImageUrl: '',
@@ -18,6 +20,7 @@ export default {
       skuGroup: "default",
       selectSkuLabel: [],
       selectSkuList: [],
+			ensureSkuList: [],
       bindingSelectSkuList: [],
       generateSkuList: [],
       dynamicTags: [],
@@ -78,17 +81,8 @@ export default {
         'spu.name': [
           { required: true, message: "请输入商品名称", trigger: "blur" }
         ],
-        'spu.info': [
-          { required: true, message: "请输入商品简介", trigger: "blur" }
-        ],
-        'spu.barCode': [
-          { required: true, message: "请输入商品条码", trigger: "blur" }
-        ],
         'spu.unit': [
           { required: true, message: "请输入商品单位", trigger: "blur" }
-        ],
-        'spu.brandName': [
-          { required: true, message: "请选择品牌", trigger: "change" }
         ],
         'spu.typeId': [
           { required: true, message: "请选择商品分类", trigger: "change" }

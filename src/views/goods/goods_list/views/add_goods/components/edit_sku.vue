@@ -75,10 +75,20 @@ export default {
       this.$parent.generateSkuList.forEach(val => {
         if(val.checked) {
           val.salesPrice = this.form.salesPrice
+        	? this.form.salesPrice
+        	: val.salesPrice
           val.stock = this.form.stock
+        	? this.form.stock
+        	: val.stock
           val.costPrice = this.form.costPrice
+        	? this.form.costPrice
+        	: val.costPrice
           val.image = this.form.image
+        	? this.form.image
+        	: val.image
           val.coverImage = this.imageUrl
+        	? this.imageUrl
+        	: val.coverImage
         }
       })
       this.$parent.caculateSalesPrice()

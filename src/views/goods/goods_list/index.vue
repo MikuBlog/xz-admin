@@ -18,17 +18,13 @@
 									<el-form-item label="商品分类" class="expand-line">
 										<span>
 											{{
-												props.row.typeName
-													.replace(/^,/, '')
-													.replace(/,$/, '')
-													.split(',')
-													.join(' | ')
+												props.row.typeName.typeName && props.row.typeName.typeName.join(" | ")
 											}}
 										</span>
 									</el-form-item>
 									<el-form-item label="商品品牌" class="expand-line">
 										<span>
-											{{ props.row.brandName }}
+											{{ props.row.brandName || "无" }}
 										</span>
 									</el-form-item>
 									<el-form-item label="热卖单品" class="expand-line">
@@ -51,6 +47,12 @@
 											{{ props.row.stockReduceType === 0 ? '拍下减库存' : props.row.stockReduceType === 1 ? '付款减库存' : '永不减库存' }}
 										</el-tag>
 									</el-form-item>
+									<el-form-item label="商品规格" class="expand-line">
+										<div v-for="item in props.row.specs">
+											<span style="font-weight: bold;">{{ item.name }}：</span>
+											<span style="margin-left: .5rem">{{ item.value.join(" 、") }}</span>
+										</div>
+									</el-form-item>
 								</el-form>
 							</template>
 						</el-table-column>
@@ -64,6 +66,7 @@
 								/>
 							</template>
 						</el-table-column>
+						<el-table-column prop="num" label="商品编号" :show-overflow-tooltip="true" />
 						<el-table-column prop="name" label="商品名称" :show-overflow-tooltip="true" />
 						<el-table-column prop="salesPrice" label="商品价格(元)" :show-overflow-tooltip="true" align="center" />
 						<el-table-column prop="sales" label="销量" :show-overflow-tooltip="true" align="center" />

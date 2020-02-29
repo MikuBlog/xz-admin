@@ -19,7 +19,7 @@
                 </el-form-item>
                 <el-form-item label="商品分类" prop="spu.typeId">
                   <el-cascader
-										v-model="typeName"
+										v-model="typeObj"
                     @change="selectGoodsType"
                     :options="goodsTypeList"
                     :props="typeProps"
@@ -202,8 +202,8 @@
               <span class="key-value-box">
                 <el-checkbox @change="selectAllSku"></el-checkbox>
               </span>
-              <el-button type="primary" size="small" @click="showEditBox">批量编辑</el-button>
-              <el-button type="danger" size="small" @click="deleteAllSku">批量删除</el-button>
+              <el-button :disabled="!generateSkuList.some(val => val.checked)" type="primary" size="small" @click="showEditBox">批量编辑</el-button>
+              <el-button :disabled="!generateSkuList.some(val => val.checked)" type="danger" size="small" @click="deleteAllSku">批量删除</el-button>
             </div>
 						<div v-if="skuGroup === 'more'">
 							<div v-for="(item, index) in generateSkuList" class="sku-list">
@@ -280,9 +280,9 @@
                     placeholder="请选择售价(元)"
                   >
                     <el-option
-                      v-for="item in generateSkuList"
-                      :key="item.label"
-                      :label="item.label"
+                      v-for="item in salesPriceList"
+                      :key="item.salesPrice"
+                      :label="item.salesPrice"
                       :value="item.salesPrice"
                     ></el-option>
                   </el-select>
