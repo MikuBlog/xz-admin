@@ -53,7 +53,7 @@ export default {
 				}
 			}).then(result => {
 				this.$setMemoryPmt("token", result.data.token)
-				this.$setMemoryPmt('username', this.ruleForm.username)
+				this.$setMemoryPmt('username', this.username)
 				this.$getMemorySes("redirect") ?
 					this.$router.push({
 						path: this.$getMemorySes("redirect") === '/login' ?

@@ -9,7 +9,7 @@
     		<div class="lowin-box lowin-login">
     			<div class="lowin-box-inner">
     				<form>
-    					<p>欢迎使用 xz-admin</p>
+    					<p>欢迎使用</p>
     					<div class="lowin-group">
     						<label>
     							用户名
