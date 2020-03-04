@@ -16,16 +16,12 @@
 						<el-table-column prop="integral" label="获取积分" :show-overflow-tooltip="true" />
 						<el-table-column label="排序" align="center" show-overflow-tooltip>
 							<template slot-scope="scope">
-								<div slot="reference" class="name-wrapper">
-									<el-tag type="primary">{{ scope.row.sort }}</el-tag>
-								</div>
+								<el-tag type="primary">{{ scope.row.sort }}</el-tag>
 							</template>
 						</el-table-column>
 						<el-table-column label="状态" align="center" show-overflow-tooltip>
 							<template slot-scope="scope">
-								<div slot="reference" class="name-wrapper">
-									<el-tag :type="scope.row.enabled ? 'primary' : 'info'">{{ scope.row.enabled ? '显示' : '隐藏' }}</el-tag>
-								</div>
+								<el-tag :type="scope.row.enabled ? 'primary' : 'info'">{{ scope.row.enabled ? '显示' : '隐藏' }}</el-tag>
 							</template>
 						</el-table-column>
 						<el-table-column label="操作" fixed="right" align="center" width="180">

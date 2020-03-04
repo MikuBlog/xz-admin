@@ -70,12 +70,16 @@
 /* 格式化卡片样式 */
 .el-card {
   border: 1px solid transparent!important;
-  box-shadow: 0 1px 12px 0 rgba(0,0,0,.1)!important;
-  -webkit-box-shadow: 0 1px 12px 0 rgba(0,0,0,.1)!important;
+  box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .1)!important;
+  -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .1)!important;
 }
 
 .el-card:hover {
   border: 1px solid #EBEEF5!important;
-  box-shadow: 0 3px 12px 0 rgba(0,0,0,.3)!important;
-  -webkit-box-shadow: 0 3px 12px 0 rgba(0,0,0,.3)!important;
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .3)!important;
+  -webkit-box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .3)!important;
+}
+
+.el-dialog {
+	overflow: hidden;
 }

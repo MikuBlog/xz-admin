@@ -15,8 +15,8 @@ export default {
         url: "/auth/info",
         method: "get"
       }).then(result => {
-        result.data.user.avatar = result.data.user.avatar
-        ? convertHttp(result.data.user.avatar)
+        result.data.avatar = result.data.avatar
+        ? convertHttp(result.data.avatar)
         : ''
         this.SET_USER_INFO(result.data)
         this.user = this.$store.state.user

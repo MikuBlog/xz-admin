@@ -108,6 +108,8 @@ export default {
 						})
 						.then(result => {
 							success(convertHttp(result.data.url));
+						}).catch(e => {
+							failure(e)
 						});
 				},
 				init_instance_callback(editor) {
