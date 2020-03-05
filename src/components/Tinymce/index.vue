@@ -22,11 +22,9 @@ export default {
 			default: ''
 		},
 		height: {
-			type: Number,
 			default: 500
 		},
 		limit: {
-			type: Number,
 			default: 500
 		}
 	},
@@ -79,7 +77,7 @@ export default {
 				plugins: plugins.plugins,
 				external_plugins: plugins.external_plugins,
 				toolbar,
-				height: this.height,
+				height: +this.height,
 				ax_wordlimit_num: this.limit,
 				ax_wordlimit_callback: function(editor, txt, num) {
 					// 字数限制
@@ -110,6 +108,8 @@ export default {
 						})
 						.then(result => {
 							success(convertHttp(result.data.url));
+						}).catch(e => {
+							failure(e)
 						});
 				},
 				init_instance_callback(editor) {

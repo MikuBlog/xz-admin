@@ -198,6 +198,16 @@ Vue.prototype.$dateDiff = Date.dateDiff
 Vue.prototype.$timeDiff = Date.timeDiff
 /**
  * @author xuanzai
+ * @description 获取指定日期
+ */
+Vue.prototype.$getFirstDate = Date.getFirstDate
+Vue.prototype.$getLastDate = Date.getLastDate
+Vue.prototype.$getPreMonth = Date.getPreMonth
+Vue.prototype.$getPreDate = Date.getPreDate
+Vue.prototype.$getLastMonth = Date.getAfterMonth
+Vue.prototype.$getLastDate = Date.getAfterDate
+/**
+ * @author xuanzai
  * @description 给元素设置样式
  * @param {DOM Object} ele DOM元素
  * @param {String} ruleName CSS属性
@@ -357,6 +367,14 @@ Vue.prototype.$sortList = ArrayMethod.sortList
  * @returns {Array} 返回新的数组
  */
 Vue.prototype.$searchResult = ArrayMethod.searchResult
+/**
+ * @author xuanzai
+ * @description 去重
+ * @param {Array} arr 需要去重的数组
+ * @param {String} key 数组元素为对象，可传入key值进行排序（对象键值为一层）
+ * @returns {Array} 返回新的数组
+ */
+Vue.prototype.$removeRepeat = ArrayMethod.removeRepeat
 /**
  * @author xuanzai
  * @description 判断是否为移动端

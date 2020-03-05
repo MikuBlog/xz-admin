@@ -15,7 +15,9 @@ export default {
         url: "/auth/info",
         method: "get"
       }).then(result => {
-        result.data.avatar = convertHttp(result.data.avatar)
+        result.data.avatar = result.data.avatar
+        ? convertHttp(result.data.avatar)
+        : ''
         this.SET_USER_INFO(result.data)
         this.user = this.$store.state.user
         this.$refs.dropDown.squareUrl = this.user.avatar

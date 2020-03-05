@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const 
-  Login = () => import('@/views/login/index'),
+  Login = () => import('@/views/login/template_1'),
   NotFound = () => import('@/views/error/404')
 
 const router = new Router({

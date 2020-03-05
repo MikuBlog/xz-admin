@@ -64,8 +64,51 @@ const timeDiff = (time_1, time_2) => {
 	}
 }
 
+
+/**
+ * @author xuanzai
+ * @description 获取指定日期
+ */
+function getFirstDate() {
+	let date = new Date()
+	date.setDate(1)
+	return formatDate(date)
+}
+
+function getLastDate() {
+	let date = new Date()
+	date.setMonth(date.getMonth() + 1)
+	return formatDate(new Date(date).setDate(0))
+}
+
+function getPreMonth(n) {
+	let date = new Date()
+	date.setMonth(date.getMonth() - n)
+	return formatDate(date)
+}
+
+function getPreDate(n) {
+	return formatDate(new Date().getTime() - n * 1000 * 60 * 60 * 24)
+}
+
+function getAfterMonth(n) {
+	let date = new Date()
+	date.setMonth(date.getMonth() + n)
+	return formatDate(date)
+}
+
+function getAfterDate(n) {
+	return formatDate(new Date().getTime() + n * 1000 * 60 * 60 * 24)
+}
+
 export default {
 	formatDate,
 	dateDiff,
-	timeDiff
+	timeDiff,
+	getFirstDate,
+	getLastDate,
+	getPreMonth,
+	getPreDate,
+	getAfterMonth,
+	getAfterDate
 }
