@@ -29,7 +29,7 @@
         <el-input type="text" v-model="form.name" style="width: 350px;"></el-input>
       </el-form-item>
       <el-form-item label="限定数" prop="number">
-        <el-input type="number" v-model="form.number" style="width: 350px;"></el-input>
+        <el-input-number controls-position="right" type="number" v-model="form.number" style="width: 350px;"></el-input-number>
       </el-form-item>
       <el-form-item label="排序" prop="sort">
         <el-input-number controls-position="right" v-model="form.sort" style="width: 350px;" />

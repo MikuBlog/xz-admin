@@ -63,9 +63,9 @@
             <el-table-column prop="title" label="明细数字" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div class="name-wrapper">
-                  {{ scope.row.pm === 0
-                  ? `-${scope.row.number}`
-                  : `+${scope.row.number}` }}
+                  {{ scope.row.pm
+                  ? `+${scope.row.number}`
+                  : `-${scope.row.number}` }}
                 </div>
               </template>
             </el-table-column>
