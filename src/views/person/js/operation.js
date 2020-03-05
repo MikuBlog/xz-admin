@@ -9,7 +9,7 @@ export default {
         url: '/api/user/updateAvatar',
         method: 'post',
         data: {
-          file: result
+          file: new window.File([result], "avatar.png", {type: result.type})
         }
       }).then(() => {
         this.isShow = false;

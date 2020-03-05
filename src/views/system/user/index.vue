@@ -35,7 +35,7 @@
                 class="search-input margin-box"
                 @keyup.native.enter="search_2"
               />
-              <el-select v-model="selectType" clearable placeholder="类型" class="select-input">
+              <el-select v-model="selectType" clearable placeholder="类型" class="select-input margin-box">
                 <el-option
                   v-for="item in options_1"
                   :key="item.value"

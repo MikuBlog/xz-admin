@@ -37,6 +37,9 @@
               style="height: 32px;width: 16px;"
             />
             <i v-else slot="prefix" class="el-icon-search el-input__icon" />
+            <i slot="suffix" class="el-icon-circle-close el-input__icon" v-if="menuForm.icon" 
+            style="cursor: pointer"
+            @click="menuForm.icon=''"/>
           </el-input>
         </el-popover>
       </el-form-item>
