@@ -86,7 +86,8 @@ export default {
     },
 		// 重置
 		refresh() {
-		  this.searchVal = ""
+      this.searchVal = ""
+      this.category = ""
 		  this.$refs.pagination.toFirstPage()
 		},
 		// 点击搜索
