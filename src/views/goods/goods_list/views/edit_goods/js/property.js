@@ -1,3 +1,4 @@
+import { validateNumber } from "@/utils/form_validate"
 export default {
   data() {
     return {
@@ -91,31 +92,31 @@ export default {
           { required: true, message: "请输入商品描述", trigger: "blur" }
         ],
         'spu.sort': [
-          { required: true, message: "请输入排序号码", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.salesPrice': [
-          { required: true, message: "请输入商品售价", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.postagePrice': [
-          { required: true, message: "请输入邮费", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.totalStock': [
-          { required: true, message: "请输入库存", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.marketPrice': [
-          { required: true, message: "请输入市场价", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.giveIntegral': [
-          { required: true, message: "请输入获得积分", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.costPrice': [
-          { required: true, message: "请输入成本价", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.fictiSales': [
-          { required: true, message: "请输入虚拟销量", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.warnStock': [
-          { required: true, message: "请输入预警库存", trigger: "change" }
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.onHot': [
           { required: true, message: "请选择热卖单品", trigger: "change" }
