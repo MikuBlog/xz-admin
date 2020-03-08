@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { isMobile, isEmail } from "@/utils/validate";
+import { validateMobile, validateEmail } from "@/utils/form_validate";
 export default {
   props: {
     isAdd: {
@@ -88,25 +88,6 @@ export default {
     }
   },
   data() {
-    // 验证电话号码
-    const validPhone = (rule, value, callback) => {
-      if (!value) {
-        callback(new Error("请输入手机号码"));
-      } else if (!isMobile(value)) {
-        callback(new Error("请输入正确的11位手机号码"));
-      } else {
-        callback();
-      }
-    };
-    const validEmail = (rule, value, callback) => {
-      if (!value) {
-        callback(new Error("请输入邮箱"));
-      } else if (!isEmail(value)) {
-        callback(new Error("请输入正确的邮箱格式"));
-      } else {
-        callback();
-      }
-    };
     return {
       dialog: false,
       userId: "",
@@ -137,8 +118,8 @@ export default {
 				nickname: [
 				  { required: true, message: "请输入昵称", trigger: "blur" }
 				],
-        email: [{ required: true, trigger: "change", validator: validEmail }],
-        phone: [{ required: true, trigger: "change", validator: validPhone }],
+        email: [{ required: false, trigger: "change", validator: validateEmail }],
+        phone: [{ required: true, trigger: "change", validator: validateMobile }],
         enabled: [{ required: true, message: "状态不能为空", trigger: "blur" }],
         'dept.id': [
 				  { required: true, message: "请选择部门", trigger: "blur" }
