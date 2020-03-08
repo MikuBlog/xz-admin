@@ -46,18 +46,18 @@ export default {
         ? this.$refs.pagination.toFirstPage()
         : this.$warnMsg("请选择搜索类型");
     },
-    // 日期格式化
-    initialDate() {
+    // 获取操作类型
+    getOperationType() {
+      this.$refs.pagination.toFirstPage()
+    },
+     // 日期格式化
+     initialDate() {
       this.dateArray.splice(0, this.dateArray.length);
       this.date &&
         this.dateArray.push(
           this.$formatDate(this.date[0], true),
           this.$formatDate(this.date[1], true)
         );
-    },
-    // 获取操作类型
-    getOperationType() {
-      this.$refs.pagination.toFirstPage()
     },
     // 获取日期
     getDate() {

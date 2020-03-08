@@ -64,6 +64,8 @@ import ReadImg from '@/api/file/get_file_image'
 import ReadFile from '@/api/file/get_file'
 // 引入文件预览模块
 import PreviewFile from '@/api/file/preview_file'
+// 引入base64转file模块
+import dataUrlToFile from '@/api/file/url_to_file'
 // 引入json美化模块
 import JsonPretty from '@/api/json'
 // 引入图片加载动画模块
@@ -314,6 +316,12 @@ Vue.prototype.$getFile = ReadFile
  * @param {String} url 文件地址
  */
 Vue.prototype.$previewFile = PreviewFile
+/**
+ * @description base64转file
+ * @param {String} dataurl base64字符串
+ * @param {String} filename 文件名称
+ */
+Vue.prototype.$dataUrlToFile = dataUrlToFile
 /**
  * @author xuanzai
  * @description 下载文件
