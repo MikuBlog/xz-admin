@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { validateMobile, validateEmail } from "@/utils/form_validate";
+import { validateBothPhMob, validateEmail } from "@/utils/form_validate";
 export default {
   props: {
     isAdd: {
@@ -119,7 +119,7 @@ export default {
 				  { required: true, message: "请输入昵称", trigger: "blur" }
 				],
         email: [{ required: false, trigger: "change", validator: validateEmail }],
-        phone: [{ required: true, trigger: "change", validator: validateMobile }],
+        phone: [{ required: true, trigger: "change", validator: validateBothPhMob }],
         enabled: [{ required: true, message: "状态不能为空", trigger: "blur" }],
         'dept.id': [
 				  { required: true, message: "请选择部门", trigger: "blur" }

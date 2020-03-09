@@ -88,6 +88,7 @@
 </template>
 
 <script>
+import { validateNumber } from '@/utils/form_validate'
 export default {
   props: {
     isAdd: {
@@ -96,11 +97,6 @@ export default {
     }
   },
   data() {
-    const numberValidate = (rule, value, callback) => {
-      value < 0 || value > 999
-        ? callback(new Error("排序范围在0~999之间"))
-        : callback();
-    };
     return {
       menuId: "",
       dialog: false,
@@ -119,7 +115,7 @@ export default {
       },
       rules: {
         name: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
-        sort: [{ validator: numberValidate, trigger: "blur" }],
+        sort: [{ required: true, min: 0, max: 999, validator: validateNumber, trigger: "change" }],
         iframe: [
           { required: true, message: "请选择菜单类型", trigger: "blur" }
         ],

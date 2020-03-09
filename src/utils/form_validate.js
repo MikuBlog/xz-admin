@@ -4,7 +4,7 @@
  */
 import { isEmail, isMobile, isPhone, isId, isURL, isLowerCase, isUpperCase } from './validate.js'
 
-// 是否为电话号码
+// 是否为手机号码
 export function validateMobile(rule, value, callback) {
 	if(!rule.required && !value) {
 		callback();
@@ -29,6 +29,21 @@ export function validatePhone(rule, value, callback) {
 	  callback(new Error("请输入电话号码"));
 	} else if (!isPhone(value)) {
 	  callback(new Error("请输入正确的电话号码"));
+	} else {
+	  callback();
+	}
+}
+
+// 是否为手机、电话号码
+export function validateBothPhMob(rule, value, callback) {
+	if(!rule.required && !value) {
+		callback();
+		return
+	}
+	if (!value) {
+	  callback(new Error("请输入手机或电话号码"));
+	} else if (!isPhone(value) && !isMobile(value)) {
+	  callback(new Error("请输入正确的手机或电话号码"));
 	} else {
 	  callback();
 	}
@@ -111,12 +126,11 @@ export function validateUpperCase(rule, value, callback) {
 
 // 是否为数字，且是否满足数字所在范围
 export function validateNumber(rule, value, callback) {
-	console.log(rule)
 	if(!rule.required && !value) {
 		callback();
 		return
 	}
-	if (!value) {
+	if (!value && value !== 0) {
 	  callback(new Error("输入框不能为空"));
 	} else if (isNaN(value)) {
 	  callback(new Error("输入值必须为数字"));
