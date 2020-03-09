@@ -5,23 +5,23 @@ export default {
 		  this.totalElements = totalElements;
 		},
 		// 初始化资讯列表
-		initialBillList(list) {
-		  this.billList.splice(0);
+		initialCouponRecordList(list) {
+		  this.couponRecordList.splice(0);
 		  list.forEach(value => {
-		    this.billList.push(value);
+		    this.couponRecordList.push(value);
 		  });
 		},
 		// 获取资讯列表
-		getBillList(page, size) {
+		getCouponRecordList(page, size) {
 		  this.$http_normal({
-		    url: `/api/userBill/page?page=${page - 1}&size=${
+		    url: `/api/couponUser/page?page=${page - 1}&size=${
 		      size
-		      }&sort=createTime,desc${this.searchVal ? `&nickname=${this.searchVal}` : ""}${this.category ? `&category=${this.category}` : ''}${this.type ? `&type=${this.type}` : ''}`,
+		      }&sort=createTime,desc${this.searchVal ? `&couponTitle=${this.searchVal}` : ""}`,
 		    method: "get"
 		  }).then(result => {
 		    const data = result.data;
 		    this.initialPage(data.totalElements);
-		    this.initialBillList(data.content);
+		    this.initialCouponRecordList(data.content);
 		  });
 		},
 		getRowKey(row) {
@@ -33,8 +33,6 @@ export default {
 		// 重置
 		refresh() {
       this.searchVal = ""
-      this.category = ""
-      this.type = ""
 		  this.$refs.pagination.toFirstPage()
 		},
 		// 点击搜索

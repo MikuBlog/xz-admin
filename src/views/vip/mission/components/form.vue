@@ -59,15 +59,9 @@
 
 <script>
 import convertHttp from "@/utils/convertHttp";
+import { validateNumber } from '@/utils/form_validate'
 export default {
   data() {
-    const 
-      numberValidate = (rule, value, callback) => {
-        value < 0 ? callback(new Error("不得小于0")) : callback();
-      },
-      numberValidate_2 = (rule, value, callback) => {
-        value < 0 || value > 999 ? callback(new Error("排序范围在0~999")) : callback();
-      }
     return {
       dialog: false,
       isAdd: true,
@@ -88,8 +82,8 @@ export default {
         name: [{ required: true, message: "请输入等级名称", trigger: "blur" }],
         realName: [{ required: !this.isAdd, message: "请输入配置原名", trigger: "blur" }],
         taskType: [{ required: !this.isAdd, message: "请输入任务类型", trigger: "blur" }],
-        sort: [{ required: true, validator: numberValidate_2, trigger: "blur" }],
-        number: [{ required: true, validator: numberValidate, trigger: "blur" }],
+        sort: [{ required: true, min: 0, max: 999, validator: validateNumber, trigger: "change" }],
+        number: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
         levelId: [
           { required: true, message: "请选择会员名称", trigger: "blur" }
         ],

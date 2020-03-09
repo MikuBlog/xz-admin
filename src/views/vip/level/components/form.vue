@@ -11,12 +11,12 @@
         <el-input v-model="form.name" style="width: 350px;" />
       </el-form-item>
       <el-form-item label="会员价格" prop="money">
-			  <el-input type="number" v-model="form.money" style="width: 350px;">
+			  <el-input v-model="form.money" style="width: 350px;">
           <template slot="append">元</template>
 			  </el-input>
 			</el-form-item>
 			<el-form-item label="有效天数" prop="validDate">
-			  <el-input type="number" v-model="form.validDate" style="width: 350px;">
+			  <el-input v-model="form.validDate" style="width: 350px;">
           <template slot="append">天</template>
 			  </el-input>
 			</el-form-item>
@@ -24,7 +24,9 @@
 			  <el-input-number controls-position="right" v-model="form.grade" style="width: 350px;" />
 			</el-form-item>
       <el-form-item label="享受折扣" prop="discount">
-			  <el-input-number controls-position="right" v-model="form.discount" style="width: 350px;" />
+			  <el-input controls-position="right" v-model="form.discount" style="width: 350px;">
+          <template slot="append">%</template>
+			  </el-input>
 			</el-form-item>
       <el-form-item label="允许购买" prop="onPay">
 			  <el-radio-group v-model="form.onPay">
@@ -79,19 +81,9 @@
 
 <script>
 import convertHttp from '@/utils/convertHttp'
+import { validateNumber } from '@/utils/form_validate'
 export default {
   data() {
-    const 
-      numberValidate = (rule, value, callback) => {
-        value < 0 
-          ? callback(new Error("不得小于0"))
-          : callback();
-      },
-      numberValidate_2 = (rule, value, callback) => {
-        value < 0 || value > 100
-          ? callback(new Error("范围在0~100"))
-          : callback();
-      }
     return {
       dialog: false,
 			isAdd: true,
@@ -113,10 +105,10 @@ export default {
       },
       rules: {
         name: [{ required: true, message: "请输入等级名称", trigger: "blur" }],
-        money: [{ required: true, validator: numberValidate, trigger: "blur" }],
-        grade: [{ required: true, validator: numberValidate, trigger: "blur" }],
-        validDate: [{ required: true, validator: numberValidate, trigger: "blur" }],
-				discount: [{ required: true, validator: numberValidate_2, trigger: "blur" }],
+        money: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
+        grade: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
+        validDate: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
+				discount: [{ required: true, min: 0, max: 100, validator: validateNumber, trigger: "change" }],
         image: [{ required: true, message: "请上传会员背景", trigger: "blur" }],
         icon: [{ required: true, message: "请上传会员图标", trigger: "blur" }],
         onForever: [{ required: true, message: "请选择是否永久", trigger: "blur" }],

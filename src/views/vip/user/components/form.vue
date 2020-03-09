@@ -44,15 +44,9 @@
 
 <script>
 import convertHttp from "@/utils/convertHttp";
+import { validateNumber, validateBothPhMob } from '@/utils/form_validate'
 export default {
   data() {
-    const 
-      numberValidate = (rule, value, callback) => {
-        isNaN(value) ? callback(new Error("只能是数字")) : callback();
-      },
-      numberValidate_2 = (rule, value, callback) => {
-        value < 0 ? callback(new Error("不得小于0")) : callback();
-      }
     return {
       dialog: false,
       isAdd: true,
@@ -70,8 +64,8 @@ export default {
         nickname: [{ required: false, message: "请输入用户昵称", trigger: "blur" }],
         realName: [{ required: true, message: "请输入用户姓名", trigger: "blur" }],
         mark: [{ required: true, message: "请输入用户备注", trigger: "blur" }],
-        phone: [{ required: true, validator: numberValidate, trigger: "blur" }],
-        integral: [{ required: true, validator: numberValidate_2, trigger: "blur" }],
+        phone: [{ required: true, validator: validateBothPhMob, trigger: "change" }],
+        integral: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
         bePromoter: [
           { required: true, message: "请选择是否为推广员", trigger: "blur" }
         ],

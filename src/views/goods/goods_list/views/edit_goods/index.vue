@@ -288,7 +288,6 @@
                   </el-select>
                   <el-input
                     v-else
-                    type="number"
                     v-model="form.spu.salesPrice"
                   >
                     <template slot="append">元</template>
@@ -302,7 +301,6 @@
                 <el-form-item label="库存" prop="spu.totalStock">
                   <el-input
                     :disabled="!!generateSkuList.length"
-                    type="number"
                     v-model="form.spu.totalStock"
                   >
                     <template slot="append">件</template>
@@ -312,18 +310,16 @@
               <el-col :span="8">
                 <el-form-item label="市场价" prop="spu.marketPrice">
                   <el-input
-                    type="number"
                     v-model="form.spu.marketPrice"
                   >
                     <template slot="append">元</template>
                   </el-input>
                 </el-form-item>
                 <el-form-item label="排序" prop="spu.sort">
-                  <el-input-number controls-position="right" type="number" v-model="form.spu.sort" @input="format('sort')" />
+                  <el-input-number controls-position="right"  v-model="form.spu.sort" @input="format('sort')" />
                 </el-form-item>
                 <el-form-item label="获得积分" prop="spu.giveIntegral">
                   <el-input-number controls-position="right"
-                    type="number"
                     v-model="form.spu.giveIntegral"
                   />
                 </el-form-item>
@@ -336,14 +332,13 @@
                 </el-form-item>
                 <el-form-item label="虚拟销量" prop="spu.fictiSales">
                   <el-input
-                    type="number"
                     v-model="form.spu.fictiSales"
                   >
                     <template slot="append">件</template>
                   </el-input>
                 </el-form-item>
                 <el-form-item label="预警库存" prop="spu.warnStock">
-                  <el-input type="number" v-model="form.spu.warnStock">
+                  <el-input v-model="form.spu.warnStock">
                     <template slot="append">件</template>
                   </el-input>
                 </el-form-item>

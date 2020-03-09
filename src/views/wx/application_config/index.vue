@@ -18,11 +18,8 @@
 						    :value="item.value"
 						  ></el-option>
 						</el-select>
-						<!-- <el-input v-model="searchVal" placeholder="搜索关键词" class="search-input margin-box" @keyup.native="searchEnter"></el-input> -->
-						<!-- <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button> -->
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddApplicationPage" title="添加应用" circle></el-button>
-						<!-- <el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllApplication" :disabled="!selectList.length" title="批量删除应用" circle></el-button> -->
 					</div>
 					<div class="card-table">
 						<el-card class="box-card" v-for="item in applicationList">
@@ -44,7 +41,7 @@
 											</el-tag>
 										</div>
 										<div class="title">
-											简介：{{ item.remark }}
+											简介：{{ item.remark || "无" }}
 										</div>
 									</div>
 								</div>
