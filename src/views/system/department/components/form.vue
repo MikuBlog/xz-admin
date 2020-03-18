@@ -5,6 +5,7 @@
     :visible.sync="dialog"
     :title="isAdd ? '新增部门' : '编辑部门'"
     width="500px"
+    @close="hideBox"
   >
     <el-form
       ref="departmentForm"
@@ -85,6 +86,7 @@ export default {
     // 隐藏弹窗
     hideBox() {
       this.dialog = false;
+      this.resetForm()
     },
     // 提交数据
     doSubmit() {

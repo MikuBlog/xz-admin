@@ -5,6 +5,7 @@
     append-to-body
     v-dialogDrag
     width="600px"
+    @close="hideBox"
   >
     <el-form
       status-icon
@@ -84,6 +85,7 @@ export default {
   methods: {
     hideBox() {
       this.dialog = false;
+      this.resetForm()
     },
     // 重置表单
     resetForm() {
