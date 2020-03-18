@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" title="编辑品牌" width="500px" append-to-body v-dialogDrag>
+  <el-dialog :visible.sync="dialog" title="编辑品牌" width="500px" append-to-body v-dialogDrag @close="hideBox">
     <el-form
       status-icon
       ref="form"

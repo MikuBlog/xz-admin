@@ -5,6 +5,7 @@
     :visible.sync="dialog"
     title="发布优惠券"
     width="530px"
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="130px">
       <el-form-item label="优惠券名称" prop="couponName">
@@ -15,17 +16,17 @@
           <template slot="append">张</template>
 			  </el-input>
 			</el-form-item>
-      <el-form-item label="领取开始时间" prop="startTimeDate">
+      <el-form-item label="领取开始时间" prop="startTime">
 			  <el-date-picker
-          v-model="form.startTimeDate"
+          v-model="form.startTime"
           type="datetime"
           value-format="yyyy-MM-dd HH:mm:ss"
           placeholder="选择日期时间">
         </el-date-picker>
 			</el-form-item>
-      <el-form-item label="领取结束时间" prop="endTimeDate">
+      <el-form-item label="领取结束时间" prop="endTime">
 			  <el-date-picker
-          v-model="form.endTimeDate"
+          v-model="form.endTime"
           type="datetime"
           value-format="yyyy-MM-dd HH:mm:ss"
           placeholder="选择日期时间">
@@ -62,16 +63,16 @@ export default {
       form: {
         couponId: "",
         couponName: "",
-        startTimeDate: "",
-        endTimeDate: "",
+        startTime: "",
+        endTime: "",
         totalCount: 0,
         onPermanent: true,
         status: 1
       },
       rules: {
         couponName: [{ required: false, message: "请输入优惠券名称", trigger: "blur" }],
-        startTimeDate: [{ required: true, message: "请选择开始时间", trigger: "blur" }],
-        endTimeDate: [{ required: true, message: "请选择结束时间", trigger: "blur" }],
+        startTime: [{ required: true, message: "请选择开始时间", trigger: "blur" }],
+        endTime: [{ required: true, message: "请选择结束时间", trigger: "blur" }],
         totalCount: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
         onPermanent: [{ required: true, message: "请选择是否限量", trigger: "blur" }],
         status: [{ required: true, message: "请选择状态", trigger: "blur" }],
@@ -109,8 +110,8 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
           const 
-            startTime = new Date(this.form.startTimeDate.replace(/-/g, '/')).getTime(),
-            endTime = new Date(this.form.endTimeDate.replace(/-/g, '/')).getTime()
+            startTime = new Date(this.form.startTime.replace(/-/g, '/')).getTime(),
+            endTime = new Date(this.form.endTime.replace(/-/g, '/')).getTime()
           if(startTime > endTime) {
             this.$warnMsg("开始时间不能大于结束时间")
             return
@@ -135,8 +136,8 @@ export default {
       this.form = {
         couponId: "",
         couponName: "",
-        startTimeDate: "",
-        endTimeDate: "",
+        startTime: "",
+        endTime: "",
         totalCount: 0,
         onPermanent: true,
         status: 1

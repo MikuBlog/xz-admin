@@ -1,3 +1,4 @@
+import { validateNumber } from '@/utils/form_validate'
 export default {
 	data() {
 		return {
@@ -11,9 +12,9 @@ export default {
 				groupName: "order_setting"
       },
       rules: {
-        orderUnpaid: [{ required: true, message: "请输入用户下单超时时间", trigger: "blur" }],
-        orderUnconfirm: [{ required: true, message: "请输入用户下单超时时间", trigger: "blur" }],
-        orderComment: [{ required: true, message: "请输入用户下单超时时间", trigger: "blur" }],
+        orderUnpaid: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
+        orderUnconfirm: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
+        orderComment: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
       }
 		}
 	}

@@ -298,11 +298,9 @@ export default {
 		},
 		selectGoodsType(item) {
 			this.typeId = []
-			this.form.spu.typeId.splice(0)
 			this.typeName.splice(0)
 			item.forEach(val => {
 				this.typeId.push(...val)
-				this.form.spu.typeId.push(...val)
 			})
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
 				this.typeName.push(val.label)
@@ -370,6 +368,7 @@ export default {
 								value: JSON.stringify(val.skuDesc)
 							}
 						})
+						this.form.onSpecs = true
 					} else {
 						this.form.skus.push({
 							costPrice: this.form.spu.salesPrice,
@@ -385,6 +384,7 @@ export default {
 							name: '默认',
 							value: ['推荐']
 						}])
+						this.form.onSpecs = false
 					}
 					this.form.spu.keyWords = `,${this.dynamicTags.join(",")},`
 					this.form.spu.typeName = JSON.stringify({

@@ -5,6 +5,7 @@
     :visible.sync="dialog"
     :title="isAdd ? '新增优惠券' : '编辑优惠券'"
     width="530px"
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="130px">
       <el-form-item label="优惠券名称" prop="title">

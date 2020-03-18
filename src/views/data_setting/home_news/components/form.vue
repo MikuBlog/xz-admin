@@ -6,6 +6,7 @@
     :title="isAdd ? '新增滚动新闻' : '编辑滚动新闻'"
     width="500px"
     v-dialogDrag
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
       <el-form-item label="名称" prop="name">
@@ -38,13 +39,9 @@
 </template>
 
 <script>
+import { validateNumber, validateUrl } from '@/utils/form_validate'
 export default {
   data() {
-    const numberValidate = (rule, value, callback) => {
-      value < 0 || value > 999
-        ? callback(new Error("排序范围在0~999之间"))
-        : callback();
-    };
     return {
       dialog: false,
 			isAdd: true,
@@ -61,10 +58,11 @@ export default {
       },
       rules: {
         name: [{ required: true, message: "请输入标题", trigger: "blur" }],
-        sort: [{ required: true, validator: numberValidate, trigger: "blur" }],
+        sort: [{ required: true, min: 0, max: 999, validator: validateNumber, trigger: "change" }],
 				content: [{ required: true, message: "请输入滚动内容", trigger: "blur" }],
-				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }]
-      }
+				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }],
+				linkUrl: [{ required: false, validator: validateUrl, trigger: 'change' }]
+			}
     };
   },
   beforeDestroy() {

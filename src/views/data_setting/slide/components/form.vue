@@ -6,6 +6,7 @@
     :title="isAdd ? '新增幻灯片' : '编辑幻灯片'"
     width="500px"
     v-dialogDrag
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
       <el-form-item label="名称" prop="name">
@@ -19,6 +20,12 @@
 			</el-form-item>
 			<el-form-item label="小程序跳转url" prop="wxurl">
 			  <el-input v-model="form.xcxUrl" style="width: 350px;" />
+			</el-form-item>
+			<el-form-item label="背景颜色">
+			  <div class="flex-box">
+					<el-input v-model="form.color" style="width: 350px;" />
+					<el-color-picker style="margin-left: .5rem;" v-model="form.color"></el-color-picker>
+				</div>
 			</el-form-item>
 			<el-form-item label="是否显示" prop="enabled">
 			  <el-radio-group v-model="form.enabled">
@@ -47,13 +54,9 @@
 
 <script>
 import convertHttp from '@/utils/convertHttp'
+import { validateNumber, validateUrl } from '@/utils/form_validate'
 export default {
   data() {
-    const numberValidate = (rule, value, callback) => {
-      value < 0 || value > 999
-        ? callback(new Error("排序范围在0~999之间"))
-        : callback();
-    };
     return {
       dialog: false,
 			isAdd: true,
@@ -66,13 +69,15 @@ export default {
 				enabled: true,
         sort: 999,
         image: "",
+				color: "#409EFF",
 				groupName: "routine_home_banner"
       },
       rules: {
         name: [{ required: true, message: "请输入标题", trigger: "blur" }],
-        sort: [{ required: true, validator: numberValidate, trigger: "blur" }],
-				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }]
-      }
+        sort: [{ required: true, min: 0, max: 999, validator: validateNumber, trigger: "change" }],
+				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }],
+				linkUrl: [{ required: false, validator: validateUrl, trigger: 'change' }]
+			}
     };
   },
   beforeDestroy() {
@@ -130,6 +135,9 @@ export default {
     doAdd() {
       this.$refs.form.validate(valid => {
         if (valid) {
+					this.form.value.color = this.form.value.color
+					? this.form.value.color
+					: '#fefefe'
           this.$http_json({
             url: "/api/groupData/add",
             method: "post",
@@ -153,6 +161,9 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
 					this.form.value = JSON.parse(JSON.stringify(this.form))
+					value.color = value.color
+					? value.color
+					: '#fefefe'
           this.$http_json({
             url: "/api/groupData/edit",
             method: "post",
@@ -184,6 +195,7 @@ export default {
         enabled: true,
         sort: 999,
         image: "",
+				color: "#fefefe",
 				groupName: "routine_home_banner"
       };
 			this.imageUrl = ""
@@ -215,5 +227,8 @@ export default {
   width: 138px;
   height: 138px;
   display: block;
+}
+.flex-box {
+	display: flex;
 }
 </style>

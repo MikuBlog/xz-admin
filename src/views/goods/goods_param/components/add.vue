@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" title="新增商品参数" width="570px" append-to-body v-dialogDrag>
+  <el-dialog :visible.sync="dialog" title="新增商品参数" width="570px" append-to-body v-dialogDrag @close="hideBox">
     <el-form status-icon ref="form" :model="form" :rules="rules" size="small" @submit.native.prevent="addParam">
       <el-form-item label="商品参数名" prop="name">
         <el-input v-model="form.name" />

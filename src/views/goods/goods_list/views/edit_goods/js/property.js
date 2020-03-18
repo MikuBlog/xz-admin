@@ -57,6 +57,7 @@ export default {
           onNew: true,
           onRecommend: true,
           onSeckill: true,
+					onSpecs: false,
           postagePrice: 0,
           sales: 0,
           salesPrice: 0,

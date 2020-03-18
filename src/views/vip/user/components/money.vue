@@ -5,6 +5,7 @@
     :visible.sync="dialog"
     :title="`修改${userName}的余额`"
     width="500px"
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
       <el-form-item label="余额数" prop="money">

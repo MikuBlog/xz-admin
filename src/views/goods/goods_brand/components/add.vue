@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" title="新增品牌" width="500px" append-to-body v-dialogDrag>
+  <el-dialog :visible.sync="dialog" title="新增品牌" width="500px" append-to-body v-dialogDrag @close="hideBox">
     <el-form status-icon ref="form" :model="form" :rules="rules" size="small" @submit.native.prevent="addBrand" label-width="100px">
       <el-form-item label="品牌名称" prop="name">
         <el-input v-model="form.name" style="width: 350px;" />

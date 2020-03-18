@@ -15,9 +15,19 @@
 						<el-table-column prop="name" label="名称" :show-overflow-tooltip="true" />
 						<el-table-column prop="linkUrl" label="链接url" :show-overflow-tooltip="true" />
 						<el-table-column prop="xcxUrl" label="小程序跳转url" :show-overflow-tooltip="true" />
-						<el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="图标" align="center">
+						<el-table-column :show-overflow-tooltip="true" prop="url" label="图标" align="center">
 							<template slot-scope="scope">
 								<img :src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.url)" />
+							</template>
+						</el-table-column>
+						<el-table-column :show-overflow-tooltip="true" label="背景颜色" align="center">
+							<template slot-scope="scope">
+								<div :style="{
+									width: '30px',
+									height: '30px',
+									backgroundColor: scope.row.color,
+									display: 'inline-block'
+								}"></div>
 							</template>
 						</el-table-column>
 						<el-table-column label="排序" align="center" show-overflow-tooltip>

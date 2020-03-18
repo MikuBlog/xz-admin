@@ -5,6 +5,7 @@
     width="570px"
     append-to-body
     v-dialogDrag
+    @close="hideBox"
   >
     <el-form
       status-icon
@@ -149,6 +150,7 @@ export default {
     // 隐藏窗口
     hideBox() {
       this.dialog = false;
+      this.resetForm()
     },
     // 提交数据
     doSubmit() {
@@ -182,7 +184,7 @@ export default {
       }).then(result => {
         this.$successMsg("添加成功");
         this.hideBox();
-        this.$parent.getUserList();
+        this.$parent.getUserList(this.$parent.nowPage, this.$parent.nowSize);
       });
     },
     // 编辑用户
@@ -195,7 +197,7 @@ export default {
       }).then(result => {
         this.$successMsg("编辑成功");
         this.hideBox();
-        this.$parent.getUserList();
+        this.$parent.getUserList(this.$parent.nowPage, this.$parent.nowSize);
       });
     },
     // 重置表单

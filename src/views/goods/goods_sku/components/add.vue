@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" title="新增商品规格" width="570px" append-to-body v-dialogDrag>
+  <el-dialog :visible.sync="dialog" title="新增商品规格" width="570px" append-to-body v-dialogDrag @close="hideBox">
     <el-form
       status-icon
       ref="form"

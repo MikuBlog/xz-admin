@@ -6,13 +6,18 @@
     :title="isAdd ? '新增滚动新闻' : '编辑滚动新闻'"
     width="500px"
     v-dialogDrag
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
       <el-form-item label="第几天" prop="day">
-        <el-input v-model="form.day" style="width: 350px;" />
+        <el-input v-model="form.day" style="width: 350px;">
+					<template slot="append">天</template>
+				</el-input>
       </el-form-item>
       <el-form-item label="获取积分" prop="integral">
-        <el-input @input="format('integral')" type="number" v-model="form.integral" style="width: 350px;" />
+        <el-input type="number" v-model="form.integral" style="width: 350px;">
+						<template slot="append">分</template>
+				</el-input>
       </el-form-item>
 			<el-form-item label="排序" prop="sort">
 			  <el-input-number controls-position="right" v-model="form.sort" style="width: 350px;" />
@@ -32,13 +37,9 @@
 </template>
 
 <script>
+import { validateNumber } from '@/utils/form_validate'
 export default {
   data() {
-    const numberValidate = (rule, value, callback) => {
-      value < 0 || value > 999
-        ? callback(new Error("排序范围在0~999之间"))
-        : callback();
-    };
     return {
       dialog: false,
 			isAdd: true,
@@ -52,9 +53,9 @@ export default {
 				groupName: "sign_day_num"
       },
       rules: {
-        day: [{ required: true, message: "请输入第几天", trigger: "blur" }],
-        integral: [{ required: true, message: "请输入签到积分", trigger: "blur" }],
-        sort: [{ required: true, validator: numberValidate, trigger: "blur" }],
+        day: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
+        integral: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
+        sort: [{ required: true, min: 0, max: 999, validator: validateNumber, trigger: "change" }],
 				enabled: [{ required: true, message: "请选择显示状态", trigger: "blur" }]
       }
     };
@@ -69,14 +70,6 @@ export default {
     submitEnter(e) {
 			e.keyCode === 13 && this.dialog === true && this.doSubmit()
 		},
-    format(key) {
-      if(!this.form[key]) {
-        return
-      }
-      if(this.form[key] < 0) {
-        this.form[key] = 0
-      }
-    },
     hideBox() {
       this.resetForm();
     },

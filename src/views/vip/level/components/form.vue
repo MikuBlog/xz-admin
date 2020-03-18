@@ -5,6 +5,7 @@
     :visible.sync="dialog"
     :title="isAdd ? '新增会员等级' : '编辑会员等级'"
     width="500px"
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
       <el-form-item label="等级名称" prop="name">

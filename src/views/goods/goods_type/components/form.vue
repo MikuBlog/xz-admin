@@ -6,6 +6,7 @@
     :title="isAdd ? '新增商品分类' : '编辑商品分类'"
     width="500px"
     v-dialogDrag
+    @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
       <el-form-item label="上级分类">

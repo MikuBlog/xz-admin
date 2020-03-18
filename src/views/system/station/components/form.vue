@@ -5,6 +5,7 @@
     :visible.sync="dialog"
     :title="isAdd ? '新增岗位' : '编辑岗位'"
     width="500px"
+    @close="hideBox"
   >
     <el-form status-icon ref="stationForm" :model="stationForm" :rules="rules" label-width="80px">
       <el-form-item label="名称" prop="name">
@@ -97,6 +98,7 @@ export default {
     // 隐藏窗口
     hideBox() {
       this.dialog = false;
+      this.resetForm()
     },
     // 提价信息
     doSubmit() {

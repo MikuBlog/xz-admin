@@ -3,14 +3,6 @@ export default {
     this.getIntegralRules()
   },
 	methods: {
-    format(key) {
-      if(!this.form[key]) {
-        return
-      }
-      if(this.form[key] < 0) {
-        this.form[key] = 0
-      }
-    },
     doSubmit() {
       this.form.id ? this.doEdit() : this.doAdd();
     },

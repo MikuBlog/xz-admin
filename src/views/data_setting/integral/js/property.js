@@ -1,3 +1,4 @@
+import { validateNumber } from '@/utils/form_validate'
 export default {
 	data() {
 		return {
@@ -9,7 +10,7 @@ export default {
 				groupName: "integral_scale"
       },
       rules: {
-        scale: [{ required: true, message: "请输入积分比例", trigger: "blur" }],
+        scale: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
       }
 		}
 	}

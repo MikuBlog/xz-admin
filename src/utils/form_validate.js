@@ -2,7 +2,15 @@
  * @author xuanzai
  * @description 用于elementui的表单验证
  */
-import { isEmail, isMobile, isPhone, isId, isURL, isLowerCase, isUpperCase } from './validate.js'
+import { 
+	isEmail, 
+	isMobile, 
+	isPhone, 
+	isId, 
+	isURL, 
+	isLowerCase, 
+	isUpperCase,
+	isColor } from './validate.js'
 
 // 是否为手机号码
 export function validateMobile(rule, value, callback) {
@@ -88,7 +96,7 @@ export function validateUrl(rule, value, callback) {
 	if (!value) {
 	  callback(new Error("请输入网络地址"));
 	} else if (!isURL(value)) {
-	  callback(new Error("请输入正确的网络地址格式"));
+	  callback(new Error("地址格式必须以http或https开头"));
 	} else {
 	  callback();
 	}
@@ -138,6 +146,21 @@ export function validateNumber(rule, value, callback) {
 		callback(new Error(`输入值不能小于${rule.min}`));
 	} else if(rule.max !== undefined && value > rule.max) {
 		callback(new Error(`输入值不能大于${rule.max}`))
+	} else {
+	  callback();
+	}
+}
+
+// 是否为颜色值
+export function validateColor(rule, value, callback) {
+	if(!rule.required && !value) {
+		callback();
+		return
+	}
+	if (!value) {
+	  callback(new Error("请输入十六进制颜色值"));
+	} else if (!isColor(value)) {
+	  callback(new Error("颜色值必须满足#xxx或#xxxxxx格式"));
 	} else {
 	  callback();
 	}

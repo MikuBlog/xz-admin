@@ -33,12 +33,12 @@
             <el-table-column type="selection" width="55" reserve-selection />
             <el-table-column prop="couponName" label="优惠券名称" :show-overflow-tooltip="true" />
             <el-table-column
-              prop="startTimeDate"
+              prop="startTime"
               label="优惠券开始时间"
               :show-overflow-tooltip="true"
             />
             <el-table-column
-              prop="endTimeDate"
+              prop="endTime"
               label="优惠券结束时间"
               :show-overflow-tooltip="true"
             />
