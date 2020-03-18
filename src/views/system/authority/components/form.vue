@@ -5,6 +5,7 @@
     append-to-body
     v-dialogDrag
     width="500px"
+    @close="hideBox"
   >
     <el-form
       status-icon
@@ -72,6 +73,7 @@ export default {
     // 隐藏窗口
     hideBox() {
       this.dialog = false;
+      this.resetForm()
     },
     // 提交数据
     doSubmit() {
