@@ -165,10 +165,10 @@ export default {
 			for (let i = 0, len = this.tagsList.length; i < len; i++) {
 				if (item.meta.title === this.tagsList[i].meta.title) {
 					if (item.path == this.$route.path && i == len - 1) {
-						this.$router.push({ path: this.tagsList[i - 1].path });
+						this.$router.push({ path: this.tagsList[i - 1].fullPath });
 					}
 					if (item.path == this.$route.path && i != len - 1) {
-						this.$router.push({ path: this.tagsList[i + 1].path });
+						this.$router.push({ path: this.tagsList[i + 1].fullPath });
 					}
 					this.REMOVE_TAGS(i);
 				}
