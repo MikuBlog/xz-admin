@@ -62,6 +62,8 @@ import Print from '@/api/file/print'
 import ReadImg from '@/api/file/get_file_image'
 // 引入文件读取模块
 import ReadFile from '@/api/file/get_file'
+// 引入txt内容读取模块
+import getTxt from '@/api/file/get_txt'
 // 引入文件预览模块
 import PreviewFile from '@/api/file/preview_file'
 // 引入base64转file模块
@@ -310,6 +312,12 @@ Vue.prototype.$getImgFile = ReadImg.getImgFile
  * @returns {Promise}
  */
 Vue.prototype.$getFile = ReadFile
+/**
+ * @author xuanzai
+ * @description 获取txt内容
+ * @returns {Promise}
+ */
+Vue.prototype.$getTxt = getTxt
 /**
  * @author xuanzai
  * @description 获取图片文件地址与文件信息
