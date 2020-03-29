@@ -6,8 +6,8 @@
     </el-input>
     <div class="icon-list">
       <div v-for="(item, index) in iconList" :key="index" @click="selectedIcon(item)">
-        <svg-icon :icon-class="item" style="height: 30px;width: 16px;" />
-        <span>{{ item }}</span>
+        <svg-icon :icon-class="item" style="min-height: 30px;min-width: 16px;" />
+        <span class="icon-name">{{ item }}</span>
       </div>
     </div>
   </div>
@@ -60,9 +60,12 @@ export default {
       }
       span {
         display: inline-block;
+        width: 70%;
         vertical-align: -0.15em;
         fill: currentColor;
         overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }

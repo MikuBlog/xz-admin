@@ -10,6 +10,7 @@
 import convertHttp from '@/utils/convertHttp.js';
 import plugins from './js/plugins';
 import toolbar from './js/toolbar';
+const environment = require('../../../public_path').editor
 export default {
 	name: 'Tinymce',
 	model: {
@@ -73,7 +74,7 @@ export default {
 			tinymce.init({
 				selector: `#textarea`,
 				language: 'zh_CN',
-				language_url: '/assets/js/tinymce/language/zh_CN.js',
+				language_url: `${environment}assets/js/tinymce/language/zh_CN.js`,
 				plugins: plugins.plugins,
 				external_plugins: plugins.external_plugins,
 				toolbar,
