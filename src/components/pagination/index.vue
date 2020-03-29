@@ -34,7 +34,11 @@ export default {
     },
     nowSize: {
       type: Number,
-      size: 10
+      default: 10
+    },
+    isInit: {
+      type: Boolean,
+      default: true
     }
   },
   watch: {
@@ -57,7 +61,7 @@ export default {
   },
   created() {
     // 初始化数据
-    this.getData(this.currentPage, this.pageSize)
+    this.isInit && this.getData(this.currentPage, this.pageSize)
   },
   methods: {
     // 跳转到第一页
