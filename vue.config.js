@@ -1,5 +1,5 @@
 const path = require('path')
-const environment = require('../../../../public_path').environment
+const environment = require('./public_path').environment
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
