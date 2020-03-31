@@ -10,14 +10,17 @@ function getFile(limit = 2) {
       fileEle = document.createElement('input'),
       event = new MouseEvent('click')
     fileEle.type = "file"
+		fileEle.style.display = 'none'
     fileEle.addEventListener('change', () => {
       const files = fileEle.files[0]
       const raw = files
       files.size / (1024 ** 2) > limit
         ? reject(`文件不能超过${limit}MB!`)
         : resolve(raw)
+			document.body.removeChild(fileEle)
     })
     fileEle.dispatchEvent(event)
+		document.body.appendChild(fileEle)
   })
 }
 

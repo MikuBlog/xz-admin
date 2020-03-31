@@ -8,14 +8,17 @@ function getTxt() {
 	        data = {}
 	    fileEle.type = "file"
 	    fileEle.accept = "text/plain"
+			fileEle.style.display = 'none'
 	    fileEle.addEventListener('change', () => {
 	        const files = fileEle.files[0]
 	        reader.readAsText(files, 'gb2312')
+					document.body.removeChild(fileEle)
 	    })
 	    reader.addEventListener('load', () => {
 	        resolve(reader.result)
 	    })
 	    fileEle.dispatchEvent(event)
+			document.body.appendChild(fileEle)
 	})
 }
 
