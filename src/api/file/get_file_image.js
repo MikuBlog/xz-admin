@@ -14,6 +14,7 @@ function getImgFile(limit = 2) {
             data = {}
         fileEle.type = "file"
         fileEle.accept = "image/*"
+    		fileEle.style.display = 'none'
         fileEle.addEventListener('change', () => {
             const files = fileEle.files[0]
             data.raw = files
@@ -22,12 +23,14 @@ function getImgFile(limit = 2) {
             : (pattern.test(files.type)
             ? reader.readAsDataURL(files)
             : reject('请选择图片!'))
+    				document.body.removeChild(fileEle)
         })
         reader.addEventListener('load', () => {
             data.url = reader.result
             resolve(data)
         })
         fileEle.dispatchEvent(event)
+    		document.body.appendChild(fileEle)
     })
 }
 

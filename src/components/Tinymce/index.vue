@@ -65,6 +65,25 @@ export default {
 		this.removeTinymce();
 	},
 	methods: {
+    getSketch() {
+      const editBody = this.tinymce.getBody();
+      this.tinymce.selection.select(editBody);
+      return this.tinymce.selection.getContent({ format: 'text' })
+    },
+    getImageLinkList() {
+      var data = [];
+      this.tinymce.getContent().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/g, function (match, capture) {
+        data.push(capture);
+      });
+      return data
+    },
+    getVideoList() {
+      var data = [];
+      this.tinymce.getContent().replace(/<video [^>]*src=['"]([^'"]+)[^>]*>/g, function (match, capture) {
+        data.push(capture);
+      });
+      return data
+    },
 		removeTinymce() {
 			this.$setStyle(document.querySelector('#textarea'), 'opacity', 0);
 			this.tinymce.destroy();
