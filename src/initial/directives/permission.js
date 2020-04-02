@@ -11,5 +11,6 @@ function permission (el, binding) {
 
 export default {
   inserted: permission,
+  update: permission,
   componentUpdated: permission
 }
