@@ -5,6 +5,6 @@
 // http://172.16.15.74:8087
 var
   // 接口统一请求前缀地址
-  baseUrl = 'http://localhost:8087',
+  baseUrl = 'http://192.168.1.102:8083',
   // 静态资源请求前缀地址
-  prefixUrl = 'http://localhost:8087'
+  prefixUrl = 'http://192.168.1.102:8083'
