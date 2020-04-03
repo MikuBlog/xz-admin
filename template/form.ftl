@@ -50,16 +50,16 @@ export default {
 			dailog: false,
 			form: {
 				<#if isNotNullColumns??>
-					<#list isNotNullColumns as column>
-						<#if column.istNotNull>
-							${column.changeColumnName}: ""<#if column_has_next>,</#if>
-						</#if>
-					</#list>
+				<#list isNotNullColumns as column>
+				<#if column.istNotNull>
+				${column.changeColumnName}: ""<#if column_has_next>,</#if>
+				</#if>
+				</#list>
 				</#if>
 			}
 	    rules: {
 	      <#if isNotNullColumns??>
-	      <#list isNotNullColumns as column>
+	      <#list isNotNullColumns as column>	
 	      <#if column.istNotNull>
 	      ${column.changeColumnName}: [
 	        { required: true, message: '<#if column.remark != ''>${column.remark}</#if>不能为空', trigger: 'blur' }
@@ -67,7 +67,7 @@ export default {
 	      </#if>
 	      </#list>
 	      </#if>
-	    }<#if hasQuery>
+	    }
 	  }
 	},
 	methods: {
@@ -115,11 +115,11 @@ export default {
 			try {
 				this.form = {
 					<#if isNotNullColumns??>
-						<#list isNotNullColumns as column>
-							<#if column.istNotNull>
-								${column.changeColumnName}: ""<#if column_has_next>,</#if>
-							</#if>
-						</#list>
+					<#list isNotNullColumns as column>
+					<#if column.istNotNull>
+					${column.changeColumnName}: ""<#if column_has_next>,</#if>
+					</#if>
+					</#list>
 					</#if>
 				}
 				this.$refs.form.resetFields();
@@ -128,3 +128,4 @@ export default {
 	}
 }
 </script>
+<style lang="scss" scoped></style>

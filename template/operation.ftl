@@ -21,11 +21,11 @@ export default {
 		},
 		downloadList() {
 		  this.$http_json({
-		    url: `?sort=createTime,desc<#if queryColumns??>${this.selectType ? `&${this.selectType}=${this.searchVal}` : ""}<#else>${this.searchVal ? `&title=${this.searchVal}` : ""}</#if><#if betweens??>${
+		    url: "?sort=createTime,desc<#if queryColumns??>this.selectType ? this.selectType=this.searchVal : ""<#else>this.searchVal ? title=this.searchVal : ""</#if><#if betweens??>
 		      this.date
-		        ? `&greatTime=${this.dateArray[0]}&lessTime=${this.dateArray[1]}`
-		        : ""
-		      }</#if>`,
+		        ? "greatTime=this.dateArray[0]lessTime=this.dateArray[1]"
+		        : ''
+		      </#if>",
 		    responseType: 'blob',
 		    method: "get"
 		  }).then(result => {
@@ -37,20 +37,23 @@ export default {
 		  })
 		},
 		<#if betweens??>
-		// 日期格式化
-		initialDate() {
-		  this.dateArray.splice(0, this.dateArray.length);
-		  this.date &&
-		    this.dateArray.push(
-		      this.$formatDate(this.date[0], true),
-		      this.$formatDate(this.date[1], true)
-		    );
-		},
-		// 获取日期
-		getDate() {
-		  this.initialDate();
-		  this.$refs.pagination.toFirstPage()
-		},
+			<#list betweens as column>
+				<#if column.queryType = 'BetWeen'>
+				// 日期格式化
+				initialDate_${column_index + 1}() {
+					this.dateArray_${column_index + 1}.splice(0, this.dateArray_${column_index + 1}.length);
+					this.date_${column_index + 1} &&
+						this.dateArray_${column_index + 1}.push(
+							this.$formatDate(this.date_${column_index + 1}[0], true),
+							this.$formatDate(this.date_${column_index + 1}[1], true)
+						);
+				},
+				getDate_${column_index + 1}() {
+				  this.initialDate_${column_index + 1}();
+				  this.$refs.pagination.toFirstPage()
+				},
+				</#if>
+			</#list>
 		</#if>
 		// 批量删除资讯
 		deleteAll() {
@@ -59,11 +62,11 @@ export default {
 			  return
 			}
 			this.$showMsgBox({
-			  msg: `<p>是否删除选中${${tableComment}}?</p>`,
+			  msg: "<p>是否删除选中${tableComment}?</p>",
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: ``,
+			    url: "",
 			    method: "post",
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
@@ -75,7 +78,7 @@ export default {
 		},
 		deleteItem(item) {
 			this.$showMsgBox({
-			  msg: `<p>是否删除选中${tableComment}?</p>`,
+			  msg: "<p>是否删除选中${tableComment}?</p>",
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
@@ -101,13 +104,13 @@ export default {
 		},
 		getList(page, size) {
 		  this.$http_normal({
-		    url: `?page=${page - 1}&size=${
+		    url: "?page=page - 1size=
 		      size
-		      }&sort=createTime,desc<#if queryColumns??>${this.selectType ? `&${this.selectType}=${this.searchVal}` : ""}<#else>${this.searchVal ? `&title=${this.searchVal}` : ""}</#if><#if betweens??>${
+		      sort=createTime,desc<#if queryColumns??>this.selectType ? this.selectType=this.searchVal : ""<#else>this.searchVal ? title=this.searchVal : ''</#if><#if betweens??>
 		      this.date
-		        ? `&greatTime=${this.dateArray[0]}&lessTime=${this.dateArray[1]}`
-		        : ""
-		      }</#if>`,
+		        ? greatTime=this.dateArray[0] lessTime=this.dateArray[1]
+		        : ''
+		      }</#if>",
 		    method: "get"
 		  }).then(result => {
 		    const data = result.data;

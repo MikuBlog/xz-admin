@@ -8,8 +8,12 @@ export default {
 			totalElements: 0,
 			selectList: [],
 			<#if betweens??>
-			date: "",
-			dateArray: [],
+				<#list betweens as column>
+					<#if column.queryType = 'BetWeen'>
+					date_${column_index + 1}: "",
+					dateArray_${column_index + 1}: [],
+					</#if>
+				</#list>
 			</#if>
 			queryTypeOptions: [
 			  <#if queryColumns??>
@@ -20,7 +24,6 @@ export default {
 			  </#list>
 			  </#if>
 			]
-			</#if>
 	  }
 	}
 }
