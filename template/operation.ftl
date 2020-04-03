@@ -106,11 +106,17 @@ export default {
 		  this.$http_normal({
 		    url: "?page=page - 1size=
 		      size
-		      sort=createTime,desc<#if queryColumns??>this.selectType ? this.selectType=this.searchVal : ""<#else>this.searchVal ? title=this.searchVal : ''</#if><#if betweens??>
-		      this.date
-		        ? greatTime=this.dateArray[0] lessTime=this.dateArray[1]
+		      sort=createTime,desc<#if queryColumns??>this.selectType ? this.selectType=this.searchVal : ""<#else>this.searchVal ? title=this.searchVal : ''</#if>
+		      <#if betweens??>
+		      	<#list betweens as column>
+		      		<#if column.queryType = 'BetWeen'>
+					this.date_${column_index}
+		        ? great${column.changeColumnName}=this.dateArray_${column_index}[0] less${column.changeColumnName}=this.dateArray_${column_index}[1]
 		        : ''
-		      }</#if>",
+							</#if>
+		      	</#list>
+		      </#if>
+					",
 		    method: "get"
 		  }).then(result => {
 		    const data = result.data;
