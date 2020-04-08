@@ -1,5 +1,5 @@
 <template>
-	<div class="tinymce"><textarea id="textarea"></textarea></div>
+	<div class="tinymce"><textarea :id="randomId"></textarea></div>
 </template>
 
 <script>
@@ -32,7 +32,8 @@ export default {
 	data() {
 		return {
 			tinymce: '',
-			asyncInit: true
+      asyncInit: true,
+      randomId: new Date().getTime()
 		};
 	},
 	watch: {
@@ -85,13 +86,12 @@ export default {
       return data
     },
 		removeTinymce() {
-			this.$setStyle(document.querySelector('#textarea'), 'opacity', 0);
 			this.tinymce.destroy();
 		},
 		initTinymce() {
 			const _this = this;
 			tinymce.init({
-				selector: `#textarea`,
+				selector: `#${this.randomId}`,
 				language: 'zh_CN',
 				language_url: `${environment}assets/js/tinymce/language/zh_CN.js`,
 				plugins: plugins.plugins,
