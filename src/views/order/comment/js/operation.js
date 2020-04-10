@@ -30,7 +30,8 @@ export default {
             }`,
 		    method: "get"
 		  }).then(result => {
-		    const data = result.data;
+        const data = result.data;
+        this.$refs.table.clearSelection()
 		    this.initialPage(data.totalElements);
 		    this.initialCommentList(data.content);
 		  });
@@ -51,7 +52,6 @@ export default {
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
 			    this.$successMsg("删除成功");
-			    this.$refs.table.clearSelection()
 			    this.getCommentList(this.nowPage, this.nowSize)
 			  });
 			});
@@ -74,7 +74,6 @@ export default {
 			    data: [ item.id ]
 			  }).then(() => {
 			    this.$successMsg("删除成功");
-			    this.$refs.table.clearSelection()
 					this.getCommentList(this.nowPage, this.nowSize)
 			  });
 			});

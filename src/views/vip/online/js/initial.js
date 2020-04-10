@@ -22,6 +22,7 @@ export default {
         method: "get"
       }).then(result => {
         const data = result.data;
+        this.$refs.onlineUserTable.clearSelection()
         this.initialPage(data.totalElements);
         this.initialOnlineUserList(data.content);
       });

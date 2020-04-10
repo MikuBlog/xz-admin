@@ -37,7 +37,6 @@ export default {
           data: this.selectList.map(val => val.id)
         }).then(() => {
           this.$successMsg("删除成功");
-          this.$refs.userTable.clearSelection()
           this.getUserList(this.nowPage, this.nowSize);
         });
       });

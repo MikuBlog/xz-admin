@@ -22,7 +22,6 @@ export default {
           data: this.idList
         }).then(() => {
           this.$successMsg("删除成功");
-          this.$refs.pictureTable.clearSelection()
           this.getPictureList(this.nowPage, this.nowSize);
         });
       });

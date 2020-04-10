@@ -23,6 +23,7 @@ export default {
           }`,
         method: "get"
       }).then(result => {
+        this.$refs.table.clearSelection()
         this.initialGoodsTypeList(result.data.content);
       });
     }

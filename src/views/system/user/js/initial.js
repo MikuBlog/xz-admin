@@ -29,6 +29,7 @@ export default {
       })
         .then(result => {
           const data = result.data;
+          this.$refs.userTable.clearSelection()
           this.initialPage(data.totalElements);
           this.initialUserList(data.content);
         })

@@ -23,6 +23,7 @@ export default {
         method: "get"
       }).then(result => {
         const data = result.data;
+        this.$refs.pictureTable.clearSelection()
         this.initialPage(data.totalElements);
         this.initialPictureList(data.content);
       });
