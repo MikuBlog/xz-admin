@@ -36,7 +36,6 @@ export default {
           data: this.idList
         }).then(() => {
           this.$successMsg("删除成功");
-          this.$refs.pictureTable.clearSelection()
           this.getFileList(this.nowPage, this.nowSize);
         });
       });

@@ -15,12 +15,13 @@
 						<#list betweens as column>
 							<#if column.queryType = 'BetWeen'>
 								<el-date-picker
-									v-model="query.${column.changeColumnName}"
-									:default-time="['00:00:00','23:59:59']"
+									v-model="date_${column_index + 1}"
 									type="datetime"
+									class="select-input margin-box"
 									value-format="yyyy-MM-dd HH:mm:ss"
 									start-placeholder="开始时间"
 									end-placeholder="结束时间"
+									@change="getDate_${column_index + 1}"
 								/>
 							</#if>
 						</#list>
