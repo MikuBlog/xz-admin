@@ -6,6 +6,7 @@ export default {
 			nowPage: 1,
 			nowSize: 10,
 			totalElements: 0,
+      list: [],
 			selectList: [],
 			<#if betweens??>
 				<#list betweens as column>

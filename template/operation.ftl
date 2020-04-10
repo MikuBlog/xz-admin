@@ -19,6 +19,16 @@ export default {
 		handleSelectionChange(val) {
 		  this.selectList = val;
 		},
+    showAddBox() {
+      const form = this.$refs.form
+      form.isAdd = true
+      form.dialog = true
+    },
+    showEditBox() {
+      const form = this.$refs.form
+      form.isAdd = false
+      form.dialog = true
+    },
 		downloadList() {
 		  this.$http_json({
 		    url: "?sort=createTime,desc<#if queryColumns??>this.selectType ? this.selectType=this.searchVal : ""<#else>this.searchVal ? title=this.searchVal : ""</#if><#if betweens??>
@@ -71,7 +81,6 @@ export default {
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
 			    this.$successMsg("删除成功");
-			    this.$refs.table.clearSelection()
 			    this.getList(this.nowPage, this.nowSize)
 			  });
 			});
@@ -87,7 +96,6 @@ export default {
 			    data: [ item.id ]
 			  }).then(() => {
 			    this.$successMsg("删除成功");
-			    this.$refs.table.clearSelection()
 					this.getList(this.nowPage, this.nowSize)
 			  });
 			});
@@ -114,6 +122,7 @@ export default {
 		    method: "get"
 		  }).then(result => {
 		    const data = result.data;
+        this.$refs.table.clearSelection()
 		    this.initialPage(data.totalElements);
 		    this.initialList(data.content);
 		  });

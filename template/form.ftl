@@ -1,6 +1,8 @@
 <template>
 <!--表单组件-->
-      <el-dialog :visible.sync="dailog" :before-close="hideBox" title="新增${tableComment}" width="500px">
+      <el-dialog append-to-body :visible.sync="dialog" @close="hideBox" :title="isAdd
+      ? '新增${tableComment}'
+      : '编辑${tableComment}'" width="550px">
         <el-form ref="form" :model="form" <#if isNotNullColumns??>:rules="rules"</#if> size="small" label-width="100px">
 			<#if columns??>
 				<#list columns as column>
@@ -9,7 +11,7 @@
 							<#if column.formType = 'Input'>
 							<el-input v-model="form.${column.changeColumnName}" style="width: 370px;" />
 							<#elseif column.formType = 'Textarea'>
-							<el-input :rows="3" v-model="form.${column.changeColumnName}" type="textarea" style="width: 370px;" />
+							<el-input :rows="3" v-model="form.${column.changeColumnName}" type="textarea" />
 							<#elseif column.formType = 'Radio'>
 								<#if column.dictName??>
 							<el-radio v-for="item in dict.${column.dictName}" :key="item.id" v-model="form.${column.changeColumnName}" :label="item.value">{{ item.label }}</el-radio>
@@ -29,7 +31,7 @@
 							未设置字典，请手动设置 Select
 								</#if>
 							<#else>
-							<el-date-picker v-model="form.${column.changeColumnName}" type="datetime" style="width: 370px;" />
+							<el-date-picker v-model="form.${column.changeColumnName}" type="datetime"/>
 							</#if>
 						</el-form-item>
 					</#if>
@@ -47,7 +49,7 @@ export default {
 	data() {
 	  return {
 			isAdd: false,
-			dailog: false,
+			dialog: false,
 			form: {
 				<#if isNotNullColumns??>
 				<#list isNotNullColumns as column>
@@ -56,7 +58,7 @@ export default {
 				</#if>
 				</#list>
 				</#if>
-			}
+			},
 	    rules: {
 	      <#if isNotNullColumns??>
 	      <#list isNotNullColumns as column>	
@@ -76,39 +78,33 @@ export default {
 			this.resetForm()
 		},
 		doSubmit() {
-			this.isAdd
-			? this.add()
-			: this.edit()
+      this.$refs.form.validate(valid => {
+        this.isAdd
+        ? this.add()
+        : this.edit()
+      })
 		},
 		add() {
 			delete this.form.id
-			this.$refs.form.validate(valid => {
-			  if (valid) {
-			    this.$http_json({
-			      url: "",
-			      method: "post",
-			      data: this.form
-			    }).then(result => {
-			      this.$successMsg("添加成功");
-			    });
-			  } else {
-			    return false;
-			  }
-			});
+			this.$http_json({
+			  url: "",
+			  method: "post",
+			  data: this.form
+			}).then(result => {
+			  this.$successMsg("添加成功");
+        this.$parent.getList(this.$parent.nowPage, this.$parent.nowSize)
+        this.hideBox()
+      )}
 		},
 		edit() {
-			this.$refs.form.validate(valid => {
-			  if (valid) {
-			    this.$http_json({
-			      url: "",
-			      method: "post",
-			      data: this.form
-			    }).then(result => {
-			      this.$successMsg("编辑成功");
-			    });
-			  } else {
-			    return false;
-			  }
+			this.$http_json({
+			  url: "",
+			  method: "post",
+			  data: this.form
+			}).then(result => {
+			  this.$successMsg("编辑成功");
+        this.$parent.getList(this.$parent.nowPage, this.$parent.nowSize)
+        this.hideBox()
 			});
 		},
 		resetForm() {
