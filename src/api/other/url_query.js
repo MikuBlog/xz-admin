@@ -8,12 +8,15 @@ function urlQuery(url = "") {
   let
     query = {},
     param = ""
-  if (url.split("?")[1]) {
+  if (url) {
     param = url.split("?")[1]
   } else if (window.location.search) {
     param = window.location.search.replace("?", "")
   } else {
     return query
+  }
+  if(!param) {
+    return  {}
   }
   param.split("&").forEach(val => {
     const

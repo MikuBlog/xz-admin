@@ -228,7 +228,7 @@ export default {
 		},
 		querySearchAsync(val, cb) {
 			this.$http_normal({
-				url: `/api/productBrand/page?page=9}&size=9999&sort=sort,asc`,
+				url: `/api/productBrand/page?page=0&size=9999&sort=sort,asc`,
 				method: "get"
 			}).then(result => {
 				cb(result.data.content)
