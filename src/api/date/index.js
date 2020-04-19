@@ -71,6 +71,9 @@ const timeDiff = (time_1, time_2) => {
  * @return {String} 带年月日的中文日期
  */
 function dateToChinese(date) {
+	if(!date) {
+		return
+	}
 	if((typeof date).toLowerCase() === 'object') {
 		date = formatDate(date, true)
 	}
