@@ -7,6 +7,6 @@
 // http://openlan.missiono.cn
 var
   // 接口统一请求前缀地址
-  baseUrl = 'http://localhost:8087',
+  baseUrl = 'http://120.79.7.9:8088',
   // 静态资源请求前缀地址
-  prefixUrl = 'http://localhost:8087'
+  prefixUrl = 'http://120.79.7.9:8088'
