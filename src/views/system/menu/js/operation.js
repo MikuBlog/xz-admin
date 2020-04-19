@@ -52,7 +52,7 @@ export default {
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/menu/del/`,
+          url: `/api/menu/del`,
           method: "post",
 					data: [ item.id ]
         }).then(() => {
