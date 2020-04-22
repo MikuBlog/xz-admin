@@ -18,14 +18,33 @@
 						<!-- <el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllCombination" :disabled="!selectList.length" title="批量删除拼团信息" circle></el-button> -->
 					</div>
 					<el-table ref="table" :data="list" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
-						<el-table-column type="selection" width="55" reserve-selection />
+						<!-- <el-table-column type="selection" width="55" reserve-selection /> -->
             <!-- <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="产品封面" align="center">
 							<template slot-scope="scope">
 								<img :src="scope.row.imageUrl || 'https://myinterface.xuanzai.top/getPicture?type=error'" alt="点击打开" class="el-avatar xz-image" @click="(isShow = true), (url = scope.row.imageUrl)" />
 							</template>
 						</el-table-column> -->
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item class="expand-line" v-for="(item, ind) in props.row.pinkUsers" :key="ind">
+                    <div class="flex-box">
+                      <el-tag style="margin: .4rem .5rem" :type="ind === 0
+                        ? 'warning'
+                        : 'success'">{{ ind === 0
+                        ? '团长'
+                        : '团员' }}</el-tag>
+                      <el-avatar :size="40" :src="convertHttp(item.avatar)"></el-avatar>
+                      <div class="profix-box">
+                        <span class="name">{{ item.nickname }}</span>
+                      </div>
+                    </div>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
             <el-table-column prop="orderNum" label="订单号" :show-overflow-tooltip="true" />
-            <el-table-column prop="orderNum" label="拼团产品" :show-overflow-tooltip="true" />
+            <el-table-column prop="combinationName" label="拼团产品" :show-overflow-tooltip="true" />
             <el-table-column prop="startTime" label="开团时间" :show-overflow-tooltip="true" />
             <el-table-column prop="pinkPrice" label="拼团价(元)" :show-overflow-tooltip="true" align="center" />
             <el-table-column prop="totalCount" label="拼团人数" :show-overflow-tooltip="true" align="center" />
@@ -74,3 +93,5 @@ export default {
   mixins: [Operation, Property]
 };
 </script>
+
+<style lang="scss" scoped src="./scss/index.scss"></style>

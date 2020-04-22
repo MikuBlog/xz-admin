@@ -135,6 +135,7 @@ export default {
 				init_instance_callback(editor) {
 					_this.tinymce = editor;
 					if (_this.value) {
+            _this.asyncInit = false;
 						editor.setContent(_this.value);
 					}
 					editor.on('NodeChange Change KeyUp SetContent', () => {

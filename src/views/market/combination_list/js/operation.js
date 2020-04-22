@@ -1,6 +1,7 @@
 import convertHttp from '@/utils/convertHttp'
 export default {
   methods: {
+    convertHttp,
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
