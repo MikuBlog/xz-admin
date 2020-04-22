@@ -78,7 +78,6 @@ export default {
     document.removeEventListener("keypress", this.submitEnter);
   },
   created() {
-    this.getLevelList()
     document.addEventListener("keypress", this.submitEnter);
   },
   methods: {

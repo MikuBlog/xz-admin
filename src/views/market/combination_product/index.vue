@@ -7,10 +7,10 @@
 						<el-input v-model="searchVal" placeholder="搜索拼团标题" class="search-input margin-box" @keyup.native.enter="search"></el-input>
 						<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
-						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddCombinationPage" title="添加资讯" circle></el-button>
-						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllCombination" :disabled="!selectList.length" title="批量删除资讯" circle></el-button>
+						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddCombinationPage" title="添加拼团产品" circle></el-button>
+						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllCombination" :disabled="!selectList.length" title="批量删除拼团产品" circle></el-button>
 					</div>
-					<el-table ref="table" :data="articleList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :data="list" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
             <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="产品封面" align="center">
 							<template slot-scope="scope">
@@ -33,12 +33,14 @@
 						</el-table-column> -->
 						<el-table-column label="操作" fixed="right" align="center" width="180">
 							<template slot-scope="scope">
-								<el-button type="primary" icon="el-icon-edit" @click="toEditArticlePage(scope.row)"></el-button>
+								<el-button type="primary" icon="el-icon-edit" @click="$router.push({
+                  path: `/home/edit_combination?id=${scope.row.id}`
+                })"></el-button>
 								<el-button type="danger" icon="el-icon-delete" @click="deleteArticle(scope.row)"></el-button>
 							</template>
 						</el-table-column>
 					</el-table>
-					<pagination ref="pagination" :get-data="getArticleList" :now-page.sync="nowPage" :now-size.sync="nowSize" :total="totalElements" />
+					<pagination ref="pagination" :get-data="getCombinationList" :now-page.sync="nowPage" :now-size.sync="nowSize" :total="totalElements" />
 				</el-card>
 			</el-col>
 		</el-row>

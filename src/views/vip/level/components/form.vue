@@ -7,25 +7,25 @@
     width="500px"
     @close="hideBox"
   >
-    <el-form ref="form" :model="form" :rules="rules" size="small" label-width="100px">
+    <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
       <el-form-item label="等级名称" prop="name">
-        <el-input v-model="form.name" style="width: 350px;" />
+        <el-input v-model="form.name" />
       </el-form-item>
       <el-form-item label="会员价格" prop="money">
-			  <el-input v-model="form.money" style="width: 350px;">
+			  <el-input v-model="form.money">
           <template slot="append">元</template>
 			  </el-input>
 			</el-form-item>
 			<el-form-item label="有效天数" prop="validDate">
-			  <el-input v-model="form.validDate" style="width: 350px;">
+			  <el-input v-model="form.validDate">
           <template slot="append">天</template>
 			  </el-input>
 			</el-form-item>
 			<el-form-item label="会员等级" prop="grade">
-			  <el-input-number controls-position="right" v-model="form.grade" style="width: 350px;" />
+			  <el-input-number controls-position="right" v-model="form.grade" />
 			</el-form-item>
       <el-form-item label="享受折扣" prop="discount">
-			  <el-input controls-position="right" v-model="form.discount" style="width: 350px;">
+			  <el-input controls-position="right" v-model="form.discount">
           <template slot="append">%</template>
 			  </el-input>
 			</el-form-item>

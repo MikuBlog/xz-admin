@@ -303,7 +303,8 @@ export default {
 			})
 			this.$refs.goodsType.getCheckedNodes().forEach(val => {
 				this.typeName.push(val.label)
-			})
+      })
+      this.form.spu.typeId = `,${this.typeId.join(",")},`
     },
     merge(val) {
       let arr = [], key = "", ind = 0
@@ -365,7 +366,7 @@ export default {
 								value: JSON.stringify(val.skuDesc)
 							}
 						})
-						this.form.onSpecs = true
+						this.form.spu.onSpecs = true
 					} else {
 						this.form.skus.push({
 							costPrice: this.form.spu.salesPrice,
@@ -381,14 +382,13 @@ export default {
 							name: '默认',
 							value: ["推荐"]
 						}])
-						this.form.onSpecs = false
+						this.form.spu.onSpecs = false
 					}
 					this.form.spu.keyWords = `,${this.dynamicTags.join(",")},`
 					this.form.spu.typeName = JSON.stringify({
 						typeName: this.typeName,
 						typeObj: this.typeObj
 					})
-					this.form.spu.typeId = `,${this.typeId.join(",")},`
 					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
 					this.$http_json({
 						url: "/api/productSpu/add",

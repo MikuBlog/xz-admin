@@ -1,6 +1,39 @@
 import convertHttp from '@/utils/convertHttp'
 export default {
+  async created() {
+    await this.getGoodsList(this.nowPage, this.nowSize)
+    this.getDetail()
+  },
   methods: {
+    initialData(data) {
+      this.form.comSpu = {
+        id: data.id,
+        combinationDiscount: data.combinationDiscount,
+        combinationPrice: data.combinationPrice,
+        effectiveHour: data.effectiveHour,
+        endTime: data.endTime,
+        info: data.info,
+        name: data.name,
+        cover: data.cover,
+        num: data.num,
+        peopleCount: data.peopleCount,
+        returnMoney: data.returnMoney,
+        spuId: data.spuId,
+        startTime: data.startTime,
+        visit: data.visit,
+        activityType: data.activityType,
+        ruleType: data.ruleType,
+        status: data.status
+      }
+    },
+    getDetail() {
+      this.$http_json({
+        url: `/api/combinationSpu/get/${this.id}`,
+        method: "get"
+      }).then(result => {
+        this.initialData(result.data.comSpu)
+      })
+    },
     getCurrentRow(item) {
       this.form.comSpu.name = item.name
       this.form.comSpu.spuId = item.id
@@ -23,15 +56,15 @@ export default {
 		  });
 		},
 		getGoodsList(page, size) {
-		  this.$http_normal({
+		  return this.$http_normal({
 		    url: `/api/productSpu/page?page=${page - 1}&size=${
 		      size
 		      }&sort=sort,asc${this.productName ? `&name=${this.productName}` : ""}`,
 		    method: "get"
 		  }).then(result => {
         const data = result.data;
-        this.product = ""
         this.$refs.table.clearSelection()
+        this.product = ""
 		    this.initialPage(data.totalElements);
 		    this.initialGoodsList(data.content);
 		  });
@@ -44,11 +77,11 @@ export default {
             return
           }
           this.$http_json({
-            url: `/api/combinationSpu/add`,
+            url: `/api/combinationSpu/edit`,
             method: "post",
             data: this.form
           }).then(result => {
-            this.$successMsg("添加成功");
+            this.$successMsg("编辑成功");
             this.$router.go(-1)
           });
         } else {

@@ -1,6 +1,7 @@
 export default {
   data() {
     return {
+      id: this.$route.query.id,
       productName: "",
       brandName: "",
       typeId: "",
@@ -18,6 +19,7 @@ export default {
       form: {
         comSkus: [],
         comSpu: {
+          id: "",
           combinationDiscount: 0,
           combinationPrice: 0,
           effectiveHour: "",

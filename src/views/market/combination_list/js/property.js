@@ -1,6 +1,8 @@
 export default {
 	data() {
 		return {
+      date: "",
+      dateArray: [],
 			searchVal: "",
 			selectType: "",
 			selectList: [],

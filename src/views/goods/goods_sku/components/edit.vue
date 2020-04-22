@@ -7,6 +7,7 @@
       :rules="rules"
       size="small"
       @submit.native.prevent="editSku"
+      label-width="100px"
     >
       <el-form-item label="商品规格名" prop="name">
         <el-input v-model="form.name" />

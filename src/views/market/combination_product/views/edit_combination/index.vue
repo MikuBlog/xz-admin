@@ -4,13 +4,13 @@
       <el-col :span="24">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span class="left-border">开启拼团</span>
+            <span class="left-border">编辑拼团</span>
             <el-button
               type="primary"
               style="float: right; position: relative; top: -3px;"
               size="small"
               @click="submitForm"
-            >确认开启</el-button>
+            >确认保存</el-button>
             <el-button
               type="info"
               style="float: right; position: relative; top: -3px; margin-right: 10px"
@@ -118,6 +118,7 @@
                     :now-page.sync="nowPage"
                     :now-size.sync="nowSize"
                     :total="totalElements"
+                    :isInit="false"
                   />
                 </el-form-item>
               </el-col>

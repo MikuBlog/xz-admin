@@ -38,7 +38,7 @@
                   ></el-autocomplete>
                 </el-form-item>
                 <el-form-item label="排序" prop="sort">
-                  <el-input type="number" v-model="articleForm.sort"></el-input>
+                  <el-input-number :min="0" :max="99999" v-model="articleForm.sort" />
                 </el-form-item>
               </el-col>
               <el-col :span="12" align="center">
@@ -81,7 +81,7 @@
               </el-col>
               <el-col :span="22">
                 <el-form-item label="资讯内容" prop="content">
-                  <Tinymce v-model="articleForm.content" />
+                  <Tinymce :height="800" v-model="articleForm.content" />
                 </el-form-item>
               </el-col>
             </el-row>

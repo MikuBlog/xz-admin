@@ -13,7 +13,7 @@
         <el-input v-model="form.name" style="width: 350px;" />
       </el-form-item>
       <el-form-item label="排序" prop="sort">
-        <el-input type="number" v-model="form.sort" style="width: 350px;" />
+        <el-input-number :min="0" :max="99999" v-model="form.sort" style="width: 350px;" />
       </el-form-item>
       <el-form-item label="是否显示" prop="isShow">
         <el-radio-group v-model="form.isShow">

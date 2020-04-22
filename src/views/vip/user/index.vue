@@ -40,7 +40,7 @@
 								<div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
 							</template>
 						</el-table-column>
-						<el-table-column label="操作" fixed="right" align="center" width="180">
+						<el-table-column label="操作" fixed="right" align="center" width="120">
 							<template slot-scope="scope">
                 <el-popover
                   placement="bottom"

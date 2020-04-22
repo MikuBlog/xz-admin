@@ -7,12 +7,12 @@ export default {
 		},
 		// 初始化拼团产品列表
 		initialCombinationList(list) {
-		  this.combinationList.splice(0);
+		  this.list.splice(0);
 		  list.forEach(value => {
-        value.imageUrl = value.coverImage
-        ? convertHttp(value.coverImage)
+        value.imageUrl = value.cover
+        ? convertHttp(value.cover)
         : ''
-		    this.combinationList.push(value);
+		    this.list.push(value);
 		  });
 		},
 		// 获取拼团产品列表
