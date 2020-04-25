@@ -69,7 +69,7 @@ export default {
 				enabled: true,
         sort: 999,
         image: "",
-				color: "#409EFF",
+				color: "#409EFF", 
 				groupName: "routine_home_banner"
       },
       rules: {
@@ -135,9 +135,9 @@ export default {
     doAdd() {
       this.$refs.form.validate(valid => {
         if (valid) {
-					this.form.value.color = this.form.value.color
-					? this.form.value.color
-					: '#fefefe'
+					// this.form.value.color = this.form.value.color
+					// ? this.form.value.color
+					// : '#fefefe'
           this.$http_json({
             url: "/api/groupData/add",
             method: "post",
@@ -161,9 +161,6 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
 					this.form.value = JSON.parse(JSON.stringify(this.form))
-					value.color = value.color
-					? value.color
-					: '#fefefe'
           this.$http_json({
             url: "/api/groupData/edit",
             method: "post",

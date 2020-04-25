@@ -4,7 +4,7 @@
       <el-col :span="24">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span class="left-border">编辑拼团</span>
+            <span class="left-border">编辑砍价产品</span>
             <el-button
               type="primary"
               style="float: right; position: relative; top: -3px;"
@@ -22,25 +22,25 @@
             :model="form"
             :rules="rules"
             ref="form"
-            label-width="130px"
+            label-width="140px"
             class="demo-ruleForm"
           >
             <el-row>
               <el-col :span="12">
-                <el-form-item label="拼团名称" prop="comSpu.name">
-                  <el-input v-model="form.comSpu.name" placeholder="默认为商品名称"></el-input>
+                <el-form-item label="砍价产品名称" prop="bargainSpu.name">
+                  <el-input v-model="form.bargainSpu.name" placeholder="默认为商品名称"></el-input>
                 </el-form-item>
-                <el-form-item label="拼团简介" prop="comSpu.info">
+                <el-form-item label="砍价产品简介" prop="bargainSpu.info">
                   <el-input
                     type="textarea"
                     :rows="4"
-                    v-model="form.comSpu.info"
+                    v-model="form.bargainSpu.info"
                     placeholder="默认为商品简介"
                   ></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="24">
-                <el-form-item label="选择拼团商品">
+                <el-form-item label="选择砍价产品商品">
                   <el-input
                     v-model="productName"
                     placeholder="查询商品名称"
@@ -123,67 +123,76 @@
                 </el-form-item>
               </el-col>
               <el-col :span="24">
-                <el-form-item label="规则状态" prop="comSpu.ruleType">
-                  <el-radio-group v-model="form.comSpu.ruleType">
-                    <el-radio :label="0">正常上线</el-radio>
-                    <el-radio :label="1">到期下线</el-radio>
-                    <el-radio :label="2">手动下线</el-radio>
+                <el-form-item label="规则状态" prop="bargainSpu.ruleType">
+                  <el-radio-group v-model="form.bargainSpu.ruleType">
+                    <el-radio :label="0">到砍价时间不自动开启</el-radio>
+                    <el-radio :label="1">到砍价时间自动开启时间</el-radio>
                   </el-radio-group>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="优惠类型" prop="comSpu.activityType">
-                  <el-radio-group v-model="form.comSpu.activityType">
-                    <el-radio :label="1">折扣</el-radio>
-                    <el-radio :label="2">返现</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-form-item label="活动状态" prop="comSpu.status">
-                  <el-radio-group v-model="form.comSpu.status">
+                <el-form-item label="活动状态" prop="bargainSpu.status">
+                  <el-radio-group v-model="form.bargainSpu.status">
                     <el-radio :label="1">开启</el-radio>
                     <el-radio :label="2">关闭</el-radio>
                   </el-radio-group>
                 </el-form-item>
               </el-col>
-              <el-col :span="24">
-                <el-form-item label="拼团价(元)" prop="comSpu.combinationPrice">
+              <el-col :span="12">
+                <el-form-item label="砍价金额(元)" prop="bargainSpu.bargainPrice">
                   <el-input-number
                     :min="0"
-                    v-model="form.comSpu.combinationPrice"
-                    placeholder="请输入拼团价"
+                    v-model="form.bargainSpu.bargainPrice"
+                    placeholder="请输入砍价金额"
                   />
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="拼团人数设置" prop="comSpu.peopleCount">
+                <el-form-item label="限购" prop="bargainSpu.limitBuy">
                   <el-input-number
                     :min="0"
-                    v-model="form.comSpu.peopleCount"
-                    placeholder="请输入拼团人数"
+                    v-model="form.bargainSpu.limitBuy"
+                    placeholder="请输入限购数量"
                   />
                 </el-form-item>
               </el-col>
-              <el-col :span="12" v-if="form.comSpu.activityType === 1">
-                <el-form-item label="拼团折扣" prop="comSpu.combinationDiscount">
+              <el-col :span="12">
+                <el-form-item label="单次砍到最低价" prop="bargainSpu.bargainMinPrice">
+                  <el-input-number
+                    :min="0"
+                    v-model="form.bargainSpu.bargainMinPrice"
+                    placeholder="请输入单次砍到最低价"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="单次砍到最高价" prop="bargainSpu.bargainMaxPrice">
+                  <el-input-number
+                    :min="0"
+                    v-model="form.bargainSpu.bargainMaxPrice"
+                    placeholder="请输入单次砍到最低价"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="允许砍到最低价" prop="bargainSpu.minPrice">
                   <el-input-number
                     :min="0"
                     :max="100"
-                    v-model="form.comSpu.combinationDiscount"
-                    placeholder="请输入拼团折扣"
+                    v-model="form.bargainSpu.minPrice"
+                    placeholder="请输入允许砍到最高价"
                   />
                 </el-form-item>
               </el-col>
-              <el-col :span="12" v-if="form.comSpu.activityType === 2">
-                <el-form-item label="参团返现(元)" prop="comSpu.returnMoney">
-                  <el-input-number :min="0" v-model="form.comSpu.returnMoney" placeholder="请输入返现值" />
+              <el-col :span="12">
+                <el-form-item label="用户允许砍价次数" prop="bargainSpu.bargainNum">
+                  <el-input-number :min="0" v-model="form.bargainSpu.bargainNum" placeholder="请输入用户允许砍价次数" />
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="开始时间" prop="comSpu.startTime">
+                <el-form-item label="开始时间" prop="bargainSpu.startTime">
                   <el-date-picker
-                    v-model="form.comSpu.startTime"
+                    v-model="form.bargainSpu.startTime"
                     type="datetime"
                     value-format="yyyy-MM-dd HH:mm:ss"
                     placeholder="选择日期时间"
@@ -192,9 +201,9 @@
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="结束时间" prop="comSpu.endTime">
+                <el-form-item label="结束时间" prop="bargainSpu.stopTime">
                   <el-date-picker
-                    v-model="form.comSpu.endTime"
+                    v-model="form.bargainSpu.stopTime"
                     type="datetime"
                     value-format="yyyy-MM-dd HH:mm:ss"
                     placeholder="选择日期时间"
@@ -202,25 +211,14 @@
                   ></el-date-picker>
                 </el-form-item>
               </el-col>
-              <el-col :span="12">
-                <el-form-item label="拼团时效(时)" prop="comSpu.effectiveHour">
-                  <el-input-number
-                    :min="0"
-                    v-model="form.comSpu.effectiveHour"
-                    placeholder="请输入拼团时效"
-                  />
+              <el-col :span="24">
+                <el-divider></el-divider>
+              </el-col>
+              <el-col :span="22">
+                <el-form-item label="砍价规则" prop="bargainSpu.rule">
+                  <Tinymce :height="800" v-model="form.bargainSpu.rule" />
                 </el-form-item>
               </el-col>
-              <!-- <el-col :span="12">
-                <el-form-item label="排序" prop="comSpu.sort">
-                  <el-input-number
-                    :min="0"
-                    :max="99999"
-                    v-model="form.comSpu.sort"
-                    placeholder="请输入序号"
-                  />
-                </el-form-item>
-              </el-col> -->
             </el-row>
           </el-form>
         </el-card>

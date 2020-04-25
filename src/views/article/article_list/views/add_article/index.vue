@@ -27,7 +27,7 @@
                 <el-form-item label="资讯标题" prop="title">
                   <el-input v-model="articleForm.title"></el-input>
                 </el-form-item>
-                <el-form-item label="资讯分类" prop="type.name">
+                <el-form-item label="资讯分类">
                   <el-autocomplete
                     v-model="articleForm.types[0].name"
                     :fetch-suggestions="querySearchAsync"
@@ -42,7 +42,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="12" align="center">
-                <el-form-item label="资讯封面">
+                <el-form-item label="资讯封面" prop="coverImage">
                   <el-upload
                     class="avatar-uploader"
                     :http-request="uploadImage"

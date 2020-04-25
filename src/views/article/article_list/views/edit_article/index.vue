@@ -42,7 +42,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="12" align="center">
-                <el-form-item label="资讯封面">
+                <el-form-item label="资讯封面" prop="coverImage">
                   <el-upload
                     class="avatar-uploader"
                     :http-request="uploadImage"

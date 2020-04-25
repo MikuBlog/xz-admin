@@ -361,10 +361,10 @@ export default {
 						}))
 						this.form.skus = this.generateSkuList.map(val => {
 							return {
-								costPrice: val.salesPrice,
+								costPrice: val.costPrice,
 								image: val.image,
 								sales: 0,
-								salesPrice: 0,
+								salesPrice: val.salesPrice,
 								stock: val.stock,
 								value: JSON.stringify(val.skuDesc)
 							}
@@ -476,7 +476,7 @@ export default {
 						checked: false,
 						...val,
 					}
-				})
+        })
 			}
 		},
 		getDetail() {

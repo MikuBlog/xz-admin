@@ -6,38 +6,39 @@ export default {
   },
   methods: {
     initialData(data) {
-      this.form.comSpu = {
+      this.form.bargainSpu = {
         id: data.id,
-        combinationDiscount: data.combinationDiscount,
-        combinationPrice: data.combinationPrice,
-        effectiveHour: data.effectiveHour,
-        endTime: data.endTime,
+        bargainPrice: data.bargainPrice,
         info: data.info,
         name: data.name,
-        cover: data.cover,
+        cover: data.endTime,
         num: data.num,
-        peopleCount: data.peopleCount,
-        returnMoney: data.returnMoney,
         spuId: data.spuId,
-        startTime: data.startTime,
-        activityType: data.activityType,
         ruleType: data.ruleType,
-        status: data.status
+        status: data.status,
+        rule: data.rule,
+        limitBuy: data.limitBuy,
+        bargainMinPrice: data.bargainMinPrice,
+        bargainMaxPrice: data.bargainMaxPrice,
+        minPrice: data.minPrice,
+        bargainNum: data.bargainNum,
+        startTime: data.startTime,
+        stopTime: data.stopTime
       }
     },
     getDetail() {
       this.$http_json({
-        url: `/api/combinationSpu/get/${this.id}`,
+        url: `/api/bargainSpu/get/${this.id}`,
         method: "get"
       }).then(result => {
-        this.initialData(result.data.comSpu)
+        this.initialData(result.data)
       })
     },
     getCurrentRow(item) {
-      this.form.comSpu.name = item.name
-      this.form.comSpu.spuId = item.id
-      this.form.comSpu.cover = item.cover
-      this.form.comSpu.num = item.num
+      this.form.bargainSpu.name = item.name
+      this.form.bargainSpu.spuId = item.id
+      this.form.bargainSpu.cover = item.cover
+      this.form.bargainSpu.num = item.num
     },
     // 分页处理
 		initialPage(totalElements) {
@@ -62,7 +63,6 @@ export default {
 		    method: "get"
 		  }).then(result => {
         const data = result.data;
-        this.$refs.table.clearSelection()
         this.product = ""
 		    this.initialPage(data.totalElements);
 		    this.initialGoodsList(data.content);
@@ -71,12 +71,12 @@ export default {
     submitForm() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          if(!this.form.comSpu.spuId) {
+          if(!this.form.bargainSpu.spuId) {
             this.$warnMsg("请选择商品")
             return
           }
           this.$http_json({
-            url: `/api/combinationSpu/edit`,
+            url: `/api/bargainSpu/edit`,
             method: "post",
             data: this.form
           }).then(result => {

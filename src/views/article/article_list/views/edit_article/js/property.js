@@ -25,6 +25,9 @@ export default {
           { required: true, message: "请输入资讯标题", trigger: "blur" },
           { min: 1, max: 15, message: "长度在 1 到 15 个字符", trigger: "change" }
         ],
+        coverImage: [
+          { required: true, message: "请上传资讯封面", trigger: "change" }
+        ],
         type: [
           { required: true, message: "请选择资讯分类", trigger: "blur" }
         ],

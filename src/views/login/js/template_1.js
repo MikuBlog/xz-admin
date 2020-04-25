@@ -4,8 +4,8 @@ import {
 export default {
 	data() {
 		return {
-			username: "",
-			password: "",
+			username: "admin",
+			password: "123456",
 			vcode: "",
 			uuid: "",
 			codeUrl: "",

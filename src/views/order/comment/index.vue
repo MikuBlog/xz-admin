@@ -22,6 +22,21 @@
 					</div>
 					<el-table ref="table" :data="commentList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="评论内容" class="expand-line">
+                    <span>{{ props.row.content || "无" }}</span>
+                  </el-form-item>
+                  <el-form-item label="评论图片" class="expand-line">
+                    <img width="30" height="30" style="margin-right: 5px; vertical-align: top" :src="item" v-for="(item, ind) in props.row.imageList" @click="(isShow = true), (url = item)" :key="ind">
+                  </el-form-item>
+                  <el-form-item label="回复内容" class="expand-line">
+                    <span>{{ props.row.merchantReplyContent || "无" }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
 						<el-table-column prop="nickname" label="用户昵称" :show-overflow-tooltip="true" />
             <el-table-column prop="productName" label="商品信息" :show-overflow-tooltip="true" />
 						<el-table-column prop="type" label="商品分数" :show-overflow-tooltip="true">
@@ -40,12 +55,6 @@
                   disabled
                   score-template="{value}">
                 </el-rate>
-              </template>
-						</el-table-column>
-            <el-table-column prop="content" label="评论内容" :show-overflow-tooltip="true" />
-            <el-table-column prop="type" label="评论图片" :show-overflow-tooltip="true">
-							<template slot-scope="scope">
-                <img width="30" height="30" style="margin-right: 5px" :src="item" v-for="item in scope.row.imageList" @click="(isShow = true), (url = item)" >
               </template>
 						</el-table-column>
 						<el-table-column label="评论时间" width="180">

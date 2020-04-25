@@ -358,10 +358,10 @@ export default {
 						}))
 						this.form.skus = this.generateSkuList.map(val => {
 							return {
-								costPrice: val.salesPrice,
+								costPrice: val.costPrice,
 								image: val.image,
 								sales: 0,
-								salesPrice: 0,
+								salesPrice: val.salesPrice,
 								stock: val.stock,
 								value: JSON.stringify(val.skuDesc)
 							}
@@ -369,10 +369,10 @@ export default {
 						this.form.spu.onSpecs = true
 					} else {
 						this.form.skus.push({
-							costPrice: this.form.spu.salesPrice,
+							costPrice: this.form.spu.costPrice,
 							image: this.form.spu.cover,
 							sales: 0,
-							salesPrice: 0,
+							salesPrice: this.form.spu.salesPrice,
 							stock: this.form.spu.totalStock,
 							value: JSON.stringify({
 								'默认': '推荐'

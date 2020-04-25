@@ -31,7 +31,7 @@
             stripe
           >
             <el-table-column type="selection" width="55" reserve-selection />
-            <el-table-column prop="couponName" label="优惠券名称" :show-overflow-tooltip="true" />
+            <el-table-column prop="couponTitle" label="优惠券名称" :show-overflow-tooltip="true" />
             <el-table-column
               prop="startTime"
               label="优惠券开始时间"

@@ -49,7 +49,7 @@ export default {
         'comSpu.spuId': [{ required: true, message: "请选择商品", trigger: 'change' }],
         'comSpu.startTime': [{ required: true, message: "请选择开始时间", trigger: 'blur' }],
         'comSpu.status': [{ required: true, message: "请选择活动状态", trigger: 'blur' }],
-        'comSpu.activityType': [{ required: true, message: "请选择优惠类型", trigger: 'blur' }],
+        'comSpu.activityType': [{ required: true, message: "请选择优惠类型", trigger: 'blur' }]
       }
     }
   }

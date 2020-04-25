@@ -8,8 +8,8 @@
     @close="hideBox"
   >
     <el-form ref="form" :model="form" :rules="rules" size="small" label-width="130px">
-      <el-form-item label="优惠券名称" prop="couponName">
-        <el-input :disabled="true" v-model="form.couponName" style="width: 350px;" />
+      <el-form-item label="优惠券名称" prop="couponTitle">
+        <el-input :disabled="true" v-model="form.couponTitle" style="width: 350px;" />
       </el-form-item>
       <el-form-item label="发布数量" prop="totalCount">
 			  <el-input v-model="form.totalCount" style="width: 350px;">
@@ -62,7 +62,7 @@ export default {
 			isAdd: true,
       form: {
         couponId: "",
-        couponName: "",
+        couponTitle: "",
         startTime: "",
         endTime: "",
         totalCount: 0,
@@ -70,7 +70,7 @@ export default {
         status: 1
       },
       rules: {
-        couponName: [{ required: false, message: "请输入优惠券名称", trigger: "blur" }],
+        couponTitle: [{ required: false, message: "请输入优惠券名称", trigger: "blur" }],
         startTime: [{ required: true, message: "请选择开始时间", trigger: "blur" }],
         endTime: [{ required: true, message: "请选择结束时间", trigger: "blur" }],
         totalCount: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
@@ -93,7 +93,7 @@ export default {
       this.resetForm();
     },
 		initial(data) {
-			this.form.couponName = data.title
+			this.form.couponTitle = data.title
 		},
 		getDetail() {
 			this.$http_json({
@@ -135,7 +135,7 @@ export default {
       this.$refs["form"].resetFields();
       this.form = {
         couponId: "",
-        couponName: "",
+        couponTitle: "",
         startTime: "",
         endTime: "",
         totalCount: 0,
