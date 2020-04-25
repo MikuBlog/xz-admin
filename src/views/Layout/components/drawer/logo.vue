@@ -44,8 +44,8 @@ export default {
         url: "/api/showConfig/getByName/logo",
         method: "get"
       }).then(result => {
-        this.logo = result.data.value
-				this.SET_LOGO_URL(result.data.value)
+        this.logo = convertHttp(result.data.value)
+				this.SET_LOGO_URL(convertHttp(result.data.value))
       })
     },
     // 选择Logo
