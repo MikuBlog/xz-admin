@@ -349,6 +349,7 @@ export default {
 		submitForm() {
 			this.$refs.form.validate(valid => {
 				if (valid) {
+          this.getPostagePrice()
 					if (this.generateSkuList.length && this.skuGroup === 'more') {
 						this.form.spu.specs = JSON.stringify(this.ensureSkuList.map(val => {
 							return {

@@ -56,7 +56,7 @@
           : Message
 						.errorMsg(
 							JSON.parse(err.response.request.response).message 
-							? JSON.parse(err.response.request.response).message.replace(/{.*}/g, '')
+							? JSON.parse(err.response.request.response).message.replace(/\{[^\{]*\}/g, '')
 							: JSON.parse(err.response.request.response)
 				))
 				: (regexp.test(err)

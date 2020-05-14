@@ -16,6 +16,11 @@
           <template slot="append">张</template>
 			  </el-input>
 			</el-form-item>
+      <el-form-item label="有效时间" prop="couponTime">
+			  <el-input v-model="form.couponTime" style="width: 350px;">
+          <template slot="append">天</template>
+			  </el-input>
+			</el-form-item>
       <el-form-item label="领取开始时间" prop="startTime">
 			  <el-date-picker
           v-model="form.startTime"
@@ -65,12 +70,14 @@ export default {
         couponTitle: "",
         startTime: "",
         endTime: "",
-        totalCount: 0,
+        totalCount: 100,
         onPermanent: true,
+        couponTime: 1,
         status: 1
       },
       rules: {
         couponTitle: [{ required: false, message: "请输入优惠券名称", trigger: "blur" }],
+        couponTime: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
         startTime: [{ required: true, message: "请选择开始时间", trigger: "blur" }],
         endTime: [{ required: true, message: "请选择结束时间", trigger: "blur" }],
         totalCount: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
@@ -138,8 +145,9 @@ export default {
         couponTitle: "",
         startTime: "",
         endTime: "",
-        totalCount: 0,
+        totalCount: 100,
         onPermanent: true,
+        couponTime: 1,
         status: 1
       };
     }

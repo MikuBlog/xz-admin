@@ -57,7 +57,8 @@ export default {
           onNew: true,
           onRecommend: true,
           onSeckill: true,
-					onSpecs: false,
+          onSpecs: false,
+          onIntegral: true,
           postagePrice: 0,
           sales: 0,
           salesPrice: 0,
@@ -73,12 +74,16 @@ export default {
           unit: "",
           vipPrice: 0,
           visit: 0,
-          warnStock: 0
+          warnStock: 0,
+          useIntegral: 0
         }
       },
       rules: {
 				'spu.cover': [
           { required: true, message: "请选择封面", trigger: "change" }
+        ],
+        'spu.useIntegral': [
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
         'spu.name': [
           { required: true, message: "请输入商品名称", trigger: "blur" }
@@ -118,6 +123,9 @@ export default {
         ],
         'spu.warnStock': [
           { required: true, min: 0, validator: validateNumber, trigger: "change" }
+        ],
+        'spu.onIntegral': [
+          { required: true, message: "请选择是否抵扣积分", trigger: "change" }
         ],
         'spu.onHot': [
           { required: true, message: "请选择热卖单品", trigger: "change" }

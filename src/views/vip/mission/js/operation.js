@@ -38,7 +38,7 @@ export default {
 		  this.$http_normal({
 		    url: `/api/memberTask/page?page=${page - 1}&size=${
 		      size
-		      }&sort=createTime,desc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.levelId ? `&levelId=${this.levelId}` : ''}`,
+		      }&sort=onShow,desc&sort=sort,asc${this.searchVal ? `&name=${this.searchVal}` : ""}${this.levelId ? `&levelId=${this.levelId}` : ''}`,
 		    method: "get"
 		  }).then(result => {
         const data = result.data;

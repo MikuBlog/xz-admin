@@ -300,7 +300,7 @@
                 </el-form-item>
                 <el-form-item label="库存" prop="spu.totalStock">
                   <el-input
-                    :disabled="!!generateSkuList.length"
+                    :disabled="!!generateSkuList.length && skuGroup === 'more'"
                     v-model="form.spu.totalStock"
                   >
                     <template slot="append">件</template>
@@ -340,6 +340,13 @@
                 <el-form-item label="预警库存" prop="spu.warnStock">
                   <el-input v-model="form.spu.warnStock">
                     <template slot="append">件</template>
+                  </el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="24">
+                <el-form-item label="抵扣积分" prop="spu.useIntegral">
+                  <el-input type="number" :disabled="!form.spu.onIntegral" v-model="form.spu.useIntegral">
+                    <template slot="append">分</template>
                   </el-input>
                 </el-form-item>
               </el-col>
@@ -388,6 +395,12 @@
                     <el-radio :label="0">拍下减库存</el-radio>
                     <el-radio :label="1">付款减库存</el-radio>
                     <el-radio :label="2">永不减库存</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="抵扣积分" prop="spu.onIntegral">
+                  <el-radio-group v-model="form.spu.onIntegral">
+                    <el-radio :label="true">是</el-radio>
+                    <el-radio :label="false">否</el-radio>
                   </el-radio-group>
                 </el-form-item>
               </el-col>

@@ -3,7 +3,7 @@
     append-to-body
     :before-close="hideBox"
     :visible.sync="dialog"
-    :title="isAdd ? '新增滚动新闻' : '编辑滚动新闻'"
+    :title="isAdd ? '新增签到配置' : '编辑签到配置'"
     width="500px"
     v-dialogDrag
     @close="hideBox"
@@ -47,9 +47,9 @@ export default {
       form: {
         id: "",
         day: "",
-        integral: "",
+        integral: 0,
         enabled: true,
-        sort: 999,
+        sort: 1,
 				groupName: "sign_day_num"
       },
       rules: {

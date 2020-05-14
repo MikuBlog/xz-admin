@@ -352,6 +352,7 @@ export default {
 		submitForm() {
 			this.$refs.form.validate(valid => {
 				if (valid) {
+          this.getPostagePrice()
 					if (this.generateSkuList.length && this.skuGroup === 'more') {
 						this.form.spu.specs = JSON.stringify(this.ensureSkuList.map(val => {
 							return {
@@ -372,10 +373,10 @@ export default {
 						this.form.spu.onSpecs = true
 					} else {
 						this.form.skus.push({
-							costPrice: this.form.spu.salesPrice,
+							costPrice: this.form.spu.costPrice,
 							image: this.form.spu.cover,
 							sales: 0,
-							salesPrice: 0,
+							salesPrice: this.form.spu.salesPrice,
 							stock: this.form.spu.totalStock,
 							value: JSON.stringify({
 								'默认': '推荐'

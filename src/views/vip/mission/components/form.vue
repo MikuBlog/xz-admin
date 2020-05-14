@@ -3,7 +3,7 @@
     append-to-body
     :before-close="hideBox"
     :visible.sync="dialog"
-    :title="isAdd ? '新增会员等级' : '编辑会员等级'"
+    :title="isAdd ? '新增等级任务' : '编辑等级任务'"
     width="500px"
     @close="hideBox"
   >
@@ -21,15 +21,23 @@
         </el-select>
       </el-form-item>
       <el-form-item label="配置原名" prop="realName">
-        <el-input :disabled="!isAdd" type="text" v-model="form.realName" style="width: 350px;"></el-input>
-      </el-form-item>
-      <el-form-item label="任务类型" prop="taskType">
-        <el-input :disabled="!isAdd" type="text" v-model="form.taskType" style="width: 350px;"></el-input>
+        <el-select
+          v-model="form.realName"
+          :disabled="!isAdd"
+          @change="getRealName"
+        >
+          <el-option
+            v-for="(item, ind) in options"
+            :key="ind"
+            :label="item.value"
+            :value="item.value"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="任务名称" prop="name">
         <el-input type="text" v-model="form.name" style="width: 350px;"></el-input>
       </el-form-item>
-      <el-form-item label="限定数" prop="number">
+      <el-form-item label="达标数" prop="number">
         <el-input-number controls-position="right" type="number" v-model="form.number" style="width: 350px;"></el-input-number>
       </el-form-item>
       <el-form-item label="排序" prop="sort">
@@ -67,13 +75,20 @@ export default {
       dialog: false,
       isAdd: true,
       levelList: [],
+      options: [{
+        value: "积分数"
+      }, {
+        value: "消费金额"
+      }, {
+        value: "累计签到"
+      }],
       form: {
         id: "",
         name: "",
         levelId: "",
         number: 0,
-        realName: 1,
-        taskType: 0,
+        realName: "",
+        taskType: "",
         sort: 0,
         onShow: true,
         onMust: false,
@@ -82,7 +97,6 @@ export default {
       rules: {
         name: [{ required: true, message: "请输入等级名称", trigger: "blur" }],
         realName: [{ required: !this.isAdd, message: "请输入配置原名", trigger: "blur" }],
-        taskType: [{ required: !this.isAdd, message: "请输入任务类型", trigger: "blur" }],
         sort: [{ required: true, min: 0, max: 999, validator: validateNumber, trigger: "change" }],
         number: [{ required: true, min: 0, validator: validateNumber, trigger: "change" }],
         levelId: [
@@ -112,6 +126,19 @@ export default {
     hideBox() {
       this.resetForm();
     },
+    getRealName(e) {
+      switch(e) {
+        case "积分数":
+          this.form.taskType = "SatisfactionIntegral";
+          break;
+        case "消费金额":
+          this.form.taskType = "ConsumptionAmount";
+          break;
+        case "累计签到":
+          this.form.taskType = "CumulativeAttendance";
+          break;
+      }
+    },
     initialLevelList(list) {
 		  this.levelList.splice(0);
 		  list.forEach(value => {
@@ -135,7 +162,7 @@ export default {
       Object
 				.keys(data)
 				.forEach(val => {
-          if(val === 'createTime' || val === 'editTime' || val === 'deletion' || val === 'editor') {
+          if(val === 'createTime' || val === 'editTime' || val === 'deletion' || val === 'editor' || val === 'creator' || val === 'levelName') {
             return
           }
 					this.form[val] = data[val]
@@ -230,8 +257,8 @@ export default {
         name: "",
         levelId: "",
         number: 0,
-        realName: 1,
-        taskType: 0,
+        realName: "" ,
+        taskType: "",
         sort: 0,
         onShow: true,
         onMust: false,

@@ -24,6 +24,11 @@ export default {
 				this.uuid = data.uuid
 				this.codeUrl = data.img
 			})
+			let clock = setTimeout(() => {
+				if(!this.codeUrl) {
+					this.getCode()
+				}
+			}, 5000)
 		},
 		submit() {
 			if (!this.username) {

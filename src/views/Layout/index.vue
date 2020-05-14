@@ -122,7 +122,7 @@
 					</transition>
           <back-top
             :options="{
-              target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
+              target: '#top',
               isMove: true
             }"
           />

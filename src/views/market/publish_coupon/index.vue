@@ -42,6 +42,24 @@
               label="优惠券结束时间"
               :show-overflow-tooltip="true"
             />
+            <el-table-column
+              prop="totalCount"
+              label="发布张数"
+              :show-overflow-tooltip="true"
+              align="center"
+            />
+            <el-table-column
+              prop="remainCount"
+              label="剩余张数"
+              :show-overflow-tooltip="true"
+              align="center"
+            />
+            <el-table-column
+              prop="couponTime"
+              label="有效天数(天)"
+              :show-overflow-tooltip="true"
+              align="center"
+            />
             <el-table-column prop="type" label="状态" :show-overflow-tooltip="true" align="center">
               <template slot-scope="scope">
                 <el-tag

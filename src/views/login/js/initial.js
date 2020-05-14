@@ -59,6 +59,11 @@ export default {
         this.ruleForm.uuid = data.uuid
         this.codeUrl = data.img
       })
+			let clock = setTimeout(() => {
+				if(!this.codeUrl) {
+					this.getCode()
+				}
+			}, 5000)
     }
   }
 }
