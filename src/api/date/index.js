@@ -1,135 +1,129 @@
+import moment from 'moment'
+// 设置语言
+moment.locale('zh-cn')
+
 /**
  * @author xuanzai
  * @description 日期格式化
- * @param {Date} dateTime 日期
- * @param {Boolean} isAccurate 是否精确到时分秒 
  */
-const formatDate = (dateTime, isAccurate = false) => {
-	if ((typeof dateTime).toLowerCase() === 'string') {
-		dateTime = dateTime.replace(/-/g, "/")
+function formatDate(date, isAccurate = false) {
+	let rules = `YYYY-MM-DD${isAccurate
+	? ' HH:mm:ss'
+	: ''}`
+	if(date) {
+		return moment(date).format(rules)
+	} else {
+		return moment().format(rules)
 	}
-	let nowDate = new Date(dateTime)
-	let date = new Date(nowDate.getTime() - (nowDate.getTimezoneOffset() * 60000))
-	let newDate = date.toISOString().split("T")[0]
-	isAccurate
-		&&
-		(newDate = `${date.toISOString().split("T")[0]} ${date.toISOString().split("T")[1].split('.')[0]}`)
-	return newDate
 }
 
 /**
  * @author xuanzai
- * @description 日期差
- * @param {Date} sDate1 时间戳
- * @param {Date} sDate2 时间戳
- * @param {Boolean} isNegative true，返回结果可以为负值，否则都为正值
+ * @description 设置天数
  */
-const dateDiff = (sDate1, sDate2, isNegative) => {
-	let iDays = ""
-	isNegative
-		?
-		iDays = new Date(sDate1) - new Date(sDate2) :
-		iDays = sDate1 < sDate2 ?
-		(new Date(sDate2) - new Date(sDate1)) :
-		(new Date(sDate1) - new Date(sDate2))
-	return iDays / 1000 / 60 / 60 / 24
+function setDay(date, number, isAccurate = false) {
+	let rules = `YYYY-MM-DD${isAccurate
+	? ' HH:mm:ss'
+	: ''}`
+	if(date) {
+		return moment(date).add(number, 'days').format(rules)
+	} else {
+		return moment(date).add(number, 'day').format(rules)
+	}
 }
 
 /**
  * @author xuanzai
- * @description 时间差
- * @param {Date} time_1 时间戳
- * @param {Date} time_2 时间戳
+ * @description 设置月份
  */
-const timeDiff = (time_1, time_2) => {
-	let time = ""
-	time = time_1 < time_2 ?
-		(new Date(time_2) - new Date(time_1)) :
-		(new Date(time_1) - new Date(time_2))
-	let hour = Math.floor(time / 1000 / 60 / 60)
-	let min = Math.floor((time % (60 * 60 * 1000)) / 1000 / 60)
-	let ses = Math.floor(((time % (60 * 60 * 1000)) % (60 * 1000)) / 1000)
+function setMonth(date, number, isAccurate = false) {
+	let rules = `YYYY-MM-DD${isAccurate
+	? ' HH:mm:ss'
+	: ''}`
+	if(date) {
+		return moment(date).add(number, 'months').format(rules)
+	} else {
+		return moment(date).add(number, 'months').format(rules)
+	}
+}
+
+/**
+ * @author xuanzai
+ * @description 设置年份
+ */
+function setYear(date, number, isAccurate = false) {
+	let rules = `YYYY-MM-DD${isAccurate
+	? ' HH:mm:ss'
+	: ''}`
+	if(date) {
+		return moment(date).add(number, 'years').format(rules)
+	} else {
+		return moment(date).add(number, 'years').format(rules)
+	}
+}
+
+/**
+ * @author xuanzai
+ * @description 设置年月日时分秒
+ */
+function setDate(date, {
+	years, quarters, months, weeks, days, hours, minutes, seconds, milliseconds
+}, isAccurate = false) {
+	const 
+		obj = {
+			years, quarters, months, weeks, days, hours, minutes, seconds, milliseconds
+		},
+		rules = `YYYY-MM-DD${isAccurate
+		? ' HH:mm:ss'
+		: ''}`
+	if(date) {
+		return moment(date).add(obj).format(rules)
+	} else {
+		return moment(date).add(obj).format(rules)
+	}
+}
+
+/**
+ * @author xuanzai
+ * @description 时间差 date_1 - date_2
+ */
+function dateDiff(date_1, date_2) {
+	let 
+		timeLine = moment(date_1).diff(moment(date_2)) / 1000,
+		second = parseInt(timeLine % (60 * 60) % 60),
+		minute = parseInt(timeLine % (60 * 60) / 60),
+		hour= parseInt(timeLine / 60 / 60)
 	return {
+		stamp: timeLine * 1000,
+		seconds: timeLine,
+		minutes: parseInt(timeLine / 60),
+		hours: parseInt(timeLine / 60 / 60),
+		days: parseInt(timeLine / 60 / 60 / 24),
+		weeks: parseInt(timeLine / 60 / 60 / 24 / 7),
 		time: `${hour < 10
 		? `0${hour}`
-		: hour}:${min < 10
-		? `0${min}`
-		: min}:${ses < 10
-		? `0${ses}`
-		: ses}`,
-		hour,
-		min,
-		ses,
-		totalSes: hour * 3600 + min * 60 + ses
+		: hour}:${minute < 10
+		? `0${minute}`
+		: minute}:${second < 10
+		? `0${second}`
+		: second}`
 	}
 }
 
 /**
  * @author xuanzai
- * @description 时间差
- * @param {String} date 中文日期格式
- * @return {String} 带年月日的中文日期
+ * @description 相对于现在时间
  */
-function dateToChinese(date) {
-	if(!date) {
-		return
-	}
-	if((typeof date).toLowerCase() === 'object') {
-		date = formatDate(date, true)
-	}
-	const arr = date.split(/[ \/-]/g)
-	return `${arr[0]}年${arr[1] < 10
-			? arr[1].replace(/0/, '')
-			: arr[1]}月${arr[2] < 10
-			? arr[2].replace(/0/, '')
-			: arr[2]}日 ${date.split(" ")[1]}`
-}
-
-
-/**
- * @author xuanzai
- * @description 获取指定日期
- */
-function getFirstDate() {
-	let date = new Date()
-	date.setDate(1)
-	return formatDate(date)
-}
-
-function getLastDate() {
-	let date = new Date()
-	date.setMonth(date.getMonth() + 1)
-	return formatDate(new Date(date).setDate(0))
-}
-
-function getPreMonth(n) {
-	let date = new Date()
-	date.setMonth(date.getMonth() - n)
-	return formatDate(date)
-}
-
-function getPreDate(n) {
-	return formatDate(new Date().getTime() - n * 1000 * 60 * 60 * 24)
-}
-
-function getAfterMonth(n) {
-	let date = new Date()
-	date.setMonth(date.getMonth() + n)
-	return formatDate(date)
-}
-
-function getAfterDate(n) {
-	return formatDate(new Date().getTime() + n * 1000 * 60 * 60 * 24)
+function fromNow(date) {
+	return moment(date).fromNow()
 }
 
 export default {
 	formatDate,
+	setDay,
+	setMonth,
+	setYear,
+	setDate,
 	dateDiff,
-	timeDiff,
-	getFirstDate,
-	getLastDate,
-	getPreMonth,
-	getPreDate,
-	getAfterMonth,
-	getAfterDate
+	fromNow
 }
