@@ -20,6 +20,7 @@
     "jsencrypt": "^3.0.0-rc.1",
     "jszip": "^3.2.2",
     "mavon-editor": "^2.7.5",
+    "moment": "^2.25.3",
     "nprogress": "^0.2.0",
     "overlayscrollbars": "^1.10.0",
     "path": "^0.12.7",
