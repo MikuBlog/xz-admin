@@ -1,4 +1,3 @@
-import moment from 'moment'
 // 设置语言
 moment.locale('zh-cn')
 
