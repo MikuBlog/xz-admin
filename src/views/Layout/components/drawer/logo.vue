@@ -45,7 +45,7 @@ export default {
         method: "get"
       }).then(result => {
         this.logo = convertHttp(result.data.value)
-				this.SET_LOGO_URL(convertHttp(result.data.value))
+        this.SET_LOGO_URL(convertHttp(result.data.value))
       })
     },
     // 选择Logo
