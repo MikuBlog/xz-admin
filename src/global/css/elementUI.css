@@ -47,6 +47,27 @@
   margin: 1rem 0;
 }
 
+.el-table__body-wrapper::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+	background-color: rgba(240, 240, 240, .5);
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+	background-color: #dddddd;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a1a3a9;
+  border-radius: 3px;
+}
+
 .el-menu-item {
   background: none!important;
 }
