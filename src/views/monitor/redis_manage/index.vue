@@ -25,6 +25,7 @@ import { MessageBox } from 'mint-ui';
           <el-table
             :data="redisList"
             style="width: 100%"
+						:max-height="$store.state.tableHeight.tableHeight"
             highlight-current-row
             stripe
           >

@@ -1,7 +1,7 @@
 export default {
   created() {
     // 初始化获取菜单列表
-    this.getMenuList();
+    this.getMenuList();		
   },
   methods: {
     // 初始化菜单列表

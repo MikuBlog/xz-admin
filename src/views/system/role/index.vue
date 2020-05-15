@@ -40,6 +40,7 @@
           </div>
           <el-table
             :data="roleList"
+						:max-height="$store.state.tableHeight.tableHeight"
             style="width: 100%;"
             highlight-current-row
             stripe

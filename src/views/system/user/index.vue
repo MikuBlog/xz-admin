@@ -90,6 +90,7 @@
             ref="userTable"
             :data="userList"
             style="width: 100%;"
+						:max-height="$store.state.tableHeight.tableHeight"
             @selection-change="handleSelectionChange"
             :row-key="getRowKey"
             highlight-current-row

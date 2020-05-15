@@ -47,7 +47,7 @@ export default {
 				method: "post",
 				data: {
 					username: this.username,
-					password: encrypt(this.password),
+					password: this.password,
 					vcode: this.vcode,
 					uuid: this.uuid
 				}

@@ -5,7 +5,7 @@
 			<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 			<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 		</div>
-		<el-table :data="operationLogList" style="width: 100%" highlight-current-row stripe>
+		<el-table :data="operationLogList" :max-height="$store.state.tableHeight.tableHeight" style="width: 100%" highlight-current-row stripe>
 			<el-table-column label="行为" show-overflow-tooltip>
 				<template slot-scope="scope">
 					<span style="margin-left: 10px">{{ scope.row.description }}</span>

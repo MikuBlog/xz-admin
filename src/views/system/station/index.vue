@@ -45,6 +45,7 @@
           </div>
           <el-table
             :data="stationList"
+						:max-height="$store.state.tableHeight.tableHeight"
             style="width: 100%"
             highlight-current-row
             stripe

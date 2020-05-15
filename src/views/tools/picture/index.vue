@@ -49,6 +49,7 @@
           <el-table
             ref="pictureTable"
             :data="pictureList"
+						:max-height="$store.state.tableHeight.tableHeight"
             style="width: 100%;"
             :row-key="getRowKey"
             @selection-change="selectItem"

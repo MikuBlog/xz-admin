@@ -33,9 +33,9 @@
           </div>
           <el-table
             :data="menuList"
-            style="width: 100%;margin-bottom: 20px;"
             row-key="id"
             v-if="isShow"
+						:max-height="$store.state.tableHeight.tableHeight"
             :default-expand-all="expand"
             :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
             highlight-current-row
