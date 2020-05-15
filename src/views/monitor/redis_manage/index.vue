@@ -57,7 +57,6 @@ import { MessageBox } from 'mint-ui';
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @deleteAll="deleteAll" />
     <VisitDetail ref="visitDetail" />
 		<DeleteAll ref="deleteAll" />
   </div>

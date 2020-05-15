@@ -52,7 +52,6 @@
 				<pagination ref="pagination" :get-data="getFileList" :now-page.sync="nowPage" :now-size.sync="nowSize" :total="totalElements" />
 			</el-col>
 		</el-row>
-		<operation-box only-key="qiniuyunBox" :options="buttonOptions" @uploadFile="uploadFile" @deleteAll="deleteAll" @exportFile="exportFile" @showConfigModal="showConfigModal" />
 		<eForm ref="form" />
 		<Config ref="config" />
 		<Share ref="share" />

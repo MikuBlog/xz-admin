@@ -10,13 +10,7 @@ export default {
       // 总条数
       totalElements: 0,
       dialogVisible: false,
-      redisDetail: "",
-      buttonOptions: [{
-        type: "danger",
-        icons: 'el-icon-delete',
-        title: "批量删除",
-        method: "deleteAll"
-      }]
+      redisDetail: ""
     }
   }
 }

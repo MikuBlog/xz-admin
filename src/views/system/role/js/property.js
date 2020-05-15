@@ -25,18 +25,7 @@ export default {
       permissions: [],
       permissionIds: [],
       menus: [],
-      menuIds: [],
-      buttonOptions: [{
-        type: "primary",
-        icons: 'el-icon-plus',
-        title: "添加角色",
-        method: "showAddRole"
-      }, {
-        type: "warning",
-        icons: 'el-icon-download',
-        title: "导出角色列表",
-        method: "downloadList"
-      }]
+      menuIds: []
     };
   }
 }
