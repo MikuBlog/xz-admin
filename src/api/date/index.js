@@ -1,7 +1,6 @@
 import moment from 'moment'
-import { language } from '@/global/js/baseUrl'
 // 设置语言
-moment.locale(language)
+moment.locale('zh-cn')
 
 /**
  * @author xuanzai
