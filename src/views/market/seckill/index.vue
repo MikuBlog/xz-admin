@@ -22,7 +22,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAll="deleteAll" />
     <eForm ref="form" />
 	</div>
 </template>

@@ -36,7 +36,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllParam="deleteAllParam" />
 		<AddForm ref="addForm" />
 		<EditForm ref="editForm" />
 	</div>

@@ -41,7 +41,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllMenu="deleteAllMenu" />
 		<ImagePreview :show-modal.sync="isShow" :url="url" />
 		<eForm ref="form" />
 	</div>

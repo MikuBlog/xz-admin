@@ -109,7 +109,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @toAddGoodsPage="toAddGoodsPage" @deleteAllGoods="deleteAllGoods" />
 		<ImagePreview :show-modal.sync="isShow" :url="url" />
 	</div>
 </template>

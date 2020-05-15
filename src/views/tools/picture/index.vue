@@ -93,12 +93,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box
-      :options="buttonOptions"
-      @uploadPic="uploadPic"
-      @deleteAll="deleteAll"
-      @exportImage="exportImage"
-    />
     <eForm ref="form" />
     <ImagePreview :show-modal.sync="isShow" :url="url" />
   </div>

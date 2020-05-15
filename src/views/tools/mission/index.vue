@@ -117,7 +117,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @addItem="addItem" @showLogList="showLogList" />
     <Form ref="form" :is-add="isAdd" />
     <Table ref="table" />
   </div>

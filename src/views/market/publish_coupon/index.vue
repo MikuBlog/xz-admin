@@ -95,14 +95,11 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions"
-    @deleteAllLevel="deleteAllCoupon" />
     <eForm ref="form" />
   </div>
 </template>
 
 <script>
-import Operation from "./js/operation";
 import Property from "./js/property";
 import eForm from './components/form'
 export default {

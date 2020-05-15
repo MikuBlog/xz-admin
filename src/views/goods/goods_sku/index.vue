@@ -43,7 +43,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllSku="deleteAllSku" />
 		<AddForm ref="addForm" />
 		<EditForm ref="editForm" />
 	</div>

@@ -52,7 +52,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @toAddCombinationPage="toAddCombinationPage" @deleteAllCombination="deleteAllCombination" />
 		<ImagePreview :show-modal.sync="isShow" :url="url" />
 	</div>
 </template>

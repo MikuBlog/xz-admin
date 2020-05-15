@@ -92,11 +92,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box
-      :options="buttonOptions"
-      @kickOutAll="kickOutAll"
-      downloadList="downloadList"
-    />
   </div>
 </template>
 

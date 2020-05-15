@@ -73,7 +73,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @deleteAllComment="deleteAllComment" />
 		<ImagePreview :show-modal.sync="isShow" :url="url" />
     <eForm ref="form" />
 	</div>

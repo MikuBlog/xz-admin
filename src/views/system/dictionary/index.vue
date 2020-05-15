@@ -166,7 +166,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @addDictionary="addDictionary" @addDetail="addDetail" @downloadList="downloadList"/>
     <Form-Add ref="formAdd" :isAdd="isAdd_1" />
     <Form-Edit ref="formEdit" :isAdd="isAdd_2" @updateDetailList="getDetailList" />
   </div>

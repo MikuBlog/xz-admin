@@ -35,7 +35,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllSignInRules="deleteAllSignInRules" />
 		<eForm ref="form" />
 	</div>
 </template>

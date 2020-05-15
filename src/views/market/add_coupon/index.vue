@@ -56,7 +56,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllCoupon="deleteAllCoupon" />
     <eForm ref="form" />
     <publishForm ref="publishForm" />
 	</div>

@@ -41,23 +41,7 @@ export default {
         }
       ],
       userList: [],
-      selectList: [],
-      buttonOptions: [{
-        type: "primary",
-        icons: 'el-icon-plus',
-        title: "添加新用户",
-        method: "showAddUser"
-      }, {
-        type: "danger",
-        icons: 'el-icon-delete',
-        title: "批量删除",
-        method: "deleteAll"
-      }, {
-        type: "warning",
-        icons: 'el-icon-download',
-        title: "导出用户列表",
-        method: "downloadUserList",
-      }]
+      selectList: []
     };
   }
 }

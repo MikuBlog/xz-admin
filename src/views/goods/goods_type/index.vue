@@ -81,11 +81,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @showAddBox="showAddBox"
-		@downloadList="downloadList"
-		@deleteAllGoodsType="deleteAllGoodsType"/>
 		<ImagePreview :show-modal.sync="isShowPic" :url="url" />
     <eForm ref="form" />
   </div>

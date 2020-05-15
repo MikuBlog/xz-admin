@@ -34,7 +34,6 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @showAddBox="showAddBox" @deleteAllHotWords="deleteAllHotWords" />
 		<ImagePreview :show-modal.sync="isShow" :url="url" />
 		<eForm ref="form" />
 	</div>
