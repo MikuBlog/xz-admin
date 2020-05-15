@@ -33,6 +33,7 @@
           </div>
           <el-table
             :data="authorityList"
+						:max-height="$store.state.tableHeight.tableHeight"
             style="width: 100%;margin-bottom: 20px;"
             row-key="id"
             v-if="isShow"

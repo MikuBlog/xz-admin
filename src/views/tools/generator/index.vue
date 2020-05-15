@@ -20,7 +20,7 @@
               title="重置"
             ></el-button>
           </div>
-          <el-table :data="generateCodeList" style="width: 100%" highlight-current-row stripe>
+          <el-table :max-height="$store.state.tableHeight.tableHeight" :data="generateCodeList" style="width: 100%" highlight-current-row stripe>
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">

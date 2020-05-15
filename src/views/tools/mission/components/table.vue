@@ -31,7 +31,7 @@
         title="重置"
       ></el-button>
     </div>
-    <el-table :data="missionLogList" style="width: 100%" highlight-current-row stripe>
+    <el-table :max-height="$store.state.tableHeight.tableHeight" :data="missionLogList" style="width: 100%" highlight-current-row stripe>
       <el-table-column label="任务名称" show-overflow-tooltip>
         <template slot-scope="scope">
           <div slot="reference" class="name-wrapper">{{ scope.row.jobName }}</div>

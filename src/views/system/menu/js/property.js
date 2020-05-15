@@ -19,7 +19,8 @@ export default {
 			}],
       options: {
         animation: 150,
-      }
+      },
+			tableMaxHeight: 0
     };
   }
 } 
