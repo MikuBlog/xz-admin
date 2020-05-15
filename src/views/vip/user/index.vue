@@ -8,7 +8,7 @@
 						<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 					</div>
-					<el-table ref="table" :data="userList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="userList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column prop="nickname" label="用户昵称" :show-overflow-tooltip="true" />
             <el-table-column :show-overflow-tooltip="true" prop="url" label="用户头像" align="center">
 							<template slot-scope="scope">

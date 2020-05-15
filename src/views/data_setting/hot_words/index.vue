@@ -10,7 +10,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="showAddBox" title="添加热词" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllHotWords" :disabled="!selectList.length" title="批量删除热词" circle></el-button>
 					</div>
-					<el-table ref="table" :data="hotWordsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="hotWordsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column prop="name" label="热词名称" :show-overflow-tooltip="true" />
 						<el-table-column label="排序" align="center" show-overflow-tooltip>

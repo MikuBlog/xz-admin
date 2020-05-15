@@ -10,7 +10,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddGoodsPage" title="添加商品" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllGoods" :disabled="!selectList.length" title="批量删除商品" circle></el-button>
 					</div>
-					<el-table ref="table" :data="goodsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="goodsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column type="expand">
 							<template slot-scope="props">

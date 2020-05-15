@@ -10,7 +10,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="showAddBox" title="添加商品参数" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllParam" :disabled="!selectList.length" title="批量删除商品参数" circle></el-button>
 					</div>
-					<el-table ref="table" :data="paramList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="paramList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column prop="name" label="商品参数名" :show-overflow-tooltip="true" />
             <el-table-column prop="name" label="商品参数值" :show-overflow-tooltip="true" align="center">

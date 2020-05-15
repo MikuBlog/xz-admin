@@ -10,7 +10,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="showAddBox" title="添加品牌" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllBrand" :disabled="!selectList.length" title="批量删除资讯" circle></el-button>
 					</div>
-					<el-table ref="table" :data="brandList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table"  :max-height="$store.state.tableHeight.tableHeight" :data="brandList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column prop="name" label="品牌名称" :show-overflow-tooltip="true" />
             <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="品牌图片" align="center">

@@ -39,6 +39,7 @@
           <el-table
             ref="table"
             :data="billList"
+						:max-height="$store.state.tableHeight.tableHeight"
             style="width: 100%"
             @selection-change="handleSelectionChange"
             :row-key="getRowKey"

@@ -10,7 +10,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="showAddBox" title="添加滚动新闻" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllNews" :disabled="!selectList.length" title="批量删除滚动新闻" circle></el-button>
 					</div>
-					<el-table ref="table" :data="newsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="newsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column type="expand">
 						  <template slot-scope="props">

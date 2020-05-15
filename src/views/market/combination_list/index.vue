@@ -17,7 +17,7 @@
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<!-- <el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllCombination" :disabled="!selectList.length" title="批量删除拼团信息" circle></el-button> -->
 					</div>
-					<el-table ref="table" :data="list" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="list" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<!-- <el-table-column type="selection" width="55" reserve-selection /> -->
             <!-- <el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="产品封面" align="center">
 							<template slot-scope="scope">

@@ -10,7 +10,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="showAddBox" title="添加幻灯片" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllSlide" :disabled="!selectList.length" title="批量删除幻灯片" circle></el-button>
 					</div>
-					<el-table ref="table" :data="slideList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="slideList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column prop="name" label="名称" :show-overflow-tooltip="true" />
 						<el-table-column prop="linkUrl" label="链接url" :show-overflow-tooltip="true" />

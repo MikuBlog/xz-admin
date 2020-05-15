@@ -10,7 +10,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddArticlePage" title="添加资讯" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllArticle" :disabled="!selectList.length" title="批量删除资讯" circle></el-button>
 					</div>
-					<el-table ref="table" :data="articleList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="articleList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column prop="title" label="标题" :show-overflow-tooltip="true" />
 						<el-table-column prop="type" label="分类" :show-overflow-tooltip="true">
