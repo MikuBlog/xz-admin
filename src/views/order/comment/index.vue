@@ -20,7 +20,7 @@
 						<el-button type="success" icon="el-icon-refresh" class="margin-box" @click="refresh" circle title="重置"></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllComment" :disabled="!selectList.length" title="批量删除评论" circle></el-button>
 					</div>
-					<el-table ref="table" :data="commentList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="commentList" style="width: 100%" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
             <el-table-column type="expand">
               <template slot-scope="props">
@@ -34,24 +34,42 @@
                   <el-form-item label="回复内容" class="expand-line">
                     <span>{{ props.row.merchantReplyContent || "无" }}</span>
                   </el-form-item>
+                  <el-form-item label="追加评论" class="expand-line" v-if="props.row.children">
+                    <div class="list" v-for="(item, ind) in props.row.children" :key="ind">
+                      <div>{{ item.createTime }}</div>
+                      <div>{{ item.content }}</div>
+                      <div v-for="(item, ind) in JSON.parse(item.picUrls)" :key="ind">
+                        <img width="30" height="30" style="margin-right: 5px; vertical-align: top" :src="convertHttp(item)" @click="(isShow = true), (url = convertHttp(item))" :key="ind">
+                      </div>
+                    </div>
+                  </el-form-item>
                 </el-form>
               </template>
             </el-table-column>
 						<el-table-column prop="nickname" label="用户昵称" :show-overflow-tooltip="true" />
-            <el-table-column prop="productName" label="商品信息" :show-overflow-tooltip="true" />
-						<el-table-column prop="type" label="商品分数" :show-overflow-tooltip="true">
+            <el-table-column prop="productName" label="商品名称" :show-overflow-tooltip="true" />
+            <el-table-column prop="productName" label="商品信息" :show-overflow-tooltip="true">
+              <template slot-scope="scope">
+                <div class="name-wrapper">
+                  <span style="padding-right: 5px" v-for="(val, key) in JSON.parse(scope.row.skuInfo)">
+                    {{ key }}：{{val}}
+                  </span>
+                </div>
+              </template>
+            </el-table-column>
+						<el-table-column prop="type" label="商品分数">
 							<template slot-scope="scope">
                 <el-rate
-                  :value ="scope.row.productScore / 10"
+                  :value ="scope.row.productScore"
                   disabled
                   score-template="{value}">
                 </el-rate>
               </template>
 						</el-table-column>
-            <el-table-column prop="type" label="服务分数" :show-overflow-tooltip="true">
+            <el-table-column prop="type" label="服务分数">
 							<template slot-scope="scope">
                 <el-rate
-                  :value ="scope.row.serviceScore / 10"
+                  :value ="scope.row.serviceScore"
                   disabled
                   score-template="{value}">
                 </el-rate>
@@ -73,6 +91,7 @@
 				</el-card>
 			</el-col>
 		</el-row>
+		<operation-box :options="buttonOptions" @deleteAllComment="deleteAllComment" />
 		<ImagePreview :show-modal.sync="isShow" :url="url" />
     <eForm ref="form" />
 	</div>
