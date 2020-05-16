@@ -1,6 +1,4 @@
 import Vue from 'vue'
-// 引入markdown编辑器
-import mavonEditor from 'mavon-editor'
 // 引入表单生成器
 import FormMaking from 'form-making'
 // 引入表单生成器富文本
@@ -26,7 +24,6 @@ import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import 'mavon-editor/dist/css/index.css'
 import 'form-making/dist/FormMaking.css'
 // 引入全局提示模块
 import Message from '@/api/message'
@@ -424,8 +421,6 @@ Vue.prototype.$exportFile = exportFile
  * @description 全局通用配置
  */
 Vue.prototype.defaultConfig = DefaultConfig
-// 引入markdown编辑器组件
-Vue.use(mavonEditor)
 // 引入树状选择器组件
 Vue.component('treeselect', Treeselect)
 // 引入表单生成器
