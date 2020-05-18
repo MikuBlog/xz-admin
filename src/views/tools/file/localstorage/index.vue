@@ -50,7 +50,6 @@
 				<pagination ref="pagination" :get-data="getFileList" :now-page.sync="nowPage" :now-size.sync="nowSize" :total="totalElements" />
 			</el-col>
 		</el-row>
-		<operation-box :options="buttonOptions" @uploadFile="uploadFile" @deleteAll="deleteAll" @exportFile="exportFile" />
 		<eForm ref="form" />
 		<ImagePreview :show-modal.sync="isShow" :url="url" />
 	</div>

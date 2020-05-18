@@ -47,6 +47,16 @@
   margin: 1rem 0;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a1a3a9;
+  border-radius: 3px;
+}
+
 .el-table__body-wrapper::-webkit-scrollbar {
 	width: 8px;
 	height: 8px;

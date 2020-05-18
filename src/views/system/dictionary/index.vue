@@ -128,7 +128,7 @@
               ></el-button>
             </el-row>
           </div>
-          <el-table :data="detailList" style="width: 100%" highlight-current-row stripe>
+          <el-table :data="detailList" :max-height="$store.state.tableHeight.tableHeight" style="width: 100%" highlight-current-row stripe>
             <el-table-column label="所属字典" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ beloneDictName }}</span>
@@ -166,7 +166,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @addDictionary="addDictionary" @addDetail="addDetail" @downloadList="downloadList"/>
     <Form-Add ref="formAdd" :isAdd="isAdd_1" />
     <Form-Edit ref="formEdit" :isAdd="isAdd_2" @updateDetailList="getDetailList" />
   </div>

@@ -89,10 +89,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @showAddDepartment="showAddDepartment"
-		@downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>

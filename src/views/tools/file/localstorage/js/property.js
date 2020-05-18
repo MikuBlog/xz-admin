@@ -16,23 +16,7 @@ export default {
       fileList: [],
       idList: [],
       isShow: false,
-      url: "https://myinterface.xuanzai.top/getPicture",
-      buttonOptions: [{
-        type: "primary",
-        icons: 'el-icon-upload',
-        title: "上传文件",
-        method: "uploadFile"
-      }, {
-        type: "warning",
-        icons: 'el-icon-download',
-        title: "批量导出文件",
-        method: "exportFile"
-      }, {
-        type: "danger",
-        icons: 'el-icon-delete',
-        title: "批量删除",
-        method: "deleteAll"
-      }]
+      url: "https://myinterface.xuanzai.top/getPicture"
     }
   }
 }

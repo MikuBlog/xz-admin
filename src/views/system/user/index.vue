@@ -153,12 +153,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box
-      :options="buttonOptions"
-      @showAddUser="showAddUser"
-      @deleteAll="deleteAll"
-      @downloadUserList="downloadUserList"
-    />
     <eForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>

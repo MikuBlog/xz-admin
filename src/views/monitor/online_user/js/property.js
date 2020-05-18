@@ -9,18 +9,7 @@ export default {
       // 当前页条数
       nowSize: 10,
       // 总条数
-      totalElements: 0,
-      buttonOptions: [{
-        type: "danger",
-        icons: 'fa fa-user-times',
-        title: "批量踢出",
-        method: "kickOutAll"
-      }, {
-        type: "warning",
-        icons: 'el-icon-download',
-        title: "导出用户列表",
-        method: "downloadUserList"
-      }]
+      totalElements: 0
     }
   }
 }

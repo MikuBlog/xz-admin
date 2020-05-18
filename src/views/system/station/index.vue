@@ -106,7 +106,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box :options="buttonOptions" @showAddStation="showAddStation" @downloadList="downloadList"/>
     <stationForm ref="form" :is-add="isAdd" :dicts="dicts" />
   </div>
 </template>

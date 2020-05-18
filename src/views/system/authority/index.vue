@@ -70,10 +70,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @showAddAuthority="showAddAuthority"
-		@downloadList="downloadList"/>
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>
