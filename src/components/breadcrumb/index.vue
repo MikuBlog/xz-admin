@@ -3,7 +3,7 @@
     <transition-group :name="defaultConfig.diy.breadcrumbAnimation ? 'bread-list' : ''">
       <el-breadcrumb-item v-for="(item, index) in breadcrumbList" v-if="item.meta.title" :key="item.meta.title">
         <span
-          v-if="item.redirect === 'noredirect'|| index == breadcrumbList.length - 1"
+          v-if="item.redirect === 'noredirect' || index == breadcrumbList.length - 1"
           class="no-redirect"
         >{{ item.meta.title }}</span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
@@ -16,6 +16,11 @@
 import { mapState } from 'vuex'
 export default {
   name: "Breadcrumb",
+	methods: {
+		handleLink(item) {
+			this.$router.push(item.path)
+		}
+	},
 	computed: {
 		...mapState({
 			breadcrumbList: state => state.breadcrumb.breadcrumbList

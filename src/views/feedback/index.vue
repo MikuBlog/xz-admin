@@ -70,8 +70,7 @@
               </template>
             </el-table-column>
             <el-table-column prop="nickname" label="用户昵称" :show-overflow-tooltip="true" />
-            <el-table-column prop="phone" label="手机号" :show-overflow-tooltip="true" />
-            <el-table-column prop="email" label="邮箱" :show-overflow-tooltip="true" />
+            <el-table-column prop="contact" label="联系方式" :show-overflow-tooltip="true" />
             <el-table-column prop="status" label="反馈状态" :show-overflow-tooltip="true" align="center">
               <template slot-scope="scope">
                 <el-tag :type="scope.row.status
