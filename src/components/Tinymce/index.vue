@@ -23,7 +23,7 @@ export default {
 			default: ''
 		},
 		height: {
-			default: 500
+			default: 700
 		},
 		limit: {
 			default: 500
@@ -98,7 +98,11 @@ export default {
 				external_plugins: plugins.external_plugins,
 				toolbar,
 				height: +this.height,
-				ax_wordlimit_num: this.limit,
+				ax_wordlimit_num: 1,
+				branding: false,
+				elementpath: false,
+				contextmenu: "bold copy italic underline lineheight forecolor backcolor strikethrough",
+				fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt 48pt 56pt 72pt 84pt 96pt 108pt",
 				ax_wordlimit_callback: function(editor, txt, num) {
 					// 字数限制
 				},
