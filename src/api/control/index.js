@@ -6,7 +6,7 @@
  * @param {Boolean} immediate 第一次是否调用
  * @returns {Function}
  */
-function debounce(callback, time, immediate = true) {
+function debounce(callback, time = 1000, immediate = true) {
   // 保存定时器引用
   var clock
   // 保存函数返回的结果
@@ -44,7 +44,7 @@ function debounce(callback, time, immediate = true) {
  * @param {Number} wait 单位ms
  * @returns {Function}
  */
-function throttled(callback, wait) {
+function throttled(callback, wait = 1000) {
   var timeout, context, args, previous = 0
   // 设置一个函数,用于收尾调用(最后一次调用)
   var later = function() {
