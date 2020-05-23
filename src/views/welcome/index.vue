@@ -2,10 +2,9 @@
   <div class="welcome">
     <el-row>
       <el-col :span="24">
-<!--        <div class="background-box" ref="backgroundBox">
+       <div class="background-box" ref="backgroundBox">
           <div class="background" ref="background"></div>
-        </div> -->
-				<Tinymce />
+        </div>
       </el-col>
     </el-row>
   </div>
