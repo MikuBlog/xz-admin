@@ -1,6 +1,6 @@
 <h1 align="center">XZ-ADMIN</h1>
 
-当前最新版本：`3.0`（日期：2019-01-19）
+当前最新版本：`3.1`（日期：2019-05-23）
 
 <br/>
 <br/>
@@ -31,17 +31,6 @@
 使用了`vue`、`element-ui`作为主要技术栈
 
 <br/>
-
-## :electric_plug: 插件
-
-+ 图表：`VCharts`
-+ 数字滚动：`vue-count-to`
-+ 树状选择器：`vue-treeselect`
-+ 动态菜单折叠插件：`vue-fragment`
-+ 进度条：`nprogress`
-+ 富文本编辑器：`UEditor`
-+ markdown编辑器：`mavonEditor`
-
 
 ## 商务合作
 
