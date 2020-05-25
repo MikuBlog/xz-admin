@@ -1,7 +1,8 @@
 export default {
 	data() {
 		return {
-			name: "",
+      name: "",
+      activeName: 'null',
 			selectType: "",
 			selectList: [],
 			goodsList: [],

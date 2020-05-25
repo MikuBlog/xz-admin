@@ -3,6 +3,16 @@
 		<el-row>
 			<el-col :span="24">
 				<el-card class="box-card">
+          <el-tabs v-model="activeName" type="card">
+            <el-tab-pane label="全部商品" name="null"></el-tab-pane>
+            <el-tab-pane label="上架" name="showStatus 1"></el-tab-pane>
+            <el-tab-pane label="热卖单品" name="onHot true"></el-tab-pane>
+            <el-tab-pane label="促销单品" name="onBenefit true"></el-tab-pane>
+            <el-tab-pane label="新品首发" name="onNew true"></el-tab-pane>
+            <el-tab-pane label="优品推荐" name="onRecommend true"></el-tab-pane>
+            <el-tab-pane label="精品推荐" name="onBest true"></el-tab-pane>
+            <el-tab-pane label="下架" name="showStatus 0"></el-tab-pane>
+          </el-tabs>
 					<div class="search">
 						<el-input v-model="name" placeholder="搜索商品名" class="search-input margin-box" @keyup.native.enter="search"></el-input>
 						<el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
@@ -10,7 +20,7 @@
 						<el-button type="primary" class="margin-box" icon="el-icon-plus" @click="toAddGoodsPage" title="添加商品" circle></el-button>
 						<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAllGoods" :disabled="!selectList.length" title="批量删除商品" circle></el-button>
 					</div>
-					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="goodsList" style="width: 100%" @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
+					<el-table ref="table" :max-height="$store.state.tableHeight.tableHeight" :data="goodsList" style="width: 100%" border @selection-change="handleSelectionChange" :row-key="getRowKey" highlight-current-row stripe>
 						<el-table-column type="selection" width="55" reserve-selection />
 						<el-table-column type="expand">
 							<template slot-scope="props">
@@ -22,54 +32,47 @@
 											}}
 										</span>
 									</el-form-item>
-									<el-form-item label="商品品牌" class="expand-line">
-										<span>
-											{{ props.row.brandName || "无" }}
-										</span>
-									</el-form-item>
-									<el-form-item label="热卖单品" class="expand-line">
-										<el-tag :type="props.row.onHot ? 'primary' : 'info'">{{ props.row.onHot ? '是' : '否' }}</el-tag>
-									</el-form-item>
-									<el-form-item label="促销单品" class="expand-line">
-										<el-tag :type="props.row.onBenefit ? 'primary' : 'info'">{{ props.row.onBenefit ? '是' : '否' }}</el-tag>
-									</el-form-item>
-									<el-form-item label="新品首发" class="expand-line">
-										<el-tag :type="props.row.onNew ? 'primary' : 'info'">{{ props.row.onNew ? '是' : '否' }}</el-tag>
-									</el-form-item>
-									<el-form-item label="优品推荐" class="expand-line">
-										<el-tag :type="props.row.onRecommend ? 'primary' : 'info'">{{ props.row.onRecommend ? '是' : '否' }}</el-tag>
-									</el-form-item>
-									<el-form-item label="精品推荐" class="expand-line">
-										<el-tag :type="props.row.onBest ? 'primary' : 'info'">{{ props.row.onBest ? '是' : '否' }}</el-tag>
-									</el-form-item>
 									<el-form-item label="库存扣减" class="expand-line">
 										<el-tag :type="props.row.stockReduceType === 0 ? 'primary' : props.row.stockReduceType === 1 ? 'success' : 'warning'">
 											{{ props.row.stockReduceType === 0 ? '拍下减库存' : props.row.stockReduceType === 1 ? '付款减库存' : '永不减库存' }}
 										</el-tag>
 									</el-form-item>
-									<el-form-item label="商品规格" class="expand-line">
-										<div v-for="item in props.row.specs">
-											<span style="font-weight: bold;">{{ item.name }}：</span>
-											<span style="margin-left: .5rem">{{ item.value.join(" 、") }}</span>
-										</div>
-									</el-form-item>
 								</el-form>
 							</template>
 						</el-table-column>
-						<el-table-column ref="table" :show-overflow-tooltip="true" prop="url" label="商品图片" align="center">
+						<el-table-column ref="table" prop="url" label="商品图片" align="center">
 							<template slot-scope="scope">
 								<img
 									:src="scope.row.coverImage || 'https://myinterface.xuanzai.top/getPicture?type=error'"
 									alt="点击打开"
-									class="el-avatar xz-image"
 									@click="(isShow = true), (url = scope.row.coverImage)"
+                  width="100"
+                  height="100"
 								/>
 							</template>
 						</el-table-column>
 						<el-table-column prop="num" label="商品编号" :show-overflow-tooltip="true" />
-						<el-table-column prop="name" label="商品名称" :show-overflow-tooltip="true" />
-						<el-table-column prop="salesPrice" label="商品价格(元)" :show-overflow-tooltip="true" align="center" />
-						<el-table-column prop="sales" label="销量" :show-overflow-tooltip="true" align="center" />
+						<el-table-column prop="name" label="商品名称" :show-overflow-tooltip="true" width="140">
+              <template slot-scope="scope">
+                <div class="name-wrapper">
+                  {{ scope.row.name }}
+                </div>
+                <div class="name-wrapper">
+                  品牌：{{ scope.row.brandName || "无" }}
+                </div>
+              </template>
+						</el-table-column>
+            <el-table-column prop="name" label="价格/货号" :show-overflow-tooltip="true" width="140">
+              <template slot-scope="scope">
+                <div class="name-wrapper">
+                  售价：￥{{ scope.row.salesPrice }}
+                </div>
+                <div class="name-wrapper">
+                  商品编码：{{ scope.row.barCode || "无" }}
+                </div>
+              </template>
+						</el-table-column>
+						<el-table-column prop="totalSales" label="销量" :show-overflow-tooltip="true" align="center" />
 						<el-table-column prop="totalStock" label="库存" :show-overflow-tooltip="true" align="center" />
 						<el-table-column label="排序" align="center" show-overflow-tooltip>
 							<template slot-scope="scope">
@@ -120,3 +123,5 @@ export default {
 	mixins: [Operation, Property]
 };
 </script>
+
+<style lang="scss" scoped src="./scss/index.scss"></style>

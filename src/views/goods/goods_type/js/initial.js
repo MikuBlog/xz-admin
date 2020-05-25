@@ -18,7 +18,7 @@ export default {
     // 获取菜单列表
     getGoodsTypeList() {
       this.$http_json({
-        url: `/api/shop/productType/queryAll?sort=sort,asc${
+        url: `/api/productType/queryAll?sort=sort,asc${
           this.searchVal ? `&name=${this.searchVal}` : ""
           }`,
         method: "get"

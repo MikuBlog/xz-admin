@@ -9,6 +9,7 @@ const successMsg = msg => {
   Message({
     message: msg,
     type: 'success',
+    dangerouslyUseHTMLString: true,
     customClass: "top-floor"
   })
 }
@@ -17,6 +18,7 @@ const warnMsg = msg => {
   Message({
     message: msg,
     type: 'warning',
+    dangerouslyUseHTMLString: true,
     customClass: "top-floor"
   })
 }
@@ -25,6 +27,7 @@ const errorMsg = msg => {
   Message({
     message: msg,
     type: 'error',
+    dangerouslyUseHTMLString: true,
     customClass: "top-floor"
   })
 }
@@ -67,6 +70,7 @@ const warnTip = ({ title, msg }) => {
   Notification({
     title: title || "",
     message: msg,
+    dangerouslyUseHTMLString: true,
     type: 'warning',
     customClass: "top-floor"
   })
@@ -76,6 +80,7 @@ const errorTip = ({ title, msg }) => {
   Notification({
     title: title || "",
     message: msg,
+    dangerouslyUseHTMLString: true,
     type: 'error',
     customClass: "top-floor"
   })

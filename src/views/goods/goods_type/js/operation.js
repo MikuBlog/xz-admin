@@ -56,7 +56,7 @@ export default {
 			  isHTML: true
 			}).then(() => {
 			  this.$http_json({
-			    url: `/api/shop/productType/del`,
+			    url: `/api/productType/del`,
 			    method: "post",
 			    data: this.selectList.map(val => val.id)
 			  }).then(() => {
@@ -72,7 +72,7 @@ export default {
         isHTML: true
       }).then(() => {
         this.$http_json({
-          url: `/api/shop/productType/del`,
+          url: `/api/productType/del`,
           method: "post",
 					data: [ item.id ]
         }).then(() => {

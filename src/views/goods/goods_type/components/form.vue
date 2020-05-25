@@ -109,7 +109,7 @@ export default {
         if (valid) {
           delete this.form.id;
           this.$http_json({
-            url: "/api/shop/productType/add",
+            url: "/api/productType/add",
             method: "post",
             data: this.form
           }).then(result => {
@@ -129,7 +129,7 @@ export default {
 						
 					}
           this.$http_json({
-            url: "/api/shop/productType/edit",
+            url: "/api/productType/edit",
             method: "post",
             data: this.form
           }).then(result => {
@@ -165,7 +165,7 @@ export default {
 		},
 		getTree() {
 			this.$http_json({
-			  url: `/api/shop/productType/queryAll`,
+			  url: `/api/productType/queryAll`,
 			  method: "get"
 			}).then(result => {
 			  this.initialCates(result.data.content)

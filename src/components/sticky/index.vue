@@ -1,77 +1,92 @@
 <template>
-  <div class="sticky" ref="sticky">
-    <slot />
+  <div :style="{height:height+'px',zIndex:zIndex}">
+    <div
+      :class="className"
+      :style="{top:(isSticky ? stickyTop +'px' : ''),zIndex:zIndex,position:position,width:width,height:height+'px'}"
+    >
+      <slot>
+        <div>sticky</div>
+      </slot>
+    </div>
   </div>
 </template>
 
 <script>
-/**
- * @author xuanzai
- * @description 固定元素到底部（废弃）
- */
 export default {
-  name: "sticky",
+  name: 'Sticky',
   props: {
-    // 滚动元素的css选择器
-    scrollTarget: String,
-    // 从距离顶部位置多少开始固定
-    distance: {
+    stickyTop: {
       type: Number,
       default: 0
+    },
+    zIndex: {
+      type: Number,
+      default: 1
+    },
+    className: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
-      fixedEle: "",
-      scrollBox: "",
-      position: "",
-      width: "",
-      height: "",
-      offsetTop: "",
-    };
+      active: false,
+      position: '',
+      width: undefined,
+      height: undefined,
+      isSticky: false
+    }
   },
   mounted() {
-    this.fixedEle = this.$refs.sticky;
-    setTimeout(() => {
-      this.scrollBox = document.querySelector(this.scrollTarget);
-      this.getMessage();
-      this.getTop();
-      this.initialListener();
-    });
+    this.height = this.$el.getBoundingClientRect().height
+    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.handleResize)
   },
-  beforeDestroy() {
-    this.scrollBox.removeEventListener("scroll", this.getTop);
-    window.removeEventListener("resize", this.getMessage);
+  activated() {
+    this.handleScroll()
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
-    getTop() {
-      if (this.scrollBox.scrollTop <= this.offsetTop - (105 + this.distance)) {
-        this.$setStyle(this.fixedEle, {
-          position: this.position,
-          zIndex: 1,
-          top: 0,
-          width: "auto"
-        });
-      } else if (this.fixedEle.getBoundingClientRect().top < 105 + this.distance) {
-        this.$setStyle(this.fixedEle, { 
-          position: "fixed",
-          zIndex: 1,
-          top: `${this.distance + 85}px`,
-          width: this.width,
-          height: this.height
-        });
+    sticky() {
+      if (this.active) {
+        return
       }
+      this.position = 'fixed'
+      this.active = true
+      this.width = this.width + 'px'
+      this.isSticky = true
     },
-    getMessage() {
-      this.position = window.getComputedStyle(this.fixedEle).position;
-      this.width = window.getComputedStyle(this.fixedEle).width;
-      this.height = window.getComputedStyle(this.fixedEle).height;
-      this.offsetTop = $(this.fixedEle).offset().top
+    handleReset() {
+      if (!this.active) {
+        return
+      }
+      this.reset()
     },
-    initialListener() {
-      this.scrollBox.addEventListener("scroll", this.getTop);
-      window.addEventListener("resize", this.getMessage);
+    reset() {
+      this.position = ''
+      this.width = 'auto'
+      this.active = false
+      this.isSticky = false
+    },
+    handleScroll() {
+      const width = this.$el.getBoundingClientRect().width
+      this.width = width || 'auto'
+      const offsetTop = this.$el.getBoundingClientRect().top
+			console.log(this.$el.getBoundingClientRect().top)
+      if (offsetTop < this.stickyTop) {
+        this.sticky()
+        return
+      }
+      this.handleReset()
+    },
+    handleResize() {
+      if (this.isSticky) {
+        this.width = this.$el.getBoundingClientRect().width + 'px'
+      }
     }
   }
-};
+}
 </script>

@@ -2,9 +2,52 @@ import convertHttp from '@/utils/convertHttp'
 export default {
 	created() {
 		this.getGoodsTypeList()
-		this.getSkuList()
+    this.getSkuList()
+    this.getVipList()
+    this.getTemplateList()
 	},
 	methods: {
+    deleteLadder(ind) {
+      if(this.ladderList.length === 1) {
+        this.$warnMsg("至少设置一项")
+        return
+      }
+      this.ladderList.splice(0, ind)
+    },
+    addLadder() {
+      if(this.ladderList.length === 3) {
+        this.$warnMsg("最多只能设置三项")
+        return
+      }
+      this.ladderList.push({
+        buyCount: 0,
+        discount: 0
+      })
+    },
+    deleteFull(ind) {
+      if(this.fullReductionList.length === 1) {
+        this.$warnMsg("至少设置一项")
+        return
+      }
+      this.fullReductionList.splice(0, ind)
+    },
+    addFull() {
+      if(this.fullReductionList.length === 3) {
+        this.$warnMsg("最多只能设置三项")
+        return
+      }
+      this.fullReductionList.push({
+        fullPrice: 0,
+        reducePrice: 0
+      })
+    },
+    preStep() {
+      if(!this.active) return
+      this.active -= 1
+    },
+    nextStep() {
+      this.active += 1
+    },
 		handleClose(tag, key) {
 			let index = this[key].indexOf(tag)
 			if (key === 'selectSkuLabel') {
@@ -81,9 +124,12 @@ export default {
 							image: "",
 							sales: 0,
 							salesPrice: 0,
-							stock: 0,
+              stock: 0,
+              weight: 0,
+              warnStock: 0,
 							value: val,
-							checked: false,
+              checked: false,
+              onShow: true,
 							coverImage: ''
 						}
 					}),
@@ -197,10 +243,8 @@ export default {
 				timeout: 100000
 			}).then(result => {
 				const data = result.data
-				this.sliderImage.push({
-					id: data.id,
-					url: data.url
-				})
+				this.sliderImage.push(data.url)
+        this.form.spu.sliderImage.push(data.url)
 				this.fileList.push(data.id)
 				this.$successMsg("上传成功！");
 			});
@@ -249,10 +293,32 @@ export default {
 				})
 			})
 			return newList
-		},
+    },
+    getVipList() {
+      this.$http_json({
+        url: "/api/memberLevel/page?page=0&size=9999&sort=grade,asc",
+        method: "get"
+      }).then(result => {
+        this.vipList = result.data.content.map(val => {
+          return {
+            memberLevelId: val.id,
+            memberLevelName:val.name,
+            memberPrice: 0
+          }
+        })
+      })
+    },
+    getTemplateList() {
+      this.$http_json({
+        url: "/api/freightTemplate/page?page=0&size=9999",
+        method: "get"
+      }).then(result => {
+        this.templateList = result.data.content
+      })
+    },
 		getGoodsTypeList() {
 			this.$http_json({
-				url: `/api/shop/productType/queryAll?sort=sort,asc`,
+				url: `/api/productType/queryAll?sort=sort,asc`,
 				method: "get"
 			}).then(result => {
 				this.initialGoodsTypeList(this.handleGoodsTypeList(result.data.content));
@@ -347,9 +413,15 @@ export default {
 			this.selectSkuLabel = this.selectSkuLabel.filter(val => !res.has(val) && res.set(val, 1))
 		},
 		submitForm() {
-			this.$refs.form.validate(valid => {
+			this.$refs.form.validate((valid, obj) => {
 				if (valid) {
           this.getPostagePrice()
+          if(!this.generateSkuList.length) {
+            this.$warnTip({
+              title: "请生成至少一项商品属性"
+            })
+            return
+          }
 					if (this.generateSkuList.length && this.skuGroup === 'more') {
 						this.form.spu.specs = JSON.stringify(this.ensureSkuList.map(val => {
 							return {
@@ -364,10 +436,12 @@ export default {
 								sales: 0,
 								salesPrice: val.salesPrice,
 								stock: val.stock,
-								value: JSON.stringify(val.skuDesc)
+                value: JSON.stringify(val.skuDesc),
+                warnStock: val.warnStock,
+                weight: val.weight,
+                onShow: val.onShow
 							}
 						})
-						this.form.spu.onSpecs = true
 					} else {
 						this.form.skus.push({
 							costPrice: this.form.spu.costPrice,
@@ -383,18 +457,26 @@ export default {
 							name: '默认',
 							value: ["推荐"]
 						}])
-						this.form.spu.onSpecs = false
 					}
 					this.form.spu.keyWords = `,${this.dynamicTags.join(",")},`
 					this.form.spu.typeName = JSON.stringify({
 						typeName: this.typeName,
 						typeObj: this.typeObj
-					})
-					this.form.spu.sliderImage = JSON.stringify(this.sliderImage)
+          })
+          let obj = {
+            ...this.form.spu,
+            fullReductionList: this.fullReductionList,
+            ladderList: this.ladderList,
+            memberPriceList: this.vipList,
+            promotionType: this.promotionType,
+            skuList: this.form.skus,
+            sliderImage: JSON.stringify(this.sliderImage),
+            services: JSON.stringify(this.form.spu.services)
+          }
 					this.$http_json({
 						url: "/api/productSpu/add",
 						method: "post",
-						data: this.form
+						data: obj
 					}).then(result => {
 						this.$successMsg("添加成功");
 						this.$router.push({
@@ -402,6 +484,16 @@ export default {
 						})
 					});
 				} else {
+          let str = ""
+          Object
+            .keys(obj)
+            .forEach((key, ind) => {
+              str += `<p>${ind + 1}.${obj[key][0].message}</p>`
+            })
+          this.$warnTip({
+            title: "请将以下商品信息补充完整",
+            msg: str
+          })
 					return false;
 				}
 			});

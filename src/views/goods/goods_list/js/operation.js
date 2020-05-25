@@ -1,5 +1,10 @@
 import convertHttp from '@/utils/convertHttp'
 export default {
+  watch: {
+    activeName() {
+      this.$refs.pagination.toFirstPage()
+    }
+  },
 	methods: {
 		// 分页处理
 		initialPage(totalElements) {
@@ -20,7 +25,10 @@ export default {
 		  this.$http_normal({
 		    url: `/api/productSpu/page?page=${page - 1}&size=${
 		      size
-		      }&sort=sort,asc${this.name ? `&name=${this.name}` : ""}`,
+          }&sort=sort,asc${this.name ? `&name=${this.name}` : ""}${this.activeName
+          !== 'null'
+          ? `&${this.activeName.split(" ")[0]}=${this.activeName.split(" ")[1]}`
+          : ''}`,
 		    method: "get"
 		  }).then(result => {
         const data = result.data;
