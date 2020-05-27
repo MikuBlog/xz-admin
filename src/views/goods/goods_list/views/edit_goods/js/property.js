@@ -2,6 +2,9 @@ import { validateNumber } from "@/utils/form_validate"
 export default {
   data() {
     return {
+      active: 0,
+      promotionType: 0,
+      vipSelect: 0,
 			sliderImage: [],
 			typeObj: [],
 			typeName: [],
@@ -30,6 +33,16 @@ export default {
       inputSkuVisible: false,
       inputSkuValue: '',
       inputChildrenIndex: '',
+      vipList: [],
+      templateList: [],
+      fullReductionList: [{
+        fullPrice: 0,
+        reducePrice: 0
+      }],
+      ladderList: [{
+        buyCount: 0,
+        discount: 0
+      }],
       form: {
         skus: [],
         spu: {
@@ -38,7 +51,6 @@ export default {
           brandId: "",
           brandName: "",
           codePath: "",
-          costPrice: 0,
           cover: "",
           description: "",
           fictiSales: 0,
@@ -50,37 +62,52 @@ export default {
           merUse: 0,
           name: "",
           onBargain: 0,
-          onBenefit: true,
-          onBest: true,
-          onFreeSend: true,
-          onHot: true,
-          onNew: true,
-          onRecommend: true,
-          onSeckill: true,
-          onSpecs: false,
-          onIntegral: true,
-          postagePrice: 0,
-          sales: 0,
+          onBenefit: false,
+          onBest: false,
+          onFreeSend: false,
+          onHot: false,
+          onNew: false,
+          onRecommend: false,
+          onSeckill: false,
+          onLimit: false,
+          promotionStartTime: "",
+          promotionEndTime: "",
+          promotionPerLimit: 0,
+          realSales: 0,
           salesPrice: 0,
           showStatus: 0,
           sliderImage: [],
           sort: 0,
-          soureLink: "",
           specs: "",
           stockReduceType: 0,
           totalStock: 0,
           typeId: [],
           typeName: [],
           unit: "",
-          vipPrice: 0,
           visit: 0,
-          warnStock: 0,
-          useIntegral: 0
+          useIntegral: 0,
+          freightTemplateId: "",
+          services: []
         }
       },
       rules: {
 				'spu.cover': [
           { required: true, message: "请选择封面", trigger: "change" }
+        ],
+        'spu.freightTemplateId': [
+          { required: true, message: "请选择快递信息", trigger: "change" }
+        ],
+        'spu.promotionPerLimit': [
+          { required: true, min: 0, validator: validateNumber, trigger: "change" }
+        ],
+        'spu.promotionStartTime': [
+          { required: true, message: "请选择开始时间", trigger: "change" }
+        ],
+        'spu.promotionEndTime': [
+          { required: true, message: "请选择结束时间", trigger: "change" }
+        ],
+        'spu.sliderImage': [
+          { required: true, message: "请上传宣传图片", trigger: "change" }
         ],
         'spu.useIntegral': [
           { required: true, min: 0, validator: validateNumber, trigger: "change" }
@@ -102,7 +129,7 @@ export default {
         ],
         'spu.salesPrice': [
           { required: true, min: 0, validator: validateNumber, trigger: "change" }
-        ],
+				],
         'spu.postagePrice': [
           { required: true, min: 0, validator: validateNumber, trigger: "change" }
         ],
@@ -123,9 +150,6 @@ export default {
         ],
         'spu.warnStock': [
           { required: true, min: 0, validator: validateNumber, trigger: "change" }
-        ],
-        'spu.onIntegral': [
-          { required: true, message: "请选择是否抵扣积分", trigger: "change" }
         ],
         'spu.onHot': [
           { required: true, message: "请选择热卖单品", trigger: "change" }

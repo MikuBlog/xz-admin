@@ -6,6 +6,25 @@ export default {
     }
   },
 	methods: {
+    showSkuList(item) {
+      const skuList = this.$refs.skuList
+      skuList.dialog = true
+      skuList.id = item.id
+      skuList.getSkuList()
+    },
+    changeStatus(item, status) {
+      this.$http_json({
+        url: "/api/productSpu/status",
+        method: "post",
+        data: {
+          id: item.id,
+          showStatus: status
+        }
+      }).then(result => {
+        this.$successMsg("修改成功")
+        this.getGoodsList(this.nowPage, this.nowSize)
+      })
+    },
 		// 分页处理
 		initialPage(totalElements) {
 		  this.totalElements = totalElements;
@@ -25,7 +44,7 @@ export default {
 		  this.$http_normal({
 		    url: `/api/productSpu/page?page=${page - 1}&size=${
 		      size
-          }&sort=sort,asc${this.name ? `&name=${this.name}` : ""}${this.activeName
+          }&sort=showStatus,desc&sort=sort,asc${this.name ? `&blurry=${this.name}` : ""}${this.activeName
           !== 'null'
           ? `&${this.activeName.split(" ")[0]}=${this.activeName.split(" ")[1]}`
           : ''}`,

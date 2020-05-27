@@ -68,8 +68,8 @@
                       v-for="(item, ind) in templateList"
                       :key="ind"
                       :label="item.name"
-                      :value="item.id">
-                    </el-option>
+                      :value="item.id"
+                    ></el-option>
                   </el-select>
                 </el-form-item>
                 <el-form-item label="关键词">
@@ -239,23 +239,23 @@
                     </el-input>
                   </span>
                   <span class="key-value-box">
-                    <span class="key">预警库存</span>
-                    <el-input
-                      v-model="item.warnStock"
-                      class="inline-input"
-                      type="number"
-                      @input="formatChildren('warnStock', index)"
-                    >
-                      <template slot="append">件</template>
-                    </el-input>
-                  </span>
-                  <span class="key-value-box">
                     <span class="key">库存</span>
                     <el-input
                       v-model="item.stock"
                       class="inline-input"
                       type="number"
                       @input="formatChildren('stock', index)"
+                    >
+                      <template slot="append">件</template>
+                    </el-input>
+                  </span>
+                  <span class="key-value-box">
+                    <span class="key">预警库存</span>
+                    <el-input
+                      v-model="item.warnStock"
+                      class="inline-input"
+                      type="number"
+                      @input="formatChildren('warnStock', index)"
                     >
                       <template slot="append">件</template>
                     </el-input>
@@ -327,19 +327,23 @@
                     <template slot="append">元</template>
                   </el-input>
                 </el-form-item>
-                <el-form-item label="库存" prop="spu.totalStock">
-                  <el-input
-                    :disabled="!!generateSkuList.length && skuGroup === 'more'"
-                    v-model="form.spu.totalStock"
-                  >
+                <el-form-item label="获得积分" prop="spu.giveIntegral">
+                  <el-input-number controls-position="right" v-model="form.spu.giveIntegral" />
+                </el-form-item>
+                <el-form-item v-if="form.spu.onLimit" label="限购数量" prop="spu.promotionPerLimit">
+                  <el-input type="number" v-model="form.spu.promotionPerLimit">
                     <template slot="append">件</template>
                   </el-input>
                 </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="市场价" prop="spu.marketPrice">
+                  <el-input v-model="form.spu.marketPrice">
+                    <template slot="append">元</template>
+                  </el-input>
+                </el-form-item>
                 <el-form-item label="抵扣积分" prop="spu.useIntegral">
-                  <el-input
-                    type="number"
-                    v-model="form.spu.useIntegral"
-                  >
+                  <el-input type="number" v-model="form.spu.useIntegral">
                     <template slot="append">分</template>
                   </el-input>
                 </el-form-item>
@@ -353,16 +357,13 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="市场价" prop="spu.marketPrice">
-                  <el-input v-model="form.spu.marketPrice">
-                    <template slot="append">元</template>
+                <el-form-item label="虚拟销量" prop="spu.fictiSales">
+                  <el-input v-model="form.spu.fictiSales">
+                    <template slot="append">件</template>
                   </el-input>
                 </el-form-item>
                 <el-form-item label="排序" prop="spu.sort">
                   <el-input-number controls-position="right" v-model="form.spu.sort" />
-                </el-form-item>
-                <el-form-item label="获得积分" prop="spu.giveIntegral">
-                  <el-input-number controls-position="right" v-model="form.spu.giveIntegral" />
                 </el-form-item>
                 <el-form-item v-if="form.spu.onLimit" label="限购结束时间" prop="spu.promotionEndTime">
                   <el-date-picker
@@ -373,143 +374,167 @@
                   ></el-date-picker>
                 </el-form-item>
               </el-col>
-              <el-col :span="8">
-                <el-form-item label="成本价" prop="spu.costPrice">
-                  <el-input v-model="form.spu.costPrice">
-                    <template slot="append">元</template>
-                  </el-input>
-                </el-form-item>
-                <el-form-item label="虚拟销量" prop="spu.fictiSales">
-                  <el-input v-model="form.spu.fictiSales">
-                    <template slot="append">件</template>
-                  </el-input>
-                </el-form-item>
-                <!-- <el-form-item label="预警库存" prop="spu.warnStock">
-                  <el-input v-model="form.spu.warnStock">
-                    <template slot="append">件</template>
-                  </el-input>
-                </el-form-item> -->
-                <el-form-item v-if="form.spu.onLimit" label="限购数量" prop="spu.promotionPerLimit">
-                  <el-input
-                    type="number"
-                    v-model="form.spu.promotionPerLimit"
-                  >
-                    <template slot="append">件</template>
-                  </el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-form-item label="热卖单品" prop="spu.onHot">
-                  <el-radio-group v-model="form.spu.onHot">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="促销单品" prop="spu.onBenefit">
-                  <el-radio-group v-model="form.spu.onBenefit">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="首发新品" prop="spu.onNew">
-                  <el-radio-group v-model="form.spu.onNew">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="上下架" prop="spu.showStatus">
-                  <el-radio-group v-model="form.spu.showStatus">
-                    <el-radio :label="0">下架</el-radio>
-                    <el-radio :label="1">上架</el-radio>
-                    <el-radio :label="2">赠品上架</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-form-item label="优品推荐" prop="spu.onRecommend">
-                  <el-radio-group v-model="form.spu.onRecommend">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="精品推荐" prop="spu.onBest">
-                  <el-radio-group v-model="form.spu.onBest">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="库存扣减" prop="spu.stockReduceType">
-                  <el-radio-group v-model="form.spu.stockReduceType">
-                    <el-radio :label="0">拍下减库存</el-radio>
-                    <el-radio :label="1">付款减库存</el-radio>
-                    <el-radio :label="2">永不减库存</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="限购商品" prop="spu.onNew">
-                  <el-radio-group v-model="form.spu.onLimit">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-              </el-col>
               <el-col :span="24">
-                <el-form-item label="选择优惠方式">
-                  <el-radio-group v-model="promotionType">
-                    <el-radio-button :label="0">无优惠</el-radio-button>
-                    <el-radio-button :label="2">会员价格</el-radio-button>
-                    <el-radio-button :label="3">阶梯价格</el-radio-button>
-                    <el-radio-button :label="4">满减价格</el-radio-button>
-                  </el-radio-group>
-                  <div class="vip-list" v-if="promotionType === 2">
-                    <el-form-item
-                      v-for="(item, ind) in vipList"
-                      :key="ind"
-                      :label="`${item.memberLevelName}价格`"
-                    >
-                      <el-input-number :min="0" v-model="item.memberPrice" />
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="热卖单品" prop="spu.onHot">
+                      <el-radio-group v-model="form.spu.onHot">
+                        <el-radio :label="true">是</el-radio>
+                        <el-radio :label="false">否</el-radio>
+                      </el-radio-group>
                     </el-form-item>
-                  </div>
-                  <div class="step-price" v-if="promotionType === 3">
-                    <el-table class="table" ref="stepPriceTable" border :data="ladderList">
-                      <el-table-column label="数量" align="center">
-                        <template slot-scope="scope">
-                          <el-input-number :min="0" v-model="scope.row.buyCount"/>
-                        </template>
-                      </el-table-column>
-                      <el-table-column label="折扣" align="center">
-                        <template slot-scope="scope">
-                          <el-input-number :min="0" :max="100" v-model="scope.row.discount"/>
-                        </template>
-                      </el-table-column>
-                      <el-table-column label="操作" align="center">
-                        <template slot-scope="scope">
-                          <el-button size="small" type="text" @click="deleteLadder(scope.$index)">删除</el-button>
-                          <el-button @click="addLadder" size="small" type="text" style="margin-left: .5rem">添加</el-button>
-                        </template>
-                      </el-table-column>
-                    </el-table>
-                  </div>
-                  <div class="full-reduction" v-if="promotionType === 4">
-                    <el-table class="table" ref="stepPriceTable" border :data="fullReductionList">
-                      <el-table-column label="满" align="center">
-                        <template slot-scope="scope">
-                          <el-input-number :min="0" v-model="scope.row.fullPrice"/>
-                        </template>
-                      </el-table-column>
-                      <el-table-column label="立减" align="center">
-                        <template slot-scope="scope">
-                          <el-input-number :min="0" v-model="scope.row.reducePrice"/>
-                        </template>
-                      </el-table-column>
-                      <el-table-column label="操作" align="center">
-                        <template slot-scope="scope">
-                          <el-button size="small" type="text" @click="deleteFull(scope.$index)">删除</el-button>
-                          <el-button @click="addFull" size="small" type="text" style="margin-left: .5rem">添加</el-button>
-                        </template>
-                      </el-table-column>
-                    </el-table>
-                  </div>
-                </el-form-item>
+                    <el-form-item label="促销单品" prop="spu.onBenefit">
+                      <el-radio-group v-model="form.spu.onBenefit">
+                        <el-radio :label="true">是</el-radio>
+                        <el-radio :label="false">否</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="首发新品" prop="spu.onNew">
+                      <el-radio-group v-model="form.spu.onNew">
+                        <el-radio :label="true">是</el-radio>
+                        <el-radio :label="false">否</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="精品推荐" prop="spu.onBest">
+                      <el-radio-group v-model="form.spu.onBest">
+                        <el-radio :label="true">是</el-radio>
+                        <el-radio :label="false">否</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="优品推荐" prop="spu.onRecommend">
+                      <el-radio-group v-model="form.spu.onRecommend">
+                        <el-radio :label="true">是</el-radio>
+                        <el-radio :label="false">否</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="限购商品" prop="spu.onNew">
+                      <el-radio-group v-model="form.spu.onLimit">
+                        <el-radio :label="true">是</el-radio>
+                        <el-radio :label="false">否</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="库存扣减" prop="spu.stockReduceType">
+                      <el-radio-group v-model="form.spu.stockReduceType">
+                        <el-radio :label="0">拍下减库存</el-radio>
+                        <el-radio :label="1">付款减库存</el-radio>
+                        <el-radio :label="2">永不减库存</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="上下架" prop="spu.showStatus">
+                      <el-radio-group v-model="form.spu.showStatus">
+                        <el-radio :label="0">下架</el-radio>
+                        <el-radio :label="1">上架</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="24">
+                    <el-form-item label="选择优惠方式">
+                      <el-radio-group v-model="promotionType">
+                        <el-radio-button :label="0">无优惠</el-radio-button>
+                        <el-radio-button :label="2">会员价格</el-radio-button>
+                        <el-radio-button :label="3">阶梯价格</el-radio-button>
+                        <el-radio-button :label="4">满减价格</el-radio-button>
+                      </el-radio-group>
+                      <div class="vip-list" v-if="promotionType === 2">
+                        <el-form-item label="优惠方式">
+                          <el-radio-group v-model="vipSelect">
+                            <el-radio :label="0">折扣</el-radio>
+                            <el-radio :label="1">降价</el-radio>
+                          </el-radio-group>
+                        </el-form-item>
+                        <div v-if="vipSelect === 1">
+                          <el-form-item
+                            v-for="(item, ind) in vipList"
+                            :key="ind"
+                            :label="`${item.memberLevelName}降价`"
+                          >
+                            <el-input-number :min="0" v-model="item.reducePrice" />
+                          </el-form-item>
+                        </div>
+                        <div v-if="vipSelect === 0">
+                          <el-form-item
+                            v-for="(item, ind) in vipList"
+                            :key="ind"
+                            :label="`${item.memberLevelName}折扣`"
+                          >
+                            <el-input-number :min="0" :max="100" v-model="item.discount" />
+                          </el-form-item>
+                        </div>
+                      </div>
+                      <div class="step-price" v-if="promotionType === 3">
+                        <el-table class="table" ref="stepPriceTable" border :data="ladderList">
+                          <el-table-column label="数量" align="center">
+                            <template slot-scope="scope">
+                              <el-input-number :min="0" v-model="scope.row.buyCount" />
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="折扣" align="center">
+                            <template slot-scope="scope">
+                              <el-input-number :min="0" :max="100" v-model="scope.row.discount" />
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="操作" align="center">
+                            <template slot-scope="scope">
+                              <el-button
+                                size="small"
+                                type="text"
+                                @click="deleteLadder(scope.$index)"
+                              >删除</el-button>
+                              <el-button
+                                @click="addLadder"
+                                size="small"
+                                type="text"
+                                style="margin-left: .5rem"
+                              >添加</el-button>
+                            </template>
+                          </el-table-column>
+                        </el-table>
+                      </div>
+                      <div class="full-reduction" v-if="promotionType === 4">
+                        <el-table
+                          class="table"
+                          ref="stepPriceTable"
+                          border
+                          :data="fullReductionList"
+                        >
+                          <el-table-column label="满" align="center">
+                            <template slot-scope="scope">
+                              <el-input-number :min="0" v-model="scope.row.fullPrice" />
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="立减" align="center">
+                            <template slot-scope="scope">
+                              <el-input-number :min="0" v-model="scope.row.reducePrice" />
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="操作" align="center">
+                            <template slot-scope="scope">
+                              <el-button
+                                size="small"
+                                type="text"
+                                @click="deleteFull(scope.$index)"
+                              >删除</el-button>
+                              <el-button
+                                @click="addFull"
+                                size="small"
+                                type="text"
+                                style="margin-left: .5rem"
+                              >添加</el-button>
+                            </template>
+                          </el-table-column>
+                        </el-table>
+                      </div>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
               </el-col>
             </el-row>
             <div class="select-button-box">
@@ -527,21 +552,6 @@
             </div>
           </el-card>
         </el-col>
-        <!-- <el-col :span="24">
-          <el-card class="box-card" style="margin-top: 1rem">
-            <div slot="header" class="clearfix">
-              <span class="left-border">商品规格</span>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="24">
-          <el-card class="box-card" style="margin-top: 1rem">
-            <div slot="header" class="clearfix">
-              <span class="left-border">商品参数</span>
-            </div>
-            
-          </el-card>
-        </el-col>-->
       </el-row>
     </el-form>
     <operation-box :options="buttonOptions" @submitForm="submitForm" @resetForm="resetForm" />

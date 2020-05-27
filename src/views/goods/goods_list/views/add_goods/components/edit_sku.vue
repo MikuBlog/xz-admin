@@ -1,15 +1,31 @@
 <template>
   <el-dialog :visible.sync="dialog" title="批量编辑" width="500px" append-to-body v-dialogDrag>
-    <el-form status-icon ref="form" :model="form" size="small" @submit.native.prevent="editSpuList" label-width="100px">
+    <el-form
+      status-icon
+      ref="form"
+      :model="form"
+      size="small"
+      @submit.native.prevent="editSpuList"
+      label-width="100px"
+    >
       <el-form-item label="售价(元)" prop="salesPrice">
-        <el-input type="number" @input="format('salesPrice')" v-model="form.salesPrice" style="width: 350px;" />
+        <el-input-number :min="0" v-model="form.salesPrice" style="width: 350px;" />
       </el-form-item>
       <el-form-item label="库存" prop="stock">
-			  <el-input type="number" @input="format('stock')" v-model="form.stock" style="width: 350px;" />
-			</el-form-item>
+        <el-input-number :min="0" v-model="form.stock" style="width: 350px;" />
+      </el-form-item>
+      <el-form-item label="预警库存" prop="warnStock">
+        <el-input-number :min="0" v-model="form.warnStock" style="width: 350px;" />
+      </el-form-item>
       <el-form-item label="成本价(元)" prop="costPrice">
-			  <el-input type="number" @input="format('costPrice')" v-model="form.costPrice" style="width: 350px;" />
-			</el-form-item>
+        <el-input-number :min="0" type="number" v-model="form.costPrice" style="width: 350px;" />
+      </el-form-item>
+      <el-form-item label="重量" prop="weight">
+        <el-input-number :min="0" type="number" v-model="form.weight" style="width: 350px;" />
+      </el-form-item>
+      <el-form-item label="是否显示" prop="costPrice">
+        <el-switch v-model="form.onShow" active-color="#409eff"></el-switch>
+      </el-form-item>
       <el-form-item label="图片">
         <el-upload
           class="avatar-uploader"
@@ -30,7 +46,7 @@
 </template>
 
 <script>
-import convertHttp from '@/utils/convertHttp'
+import convertHttp from "@/utils/convertHttp";
 export default {
   data() {
     return {
@@ -39,7 +55,10 @@ export default {
         salesPrice: 0,
         stock: 0,
         costPrice: 0,
-        image: ''
+        warnStock: 0,
+        onShow: true,
+        weight: 0,
+        image: ""
       },
       imageUrl: ""
     };
@@ -47,14 +66,14 @@ export default {
   methods: {
     hideBox() {
       this.dialog = false;
-			this.resetForm()
+      this.resetForm();
     },
     format(key) {
-      if(!this.form[key]) {
-        return
+      if (!this.form[key]) {
+        return;
       }
-      if(this.form[key] <= 0) {
-        this.form[key] = 0
+      if (this.form[key] <= 0) {
+        this.form[key] = 0;
       }
     },
     uploadImage(param) {
@@ -66,33 +85,26 @@ export default {
         },
         timeout: 100000
       }).then(result => {
-        this.imageUrl = convertHttp(result.data.url)
-				this.form.image = result.data.url
+        this.imageUrl = convertHttp(result.data.url);
+        this.form.image = result.data.url;
         this.$successMsg("上传成功！");
       });
     },
     editSpuList() {
       this.$parent.generateSkuList.forEach(val => {
-        if(val.checked) {
+        if (val.checked) {
           val.salesPrice = this.form.salesPrice
-        	? this.form.salesPrice
-        	: val.salesPrice
           val.stock = this.form.stock
-        	? this.form.stock
-        	: val.stock
+          val.warnStock = this.form.warnStock
+          val.onShow = this.form.onShow
+          val.weight = this.form.weight
           val.costPrice = this.form.costPrice
-        	? this.form.costPrice
-        	: val.costPrice
-          val.image = this.form.image
-        	? this.form.image
-        	: val.image
-          val.coverImage = this.imageUrl
-        	? this.imageUrl
-        	: val.coverImage
+          val.image = this.form.image ? this.form.image : val.image;
+          val.coverImage = this.imageUrl ? this.imageUrl : val.coverImage;
         }
-      })
-      this.$parent.caculateSalesPrice()
-      this.hideBox()
+      });
+      this.$parent.caculateSalesPrice();
+      this.hideBox();
     },
     // 重置表单
     resetForm() {
@@ -101,9 +113,12 @@ export default {
           salesPrice: 0,
           stock: 0,
           costPrice: 0,
-          image: ''
+          warnStock: 0,
+          onShow: true,
+          weight: 0,
+          image: ""
         };
-        this.imageUrl = ""
+        this.imageUrl = "";
         this.$refs.form.resetFields();
       } catch (e) {}
     }

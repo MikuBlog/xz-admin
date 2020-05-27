@@ -1,3 +1,18 @@
+.step-box {
+  position: relative;
+  margin: 1rem 0 2rem 0;
+}
+.select-button-box {
+  margin-top: 2rem;
+  text-align: center;
+}
+.vip-list, .step-price, .full-reduction {
+  margin-top: 2rem;
+  width: 500px;
+  .el-form-item {
+    margin: 1rem 0;
+  }
+}
 .select-box {
   position: relative;
   float: right;

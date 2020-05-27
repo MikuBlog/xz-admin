@@ -303,14 +303,15 @@ export default {
           return {
             memberLevelId: val.id,
             memberLevelName:val.name,
-            memberPrice: 0
+            reducePrice: 0,
+            discount: 0
           }
         })
       })
     },
     getTemplateList() {
       this.$http_json({
-        url: "/api/freightTemplate/page?page=0&size=9999",
+        url: "/api/freightTemplate/page?page=0&size=9999&sort=createTime,desc",
         method: "get"
       }).then(result => {
         this.templateList = result.data.content
@@ -467,7 +468,10 @@ export default {
             ...this.form.spu,
             fullReductionList: this.fullReductionList,
             ladderList: this.ladderList,
-            memberPriceList: this.vipList,
+            memberPriceList: this.vipList.map(val => {
+              val.memberPriceType = this.vipSelect
+              return val
+            }),
             promotionType: this.promotionType,
             skuList: this.form.skus,
             sliderImage: JSON.stringify(this.sliderImage),
@@ -510,7 +514,6 @@ export default {
 						brandId: "",
 						brandName: "",
 						codePath: "",
-						costPrice: 0,
 						description: "",
 						fictiSales: 0,
 						giveIntegral: 0,

@@ -4,6 +4,7 @@ export default {
     return {
       active: 0,
       promotionType: 0,
+      vipSelect: 0,
 			typeObj: [],
 			typeName: [],
 			typeId: [],
@@ -50,7 +51,6 @@ export default {
           brandId: "",
           brandName: "",
           codePath: "",
-          costPrice: 0,
           cover: "",
           description: "",
           fictiSales: 0,
