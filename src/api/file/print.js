@@ -23,7 +23,7 @@ function toPrint(page = "") {
   if((typeof page).toLowerCase() === 'string') {
     doc.write(page)
   }else {
-    doc.body.appendChild(page)
+    doc.body.appendChild(page.cloneNode(true))
   }
   doc.close()
   removePrintHeader(iframe.contentWindow)

@@ -433,6 +433,7 @@ export default {
             // }))
             this.form.skus = this.generateSkuList.map(val => {
               return {
+                id: val.id || null,
                 costPrice: val.costPrice,
 								image: val.image,
 								sales: 0,
