@@ -225,58 +225,49 @@
                   </span>
                   <span class="key-value-box">
                     <span class="key">售价</span>
-                    <el-input
+                    <el-input-number
                       class="inline-input"
-                      type="number"
-                      @input="formatChildren('salesPrice', index)"
+                      :min="0"
+                      :controls="false"
+                      @input="formatChildren"
                       v-model="item.salesPrice"
-                    >
-                      <template slot="append">元</template>
-                    </el-input>
+                    />
                   </span>
                   <span class="key-value-box">
                     <span class="key">库存</span>
-                    <el-input
+                    <el-input-number
                       v-model="item.stock"
                       class="inline-input"
-                      type="number"
-                      @input="formatChildren('stock', index)"
-                    >
-                      <template slot="append">件</template>
-                    </el-input>
+                      :min="0"
+                      :controls="false"
+                    />
                   </span>
                   <span class="key-value-box">
                     <span class="key">预警库存</span>
-                    <el-input
+                    <el-input-number
                       v-model="item.warnStock"
                       class="inline-input"
-                      type="number"
-                      @input="formatChildren('warnStock', index)"
-                    >
-                      <template slot="append">件</template>
-                    </el-input>
+                      :min="0"
+                      :controls="false"
+                    />
                   </span>
                   <span class="key-value-box">
                     <span class="key">成本价</span>
-                    <el-input
+                    <el-input-number
                       v-model="item.costPrice"
                       class="inline-input"
-                      type="number"
-                      @input="formatChildren('costPrice', index)"
-                    >
-                      <template slot="append">元</template>
-                    </el-input>
+                      :min="0"
+                      :controls="false"
+                    />
                   </span>
                   <span class="key-value-box">
                     <span class="key">重量</span>
-                    <el-input
+                    <el-input-number
                       v-model="item.weight"
                       class="inline-input"
-                      type="number"
-                      @input="formatChildren('weight', index)"
-                    >
-                      <template slot="append">kg</template>
-                    </el-input>
+                      :min="0"
+                      :controls="false"
+                    />
                   </span>
                   <span class="key-value-box">
                     <span class="key">是否显示</span>

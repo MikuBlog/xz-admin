@@ -5,14 +5,14 @@
 				<el-card class="box-card">
           <el-tabs v-model="activeName" type="card">
             <el-tab-pane label="全部订单" name="null"></el-tab-pane>
-            <el-tab-pane label="未支付" name="0"></el-tab-pane>
-            <el-tab-pane label="未发货" name="1"></el-tab-pane>
-            <el-tab-pane label="待收货" name="2"></el-tab-pane>
-            <el-tab-pane label="待评价" name="3"></el-tab-pane>
-            <el-tab-pane label="交易完成" name="4"></el-tab-pane>
-            <el-tab-pane label="退款中" name="-1"></el-tab-pane>
-            <el-tab-pane label="已退款" name="-2"></el-tab-pane>
-            <el-tab-pane label="已删除" name="-3"></el-tab-pane>
+            <el-tab-pane label="未支付" name="101"></el-tab-pane>
+            <el-tab-pane label="未发货" name="201"></el-tab-pane>
+            <el-tab-pane label="待收货" name="301"></el-tab-pane>
+            <el-tab-pane label="待评价" name="401"></el-tab-pane>
+            <el-tab-pane label="交易完成" name="501"></el-tab-pane>
+            <el-tab-pane label="退款中" name="-101"></el-tab-pane>
+            <el-tab-pane label="已退款" name="-200"></el-tab-pane>
+            <!-- <el-tab-pane label="已删除" name="-3"></el-tab-pane> -->
           </el-tabs>
 					<div class="search">
             <el-input v-model="searchVal" placeholder="搜索关键词" class="search-input margin-box" @keyup.native.enter="search"></el-input>
@@ -38,12 +38,12 @@
                     <div v-for="(item, ind) in props.row.orderCartInfos" :key="ind">
                       <img width="30" height="30" style="margin-right: 5px; vertical-align: top" :src="convertHttp(item.image)" @click="(isShow = true), (url = convertHttp(item.image))">
                       <span>{{ item.spuName }} | </span>
-                      <span>￥{{ item.price }} </span>
+                      <span>￥{{ item.salesPrice }} </span>
                       <span>x {{item.number}}</span>
                     </div>
                   </el-form-item>
                   <el-form-item label="订单备注" class="expand-line">
-                    <span>{{ props.row.useRemark || "无" }}</span>
+                    <span>{{ props.row.remark || "无" }}</span>
                   </el-form-item>
                   <el-form-item label="退款原因" class="expand-line" v-if="props.row.refundReasonWap">
                     <span>{{ props.row.refundReasonWap || "无" }}</span>
@@ -55,44 +55,44 @@
               </template>
             </el-table-column>
             <el-table-column prop="orderNum" label="订单编号" :show-overflow-tooltip="true" />
-						<el-table-column prop="userName" label="用户昵称" :show-overflow-tooltip="true" />
-            <el-table-column prop="payPrice" label="实际支付" :show-overflow-tooltip="true">
+						<el-table-column prop="receiverName" label="用户昵称" :show-overflow-tooltip="true" />
+            <el-table-column prop="payAmount" label="实际支付" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <div class="name-wrapper">
-                  ￥{{ scope.row.payPrice.toFixed(2) }}
+                  ￥{{ scope.row.payAmount.toFixed(2) }}
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="payType" label="支付状态" :show-overflow-tooltip="true" />
+            <!-- <el-table-column prop="payType" label="支付状态" :show-overflow-tooltip="true" /> -->
             <el-table-column prop="payPrice" label="订单状态" :show-overflow-tooltip="true">
               <template slot-scope="scope">
-                <el-tag :type="scope.row.status === 0
+                <el-tag :type="scope.row.status === 101
                 ? 'info'
-                : scope.row.status === 1
+                : scope.row.status === 201
                 ? 'info'
-                : scope.row.status === 2
+                : scope.row.status === 301
                 ? 'primary'
-                : scope.row.status === 3
+                : scope.row.status === 401
                 ? 'suuccess'
-                : scope.row.status === 4
+                : scope.row.status === 501
                 ? 'success'
-                : scope.row.status === -1
+                : scope.row.status === -101
                 ? 'primary'
-                : scope.row.status === -2
+                : scope.row.status === -200
                 ? 'success'
-                : 'danger'">{{ scope.row.status === 0
+                : 'danger'">{{ scope.row.status === 101
                 ? '未付款'
-                : scope.row.status === 1
+                : scope.row.status === 201
                 ? '未发货'
-                : scope.row.status === 2
+                : scope.row.status === 301
                 ? '待收货'
-                : scope.row.status === 3
+                : scope.row.status === 401
                 ? '待评价'
-                : scope.row.status === 4
+                : scope.row.status === 501
                 ? '已完成'
-                : scope.row.status === -1
+                : scope.row.status === -101
                 ? '退款中'
-                : scope.row.status === -2
+                : scope.row.status === -200
                 ? '已退款'
                 : '已删除' }}</el-tag>
               </template>

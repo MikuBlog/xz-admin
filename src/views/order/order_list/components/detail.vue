@@ -8,9 +8,11 @@
   >
     <el-card style="margin-bottom: 1rem">
       <div slot="header">收货信息</div>
-      <p>收货人：{{ detail.userName || "无" }}</p>
-      <p>联系电话：{{ detail.userPhone || "无" }}</p>
-      <p>收货地址：{{ detail.userAddress || "无"}}</p>
+      <p>收货人：{{ detail.receiverName || "无" }}</p>
+      <p>联系电话：{{ detail.receiverPhone || "无" }}</p>
+      <p>收货地址：{{ detail.receiverProvince
+      ? detail.receiverProvince + detail.receiverCity + detail.receiverDistrict
+      : "无"}}</p>
     </el-card>
     <el-card style="margin-bottom: 1rem">
       <div slot="header">订单信息</div>
@@ -18,9 +20,9 @@
         <el-col :span="12">
           <p>订单编号：{{ detail.orderNum || "无" }}</p>
           <p>商品总数：{{ detail.totalNumber || "无" }}</p>
-          <p>支付邮费：￥{{ detail.totalPostage || 0}}</p>
-          <p>支付方式：{{ detail.payType || "无"}}</p>
-          <p>实际支付：￥{{ detail.payMoney || 0}}</p>
+          <p>支付邮费：￥{{ detail.postage || 0}}</p>
+          <!-- <p>支付方式：{{ detail.payType || "无"}}</p> -->
+          <p>实际支付：￥{{ detail.payAmount || 0}}</p>
         </el-col>
         <el-col :span="12">
           <p>
@@ -40,7 +42,7 @@
             ? '已退款'
             : '已删除'}}
           </p>
-          <p>商品总价：￥{{ detail.totalPrice || 0 }}</p>
+          <p>商品总价：￥{{ detail.totalAmount || 0 }}</p>
           <p>创建时间：{{ detail.createTime || "无"}}</p>
           <p>支付时间：{{ detail.payTime || "无"}}</p>
         </el-col>
@@ -48,7 +50,7 @@
     </el-card>
     <el-card style="margin-bottom: 1rem">
       <div slot="header">备注信息</div>
-      <div>{{ detail.useRemark || "无" }}</div>
+      <div>{{ detail.remark || "无" }}</div>
     </el-card>
   </el-dialog>
 </template>

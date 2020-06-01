@@ -2,6 +2,7 @@ import convertHttp from '@/utils/convertHttp'
 export default {
   watch: {
     activeName() {
+      this.searchType = this.activeName
       this.search()
     }
   },
@@ -15,7 +16,7 @@ export default {
 		initialList(list) {
 		  this.list.splice(0);
 		  list.forEach(value => {
-        value.orderCartInfos = value.orderCartInfos.map(val => {
+        value.orderCartInfos = value.orderItemList.map(val => {
           return JSON.parse(val.cartInfo)
         })
 		    this.list.push(value);
@@ -30,9 +31,11 @@ export default {
             this.date
               ? `&greatCreateTime=${this.dateArray[0]}&lessCreateTime=${this.dateArray[1]}`
               : ""
-            }${this.activeName !== 'null'
+            }${this.activeName !== 'null' && this.activeName > -200
             ? `&status=${this.activeName}`
-          : ''}`,
+          : ''}${this.searchType <= -200
+          ? `&lessStatus=${this.searchType}`
+        : ''}`,
 		    method: "get"
 		  }).then(result => {
         const data = result.data;

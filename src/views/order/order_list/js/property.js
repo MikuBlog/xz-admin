@@ -2,6 +2,7 @@ export default {
 	data() {
 		return {
       activeName: 'null',
+      searchType: "",
       searchVal: "",
       selectList: [],
       list: [],

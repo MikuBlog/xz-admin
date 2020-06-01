@@ -655,15 +655,7 @@ export default {
       }
     },
     formatChildren(key, index) {
-      if (!this.generateSkuList[index][key]) {
-        return
-      }
-      if (this.generateSkuList[index][key] <= 0) {
-        this.generateSkuList[index][key] = 0
-      }
-      if (key === 'salesPrice') {
-        this.caculateSalesPrice()
-      }
+      this.caculateSalesPrice()
     },
     getPostagePrice() {
       if (!this.form.spu.postagePrice) {
