@@ -7,6 +7,6 @@
 // http://openlan.missiono.cn
 var
   // 接口统一请求前缀地址
-  baseUrl = 'http://192.168.1.100:8085',
+  baseUrl = 'http://192.168.1.124:8085',
   // 静态资源请求前缀地址
-  prefixUrl = 'http://192.168.1.100:8085'
+  prefixUrl = 'http://192.168.1.124:8085'

@@ -109,8 +109,8 @@
 						</el-table-column>
 						<el-table-column label="操作" fixed="right" align="center" width="250">
 							<template slot-scope="scope">
-                <el-button v-if="scope.row.status === 1" type="primary" icon="el-icon-s-promotion" @click="sendDelivery(scope.row)" title="发货"></el-button>
-                <el-button v-if="scope.row.status === -1" type="warning" icon="el-icon-refresh-left" @click="refund(scope.row)" title="允许退款"></el-button>
+                <el-button v-if="scope.row.status === 201" type="primary" icon="el-icon-s-promotion" @click="sendDelivery(scope.row)" title="发货"></el-button>
+                <el-button v-if="scope.row.status === -101" type="warning" icon="el-icon-refresh-left" @click="refund(scope.row)" title="允许退款"></el-button>
 								<el-button type="success" icon="el-icon-view" @click="showDetailBox(scope.row)" title="查看详情"></el-button>
 								<el-button type="danger" icon="el-icon-delete" @click="deleteComment(scope.row)"></el-button>
 							</template>
