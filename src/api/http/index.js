@@ -124,7 +124,6 @@
 			return formData
 		}],
 	})
-	
 	// 添加拦截器
 	addInterceptors(http_normal)	
 	addInterceptors(http_json)
