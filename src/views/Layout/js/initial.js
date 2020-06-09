@@ -75,18 +75,19 @@ export default {
 		},
     // 初始化滚动条样式
     initialScrollBar() {
-      if (!isMobile() && !isSafari()) {
-        OverlayScrollbars(document.querySelector('#top'), {
-          scrollbars: {
-            autoHide: "move"
-          }
-        })
-        const scrollContent = document.querySelector('.os-viewport')
-        this.$setStyle(scrollContent, 'padding-bottom', '20px')
-        scrollContent.scrollTop = this.$getMemorySes('scrollTop')
-      }else {
-        document.querySelector('#top').scrollTop = this.$getMemorySes('scrollTop')
-      }
+      // if (!isMobile() && !isSafari()) {
+      //   OverlayScrollbars(document.querySelector('#top'), {
+      //     scrollbars: {
+      //       autoHide: "move"
+      //     }
+      //   })
+      //   const scrollContent = document.querySelector('.os-viewport')
+      //   this.$setStyle(scrollContent, 'padding-bottom', '20px')
+      //   scrollContent.scrollTop = this.$getMemorySes('scrollTop')
+      // }else {
+      //   document.querySelector('#top').scrollTop = this.$getMemorySes('scrollTop')
+      // }
+			document.querySelector('#top').scrollTop = this.$getMemorySes('scrollTop')
     },
     // 初始化布局大小
     initialSize() {

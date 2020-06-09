@@ -7,8 +7,8 @@ import VueEditor from "vue2-editor"
 import draggable from 'vuedraggable'
 // 引入前端错误日志
 import './error_log'
-// 引入滚动条
-import 'overlayscrollbars'
+// // 引入滚动条
+// import 'overlayscrollbars'
 // 引入icon组件
 import '@/icons'
 // 引入UI框架
@@ -19,7 +19,7 @@ import '@/global/css/animation.css'
 import '@/global/css/elementUI.css'
 import '@/global/css/format.css'
 import '@/global/css/media.css'
-import '@/global/css/overlay-scroll.css'
+// import '@/global/css/overlay-scroll.css'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'

@@ -74,7 +74,7 @@
       </Drawer>
       <el-container class="container-background">
         <div class="menu" v-show="!isVerticleMenu">
-          <el-scrollbar class="menu-horizontal-scrollbar">
+          <el-scrollbar class="menu-horizontal-scrollbar" style="outline: none;">
             <el-menu
               :default-active="$route.path"
               class="el-menu-demo menu-horizontal"
@@ -120,12 +120,13 @@
 							<router-view @updateUserInfo="getUserInfo" class="router" />
 						</keep-alive>
 					</transition>
-          <back-top
+					<!-- 返回到底部 -->
+<!--          <back-top
             :options="{
-              target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
+              target: '#top',
               isMove: true
             }"
-          />
+          /> -->
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter">
           <div class="coppy-right">
