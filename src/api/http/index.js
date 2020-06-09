@@ -39,6 +39,7 @@
 				return response;
 			}, err => {
         const regexp = new RegExp(/timeout/g)
+				loading.close()
 				typeof err.response === "object" 
 				? (err.response.status === 401
 					? Message
@@ -62,7 +63,6 @@
 				: (regexp.test(err)
 				? Message.errorMsg('请求超时，请检查网络是否连通')
 				: Message.errorMsg('服务器出错，请联系客服进行处理'))
-				loading.close()
 				return Promise.reject(err)
 			})
 	}
@@ -124,7 +124,6 @@
 			return formData
 		}],
 	})
-	
 	// 添加拦截器
 	addInterceptors(http_normal)	
 	addInterceptors(http_json)
