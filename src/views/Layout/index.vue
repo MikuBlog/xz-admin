@@ -120,12 +120,13 @@
 							<router-view @updateUserInfo="getUserInfo" class="router" />
 						</keep-alive>
 					</transition>
-          <back-top
+					<!-- 返回到底部 -->
+<!--          <back-top
             :options="{
-              target: (isMobile() || isSafari()) ? '#top' : '.os-viewport',
+              target: '#top',
               isMove: true
             }"
-          />
+          /> -->
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter">
           <div class="coppy-right">
