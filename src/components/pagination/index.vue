@@ -7,6 +7,7 @@
       :pager-count="5"
       :small="this.defaultConfig.paginationSize"
       :layout="this.defaultConfig.paginationLayout"
+			:page-size.sync="pageSize"
       :current-page.sync="currentPage"
       :total="total"
     ></el-pagination>

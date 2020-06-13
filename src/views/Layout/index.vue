@@ -121,12 +121,12 @@
 						</keep-alive>
 					</transition>
 					<!-- 返回到底部 -->
-<!--          <back-top
+         <back-top
             :options="{
               target: '#top',
               isMove: true
             }"
-          /> -->
+          />
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter">
           <div class="coppy-right">
