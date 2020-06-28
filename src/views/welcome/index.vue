@@ -29,7 +29,7 @@ export default {
     initialImage() {
       const image = new Image(),
         background = this.$refs.background;
-      image.src = "/img/homepage.f40b3207.gif";
+      image.src = "/img/homepage.f40b3207.gif"; // 可使用require("")代替
       image.onload = () => {
         this.$setStyle(background, "display", "block");
         this.$setStyle(background, "background-image", `url(${image.src})`);

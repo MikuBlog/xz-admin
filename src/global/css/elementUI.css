@@ -105,3 +105,8 @@
 /* .el-dialog {
 	overflow: hidden;
 } */
+
+/* 解决弹窗闪动问题 */
+body {
+	padding-right: 0!important;
+}
