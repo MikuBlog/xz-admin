@@ -42,18 +42,10 @@ export default {
 		}
   },
   beforeDestroy() {
-    if (!isMobile() && !isSafari()) {
-      document.querySelector(".os-viewport").removeEventListener("scroll", this.getScrollTop);
-    } else {
-      document.querySelector("#top").removeEventListener("scroll", this.getScrollTop);
-    }
+    document.querySelector("#top").removeEventListener("scroll", this.getScrollTop);
   },
   deactivated() {
-    if (!isMobile() && !isSafari()) {
-      document.querySelector(".os-viewport").removeEventListener("scroll", this.getScrollTop);
-    } else {
-      document.querySelector("#top").removeEventListener("scroll", this.getScrollTop);
-    }
+    document.querySelector("#top").removeEventListener("scroll", this.getScrollTop);
   },
   mounted() {
     setTimeout(() => {
@@ -69,13 +61,7 @@ export default {
     },
     initialListener() {
       const _this = this;
-      if (!isMobile() && !isSafari()) {
-        document
-          .querySelector(".os-viewport")
-          .addEventListener("scroll", this.getScrollTop);
-      } else {
-        document.querySelector("#top").addEventListener("scroll", this.getScrollTop);
-      }
+      document.querySelector("#top").addEventListener("scroll", this.getScrollTop);
     }
   }
 };
