@@ -25,13 +25,21 @@ function download(url, fileName) {
     method: "get",
     responseType: 'blob'
   }).then(result => {
-    const
-      a = document.createElement('a'),
-      arr = url.split('/')
-    a.download = fileName || arr[arr.length - 1]
-    a.href = window.URL.createObjectURL(result.data)
-    a.click()
-    loading.close()
+		if(window.navigator.msSaveBlob) {
+			try {
+				window.navigator.msSaveBlob(blob, fileName || arr[arr.length - 1])
+			} catch(e) {
+				console.log(e)
+			}
+		}else {
+			const
+			  a = document.createElement('a'),
+			  arr = url.split('/')
+			a.download = fileName || arr[arr.length - 1]
+			a.href = window.URL.createObjectURL(result.data)
+			a.click()
+			loading.close()
+		}  
   }).catch(e => {
     Message({
       message: e,
