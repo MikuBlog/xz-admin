@@ -55,6 +55,7 @@
             :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column prop="name" label="名称" :render-header="renderHeader">
             </el-table-column>

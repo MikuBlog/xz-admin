@@ -20,7 +20,7 @@
 					<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAll" :disabled="!idList.length" title="批量删除" circle></el-button>
 					<el-button type="primary" icon="el-icon-setting" class="margin-box" @click="showConfigModal" title="配置七牛云" circle></el-button>
 				</div>
-				<el-table ref="pictureTable" :max-height="$store.state.tableHeight.tableHeight" :data="fileList" style="width: 100%;" :row-key="getRowKey" @selection-change="selectItem" highlight-current-row stripe>
+				<el-table ref="pictureTable" :max-height="$store.state.tableHeight.tableHeight" :data="fileList" style="width: 100%;" :row-key="getRowKey" @selection-change="selectItem" highlight-current-row stripe border>
 					<el-table-column type="selection" width="55" reserve-selection />
 					<el-table-column prop="key" label="文件名" :show-overflow-tooltip="true" />
 					<el-table-column prop="suffix" label="文件类型" show-overflow-tooltip align="center">

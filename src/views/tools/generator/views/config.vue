@@ -9,7 +9,7 @@
 						<el-button type="warning" icon="el-icon-refresh" class="margin-box" @click="sync" title="同步" size="small">同步</el-button>
 					</div>
 					<el-form size="small" label-width="90px">
-						<el-table :data="columnList" :max-height="tableHeight" size="small" style="width: 100%;margin-bottom: 15px">
+						<el-table :data="columnList" :max-height="tableHeight" size="small" style="width: 100%;margin-bottom: 15px" border>
 							<el-table-column prop="columnName" label="字段名称" />
 							<el-table-column prop="columnType" label="字段类型" />
 							<el-table-column prop="remark" label="字段描述">

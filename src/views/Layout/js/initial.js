@@ -13,6 +13,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.getWindowWidth)
+    clearInterval(this.interval)
   },
   computed: {
     ...mapState({
@@ -186,15 +187,9 @@ export default {
     initialListener() {
       const _this = this
       window.addEventListener('resize', this.getWindowWidth)
-      if(!isMobile() && !isSafari()) {
-        document.querySelector('.os-viewport').addEventListener('scroll', function () {
-          _this.getScrollTop(this)
-        })
-      }else {
-        document.querySelector('#top').addEventListener('scroll', function () {
-          _this.getScrollTop(this)
-        })
-      }
+      document.querySelector('#top').addEventListener('scroll', function () {
+        _this.getScrollTop(this)
+      })
     }
   }
 }

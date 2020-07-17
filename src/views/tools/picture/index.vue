@@ -55,6 +55,7 @@
             @selection-change="selectItem"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column type="selection" width="55" reserve-selection />
             <el-table-column prop="filename" label="文件名" :show-overflow-tooltip="true" />

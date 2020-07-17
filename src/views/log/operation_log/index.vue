@@ -35,6 +35,7 @@
             style="width: 100%"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column type="expand">
               <template slot-scope="props">
@@ -48,12 +49,12 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column label="用户名" show-overflow-tooltip>
+            <el-table-column label="用户名">
               <template slot-scope="scope">
-                <span style="margin-left: 10px">{{ scope.row.username }}</span>
+                <span>{{ scope.row.username }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="IP" show-overflow-tooltip>
+            <el-table-column label="IP">
               <template slot-scope="scope">
                 <div slot="reference">{{ scope.row.requestIp }}</div>
               </template>
@@ -75,7 +76,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="创建日期" width="180">
+            <el-table-column label="创建日期">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
               </template>

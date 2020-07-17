@@ -95,6 +95,7 @@
             :row-key="getRowKey"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column type="selection" width="55" reserve-selection />
             <el-table-column label="用户名" show-overflow-tooltip>

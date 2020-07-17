@@ -17,7 +17,7 @@ export default {
 	methods: {
 		getCode() {
 			this.$http({
-				url: `${baseUrl}/auth/vCode`,
+				url: `/auth/vCode`,
 				method: "get"
 			}).then(result => {
 				const data = JSON.parse(result.request.response)

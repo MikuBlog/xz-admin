@@ -53,6 +53,8 @@ import FullScreen from '@/api/other/full_screen'
 import Memory from '@/api/storage'
 // 引入文件下载模块
 import Download from '@/api/file/download'
+// 引入模板下载方法
+import DownloadTemplate from '@/api/file/download_template'
 // 引入打印功能
 import Print from '@/api/file/print'
 // 引入图片读取模块
@@ -326,6 +328,13 @@ Vue.prototype.$dataUrlToFile = dataUrlToFile
  * @param {Boolean} isBlob 是否为二进制文件
  */
 Vue.prototype.$download = Download
+/**
+ * @author xuanzai
+ * @description 导出模板、导出列表
+ * @param {String} url 下载路径
+ * @param {String} fileName 文件名称
+ */
+Vue.prototype.$downloadTemplate = DownloadTemplate
 /**
  * @author xuanzai
  * @description 文本复制
