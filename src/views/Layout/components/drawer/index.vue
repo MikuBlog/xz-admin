@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { isMobile, isSafari } from "@/utils/agent";
 import System from "./system";
 import Background from "./background";
 import Logo from "./logo";
@@ -29,16 +28,6 @@ export default {
       isSetting: false,
       activeName: "DIY"
     };
-  },
-  mounted() {
-    // 初始化进度条
-    if (!isMobile() && !isSafari()) {
-      OverlayScrollbars(document.querySelector(".drawer-setting .ivu-drawer-body"), {
-        scrollbars: {
-          autoHide: "move"
-        }
-      });
-    }
   },
   methods: {
     // 保存设置

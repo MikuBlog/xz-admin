@@ -1,4 +1,3 @@
-import { isMobile, isSafari } from '@/utils/agent'
 import { mapState } from 'vuex'
 import Vue from 'vue'
 export default {
