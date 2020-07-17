@@ -50,7 +50,7 @@
               circle
             ></el-button>
           </div>
-          <el-table :max-height="$store.state.tableHeight.tableHeight" :data="missionList" style="width: 100%" highlight-current-row stripe>
+          <el-table :max-height="$store.state.tableHeight.tableHeight" :data="missionList" style="width: 100%" highlight-current-row stripe border>
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">

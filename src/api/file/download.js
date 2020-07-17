@@ -27,7 +27,7 @@ function download(url, fileName) {
   }).then(result => {
 		if(window.navigator.msSaveBlob) {
 			try {
-				window.navigator.msSaveBlob(blob, fileName || arr[arr.length - 1])
+				window.navigator.msSaveBlob(result.data, fileName || arr[arr.length - 1])
 			} catch(e) {
 				console.log(e)
 			}

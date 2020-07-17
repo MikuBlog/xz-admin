@@ -27,6 +27,7 @@ import { MessageBox } from 'mint-ui';
             style="width: 100%"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column type="expand">
               <template slot-scope="props">

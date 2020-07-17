@@ -44,6 +44,7 @@
             style="width: 100%;"
             highlight-current-row
             stripe
+            border
             @row-click="getRoleItem"
           >
             <el-table-column type="expand">

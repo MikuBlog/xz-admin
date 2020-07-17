@@ -19,7 +19,7 @@
 					<el-button type="warning" icon="el-icon-download" class="margin-box" @click="exportFile" :disabled="!selectFileList.length" title="批量导出文件" circle></el-button>
 					<el-button type="danger" icon="el-icon-delete" class="margin-box" @click="deleteAll" :disabled="!idList.length" title="批量删除" circle></el-button>
 				</div>
-				<el-table ref="pictureTable" :max-height="$store.state.tableHeight.tableHeight" :data="fileList" style="width: 100%;" :row-key="getRowKey" @selection-change="selectItem" highlight-current-row stripe>
+				<el-table ref="pictureTable" :max-height="$store.state.tableHeight.tableHeight" :data="fileList" style="width: 100%;" :row-key="getRowKey" @selection-change="selectItem" highlight-current-row stripe border>
 					<el-table-column type="selection" width="55" reserve-selection />
 					<el-table-column prop="name" label="文件名" :show-overflow-tooltip="true" />
 					<el-table-column prop="suffix" label="文件类型" show-overflow-tooltip align="center">

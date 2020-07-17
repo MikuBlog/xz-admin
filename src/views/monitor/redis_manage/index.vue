@@ -28,6 +28,7 @@ import { MessageBox } from 'mint-ui';
 						:max-height="$store.state.tableHeight.tableHeight"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column :show-overflow-tooltip="true" label="KEY">
               <template slot-scope="scope">

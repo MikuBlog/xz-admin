@@ -49,6 +49,7 @@
             style="width: 100%"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column label="名称" show-overflow-tooltip>
               <template slot-scope="scope">

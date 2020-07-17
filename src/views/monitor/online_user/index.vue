@@ -39,6 +39,7 @@
             :row-key="getRowKey"
             highlight-current-row
             stripe
+            border
           >
             <el-table-column type="selection" width="55" />
             <el-table-column label="用户名" :show-overflow-tooltip="true">
