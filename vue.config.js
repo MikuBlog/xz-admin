@@ -7,6 +7,11 @@ function resolve(dir) {
 module.exports = {
   // 配置生产环境静态资源访问路径
   publicPath: environment,
+  // 项目设置访问端口
+  // devServer: {
+  //   port: 8888,     // 端口
+  // },
+  // lintOnSave: false,   // 取消 eslint 验证
   // 用于请求跨域资源,api等
   // devServer: {
   // 	open: true, //是否自动弹出浏览器页面
