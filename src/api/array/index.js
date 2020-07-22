@@ -7,6 +7,7 @@
  * @returns {Array} 返回新的数组
  */
 function sortList(list, property, isDes = false) {
+  if(!list || list.length === 0) return []
 	if (property) {
 		if ((typeof list[0][property]).toLowerCase() === 'number') {
 			return list.sort((a, b) => {
