@@ -6,6 +6,7 @@ import { Message, MessageBox, Notification } from 'element-ui'
  * @param {String} msg 
  */
 const successMsg = msg => {
+  Message.closeAll()
   Message({
     message: msg,
     type: 'success',
@@ -14,6 +15,7 @@ const successMsg = msg => {
 }
 
 const warnMsg = msg => {
+  Message.closeAll()
   Message({
     message: msg,
     type: 'warning',
@@ -22,6 +24,7 @@ const warnMsg = msg => {
 }
 
 const errorMsg = msg => {
+  Message.closeAll()
   Message({
     message: msg,
     type: 'error',
@@ -30,6 +33,7 @@ const errorMsg = msg => {
 }
 
 const showMsgBox = ({ title, msg, isHTML, type, iconClass }) => {
+  Message.closeAll()
   return MessageBox.confirm(msg || "", title || "", {
     // 不允许显示取消icon
     showClose: false,
@@ -55,6 +59,7 @@ const showMsgBox = ({ title, msg, isHTML, type, iconClass }) => {
  * @param {String} title 通知标题
  */
 const successTip = ({ title, msg }) => {
+  Notification.closeAll()
   Notification({
     title: title || "",
     message: msg,
@@ -64,6 +69,7 @@ const successTip = ({ title, msg }) => {
 }
 
 const warnTip = ({ title, msg }) => {
+  Notification.closeAll()
   Notification({
     title: title || "",
     message: msg,
@@ -73,6 +79,7 @@ const warnTip = ({ title, msg }) => {
 }
 
 const errorTip = ({ title, msg }) => {
+  Notification.closeAll()
   Notification({
     title: title || "",
     message: msg,
@@ -82,6 +89,7 @@ const errorTip = ({ title, msg }) => {
 }
 
 const showTipDiy = ({ title, msg, type, iconClass, isHTML }) => {
+  Notification.closeAll()
   Notification({
     title: title || "",
     message: msg,

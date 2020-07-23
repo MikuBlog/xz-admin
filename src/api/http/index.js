@@ -26,7 +26,7 @@
 				loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
 				return config
 			}, err => {
-				Message.errorMsg('服务器出错，请联系客服进行处理')
+				Message.errorMsg('网络出错，请检查设备联网状态')
 				loading.close()
 				return Promise.reject(err)
 			})
@@ -62,7 +62,7 @@
 				))
 				: (regexp.test(err)
 				? Message.errorMsg('请求超时，请检查网络是否连通')
-				: Message.errorMsg('服务器出错，请联系客服进行处理'))
+				: Message.errorMsg('网络出错，请检查设备联网状态'))
 				return Promise.reject(err)
 			})
 	}
