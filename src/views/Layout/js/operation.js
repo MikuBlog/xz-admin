@@ -2,6 +2,9 @@ import { isMobile, isSafari } from '@/utils/agent'
 import { mapMutations } from 'vuex'
 import convertHttp from '@/utils/convertHttp'
 export default {
+	beforeDestroy() {
+		clearInterval(this.interval)
+	},
   methods: {
     ...mapMutations([
       "SET_USER_INFO",
