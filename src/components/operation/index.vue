@@ -3,7 +3,7 @@
     <el-row>
       <el-col>
         <el-card>
-          <div class="button-box" v-for="items in options">
+          <div class="button-box" v-for="(items, ind) in options" :key="ind">
             <el-button
               :type="items.type || ''"
               :icon="items.icons || ''"
