@@ -84,7 +84,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div style="text-align: right">
+    <div style="text-align: right" v-if="tableConfig.isPagination">
       <el-pagination
         @size-change="getList(nowPage, $event)"
         @current-change="getList($event, nowSize)"
@@ -115,12 +115,19 @@ export default {
   },
   data() {
     return {
+			// 列表元素
       list: [],
+			// 已选择元素
       selectList: [],
+			// 当前页
       nowPage: 1,
+			// 当前页条数
       nowSize: 10,
+			// 总条数
       totalElements: 0,
+			// 默认一页条数
       defaultPageSizes: [],
+			// 搜索参数
       searchParam: {},
     };
   },
@@ -173,6 +180,7 @@ export default {
         });
       });
     },
+		// 返回第一页
     toFirstPage() {
       this.nowPage = 1;
       this.getList(this.nowPage, this.nowSize);
@@ -187,6 +195,7 @@ export default {
         );
       });
     },
+		// 刷新列表，清空所有搜索参数值
     refresh() {
       Object
         .keys(this.searchParam)
@@ -195,6 +204,7 @@ export default {
         })
       this.toFirstPage()
     },
+		// 获取列表
     getList(page, size) {
       this.tableConfig.requestParam.requestMethods
         ? this.tableConfig.requestParam.requestMethods(
