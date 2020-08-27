@@ -91,7 +91,7 @@ export default {
           param: {
             sort: "createTime,desc",
           },
-          // 搜索参数,绑定输入框
+          // 搜索参数,绑定输入框,点击刷新按钮会清空搜索值
           searchParam: {
             name: ""
           },
