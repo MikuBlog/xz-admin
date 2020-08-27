@@ -113,7 +113,7 @@ export default {
 								url: '/api/localStorage/upload',
 								method: 'post',
 								data: {
-									file: raw
+                  file: raw[0]
 								}
 							})
 							.then(result => {
