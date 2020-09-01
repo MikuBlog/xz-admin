@@ -15,7 +15,7 @@ export default {
     // 获取用户信息
     getUserInfo() {
       this.$http_json({
-        url: "/auth/info",
+        url: "/api/auth/info",
         method: "get"
       }).then(result => {
         result.data.avatar = result.data.avatar

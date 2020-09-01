@@ -72,7 +72,7 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.browser }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="创建日期" width="180">
+            <el-table-column label="第一次登录时间" width="180">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.loginTime }}</div>
               </template>

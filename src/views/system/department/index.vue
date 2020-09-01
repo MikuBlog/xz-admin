@@ -66,9 +66,9 @@
                 >{{ scope.row.enabled ? "正常" : "停用" }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column show-overflow-tooltip width="180" prop="createTime" label="创建日期">
+            <el-table-column show-overflow-tooltip width="180" prop="createdAt" label="创建日期">
               <template slot-scope="scope">
-                <span>{{ scope.row.createTime }}</span>
+                <span>{{ scope.row.createdAt }}</span>
               </template>
             </el-table-column>
             <el-table-column label="操作" width="180" align="center">

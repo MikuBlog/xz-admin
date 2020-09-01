@@ -83,6 +83,7 @@ export default {
       this.$refs.form.roleId = item.id;
       roleItem.name = item.name;
       roleItem.remark = item.remark;
+			roleItem.authority = item.authority
       roleItem.level = item.level;
       roleItem.dataScope = item.dataScope;
       component.deptIds = item.depts.map(val => val.id);

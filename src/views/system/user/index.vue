@@ -134,7 +134,7 @@
             </el-table-column>
             <el-table-column label="创建日期" width="180">
               <template slot-scope="scope">
-                <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
+                <div slot="reference" class="name-wrapper">{{ scope.row.createdAt }}</div>
               </template>
             </el-table-column>
             <el-table-column label="操作" width="150" fixed="right" align="center">

@@ -36,7 +36,7 @@ export default {
           this.selectType_1 ? `&${this.selectType_1}=${this.searchVal}` : ""
           }${
           this.date
-            ? `&greatTime=${this.dateArray[0]}&lessTime=${this.dateArray[1]}`
+            ? `&greatCreatedAt=${this.dateArray[0]}&lessCreatedAt=${this.dateArray[1]}`
             : ""
           }${this.selectType_2 ? `&type=${this.selectType_2}` : ""}`,
         method: "get"

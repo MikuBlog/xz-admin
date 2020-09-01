@@ -42,10 +42,17 @@ export default {
         operation: true,
         // 操作宽度（默认100px）
         operationWidth: 100,
-        // 表格固定高度
-        maxHeight: 500,
+        // // 表格固定高度
+        // maxHeight: 500,
         // 是否带有分页组件
         isPagination: true,
+        // 是否默认展开全部子项
+        isExpandAll: false,
+        // 渲染子项字段
+        treeProps: {
+          children: 'children', 
+          hasChildren: 'hasChildren'
+        },
         // 搜索框右方按钮
         operationBtns: [
           { label: "搜索列表", type: "primary", icon: "el-icon-search", circle: true, class: 'margin-box', method: _ => {
@@ -59,6 +66,20 @@ export default {
             this.$refs.dataTable.deleteAll()
           }} 
         ],
+        // 表格展开项
+        columnsExpand: [
+          {
+            label: "创建时间",
+            prop: "createdAt"
+          },
+          {
+            label: "创建时间",
+            prop: "createdAt",
+            render: row => {
+              return `<div>${ row.createdAt }</div>`
+            }
+          }
+        ],
         // 表格表头元素
         columns: [
           {
@@ -67,9 +88,11 @@ export default {
             render: row => {
               return `<div>${row.name}</div>`;
             },
-            showOverflowTooltip: true
+            showOverflowTooltip: true,
+            isShow: true,
+            sortable: true
           },
-          { label: "创建时间", prop: "createTime", showOverflowTooltip: true },
+          { label: "创建时间", prop: "createdAt", showOverflowTooltip: true, isShow: true, sortable: true }
         ],
         // 表格操作元素（当operation为true的时候生效）
         operations: [{ label: "查看进度", method: (row, ind) => {
@@ -82,14 +105,14 @@ export default {
         // 请求方法
         requestParam: {
           // 请求列表url
-          requestUrl: "/api/project/page",
+          requestUrl: "/api/dept/get",
           // 删除列表项url，只有传入该值才能删除列表项，否则只能自己编写相应的业务逻辑
           deleteUrl: "",
           // 是否在初始化时请求列表
           immediate: true,
           // 固定参数,不变的参数
           param: {
-            sort: "createTime,desc",
+            sort: "createdAt,desc",
           },
           // 搜索参数,绑定输入框,点击刷新按钮会清空搜索值
           searchParam: {

@@ -80,7 +80,7 @@
       </el-table-column>
       <el-table-column label="创建日期 " width="180">
         <template slot-scope="scope">
-          <div slot="reference" class="name-wrapper">{{ scope.row.createTime }}</div>
+          <div slot="reference" class="name-wrapper">{{ scope.row.createdAt }}</div>
         </template>
       </el-table-column>
     </el-table>
@@ -149,7 +149,7 @@ export default {
       this.$http_normal({
         url: `/api/quartz/jobLogs?page=${page - 1}&size=${
           this.nowSize
-        }&sort=createTime,desc${
+        }&sort=createdAt,desc${
           this.searchVal ? `&jobName=${this.searchVal}` : ""
         }${this.selectType !== "" ? `&successful=${this.selectType}` : ""}`,
         method: "get"

@@ -47,9 +47,9 @@
             </el-table-column>
             <el-table-column prop="alias" label="别名">
             </el-table-column>
-            <el-table-column prop="createTime" label="创建日期" width="180">
+            <el-table-column prop="createdAt" label="创建日期" width="180">
               <template slot-scope="scope">
-                <span>{{ scope.row.createTime }}</span>
+                <span>{{ scope.row.createdAt }}</span>
               </template>
             </el-table-column>
             <el-table-column label="操作" width="150" align="center" fixed="right">
