@@ -16,7 +16,7 @@ export default {
       this.$http_normal({
         url: `/api/dict/page?page=${page - 1}&size=${
           size
-          }&sort=createTime,desc${
+          }&sort=createdAt,desc${
           this.selectType_1 ? `&${this.selectType_1}=${this.searchVal_1}` : ""
           }`,
         method: "get"

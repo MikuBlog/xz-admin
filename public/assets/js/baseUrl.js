@@ -7,6 +7,6 @@
 // http://openlan.missiono.cn
 var
   // 接口统一请求前缀地址
-  baseUrl = 'http://fishapi.xuanzai.top',
+  baseUrl = 'http://172.16.12.29:8800',
   // 静态资源请求前缀地址
-  prefixUrl = 'http://fishapi.xuanzai.top'
+  prefixUrl = 'http://172.16.12.29:8800'

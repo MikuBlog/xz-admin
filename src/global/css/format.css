@@ -11,9 +11,9 @@ html, body {
   overflow: hidden;
 }
 
-label {
+/* label {
   font-weight: bold;
-}
+} */
 
 .expand-line {
   position: relative;

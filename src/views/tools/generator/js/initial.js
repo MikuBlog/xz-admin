@@ -16,7 +16,7 @@ export default {
       this.$http_normal({
         url: `/api/generator/tables?page=${page - 1}&size=${
           size
-        }&sort=createTime,desc${
+        }&sort=createdAt,desc${
           this.searchVal ? `&name=${this.searchVal}` : ""
         }`,
         method: "get"

@@ -47,6 +47,19 @@
   margin: 1rem 0;
 }
 
+.el-table th.gutter {
+  display: table-cell!important;
+}
+
+.el-table th .cell {
+  color: #333;
+}
+
+.el-table td, .el-table th {
+  padding: 5px 0;
+  font-size: 13px;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -91,12 +104,19 @@
 /* 格式化卡片样式 */
 .el-card {
 	position: relative;
+  border: 1px solid #ddd!important;
+  box-shadow: none!important;
+  /* -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .1)!important; */
+}
+
+.el-card-child {
+	position: relative;
   border: 1px solid transparent!important;
   box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .1)!important;
   -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .1)!important;
 }
 
-.el-card:hover {
+.el-card-child:hover {
   border: 1px solid #EBEEF5!important;
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .3)!important;
   -webkit-box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .3)!important;
@@ -109,4 +129,19 @@
 /* 解决弹窗闪动问题 */
 body {
 	padding-right: 0!important;
+}
+.el-dialog__title, .el-dialog__close {
+  font-weight: bold;
+}
+.el-dialog__title {
+  color: #444;
+}
+.el-dialog__footer {
+	border-top: 1px solid #ddd;
+  background-color: #f7f8fa;
+  padding: 10px 20px;
+}
+.is-fullscreen .el-dialog__footer {
+  background: none;
+  border-top: none;
 }

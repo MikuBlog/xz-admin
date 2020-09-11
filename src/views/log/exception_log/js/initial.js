@@ -14,7 +14,7 @@ export default {
     // 获取错误日志信息
     getExceptionLogList(page, size) {
       this.$http_normal({
-        url: `/log/page/error?page=${page - 1}&size=${size}&sort=createTime,desc${
+        url: `/api/log/page/error?page=${page - 1}&size=${size}&sort=createdAt,desc${
           this.selectType ? `&${this.selectType}=${this.searchVal}` : ""
           }`,
         method: "get"

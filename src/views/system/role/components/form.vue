@@ -26,6 +26,9 @@
           style="width: 370px;"
         />
       </el-form-item>
+			<el-form-item label="权限标识" prop="authority">
+			  <el-input v-model="roleForm.authority" style="width: 370px;" maxlength="20" show-word-limit />
+			</el-form-item>
       <el-form-item label="数据范围">
         <el-select
           v-model="roleForm.dataScope"
@@ -76,10 +79,11 @@ export default {
         depts: [],
         remark: "",
         dataScope: "本级",
-        level: 3
+        level: 3,
+				authority: ""
       },
       rules: {
-        name: [{ required: true, message: "请输入名称", trigger: "blur" }]
+        name: [{ required: true, message: "请输入名称", trigger: "blur" }],
       }
     };
   },
@@ -154,7 +158,8 @@ export default {
           depts: [],
           remark: "",
           dataScope: "本级",
-          level: 3
+          level: 3,
+					authority: ""
         };
         this.$refs["form"].resetFields();
       } catch (e) {}

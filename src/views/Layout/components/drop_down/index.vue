@@ -46,7 +46,7 @@ export default {
         iconClass: "el-icon-question"
       }).then(result => {
         this.$http_normal({
-          url: "/auth/logout",
+          url: "/api/auth/logout",
           method: "post"
         }).then(() => {
           this.$setMemoryPmt("token", "");

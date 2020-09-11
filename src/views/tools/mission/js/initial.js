@@ -16,7 +16,7 @@ export default {
       this.$http_normal({
         url: `/api/quartz/page?page=${page - 1}&size=${
           size
-        }&sort=createTime,desc${
+        }&sort=createdAt,desc${
           this.searchVal ? `&jobName=${this.searchVal}` : ""
         }${
           this.selectType !== "" ? `&paused=${this.selectType}` : ""

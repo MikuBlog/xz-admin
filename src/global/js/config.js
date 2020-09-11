@@ -39,7 +39,7 @@ export default {
 		// 默认系统亮度
 		brightness: 100,
 		// 默认菜单风格(light/dark)
-		menuStyleType: 'light',
+		menuStyleType: 'dark',
 		// 默认菜单布局(true为垂直,false为水平)
 		menuLayout: true,
 		// 默认显示Logo
@@ -137,12 +137,12 @@ export default {
   paginationLayout: `${
     // 是否为ipad
     isIpad()
-      ? 'total, sizes, prev, pager, next'
+      ? 'pager, sizes, total, prev, next'
       // 是否为移动设备
       : isMobile()
         ? 'prev, pager, next'
         // pc设备
-        : 'total, sizes, prev, pager, next, jumper'
+        : 'prev, pager, next, sizes, total, jumper'
     }`,
   // 分页大小
   paginationSize: isMobile() && !isIpad(),

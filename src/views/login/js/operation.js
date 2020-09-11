@@ -187,7 +187,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$http_json({
-            url: "/auth/login",
+            url: "/api/auth/login",
             method: "post",
             data: {
               username: this.ruleForm.username,

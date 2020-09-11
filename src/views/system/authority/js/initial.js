@@ -13,7 +13,7 @@ export default {
     // 获取权限信息
     getAuthorityList() {
       this.$http_json({
-        url: `/api/permission/get?sort=createTime,desc${
+        url: `/api/permission/get?sort=createdAt,desc${
           this.searchVal ? `&name=${this.searchVal}` : ""
           }`,
         method: "get"

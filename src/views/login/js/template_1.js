@@ -17,7 +17,7 @@ export default {
 	methods: {
 		getCode() {
 			this.$http({
-				url: `/auth/vCode`,
+				url: `/api/auth/vCode`,
 				method: "get"
 			}).then(result => {
 				const data = JSON.parse(result.request.response)
@@ -43,7 +43,7 @@ export default {
 				return
 			}
 			this.$http_json({
-				url: "/auth/login",
+				url: "/api/auth/login",
 				method: "post",
 				data: {
 					username: this.username,

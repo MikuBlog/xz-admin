@@ -47,16 +47,6 @@ export default {
       stationForm.enabled = item.enabled.toString();
       stationForm.dept.id = item.dept.id;
       this.showEditStation();
-    },
-    // 重置
-    refresh() {
-      this.searchVal = ""
-      this.selectType = ""
-      this.$refs.pagination.toFirstPage()
-    },
-    // 点击搜索
-    search(val) {
-      this.$refs.pagination.toFirstPage()
     }
   }
 }

@@ -14,9 +14,9 @@ export default {
     // 获取操作日志信息
     getOnlineUserList(page, size) {
       this.$http_normal({
-        url: `/auth/online?page=${page - 1}&size=${
+        url: `/api/online?page=${page - 1}&size=${
           size
-          }&sort=createTime,desc${
+          }&sort=createdAt,desc${
           this.searchVal ? `&filter=${this.searchVal}` : ""
           }`,
         method: "get"

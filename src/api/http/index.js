@@ -23,11 +23,11 @@
 				config.url.indexOf('login') != -1
 				? config.headers.Authorization = ""
 				: config.headers.Authorization = `Bearer ${storage.getMemoryPmt('token')}`
-				loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
+				// loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
 				return config
 			}, err => {
 				Message.errorMsg('网络出错，请检查设备联网状态')
-				loading.close()
+				// loading.close()
 				return Promise.reject(err)
 			})
 			
@@ -35,11 +35,11 @@
 			.interceptors
 			.response
 			.use(response => {
-        loading.close()
+        // loading.close()
 				return response;
 			}, err => {
         const regexp = new RegExp(/timeout/g)
-				loading.close()
+				// loading.close()
 				typeof err.response === "object" 
 				? (err.response.status === 401
 					? Message

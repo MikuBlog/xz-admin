@@ -10,6 +10,7 @@ import { Loading, Message } from 'element-ui'
 let loading = ""
 
 function download(url, fileName) {
+  console.log(url)
   loading = Loading.service({ 
     fullscreen: true, 
     background: "rgba(255, 255, 255, .4)", 

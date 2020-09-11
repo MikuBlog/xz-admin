@@ -11,11 +11,11 @@ const
 	}
 
 window.addEventListener('load', e => {
-	store.commit('SET_TABLE_HEIGHT', document.body.clientHeight - 180)
+	store.commit('SET_TABLE_HEIGHT', document.body.clientHeight - 280)
 })
 
 window.addEventListener('resize', e => {
-	store.commit('SET_TABLE_HEIGHT', document.body.clientHeight - 180)
+	store.commit('SET_TABLE_HEIGHT', document.body.clientHeight - 280)
 })
 
 export default {

@@ -22,7 +22,7 @@ export default {
       this.$http_normal({
         url: `/api/user/page?page=${page - 1}&size=${
           size
-        }&sort=createTime,desc&deptId=${this.deptId}${
+        }&sort=createdAt,desc&deptId=${this.deptId}${
           this.selectType ? `&${this.selectType}=${this.searchVal_2}` : ""
         }${this.selectStatus ? `&enabled=${this.selectStatus}` : ""}`,
         method: "get"

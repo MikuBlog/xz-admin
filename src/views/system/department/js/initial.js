@@ -16,7 +16,7 @@ export default {
     // 获取部门列表
     getDepartmentList() {
       this.$http_json({
-        url: `/api/dept/get?sort=createTime,desc${
+        url: `/api/dept/get?sort=createdAt,desc${
           this.searchVal ? `&name=${this.searchVal}` : ""
           }${this.selectType ? `&enabled=${this.selectType}` : ""}`,
         method: "get"

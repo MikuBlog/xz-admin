@@ -41,6 +41,16 @@ const
       // 缓存tags
       storage.setMemorySes('tags', state.tagsList)
     },
+		// 删除指定名称标签
+		REMOVE_NAME_TAGS(state, name) {
+			let ind = ""
+			for(let i = 0, len = state.tagsList.length; i < len; i ++) {
+				if(state.tagsList[i].name === name) {
+					ind = i
+				}
+			}
+			state.tagsList.splice(ind, 1)
+		},
 		// 移除指定范围标签
 		REMOVE_RANGE_TAGS(state, obj) {
 		  state.tagsList.splice(obj.startInd, obj.number)
