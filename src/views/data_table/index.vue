@@ -74,9 +74,13 @@ export default {
           },
           {
             label: "创建时间",
-            prop: "createdAt",
-            render: row => {
-              return `<div>${ row.createdAt }</div>`
+            render: (h, param) => {
+              console.log(param)
+              return h('el-tag', {
+                props: {
+                  type: 'warning'
+                }
+              }, param.row.createdAt + '123123123')
             }
           }
         ],
@@ -92,7 +96,14 @@ export default {
             isShow: true,
             sortable: true
           },
-          { label: "创建时间", prop: "createdAt", showOverflowTooltip: true, isShow: true, sortable: true }
+          { label: "创建时间", isShow: true, sortable: true, render: (h, param) => {
+              console.log(param)
+              return h('el-tag', {
+                props: {
+                  type: 'warning'
+                }
+              }, param.row.createdAt)
+            } }
         ],
         // 表格操作元素（当operation为true的时候生效）
         operations: [{ label: "查看进度", method: (row, ind) => {

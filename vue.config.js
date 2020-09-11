@@ -10,6 +10,7 @@ module.exports = {
   // 项目设置访问端口
   // devServer: {
   //   port: 8888,     // 端口
+  //   disableHostCheck: true // 允许内网穿透
   // },
   // lintOnSave: false,   // 取消 eslint 验证
   // 用于请求跨域资源,api等

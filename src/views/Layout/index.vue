@@ -130,7 +130,7 @@
         </el-main>
         <el-footer class="footer" height="30px" v-show="showFooter">
           <div class="coppy-right">
-            <span>© 2019 xuanzai Whale cloud network.All rights reserved - 粤ICP备19008964号-2</span>
+            <span>© 2020 xuanzai Whale cloud network.All rights reserved - 粤ICP备19008964号-2</span>
           </div>
         </el-footer>
       </el-container>

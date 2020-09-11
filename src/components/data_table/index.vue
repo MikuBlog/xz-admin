@@ -1,7 +1,7 @@
 <template>
-  <div @click="visible = false">
+  <div>
     <div class="search">
-      <slot name="search" />
+      <slot :table="this" />
       <el-button
         v-for="(item, ind) in config.operationBtns"
         :key="ind"
@@ -47,15 +47,16 @@
         reserve-selection
         align="center"
       />
-      <el-table-column type="expand">
+      <el-table-column type="expand" v-if="config.columnsExpand.length">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item 
             v-for="(item, ind) in config.columnsExpand" :key="ind" 
             :label="item.label" 
             class="expand-line">
-              <div v-if="item.render" v-html="item.render(props.row)"></div>
-              <div v-else>{{ props.row[item.prop] }}</div>
+              <div v-if="item.renderHtml" v-html="item.render(props.row)"></div>
+              <expand-dom v-if="item.render" :row="scope.row" :render="item.render"></expand-dom>
+              <div v-if="item.prop">{{ props.row[item.prop] }}</div>
             </el-form-item>
           </el-form>
         </template>
@@ -65,7 +66,7 @@
         :key="ind"
         :prop="item.prop"
         :label="item.label"
-        :width="item.width"
+        :min-width="item.width"
         :render-header="item.renderHeader || ((h, { column, $index }) => {
           return column.label
         })"
@@ -83,26 +84,26 @@
         : false"
       >
         <template slot-scope="scope">
-          <div v-if="item.render" v-html="item.render(scope.row)"></div>
-          <div v-else>{{ scope.row[item.prop] }}</div>
+          <div v-if="item.renderHtml" v-html="item.renderHtml(scope.row, scope.index)"></div>
+          <expand-dom v-if="item.render" :row="scope.row" :render="item.render"></expand-dom>
+          <div v-if="item.prop">{{ scope.row[item.prop] }}</div>
         </template>
       </el-table-column>
       <el-table-column
+        fixed="right"
         label="操作"
         align="center"
         v-if="config.operation"
         :width="config.operationWidth || 100"
-        fixed="right"
       >
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <div>
             <span>操作</span>
             <el-popover 
             placement="bottom" 
-            width="270" 
-            trigger="manual" 
-            v-model="visible"
-            @click.native.stop="visible = true">
+            width="220" 
+            trigger="click"
+            >
               <div class="search">
                 <el-input
                   placeholder="搜索字段"
@@ -116,21 +117,23 @@
               <div
                 class="list-box"
                 :style="{
-                height: '300px',
+                height: '250px',
                 overflow: 'auto',
-                marginBottom: '50px'
               }"
               >
-                <draggable v-model="config.columns">
+                <draggable 
+                v-model="config.columns" 
+                animation="400"  
+                v-if="!isChangeList">
                   <transition-group>
                     <div
                       class="list"
                       v-for="(item, ind) in config.columns.filter(val => val.isSearch)"
                       :key="ind"
                       :style="{
-                  padding: '5px',
-                  cursor: 'move'
-                }"
+                        padding: '5px',
+                        cursor: 'move'
+                      }"
                     >
                       <el-switch
                         v-model="item.isShow"
@@ -140,15 +143,15 @@
                       ></el-switch>
                       <span
                         :style="{
-                    marginLeft: '5px',
-                    fontSize: '14px'
-                  }"
+                          marginLeft: '5px',
+                          fontSize: '14px'
+                        }"
                       >{{ item.label }}</span>
                     </div>
                   </transition-group>
                 </draggable>
               </div>
-              <div
+              <!-- <div
                 class="button-box"
                 :style="{
                 position: 'absolute',
@@ -162,12 +165,11 @@
                 borderTop: '1px solid #ddd'
               }"
               >
-                <el-button type="primary" size="small" @click="visible = !visible">确认</el-button>
+                <el-button type="primary" size="small" @click="visible = false">确认</el-button>
                 <el-button type="text" size="small" @click="switchReset">重置</el-button>
-              </div>
+              </div> -->
               <i
                 slot="reference"
-                @click="visible = !visible"
                 class="el-icon-menu"
                 style="margin: 2px 0 0 3px; cursor: pointer"
               />
@@ -214,6 +216,17 @@
  */
 export default {
   name: "data-table",
+  components: {
+    // 用于render对象
+    "expand-dom": {
+      functional: true,
+      props: { row: Object, index: Number, render: Function },
+      render: (h, ctx) => {
+        const params = { row: ctx.props.row, index: ctx.props.index }
+        return ctx.props.render(h, params)
+      }
+    }
+  },
   props: {
     tableConfig: {
       type: Object,
@@ -222,12 +235,11 @@ export default {
   },
   data() {
     return {
+      isChangeList: false,
       // 是否加载表格
       loading: false,
       // 筛选列表字段
       searchVal: "",
-      // 是否显示列表筛选框
-      visible: false,
       // 列表元素
       list: [],
       // 已选择元素
@@ -243,10 +255,13 @@ export default {
       // 搜索参数
       searchParam: {},
       // 配置备份
-      config: {},
+      config: {
+        columns: []
+      },
     };
   },
   watch: {
+    // 监听tableConfig变化并响应数据
     tableConfig: {
       handler() {
         this.tableConfig.columns.forEach((val) => {
@@ -255,9 +270,18 @@ export default {
         this.config = $.extend(true, {}, this.tableConfig);
       },
       immediate: true,
+      deep: true
     },
+    // 解决vue-draggable拖拽数组不重渲染问题
+    ['config.columns']() {
+      this.isChangeList = true
+      this.$nextTick(val => {
+        this.isChangeList = false
+      })
+    }
   },
   created() {
+    // 初始化数据
     this.init();
   },
   methods: {
@@ -274,6 +298,7 @@ export default {
         parseInt(this.nowSize * 10),
       ];
     },
+    // 判断是否仅剩一个表格列
     switchChange() {
       let times = 0;
       this.config.columns.forEach((val) => {
@@ -293,19 +318,21 @@ export default {
         });
       }
     },
+    // 如果仅剩一列提示处理
     switchClick(item) {
       if (item.disabled) {
         this.$warnMsg("表格最少保留一列");
       }
     },
-    switchReset() {
-      this.config.columns.forEach((val) => {
-        val.isShow = true;
-        val.disabled = false;
-        val.isSearch = true;
-      });
-      this.visible = !this.visible;
-    },
+    // 重置表格列
+    // switchReset() {
+    //   this.config.columns.forEach((val) => {
+    //     val.isShow = true;
+    //     val.disabled = false;
+    //     val.isSearch = true;
+    //   });
+    // },
+    // 搜索表格列
     searchColumns() {
       if (this.searchVal) {
         this.config.columns.forEach((val) => {
@@ -343,6 +370,7 @@ export default {
         });
       });
     },
+    // 删除单独项
     deleteItem(item) {
       this.$showMsgBox({
         msg: `是否删除选中项?`,
@@ -362,6 +390,7 @@ export default {
       this.nowPage = 1;
       this.getList(this.nowPage, this.nowSize);
     },
+    // 初始化表格数据
     initialList(list) {
       this.list.splice(0);
       list.forEach((val) => {
@@ -378,6 +407,10 @@ export default {
         this.searchParam[val] = "";
       });
       this.toFirstPage();
+    },
+    // 刷新当前页
+    refreshNowPage() {
+      this.getList(this.nowPage, this.nowSize)
     },
     // 获取列表
     getList(page, size) {

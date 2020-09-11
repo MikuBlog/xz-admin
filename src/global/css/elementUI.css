@@ -55,6 +55,11 @@
   color: #333;
 }
 
+.el-table td, .el-table th {
+  padding: 5px 0;
+  font-size: 13px;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -136,7 +141,6 @@ body {
   background-color: #f7f8fa;
   padding: 10px 20px;
 }
-
 .is-fullscreen .el-dialog__footer {
   background: none;
   border-top: none;

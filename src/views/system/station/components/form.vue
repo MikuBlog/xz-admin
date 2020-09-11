@@ -125,7 +125,7 @@ export default {
         this.$successMsg("添加成功");
         this.hideBox();
         this.getDepartmentList();
-        this.$parent.getStationList();
+        this.$parent.$refs.dataTable.refreshNowPage();
       });
     },
     // 编辑岗位
@@ -139,7 +139,7 @@ export default {
         this.$successMsg("编辑成功");
         this.hideBox();
         this.getDepartmentList();
-        this.$parent.getStationList();
+        this.$parent.$refs.dataTable.refreshNowPage();
       });
     },
     // 重置表单
