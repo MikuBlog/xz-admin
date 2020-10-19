@@ -67,7 +67,7 @@ export default {
 		// 获取操作日志信息
 		getOpertionLogList(page, size) {
 			this.$http_normal({
-				url: `/log/page/user?page=${page - 1}&size=${size}&sort=createdAt,desc${this.searchVal ? `&description=${this.searchVal}` : ''}`,
+				url: `/api/log/page/user?page=${page - 1}&size=${size}&sort=createdAt,desc${this.searchVal ? `&description=${this.searchVal}` : ''}`,
 				method: 'get'
 			}).then(result => {
 				const data = result.data;

@@ -22,20 +22,19 @@ function copyText(obj) {
             selection.removeAllRanges()
         }
         if(typeof obj === "string") {
-            const ele = document.createElement('span')
-            ele.innerText = obj
-            ele.style.cssText = `
-                position: fixed;
-                top: 0;
-                opacity: 0;
-                white-space: pre; 
-            `
-            document.body.appendChild(ele)
-            range.selectNodeContents(ele)
-            selection.removeAllRanges()
-            selection.addRange(range)
-            document.execCommand('Copy')
-            document.body.removeChild(ele)
+					// 动态创建 textarea 元素
+					var aux = document.createElement("textarea");
+					// 获得需要复制的内容
+					aux.value = obj
+					// 添加到 DOM 元素中
+					document.body.appendChild(aux);
+					// 执行选中
+					// 注意: 只有 input 和 textarea 可以执行 select() 方法.
+					aux.select();
+					// 获得选中的内容
+					var content = window.getSelection().toString();
+					// 执行复制命令
+					document.execCommand("copy");
         }
         resolve()
     })

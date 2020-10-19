@@ -1,5 +1,5 @@
 <template>
-	<el-dialog :title="isAdd ? '添加字典详情' : '编辑字典详情'" :visible.sync="isShowDetailBox" append-to-body v-dialogDrag width="450px">
+	<el-dialog :title="isAdd ? '添加字典详情' : '编辑字典详情'" :visible.sync="isShowDetailBox" append-to-body v-dialogDrag width="450px" :close-on-click-modal="false">
 		<el-form status-icon :model="detailForm" ref="detailForm" :rules="detailFormRules" label-position="right" label-width="80px" size="small">
 			<el-form-item label="字典标签" prop="label"><el-input placeholder="请输入字典标签" v-model="detailForm.label" autocomplete="off"></el-input></el-form-item>
 			<el-form-item label="字典值" prop="value"><el-input placeholder="请输入字典值" v-model="detailForm.value" autocomplete="off"></el-input></el-form-item>

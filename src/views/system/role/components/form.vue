@@ -3,6 +3,7 @@
     :visible.sync="dialog"
     :title="isAdd ? '新增角色' : '编辑角色'"
     append-to-body
+    :close-on-click-modal="false"
     v-dialogDrag
     width="500px"
     @close="hideBox"

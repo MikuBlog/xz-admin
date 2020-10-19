@@ -3,6 +3,7 @@
     :visible.sync="dialog"
     append-to-body
     v-dialogDrag
+    :close-on-click-modal="false"
     width="550px"
     @close="updateList"
     title="文件上传"

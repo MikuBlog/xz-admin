@@ -36,6 +36,8 @@ export default {
         border: true,
         // 选中是否高亮
         highlightCurrentRow: true,
+				// 是否开启表格拖拽排序
+				isSort: false,
         // 表格是否可以多选(只有多选才有批量删除)
         selection: true,
         // 表格项是否开启操作
@@ -119,6 +121,8 @@ export default {
           requestUrl: "/api/dept/get",
           // 删除列表项url，只有传入该值才能删除列表项，否则只能自己编写相应的业务逻辑
           deleteUrl: "",
+					// 列表排序url（isSort为true时需要传入该字段）
+					sortUrl: "",
           // 是否在初始化时请求列表
           immediate: true,
           // 固定参数,不变的参数

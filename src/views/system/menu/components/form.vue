@@ -3,6 +3,7 @@
     :visible.sync="dialog"
     :title="isAdd ? '新增菜单' : '编辑菜单'"
     append-to-body
+    :close-on-click-modal="false"
     v-dialogDrag
     width="600px"
     @close="hideBox"

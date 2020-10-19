@@ -82,6 +82,7 @@
         :resizable="config.border
         ? (item.resizable || false)
         : false"
+				style="cursor: move;"
       >
         <template slot-scope="scope">
           <div v-if="item.renderHtml" v-html="item.renderHtml(scope.row, scope.index)"></div>
@@ -214,6 +215,7 @@
  * @author xuanzai
  * @description 表格js化
  */
+import Sortable from 'sortablejs'
 export default {
   name: "data-table",
   components: {
@@ -284,6 +286,10 @@ export default {
     // 初始化数据
     this.init();
   },
+	mounted() {
+		// 开启表格拖拽排序
+		this.tableConfig.isSort && this.rowDrop()
+	},
   methods: {
     init() {
       // 判断是否立刻请求列表
@@ -298,6 +304,34 @@ export default {
         parseInt(this.nowSize * 10),
       ];
     },
+		// 表格拖拽
+		rowDrop() {
+		  const tbody = document.querySelector('.el-table__body-wrapper tbody')
+		  const _this = this
+		  Sortable.create(tbody, {
+		    onEnd({ newIndex, oldIndex }) {
+		      const currRow = _this.list.splice(oldIndex, 1)[0]
+		      _this.list.splice(newIndex, 0, currRow)
+		      _this.sortList(_this.list[oldIndex], _this.list[newIndex], oldIndex, newIndex)
+		    }
+		  })
+		},
+		// 表格排序
+		sortList(oldItem, newItem, oldIndex, newIndex) {
+		  this.$http_json({
+		    url: this.tableConfig.requestParam.sortUrl,
+		    method: "post",
+		    data: this.list.map((val, ind) => {
+		      return {
+		        id: val.id,
+		        sort: ind + 1 + this.nowPage * this.nowSize
+		      }
+		    })
+		  }).then(result => {
+		    this.$successMsg("排序成功")
+		    this.getList(this.nowPage, this.nowSize)
+		  })
+		},
     // 判断是否仅剩一个表格列
     switchChange() {
       let times = 0;

@@ -40,9 +40,10 @@ export default {
         },
         // 搜索框右方按钮
         operationBtns: [
-          { label: "搜索列表", type: "primary", icon: "el-icon-search", circle: true, class: 'margin-box', method: _ => {
+          { label: "搜索列表", type: "", icon: "el-icon-search", circle: true, class: 'margin-box', method: _ => {
             this.$refs.dataTable.search()
-          }},
+          }}, 
+					{ label: "添加岗位", type: "primary", icon: "el-icon-plus", circle: true, class: 'margin-box', method: this.showAddStation },
           { label: "刷新列表", type: "success", icon: "el-icon-refresh", circle: true, class: 'margin-box', method: _ => {
             this.date = ""
             this.$refs.dataTable.refresh()
@@ -101,7 +102,7 @@ export default {
           },
         ],
         // 表格操作元素（当operation为true的时候生效）
-        operations: [{ label: "编辑部门", method: this.editStationItem}, { label: "删除部门", method: this.deleteStation}],
+        operations: [{ label: "编辑岗位", method: this.editStationItem}, { label: "删除岗位", method: this.deleteStation}],
         // 请求方法
         requestParam: {
           // 请求列表url
