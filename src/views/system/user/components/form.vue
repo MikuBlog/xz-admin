@@ -4,6 +4,7 @@
     :title="isAdd ? '新增用户' : '编辑用户'"
     width="570px"
     append-to-body
+    :close-on-click-modal="false"
     v-dialogDrag
     @close="hideBox"
   >
@@ -48,6 +49,11 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="密码" :prop="isAdd 
+      ? 'password'
+      : ''">
+        <el-input type="password" v-model="userForm.password" style="width: 450px;" />
+      </el-form-item>
       <el-form-item style="margin-bottom: 0px;" label="角色" prop="roles">
         <el-select v-model="roleIds" style="width: 450px;" multiple placeholder="请选择">
           <el-option
@@ -77,6 +83,7 @@
 
 <script>
 import { validateBothPhMob, validateEmail } from "@/utils/form_validate";
+import { encrypt } from '@/utils/encrypt'
 export default {
   props: {
     isAdd: {
@@ -97,6 +104,7 @@ export default {
         username: "",
 				nickname: "",
         email: "",
+        password: "",
         enabled: "false",
         roles: [],
         job: { id: "" },
@@ -116,6 +124,10 @@ export default {
           { required: true, message: "请输入用户名", trigger: "blur" },
           { min: 2, max: 21, message: "长度在 2 到 21 个字符", trigger: "blur" }
         ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 6, max: 21, message: "长度在 6 到 21 个字符", trigger: "blur" }
+				],
 				nickname: [
 				  { required: true, message: "请输入昵称", trigger: "blur" }
 				],
@@ -180,7 +192,10 @@ export default {
       this.$http_json({
         url: "/api/user/add",
         method: "post",
-        data: this.userForm
+        data: {
+          ...this.userForm,
+          password: encrypt(this.userForm.password)
+        }
       }).then(result => {
         this.$successMsg("添加成功");
         this.hideBox();
@@ -193,7 +208,10 @@ export default {
       this.$http_json({
         url: "/api/user/edit",
         method: "post",
-        data: this.userForm
+        data: {
+          ...this.userForm,
+          password: encrypt(this.userForm.password)
+        }
       }).then(result => {
         this.$successMsg("编辑成功");
         this.hideBox();
@@ -210,6 +228,7 @@ export default {
           username: "",
 					nickname: "",
           email: "",
+          password: "",
           enabled: "false",
           roles: [],
           job: { id: "" },

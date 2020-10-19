@@ -25,7 +25,6 @@
     "overlayscrollbars": "^1.10.0",
     "path": "^0.12.7",
     "path-to-regexp": "^3.0.0",
-    "pl-table": "^2.7.5",
     "svg-sprite-loader": "^4.1.6",
     "v-charts": "^1.19.0",
     "view-design": "^4.0.2",

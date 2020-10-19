@@ -2,6 +2,7 @@
   <el-dialog
     append-to-body
     v-dialogDrag
+    :close-on-click-modal="false"
     :visible.sync="dialog"
     :title="isAdd ? '新增部门' : '编辑部门'"
     width="500px"
