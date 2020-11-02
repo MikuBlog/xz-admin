@@ -2,7 +2,8 @@
 	import router from '@/router'
 	import { Loading } from 'element-ui'
 	import storage from '@/api/storage'
-	import Message from '@/api/message'
+  import Message from '@/api/message'
+  import NProgress from 'nprogress';
 
 	/**
 	 * @author xuanzai
@@ -14,6 +15,7 @@
 			.interceptors
 			.request
 			.use(config => {
+        NProgress.start()
         // 统一对中文字符进行编码
         config.url = encodeURI(config.url)
 				/**
@@ -26,6 +28,7 @@
 				// loading = Loading.service({ fullscreen: true, background: "rgba(255, 255, 255, .4)", customClass: 'top-floor' })
 				return config
 			}, err => {
+        NProgress.done()
 				Message.errorMsg('网络出错，请检查设备联网状态')
 				// loading.close()
 				return Promise.reject(err)
@@ -36,8 +39,10 @@
 			.response
 			.use(response => {
         // loading.close()
+        NProgress.done()
 				return response;
 			}, err => {
+        NProgress.done()
         const regexp = new RegExp(/timeout/g)
 				// loading.close()
 				typeof err.response === "object" 
