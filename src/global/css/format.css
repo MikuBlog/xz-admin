@@ -121,3 +121,7 @@ html, body {
   right: 0;
   bottom: 0;
 }
+
+#nprogress .bar {
+  background: #e6a23c !important;
+}
