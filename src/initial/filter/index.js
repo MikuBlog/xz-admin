@@ -1,5 +1,6 @@
 import formatDate from './formatDate'
-
+import formatMoney from './formatMoney'
 export default {
-  formatDate
+  formatDate,
+  formatMoney
 }
