@@ -128,7 +128,7 @@ function getData() {
       store.commit("SET_MENU_LIST", list) 
 			store.commit("SET_CACHE_VIEWS", flatList(list))
 			layout.children.push(...generateRouter(list))
-      router.addRoutes([layout])
+      router.addRoutes([ layout ])
       router.addRoutes([{
         path: "*",
         redirect: "/404"
