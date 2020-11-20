@@ -20,7 +20,7 @@ export default {
       }
       this.$showMsgBox({ msg: `是否踢出所选中用户?` }).then(() => {
         this.$http_json({
-          url: `/api/auth/online/del`,
+          url: `/api/online/del`,
           method: "post",
           data: this.selectList.map(val => val.key)
         }).then(() => {
@@ -34,7 +34,7 @@ export default {
     kickOut(item) {
       this.$showMsgBox({ msg: `是否踢出当前用户?` }).then(() => {
         this.$http_json({
-          url: `/api/auth/online/del`,
+          url: `/api/online/del`,
           method: "post",
 					data: [ item.key ]
         }).then(() => {
@@ -46,7 +46,7 @@ export default {
     // 导出在线列表
     downloadList() {
       this.$http_json({
-        url: "/api/auth/online/download",
+        url: "/api/online/download",
         responseType: "blob",
         method: "get"
       }).then(result => {

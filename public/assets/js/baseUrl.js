@@ -7,6 +7,6 @@
 // http://openlan.missiono.cn
 var
   // 接口统一请求前缀地址
-  baseUrl = 'http://jingyun.missiono.cn',
+  baseUrl = 'http://192.168.0.198:8800',
   // 静态资源请求前缀地址
-  prefixUrl = 'http://jingyun.missiono.cn'
+  prefixUrl = 'http://192.168.0.198:8800'
