@@ -72,6 +72,11 @@
                 <div slot="reference" class="name-wrapper">{{ scope.row.browser }}</div>
               </template>
             </el-table-column>
+            <el-table-column label="系统" :show-overflow-tooltip="true">
+              <template slot-scope="scope">
+                <div slot="reference" class="name-wrapper">{{ scope.row.os }}</div>
+              </template>
+            </el-table-column>
             <el-table-column label="第一次登录时间" width="180">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">{{ scope.row.loginTime }}</div>

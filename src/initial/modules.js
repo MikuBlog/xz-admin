@@ -5,6 +5,7 @@ import FormMaking from 'form-making'
 import VueEditor from "vue2-editor"
 // 引入拖拽列表组件
 import draggable from 'vuedraggable'
+// 引入国际化组件
 // 引入前端错误日志
 import './error_log'
 // // 引入滚动条
@@ -438,5 +439,7 @@ Vue.use(FormMaking)
 Vue.use(VueEditor)
 // 引入拖拽列表组件
 Vue.component(draggable.name, draggable)
+// 引入国际化组件
+// Vue.use(VueI18n)
 
 Vue.config.productionTip = false
