@@ -27,6 +27,10 @@ export default {
 		},
 		limit: {
 			default: 500
+		},
+		async: {
+			type: Boolean,
+			default: false
 		}
 	},
 	data() {
@@ -54,6 +58,7 @@ export default {
 		}
 	},
 	mounted() {
+		this.asyncInit = this.async
 		this.initTinymce();
 	},
 	activated() {
