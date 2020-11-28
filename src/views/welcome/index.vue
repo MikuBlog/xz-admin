@@ -7,16 +7,6 @@
         </div>
       </el-col>
     </el-row>
-    <!-- <VuePictureViewer v-if="isShow" :imgData="[{
-      url: 'http://zhanma.xuanzai.top/image/bar_energy_off.png',
-      name: '图片'
-    }, {
-      url: 'http://zhanma.xuanzai.top/image/bg_1.png',
-      name: '图片'
-    }, {
-      url: 'http://zhanma.xuanzai.top/video/test.mp4',
-      name: '视频'
-    }]" @close-viewer="isShow = false" /> -->
   </div>
 </template>
 
