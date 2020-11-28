@@ -4,6 +4,6 @@
   "main": "main.js",
   "scripts": {
       "start": "electron .",
-      "pack":"electron-packager ./app HelloWorld --platform=win64 --arch=x64 --icon=icon.ico --out=./out --asar --app-version=0.0.1"
+      "package":"electron-packager . xzadmin --win --out . --arch=x64 --electron-version=11.0.3 --overwrite --electron-zip-dir=. --ignore=node_module"
   }
 }
