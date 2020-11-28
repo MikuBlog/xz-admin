@@ -1,13 +1,17 @@
 const path = require('path')
+// 环境变量
 const environment = require('./public_path').environment
 const electron = require('./public_path').electron
+const isExe = require('./public_path').isExe
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 module.exports = {
   // 配置生产环境静态资源访问路径
-  publicPath: electron,
+  publicPath: isExe
+  ? electron
+  : environment,
   // 项目设置访问端口
   // devServer: {
   //   port: 8888,     // 端口
