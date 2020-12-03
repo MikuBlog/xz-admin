@@ -86,6 +86,8 @@ export default {
             }
           }
         ],
+        // 是否自定义表格展开项
+        columnsExpandSlot: false,
         // 表格表头元素
         columns: [
           {
@@ -114,7 +116,7 @@ export default {
           console.log(row, ind)
         }}, { label: "删除进度", method: (row, ind) => {
           this.$refs.dataTable.deleteItem(row)
-        }}],
+        }, color: '#f4797a'}],
         // 请求方法
         requestParam: {
           // 请求列表url
