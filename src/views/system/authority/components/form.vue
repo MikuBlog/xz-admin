@@ -33,7 +33,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" class="margin-box" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" class="margin-box" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" class="margin-box" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -49,6 +49,7 @@ export default {
   data() {
     return {
       dialog: false,
+      isLoading: false,
       permissions: [],
       authorityId: "",
       authorityForm: { name: "", alias: "", parentId: 0 },
@@ -89,11 +90,13 @@ export default {
     // 添加权限
     addAuthority() {
       delete this.authorityForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/permission/add",
         method: "post",
         data: this.authorityForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("添加成功");
         this.hideBox();
         this.getPermissions();
@@ -103,11 +106,13 @@ export default {
     // 编辑权限
     editAuthority() {
       this.authorityForm.id = this.authorityId;
+      this.isLoading = true
       this.$http_json({
         url: "/api/permission/edit",
         method: "post",
         data: this.authorityForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("编辑成功");
         this.hideBox();
         this.getPermissions();

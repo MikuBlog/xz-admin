@@ -30,7 +30,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialog = false" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -39,6 +39,7 @@
 export default {
   data() {
     return {
+      isLoading: false,
       zones: ['华东', '华北', '华南', '北美', '东南亚'], dialog: false,
       form: { accessKey: '', secretKey: '', bucket: '', host: '', zone: '', type: '' },
       rules: {
@@ -83,12 +84,13 @@ export default {
     doSubmit() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          this.loading = true
+          this.isLoading = true
 					this.$http_json({
 						url: "/api/qiNiuContent/config",
 						method: "post",
 						data: this.form
 					}).then(result => {
+            this.isLoading = false
 						this.$successMsg('修改成功')
 						this.dialog = false
 					})

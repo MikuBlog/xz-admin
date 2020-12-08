@@ -38,7 +38,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button size="small" @click="dialog = false">取消</el-button>
-      <el-button type="primary" @click="updateList" size="small">确认</el-button>
+      <el-button type="primary" @click="updateList" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -49,6 +49,7 @@ export default {
     return {
       fileUploadApi: `${baseUrl}/api/localStorage/upload`,
       pictures: [],
+      isLoading: false,
       dialog: false,
       headers: {
         Authorization: "Bearer " + this.$getMemoryPmt("token")
@@ -74,6 +75,7 @@ export default {
     },
     beforeUpload(file) {
       let isLt2M = true
+      this.isLoading = true
       isLt2M = file.size / 1024 / 1024 < 100
       if (!isLt2M) {
         this.loading = false
@@ -83,6 +85,7 @@ export default {
       return isLt2M
     },
     handleSuccess() {
+      this.isLoading = false
       this.$successMsg("上传成功");
       this.form.name = ""
       this.$refs.upload.clearFiles();

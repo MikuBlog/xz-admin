@@ -76,7 +76,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -98,6 +98,7 @@ export default {
   data() {
     return {
       dialog: false,
+      isLoading: false,
       userId: "",
       level: "",
       userForm: {
@@ -189,6 +190,7 @@ export default {
     // 添加用户
     addUser() {
       delete this.userForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/user/add",
         method: "post",
@@ -197,6 +199,7 @@ export default {
           password: encrypt(this.userForm.password)
         }
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("添加成功");
         this.hideBox();
         this.$parent.getUserList(this.$parent.nowPage, this.$parent.nowSize);
@@ -205,6 +208,7 @@ export default {
     // 编辑用户
     editUser() {
       this.userForm.id = this.userId;
+      this.isLoading = true
       this.$http_json({
         url: "/api/user/edit",
         method: "post",
@@ -213,6 +217,7 @@ export default {
           password: encrypt(this.userForm.password)
         }
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("编辑成功");
         this.hideBox();
         this.$parent.getUserList(this.$parent.nowPage, this.$parent.nowSize);

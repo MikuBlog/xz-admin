@@ -12,7 +12,7 @@
 	  </el-radio-group>
 	  <span slot="footer" class="dialog-footer">
 	    <el-button @click="dialogVisible = false" size="small">取 消</el-button>
-	    <el-button type="primary" @click="deleteAll" size="small">确 定</el-button>
+	    <el-button type="primary" @click="deleteAll" size="small" :loading="isLoading">确 定</el-button>
 	  </span>
 	</el-dialog>
 </template>
@@ -22,16 +22,19 @@
 		data() {
 			return {
 				dialogVisible: false,
+				isLoading: false,
 				cache: "1"
 			}
 		},
 		methods: {
 			// 删除所有缓存
 			deleteAll() {
+				this.isLoading = true
 			  this.$http_json({
 			    url: `/api/redis/delAll/${this.cache}`,
 			    method: "post"
 			  }).then(() => {
+					this.isLoading = false
 			    this.$successMsg("删除成功");
 			    this.$parent.getRedisList();
 					this.dialogVisible = false

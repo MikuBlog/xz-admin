@@ -16,7 +16,7 @@
       </el-form-item>
 			<el-form-item>
 			  <el-button @click="resetForm" size="small">重置</el-button>
-			  <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+			  <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
 			</el-form-item>
     </el-form>
   </div>
@@ -28,6 +28,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
+      isLoading: false,
       userForm: { email: "", password: "" },
       rules: {
         email: [
@@ -65,6 +66,7 @@ export default {
     doSubmit() {
       this.$refs.userForm.validate(valid => {
         if (valid) {
+          this.isLoading = true
           this.$http_json({
             url: "/api/user/updateMail",
             method: "post",
@@ -73,6 +75,7 @@ export default {
 							password: encrypt(this.userForm.password)
 						}
           }).then(() => {
+            this.isLoading = false
             this.$successMsg("修改成功");
             this.$emit("updateUserInfo");
           });
