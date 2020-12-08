@@ -51,7 +51,6 @@ export default {
         method: "get"
       }).then(result => {
         this.getRoleItem(result.data);
-        this.getRoleList();
       });
     },
     // 点击表格项

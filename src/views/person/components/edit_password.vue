@@ -19,7 +19,7 @@
       </el-form-item>
 			<el-form-item>
 			  <el-button @click="resetForm" size="small">重置</el-button>
-			  <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+			  <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
 			</el-form-item>
     </el-form>
   </div>
@@ -39,6 +39,7 @@ export default {
       }
     };
     return {
+      isLoading: false,
       userForm: { oldPass: "", newPass: "" },
       rules: {
         oldPass: [
@@ -64,6 +65,7 @@ export default {
     doSubmit() {
       this.$refs.userForm.validate(valid => {
         if (valid) {
+          this.isLoading = true
           this.$http_json({
             url: "/api/user/updatePassword",
             method: "post",
@@ -72,6 +74,7 @@ export default {
               newPass: encrypt(this.userForm.newPass)
             }
           }).then(() => {
+            this.isLoading = false
             this.$successMsg("修改成功，请重新登录");
             this.$setMemoryPmt("token", "");
             this.$router.push({ path: "/login" });

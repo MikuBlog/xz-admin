@@ -9,7 +9,7 @@
 		</el-form>
 		<div slot="footer" class="dialog-footer">
 			<el-button @click="isShowDetailBox = false">取 消</el-button>
-			<el-button type="primary" @click="submitForm('detailForm')">确 定</el-button>
+			<el-button type="primary" @click="submitForm('detailForm')" :loading="isLoading">确 定</el-button>
 		</div>
 	</el-dialog>
 </template>
@@ -31,6 +31,7 @@ export default {
 			id: '',
 			title: '编辑字典详情',
 			isShowDetailBox: false,
+			isLoading: false,
 			detailForm: {
 				label: '',
 				value: '',
@@ -60,21 +61,25 @@ export default {
 		// 添加字典详情
 		addDictDetail() {
 			delete this.detailForm.id;
+			this.isLoading = true
 			this.$http_json({
 				url: '/api/dictDetail/add',
 				method: 'post',
 				data: this.detailForm
 			}).then(result => {
+				this.isLoading = false
 				result.status === 200 && (this.$successMsg('添加成功'), this.hideDetailBox(), this.$parent.getDetailList());
 			});
 		},
 		editDictDetail() {
 			this.detailForm.id = this.id;
+			this.isLoading = true
 			this.$http_json({
 				url: '/api/dictDetail/edit',
 				method: 'post',
 				data: this.detailForm
 			}).then(result => {
+				this.isLoading = false
 				result.status === 200 && (this.$successMsg('编辑成功'), this.hideDetailBox(), this.$parent.getDetailList());
 			});
 		},

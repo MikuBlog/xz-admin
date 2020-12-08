@@ -55,7 +55,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -73,6 +73,7 @@ export default {
       roleId: "",
       dateScopes: ["全部", "本级", "自定义"],
       dialog: false,
+      isLoading: false,
       depts: [],
       deptIds: [],
       roleForm: {
@@ -128,11 +129,13 @@ export default {
     // 添加角色
     addRole() {
       delete this.roleForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/role/add",
         method: "post",
         data: this.roleForm
       }).then(() => {
+        this.isLoading = false
         this.$successMsg("添加成功");
         this.hideBox();
         this.$parent.getRoleList();
@@ -141,11 +144,13 @@ export default {
     // 编辑角色
     editRole() {
       this.roleForm.id = this.roleId;
+      this.isLoading = true
       this.$http_json({
         url: "/api/role/edit",
         method: "post",
         data: this.roleForm
       }).then(() => {
+        this.isLoading = false
         this.$successMsg("编辑成功");
         this.hideBox();
         this.$parent.getRoleList();

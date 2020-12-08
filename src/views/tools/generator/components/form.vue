@@ -108,7 +108,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="text" @click="cancel" size="small">取消</el-button>
-        <el-button type="primary" @click="doSubmit" size="small">生成</el-button>
+        <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">生成</el-button>
       </div>
     </el-dialog>
   </div>
@@ -128,6 +128,7 @@ export default {
       id: "",
       remark: "",
       dialog: false,
+      isLoading: false,
       columnQuery: "",
       form: {
         id: 1,

@@ -47,7 +47,7 @@
         reserve-selection
         align="center"
       />
-      <el-table-column type="expand" v-if="config.columnsExpand.length">
+      <el-table-column type="expand" v-if="config.columnsExpand.length && !config.columnsExpandSlot">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item 
@@ -59,6 +59,11 @@
               <div v-if="item.prop">{{ props.row[item.prop] }}</div>
             </el-form-item>
           </el-form>
+        </template>
+      </el-table-column>
+      <el-table-column type="expand" v-if="!config.columnsExpand.length && config.columnsExpandSlot">
+        <template slot-scope="props">
+          <slot name="expand" :row="props.row"/>
         </template>
       </el-table-column>
       <el-table-column
@@ -178,7 +183,7 @@
           </div>
         </template>
         <template slot-scope="scope">
-          <el-dropdown trigger="click" placement="bottom">
+          <el-dropdown v-if="config.operations.length > 1" trigger="click" placement="bottom">
             <el-button type="text">操作</el-button>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
@@ -186,10 +191,15 @@
                 :key="ind"
                 @click.native="item.method(scope.row, scope.$index)"
               >
-                <el-button type="text">{{ item.label }}</el-button>
+                <el-button type="text" :style="{
+                  color: item.color || '#409eff'
+                }">{{ item.label }}</el-button>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
+          <el-button v-else type="text" :style="{
+            color: config.operations[0].color || '#409eff'
+          }" @click="config.operations[0].method(scope.row, scope.$index)">{{ config.operations[0].label }}</el-button>
         </template>
       </el-table-column>
     </el-table>

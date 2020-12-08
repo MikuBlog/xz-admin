@@ -26,7 +26,7 @@ import { edit } from '@/api/user';
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="isShowAddBox = false">取 消</el-button>
-      <el-button type="primary" @click="submitForm('addForm')">确 定</el-button>
+      <el-button type="primary" @click="submitForm('addForm')" :loading="isLoading">确 定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -45,6 +45,7 @@ export default {
       id: "",
       title: "编辑字典",
       isShowAddBox: false,
+      isLoading: false,
       addForm: {
         name: "",
         remark: ""
@@ -72,11 +73,13 @@ export default {
     // 添加字典
     addDictionary() {
       delete this.addForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/dict/add",
         method: "post",
         data: this.addForm
       }).then(result => {
+        this.isLoading = false
         result.status === 200 &&
           (this.$successMsg("添加成功"),
           this.hideBox(),
@@ -86,11 +89,13 @@ export default {
     // 编辑字典
     editDictionary() {
       this.addForm.id = this.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/dict/edit",
         method: "post",
         data: this.addForm
       }).then(result => {
+        this.isLoading = false
         result.status === 200 &&
           (this.$successMsg("编辑成功"),
           this.hideBox(),

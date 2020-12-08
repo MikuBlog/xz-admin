@@ -84,7 +84,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -102,6 +102,7 @@ export default {
     return {
       menuId: "",
       dialog: false,
+      isLoading: false,
       menus: [],
       menuForm: {
         name: "",
@@ -185,11 +186,13 @@ export default {
     // 添加菜单
     addMenu() {
       delete this.menuForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/menu/add",
         method: "post",
         data: this.menuForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("添加成功，刷新页面即可生效");
         this.hideBox();
         this.getMenus();
@@ -199,11 +202,13 @@ export default {
     // 编辑菜单
     editMenu() {
       this.menuForm.id = this.menuId;
+      this.isLoading = true
       this.$http_json({
         url: "/api/menu/edit",
         method: "post",
         data: this.menuForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("编辑成功，刷新页面即可生效");
         this.hideBox();
         this.getMenus();

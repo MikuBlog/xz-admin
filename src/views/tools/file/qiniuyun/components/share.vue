@@ -12,7 +12,7 @@
 	  </el-radio-group>
 	  <span slot="footer" class="dialog-footer">
 	    <el-button @click="dialogVisible = false" size="small">取 消</el-button>
-	    <el-button type="primary" @click="copyLink" size="small">确 定</el-button>
+	    <el-button type="primary" @click="copyLink" size="small" :loading="isLoading">确 定</el-button>
 	  </span>
 	</el-dialog>
 </template>
@@ -22,6 +22,7 @@
 		data() {
 			return {
 				dialogVisible: false,
+				isLoading: false,
 				time: "604800",
 				fileId: ""
 			}
@@ -38,10 +39,12 @@
 			},
 			// 删除所有缓存
 			copyLink() {
+				this.isLoading = true
 			  this.$http_json({
 			  	url: `/api/qiNiuContent/downloadStorage?id=${this.fileId}&expireInSeconds=${this.time}`,
 			  	method: "get"
 			  }).then(result => {
+					this.isLoading = false
 					this.$copyText(result.data.url)
 					this.$successMsg("复制链接成功")
 					this.dialogVisible = false

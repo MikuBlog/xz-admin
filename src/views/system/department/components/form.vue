@@ -37,7 +37,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       dialog: false,
+      isLoading: false,
       depts: [],
       departmentId: "",
       departmentForm: {
@@ -106,11 +107,13 @@ export default {
     // 添加部门
     addDepartment() {
       delete this.departmentForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/dept/add",
         method: "post",
         data: this.departmentForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("添加成功");
         this.hideBox();
         this.getDepartmentList();
@@ -120,11 +123,13 @@ export default {
     // 编辑部门
     editDepartment() {
       this.departmentForm.id = this.departmentId;
+      this.isLoading = true
       this.$http_json({
         url: "/api/dept/edit",
         method: "post",
         data: this.departmentForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("编辑成功");
         this.hideBox();
         this.getDepartmentList();

@@ -52,6 +52,11 @@ module.exports = {
         .options({ bypassOnDebug: true })
         .end()
     }
+    config.module
+    .rule('images')
+      .use('url-loader')
+        .loader('url-loader')
+        .tap(options => Object.assign(options, { limit: 2000, esModule: false }));
     // 解决IE打开空白页面问题
     config.module
       .rule('view-design')

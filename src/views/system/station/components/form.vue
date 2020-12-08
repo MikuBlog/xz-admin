@@ -40,7 +40,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" class="margin-box" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" class="margin-box" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" class="margin-box" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -62,6 +62,7 @@ export default {
       dialog: false,
       depts: [],
       stationId: "",
+      isLoading: false,
       stationForm: {
         name: "",
         sort: 0,
@@ -118,11 +119,13 @@ export default {
     // 添加岗位
     addStation() {
       delete this.stationForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/job/add",
         method: "post",
         data: this.stationForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("添加成功");
         this.hideBox();
         this.getDepartmentList();
@@ -132,11 +135,13 @@ export default {
     // 编辑岗位
     editStation() {
       this.stationForm.id = this.stationId;
+      this.isLoading = true
       this.$http_json({
         url: "/api/job/edit",
         method: "post",
         data: this.stationForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("编辑成功");
         this.hideBox();
         this.getDepartmentList();
