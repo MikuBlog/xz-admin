@@ -97,6 +97,8 @@ export default {
             this.isLoading = false
             this.$successMsg("修改成功");
             this.$emit("updateUserInfo");
+          }).catch(e => {
+            this.isLoading = false
           });
         } else {
           return false;

@@ -78,6 +78,8 @@ export default {
             this.$successMsg("修改成功，请重新登录");
             this.$setMemoryPmt("token", "");
             this.$router.push({ path: "/login" });
+          }).catch(e => {
+            this.isLoading = false
           });
         } else {
           return false;

@@ -197,6 +197,8 @@ export default {
         this.hideBox();
         this.getMenus();
         this.$parent.getMenuList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 编辑菜单
@@ -213,6 +215,8 @@ export default {
         this.hideBox();
         this.getMenus();
         this.$parent.getMenuList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 选择icon

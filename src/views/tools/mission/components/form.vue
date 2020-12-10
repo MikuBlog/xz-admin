@@ -40,7 +40,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="hideBox" size="small">取消</el-button>
-      <el-button type="primary" @click="doSubmit" size="small">确认</el-button>
+      <el-button type="primary" @click="doSubmit" size="small" :loading="isLoading">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -57,6 +57,7 @@ export default {
     return {
       dialog: false,
       missionId: "",
+      isLoading: false,
       missionForm: {
         jobName: "",
         beanName: "",
@@ -105,27 +106,35 @@ export default {
     // 编辑定时任务
     editMission() {
       this.missionForm.id = this.missionId;
+      this.isLoading = true
       this.$http_json({
         url: "/api/quartz/edit",
         method: "post",
         data: this.missionForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("编辑成功");
         this.hideBox();
         this.$parent.getMissionList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 新增定时任务
     addMission() {
       delete this.missionForm.id;
+      this.isLoading = true
       this.$http_json({
         url: "/api/quartz/add",
         method: "post",
         data: this.missionForm
       }).then(result => {
+        this.isLoading = false
         this.$successMsg("添加成功");
         this.hideBox();
         this.$parent.getMissionList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     doSubmit() {
