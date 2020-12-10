@@ -38,7 +38,9 @@
 			    this.$successMsg("删除成功");
 			    this.$parent.getRedisList();
 					this.dialogVisible = false
-			  });
+			  }).catch(e => {
+					this.isLoading = false
+				});
 			}
 		}
 	}

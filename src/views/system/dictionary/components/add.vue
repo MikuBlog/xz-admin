@@ -84,6 +84,8 @@ export default {
           (this.$successMsg("添加成功"),
           this.hideBox(),
           this.$parent.getDictionaryList());
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 编辑字典
@@ -100,6 +102,8 @@ export default {
           (this.$successMsg("编辑成功"),
           this.hideBox(),
           this.$parent.getDictionaryList());
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 提交数据

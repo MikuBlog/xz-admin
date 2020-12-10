@@ -203,6 +203,8 @@ export default {
         this.$successMsg("添加成功");
         this.hideBox();
         this.$parent.getUserList(this.$parent.nowPage, this.$parent.nowSize);
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 编辑用户
@@ -221,6 +223,8 @@ export default {
         this.$successMsg("编辑成功");
         this.hideBox();
         this.$parent.getUserList(this.$parent.nowPage, this.$parent.nowSize);
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 重置表单

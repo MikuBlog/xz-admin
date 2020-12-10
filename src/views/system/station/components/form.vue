@@ -130,6 +130,8 @@ export default {
         this.hideBox();
         this.getDepartmentList();
         this.$parent.$refs.dataTable.refreshNowPage();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 编辑岗位
@@ -146,6 +148,8 @@ export default {
         this.hideBox();
         this.getDepartmentList();
         this.$parent.$refs.dataTable.refreshNowPage();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 重置表单

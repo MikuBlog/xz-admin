@@ -101,6 +101,8 @@ export default {
         this.hideBox();
         this.getPermissions();
         this.$parent.getAuthorityList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 编辑权限
@@ -117,6 +119,8 @@ export default {
         this.hideBox();
         this.getPermissions();
         this.$parent.getAuthorityList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 重置表单

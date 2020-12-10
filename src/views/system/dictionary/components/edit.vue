@@ -69,7 +69,9 @@ export default {
 			}).then(result => {
 				this.isLoading = false
 				result.status === 200 && (this.$successMsg('添加成功'), this.hideDetailBox(), this.$parent.getDetailList());
-			});
+			}).catch(e => {
+        this.isLoading = false
+      });
 		},
 		editDictDetail() {
 			this.detailForm.id = this.id;
@@ -81,7 +83,9 @@ export default {
 			}).then(result => {
 				this.isLoading = false
 				result.status === 200 && (this.$successMsg('编辑成功'), this.hideDetailBox(), this.$parent.getDetailList());
-			});
+			}).catch(e => {
+        this.isLoading = false
+      });
 		},
 		// 提交数据
 		submitForm(formName) {

@@ -118,6 +118,8 @@ export default {
         this.hideBox();
         this.getDepartmentList();
         this.$parent.getDepartmentList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     // 编辑部门
@@ -134,6 +136,8 @@ export default {
         this.hideBox();
         this.getDepartmentList();
         this.$parent.getDepartmentList();
+      }).catch(e => {
+        this.isLoading = false
       });
     },
     resetForm() {
