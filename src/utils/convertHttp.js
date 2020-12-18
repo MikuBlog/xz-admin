@@ -6,10 +6,10 @@
  */
 export default (url) => {
   const regexp = new RegExp(/^http/)
-  if(!url) return
+  if(!url) return require('@/assets/thumb.png')
   if (regexp.test(url)) {
     return url
   } else {
-    return `${prefixUrl}${url.replace(/\\/g, '/')}`
+    return `${prefixUrl}${url.replace(/\\/g, '/').replace(/[ ]/g, '%20')}`
   }
 }

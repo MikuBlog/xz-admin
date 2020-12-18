@@ -7,6 +7,6 @@
 // http://openlan.missiono.cn
 var
   // 接口统一请求前缀地址
-  baseUrl = 'https://weitamilkhzlapi.whalenect.com',
+  baseUrl = 'https://aboot.missiono.cn',
   // 静态资源请求前缀地址
-  prefixUrl = 'https://weitamilkhzlapi.whalenect.com'
+  prefixUrl = 'https://aboot.missiono.cn'
