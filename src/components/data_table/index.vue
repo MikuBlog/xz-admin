@@ -18,6 +18,7 @@
     </div>
     <el-table
       :data="list"
+      v-if="isShowTable"
       :header-cell-style="{
         background: '#f6f8fa'
       }"
@@ -55,7 +56,7 @@
             :label="item.label" 
             class="expand-line">
               <div v-if="item.renderHtml" v-html="item.render(props.row)"></div>
-              <expand-dom v-if="item.render" :row="scope.row" :render="item.render"></expand-dom>
+              <expand-dom v-if="item.render" :row="props.row" :render="item.render"></expand-dom>
               <div v-if="item.prop">{{ props.row[item.prop] }}</div>
             </el-form-item>
           </el-form>
@@ -99,7 +100,7 @@
         fixed="right"
         label="操作"
         align="center"
-        v-if="config.operation"
+        v-if="config.operations"
         :width="config.operationWidth || 100"
       >
         <template slot="header">
@@ -247,6 +248,7 @@ export default {
   },
   data() {
     return {
+      isShowTable: true,
       isChangeList: false,
       // 是否加载表格
       loading: false,
@@ -364,6 +366,10 @@ export default {
     },
     // 如果仅剩一列提示处理
     switchClick(item) {
+      this.isShowTable = false
+      this.$nextTick(_ => {
+        this.isShowTable = true
+      })
       if (item.disabled) {
         this.$warnMsg("表格最少保留一列");
       }
