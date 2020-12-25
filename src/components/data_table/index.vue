@@ -33,8 +33,8 @@
       :height="config.maxHeight
       ? config.maxHeight
       : $store.state.tableHeight.tableHeight"
-      :row-key="getRowKey"
-        :row-style="config.rowStyle || ( _ => {})"
+      :row-key="config.getRowKey || getRowKey"
+      :row-style="config.rowStyle || ( _ => {})"
       :cell-style="config.cellStyle || ( _ => {}) "
       @selection-change="arr => { selectList = arr }"
       v-loading="loading"
@@ -87,13 +87,13 @@
         : ''"
         :resizable="config.border
         ? (item.resizable || false)
-        : false"
+        : true"
 				style="cursor: move;"
       >
         <template slot-scope="scope">
           <div v-if="item.renderHtml" v-html="item.renderHtml(scope.row, scope.index)"></div>
           <expand-dom v-if="item.render" :row="scope.row" :render="item.render"></expand-dom>
-          <div v-if="item.prop">{{ scope.row[item.prop] }}</div>
+          <div style="display: inline-block" v-if="item.prop">{{ scope.row[item.prop] }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -486,6 +486,8 @@ export default {
               this.tableConfig.isPagination ? result.data.content : result.data
             );
             this.totalElements = result.data.totalElements;
+          }).catch(e => {
+            this.loading = false
           });
     },
   },

@@ -20,6 +20,7 @@
     "form-making": "^1.2.7",
     "jsencrypt": "^3.0.0-rc.1",
     "jszip": "^3.2.2",
+    "lrz": "^4.9.41",
     "mavon-editor": "^2.7.5",
     "moment": "^2.25.3",
     "nprogress": "^0.2.0",

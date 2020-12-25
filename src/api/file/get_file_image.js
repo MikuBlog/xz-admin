@@ -2,9 +2,12 @@
  * @author xuanzai
  * @description 选择文件获取图片url
  * @param {Number} limit 图片大小限制，默认为2MB
+ * @param {Number} quality 图片大小限制，默认为0.7，范围为(0-1]
  * @returns {Promise}
  */
-function getImgFile(limit = 2) {
+import lrz from "lrz";
+
+function getImgFile(limit = 2, quality = 0.7) {
     return new Promise((resolve, reject) => {
         let
             reader = new FileReader(),
@@ -14,23 +17,56 @@ function getImgFile(limit = 2) {
             data = {}
         fileEle.type = "file"
         fileEle.accept = "image/*"
-    		fileEle.style.display = 'none'
-        fileEle.addEventListener('change', () => {
-            const files = fileEle.files[0]
+        fileEle.style.display = 'none'
+        fileEle.addEventListener('change', async () => {
+            let files = fileEle.files[0]
+
+            await compressImageFile(files, quality).then(res => {
+                console.log(res)
+                files = res
+            })
+
             data.raw = files
-            files.size / (1024 ** 2) > limit
-            ? reject(`图片大小不能超过${limit}MB!`)
-            : (pattern.test(files.type)
-            ? reader.readAsDataURL(files)
-            : reject('请选择图片!'))
-    				document.body.removeChild(fileEle)
+
+            files.size / (1024 ** 2) > limit ?
+                reject(`图片大小不能超过${limit}MB!`) :
+                (pattern.test(files.type) ?
+                    reader.readAsDataURL(files) :
+                    reject('请选择图片!'))
+            document.body.removeChild(fileEle)
         })
         reader.addEventListener('load', () => {
             data.url = reader.result
             resolve(data)
         })
         fileEle.dispatchEvent(event)
-    		document.body.appendChild(fileEle)
+        document.body.appendChild(fileEle)
+    })
+}
+
+/**
+ * @author wenfeng
+ * @description 压缩图片文件
+ * @param {File} file 
+ * @param {Number} quality 压缩质量 范围:(0-1]
+ * @returns {Promise}
+ */
+function compressImageFile(file, quality = 0.7) {
+    return new Promise((resolve, reject) => {
+        lrz(file, {
+                quality: quality
+            }).then(function (rst) {
+                // 处理成功会执行
+                let newFile = new File([rst.file], rst.origin.name, {
+                    type: rst.origin.type
+                })
+                resolve(newFile)
+            })
+            .catch(function (err) {
+                // 处理失败会执行
+                reject(err)
+            })
+
     })
 }
 
@@ -40,7 +76,7 @@ function getImgFile(limit = 2) {
  * @returns {String}
  */
 function getBase64Image(image) {
-    const 
+    const
         canvas = document.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         width = image.width,
@@ -56,7 +92,7 @@ function getBase64Image(image) {
  * @param {String} base64 
  */
 function openPictureBase64(base64) {
-    const 
+    const
         image = new Image(),
         newTag = window.open('', '_blank')
     image.src = base64
@@ -67,5 +103,6 @@ function openPictureBase64(base64) {
 export default {
     getImgFile,
     getBase64Image,
-    openPictureBase64
+    openPictureBase64,
+    compressImageFile
 }

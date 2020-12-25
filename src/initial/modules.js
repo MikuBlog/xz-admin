@@ -297,6 +297,14 @@ Vue.prototype.$clearMemoryPmt = Memory.clearMemoryPmt
  */
 Vue.prototype.$getImgFile = ReadImg.getImgFile
 /**
+ * @author wenfeng
+ * @description 压缩文件
+ * @param {File} file 
+ * @param {Number} quality 压缩质量 范围:(0-1]
+ * @returns {Promise}
+ */
+Vue.prototype.$compressImageFile = ReadImg.compressImageFile
+/**
  * @author xuanzai
  * @description 获取文件地址与文件信息
  * @param {Number} limit 限制文件大小/MB
