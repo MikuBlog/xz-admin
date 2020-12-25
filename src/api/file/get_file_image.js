@@ -21,7 +21,7 @@ function getImgFile(limit = 2, quality = 0.7) {
         fileEle.addEventListener('change', async () => {
             let files = fileEle.files[0]
 
-            await compressFile(files, quality).then(res => {
+            await compressImageFile(files, quality).then(res => {
                 console.log(res)
                 files = res
             })
@@ -46,12 +46,12 @@ function getImgFile(limit = 2, quality = 0.7) {
 
 /**
  * @author wenfeng
- * @description 压缩文件
+ * @description 压缩图片文件
  * @param {File} file 
  * @param {Number} quality 压缩质量 范围:(0-1]
  * @returns {Promise}
  */
-function compressFile(file, quality = 0.7) {
+function compressImageFile(file, quality = 0.7) {
     return new Promise((resolve, reject) => {
         lrz(file, {
                 quality: quality
@@ -104,5 +104,5 @@ export default {
     getImgFile,
     getBase64Image,
     openPictureBase64,
-    compressFile
+    compressImageFile
 }

@@ -303,7 +303,7 @@ Vue.prototype.$getImgFile = ReadImg.getImgFile
  * @param {Number} quality 压缩质量 范围:(0-1]
  * @returns {Promise}
  */
-Vue.prototype.$compressFile = ReadImg.compressFile
+Vue.prototype.$compressImageFile = ReadImg.compressImageFile
 /**
  * @author xuanzai
  * @description 获取文件地址与文件信息
