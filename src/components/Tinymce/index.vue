@@ -71,11 +71,11 @@ export default {
 		this.removeTinymce();
 	},
 	methods: {
-    getSketch() {
-      const editBody = this.tinymce.getBody();
-      this.tinymce.selection.select(editBody);
-      return this.tinymce.selection.getContent({ format: 'text' })
-    },
+    getSketch () {
+      const editBody = this.tinymce.getBody();
+      this.tinymce.selection.select(editBody);
+      return this.tinymce.selection.getContent().replace(/<\/?.+?\/?>/g, '')
+    },
     getImageLinkList() {
       var data = [];
       this.tinymce.getContent().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/g, function (match, capture) {
