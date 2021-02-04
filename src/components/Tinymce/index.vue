@@ -10,6 +10,12 @@
 import convertHttp from '@/utils/convertHttp.js';
 import plugins from './js/plugins';
 import toolbar from './js/toolbar';
+import tinymce from 'tinymce'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/skins/ui/oxide/content.min.css'
+import 'tinymce/skins/content/default/content.css'
 const environment = require('../../../public_path').editor
 export default {
 	name: 'Tinymce',
@@ -99,7 +105,7 @@ export default {
 				selector: `#${this.randomId}`,
 				language: 'zh_CN',
 				language_url: `${environment}assets/js/tinymce/language/zh_CN.js`,
-				plugins: plugins.plugins,
+				// plugins: plugins.plugins,
 				external_plugins: plugins.external_plugins,
 				toolbar,
 				height: +this.height,
@@ -112,7 +118,7 @@ export default {
 					// 字数限制
 				},
 				file_picker_callback: function(callback, value, meta) {
-					_this.$getFile(100).then(raw => {
+					_this.$getFile({ limit: 100 }).then(raw => {
 						_this
 							.$http_file({
 								url: '/api/localStorage/upload',
@@ -124,7 +130,30 @@ export default {
 							.then(result => {
 								callback(convertHttp(result.data.url));
 							});
+					}).catch(e => {
+						this.$warnMsg('上传的文件不可大于100M')
 					});
+				},
+				file_callback: function (file, succFun) {
+					if(!file) {
+						_this.$warnMsg('请选择文件上传')
+						return
+					}
+					_this
+						.$http_file({
+							url: '/api/localStorage/upload',
+							method: 'post',
+							data: {
+								file: file
+							}
+						})
+						.then(result => {
+							// success(convertHttp(result.data.url));
+							// 自定义处理文件操作部分
+							succFun(convertHttp(result.data.url),{text: file.name}) //成功回调函数 text 显示的文本
+						}).catch(e => {
+							failure(e)
+						});
 				},
 				images_upload_handler(blobInfo, success, failure, progress) {
 					_this
