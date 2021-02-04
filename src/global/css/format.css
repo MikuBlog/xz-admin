@@ -125,3 +125,7 @@ html, body {
 #nprogress .bar {
   background: #e6a23c !important;
 }
+
+.tox-tinymce-aux {
+  z-index: 9999!important;
+}

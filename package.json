@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@riophae/vue-treeselect": "^0.0.38",
+    "@tinymce/tinymce-vue": "^4.0.0",
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "echarts": "^4.2.1",
@@ -28,6 +29,7 @@
     "path": "^0.12.7",
     "path-to-regexp": "^3.0.0",
     "svg-sprite-loader": "^4.1.6",
+    "tinymce": "^5.6.2",
     "v-charts": "^1.19.0",
     "view-design": "^4.0.2",
     "vue": "^2.6.10",

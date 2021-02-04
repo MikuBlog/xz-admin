@@ -128,7 +128,8 @@
 
 /* 解决弹窗闪动问题 */
 body {
-	padding-right: 0!important;
+  padding-right: 0!important;
+  margin: 0!important;
 }
 .el-dialog__title, .el-dialog__close {
   font-weight: bold;
@@ -141,7 +142,16 @@ body {
   background-color: #f7f8fa;
   padding: 10px 20px;
 }
+
+.el-table__fixed-right{
+  height: 100% !important;
+}
+
 .is-fullscreen .el-dialog__footer {
   background: none;
   border-top: none;
+}
+
+body .el-table th.gutter{
+  display: table-cell!important;
 }

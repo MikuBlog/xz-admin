@@ -2,7 +2,7 @@
   <div class="welcome">
     <el-row>
       <el-col :span="24">
-       <div class="background-box" ref="backgroundBox">
+        <div class="background-box" ref="backgroundBox">
           <div class="background" ref="background"></div>
         </div>
       </el-col>
@@ -12,11 +12,6 @@
 
 <script>
 export default {
-  // data() {
-  //   return {
-  //     isShow: true
-  //   }
-  // },
   mounted() {
     this.initialStyle();
     this.initialImage();

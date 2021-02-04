@@ -7,6 +7,6 @@
 // http://openlan.missiono.cn
 var
   // 接口统一请求前缀地址
-  baseUrl = 'https://aboot.missiono.cn',
-  // 静态资源请求前缀地址
-  prefixUrl = 'https://aboot.missiono.cn'
+  baseUrl = 'http://172.25.0.230:8899',
+  // 静态资源请求前tp:/缀地址
+  prefixUrl = 'http://172.25.0.230:8899'
