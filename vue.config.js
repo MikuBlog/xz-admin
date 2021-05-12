@@ -10,8 +10,8 @@ function resolve(dir) {
 module.exports = {
   // 配置生产环境静态资源访问路径
   publicPath: isExe
-  ? electron
-  : environment,
+    ? electron
+    : environment,
   // 项目设置访问端口
   // devServer: {
   //   port: 8888,     // 端口
@@ -53,10 +53,10 @@ module.exports = {
         .end()
     }
     config.module
-    .rule('images')
+      .rule('images')
       .use('url-loader')
-        .loader('url-loader')
-        .tap(options => Object.assign(options, { limit: 2000, esModule: false }));
+      .loader('url-loader')
+      .tap(options => Object.assign(options, { limit: 2000, esModule: false }));
     // 解决IE打开空白页面问题
     config.module
       .rule('view-design')
@@ -64,6 +64,23 @@ module.exports = {
       .use('babel')
       .loader('babel-loader')
       .end()
+    // 多进程打包提高打包效率
+    config.module
+      .rule('src')
+      .test(/\.js$/)
+      .use('thread-loader')
+      .loader('thread-loader')
+      .options({
+        // 三个进程
+        workers: 3
+      })
+      .end()
+    // 修复新版url-loader的esModule默认为true的问题
+    config.module
+      .rule('images')
+      .use('url-loader')
+      .loader('url-loader')
+      .tap(options => Object.assign(options, { limit: 2000, esModule: false }))
     config.module
       .rule("src")
       .test(/\.js/)
