@@ -60,7 +60,7 @@
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-pngquant": "^9.0.1",
-    "node-sass": "^4.9.0",
+    "node-sass": "^7.0.0",
     "sass-loader": "^7.1.0",
     "script-ext-html-webpack-plugin": "^2.1.4",
     "svgo": "^1.1.0",
