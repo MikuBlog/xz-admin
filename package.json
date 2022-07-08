@@ -23,7 +23,7 @@
     "jszip": "^3.2.2",
     "lrz": "^4.9.41",
     "mavon-editor": "^2.7.5",
-    "moment": "^2.25.3",
+    "moment": "^2.29.4",
     "nprogress": "^0.2.0",
     "overlayscrollbars": "^1.10.0",
     "path": "^0.12.7",
