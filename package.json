@@ -20,7 +20,7 @@
     "flowchart.js": "^1.12.1",
     "form-making": "^1.2.7",
     "jsencrypt": "^3.0.0-rc.1",
-    "jszip": "^3.2.2",
+    "jszip": "^3.7.0",
     "lrz": "^4.9.41",
     "mavon-editor": "^2.7.5",
     "moment": "^2.25.3",
